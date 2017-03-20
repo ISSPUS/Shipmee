@@ -218,7 +218,7 @@ public class ShipmentTest extends AbstractTest {
 	public void negativeListShipment1() {
 		authenticate("user1");
 					
-		shipmentService.searchShipment(null, "Sevilla", "12/03/2017", "23:59", null, null);
+		shipmentService.searchShipment("", "Sevilla", "12/03/2017", "23:59", null, null);
 				
 		unauthenticate();
 	}
@@ -231,7 +231,7 @@ public class ShipmentTest extends AbstractTest {
 	public void negativeListShipment2() {
 		authenticate("user1");
 					
-		shipmentService.searchShipment("Almeria", null, "12/03/2017", "23:59", null, null);
+		shipmentService.searchShipment("Almeria", "", "12/03/2017", "23:59", null, null);
 				
 		unauthenticate();
 	}
