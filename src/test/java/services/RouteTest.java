@@ -13,6 +13,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.util.Assert;
 
 import domain.Route;
+import domain.RouteOffer;
 import utilities.AbstractTest;
 import utilities.UtilTest;
 
@@ -122,6 +123,108 @@ public class RouteTest extends AbstractTest {
 					
 		routeService.searchRoute("Almeria", "", "12/03/2017", "23:59", null, null);
 				
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Contract a Route
+	 * @result The router is associated to the contractor
+	 */
+	@Test
+	public void possitiveContractRouteTest() {
+		authenticate("user1");
+		Route route;
+		RouteOffer routeOffer;
+
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+
+		routeOffer = routeService.contractRoute(UtilTest.getIdFromBeanName("route2"), UtilTest.getIdFromBeanName("sizePrice5"));
+		Assert.isTrue(routeOffer.getId() != 0);
+		Assert.isTrue(routeOffer.getRoute().equals(route));
+
+		unauthenticate();
+	}
+
+	/**
+	 * @Test Contract a Route
+	 * @result We create various offers from different users
+	 */
+	@Test
+	public void possitiveContractRouteTest1() {
+		authenticate("user1");
+		Route route;
+		RouteOffer routeOffer;
+		RouteOffer routeOffer1;
+
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+
+		routeOffer = routeService.contractRoute(UtilTest.getIdFromBeanName("route2"), UtilTest.getIdFromBeanName("sizePrice5"));
+		Assert.isTrue(routeOffer.getId() != 0);
+		Assert.isTrue(routeOffer.getRoute().equals(route));
+
+		unauthenticate();
+		authenticate("user3");
+
+		routeOffer1 = routeService.contractRoute(UtilTest.getIdFromBeanName("route2"), UtilTest.getIdFromBeanName("sizePrice6"));
+		Assert.isTrue(routeOffer1.getId() != 0);
+		Assert.isTrue(routeOffer1.getRoute().equals(route));
+
+		unauthenticate();
+	}
+
+	/**
+	 * @Test Contract a Route
+	 * @result We try to contract our own route
+	 *         <code>IllegalArgumentException</code> is expected
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeContractRouteTest1() {
+		authenticate("user2");
+		Route route;
+		RouteOffer routeOffer;
+
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+
+		routeOffer = routeService.contractRoute(UtilTest.getIdFromBeanName("route2"), UtilTest.getIdFromBeanName("sizePrice5"));
+		Assert.isTrue(routeOffer.getId() != 0);
+		Assert.isTrue(routeOffer.getRoute().equals(route));
+
+		unauthenticate();
+	}
+
+	/**
+	 * @Test Contract a Route
+	 * @result We try to contract a Route that doesn't exists
+	 *         <code>IllegalArgumentException</code> is expected
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeContractRouteTest2() {
+		authenticate("user1");
+		RouteOffer routeOffer;
+
+		routeOffer = routeService.contractRoute(-200, UtilTest.getIdFromBeanName("sizePrice5"));
+		Assert.isTrue(routeOffer.getId() != 0);
+
+		unauthenticate();
+	}
+
+	/**
+	 * @Test Contract a Route
+	 * @result We try contract a Route that is earlier than the current
+	 *         <code>IllegalArgumentException</code> is expected
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeContractRouteTest3() {
+		authenticate("user1");
+		Route route;
+		RouteOffer routeOffer;
+
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+
+		routeOffer = routeService.contractRoute(UtilTest.getIdFromBeanName("route1"), UtilTest.getIdFromBeanName("sizePrice1"));
+		Assert.isTrue(routeOffer.getId() != 0);
+		Assert.isTrue(routeOffer.getRoute().equals(route));
+
 		unauthenticate();
 	}
 

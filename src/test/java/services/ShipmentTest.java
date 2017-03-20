@@ -31,7 +31,6 @@ public class ShipmentTest extends AbstractTest {
 
 	// Supporting services ----------------------------------------------------
 
-
 	 @Autowired 
 	 private UserService userService;
 
@@ -59,7 +58,7 @@ public class ShipmentTest extends AbstractTest {
 
 	/**
 	 * @Test Carry a Shipment
-	 * @result We create various offers from different users
+	 * @result We create various offers from same user
 	 */
 	@Test
 	public void possitiveCarryShipmentTest1() {
