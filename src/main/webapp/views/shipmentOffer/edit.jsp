@@ -10,26 +10,69 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<!-- Form -->
-<form:form action="shipmentOffer/user/edit.do" modelAttribute="shipmentOffer">
-	<!-- Hidden Attributes -->
-	<form:hidden path="id" />
-	<form:hidden path="shipment" />
-	<form:hidden path="user" />
-	<form:hidden path="acceptedBySender" />
-	<form:hidden path="rejectedBySender" />
-	
-	<!-- Editable Attributes -->
-	
-	<acme:textbox code="shipmentOffer.amount" path="amount"/>
-	
-	<acme:textarea code="shipmentOffer.description" path="description"/>
-		
-	<br/>
+<link rel="stylesheet" href="styles/assets/css/style-edits-offers.css"  type="text/css">
 
-	<!-- Action buttons -->
-	<acme:submit name="save" code="shipmentOffer.save"/>
-	
-	<acme:cancel code="shipmentOffer.cancel" url="shipmentOffer/user/list.do"/>
-	
-</form:form>
+<div class="blue-barra" style="padding-top: 0.75%;padding-bottom: 0.75%;">
+	<div class="container">
+		<div class="row">
+			<h3>
+			<spring:message code="shipmentOffer.create.for" />
+			<a
+				href="shipment/display.do?shipmentId=${shipmentOffer.shipment.id}">
+				<jstl:out value="${shipmentOffer.shipment.itemName}" />
+			</a>
+			</h3>
+		</div>
+		<!-- /row -->
+	</div>
+</div>
+<div class="container">
+	<div class="row formulario">
+		<form:form action="shipmentOffer/user/edit.do" modelAttribute="shipmentOffer" method="post" class="form-horizontal"
+			role="form">
+
+			<!-- Hidden Attributes -->
+		<form:hidden path="id" />
+		<form:hidden path="shipment" />
+		<form:hidden path="user" />
+		<form:hidden path="acceptedBySender" />
+		<form:hidden path="rejectedBySender" />
+
+			<div class="form-group">
+				<form:label path="amount" class="control-label col-md-2"
+					for="amount">
+					<spring:message code="shipmentOffer.amount" />
+				</form:label>
+				<div class="col-md-8">
+					<div class="inner-addon left-addon input-price">
+						<i class="glyphicon glyphicon-euro"></i>
+						<form:input path="amount" class="form-control" id="amount" min="0"
+							step="0.10" type="number" />
+					</div>
+					<form:errors class="error create-message-error" path="amount" />
+				</div>
+			</div>
+			<div class="form-group">
+				<form:label path="description" class="control-label col-md-2"
+					for="itemPicture">
+					<spring:message code="shipmentOffer.description" />
+				</form:label>
+				<div class="col-md-8">
+					<form:textarea path="description" class="form-control"
+						id="description" />
+					<form:errors class="error create-message-error" path="description" />
+				</div>
+			</div>
+			<div class="form-group" style="text-align: center;">
+				<!-- Action buttons -->
+				<acme:submit name="save" code="shipmentOffer.save"/>
+				
+				<acme:cancel code="shipmentOffer.cancel" url="shipment/display.do?shipmentId=${shipmentOffer.shipment.id}"/>
+			</div>
+
+		</form:form>
+
+
+	</div>
+
+</div>

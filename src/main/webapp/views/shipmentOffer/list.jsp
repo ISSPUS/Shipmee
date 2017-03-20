@@ -16,46 +16,8 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
 
-
-<style>
-@font-face {
-	font-family: 'Fontawesome';
-	src: url('../fonts/fontawesome-webfont.ttf');
-}
-
-.offer-shipment {
-	border: 1px solid #d0d0d0;
-}
-
-.profile-offer-img {
-	width: 100px !important;
-}
-
-.offer-shipment {
-	background-color: rgba(227, 229, 231, 0.15);
-}
-
-.offer-profile-info {
-	color: black;
-	margin-bottom: 0;
-}
-
-.badge-shipmentoffer-price {
-	font-size: 120%;
-	font-family: A;
-	background-color: #66BB6A;
-}
-
-.btn-shipmentOffer-actions {
-	margin: 1%;
-}
-
-hr {
-	margin-top: 2%;
-	margin-bottom: 1%;
-}
-</style>
 <div class="blue-barra" style="padding-top: 0.75%;padding-bottom: 0.75%;">
 	<div class="container">
 		<div class="row">
@@ -119,7 +81,7 @@ hr {
 						</div>
 					</div>
 					<div class="col-xs-2 col-sm-3"
-						style="padding-top: 0.5%; font-size: 190%; text-align: center; vertical-align: middle;">
+						style="padding-top: 1.5%; font-size: 190%; text-align: center; vertical-align: middle;">
 						<span class="badge badge-shipmentoffer-price"><jstl:out
 								value="${shipmentOfferRow.amount}" />&#8364;</span>
 					</div>
