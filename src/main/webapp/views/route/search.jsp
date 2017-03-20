@@ -146,24 +146,14 @@
 			</div>
 		</div>
 		
-		
-		<div class="col-md-9">
+	<div class="col-md-9">
 			<div class="profile-content">
-				
-						
-						
-<!-- 2016 Thanks to TavoQiqe https://www.facebook.com/tavo.qiqe.lucero -->						
-									
-						
-<div class="container">
-	<div class="row">
-		<section class="content">
-			<div class="col-md-8">
-				<div class="panel panel-default">
+					
+					<div class="panel panel-default">
 					<div class="panel-body">
 						
 						<div class="table-container">
-							<table class="table table-filter">
+					<table class="table table-filter">
 								<tbody>
 								
 								
@@ -174,64 +164,52 @@
 									<tr>
 										
 										<td>
-											<div class="media">
-												<div class="pull-left">
-													<a href="user/profile.do?userId=${route.creator.id}"><img src="images/anonymous.png" class="media-photo-route"></a>
+											
+											
+										<div class="row">
+										
+											<div class="col-lg-3 text-center">
+
+												<a href="user/profile.do?userId=${route.creator.id}"><img src="images/anonymous.png" class="media-photo-route"></a>
+													
+											</div>
+										
+											<div class="info-salida col-lg-6" style="margin-bottom: 2%; font-size: 16px;">
+												<div class="cabecera">
+												<div class="title">
+													<h4><a>${route.creator.name}</a></h4>
 												</div>
-												<div class="media-body">
-													<span class="media-meta pull-right"><fmt:formatDate value="${route.date}" pattern="dd/MM/yyyy HH:mm" /></span>
-													
-													<h4 class="title">
-														<a href="user/profile.do?userId=${route.creator.id}">${route.creator.name}</a>
-														<span class="pull-right cantidad"></span>
-													</h4>
-													
-													<div class="row info-lugar">
-
-											<div class="col-xs-12 col-sm-4 text-center">
-												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}
-												</a>
-											</div>
-
-											<div class="col-sm-2 text-center">
+												
+												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
+											
 												<i class="glyphicon glyphicon-sort"></i>
-											</div>
-
-											<div class="col-xs-12 col-sm-4 text-center">
+											
 												<a> <i
 													class="glyphicon glyphicon-map-marker img-destination"></i>${route.destination}
 												</a>
-											</div>
-										</div>
-													
-												</div>
-											</div>
-											
-										<div class="row">
-											<div class="info-salida col-sm-12 ">
-
-												<div class="view" style="float: right;"><h4><a href="route/display.do?routeId=${route.id}">
 												
+												</div>	
 						
-												
-													<spring:message code="route.details" />
-													<i class="glyphicon glyphicon-chevron-right"></i></a></h4>
-													
-													
-													
-												</div>
+
+										
 
 												<i class="glyphicon glyphicon-plane"></i> 
 												<spring:message code="route.departureTime" />: 
 												<fmt:formatDate value="${route.departureTime}" pattern="dd/MM/yyyy '-' HH:mm" />
-												<br/>
 												
+												
+												<br/>
 												<i class="glyphicon glyphicon-plane"></i> 
 												<spring:message code="route.arriveTime" />: 
 												<fmt:formatDate value="${route.arriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
-														
 												
 													
+											</div>
+											<div class="col-lg-3" style="margin-top: 10%;">
+											
+												<button type="button" class="btn btn-primary btn-md btn-block" onclick="location.href = 'route/display.do?routeId=${route.id}';"><spring:message code="route.details" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>	
+											
+
 											</div>
 										</div>
 											
@@ -242,28 +220,32 @@
 									</jstl:forEach>
 					</jstl:when>
 					<jstl:otherwise>
-						<p><spring:message code="route.results" /></p>
+						<p><spring:message code="shipment.results" /></p>
 					</jstl:otherwise>
 				</jstl:choose>
 								</tbody>
 							</table>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</section>
-		
-	</div>
-</div>
-										
-			</div>
 
+
+				</div>
+
+
+
+
+			</div>
+</div></div>
 
 		</div>
 
+
+
+
+
+
+
 	</div>
 </div>
+
 
 
 

@@ -32,6 +32,7 @@
 
 
 <style>
+
 @font-face {
 	font-family: 'icons';
 	src: url('styles/assets/fonts/iconos/iconos.eot?58322891');
@@ -45,32 +46,17 @@
 	font-weight: normal;
 	font-style: normal;
 }
-.demo-icon {
-	font-family: "icons";
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	font-size: 150%;
-}
-.size-icon {
-	font-family: "package-open";
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	font-size: 150%;
-}
-</style>
 
+</style>
 
 <div class="blue-barra">
 	    <div class="container">
 			<div class="row">
-				<h3><spring:message code="shipment.shipments" /></h3>
+				<h3><spring:message code="shipment.shipment" /></h3>
 			</div><!-- /row -->
 	    </div>
 	</div>
+
 
 <div class="container">
 
@@ -152,7 +138,7 @@
 							</select></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
-									<spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span>
+									<spring:message code="welcome.search" /><span class="glyphicon glyphicon-search"></span>
 								</button></li>
 						</ul>
 					</form>
@@ -161,23 +147,20 @@
 				<!-- END MENU -->
 			</div>
 		</div>
-		
-		
+
+
+
+
+
+
 		<div class="col-md-9">
 			<div class="profile-content">
-		
-		<!-- 2016 Thanks to TavoQiqe https://www.facebook.com/tavo.qiqe.lucero -->						
-									
-						
-<div class="container">
-	<div class="row">
-		<section class="content">
-			<div class="col-md-8">
-				<div class="panel panel-default">
+					
+					<div class="panel panel-default">
 					<div class="panel-body">
 						
 						<div class="table-container">
-							<table class="table table-filter">
+					<table class="table table-filter">
 								<tbody>
 								
 								
@@ -188,52 +171,35 @@
 									<tr>
 										
 										<td>
-											<div class="media">
-												<div class="pull-left">
-													<img src="${shipment.itemPicture}" class="media-photo-shipment">
+											
+											
+										<div class="row">
+										
+											<div class="col-lg-3 text-center">
+
+												<img src="${shipment.itemPicture}" class="media-photo-shipment">
+													
+											</div>
+										
+											<div class="info-salida col-lg-6" style="margin-bottom: 2%; font-size: 16px;">
+												<div class="cabecera">
+												<div class="title">
+													<h4><a>${shipment.itemName}</a></h4>
 												</div>
-												<div class="media-body">
-													<span class="media-meta pull-right"><fmt:formatDate value="${shipment.date}" pattern="dd/MM/yyyy HH:mm" /></span>
-													
-													<h4 class="title">
-														<a>${shipment.itemName}</a>
-														<span class="pull-right cantidad"></span>
-													</h4>
-													
-													<div class="row info-lugar">
-
-											<div class="col-xs-12 col-sm-4 text-center">
-												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}
-												</a>
-											</div>
-
-											<div class="col-sm-2 text-center">
+												
+												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
+											
 												<i class="glyphicon glyphicon-sort"></i>
-											</div>
-
-											<div class="col-xs-12 col-sm-4 text-center">
+											
 												<a> <i
 													class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
 												</a>
-											</div>
-										</div>
-													
-												</div>
-											</div>
-											
-										<div class="row">
-											<div class="info-salida col-sm-12 ">
-
-												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price}&#8364;</h4></div><h4><a href="shipment/display.do?shipmentId=${shipment.id}">
+														
 												
+												</div>	
 						
-												
-													<spring:message code="route.details" />
-													<i class="glyphicon glyphicon-chevron-right"></i></a></h4>
-													
-													
-													
-												</div>
+
+										
 
 												<i class="glyphicon glyphicon-plane"></i> 
 												<spring:message code="shipment.departureTime" />: 
@@ -246,6 +212,13 @@
 												<fmt:formatDate value="${shipment.maximumArriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
 												
 													
+											</div>
+											<div class="col-lg-3" style="margin-top: 5%;">
+											
+												<div class="price">${shipment.price}&#8364;</div>	
+												<button type="button" class="btn btn-primary btn-md btn-block" onclick="location.href = 'shipment/display.do?shipmentId=${shipment.id}';"><spring:message code="route.details" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>	
+											
+
 											</div>
 										</div>
 											
@@ -261,27 +234,26 @@
 				</jstl:choose>
 								</tbody>
 							</table>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</section>
-		
-	</div>
-</div>
-										
-			</div>
 
+
+				</div>
+
+
+
+
+			</div>
+</div></div>
 
 		</div>
 
+
+
+
+
+
+
 	</div>
 </div>
-
-
-
-
 
 
 
@@ -291,5 +263,9 @@
 			viewMode : 'days',
 			format : 'DD/MM/YYYY'
 		});
+	});
+
+	$(function() {
+		$('#datetimepicker2').datetimepicker();
 	});
 </script>
