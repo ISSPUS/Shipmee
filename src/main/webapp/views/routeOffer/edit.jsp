@@ -6,30 +6,79 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<!-- Form -->
-<form:form action="routeOffer/user/edit.do" modelAttribute="routeOffer">
-	<!-- Hidden Attributes -->
-	<form:hidden path="id" />
-	<form:hidden path="route" />
-	<form:hidden path="user" />
-	<form:hidden path="acceptedByCarrier" />
-	<form:hidden path="rejectedByCarrier" />
-	
-	<!-- Editable Attributes -->
-	
-	<acme:textbox code="routeOffer.amount" path="amount"/>
-	
-	<acme:textarea code="routeOffer.description" path="description"/>
-		
-	<br/>
+<link rel="stylesheet" href="styles/assets/css/style-edits-offers.css"  type="text/css">
 
-	<!-- Action buttons -->
-	<acme:submit name="save" code="routeOffer.save"/>
-	
-	<acme:cancel code="routeOffer.cancel" url="routeOffer/user/list.do"/>
-	
-</form:form>
+
+<div class="blue-barra" style="padding-top: 0.75%;padding-bottom: 0.75%;">
+	<div class="container">
+		<div class="row">
+			<h3>
+			<spring:message code="routeOffer.create.for" />
+			
+			<a href="route/display.do?routeId=${routeOffer.route.id}">
+				<jstl:out value="${routeOffer.route.origin}" />
+				->
+				<jstl:out value="${routeOffer.route.destination}" />
+			</a>
+			</h3>
+		</div>
+		<!-- /row -->
+	</div>
+</div>
+
+<div class="container">
+	<div class="row formulario">
+		<form:form action="routeOffer/user/edit.do"
+			modelAttribute="routeOffer" method="post" class="form-horizontal"
+			role="form">
+			<form:hidden path="id" />
+			<form:hidden path="route" />
+			<form:hidden path="user" />
+			<form:hidden path="acceptedByCarrier" />
+			<form:hidden path="rejectedByCarrier" />
+
+			<div class="form-group">
+				<form:label path="amount" class="control-label col-md-2"
+					for="amount">
+					<spring:message code="routeOffer.amount" />
+				</form:label>
+				<div class="col-md-8">
+					<div class="inner-addon left-addon input-price">
+						<i class="glyphicon glyphicon-euro"></i>
+						<form:input path="amount" class="form-control" id="amount" min="0"
+							step="0.10" type="number" />
+					</div>
+					<form:errors class="error create-message-error" path="amount" />
+				</div>
+			</div>
+			<div class="form-group">
+				<form:label path="description" class="control-label col-md-2"
+					for="itemPicture">
+					<spring:message code="routeOffer.description" />
+				</form:label>
+				<div class="col-md-8">
+					<form:textarea path="description" class="form-control"
+						id="description" />
+					<form:errors class="error create-message-error" path="description" />
+				</div>
+			</div>
+			<div class="form-group" style="text-align: center;">
+				<!-- Action buttons -->
+				<acme:submit name="save" code="routeOffer.save" />
+
+				<acme:cancel code="routeOffer.cancel" url="route/display.do?routeId=${routeOffer.route.id}" />
+
+			</div>
+
+		</form:form>
+
+
+	</div>
+
+</div>
+
