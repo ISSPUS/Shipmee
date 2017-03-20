@@ -186,7 +186,7 @@ public class ShipmentTest extends AbstractTest {
 				Assert.isTrue(false);
 		}
 		
-		Assert.isTrue(shipments.size() == 2);
+		Assert.isTrue(shipments.size() == 1);
 		
 		
 		unauthenticate();

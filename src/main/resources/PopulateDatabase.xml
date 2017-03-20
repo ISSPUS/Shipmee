@@ -369,9 +369,9 @@
 	<!-- Shipment -->
 	
 	<bean id="shipment1" class="domain.Shipment">
-		<property name="date" value="2017/03/12 00:00"/>
-		<property name="departureTime" value="2017/03/12 16:00"/>
-		<property name="maximumArriveTime" value="2017/03/12 19:00"/>
+		<property name="date" value="2017/05/12 00:00"/>
+		<property name="departureTime" value="2017/05/12 16:00"/>
+		<property name="maximumArriveTime" value="2017/05/12 19:00"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
 		<property name="price" value="2.00"/>
