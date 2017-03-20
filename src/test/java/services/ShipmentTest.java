@@ -1,5 +1,7 @@
 package services;
 
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -139,6 +141,98 @@ public class ShipmentTest extends AbstractTest {
 		shipmentOffer = shipmentService.carryShipment(shipment.getId());
 		Assert.isTrue(shipmentOffer.getId() != 0);
 
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test List all Shipments
+	 * @result The shipments are list
+	 */
+	@Test
+	public void positiveListShipment1() {
+		authenticate("user1");
+	
+		Collection<Shipment> shipments;
+		Shipment shipment, shipmentResult;
+				
+		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
+		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/07/2017", "15:00", "Open", "M");
+		shipmentResult = shipments.iterator().next();
+
+		Assert.isTrue(shipments.size() == 1);
+		Assert.isTrue(shipment.getId() == shipmentResult.getId());
+		
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test List all Shipments
+	 * @result The shipments are list
+	 */
+	@Test
+	public void positiveListShipment2() {
+		authenticate("user1");
+	
+		Collection<Shipment> shipments;
+		Shipment shipment1, shipment2;
+				
+		shipment1 = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		shipment2 = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment2"));
+		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/03/2017", "15:00", "Open", null);
+
+		for(Shipment s : shipments) {
+			if(s.getId() != shipment1.getId() && s.getId() != shipment2.getId())
+				Assert.isTrue(false);
+		}
+		
+		Assert.isTrue(shipments.size() == 2);
+		
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test List all Shipments
+	 * @result The shipments are list
+	 */
+	@Test
+	public void positiveListShipment3() {
+		authenticate("user1");
+	
+		Collection<Shipment> shipments;
+				
+		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/03/2017", "23:59", null, null);
+		
+		Assert.isTrue(shipments.isEmpty());
+		
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test List all Shipments
+	 * @result The user tries to search wihtout origin
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeListShipment1() {
+		authenticate("user1");
+					
+		shipmentService.searchShipment(null, "Sevilla", "12/03/2017", "23:59", null, null);
+				
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test List all Shipments
+	 * @result The user tries to search wihtout destination
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeListShipment2() {
+		authenticate("user1");
+					
+		shipmentService.searchShipment("Almeria", null, "12/03/2017", "23:59", null, null);
+				
 		unauthenticate();
 	}
 
