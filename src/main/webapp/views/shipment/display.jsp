@@ -221,7 +221,7 @@
 										<div class="row info1 col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
 											<div class="col-sm-12">
-												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
+												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.price" />: 
 												<span class="titles-info-price">${shipment.price}&#8364;</span>
 
 												<security:authorize access="hasRole('USER')">

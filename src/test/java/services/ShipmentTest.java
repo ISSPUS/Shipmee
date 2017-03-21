@@ -76,8 +76,8 @@ public class ShipmentTest extends AbstractTest {
 	 }
 	 
 	 /**
-	  * @Test Create a Shipment been unauthenticated
-	  * @result The shipment is  not created.
+	  * @Test Create a Shipment while been unauthenticated
+	  * @result The shipment is not created.
 	  */
 	 @Test(expected = IllegalArgumentException.class)
 	 public void negativeCreateShipment1(){
@@ -113,7 +113,10 @@ public class ShipmentTest extends AbstractTest {
 	  */
 	 @Test(expected = IllegalArgumentException.class)
 	 public void negativeCreateShipment2(){
-		 		 
+		 
+		 
+		 authenticate("user1");
+		 
 		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
 		 
 		 Shipment shipment;
@@ -137,6 +140,7 @@ public class ShipmentTest extends AbstractTest {
 
 		 Assert.isTrue(numberOfShipmentAfter - numberOfShipmentBefore == 1);
 		 
+		 unauthenticate();
 	 }
 	 
 	 /**
@@ -158,7 +162,7 @@ public class ShipmentTest extends AbstractTest {
 		 
 		 Shipment shipmentAfter = shipmentService.findOne(shipmentBefore.getId());
 		 
-		 Assert.isTrue(shipmentAfter.getItemName() == "Nuevo Equipo de Música");
+		 Assert.isTrue(shipmentAfter.getItemName().equals("Nuevo Equipo de Música"));
 		 
 		 unauthenticate();
 	 }
@@ -260,7 +264,7 @@ public class ShipmentTest extends AbstractTest {
 	 }
 	 
 	 /**
-	  * @Test A user deletes his own shipment.
+	  * @Test A user deletes his own shipment while been unauthenticated.
 	  * @return The shipment will not be deleted.
 	  */
 	 @Test(expected = IllegalArgumentException.class)

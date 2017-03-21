@@ -1,6 +1,9 @@
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.transaction.Transactional;
 
@@ -14,6 +17,7 @@ import org.springframework.util.Assert;
 
 import domain.Route;
 import domain.RouteOffer;
+import domain.Vehicle;
 import utilities.AbstractTest;
 import utilities.UtilTest;
 
@@ -27,12 +31,288 @@ public class RouteTest extends AbstractTest {
 
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private VehicleService vehicleService;
 
 	// Supporting services ----------------------------------------------------
 
 
 	// Test cases -------------------------------------------------------------
 
+	/**
+	 * @test 
+	 */
+	@Test
+	public void positiveCreateRoute1(){
+		
+		authenticate("user2");
+		
+		Integer numberOfRoutesBefore = routeService.findAll().size();
+		
+		Route route;
+		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Vehicle vehicle = vehicleService.findAllByUser().iterator().next();
+		
+		route = routeService.create();
+		route.setOrigin("Sevilla");
+		route.setDestination("Madrid");
+		route.setDepartureTime(departureTime);
+		route.setArriveTime(arrivalTime);
+		route.setItemEnvelope("Open");
+		route.setVehicle(vehicle);
+		
+		routeService.save(route);
+		
+		Integer numberOfRoutesAfter = routeService.findAll().size();
+		
+		Assert.isTrue(numberOfRoutesAfter - numberOfRoutesBefore == 1);
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @test Create a route while been unauthenticated.
+	 * @result The route is not created.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeCreateShipment1(){
+				
+		Integer numberOfRoutesBefore = routeService.findAll().size();
+		
+		Route route;
+		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Vehicle vehicle = vehicleService.findAllByUser().iterator().next();
+		
+		route = routeService.create();
+		route.setOrigin("Sevilla");
+		route.setDestination("Madrid");
+		route.setDepartureTime(departureTime);
+		route.setArriveTime(arrivalTime);
+		route.setItemEnvelope("Open");
+		route.setVehicle(vehicle);
+		
+		routeService.save(route);
+		
+		Integer numberOfRoutesAfter = routeService.findAll().size();
+		
+		Assert.isTrue(numberOfRoutesAfter - numberOfRoutesBefore == 1);
+		
+	}
+	
+	/**
+	 * @test Create a route with a MaximumArrivalTime before the DepartureTime.
+	 * @result The route is not created.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeCreateShipment2(){
+			
+		authenticate("user1");
+		
+		Integer numberOfRoutesBefore = routeService.findAll().size();
+		
+		Route route;
+		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Vehicle vehicle = vehicleService.findAllByUser().iterator().next();
+		
+		route = routeService.create();
+		route.setOrigin("Sevilla");
+		route.setDestination("Madrid");
+		route.setDepartureTime(departureTime);
+		route.setArriveTime(arrivalTime);
+		route.setItemEnvelope("Open");
+		route.setVehicle(vehicle);
+		
+		routeService.save(route);
+		
+		Integer numberOfRoutesAfter = routeService.findAll().size();
+		
+		Assert.isTrue(numberOfRoutesAfter - numberOfRoutesBefore == 1);
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @test Create a route with a vehicle that it's not yours.
+	 * @return The route is not created.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeCreateRoute3(){
+		
+		authenticate("user2");
+		
+		Integer numberOfRoutesBefore = routeService.findAll().size();
+		
+		Route route;
+		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Vehicle vehicle = vehicleService.findOne(UtilTest.getIdFromBeanName("vehicle1"));
+		
+		route = routeService.create();
+		route.setOrigin("Sevilla");
+		route.setDestination("Madrid");
+		route.setDepartureTime(departureTime);
+		route.setArriveTime(arrivalTime);
+		route.setItemEnvelope("Open");
+		route.setVehicle(vehicle);
+		
+		routeService.save(route);
+		
+		Integer numberOfRoutesAfter = routeService.findAll().size();
+		
+		Assert.isTrue(numberOfRoutesAfter - numberOfRoutesBefore == 1);
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @test Edit an own route
+	 * @return The route is edited.
+	 */
+	@Test
+	public void positiveEditShipment1(){
+		
+		authenticate("user2");
+		
+		Route routeBefore =  routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		
+		routeBefore.setOrigin("Valencia");
+		
+		routeService.save(routeBefore);
+		
+		Route routeAfter = routeService.findOne(routeBefore.getId());
+		
+		Assert.isTrue(routeAfter.getOrigin().equals("Valencia"));
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @test Edit an own route
+	 * @return The route is edited.
+	 */
+	@Test
+	public void positiveEditShipment2(){
+		
+		authenticate("user2");
+		
+		Route routeBefore =  routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		Date arrivalTimeAfter = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
+		
+		routeBefore.setArriveTime(arrivalTimeAfter);
+		
+		routeService.save(routeBefore);
+		
+		Route routeAfter = routeService.findOne(routeBefore.getId());
+		
+		Assert.isTrue(routeAfter.getArriveTime().equals(arrivalTimeAfter));
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @test Edit an route while been unauthenticated
+	 * @return The route is edited.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeEditShipment1(){
+				
+		Route routeBefore =  routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		
+		routeBefore.setOrigin("Valencia");
+		
+		routeService.save(routeBefore);
+		
+		Route routeAfter = routeService.findOne(routeBefore.getId());
+		
+		Assert.isTrue(routeAfter.getOrigin().equals("Valencia"));
+		
+	}
+	
+	/**
+	 * @test Edit an route that belongs to another user
+	 * @return The route is edited.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeEditShipment2(){
+		
+		authenticate("user3");
+		
+		Route routeBefore =  routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		
+		routeBefore.setOrigin("Valencia");
+		
+		routeService.save(routeBefore);
+		
+		Route routeAfter = routeService.findOne(routeBefore.getId());
+		
+		Assert.isTrue(routeAfter.getOrigin().equals("Valencia"));
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @test A user tries to delete his own routes.
+	 * @return The route is deleted
+	 */
+	@Test
+	public void positiveDeleteRoute1(){
+		
+		authenticate("user2");
+		
+		Route routeBefore = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		Integer numberOfRouteBefore = routeService.findAll().size();
+		
+		routeService.delete(routeBefore);
+		
+		Integer numberOfRouteAfter = routeService.findAll().size();
+
+		Assert.isTrue(numberOfRouteBefore - numberOfRouteAfter == 1);
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @test A user tries to delete his own routes while been unauthenticated.
+	 * @return The route is not deleted
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void deleteDeleteRoute1(){
+				
+		Route routeBefore = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		Integer numberOfRouteBefore = routeService.findAll().size();
+		
+		routeService.delete(routeBefore);
+		
+		Integer numberOfRouteAfter = routeService.findAll().size();
+
+		Assert.isTrue(numberOfRouteBefore - numberOfRouteAfter == 1);
+		
+	}
+	
+	/**
+	 * @test A user tries to delete a route that he/she does not belong.
+	 * @return The route is not deleted
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeDeleteRoute2(){
+		
+		authenticate("user3");
+		
+		Route routeBefore = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		Integer numberOfRouteBefore = routeService.findAll().size();
+		
+		routeService.delete(routeBefore);
+		
+		Integer numberOfRouteAfter = routeService.findAll().size();
+
+		Assert.isTrue(numberOfRouteBefore - numberOfRouteAfter == 1);
+		
+		unauthenticate();
+	}
 	
 	/**
 	 * @Test List all routes
