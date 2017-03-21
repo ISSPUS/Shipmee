@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 
 import domain.Route;
 import domain.RouteOffer;
-import domain.SizePrice;
 import domain.User;
 import repositories.RouteOfferRepository;
 
@@ -35,9 +34,6 @@ public class RouteOfferService {
 
 	@Autowired
 	private RouteService routeService;
-		
-	@Autowired
-	private SizePriceService sizePriceService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -176,14 +172,13 @@ public class RouteOfferService {
 	 * 
 	 * The carrier (the user that created the route) accept the counter offer proposed by the client.
 	 */
-	public void accept(int routeOfferId, int sizePriceId){
+	public void accept(int routeOfferId){
 		
 		Assert.isTrue(routeOfferId != 0);
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment");
 		
 		RouteOffer routeOffer = findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
-		SizePrice sizePrice = sizePriceService.findOne(sizePriceId);
 		
 		Assert.notNull(route, "The route related to the offer must exist.");
 		Assert.isTrue(routeService.checkDates(route), "All routes dates must be valid.");
@@ -191,13 +186,8 @@ public class RouteOfferService {
 		Assert.isTrue(route.getArriveTime().after(new Date()), "The Arrival Time must be future");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the route can accept or deny a counter offer");
 		Assert.isTrue(route.getCreator().getIsVerified(), "The creator of the route must be verified.");
-		
-		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "The offer must not be accepted or rejected.");
-		
-		Assert.isTrue(sizePrice.getRoute().equals(route), "The Size and Price must match the route.");
-		
-		sizePrice.setPrice(routeOffer.getAmount()); // Update price of the route
-		sizePriceService.save(sizePrice);
+
+		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "The offer must not be accepted or rejected.");		
 		
 		routeOffer.setAcceptedByCarrier(true); // The offer is accepted.
 		routeOffer.setRejectedByCarrier(false); // The offer is not rejected.
