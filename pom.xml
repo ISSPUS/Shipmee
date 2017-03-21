@@ -92,7 +92,20 @@
 				<version>2.7</version>
 				<configuration>
 					<format>xml</format>
+<!-- 					<format>html</format> -->
 					<maxmem>256m</maxmem>
+					<instrumentation>
+						<excludes>
+							<exclude>controllers/**</exclude>
+							<exclude>converters/**</exclude>
+							<exclude>domain/form/**</exclude>
+							<exclude>security/**</exclude>
+							<exclude>repositories/**</exclude>
+							<exclude>utilities/**</exclude>
+							<exclude>services/form/**</exclude>
+							<exclude>services/ActorService.*</exclude>
+						</excludes>
+					</instrumentation>
 				</configuration>
 			</plugin>
 		</plugins>
