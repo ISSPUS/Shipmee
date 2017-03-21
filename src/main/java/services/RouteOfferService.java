@@ -109,7 +109,9 @@ public class RouteOfferService {
 		}
 		Assert.isTrue(!tmp.getUser().equals(tmp.getRoute().getCreator()),
 				"service.routeOffer.save.equalsCreatorAndProposer");
-
+		Assert.isTrue(tmp.getRoute().getArriveTime().after(new Date()),
+				"service.shipmentOffer.create.inPast");
+		
 		tmp = routeOfferRepository.save(tmp);
 
 		return tmp;
