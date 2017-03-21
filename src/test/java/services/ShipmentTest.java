@@ -1,6 +1,9 @@
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.transaction.Transactional;
 
@@ -36,7 +39,266 @@ public class ShipmentTest extends AbstractTest {
 
 	// Test cases -------------------------------------------------------------
 
-	/**
+	 /**
+	  * @Test Create a Shipment
+	  * @result The shipment is created.
+	  */
+	 @Test
+	 public void positiveCreateShipment1(){
+		 
+		 authenticate("user1");
+		 
+		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
+		 
+		 Shipment shipment;
+		 Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		 Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		 
+		 shipment = shipmentService.create();
+		 shipment.setOrigin("Sevilla");
+		 shipment.setDestination("Madrid");
+		 shipment.setDepartureTime(departureTime);
+		 shipment.setMaximumArriveTime(maximumArrivalTime);
+		 shipment.setItemSize("L");
+		 shipment.setPrice(20.0);
+		 shipment.setItemName("Bolsa de deporte");
+		 shipment.setItemPicture("https://www.elitefts.com/black-red-crescent-duffel-bag.html");
+		 shipment.setItemEnvelope("Open");
+		 
+		 shipmentService.save(shipment);
+		 
+		 Integer numberOfShipmentAfter = shipmentService.findAll().size();
+
+		 Assert.isTrue(numberOfShipmentAfter - numberOfShipmentBefore == 1);
+		 
+		 unauthenticate();
+		 
+	 }
+	 
+	 /**
+	  * @Test Create a Shipment been unauthenticated
+	  * @result The shipment is  not created.
+	  */
+	 @Test(expected = IllegalArgumentException.class)
+	 public void negativeCreateShipment1(){
+		 		 
+		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
+		 
+		 Shipment shipment;
+		 Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		 Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+
+		 shipment = shipmentService.create();
+		 shipment.setOrigin("Sevilla");
+		 shipment.setDestination("Madrid");
+		 shipment.setDepartureTime(departureTime);
+		 shipment.setMaximumArriveTime(maximumArrivalTime);
+		 shipment.setItemSize("L");
+		 shipment.setPrice(20.0);
+		 shipment.setItemName("Bolsa de deporte");
+		 shipment.setItemPicture("https://www.elitefts.com/black-red-crescent-duffel-bag.html");
+		 shipment.setItemEnvelope("Open");
+		 
+		 shipmentService.save(shipment);
+		 
+		 Integer numberOfShipmentAfter = shipmentService.findAll().size();
+
+		 Assert.isTrue(numberOfShipmentAfter - numberOfShipmentBefore == 1);
+		 
+	 }
+	 
+	 /**
+	  * @Test Create a Shipment with a MaximumArrivalTime before the DepartureTime.
+	  * @result The shipment is  not created.
+	  */
+	 @Test(expected = IllegalArgumentException.class)
+	 public void negativeCreateShipment2(){
+		 		 
+		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
+		 
+		 Shipment shipment;
+		 Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		 Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+
+		 shipment = shipmentService.create();
+		 shipment.setOrigin("Sevilla");
+		 shipment.setDestination("Madrid");
+		 shipment.setDepartureTime(departureTime);
+		 shipment.setMaximumArriveTime(maximumArrivalTime);
+		 shipment.setItemSize("L");
+		 shipment.setPrice(20.0);
+		 shipment.setItemName("Bolsa de deporte");
+		 shipment.setItemPicture("https://www.elitefts.com/black-red-crescent-duffel-bag.html");
+		 shipment.setItemEnvelope("Open");
+		 
+		 shipmentService.save(shipment);
+		 
+		 Integer numberOfShipmentAfter = shipmentService.findAll().size();
+
+		 Assert.isTrue(numberOfShipmentAfter - numberOfShipmentBefore == 1);
+		 
+	 }
+	 
+	 /**
+	  * @Test Edit an own shipment
+	  * @result The shipment is edited.
+	  */
+	 @Test
+	 public void positiveEditShipment1(){
+		 
+		 authenticate("user2");
+		 
+		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		 
+		 Assert.isTrue(shipmentBefore.getItemName().equals("Equipo de música"));
+		 
+		 shipmentBefore.setItemName("Nuevo Equipo de Música");
+		 
+		 shipmentService.save(shipmentBefore);
+		 
+		 Shipment shipmentAfter = shipmentService.findOne(shipmentBefore.getId());
+		 
+		 Assert.isTrue(shipmentAfter.getItemName() == "Nuevo Equipo de Música");
+		 
+		 unauthenticate();
+	 }
+	 
+	 /**
+	  * @Test Edit the dates of a shipment.
+	  * @Return The shipment will be updated.
+	  */
+	 @Test()
+	 public void positivestiveEditShipment2(){
+		 
+		 authenticate("user2");
+		 
+		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+
+		 Date departureTimeAfter = new GregorianCalendar(2018, Calendar.JULY, 01).getTime();
+		 Date maximumArrivalTimeAfter = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
+		 
+		 shipmentBefore.setDepartureTime(departureTimeAfter);
+		 shipmentBefore.setMaximumArriveTime(maximumArrivalTimeAfter);
+		 
+		 shipmentService.save(shipmentBefore);
+		 
+		 Shipment shipmentAfter = shipmentService.findOne(shipmentBefore.getId());
+		 
+		 Assert.isTrue(shipmentAfter.getDepartureTime().equals(departureTimeAfter));
+		 Assert.isTrue(shipmentAfter.getMaximumArriveTime().equals(maximumArrivalTimeAfter));
+		 
+		 unauthenticate();
+	 }
+	 
+	 /**
+	  * @Test Edit an shipment been unauthenticated.
+	  * @result The shipment will not be edited.
+	  */
+	 @Test(expected = IllegalArgumentException.class)
+	 public void negativeEditShipment1(){
+		 		 
+		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		 
+		 Assert.isTrue(shipmentBefore.getItemName().equals("Equipo de música"));
+		 
+		 shipmentBefore.setItemName("Nuevo Equipo de Música");
+		 
+		 shipmentService.save(shipmentBefore);
+		 
+		 Shipment shipmentAfter = shipmentService.findOne(shipmentBefore.getId());
+		 
+		 Assert.isTrue(shipmentAfter.getItemName() == "Nuevo Equipo de Música");
+		 
+	 }
+	 
+	 /**
+	  * @Test Edit the dates of a shipment. Dates are wrong.
+	  * @Return The shipment will not be updated.
+	  */
+	 @Test(expected = IllegalArgumentException.class)
+	 public void negativeEditShipment2(){
+		 
+		 authenticate("user2");
+		 
+		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+
+		 Date departureTimeAfter = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		 Date maximumArrivalTimeAfter = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		 
+		 shipmentBefore.setDepartureTime(departureTimeAfter);
+		 shipmentBefore.setMaximumArriveTime(maximumArrivalTimeAfter);
+		 
+		 shipmentService.save(shipmentBefore);
+		 
+		 Shipment shipmentAfter = shipmentService.findOne(shipmentBefore.getId());
+		 
+		 Assert.isTrue(shipmentAfter.getDepartureTime().equals(departureTimeAfter));
+		 Assert.isTrue(shipmentAfter.getMaximumArriveTime().equals(maximumArrivalTimeAfter));
+		 
+		 unauthenticate();
+	 }
+	 
+	 /**
+	  * @Test A user deletes his own shipment.
+	  * @return The shipment is deleted.
+	  */
+	 @Test
+	 public void positiveDeleteShipment1(){
+		 
+		 authenticate("user2");
+		 
+		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
+		 
+		 shipmentService.delete(shipmentBefore);
+		 		 
+		 Integer numberOfShipmentAfter = shipmentService.findAll().size();
+		 
+		 Assert.isTrue(numberOfShipmentBefore - numberOfShipmentAfter == 1);
+		 
+		 unauthenticate();
+	 }
+	 
+	 /**
+	  * @Test A user deletes his own shipment.
+	  * @return The shipment will not be deleted.
+	  */
+	 @Test(expected = IllegalArgumentException.class)
+	 public void negativeDeleteShipment1(){
+		 		 
+		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
+		 
+		 shipmentService.delete(shipmentBefore);
+		 		 
+		 Integer numberOfShipmentAfter = shipmentService.findAll().size();
+		 
+		 Assert.isTrue(numberOfShipmentBefore - numberOfShipmentAfter == 1);
+		 
+	 }
+	 
+	 /**
+	  * @Test A user tries to delete another user's shipment.
+	  * @return The shipment will not be deleted.
+	  */
+	 @Test(expected = IllegalArgumentException.class)
+	 public void negativeDeleteShipment2(){
+		 
+		 authenticate("user1");
+		 
+		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
+		 
+		 shipmentService.delete(shipmentBefore);
+		 		 
+		 Integer numberOfShipmentAfter = shipmentService.findAll().size();
+		 
+		 Assert.isTrue(numberOfShipmentBefore - numberOfShipmentAfter == 1);
+		 
+		 unauthenticate();
+	 }
+	
+	 /**
 	 * @Test Carry a Shipment
 	 * @result The shipment is associated to the carrier
 	 */
