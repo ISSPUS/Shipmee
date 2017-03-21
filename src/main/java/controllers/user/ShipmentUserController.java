@@ -117,6 +117,7 @@ public class ShipmentUserController extends AbstractController {
 	@RequestMapping(value = "/carry", method = RequestMethod.GET)
 	public ModelAndView carryShipment(@RequestParam int shipmentId){
 		ModelAndView result;
+		String messageError;
 		
 		Shipment shipment = shipmentService.findOne(shipmentId);
 		
@@ -124,10 +125,11 @@ public class ShipmentUserController extends AbstractController {
 			shipmentService.carryShipment(shipmentId);
 			result = new ModelAndView("redirect:../../shipmentOffer/user/list.do?shipmentId=" + shipmentId);
 		}catch(Throwable oops){
-			/*
-			 * We have to be careful with the URL we use to send the user when things go wrong.
-			 */
-			result = createEditModelAndView(shipment, "shipment.commit.error");
+			messageError = "shipment.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError = oops.getMessage();
+			}
+			result = createEditModelAndView(shipment, messageError);
 		}
 		
 		return result;		

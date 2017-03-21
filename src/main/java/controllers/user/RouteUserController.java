@@ -130,6 +130,7 @@ public class RouteUserController extends AbstractController {
 	@RequestMapping(value = "/contract", method = RequestMethod.GET)
 	public ModelAndView contractRoute(@RequestParam int routeId, @RequestParam int sizePriceId) {
 		ModelAndView result;
+		String messageError;
 		
 		Route route = routeService.findOne(routeId);
 		
@@ -137,10 +138,11 @@ public class RouteUserController extends AbstractController {
 			routeService.contractRoute(routeId, sizePriceId);
 			result = new ModelAndView("redirect:../../routeOffer/user/list.do?routeId=" + routeId);
 		} catch(Throwable oops){
-			/*
-			 * We have to be careful with the URL we use to send the user when things go wrong.
-			 */
-			result = createEditModelAndView(route, "route.commit.error");
+			messageError = "route.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError = oops.getMessage();
+			}
+			result = createEditModelAndView(route, messageError);
 		}
 		
 		return result;
