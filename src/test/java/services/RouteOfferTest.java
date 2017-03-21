@@ -239,17 +239,17 @@ public class RouteOfferTest extends AbstractTest {
 	 */
 	@Test
 	public void positiveAcceptRouteOffer1() {
-		authenticate("user1");
+		authenticate("user2");
 		
 		Route route;
 		RouteOffer ro;
 		SizePrice sp;
 		Collection<RouteOffer> routeOffers;
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		ro = routeOffers.iterator().next();
-		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice1"));
+		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice5"));
 		
 		routeOfferService.accept(ro.getId(), sp.getId());
 		
@@ -266,20 +266,20 @@ public class RouteOfferTest extends AbstractTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeAcceptRouteOffer1() {
-		authenticate("user1");
+		authenticate("user2");
 		
 		Route route;
 		RouteOffer ro;
 		SizePrice sp;
 		Collection<RouteOffer> routeOffers;
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		ro = routeOffers.iterator().next();
-		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice1"));
+		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice5"));
 		
 		unauthenticate();
-		authenticate("user2");
+		authenticate("user1");
 		
 		routeOfferService.accept(ro.getId(), sp.getId());
 		
@@ -296,17 +296,17 @@ public class RouteOfferTest extends AbstractTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeAcceptRouteOffer2() {
-		authenticate("user1");
+		authenticate("user2");
 		
 		Route route;
 		RouteOffer ro;
 		SizePrice sp;
 		Collection<RouteOffer> routeOffers;
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		ro = routeOffers.iterator().next();
-		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice1"));
+		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice5"));
 		
 		unauthenticate();
 		
@@ -324,13 +324,13 @@ public class RouteOfferTest extends AbstractTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeAcceptRouteOffer3() {
-		authenticate("user1");
+		authenticate("user2");
 		
 		RouteOffer ro;
 		SizePrice sp;
 		
-		ro = routeOfferService.findOne(UtilTest.getIdFromBeanName("routeOffer3"));	
-		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice1"));
+		ro = routeOfferService.findOne(UtilTest.getIdFromBeanName("routeOffer7"));	
+		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice5"));
 		routeOfferService.accept(ro.getId(), sp.getId());
 		ro = routeOfferService.findOne(ro.getId());
 		
@@ -345,13 +345,13 @@ public class RouteOfferTest extends AbstractTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeAcceptRouteOffer4() {
-		authenticate("user1");
+		authenticate("user2");
 		
 		RouteOffer ro;
 		SizePrice sp;
 		
-		ro = routeOfferService.findOne(UtilTest.getIdFromBeanName("routeOffer4"));	
-		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice1"));
+		ro = routeOfferService.findOne(UtilTest.getIdFromBeanName("routeOffer8"));	
+		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice5"));
 		routeOfferService.accept(ro.getId(), sp.getId());
 		ro = routeOfferService.findOne(ro.getId());
 		

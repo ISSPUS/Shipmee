@@ -172,7 +172,7 @@ public class RouteService {
 		return result;
 	}
 	
-	public void contractRoute(int routeId, int sizePriceId){
+	public RouteOffer contractRoute(int routeId, int sizePriceId){
 		
 		Assert.isTrue(routeId != 0, "The Route's ID must not be zero.");
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment.");
@@ -202,12 +202,13 @@ public class RouteService {
 		 * This may include more sets to the RouteOffer.
 		 */
 		
-		routeOfferService.save(routeOffer);
+		routeOffer = routeOfferService.save(routeOffer);
 		
 		/*
 		 * Here comes the notification system (Sprint 2)
 		 */
 		
+		return routeOffer;
 	}
 	
 	public void flush() {

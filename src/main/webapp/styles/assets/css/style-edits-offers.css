@@ -1,0 +1,62 @@
+
+.formulario {
+	padding: 10%;
+}
+/* enable absolute positioning */
+.inner-addon {
+	position: relative;
+}
+
+/* style glyph */
+.inner-addon .glyphicon {
+	position: absolute;
+	padding: 10px;
+	pointer-events: none;
+}
+
+/* align glyph */
+.left-addon .glyphicon {
+	left: 0px;
+}
+
+.right-addon .glyphicon {
+	right: 0px;
+}
+
+/* add padding  */
+.left-addon input {
+	padding-left: 30px;
+}
+
+.right-addon input {
+	padding-right: 30px;
+}
+
+.btn-accept {
+	background-color: #00796B;
+	border-color: #00796B;
+	color: white;
+	margin-left:2%;
+	margin-right: 2%: 
+}
+
+.btn-accept:hover, .btn-accept:focus, .btn-accept:active, .btn-accept.active,
+	.open>.dropdown-toggle.btn-accept {
+	color: #fff;
+	background-color: #00897B;
+	border-color: #00897B; /*set the color you want here*/
+}
+
+.btn-cancel {
+	background-color: #C62828;
+	border-color: #C62828;
+	margin-left:2%;
+	margin-right: 2%: 
+}
+
+.btn-cancel:hover, .btn-cancel:focus, .btn-cancel:active, .btn-cancel.active,
+	.open>.dropdown-toggle.btn-cancel {
+	color: #fff;
+	background-color: #D32F2F;
+	border-color: #D32F2F; /*set the color you want here*/
+}

@@ -18,16 +18,11 @@
 
 <%-- Definition --%>
 
-<button type="button" class="btn btn-primary" onclick="javascript: relativeRedir('${url}')" >
+<button type="button" class="btn btn-primary btn-cancel" onclick="javascript: relativeRedir('${url}')" >
 	<spring:message code="${code}" />
 </button>
 
 <%-- Notes --%>
-
-<%-- 
-
-	If you wish to use this custom tag, you need add the following 
-	script in your master page: 
 
 	<script type="text/javascript">
 		function relativeRedir(loc) {	
@@ -41,4 +36,3 @@
 		}
 	</script>
 
---%>

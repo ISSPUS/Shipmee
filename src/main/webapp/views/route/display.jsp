@@ -239,7 +239,7 @@
                         <tr>
                             <td>
                                 <label class="custom-control custom-checkbox">
-                                    <input type="radio" name="gender"  style="display:none" class="custom-control-input">
+                                    <input type="radio" name="sizes" value="${value.id}" style="display:none" class="custom-control-input" required>
                                     <span class="custom-control-indicator"></span>
                                 </label>
                             </td>
@@ -247,7 +247,7 @@
                             <td class="tabla-precio">${value.price}&#8364;
                             
                             <security:authorize access="hasRole('USER')">
-                            	<a href="shipmentOffer/user/create.do?shipmentId=${shipment.id}"><span title="<spring:message code="route.offer" />"><i class="glyphicon glyphicon-resize-small contraoferta-icon"></i></span></a>
+                            	<a href="routeOffer/user/create.do?routeId=${route.id}"><span title="<spring:message code="route.offer" />"><i class="glyphicon glyphicon-resize-small contraoferta-icon"></i></span></a>
                             </security:authorize></td>
                          
                         </tr>
@@ -265,7 +265,7 @@
 								<div class="row info1 col-xs-12 col-sm-12 text-center">
 											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
-											value= "<spring:message code="route.contract" />" onclick="location.href = 'route/user/contract.do?routeId=${route.id}&sizePriceId=${value.id}';"></input>
+											value= "<spring:message code="route.contract" />" onclick="contract(${route.id});"></input>
 
 								</div>
 								<div class="text-center"><a href="routeOffer/user/list.do?routeId=${route.id}"><spring:message code="route.offers" /><i class="glyphicon glyphicon-chevron-right"></i></a></div>
@@ -283,6 +283,16 @@
 
 
 <script type="text/javascript">
+	function contract(routeId){
+		//location.href = 'route/user/contract.do?routeId=${route.id}&sizePriceId=${value.id}';"
+		var sizePriceId = $('input[name=sizes]:checked').val();
+		if(sizePriceId!=undefined){
+			window.location = 'route/user/contract.do?routeId='+routeId+'&sizePriceId='+sizePriceId;
+			return false;
+		}else{
+			return true;
+		}
+	}
 	$(function() {
 		$('#datetimepicker1').datetimepicker({
 			viewMode : 'days',

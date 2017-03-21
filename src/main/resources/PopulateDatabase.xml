@@ -226,6 +226,16 @@
 		<property name="vehicle" ref="vehicle2"/>
 	</bean>
 	
+	<bean id="route3" class="domain.Route">
+		<property name="date" value="2017/03/12 00:00"/>
+		<property name="departureTime" value="2017/07/12 16:00"/>
+		<property name="arriveTime" value="2017/07/12 19:00"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="itemEnvelope" value="Both"/>
+		<property name="creator" ref="user3"/>
+	</bean>
+	
 	<!-- SizePrice -->
 	
 	<bean id="sizePrice1" class="domain.SizePrice">
@@ -276,6 +286,12 @@
 		<property name="route" ref="route2"/>
 	</bean>
 	
+	<bean id="sizePrice9" class="domain.SizePrice">
+		<property name="size" value="M"/>
+		<property name="price" value="3.50"/>
+		<property name="route" ref="route3"/>
+	</bean>
+	
 	<!-- RouteOffer -->
 	
 	<bean id="routeOffer1" class="domain.RouteOffer">
@@ -314,12 +330,48 @@
 		<property name="route" ref="route1"/>
 	</bean>
 	
+	<bean id="routeOffer5" class="domain.RouteOffer">
+		<property name="amount" value="2.00"/>
+		<property name="description" value="Te doy 2€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user1"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="routeOffer6" class="domain.RouteOffer">
+		<property name="amount" value="3.00"/>
+		<property name="description" value="Te doy 3€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user3"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="routeOffer7" class="domain.RouteOffer">
+		<property name="amount" value="0.50"/>
+		<property name="description" value="Te doy 0.50€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="true"/>
+		<property name="user" ref="user3"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="routeOffer8" class="domain.RouteOffer">
+		<property name="amount" value="2.00"/>
+		<property name="description" value="Te doy 1.75€ por un artículo de tamaño M y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="true"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user1"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
 	<!-- Shipment -->
 	
 	<bean id="shipment1" class="domain.Shipment">
-		<property name="date" value="2017/03/12 00:00"/>
-		<property name="departureTime" value="2017/03/12 16:00"/>
-		<property name="maximumArriveTime" value="2017/03/12 19:00"/>
+		<property name="date" value="2017/05/12 00:00"/>
+		<property name="departureTime" value="2017/05/12 16:00"/>
+		<property name="maximumArriveTime" value="2017/05/12 19:00"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
 		<property name="price" value="2.00"/>
