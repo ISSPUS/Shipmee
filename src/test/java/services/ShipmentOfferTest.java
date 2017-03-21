@@ -3,6 +3,7 @@ package services;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,6 +48,127 @@ public class ShipmentOfferTest extends AbstractTest {
 
 	// Test cases -------------------------------------------------------------
 
+	/**
+	 * @test A user creates an offer for a shipment.
+	 * @result The shipmentOffer is created.
+	 */
+	@Test
+	public void positiveCreateShipmentOffer1(){
+		
+		authenticate("user1");
+		
+		ShipmentOffer shipmentOffer;
+		Shipment shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
+		Integer numberOfShipmentOfferBefore = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
+		
+		shipmentOffer = shipmentOfferService.create(shipment.getId());
+		shipmentOffer.setAmount(35.0);
+		shipmentOffer.setDescription("Lo pido muy caro");
+		shipmentOfferService.save(shipmentOffer);
+		
+		Integer numberOfShipmentOfferAfter = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
+		
+		Assert.isTrue(numberOfShipmentOfferAfter - numberOfShipmentOfferBefore == 1);
+
+		unauthenticate();
+	}
+	
+	/**
+	 * @test A user creates an offer for a shipment while been unauthenticated.
+	 * @result The shipmentOffer is not created.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeCreateShipmentOffer1(){
+				
+		ShipmentOffer shipmentOffer;
+		Shipment shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
+		Integer numberOfShipmentOfferBefore = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
+		
+		shipmentOffer = shipmentOfferService.create(shipment.getId());
+		shipmentOffer.setAmount(35.0);
+		shipmentOffer.setDescription("Lo pido muy caro");
+		shipmentOfferService.save(shipmentOffer);
+		
+		Integer numberOfShipmentOfferAfter = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
+		
+		Assert.isTrue(numberOfShipmentOfferAfter - numberOfShipmentOfferBefore == 1);
+
+	}
+	
+	/**
+	 * @test A user creates an offer for a shipment that belongs to him/herself.
+	 * @result The shipmentOffer is not created.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeCreateShipmentOffer2(){
+		
+		authenticate("user2");
+		
+		ShipmentOffer shipmentOffer;
+		Shipment shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
+		Integer numberOfShipmentOfferBefore = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
+		
+		shipmentOffer = shipmentOfferService.create(shipment.getId());
+		shipmentOffer.setAmount(35.0);
+		shipmentOffer.setDescription("Lo pido muy caro");
+		shipmentOfferService.save(shipmentOffer);
+		
+		Integer numberOfShipmentOfferAfter = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
+		
+		Assert.isTrue(numberOfShipmentOfferAfter - numberOfShipmentOfferBefore == 1);
+
+		unauthenticate();
+	}
+	
+	/**
+	 * @test A user creates an offer for a shipment with a negative amount.
+	 * @result The shipmentOffer is not created.
+	 */
+	@Test(expected = ConstraintViolationException.class)
+	public void negativeCreateShipmentOffer3(){
+		
+		authenticate("user1");
+		
+		ShipmentOffer shipmentOffer;
+		Shipment shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
+		Integer numberOfShipmentOfferBefore = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
+		
+		shipmentOffer = shipmentOfferService.create(shipment.getId());
+		shipmentOffer.setAmount(-35.0);
+		shipmentOffer.setDescription("Lo pido muy caro");
+		shipmentOfferService.save(shipmentOffer);
+		
+		Integer numberOfShipmentOfferAfter = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
+		
+		Assert.isTrue(numberOfShipmentOfferAfter - numberOfShipmentOfferBefore == 1);
+
+		unauthenticate();
+	}
+	
+	/**
+	 * @test A user creates an offer for a shipment with a past arrival time.
+	 * @result The shipmentOffer is not created.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeCreateShipmentOffer4(){
+		
+		authenticate("user1");
+		
+		ShipmentOffer shipmentOffer;
+		Shipment shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		Integer numberOfShipmentOfferBefore = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
+		
+		shipmentOffer = shipmentOfferService.create(shipment.getId());
+		shipmentOffer.setAmount(35.0);
+		shipmentOffer.setDescription("Lo pido muy caro");
+		shipmentOfferService.save(shipmentOffer);
+		
+		Integer numberOfShipmentOfferAfter = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
+		
+		Assert.isTrue(numberOfShipmentOfferAfter - numberOfShipmentOfferBefore == 1);
+
+		unauthenticate();
+	}
 	
 	/**
 	 * @Test List all shipment Offers
