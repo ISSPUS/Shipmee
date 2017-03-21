@@ -111,6 +111,8 @@ public class ShipmentOfferService {
 		}
 		Assert.isTrue(!tmp.getUser().equals(tmp.getShipment().getCreator()),
 				"service.shipmentOffer.save.equalsCreatorAndProposer");
+		Assert.isTrue(tmp.getShipment().getMaximumArriveTime().after(new Date()),
+				"service.shipmentOffer.create.inPast");
 
 		tmp = shipmentOfferRepository.save(tmp);
 
