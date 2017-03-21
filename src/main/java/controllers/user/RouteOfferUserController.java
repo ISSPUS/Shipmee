@@ -131,14 +131,14 @@ public class RouteOfferUserController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/accept", method = RequestMethod.GET)
-	public ModelAndView accept(@RequestParam int routeOfferId, @RequestParam int sizePriceId){
+	public ModelAndView accept(@RequestParam int routeOfferId){
 		ModelAndView result;
 		
 		RouteOffer routeOffer = routeOfferService.findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
 		
 		try{
-			routeOfferService.accept(routeOfferId, sizePriceId);
+			routeOfferService.accept(routeOfferId);
 			// This reditect may be change to other url.
 			result = new ModelAndView("redirect:../user/list.do?routeId="+route.getId());
 		}catch(Throwable oops){

@@ -17,7 +17,6 @@ import org.springframework.util.Assert;
 
 import domain.Route;
 import domain.RouteOffer;
-import domain.SizePrice;
 import domain.User;
 import utilities.AbstractTest;
 import utilities.UtilTest;
@@ -41,9 +40,6 @@ public class RouteOfferTest extends AbstractTest {
 	@Autowired 
 	private UserService userService;
 	
-	@Autowired
-	private SizePriceService sizePriceService;
-
 	// Test cases -------------------------------------------------------------
 
 	/**
@@ -243,15 +239,13 @@ public class RouteOfferTest extends AbstractTest {
 		
 		Route route;
 		RouteOffer ro;
-		SizePrice sp;
 		Collection<RouteOffer> routeOffers;
 		
 		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		ro = routeOffers.iterator().next();
-		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice5"));
 		
-		routeOfferService.accept(ro.getId(), sp.getId());
+		routeOfferService.accept(ro.getId());
 		
 		ro = routeOfferService.findOne(ro.getId());
 		
@@ -270,18 +264,16 @@ public class RouteOfferTest extends AbstractTest {
 		
 		Route route;
 		RouteOffer ro;
-		SizePrice sp;
 		Collection<RouteOffer> routeOffers;
 		
 		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		ro = routeOffers.iterator().next();
-		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice5"));
 		
 		unauthenticate();
 		authenticate("user1");
 		
-		routeOfferService.accept(ro.getId(), sp.getId());
+		routeOfferService.accept(ro.getId());
 		
 		ro = routeOfferService.findOne(ro.getId());
 		
@@ -300,17 +292,15 @@ public class RouteOfferTest extends AbstractTest {
 		
 		Route route;
 		RouteOffer ro;
-		SizePrice sp;
 		Collection<RouteOffer> routeOffers;
 		
 		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		ro = routeOffers.iterator().next();
-		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice5"));
 		
 		unauthenticate();
 		
-		routeOfferService.accept(ro.getId(), sp.getId());
+		routeOfferService.accept(ro.getId());
 		
 		ro = routeOfferService.findOne(ro.getId());
 		
@@ -327,11 +317,9 @@ public class RouteOfferTest extends AbstractTest {
 		authenticate("user2");
 		
 		RouteOffer ro;
-		SizePrice sp;
 		
 		ro = routeOfferService.findOne(UtilTest.getIdFromBeanName("routeOffer7"));	
-		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice5"));
-		routeOfferService.accept(ro.getId(), sp.getId());
+		routeOfferService.accept(ro.getId());
 		ro = routeOfferService.findOne(ro.getId());
 		
 		Assert.isTrue(ro.getAcceptedByCarrier() == true && ro.getRejectedByCarrier() == false);
@@ -348,11 +336,9 @@ public class RouteOfferTest extends AbstractTest {
 		authenticate("user2");
 		
 		RouteOffer ro;
-		SizePrice sp;
 		
 		ro = routeOfferService.findOne(UtilTest.getIdFromBeanName("routeOffer8"));	
-		sp = sizePriceService.findOne(UtilTest.getIdFromBeanName("sizePrice5"));
-		routeOfferService.accept(ro.getId(), sp.getId());
+		routeOfferService.accept(ro.getId());
 		ro = routeOfferService.findOne(ro.getId());
 		
 		Assert.isTrue(ro.getAcceptedByCarrier() == true && ro.getRejectedByCarrier() == false);
