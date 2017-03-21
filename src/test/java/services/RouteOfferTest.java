@@ -48,14 +48,14 @@ public class RouteOfferTest extends AbstractTest {
 	 */
 	@Test
 	public void positiveCreateRouteOffer1() {
-		authenticate("user1");
+		authenticate("user3");
 		
 		RouteOffer result;
 		Route route;
 		Collection<RouteOffer> routeOffers;
 		int sizePreCreate, sizePostCreate;
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		sizePreCreate = routeOffers.size();
 		
@@ -68,9 +68,9 @@ public class RouteOfferTest extends AbstractTest {
 		result = routeOfferService.save(result);
 		
 		unauthenticate();
-		authenticate("user1");
+		authenticate("user3");
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		sizePostCreate = routeOffers.size();
 		
@@ -86,14 +86,14 @@ public class RouteOfferTest extends AbstractTest {
 	 */
 	@Test
 	public void positiveCreateRouteOffer2() {
-		authenticate("user1");
+		authenticate("user3");
 		
 		RouteOffer result;
 		Route route;
 		Collection<RouteOffer> routeOffers;
 		int sizePreCreate, sizePostCreate;
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		sizePreCreate = routeOffers.size();
 		
@@ -107,9 +107,9 @@ public class RouteOfferTest extends AbstractTest {
 		result = routeOfferService.save(result);
 		
 		unauthenticate();
-		authenticate("user1");
+		authenticate("user3");
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		sizePostCreate = routeOffers.size();
 
@@ -199,14 +199,14 @@ public class RouteOfferTest extends AbstractTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeCreateRouteOffer3() {
-		authenticate("user1");
+		authenticate("user3");
 		
 		RouteOffer result;
 		Route route;
 		Collection<RouteOffer> routeOffers;
 		int sizePreCreate, sizePostCreate;
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		sizePreCreate = routeOffers.size();
 		
@@ -217,9 +217,9 @@ public class RouteOfferTest extends AbstractTest {
 		result.setDescription("Test");
 		result = routeOfferService.save(result);
 		
-		authenticate("user1");
+		authenticate("user3");
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		sizePostCreate = routeOffers.size();
 
@@ -352,13 +352,13 @@ public class RouteOfferTest extends AbstractTest {
 	 */
 	@Test
 	public void positiveDenyRouteOffer1() {
-		authenticate("user1");
+		authenticate("user2");
 		
 		Route route;
 		RouteOffer ro;
 		Collection<RouteOffer> routeOffers;
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		ro = routeOffers.iterator().next();
 		
