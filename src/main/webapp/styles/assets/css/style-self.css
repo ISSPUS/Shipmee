@@ -1,0 +1,288 @@
+/*	################################################################
+	1. GENERAL STRUCTURES
+################################################################# */
+@font-face
+{
+ font-family: 'Aero';
+ src: url('../fonts/Aero.ttf');
+}
+
+.titlePrincipal{
+	text-shadow: 1px 2px #999;
+}
+
+.titlePrincipal h1{
+	font-size: 400%;
+	margin-top: auto;
+	text-shadow: 1px 2px #999;
+}
+#headerwrap h4{
+	color: white;
+}
+
+/*	Importante! Fijando menu de arriba */
+.navbar-default {
+    position: relative;
+    
+}
+
+#headerwrap {
+  	background: url(../../../images/furgo.gif) no-repeat center center fixed; 
+  	background-size: cover;
+	min-height: 550px;
+	padding-bottom: 15%;
+	padding-top: 40px;
+	text-align: center;
+}
+
+.containerLogin {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 3%;
+    padding-bottom: 8%;
+    
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+.foto-shipmee {
+    display: block;
+    max-width: 100%;
+    width: 80%;
+}
+
+.search-background img {
+    width: 100%;
+}
+
+
+
+
+
+
+.text-sample{
+	color: white;
+}
+
+#footerwrap {
+	padding-top: 60px;
+	padding-bottom: 30px;
+	background: #384452;
+}
+
+
+.licence{
+	float: right !important;
+}
+
+
+
+.logoShp {
+    margin-left: 0%;
+    margin-right: 5%;
+   	width: 100%;
+   /* position: absolute;*/
+    padding-left: 155px;
+}
+
+
+/*	Buttom search */
+
+.btnSearch {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+.btnSearch:hover {
+    color: #fff;
+    background-color: #3276b1;
+    border-color: #285e8e;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+	color: #d9d9d9;
+  background-color: transparent;
+}
+
+.navbar-brand {
+	font-family: Aero;
+	font-size: 30px;
+}
+
+/* BUSCADOR ------------------------------- */
+.group {
+	position: relative;
+	margin-bottom: 35px;
+}
+
+.camp{
+	font-size: 18px;
+	padding: 5px 10px 10px 5px;
+	display: block;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	color: white;
+	font-weight:bold;
+}
+
+.camp:focus {
+	outline: none;
+}
+
+.group label {
+	color: #fff;
+	font-size: 18px;
+	font-weight: normal;
+	position: absolute;
+	pointer-events: none;
+	left: 5px;
+	top: 10px;
+	transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-webkit-transition: 0.2s ease all;
+}
+
+
+
+/* active state */
+input:focus ~ label, input:valid ~ label {
+	top: -20px;
+	font-size: 14px;
+	color: #fff;
+}
+
+.bar {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+
+.bar:before, .bar:after {
+	content: '';
+	height: 2px;
+	width: 0;
+	bottom: 1px;
+	position: absolute;
+	background: #fff;
+	transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+	left: 50%;
+}
+
+.bar:after {
+	right: 50%;
+}
+
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+	width: 50%;
+}
+
+.highlight {
+	position: absolute;
+	height: 60%;
+	width: 100px;
+	top: 25%;
+	left: 0;
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+input:focus ~ .highlight {
+	-webkit-animation: inputHighlighter 0.3s ease;
+	-moz-animation: inputHighlighter 0.3s ease;
+	animation: inputHighlighter 0.3s ease;
+	
+}
+
+@
+-webkit-keyframes inputHighlighter {from { background:#fff;
+	
+}
+
+to {
+	width: 0;
+	background: transparent;
+}
+
+}
+@
+-moz-keyframes inputHighlighter {from { background:#fff;
+	
+}
+
+to {
+	width: 0;
+	background: transparent;
+}
+
+}
+@
+keyframes inputHighlighter {from { background:#fff;
+	
+}
+
+to {
+	width: 0;
+	background: transparent;
+}
+
+}
+#panel {
+	background: rgba(0, 0, 0, 0.6);
+	border-radius: 8px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+	margin-top: 3%;
+	padding-top: 2%;
+	padding-left: 2%;
+	padding-right: 2%;
+	padding-bottom: 0%;
+	 
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+
+.titleSearch{
+	color: white;
+	padding-top: 1%;
+	padding-bottom: 5%;
+}
+
+.choose{
+	padding-bottom: 10%;
+}
+
+.btnSearch{
+	font-size: 20px;
+}
+
+.fondoDesplegable .dropdown-menu {
+	background-color: white;
+}
+
+.blue-barra{
+	background: #00b3fe;
+	margin-top: 0px;
+	/* margin-bottom: 60px; */
+	padding-top: 25px;
+	padding-bottom: 25px;
+	color: white;
+}
+

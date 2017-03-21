@@ -18,19 +18,19 @@ public class Credentials {
 
 	@Size(min = 5, max = 32)
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
-	public void setJ_username(String username) {
+	public void setJ_username(final String username) {
 		this.username = username;
 	}
 
 	@Size(min = 5, max = 32)
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 

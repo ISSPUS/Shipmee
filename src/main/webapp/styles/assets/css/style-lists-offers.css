@@ -1,0 +1,55 @@
+@font-face {
+	font-family: 'Fontawesome';
+	src: url('../fonts/fontawesome-webfont.ttf');
+}
+
+.offer-shipment {
+	border: 1px solid #d0d0d0;
+}
+
+.profile-offer-img {
+	width: 100px !important;
+}
+
+.offer-shipment {
+	background-color: rgba(227, 229, 231, 0.15);
+}
+
+.offer-profile-info {
+	color: black;
+	margin-bottom: 0;
+}
+
+.badge-shipmentoffer-price {
+	font-size: 120%;
+	font-family: 'Lato', sans-serif;
+	background-color: #9E9E9E;
+	text-decoration: none;
+	font-weight: normal !important;
+}
+
+.btn-shipmentOffer-actions {
+	margin: 1%;
+}
+
+hr {
+	margin-top: 2%;
+	margin-bottom: 1%;
+}
+
+.btn-primary {
+	background-color: #00796B;
+}
+
+.btn-danger {
+	background-color: #C62828;
+}
+
+@media ( min-width : 770px) {
+	.btn-shipmentOffer-actions {
+		margin-top: 10%;
+	}
+	.badge-shipmentoffer-price {
+		margin-top: 15%;
+	}
+}

@@ -8,10 +8,55 @@
 	">
 
 	<util:list id="converters">
-		<!-- 
-			Add your own converters using entries of the following form: 
-			<bean class="converters.Class1ToClass2" /> 
-		-->
+	
+		<bean class="converters.AuthorityToStringConverter" />
+		<bean class="converters.StringToAuthorityConverter" />
+		
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		
+		<bean class="converters.UserToStringConverter" />
+		<bean class="converters.StringToUserConverter" />
+		
+		<bean class="converters.ModeratorToStringConverter" />
+		<bean class="converters.StringToModeratorConverter" />
+		
+		<bean class="converters.RankToStringConverter" />
+		<bean class="converters.StringToRankConverter" />
+		
+		<bean class="converters.ComplaintToStringConverter" />
+		<bean class="converters.StringToComplaintConverter" />
+		
+		<bean class="converters.VehicleToStringConverter" />
+		<bean class="converters.StringToVehicleConverter" />
+		
+		<bean class="converters.RatingToStringConverter" />
+		<bean class="converters.StringToRatingConverter" />
+		
+		<bean class="converters.RouteToStringConverter" />
+		<bean class="converters.StringToRouteConverter" />
+		
+		<bean class="converters.RouteOfferToStringConverter" />
+		<bean class="converters.StringToRouteOfferConverter" />
+		
+		<bean class="converters.SizePriceToStringConverter" />
+		<bean class="converters.StringToSizePriceConverter" />
+		
+		<bean class="converters.NotificationToStringConverter" />
+		<bean class="converters.StringToNotificationConverter" />
+		
+		<bean class="converters.ShipmentToStringConverter" />
+		<bean class="converters.StringToShipmentConverter" />
+		
+		<bean class="converters.ShipmentOfferToStringConverter" />
+		<bean class="converters.StringToShipmentOfferConverter" />
+		
+		<bean class="converters.CreditCardToStringConverter" />
+		<bean class="converters.StringToCreditCardConverter" />
+		
 	</util:list>
 	
 </beans>

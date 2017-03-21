@@ -1,0 +1,38 @@
+language:
+- java
+services:
+- mysql
+jdk:
+- oraclejdk8
+before_install:
+- mysql -u root < initialize.sql
+script:
+- mvn exec:java -Dexec.mainClass="utilities.PopulateDatabase"
+- mvn clean test
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.organization=shipmee
+- ls -lah
+after_success:
+- mvn clean cobertura:cobertura coveralls:report -DrepoToken=$tokenCoverall
+cache:
+  directories:
+  - "$HOME/.m2"
+  - "$HOME/.sonar/cache"
+addons:
+  sonarqube:
+    token:
+      secure: UkW0I83nifb5EyWR6Dou1zZz5i6riWa2EDgTgqfiB/YqYtrfoz2zwnVFxO+62ACUGbQfkLanv7pxZmgBfYZRR5TNndG6fiiB7lylKkRYksfik9BN2hDj1AxxBbhB0fiuCT5N6gF8QC/tkGmhESff11Ytb2RJHIG8cql5IKMjzXi/txYs85npIE5775B9nWmKznpsRVeXCAvnIjnDfD7wJDZUvgP901zIjKwEwxLuraH1q1xLwj/O102Q8VLklnkH18USaqEs8O7+XHhUTjOLwOp4pvv3Droyh/JeAHrLOdAUwhB4GmPkoQCdD706LH9PCAntD+MoyG4kcecgzf0DV/O7ZgknD/+DV6pJ9XCjVdfsUhoml2+DeEorodScXDByN4weLb7JIWasKZLERV5mTjquiRKdn2NC7DhFebf0shQNVXjBAX3xqJk62vLEEyHfMsCGETA0zw5Ps8j4BkKV6Xb+By06yDUFCSL80WSb/pqR3RRzOthOJhTJzksXm4WECACV1GT5McN8M4tWD/6FZVQqGG6b8FLbG0IyBM86TwWIlJ2RaTyiOHHB6RP5llkTdQQ+L9CIa54+P7vN9eRcj9XYXAPlKCyudFUBpnO9gYZVX2FRI45Ip21KCOCMY3RziJ6iTa04CoIDVopZIDM5WjcF7m7EsNDuqHmADLuz21Q=
+    branches:
+    - integrations
+    - develop
+    - master
+dist:
+- trusty
+sudo:
+- false
+notifications:
+  matrix:
+  - email: false
+  slack:
+    secure: CW1NSp/FNEBd1aLIR5VB6vecx/gERcR/TH6KMS7uafA5Jd0g7kIxOaJYcTNznELmnjmISag3wwMx2NCDkVGyMmqEM3Hgyd0o9kEvl7TS2iErl76yRA19mJD2ZKenvqJYQex0Brb7+my0tH/SmdwSijPc24u05KJ22rbD5a5GFtAq8rmaC/D8BH4TxMp0nN6OpmeAQbz97xROAwMJcth2N1z/N0hh/FfDNJHtPO+B89yUTrpaiRyGC+tACYREfA15PZW4skjPEOmykyBRnkGHqtR7aOTlECfkI3TNiZtn19eglDCiQyLOo33Y1YH9B9YaaActM0MapKBJyXF3TWexT4ifvfkCgj5qG6v69PjlVlmK/roGPnm1scA+iWM5yx3Z8AufLGxecQbTLS9BBkzKwhA9I/rS23cyLyXzdf+q4jTqtbveWCkfK+8pYQZFqS54dYtrSlajTJC6Bd+auxOI+uPEhgOjFHSPeWGKz7KOJRK6W+R77vXhgIIT/lXOf7IJyikpjj1BEdAgr0lYO1D6NHCn44nHVdIAG1CezIRZroNzV/0B6yNvaV4TxtS5kIPAndp4QT/i0VUYAio5KqiLmNnmuQh5UyJTrqUvDKuz4d5D3HLe6do4FlW15DfUcmwVoqqXt2DIPbyVRdWTC+HdQlzkhCb0cQFIHfb+W4/bkGI=
+    on_success: change
+    on_failure: always

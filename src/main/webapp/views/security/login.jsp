@@ -7,28 +7,56 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="j_spring_security_check" modelAttribute="credentials">
 
-	<form:label path="username">
-		<spring:message code="security.username" />
-	</form:label>
-	<form:input path="username" />	
+<div class="container containerLogin">
+
+	<div id="loginbox"
+		class="mainbox col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title text-center">
+					<spring:message code="login.login" />
+				</div>
+			</div>
+
+			<div class="panel-body">
+
+				<form:form action="j_spring_security_check" modelAttribute="credentials">
+
+
+	<div class="input-group">
+	<span class="input-group-addon">
+	<i class="glyphicon glyphicon-user"></i></span>
+	<form:input class="form-control" id="user" code="user.user" path="username" />	
 	<form:errors class="error" path="username" />
+	</div>
+	
 	<br />
 
-	<form:label path="password">
-		<spring:message code="security.password" />
-	</form:label>
-	<form:password path="password" />	
+	<div class="input-group">
+	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	<form:password code="user.password" path="password" id="password" class="form-control" />	
 	<form:errors class="error" path="password" />
 	<br />
-	
+	</div>
+
+
+
 	<jstl:if test="${showError == true}">
 		<div class="error">
 			<spring:message code="security.login.failed" />
 		</div>
 	</jstl:if>
-	
-	<input type="submit" value="<spring:message code="security.login" />" />
+	<br />
+	<input class="btn btn-theme" type="submit" value="<spring:message code="security.login" />" />
 	
 </form:form>
+</div>
+		</div>
+		
+	</div>
+</div>
+
+

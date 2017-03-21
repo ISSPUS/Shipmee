@@ -19,34 +19,474 @@
 			</list>
 		</property>
 	</bean>
-
+	
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="USER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="moderator1" />
+		<property name="password" value="38caf4a470117125b995f7ce53e6e6b9" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MODERATOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="user3" />
+		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Administrator -->	
+	
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Miguel"/>
+		<property name="surname" value="Rodriguez"/>
+		<property name="email" value="miguel@gmail.com"/>
+		<property name="birthDate" value="1995/10/24 00:00"/>
+		<property name="phone" value="666777888"/>
+		<property name="dni" value="12345678A"/>
+		<property name="userAccount" ref="userAccount1"/>
+	</bean>
+	
+	<!-- Rank -->
+	
+	<bean id="rank1" class="domain.Rank">
+		<property name="title" value="title1"/>
+		<property name="description" value="description1"/>
+		<property name="icon" value="http://www.icon1.com"/>
+		<property name="since" value="1"/>
+	</bean>
+	
+	<bean id="rank2" class="domain.Rank">
+		<property name="title" value="title2"/>
+		<property name="description" value="description2"/>
+		<property name="icon" value="http://www.icon2.com"/>
+		<property name="since" value="2"/>
+	</bean>
+	
+	<bean id="rank3" class="domain.Rank">
+		<property name="title" value="title3"/>
+		<property name="description" value="description3"/>
+		<property name="icon" value="http://www.icon3.com"/>
+		<property name="since" value="3"/>
+	</bean>
+	
+	<!-- User -->
+	
+	<bean id="user1" class="domain.User">
+		<property name="name" value="Manolo"/>
+		<property name="surname" value="Ruiz"/>
+		<property name="email" value="manolo@gmail.com"/>
+		<property name="birthDate" value="1992/10/05 00:00"/>
+		<property name="phone" value="666777666"/>
+		<property name="dni" value="23456789B"/>
+		<property name="userAccount" ref="userAccount2"/>
+		<property name="isVerified" value="true"/>
+		<property name="isActive" value="true"/>
+		<property name="rank" ref="rank1"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user2" class="domain.User">
+		<property name="name" value="Guillermo"/>
+		<property name="surname" value="Gamero"/>
+		<property name="email" value="Guillermo@gmail.com"/>
+		<property name="birthDate" value="1995/10/01 00:00"/>
+		<property name="phone" value="676554345"/>
+		<property name="dni" value="34567890C"/>
+		<property name="userAccount" ref="userAccount3"/>
+		<property name="isVerified" value="true"/>
+		<property name="isActive" value="true"/>
+		<property name="rank" ref="rank2"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user3" class="domain.User">
+		<property name="name" value="Carlos"/>
+		<property name="surname" value="García"/>
+		<property name="email" value="carlos@gmail.com"/>
+		<property name="birthDate" value="1983/02/09 00:00"/>
+		<property name="phone" value="676554311"/>
+		<property name="dni" value="34567895C"/>
+		<property name="userAccount" ref="userAccount5"/>
+		<property name="isVerified" value="false"/>
+		<property name="isActive" value="true"/>
+		<property name="rank" ref="rank3"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Moderator -->
+	
+	<bean id="moderator1" class="domain.Moderator">
+		<property name="name" value="Antonio"/>
+		<property name="surname" value="López"/>
+		<property name="email" value="Antonio@gmail.com"/>
+		<property name="birthDate" value="1994/11/28 00:00"/>
+		<property name="phone" value="689836654"/>
+		<property name="dni" value="49983586H"/>
+		<property name="userAccount" ref="userAccount4"/>
+	</bean>
+	
+	<!-- Vehicle -->
+	
+	<bean id="vehicle1" class="domain.Vehicle">
+		<property name="brand" value="Audi"/>
+		<property name="model" value="a7"/>
+		<property name="picture" value=""/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<bean id="vehicle2" class="domain.Vehicle">
+		<property name="brand" value="Fiat"/>
+		<property name="model" value="Panda"/>
+		<property name="picture" value=""/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
+	<!-- Rating -->
+	
+	<bean id="rating1" class="domain.Rating">
+		<property name="value" value="4"/>
+		<property name="valoration" value="Very good"/>
+		<property name="comment" value="He is a great driver"/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<!-- Complaint -->
+	
+	<bean id="complaint1" class="domain.Complaint">
+		<property name="explanation" value="His car is not an Audi"/>
+		<property name="creator" ref="user2"/>
+		<property name="involved" ref="user1"/>
+		<property name="moderator" ref="moderator1"/>
+	</bean>
+	
+	<!-- Route -->
+	
+	<bean id="route1" class="domain.Route">
+		<property name="date" value="2017/03/12 00:00"/>
+		<property name="departureTime" value="2017/03/12 16:00"/>
+		<property name="arriveTime" value="2017/03/12 19:00"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="itemEnvelope" value="Both"/>
+		<property name="creator" ref="user1"/>
+		<property name="vehicle" ref="vehicle1"/>
+	</bean>
+	
+	<bean id="route2" class="domain.Route">
+		<property name="date" value="2017/03/12 00:00"/>
+		<property name="departureTime" value="2017/07/12 16:00"/>
+		<property name="arriveTime" value="2017/07/12 19:00"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="itemEnvelope" value="Both"/>
+		<property name="creator" ref="user2"/>
+		<property name="vehicle" ref="vehicle2"/>
+	</bean>
+	
+	<bean id="route3" class="domain.Route">
+		<property name="date" value="2017/03/12 00:00"/>
+		<property name="departureTime" value="2017/07/12 16:00"/>
+		<property name="arriveTime" value="2017/07/12 19:00"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="itemEnvelope" value="Both"/>
+		<property name="creator" ref="user3"/>
+	</bean>
+	
+	<!-- SizePrice -->
+	
+	<bean id="sizePrice1" class="domain.SizePrice">
+		<property name="size" value="S"/>
+		<property name="price" value="1.50"/>
+		<property name="route" ref="route1"/>
+	</bean>
+	
+	<bean id="sizePrice2" class="domain.SizePrice">
+		<property name="size" value="M"/>
+		<property name="price" value="2.00"/>
+		<property name="route" ref="route1"/>
+	</bean>
+	
+	<bean id="sizePrice3" class="domain.SizePrice">
+		<property name="size" value="L"/>
+		<property name="price" value="2.50"/>
+		<property name="route" ref="route1"/>
+	</bean>
+	
+	<bean id="sizePrice4" class="domain.SizePrice">
+		<property name="size" value="XL"/>
+		<property name="price" value="3.50"/>
+		<property name="route" ref="route1"/>
+	</bean>
+	
+	<bean id="sizePrice5" class="domain.SizePrice">
+		<property name="size" value="S"/>
+		<property name="price" value="1.50"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="sizePrice6" class="domain.SizePrice">
+		<property name="size" value="M"/>
+		<property name="price" value="2.00"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="sizePrice7" class="domain.SizePrice">
+		<property name="size" value="L"/>
+		<property name="price" value="2.50"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="sizePrice8" class="domain.SizePrice">
+		<property name="size" value="XL"/>
+		<property name="price" value="3.50"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="sizePrice9" class="domain.SizePrice">
+		<property name="size" value="M"/>
+		<property name="price" value="3.50"/>
+		<property name="route" ref="route3"/>
+	</bean>
+	
+	<!-- RouteOffer -->
+	
+	<bean id="routeOffer1" class="domain.RouteOffer">
+		<property name="amount" value="2.00"/>
+		<property name="description" value="Te doy 2€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user2"/>
+		<property name="route" ref="route1"/>
+	</bean>
+	
+	<bean id="routeOffer2" class="domain.RouteOffer">
+		<property name="amount" value="3.00"/>
+		<property name="description" value="Te doy 3€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user3"/>
+		<property name="route" ref="route1"/>
+	</bean>
+	
+	<bean id="routeOffer3" class="domain.RouteOffer">
+		<property name="amount" value="0.50"/>
+		<property name="description" value="Te doy 0.50€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="true"/>
+		<property name="user" ref="user3"/>
+		<property name="route" ref="route1"/>
+	</bean>
+	
+	<bean id="routeOffer4" class="domain.RouteOffer">
+		<property name="amount" value="2.00"/>
+		<property name="description" value="Te doy 1.75€ por un artículo de tamaño M y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="true"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user2"/>
+		<property name="route" ref="route1"/>
+	</bean>
+	
+	<bean id="routeOffer5" class="domain.RouteOffer">
+		<property name="amount" value="2.00"/>
+		<property name="description" value="Te doy 2€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user1"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="routeOffer6" class="domain.RouteOffer">
+		<property name="amount" value="3.00"/>
+		<property name="description" value="Te doy 3€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user3"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="routeOffer7" class="domain.RouteOffer">
+		<property name="amount" value="0.50"/>
+		<property name="description" value="Te doy 0.50€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="true"/>
+		<property name="user" ref="user3"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="routeOffer8" class="domain.RouteOffer">
+		<property name="amount" value="2.00"/>
+		<property name="description" value="Te doy 1.75€ por un artículo de tamaño M y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="true"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user1"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<!-- Shipment -->
+	
+	<bean id="shipment1" class="domain.Shipment">
+		<property name="date" value="2017/05/12 00:00"/>
+		<property name="departureTime" value="2017/05/12 16:00"/>
+		<property name="maximumArriveTime" value="2017/05/12 19:00"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="price" value="2.00"/>
+		<property name="itemName" value="Equipo de música"/>
+		<property name="itemPicture" value="http://cde.3.elcomercio.pe/ima/0/1/0/2/1/1021917.jpg"/>
+		<property name="itemSize" value="L"/>
+		<property name="itemEnvelope" value="Open"/>
+		<property name="creator" ref="user2"/>
+		<!-- <property name="carried" ref=""/> -->
+	</bean>
+	
+	<bean id="shipment2" class="domain.Shipment">
+		<property name="date" value="2017/03/12 00:00"/>
+		<property name="departureTime" value="2017/03/12 16:00"/>
+		<property name="maximumArriveTime" value="2017/03/12 19:00"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="price" value="2.00"/>
+		<property name="itemName" value="Linterna"/>
+		<property name="itemPicture" value="https://www.publicdomainpictures.net/pictures/30000/velka/flashlight-1346103141HB3.jpg"/>
+		<property name="itemSize" value="M"/>
+		<property name="itemEnvelope" value="Open"/>
+		<property name="creator" ref="user3"/>
+		<property name="carried" ref="user1"/>
+	</bean>
+	
+	<bean id="shipment3" class="domain.Shipment">
+		<property name="date" value="2017/03/12 00:00"/>
+		<property name="departureTime" value="2017/07/12 16:00"/>
+		<property name="maximumArriveTime" value="2017/07/12 19:00"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="price" value="2.00"/>
+		<property name="itemName" value="Libro"/>
+		<property name="itemPicture" value="http://i.imgur.com/JX1E7.jpg"/>
+		<property name="itemSize" value="M"/>
+		<property name="itemEnvelope" value="Open"/>
+		<property name="creator" ref="user2"/>
+<!-- 		<property name="carried" ref="user1"/> -->
+	</bean>
+	
+	<!-- ShipmentOffer -->
+	
+	<bean id="shipmentOffer1" class="domain.ShipmentOffer">
+		<property name="amount" value="250"/>
+		<property name="description" value="Te llevo ese artículo por 2.50€ debido a su tamaño."/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="true"/>
+		<property name="user" ref="user1"/>
+		<property name="shipment" ref="shipment1"/>
+	</bean>
+		
+	<bean id="shipmentOffer2" class="domain.ShipmentOffer">
+		<property name="amount" value="25.0"/>
+		<property name="description" value="Te llevo ese artículo por 2.50€ debido a su tamaño."/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="true"/>
+		<property name="user" ref="user1"/>
+		<property name="shipment" ref="shipment1"/>
+	</bean>
+		
+	<bean id="shipmentOffer3" class="domain.ShipmentOffer">
+		<property name="amount" value="2.50"/>
+		<property name="description" value="Te llevo ese artículo por 2.50€ debido a su tamaño."/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user1"/>
+		<property name="shipment" ref="shipment1"/>
+	</bean>
+		
+	<bean id="shipmentOffer4" class="domain.ShipmentOffer">
+		<property name="amount" value="1.50"/>
+		<property name="description" value="Te llevo ese artículo por 2.50€ debido a su tamaño."/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user1"/>
+		<property name="shipment" ref="shipment1"/>
+	</bean>
+	
+	<bean id="shipmentOffer5" class="domain.ShipmentOffer">
+		<property name="amount" value="1.50"/>
+		<property name="description" value="Te llevo ese artículo por 1.50€ debido a su tamaño."/>
+		<property name="acceptedBySender" value="true"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user1"/>
+		<property name="shipment" ref="shipment2"/>
+	</bean>
+	
+	<bean id="shipmentOffer6" class="domain.ShipmentOffer">
+		<property name="amount" value="1.20"/>
+		<property name="description" value="Te llevo ese artículo por 2.50€ debido a su tamaño."/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user2"/>
+		<property name="shipment" ref="shipment2"/>
+	</bean>
+	
+	<!-- Notification -->
+	
+	<bean id="notification1" class="domain.Notification">
+		<property name="date" value="2017/03/09 11:02"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
+	<!-- CreditCard -->
+	
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Guillermo Gamero"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4072530828718735"/>
+		<property name="expirationMonth" value="07"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="303"/>
+	</bean>
 	
 </beans>

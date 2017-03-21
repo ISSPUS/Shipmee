@@ -1,0 +1,24 @@
+start transaction;
+
+create user 'shipmee-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';
+
+create user 'shipmee-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';
+
+
+# Privilegios para `shipmee-manager`@`%`
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, TRIGGER ON *.* TO 'shipmee-manager'@'%' IDENTIFIED BY PASSWORD '*FDB8CD304EB2317D10C95D797A4BD7492560F55F' WITH GRANT OPTION;
+
+# Privilegios para `shipmee-user`@`%`
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON *.* TO 'shipmee-user'@'%' IDENTIFIED BY PASSWORD '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577' WITH GRANT OPTION;
+
+
+-- Base de datos: `deliberations`
+--
+CREATE DATABASE IF NOT EXISTS `Shipmee` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `Shipmee`;
+
+SET NAMES utf8;
+
+commit; 

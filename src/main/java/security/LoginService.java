@@ -22,14 +22,15 @@ public class LoginService implements UserDetailsService {
 	
 	// Business methods -------------------------------------------------------
 
-	public UserDetails loadUserByUsername(String username)
+	@Override
+	public UserDetails loadUserByUsername(final String username)
 			throws UsernameNotFoundException {
 		Assert.notNull(username);
 
 		UserDetails result;
 
-		result = userRepository.findByUsername(username);
-		Assert.notNull(result);		
+		result = this.userRepository.findByUsername(username);
+		Assert.notNull(result);
 		// WARNING: The following sentences prevent lazy initialisation problems!
 		Assert.notNull(result.getAuthorities());
 		result.getAuthorities().size();

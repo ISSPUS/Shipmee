@@ -29,23 +29,23 @@ public abstract class DomainEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
 	@Version
 	public int getVersion() {
-		return version;
+		return this.version;
 	}
 
-	public void setVersion(int version) {
+	public void setVersion(final int version) {
 		this.version = version;
 	}
 
-	// Equality ---------------------------------------------------------------
+	// Object Interface ---------------------------------------------------------------
 
 	@Override
 	public int hashCode() {
@@ -53,7 +53,7 @@ public abstract class DomainEntity {
 	}
 
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(final Object other) {
 		boolean result;
 
 		if (this == other)
@@ -68,6 +68,22 @@ public abstract class DomainEntity {
 			result = (this.getId() == ((DomainEntity) other).getId());
 
 		return result;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder result;
+
+		result = new StringBuilder();
+		result.append(this.getClass().getName());
+		result.append("{");
+		result.append("id=");
+		result.append(this.getId());
+		result.append(", version=");
+		result.append(this.getVersion());
+		result.append("}");
+
+		return result.toString();
 	}
 
 }

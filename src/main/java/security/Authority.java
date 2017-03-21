@@ -26,20 +26,21 @@ public class Authority implements GrantedAuthority {
 	// Values -----------------------------------------------------------------
 
 	public static final String ADMIN = "ADMIN";
-	public static final String CUSTOMER = "CUSTOMER";
+	public static final String USER = "USER";
+	public static final String MODERATOR = "MODERATOR";
 
 	// Attributes -------------------------------------------------------------
 
 	private String authority;
 
 	@NotBlank
-	@Pattern(regexp = "^" + ADMIN + "|" + CUSTOMER + "$")
+	@Pattern(regexp = "^" + Authority.ADMIN + "|" + Authority.USER + "|" + Authority.MODERATOR + "$")
 	@Override
 	public String getAuthority() {
-		return authority;
+		return this.authority;
 	}
 
-	public void setAuthority(String authority) {
+	public void setAuthority(final String authority) {
 		this.authority = authority;
 	}
 
@@ -50,11 +51,15 @@ public class Authority implements GrantedAuthority {
 		result = new ArrayList<Authority>();
 
 		authority = new Authority();
-		authority.setAuthority(ADMIN);
+		authority.setAuthority(Authority.ADMIN);
 		result.add(authority);
 
 		authority = new Authority();
-		authority.setAuthority(CUSTOMER);
+		authority.setAuthority(Authority.USER);
+		result.add(authority);
+		
+		authority = new Authority();
+		authority.setAuthority(Authority.MODERATOR);
 		result.add(authority);
 
 		return result;
@@ -68,7 +73,7 @@ public class Authority implements GrantedAuthority {
 	}
 
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(final Object other) {
 		boolean result;
 
 		if (this == other)
