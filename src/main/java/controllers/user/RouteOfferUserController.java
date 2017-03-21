@@ -133,16 +133,20 @@ public class RouteOfferUserController extends AbstractController {
 	@RequestMapping(value = "/accept", method = RequestMethod.GET)
 	public ModelAndView accept(@RequestParam int routeOfferId){
 		ModelAndView result;
+		String messageError;
 		
 		RouteOffer routeOffer = routeOfferService.findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
 		
 		try{
 			routeOfferService.accept(routeOfferId);
-			// This reditect may be change to other url.
 			result = new ModelAndView("redirect:../user/list.do?routeId="+route.getId());
 		}catch(Throwable oops){
-			result = createEditModelAndView(routeOffer, "routeOffer.commit.error");
+			messageError = "routeOffer.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError = oops.getMessage();
+			}
+			result = createEditModelAndView(routeOffer, messageError);
 		}
 		
 		return result;
@@ -151,6 +155,7 @@ public class RouteOfferUserController extends AbstractController {
 	@RequestMapping(value = "/deny", method = RequestMethod.GET)
 	public ModelAndView deny(@RequestParam int routeOfferId){
 		ModelAndView result;
+		String messageError;
 		
 		RouteOffer routeOffer = routeOfferService.findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
@@ -160,8 +165,11 @@ public class RouteOfferUserController extends AbstractController {
 			// This reditect may be change to other url.
 			result = new ModelAndView("redirect:../user/list.do?routeId="+route.getId());
 		}catch(Throwable oops){
-			result = createEditModelAndView(routeOffer, "routeOffer.commit.error");
-		}
+			messageError = "routeOffer.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError = oops.getMessage();
+			}
+			result = createEditModelAndView(routeOffer, messageError);		}
 		
 		return result;
 	}

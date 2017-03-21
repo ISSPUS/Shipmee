@@ -185,7 +185,7 @@ public class RouteOfferService {
 		Assert.isTrue(route.getDepartureTime().after(new Date()), "The Departure Time must be future");
 		Assert.isTrue(route.getArriveTime().after(new Date()), "The Arrival Time must be future");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the route can accept or deny a counter offer");
-		Assert.isTrue(route.getCreator().getIsVerified(), "The creator of the route must be verified.");
+		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
 
 		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "The offer must not be accepted or rejected.");		
 		
@@ -195,13 +195,13 @@ public class RouteOfferService {
 		
 		// Now, we reject every other offer.
 
-		Collection<RouteOffer> remaining = findAllPendingByRouteId(route.getId());
+		//Collection<RouteOffer> remaining = findAllPendingByRouteId(route.getId());
 		
-		for(RouteOffer ro:remaining){
-			if(!ro.getAcceptedByCarrier()){
-				deny(ro.getId());
-			}
-		}
+		//for(RouteOffer ro:remaining){
+			//if(!ro.getAcceptedByCarrier()){
+				//deny(ro.getId());
+			//}
+		//}
 		
 		/*
 		 * Here comes the notification to the carrier (Still not developed) 

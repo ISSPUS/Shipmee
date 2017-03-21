@@ -133,6 +133,7 @@ public class ShipmentOfferUserController extends AbstractController {
 	@RequestMapping(value = "/accept", method = RequestMethod.GET)
 	public ModelAndView accept(@RequestParam int shipmentOfferId){
 		ModelAndView result;
+		String messageError;
 		
 		ShipmentOffer shipmentOffer = shipmentOfferService.findOne(shipmentOfferId);
 		Shipment shipment = shipmentOffer.getShipment();
@@ -142,7 +143,11 @@ public class ShipmentOfferUserController extends AbstractController {
 			// This reditect may be change to other url.
 			result = new ModelAndView("redirect:../user/list.do?shipmentId="+shipment.getId());
 		}catch(Throwable oops){
-			result = createEditModelAndView2(shipmentOffer, "shipmentOffer.commit.error");
+			messageError = "shipmentOffer.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError = oops.getMessage();
+			}
+			result = createEditModelAndView2(shipmentOffer, messageError);
 		}
 		
 		return result;
@@ -151,6 +156,7 @@ public class ShipmentOfferUserController extends AbstractController {
 	@RequestMapping(value = "/deny", method = RequestMethod.GET)
 	public ModelAndView deny(@RequestParam int shipmentOfferId){
 		ModelAndView result;
+		String messageError;
 		
 		ShipmentOffer shipmentOffer = shipmentOfferService.findOne(shipmentOfferId);
 		Shipment shipment = shipmentOffer.getShipment();
@@ -160,7 +166,11 @@ public class ShipmentOfferUserController extends AbstractController {
 			// This reditect may be change to other url.
 			result = new ModelAndView("redirect:../user/list.do?shipmentId="+shipment.getId());
 		}catch(Throwable oops){
-			result = createEditModelAndView2(shipmentOffer, "shipmentOffer.commit.error");
+			messageError = "shipmentOffer.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError = oops.getMessage();
+			}
+			result = createEditModelAndView2(shipmentOffer, messageError);
 		}
 		
 		return result;
