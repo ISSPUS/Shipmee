@@ -500,5 +500,35 @@ public class ShipmentTest extends AbstractTest {
 				
 		unauthenticate();
 	}
+	
+	/**
+	 * @Test View details of a shipment
+	 * @result The user views details of a shipment
+	 */
+	@Test
+	public void positiveViewDetailsShipment() {
+		authenticate("user2");
+		
+		Shipment shipment;
+		
+		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
+		
+		Assert.notNull(shipment);
+	}
+	
+	/**
+	 * @Test View details of a shipment
+	 * @result The user cannot view details of a shipment because its Id is wrong
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeViewDetailsShipment() {
+		authenticate("user2");
+		
+		Shipment shipment;
+		
+		shipment = shipmentService.findOne(935634865);
+		
+		Assert.notNull(shipment);
+	}
 
 }
