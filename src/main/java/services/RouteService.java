@@ -82,6 +82,8 @@ public class RouteService {
 		user = userService.findByPrincipal();
 		date = new Date();
 		
+		Assert.isTrue(user.getId() == route.getCreator().getId(), "Only the user who created the route can delete it");
+		
 		if(route.getId() == 0) {
 			route.setCreator(user);
 			route.setDate(date);
