@@ -155,7 +155,7 @@ public class ShipmentOfferTest extends AbstractTest {
 		authenticate("user1");
 		
 		ShipmentOffer shipmentOffer;
-		Shipment shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		Shipment shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment2"));
 		Integer numberOfShipmentOfferBefore = shipmentOfferService.findAllByShipmentId2(shipment.getId()).size();
 		
 		shipmentOffer = shipmentOfferService.create(shipment.getId());
