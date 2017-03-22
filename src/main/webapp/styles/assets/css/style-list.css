@@ -1,0 +1,280 @@
+.input-text {
+	width: 90%;
+	margin: 0px auto;
+}
+
+.envio {
+	margin-top: 5%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f7f7f7;
+	-webkit-box-shadow: 2px 2px 5px #999;
+	-moz-box-shadow: 2px 2px 5px #999;
+	margin-bottom: 5%;
+	width: 100%;
+	padding-bottom: 2%;
+	
+}
+
+.selecciona .dropdown-menu {
+	background-color: white;
+}
+
+.ruta {
+	margin-top: 5%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: white;
+	-webkit-box-shadow: 2px 2px 5px #999;
+	-moz-box-shadow: 2px 2px 5px #999;
+	margin-bottom: 5%;
+	width: 100%;
+	padding-bottom: 2%;
+}
+
+.rfecha {
+	border-top: 1px solid #ccc;
+}
+
+.precio {
+	border: 1px solid #ccc;
+	border-radius: 25px;
+	background-color: #f7f7f7;
+	margin: auto;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	width: 20%;
+	height: 20%;
+	background-color: darkred;
+	color: white;
+}
+
+.titulo {
+	padding: 0.5%
+}
+
+.row-origen {
+	padding-top: 0.5%;
+}
+
+.information {
+	font-size: 16px;
+}
+
+.imagen-envio {
+	margin-bottom: 0.5%;
+}
+
+.btn {
+	white-space: normal;
+}
+
+
+.row {
+	margin-left: 0px !important;
+}
+
+.info-lugar {
+	padding-top: 2.5%;
+	font-size: 120%;
+	color: black;
+}
+
+.img-origin {
+	color: green;
+}
+
+.img-destination {
+	color: red;
+}
+
+.info-salida {
+	padding-top: 1%;
+	pading-bottom: 0.5%;
+}
+
+label {
+	color: #495766 !important;
+	font-weight: normal !important;
+	position: relative;
+}
+
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+	width: auto !important;
+}
+
+.li-input {
+	padding: 3%;
+}
+
+.i-code {
+	display: none;
+}
+
+
+.demo-icon {
+	font-family: "icons";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	font-size: 150%;
+}
+
+.size-icon {
+	font-family: "package-open";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	font-size: 150%;
+}
+
+.contraoferta{
+	margin-top: 4px;
+}
+
+.ok{
+	margin-top: 4px;
+	font-size: 16px;
+	font-weight:bold;
+}
+
+.view h4{
+margin-top: 5%;
+
+
+}
+
+/*    --------------------------------------------------
+	:: General
+	-------------------------------------------------- */
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: #353535;
+}
+.content h1 {
+	text-align: center;
+}
+.content .content-footer p {
+	color: #6d6d6d;
+    font-size: 12px;
+    text-align: center;
+}
+.content .content-footer p a {
+	color: inherit;
+	font-weight: bold;
+}
+
+
+.price{
+	color:#d9534f;
+	font-size: 30px;
+	text-align: center;
+	font-weight: bold;
+}
+
+/*	--------------------------------------------------
+	:: Table Filter
+	-------------------------------------------------- */
+.panel {
+	border: 1px solid #ddd;
+	background-color: #fcfcfc;
+}
+.panel .btn-group {
+	margin: 15px 0 30px;
+}
+.panel .btn-group .btn {
+	transition: background-color .3s ease;
+}
+.table-filter {
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+}
+
+.ckbox {
+	position: relative;
+}
+.ckbox input[type="checkbox"] {
+	opacity: 0;
+}
+.ckbox label {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.ckbox label:before {
+	content: '';
+	top: 1px;
+	left: 0;
+	width: 18px;
+	height: 18px;
+	display: block;
+	position: absolute;
+	border-radius: 2px;
+	border: 1px solid #bbb;
+	background-color: #fff;
+}
+.ckbox input[type="checkbox"]:checked + label:before {
+	border-color: #2BBCDE;
+	background-color: #2BBCDE;
+}
+.ckbox input[type="checkbox"]:checked + label:after {
+	top: 3px;
+	left: 3.5px;
+	content: '\e013';
+	color: #fff;
+	font-size: 11px;
+	font-family: 'Glyphicons Halflings';
+	position: absolute;
+}
+.table-filter .star {
+	color: #ccc;
+	text-align: center;
+	display: block;
+}
+.table-filter .star.star-checked {
+	color: #F0AD4E;
+}
+.table-filter .star:hover {
+	color: #ccc;
+}
+.table-filter .star.star-checked:hover {
+	color: #F0AD4E;
+}
+.table-filter .media-photo {
+	width: 50px;
+}
+.table-filter .media-photo-route {
+	width: 120px;
+}
+.table-filter .media-photo-shipment {
+	width: 150px;
+}
+.table-filter .media-body {
+    display: block;
+    /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+}
+.table-filter .media-meta {
+	font-size: 11px;
+	color: #999;
+}
+.table-filter .media .title {
+	color: #2BBCDE;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+}
+.table-filter .media .title span {
+	font-size: .8em;
+	margin-right: 20px;
+}
+.table-filter .media .title span.cantidad {
+	color: #d9534f;
+}
+.table-filter .media .summary {
+	font-size: 14px;
+}
+

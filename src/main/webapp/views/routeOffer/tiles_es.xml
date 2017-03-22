@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="routeOffer/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar la Oferta a una Ruta" />
+		<put-attribute name="body" value="/views/routeOffer/edit.jsp" />
+	</definition>
+	
+	<definition name="routeOffer/list" extends="master.page">	
+		<put-attribute name="title" value="Listar las Ofertas de Ruta" />
+		<put-attribute name="body" value="/views/routeOffer/list.jsp" />
+	</definition>
+	
+</tiles-definitions>

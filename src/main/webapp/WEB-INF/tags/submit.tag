@@ -18,6 +18,6 @@
 
 <%-- Definition --%>
 
-<button type="submit" name="${name}" class="btn btn-primary">
+<button type="submit" name="${name}" class="btn btn-primary btn-accept">
 	<spring:message code="${code}" />
 </button>

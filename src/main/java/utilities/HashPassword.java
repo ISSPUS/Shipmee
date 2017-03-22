@@ -8,25 +8,25 @@ import utilities.internal.ConsoleReader;
 
 public class HashPassword {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(final String[] args) throws IOException {
 		Md5PasswordEncoder encoder;
 		ConsoleReader reader;
 		String line, hash;
 
 		try {
-			System.out.printf("HashPassword 1.8%n");
+			System.out.printf("HashPassword%n");
 			System.out.printf("----------------%n%n");
-			
+
 			encoder = new Md5PasswordEncoder();
-			reader = new ConsoleReader(); 
-				
+			reader = new ConsoleReader();
+
 			line = reader.readLine();
-			while (!line.equals("quit")) {				
+			while (!line.equals("quit")) {
 				hash = encoder.encodePassword(line, null);
 				System.out.println(hash);
 				line = reader.readLine();
-			} 
-		} catch (Throwable oops) {
+			}
+		} catch (final Throwable oops) {
 			System.out.flush();
 			System.err.printf("%n%s%n", oops.getLocalizedMessage());
 			//oops.printStackTrace(System.out);			
