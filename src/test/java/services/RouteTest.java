@@ -507,5 +507,37 @@ public class RouteTest extends AbstractTest {
 
 		unauthenticate();
 	}
+	
+	/**
+	 * @Test View details of a route
+	 * @result The user views the details of a route
+	 */
+	@Test
+	public void positiveViewDetailsShipment() {
+		authenticate("user2");
+		Route route;
+		
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		route.getOrigin().equals("Almeria");
+		route.getDestination().equals("Sevilla");
+		route.getItemEnvelope().equals("Both");
+		
+		Assert.notNull(route);
+	}
+	
+	/**
+	 * @Test View details of a shipment
+	 * @result We try view the details of a Route that not exists
+	 *         <code>IllegalArgumentException</code> is expected
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeViewDetailsShipment() {
+		authenticate("user2");
+		Route route;
+		
+		route = routeService.findOne(-200);
+		
+		Assert.notNull(route);
+	}
 
 }
