@@ -164,7 +164,7 @@ public class RouteService {
 					time = formatter.parse(date+" "+hour);
 				}
 			} catch (ParseException e) {
-				e.printStackTrace();
+				log.error(e.getMessage());
 			}
 		}
 		

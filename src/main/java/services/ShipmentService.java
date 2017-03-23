@@ -149,7 +149,7 @@ public class ShipmentService {
 					time = formatter.parse(date+" "+hour);
 				}
 			} catch (ParseException e) {
-				e.printStackTrace();
+				log.error(e.getMessage());
 			}
 		}
 		
