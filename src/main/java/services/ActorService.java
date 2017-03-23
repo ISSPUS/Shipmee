@@ -108,12 +108,5 @@ public class ActorService {
 			result = false;
 		}
 		return result;
-	}
-	
-	public void flush(){
-
-		actorRepository.flush();
-		
-	}
-	
+	}	
 }

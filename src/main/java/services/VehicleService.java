@@ -70,10 +70,5 @@ public class VehicleService {
 		result = vehicleRepository.findAllByUserId(user.getId());
 
 		return result;
-	}
-	
-	public void flush() {
-		vehicleRepository.flush();
-	}
-	
+	}	
 }

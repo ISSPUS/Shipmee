@@ -213,10 +213,6 @@ public class RouteService {
 		return routeOffer;
 	}
 	
-	public void flush() {
-		routeRepository.flush();
-	}
-	
 	private boolean checkItemEnvelope(String itemEnvelope) {
 		boolean res;
 		
