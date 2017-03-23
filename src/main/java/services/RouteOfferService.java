@@ -140,10 +140,6 @@ public class RouteOfferService {
 
 	// Other business methods -------------------------------------------------
 
-	public void flush() {
-		routeOfferRepository.flush();
-	}
-
 	public Collection<RouteOffer> findAllByRouteId(int routeId) {
 		Collection<RouteOffer> result;
 		User actUser;

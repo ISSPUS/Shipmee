@@ -2,7 +2,6 @@ package controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,8 +42,6 @@ public class RouteController extends AbstractController {
 		ModelAndView result;
 		Collection<Route> routes;
 		
-		routes = new HashSet<Route>();
-		
 		routes = routeService.searchRoute(origin, destination, date, hour, envelope, itemSize);
 				
 		result = new ModelAndView("route/search");
@@ -74,18 +71,18 @@ public class RouteController extends AbstractController {
 		sizePrices = sizePriceService.findAllByRouteId(routeId);
 		
 		String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(route.getDepartureTime());
-		String departureTime_hour = new SimpleDateFormat("HH':'mm").format(route.getDepartureTime());
+		String departureTimeHour = new SimpleDateFormat("HH':'mm").format(route.getDepartureTime());
 		
 		String arriveTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(route.getArriveTime());
-		String arriveTime_hour = new SimpleDateFormat("HH':'mm").format(route.getArriveTime());
+		String arriveTimeHour = new SimpleDateFormat("HH':'mm").format(route.getArriveTime());
 
 
 		result = new ModelAndView("route/display");
 		result.addObject("route", route);
 		result.addObject("departureTime", departureTime);
-		result.addObject("departureTime_hour", departureTime_hour);
+		result.addObject("departureTime_hour", departureTimeHour);
 		result.addObject("arriveTime", arriveTime);
-		result.addObject("arriveTime_hour", arriveTime_hour);
+		result.addObject("arriveTime_hour", arriveTimeHour);
 		result.addObject("sizePrices", sizePrices);
 		
 		return result;

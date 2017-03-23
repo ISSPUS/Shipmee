@@ -80,10 +80,6 @@ public class SizePriceService {
 	}
 
 	// Other business methods -------------------------------------------------
-	
-	public void flush() {
-		sizePriceRepository.flush();
-	}
 
 	public Collection<SizePrice> findAllByRouteId(int routeId) {
 		Collection<SizePrice> result;

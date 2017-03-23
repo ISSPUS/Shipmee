@@ -13,12 +13,42 @@
 
 	<properties>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+        <sonar.organization>shipmee</sonar.organization>
+        <sonar.language>java</sonar.language>
+        <sonar.exclusions>
+            src/main/java/security/**,
+            src/main/java/utilities/**,
+            src/main/java/repositories/**,
+            src/main/java/services/form/**
+        </sonar.exclusions>
+        <sonar.cpd.exclusions>
+            src/main/java/converters/**,
+            src/main/java/domain/**,
+            src/main/java/repositories/**
+        </sonar.cpd.exclusions>
+        <sonar.coverage.exclusions>
+            src/main/java/controllers/**,
+            src/main/java/converters/**,
+            src/main/java/domain/form/**,
+            src/main/java/domain/DomainEntity.*,
+            src/main/java/security/**,
+            src/main/java/repositories/**,
+            src/main/java/utilities/**,
+            src/main/java/services/form/**,
+            src/main/java/services/ActorService.*
+            src/main/java/services/SizePriceService.*
+        </sonar.coverage.exclusions>
 	</properties>
 
 	<!-- Indexing information -->
 
 	<name>Shipmee</name>
-	<url>https://github.com/ISSPUS</url>
+	<version>0.1</version>
+	<url>https://shipmee.es</url>
+	<scm><url>https://github.com/ISSPUS/Shipmee</url></scm>
+	<ciManagement><url>https://travis-ci.org/ISSPUS/Shipmee</url></ciManagement>
+	<issueManagement><url>http://red.mlr.duckdns.org/projects/c</url></issueManagement>
+
 
 	<!-- Build commands -->
 
@@ -99,11 +129,13 @@
 							<exclude>controllers/**</exclude>
 							<exclude>converters/**</exclude>
 							<exclude>domain/form/**</exclude>
+							<exclude>domain/DomainEntity.*</exclude>
 							<exclude>security/**</exclude>
 							<exclude>repositories/**</exclude>
 							<exclude>utilities/**</exclude>
 							<exclude>services/form/**</exclude>
 							<exclude>services/ActorService.*</exclude>
+							<exclude>services/SizePriceService.*</exclude>
 						</excludes>
 					</instrumentation>
 				</configuration>
@@ -345,6 +377,4 @@
 		</dependency>
 		
 	</dependencies>
-
-	<version>0.1</version>
 </project> 

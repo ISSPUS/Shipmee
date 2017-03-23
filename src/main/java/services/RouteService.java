@@ -164,7 +164,7 @@ public class RouteService {
 					time = formatter.parse(date+" "+hour);
 				}
 			} catch (ParseException e) {
-				e.printStackTrace();
+				log.error(e.getMessage());
 			}
 		}
 		
@@ -211,10 +211,6 @@ public class RouteService {
 		 */
 		
 		return routeOffer;
-	}
-	
-	public void flush() {
-		routeRepository.flush();
 	}
 	
 	private boolean checkItemEnvelope(String itemEnvelope) {

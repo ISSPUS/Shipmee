@@ -142,10 +142,6 @@ public class ShipmentOfferService {
 
 	// Other business methods -------------------------------------------------
 
-	public void flush() {
-		shipmentOfferRepository.flush();
-	}
-
 	public Collection<ShipmentOffer> findAllByShipmentId(int shipmentId) {
 		Collection<ShipmentOffer> result;
 		User actUser;

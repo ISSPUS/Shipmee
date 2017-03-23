@@ -125,10 +125,6 @@ public class ShipmentService {
 	}
 	
 	// Other business methods -------------------------------------------------
-	
-	public void flush() {
-		shipmentRepository.flush();
-	}
 
 	public Collection<Shipment> searchShipment(String origin, String destination, String date, String hour, String envelope, String itemSize){
 		Assert.isTrue(origin != "" && destination != "");
@@ -149,7 +145,7 @@ public class ShipmentService {
 					time = formatter.parse(date+" "+hour);
 				}
 			} catch (ParseException e) {
-				e.printStackTrace();
+				log.error(e.getMessage());
 			}
 		}
 		
