@@ -475,6 +475,7 @@
 		<property name="date" value="2017/03/09 11:02"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
+		<property name="type" value="Route"/>
 		<property name="user" ref="user2"/>
 	</bean>
 	

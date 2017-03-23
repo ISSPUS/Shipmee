@@ -21,7 +21,7 @@ import repositories.RouteRepository;
 @Transactional
 public class RouteService {
 	
-	static Logger log = Logger.getLogger(ShipmentService.class);
+	static Logger log = Logger.getLogger(RouteService.class);
 
 	// Managed repository -----------------------------------------------------
 

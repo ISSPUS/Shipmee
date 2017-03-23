@@ -22,6 +22,7 @@ public class Notification extends DomainEntity {
 	private Date date;
 	private String origin;
 	private String destination;
+	private String type;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -48,6 +49,13 @@ public class Notification extends DomainEntity {
 	}
 	public void setDestination(String destination) {
 		this.destination = destination;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	// Relationships ----------------------------------------------------------
