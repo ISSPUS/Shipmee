@@ -83,7 +83,7 @@ public class ActorService {
 			authorities = actor.getUserAccount().getAuthorities();
 			
 			for (Authority a : authorities) {
-				if(a.getAuthority().equals(authority.toUpperCase())){
+				if(a.getAuthority().equalsIgnoreCase(authority)){
 					result = true;
 					break;
 				}
