@@ -36,6 +36,7 @@
             src/main/java/utilities/**,
             src/main/java/services/form/**,
             src/main/java/services/ActorService.*
+            src/main/java/services/SizePriceService.*
         </sonar.coverage.exclusions>
 	</properties>
 
@@ -134,6 +135,7 @@
 							<exclude>utilities/**</exclude>
 							<exclude>services/form/**</exclude>
 							<exclude>services/ActorService.*</exclude>
+							<exclude>services/SizePriceService.*</exclude>
 						</excludes>
 					</instrumentation>
 				</configuration>
