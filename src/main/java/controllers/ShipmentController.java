@@ -2,7 +2,6 @@ package controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,8 +38,6 @@ public class ShipmentController extends AbstractController {
 			ModelAndView result;
 			Collection<Shipment> shipments;
 
-			shipments = new HashSet<Shipment>();
-			
 			shipments = shipmentService.searchShipment(origin, destination, date, hour, envelope, itemSize);
 						
 			result = new ModelAndView("shipment/search");
@@ -68,18 +65,18 @@ public class ShipmentController extends AbstractController {
 			shipment = shipmentService.findOne(shipmentId);
 			
 			String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(shipment.getDepartureTime());
-			String departureTime_hour = new SimpleDateFormat("HH':'mm").format(shipment.getDepartureTime());
+			String departureTimeHour = new SimpleDateFormat("HH':'mm").format(shipment.getDepartureTime());
 			
 			String maximumArriveTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(shipment.getMaximumArriveTime());
-			String maximumArriveTime_hour = new SimpleDateFormat("HH':'mm").format(shipment.getMaximumArriveTime());
+			String maximumArriveTimeHour = new SimpleDateFormat("HH':'mm").format(shipment.getMaximumArriveTime());
 
 			
 			result = new ModelAndView("shipment/display");
 			result.addObject("shipment", shipment);
 			result.addObject("departureTime", departureTime);
-			result.addObject("departureTime_hour", departureTime_hour);
+			result.addObject("departureTime_hour", departureTimeHour);
 			result.addObject("maximumArriveTime", maximumArriveTime);
-			result.addObject("maximumArriveTime_hour", maximumArriveTime_hour);
+			result.addObject("maximumArriveTime_hour", maximumArriveTimeHour);
 
 			
 
