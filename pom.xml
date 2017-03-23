@@ -30,6 +30,7 @@
             src/main/java/controllers/**,
             src/main/java/converters/**,
             src/main/java/domain/form/**,
+            src/main/java/domain/DomainEntity.*,
             src/main/java/security/**,
             src/main/java/repositories/**,
             src/main/java/utilities/**,
@@ -127,6 +128,7 @@
 							<exclude>controllers/**</exclude>
 							<exclude>converters/**</exclude>
 							<exclude>domain/form/**</exclude>
+							<exclude>domain/DomainEntity.*</exclude>
 							<exclude>security/**</exclude>
 							<exclude>repositories/**</exclude>
 							<exclude>utilities/**</exclude>
