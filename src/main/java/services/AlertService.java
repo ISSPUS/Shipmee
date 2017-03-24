@@ -2,7 +2,6 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,9 @@ public class AlertService {
 	private AlertRepository alertRepository;
 
 	// Supporting services ----------------------------------------------------
+	
+	@Autowired
+	private UserService userService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -75,10 +77,40 @@ public class AlertService {
 
 	// Other business methods -------------------------------------------------
 	
+	/***
+	 * 
+	 * @param origin Origin of the Alert
+	 * @param destination Destination of the Alert
+	 * @param date Date of the Alert
+	 * @param type Type of Alert, can be "Route" or "Shipment"
+	 * @return The collection of Alerts founded
+	 */
 	public Collection<Alert> checkAlerts(String origin, String destination, Date date, String type){
+		Collection<Alert> alerts;
+		
+		alerts = alertRepository.checkAlerts(origin, destination, date, type);
+		sendAlerts(alerts);
+		
+		return alerts;
+	}
+	
+	public void sendAlerts(Collection<Alert> alerts){
+		
+		for(Alert alert: alerts){
+			if(alert.getType().equals("Route")){
+				//sendMessage(alert.user, admin, "Se ha creado una nueva ruta "+alert.origin+" -> 
+				//"+alert.destination+" el día "+alert.date+" \n Pincha aquí para ir al listado de rutas");
+			}else{
+				//sendMessage(alert.user, admin, "Se ha creado un nuevo envío "+alert.origin+" -> 
+				//"+alert.destination+" el día "+alert.date+" \n Pincha aquí para ir al listado de envíos");
+			}
+		}
+	}
+	
+	public Collection<Alert> getAlertsByPrincipal(){
 		Collection<Alert> result;
 		
-		result = new HashSet<Alert>();
+		result = alertRepository.getAlertsOfUser(userService.findByPrincipal().getId());
 		
 		return result;
 	}
