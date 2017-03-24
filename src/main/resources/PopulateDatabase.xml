@@ -469,9 +469,9 @@
 		<property name="shipment" ref="shipment2"/>
 	</bean>
 	
-	<!-- Notification -->
+	<!-- Alert -->
 	
-	<bean id="notification1" class="domain.Notification">
+	<bean id="alert1" class="domain.Alert">
 		<property name="date" value="2017/03/09 11:02"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>

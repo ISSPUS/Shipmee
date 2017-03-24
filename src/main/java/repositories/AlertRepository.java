@@ -3,9 +3,9 @@ package repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import domain.Notification;
+import domain.Alert;
 
 @Repository
-public interface NotificationRepository extends JpaRepository<Notification, Integer> {
+public interface AlertRepository extends JpaRepository<Alert, Integer> {
 
 }

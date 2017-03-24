@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Notification extends DomainEntity {
+public class Alert extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private Date date;
