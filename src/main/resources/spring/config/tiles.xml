@@ -21,6 +21,7 @@
 		<value>/views/alert/tiles.xml</value>
 		<value>/views/message/tiles.xml</value>
 		<value>/views/vehicle/tiles.xml</value>
+		<value>/views/user/tiles.xml</value>
 
 		<value>/views/about/tiles.xml</value>
 	</util:list>
