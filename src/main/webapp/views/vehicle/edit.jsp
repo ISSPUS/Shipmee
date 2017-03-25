@@ -36,6 +36,7 @@
 			<form:hidden path="id" />
 			<form:hidden path="version" />
 			<form:hidden path="user" />
+			<form:hidden path="deleted" />
 
 			<div class="form-group">
 				<form:label path="brand" class="control-label col-md-2"
@@ -56,6 +57,17 @@
 				<div class="col-md-8">
 					<form:input path="model" class="form-control" id="model" />
 					<form:errors class="error create-message-error" path="model" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<form:label path="color" class="control-label col-md-2"
+					for="color">
+					<spring:message code="vehicle.color" />
+				</form:label>
+				<div class="col-md-8">
+					<form:input path="color" class="form-control" id="color" />
+					<form:errors class="error create-message-error" path="color" />
 				</div>
 			</div>
 			

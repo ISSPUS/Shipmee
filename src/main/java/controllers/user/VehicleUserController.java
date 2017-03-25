@@ -51,7 +51,7 @@ public class VehicleUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Vehicle> vehicles;
 		
-		vehicles = vehicleService.findAllByUser();
+		vehicles = vehicleService.findAllNotDeletedByUser();
 		
 		result = new ModelAndView("vehicles/list");
 		result.addObject("vehicles", vehicles);
@@ -144,7 +144,7 @@ public class VehicleUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Vehicle> vehicles;
 		
-		vehicles = vehicleService.findAllByUser();
+		vehicles = vehicleService.findAllNotDeletedByUser();
 				
 		result = new ModelAndView("route/search");
 		result.addObject("route", route);

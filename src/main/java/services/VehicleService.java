@@ -46,6 +46,7 @@ public class VehicleService {
 		user = userService.findByPrincipal();
 		
 		result.setUser(user);
+		result.setDeleted(false);
 		
 		return result;
 	}
@@ -60,6 +61,7 @@ public class VehicleService {
 				
 		if(vehicle.getId() == 0) {
 			vehicle.setUser(user);
+			vehicle.setDeleted(false);
 			
 			vehicle = vehicleRepository.save(vehicle);
 			
@@ -67,6 +69,9 @@ public class VehicleService {
 			vehiclePreSave = this.findOne(vehicle.getId());
 			
 			Assert.isTrue(user.getId() == vehiclePreSave.getUser().getId(), "Only the owner can save this vehicle.");
+			Assert.isTrue(vehiclePreSave.isDeleted() == false, "The user cannot save a deleted vehicle.");
+			
+			vehicle.setDeleted(false);
 			
 			vehicle = vehicleRepository.save(vehicle);
 		}
@@ -85,7 +90,8 @@ public class VehicleService {
 
 		Assert.isTrue(user.getId() == vehicle.getUser().getId(), "Only the user who created the vehicle can delete it");
 						
-		vehicleRepository.delete(vehicle);
+		vehicle.setDeleted(true);
+		vehicleRepository.save(vehicle);
 	}
 	
 	public Vehicle findOne(int vehicleId) {
@@ -107,25 +113,14 @@ public class VehicleService {
 
 	// Other business methods -------------------------------------------------
 	
-	public Collection<Vehicle> findAllByUser() {
+	public Collection<Vehicle> findAllNotDeletedByUser() {
 		Collection<Vehicle> result;
 		User user;
 		
 		user = userService.findByPrincipal();
 
-		result = vehicleRepository.findAllByUserId(user.getId());
+		result = vehicleRepository.findAllNotDeletedByUserId(user.getId());
 
 		return result;
 	}
-	
-	public Collection<Vehicle> findAllByUserId(int userId) {
-		Collection<Vehicle> result;
-		User user;
-		
-		user = userService.findOne(userId);
-
-		result = vehicleRepository.findAllByUserId(user.getId());
-
-		return result;
-	}	
 }

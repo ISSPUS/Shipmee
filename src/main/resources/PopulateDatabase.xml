@@ -174,6 +174,8 @@
 		<property name="brand" value="Audi"/>
 		<property name="model" value="a7"/>
 		<property name="picture" value=""/>
+		<property name="color" value="Blue"/>
+		<property name="deleted" value="false"/>
 		<property name="user" ref="user1"/>
 	</bean>
 	
@@ -181,6 +183,8 @@
 		<property name="brand" value="Fiat"/>
 		<property name="model" value="Panda"/>
 		<property name="picture" value=""/>
+		<property name="color" value="Red"/>
+		<property name="deleted" value="false"/>
 		<property name="user" ref="user2"/>
 	</bean>
 	
