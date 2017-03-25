@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Actor;
-
 import repositories.ActorRepository;
 import security.Authority;
 import security.LoginService;
@@ -109,4 +108,12 @@ public class ActorService {
 		}
 		return result;
 	}	
+	
+	public Actor findByUsername(String username) {
+		Actor result;
+
+		result = actorRepository.findByUsername(username);
+
+		return result;
+	}
 }

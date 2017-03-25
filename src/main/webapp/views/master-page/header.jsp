@@ -53,8 +53,9 @@
             	<li class="dropdown">
               		<a href="#" class="fNiv dropdown-toggle" data-toggle="dropdown"><spring:message code="master.page.messages" /><b class="caret"></b></a>
               			<ul class="dropdown-menu">
-              				<li><a href="message/user/received.do?page=1"><spring:message code="master.page.messages.received" /></a></li>
-                			<li><a href="message/user/sent.do?page=1"><spring:message code="master.page.messages.sent" /></a></li>
+              				<li><a href="message/actor/received.do?page=1"><spring:message code="master.page.messages.received" /></a></li>
+                			<li><a href="message/actor/sent.do?page=1"><spring:message code="master.page.messages.sent" /></a></li>
+                			<li><a href="message/actor/create.do"><spring:message code="master.page.messages.create" /></a></li>
               			</ul>
             	</li>
             	

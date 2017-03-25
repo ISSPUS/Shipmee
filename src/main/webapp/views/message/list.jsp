@@ -33,7 +33,7 @@
 			<jstl:if test="${infoMessages eq 'messages.received'}">
 				class="active"
 			</jstl:if>>
-			<a href="message/user/received.do?page=1"> <spring:message
+			<a href="message/actor/received.do?page=1"> <spring:message
 					code="messages.received" />
 		</a>
 		</li>
@@ -41,10 +41,10 @@
 			<jstl:if test="${infoMessages eq 'messages.sent'}">
 				class="active"
 			</jstl:if>><a
-			href="message/user/sent.do?page=1" > <spring:message
+			href="message/actor/sent.do?page=1" > <spring:message
 					code="messages.sent" />
 		</a></li>
-		<li role="presentation"><a href="message/user/create.do"> <spring:message
+		<li role="presentation"><a href="message/actor/create.do"> <spring:message
 					code="message.create" />
 		</a></li>
 	</ul>
@@ -70,12 +70,12 @@
 						<jstl:choose>
 							<jstl:when test="${infoMessages eq 'messages.received'}">
 								<spring:message code="message.sender" />: 
-								<a href="user/profile.do?userId=${messageRow.sender.id}"><jstl:out value="${messageRow.sender.userAccount.username }" /></a>
+								<a href="actor/profile.do?userId=${messageRow.sender.id}"><jstl:out value="${messageRow.sender.userAccount.username }" /></a>
 
 							</jstl:when>
 							<jstl:otherwise>
 								<spring:message code="message.recipient" />: 
-								<a href="user/profile.do?userId=${messageRow.recipient.id}"><jstl:out value="${messageRow.recipient.userAccount.username }" /></a>
+								<a href="actor/profile.do?userId=${messageRow.recipient.id}"><jstl:out value="${messageRow.recipient.userAccount.username }" /></a>
 
 							</jstl:otherwise>
 						</jstl:choose>
