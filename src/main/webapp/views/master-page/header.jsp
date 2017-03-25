@@ -62,6 +62,7 @@
               		<a href="#" class="fNiv dropdown-toggle" data-toggle="dropdown"><spring:message code="master.page.profile" /> (<security:authentication property="principal.username" />)<b class="caret"></b></a>
               			<ul class="dropdown-menu">
                 			<li><a href="user/profile.do"><spring:message code="master.page.info" /></a></li>
+                			<li><a href="vehicle/user/list.do"><spring:message code="master.page.vehicles" /></a></li>
                 			<li><a href="alert/user/list.do"><spring:message code="master.page.alerts" /></a></li>
                 			<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
               			</ul>

@@ -173,7 +173,7 @@
 	<bean id="vehicle1" class="domain.Vehicle">
 		<property name="brand" value="Audi"/>
 		<property name="model" value="a7"/>
-		<property name="picture" value=""/>
+		<property name="picture" value="https://s-media-cache-ak0.pinimg.com/736x/1e/d0/8b/1ed08b487f02fc8c43aaab936d1f1e91.jpg"/>
 		<property name="color" value="Blue"/>
 		<property name="deleted" value="false"/>
 		<property name="user" ref="user1"/>
@@ -182,7 +182,7 @@
 	<bean id="vehicle2" class="domain.Vehicle">
 		<property name="brand" value="Fiat"/>
 		<property name="model" value="Panda"/>
-		<property name="picture" value=""/>
+		<property name="picture" value="https://imganuncios.mitula.net/vendo_fiat_panda_1_2_mamy_5p_en_venta_2009_2870132445115534496.jpg"/>
 		<property name="color" value="Red"/>
 		<property name="deleted" value="false"/>
 		<property name="user" ref="user2"/>

@@ -53,7 +53,7 @@ public class VehicleUserController extends AbstractController {
 		
 		vehicles = vehicleService.findAllNotDeletedByUser();
 		
-		result = new ModelAndView("vehicles/list");
+		result = new ModelAndView("vehicle/list");
 		result.addObject("vehicles", vehicles);
 
 		return result;

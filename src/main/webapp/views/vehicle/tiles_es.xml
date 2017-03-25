@@ -5,6 +5,11 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
+
+	<definition name="vehicle/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de vehículos" />
+		<put-attribute name="body" value="/views/vehicle/list.jsp" />
+	</definition>
 	
 	<definition name="vehicle/edit" extends="master.page">	
 		<put-attribute name="title" value="Editar un vehículo" />
