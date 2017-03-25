@@ -91,11 +91,6 @@ public class MessageUserController extends AbstractController {
 		result.addObject("infoMessages", "messages.received");
 		result.addObject("urlPage", "message/user/received.do?page=");
 
-		Message message;
-		message = messageService.create();
-
-		result.addObject("message", message);
-
 		return result;
 	}
 
@@ -114,11 +109,6 @@ public class MessageUserController extends AbstractController {
 		result.addObject("total_pages", items.getTotalPages());
 		result.addObject("infoMessages", "messages.sent");
 		result.addObject("urlPage", "message/user/sent.do?page=");
-
-		Message message;
-		message = messageService.create();
-
-		result.addObject("message", message);
 
 		return result;
 	}

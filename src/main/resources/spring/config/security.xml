@@ -37,6 +37,8 @@
 		<security:intercept-url pattern="/shipment/user/*" access="hasRole('USER')" />
 		<security:intercept-url pattern="/shipmentOffer/user/*" access="hasRole('USER')" />
 		<security:intercept-url pattern="/vehicle/user/*" access="hasRole('USER')" />
+		<security:intercept-url pattern="/message/user/*" access="hasRole('USER')" />
+		<security:intercept-url pattern="/alert/user/*" access="hasRole('USER')" />
 
 		<security:intercept-url pattern="/about/info.do" access="permitAll" /> 
 		<security:intercept-url pattern="/shipment/*" access="permitAll" />

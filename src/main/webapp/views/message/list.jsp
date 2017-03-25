@@ -54,7 +54,7 @@
 
 <div class="container">
 
-
+	<jstl:if test="${not empty messages}">
 	<jstl:forEach items="${messages}" var="messageRow">
 
 		<!-- /row -->
@@ -101,6 +101,7 @@
 		</div>
 		<!-- /row -->
 	</jstl:forEach>
+	</jstl:if>
 </div>
 
 <jstl:if test="${fn:length(messages) ==0}">
