@@ -30,10 +30,12 @@
 </style>
 <div class="container">
 	<div class="row formulario">
-		<form:form action="route/user/edit.do" modelAttribute="routeForm" method="post"
+		<form:form action="alert/user/edit.do" method="post"
 			class="form-horizontal" role="form">
 
-			<form:hidden path="routeId" />
+			<form:hidden path="id" />
+			<form:hidden path="version" />
+			<form:hidden path="user" />
 
 			<div class="form-group">
 				<form:label path="origin" class="control-label col-md-2"
@@ -58,8 +60,8 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="departureTime" class="control-label col-md-2"
-					for="departureTime">
+				<form:label path="date" class="control-label col-md-2"
+					for="date">
 					<spring:message code="route.departureTime" />
 				</form:label>
 				<div class="col-md-8">
@@ -74,24 +76,6 @@
 					</div>
 					<form:errors class="error create-message-error"
 						path="departureTime" />
-				</div>
-			</div>
-			<div class="form-group">
-				<form:label path="arriveTime" class="control-label col-md-2"
-					for="arriveTime">
-					<spring:message code="route.arriveTime" />
-				</form:label>
-				<div class="col-md-8">
-
-					<div class='input-group date input-text' id='datetimepicker2'>
-						<form:input path="arriveTime" name="fecha"
-							style="backgroud-color: white;width:99% ! important" type="text"
-							class="form-control" />
-						. <span class="input-group-addon"> <span
-							class="glyphicon glyphicon-calendar"></span>
-						</span>
-					</div>
-					<form:errors class="error create-message-error" path="arriveTime" />
 				</div>
 			</div>
 			<div class="form-group">

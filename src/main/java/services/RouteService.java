@@ -42,6 +42,9 @@ public class RouteService {
 	@Autowired
 	private RouteOfferService routeOfferService;
 	
+	@Autowired
+	private AlertService alertService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public RouteService() {
@@ -89,7 +92,8 @@ public class RouteService {
 			route.setDate(date);
 			
 			route = routeRepository.save(route);
-			
+			alertService.checkAlerts(route.getOrigin(), route.getDestination(), 
+					route.getDepartureTime(), "Route");
 		} else {
 			route = routeRepository.save(route);
 		}

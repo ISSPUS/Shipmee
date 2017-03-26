@@ -6,12 +6,12 @@
       
 <tiles-definitions>
 	
-	<definition name="route/list" extends="master.page">	
+	<definition name="alert/list" extends="master.page">	
 		<put-attribute name="title" value="list Alerts" />
 		<put-attribute name="body" value="/views/alert/list.jsp" />
 	</definition>
 	
-	<definition name="route/edit" extends="master.page">	
+	<definition name="alert/edit" extends="master.page">	
 		<put-attribute name="title" value="Edit Alert" />
 		<put-attribute name="body" value="/views/alert/edit.jsp" />
 	</definition>

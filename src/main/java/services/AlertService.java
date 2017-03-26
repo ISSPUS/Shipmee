@@ -95,6 +95,7 @@ public class AlertService {
 		Collection<Alert> alerts;
 		
 		alerts = alertRepository.checkAlerts(origin, destination, date, type);
+		log.trace(alerts);
 		sendAlerts(alerts);
 		
 		return alerts;
@@ -104,13 +105,11 @@ public class AlertService {
 		
 		for(Alert alert: alerts){
 			if(alert.getType().equals("Route")){
-				messageService.sendMessage(alert.getUser(), actorService.findByUsername("shipmee"), "Nueva Alerta", 
-						"Se ha creado una nueva ruta "+alert.getOrigin()+" -> "+alert.getDestination()+" "
-								+ "el día "+alert.getDate()+" \n Pincha aquí para ir al listado de rutas.");
+				messageService.sendMessage( actorService.findByUsername("shipmee"), alert.getUser(), "Nueva Alerta", 
+						"Se ha creado una nueva ruta "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+alert.getDate());
 			}else{
-				messageService.sendMessage(alert.getUser(), actorService.findByUsername("shipmee"), "Nueva Alerta", 
-						"Se ha creado un nuevo envío "+alert.getOrigin()+" -> "+alert.getDestination()+" "
-								+ "el día "+alert.getDate()+" \n Pincha aquí para ir al listado de envíos.");
+				messageService.sendMessage(actorService.findByUsername("shipmee"), alert.getUser(), "Nueva Alerta", 
+						"Se ha creado un nuevo envío "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+alert.getDate());
 			}
 		}
 	}

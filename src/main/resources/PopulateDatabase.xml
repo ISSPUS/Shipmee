@@ -498,10 +498,18 @@
 	<!-- Alert -->
 	
 	<bean id="alert1" class="domain.Alert">
-		<property name="date" value="2017/03/09 11:02"/>
+		<property name="date" value="2017/05/09 11:02"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
 		<property name="type" value="Route"/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
+	<bean id="alert2" class="domain.Alert">
+		<property name="date" value="2017/05/09 11:02"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="type" value="Shipment"/>
 		<property name="user" ref="user2"/>
 	</bean>
 	

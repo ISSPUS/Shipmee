@@ -12,7 +12,9 @@ import domain.Alert;
 @Repository
 public interface AlertRepository extends JpaRepository<Alert, Integer> {
 
-	@Query("select a from Alert a where a.origin = ?1 AND a.destination = ?2 AND a.type like ?3")
+	@Query("select a from Alert a where a.origin like %?1% AND a.destination like %?2% AND "
+			+ "year(a.date) = year(?3) AND month(a.date) = month(?3) AND day(a.date) = day(?3)"
+			+ "AND a.type like ?4")
 	Collection<Alert> checkAlerts(String origin, String destination, Date date, String type);
 	
 	@Query("select a from Alert a where a.user.id = ?1")

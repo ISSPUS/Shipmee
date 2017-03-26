@@ -38,6 +38,9 @@ public class ShipmentService {
 	@Autowired
 	private ShipmentOfferService shipmentOfferService;
 	
+	@Autowired
+	private AlertService alertService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public ShipmentService() {
@@ -80,6 +83,8 @@ public class ShipmentService {
 			shipment.setDate(date);
 			shipment.setCarried(null);
 			shipment = shipmentRepository.save(shipment);
+			alertService.checkAlerts(shipment.getOrigin(), shipment.getDestination(), 
+					shipment.getDepartureTime(), "Shipment");
 		} else {
 			shipment = shipmentRepository.save(shipment);
 		}
