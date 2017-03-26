@@ -37,7 +37,7 @@
 
 			<div class="form-group">
 				<form:label path="origin" class="control-label col-md-2"
-					for="recipient">
+					for="recipient"> 
 					<spring:message code="route.origin" />
 				</form:label>
 				<div class="col-md-8">
