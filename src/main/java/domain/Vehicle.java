@@ -18,6 +18,8 @@ public class Vehicle extends DomainEntity {
 	private String brand;
 	private String model;
 	private String picture;
+	private String color;
+	private boolean deleted;
 	
 	@NotNull
 	@NotBlank
@@ -48,6 +50,26 @@ public class Vehicle extends DomainEntity {
 		this.picture = picture;
 	}
 	
+	@NotNull
+	@NotBlank
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
+
+
 	// Relationships ----------------------------------------------------------
 	private User user;
 	

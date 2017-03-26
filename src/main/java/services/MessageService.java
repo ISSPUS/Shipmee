@@ -12,9 +12,8 @@ import org.springframework.util.Assert;
 
 import domain.Actor;
 import domain.Message;
-import domain.User;
-import services.form.MessageFormService;
 import repositories.MessageRepository;
+import services.form.MessageFormService;
 
 @Service
 @Transactional
@@ -28,7 +27,7 @@ public class MessageService {
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	private UserService userService;
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -40,18 +39,18 @@ public class MessageService {
 
 	public Message create() {
 		Message result;
-		User user;
+		Actor actor;
 		long segundos;
 		Date momento;
 
 		result = new Message();
-		user = userService.findByPrincipal();
+		actor = actorService.findByPrincipal();
 		segundos = System.currentTimeMillis() - 1;
 		momento = new Date(segundos);
 
 		result.setMoment(momento);
-		Assert.notNull(user);
-		result.setSender(user);
+		Assert.notNull(actor);
+		result.setSender(actor);
 
 		return result;
 	}
@@ -116,12 +115,13 @@ public class MessageService {
 
 	public Message MessageFormToMessage(MessageFormService messageFormService) {
 		Message res;
+		Actor recipient;
 
 		res = create();
 			
 		// Comprobamos si existe el usuario al que le queremos enviar el mensaje
 
-		User recipient = userService.findByUsername(messageFormService.getRecipient());
+		recipient = actorService.findByUsername(messageFormService.getRecipient());
 		Assert.notNull(recipient,"message.error.recipient");
 		res.setRecipient(recipient);
 		
@@ -140,50 +140,50 @@ public class MessageService {
 
 	public Page<Message> findAllReceived(Pageable page) {
 		Page<Message> result;
-		User user;
+		Actor actor;
 
-		user = userService.findByPrincipal();
-		Assert.notNull(user);
+		actor = actorService.findByPrincipal();
+		Assert.notNull(actor);
 
-		result = messageRepository.messagesReceived(user.getId(), page);
+		result = messageRepository.messagesReceived(actor.getId(), page);
 		Assert.notNull(result);
 		return result;
 	}
 
 	public Page<Message> findAllSent(Pageable page) {
 		Page<Message> result;
-		User user;
+		Actor actor;
 
-		user = userService.findByPrincipal();
-		Assert.notNull(user);
+		actor = actorService.findByPrincipal();
+		Assert.notNull(actor);
 
-		result = messageRepository.messagesSent(user.getId(), page);
+		result = messageRepository.messagesSent(actor.getId(), page);
 		Assert.notNull(result);
 		return result;
 	}
 	
-	public int countMessagesSentByUser(){
+	public int countMessagesSentByActor(){
 		int res;
-		User user;
+		Actor actor;
 		
-		user = userService.findByPrincipal();
+		actor = actorService.findByPrincipal();
 		
-		Assert.notNull(user);
+		Assert.notNull(actor);
 		
-		res = messageRepository.countMessagesSentByUserId(user.getId());
+		res = messageRepository.countMessagesSentByActorId(actor.getId());
 		
 		return res;
 	}
 	
-	public int countMessagesReceivedtByUser(){
+	public int countMessagesReceivedtByActor(){
 		int res;
-		User user;
+		Actor actor;
 		
-		user = userService.findByPrincipal();
+		actor = actorService.findByPrincipal();
 		
-		Assert.notNull(user);
+		Assert.notNull(actor);
 		
-		res = messageRepository.countMessagesReceivedtByUserId(user.getId());
+		res = messageRepository.countMessagesReceivedtByActorId(actor.getId());
 		
 		return res;
 	}

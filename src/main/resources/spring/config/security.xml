@@ -36,6 +36,10 @@
 		<security:intercept-url pattern="/sizePrice/user/*" access="hasRole('USER')" />
 		<security:intercept-url pattern="/shipment/user/*" access="hasRole('USER')" />
 		<security:intercept-url pattern="/shipmentOffer/user/*" access="hasRole('USER')" />
+		<security:intercept-url pattern="/vehicle/user/*" access="hasRole('USER')" />
+		<security:intercept-url pattern="/message/actor/*" access="isAuthenticated()" />
+		<security:intercept-url pattern="/alert/user/*" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/*" access="permitAll" />
 
 		<security:intercept-url pattern="/about/info.do" access="permitAll" /> 
 		<security:intercept-url pattern="/shipment/*" access="permitAll" />

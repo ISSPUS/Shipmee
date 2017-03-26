@@ -1,7 +1,8 @@
-package controllers.user;
+package controllers.actor;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,10 +18,11 @@ import controllers.AbstractController;
 import domain.Message;
 import services.form.MessageFormService;
 import services.MessageService;
-
 @Controller
-@RequestMapping("/message/user")
-public class MessageUserController extends AbstractController {
+@RequestMapping("/message/actor")
+public class MessageActorController extends AbstractController {
+	
+	static Logger log = Logger.getLogger(MessageActorController.class);
 
 	// Services ---------------------------------------------------------------
 
@@ -29,7 +31,7 @@ public class MessageUserController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public MessageUserController() {
+	public MessageActorController() {
 		super();
 	}
 
@@ -60,10 +62,10 @@ public class MessageUserController extends AbstractController {
 			result = createEditModelAndView(messageForm);
 		} else {
 			try {
-
 				messageService.save(messageForm);
 				result = new ModelAndView("redirect:received.do?page=1");
 			} catch (Throwable oops) {
+				log.error(oops.getMessage());
 				messageError="message.commit.error";
 				if(oops.getMessage().contains("message.error")){
 					messageError=oops.getMessage();
@@ -89,12 +91,7 @@ public class MessageUserController extends AbstractController {
 		result.addObject("p", page);
 		result.addObject("total_pages", items.getTotalPages());
 		result.addObject("infoMessages", "messages.received");
-		result.addObject("urlPage", "message/user/received.do?page=");
-
-		Message message;
-		message = messageService.create();
-
-		result.addObject("message", message);
+		result.addObject("urlPage", "message/actor/received.do?page=");
 
 		return result;
 	}
@@ -113,12 +110,7 @@ public class MessageUserController extends AbstractController {
 		result.addObject("p", page);
 		result.addObject("total_pages", items.getTotalPages());
 		result.addObject("infoMessages", "messages.sent");
-		result.addObject("urlPage", "message/user/sent.do?page=");
-
-		Message message;
-		message = messageService.create();
-
-		result.addObject("message", message);
+		result.addObject("urlPage", "message/actor/sent.do?page=");
 
 		return result;
 	}

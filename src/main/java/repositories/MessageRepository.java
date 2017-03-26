@@ -19,8 +19,8 @@ public interface MessageRepository  extends JpaRepository<Message, Integer>{
 	Page<Message> messagesSent(int id,Pageable page);
 	
 	@Query("select count(m) from Message m where m.sender.id = ?1")
-	int countMessagesSentByUserId(int id);
+	int countMessagesSentByActorId(int id);
 	
 	@Query("select count(m) from Message m where m.recipient.id = ?1")
-	int countMessagesReceivedtByUserId(int id);
+	int countMessagesReceivedtByActorId(int id);
 }

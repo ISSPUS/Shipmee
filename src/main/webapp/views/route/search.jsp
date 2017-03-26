@@ -177,7 +177,7 @@
 											<div class="info-salida col-lg-6" style="margin-bottom: 2%; font-size: 16px;">
 												<div class="cabecera">
 												<div class="title">
-													<h4><a>${route.creator.name}</a></h4>
+													<h4><a href="user/profile.do?userId=${route.creator.id}">${route.creator.name}</a></h4>
 												</div>
 												
 												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>

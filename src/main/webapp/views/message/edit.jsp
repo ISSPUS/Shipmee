@@ -25,13 +25,13 @@
 	<ul class="nav nav-pills nav-justified sub-menu-messages-options"
 		style="">
 		<li role="presentation"><a
-			href="message/user/received.do?page=1"> <spring:message
+			href="message/actor/received.do?page=1"> <spring:message
 					code="messages.received" />
 		</a></li>
-		<li role="presentation"><a href="message/user/sent.do?page=1">
+		<li role="presentation"><a href="message/actor/sent.do?page=1">
 				<spring:message code="messages.sent" />
 		</a></li>
-		<li role="presentation" class="active"><a href="message/user/create.do"> <spring:message
+		<li role="presentation" class="active"><a href="message/actor/create.do"> <spring:message
 					code="message.create" />
 		</a></li>
 	</ul>
@@ -40,7 +40,7 @@
 <br />
 <br />
 <div class="container">
-	<form:form action="message/user/edit.do" method="post"
+	<form:form action="message/actor/edit.do" method="post"
 		modelAttribute="messageForm" class="form-horizontal" role="form">
 
 		<form:hidden path="sender" />
@@ -87,7 +87,7 @@
 					style="float: right">
 					<spring:message code="message.send" />
 				</button>
-				<button type="button"  onclick="javascript: relativeRedir('/message/user/received.do?page=1')" name="cancel" class="btn btn-primary btn-create-message"
+				<button type="button"  onclick="javascript: relativeRedir('/message/actor/received.do?page=1')" name="cancel" class="btn btn-primary btn-create-message"
 					style="float: right">
 					<spring:message code="message.cancel" />
 				</button>
