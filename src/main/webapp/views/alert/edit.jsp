@@ -98,30 +98,10 @@
 					<form:errors path="itemEnvelope" cssClass="error" />
 				</div>
 			</div>
-			<div class="form-group">
-				<form:label path="vehicle" class="control-label col-md-2"
-					for="vehicle">
-					<spring:message code="route.vehicle" />
-				</form:label>
-				<div class="col-md-8">
-
-					<spring:message code="route.open" var="open" />
-					<spring:message code="route.closed" var="closed" />
-					<spring:message code="route.both" var="both" />
-
-					<form:select id="vehicle" class="form-control" path="vehicle">
-						<form:option value="" label="----" />
-						<c:forEach items="${vehicles}" var="vehicle">
-    						<form:option value="${vehicle.id }" label="${vehicle.brand} - ${ vehicle.model}" />
-						</c:forEach>
-					</form:select>
-					<form:errors path="vehicle" cssClass="error" />
-				</div>
-			</div>
 						<!-- Action buttons -->
 			<acme:submit name="save" code="route.save" />
 
-			<jstl:if test="${routeForm.routeId != 0}">
+			<jstl:if test="${alert.id != 0}">
 				<acme:submit_confirm name="delete" code="route.delete"
 					codeConfirm="route.confirm.delete" />
 			</jstl:if>
