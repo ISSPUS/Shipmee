@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
-import domain.Route;
 import domain.Vehicle;
 import services.VehicleService;
 
@@ -136,20 +135,6 @@ public class VehicleUserController extends AbstractController {
 		result = new ModelAndView("vehicle/edit");
 		result.addObject("vehicle", vehicle);
 		result.addObject("message", message);
-
-		return result;
-	}
-	
-	protected ModelAndView createEditModelAndView(Route route, String message) {
-		ModelAndView result;
-		Collection<Vehicle> vehicles;
-		
-		vehicles = vehicleService.findAllNotDeletedByUser();
-				
-		result = new ModelAndView("route/search");
-		result.addObject("route", route);
-		result.addObject("message", message);
-		result.addObject("vehicles", vehicles);
 
 		return result;
 	}
