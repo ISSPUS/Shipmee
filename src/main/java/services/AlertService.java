@@ -31,6 +31,9 @@ public class AlertService {
 	@Autowired
 	private MessageService messageService;
 	
+	@Autowired
+	private ActorService actorService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public AlertService() {
@@ -101,11 +104,11 @@ public class AlertService {
 		
 		for(Alert alert: alerts){
 			if(alert.getType().equals("Route")){
-				messageService.sendMessage(alert.getUser(), alert.getUser(), "Nueva Alerta", 
+				messageService.sendMessage(alert.getUser(), actorService.findByUsername("shipmee"), "Nueva Alerta", 
 						"Se ha creado una nueva ruta "+alert.getOrigin()+" -> "+alert.getDestination()+" "
 								+ "el día "+alert.getDate()+" \n Pincha aquí para ir al listado de rutas.");
 			}else{
-				messageService.sendMessage(alert.getUser(), alert.getUser(), "Nueva Alerta", 
+				messageService.sendMessage(alert.getUser(), actorService.findByUsername("shipmee"), "Nueva Alerta", 
 						"Se ha creado un nuevo envío "+alert.getOrigin()+" -> "+alert.getDestination()+" "
 								+ "el día "+alert.getDate()+" \n Pincha aquí para ir al listado de envíos.");
 			}

@@ -67,6 +67,18 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="shipmee" />
+		<property name="password" value="a1e85a708eea1ae0ec182cdaf967e2f5" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Administrator -->	
 	
@@ -78,6 +90,16 @@
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
 		<property name="userAccount" ref="userAccount1"/>
+	</bean>
+	
+	<bean id="shipmee" class="domain.Administrator">
+		<property name="name" value="Shipmee"/>
+		<property name="surname" value="S.A"/>
+		<property name="email" value="no-reply@shipmee.es"/>
+		<property name="birthDate" value="2017/03/03 00:00"/>
+		<property name="phone" value="666777888"/>
+		<property name="dni" value="12345678A"/>
+		<property name="userAccount" ref="userAccount6"/>
 	</bean>
 	
 	<!-- Rank -->
