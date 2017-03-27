@@ -217,9 +217,9 @@
 												
 													
 											</div>
-											<div class="col-lg-3" style="margin-top: 10%;">
+											<div class="col-lg-3 profile-userbuttons" style="margin-top: 10%;">
 											
-												<button type="button" class="btn btn-primary btn-md btn-block" onclick="location.href = 'route/display.do?routeId=${route.id}';"><spring:message code="route.details" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>	
+												<button type="button" class="btn button-ok btn-block" style="font-size: 15px;" onclick="location.href = 'route/display.do?routeId=${route.id}';"><spring:message code="route.details" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>	
 											
 
 											</div>
