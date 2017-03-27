@@ -527,4 +527,27 @@
 		<property name="cvvCode" value="303"/>
 	</bean>
 	
+	<!-- Messages -->
+	
+	<bean id="message1" class="domain.Message">
+		<property name="subject" value="Message1"/>
+		<property name="body" value="Hello world"/>
+		<property name="moment" value="2017/02/09 11:02"/>
+		<property name="sender" ref="user2"/>
+		<property name="recipient" ref="user1"/>
+	</bean>
+		<bean id="message2" class="domain.Message">
+		<property name="subject" value="Message2"/>
+		<property name="body" value="Hello world"/>
+		<property name="moment" value="2017/02/09 11:12"/>
+		<property name="sender" ref="user2"/>
+		<property name="recipient" ref="user1"/>
+	</bean>
+		<bean id="message3" class="domain.Message">
+		<property name="subject" value="Message3"/>
+		<property name="body" value="Hello world"/>
+		<property name="moment" value="2017/02/09 11:22"/>
+		<property name="sender" ref="user2"/>
+		<property name="recipient" ref="user1"/>
+	</bean>
 </beans>
