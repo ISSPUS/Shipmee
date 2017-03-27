@@ -20,12 +20,37 @@
 	background-color: white;
 }
 
-.ruta {
+.button-profile{
+    color: #fff;
+    background-color: #1abc9c;
+    border-color: #1abcaa;
+}
+
+.button-profile:hover {
+    color: #fff;
+    background-color: #17a696;
+    border-color: #1abcaa;
+}
+
+
+.button-report{
+    color: #fff;
+    /* background-color: #d9534f; */
+    /* border-color: #d43f3a; */;
+}
+
+.button-report:hover {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+
+.cuadro {
 	margin-top: -1%;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	background-color: white;
-	-webkit-box-shadow: 2px 2px 5px #999;
 	-moz-box-shadow: 2px 2px 5px #999;
 	margin-bottom: 5%;
 	width: 100%;

@@ -1,4 +1,10 @@
-.profile
+.modal-body{ /* Esta en boostrap pero como relative, lo quitamos para poder udar boton report */
+	position: static;
+	
+	
+}
+
+.profile-user
 {
 	margin-top:10%;
     display: inline-block;
@@ -7,7 +13,21 @@
 
 .img-verified{
 	color: #1abc9c;
+	font-size: 21px;
 }
+
+.img-report{
+	color: #d3d7cf;
+	font-size: 21px;
+	float: right;
+}
+
+.img-report:hover{
+	color: #e1283c;
+	font-size: 21px;
+	float: right;
+}
+
 
 .titulo-apartado{
 	margin-top: 20px;
