@@ -16,8 +16,7 @@
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script type="text/javascript" src="scripts/moment.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
-<link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
-	type="text/css">
+<link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
 
 <style>
@@ -211,7 +210,7 @@
 			</div>
 			<!-- Action buttons -->
 			
-			<div class="text-center">
+			<div class="text-center profile-userbuttons">
 			<acme:submit name="save" code="shipment.save" />
 
 			<jstl:if test="${shipmentForm.shipmentId != 0}">

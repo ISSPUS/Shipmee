@@ -117,7 +117,9 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation" style="position: initial;">
+		
+	</div>
 
 
 

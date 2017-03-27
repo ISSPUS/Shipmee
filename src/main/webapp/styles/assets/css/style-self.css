@@ -7,6 +7,31 @@
  src: url('../fonts/Aero.ttf');
 }
 
+.button-ok{
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+}
+
+.button-ok:hover {
+    color: #fff;
+    background-color: #3276b1;
+  	order-color: #285e8e;
+}
+
+.button-cancel{
+    color: #555753;
+    /* background-color: #d9534f; */
+    /* border-color: #d43f3a; */;
+}
+
+.button-cancel:hover {
+    color: #555753;
+    background-color: #babdb6;
+    border-color: #babdb6;
+}
+
+
 .titlePrincipal{
 	text-shadow: 1px 2px #999;
 }
@@ -22,7 +47,7 @@
 
 /*	Importante! Fijando menu de arriba */
 .navbar-default {
-    position: relative;
+  /*  position: relative;*/
     
 }
 

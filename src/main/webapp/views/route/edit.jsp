@@ -144,7 +144,7 @@
 				</div>
 			</div>
 						<!-- Action buttons -->
-						<div class="text-center">
+			<div class="text-center profile-userbuttons">
 			<acme:submit name="save" code="route.save" />
 
 			<jstl:if test="${routeForm.routeId != 0}">
