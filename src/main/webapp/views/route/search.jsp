@@ -170,9 +170,21 @@
 										
 											<div class="col-lg-3 text-center">
 
-												<a href="user/profile.do?userId=${route.creator.id}"><img src="images/anonymous.png" class="media-photo-route"></a>
-													
-											</div>
+																<a href="user/profile.do?userId=${route.creator.id}">
+																	<jstl:choose>
+																		<jstl:when test="${not empty route.creator.photo}">
+																			<jstl:set var="imageUser"
+																				value="${route.creator.photo}" />
+																		</jstl:when>
+																		<jstl:otherwise>
+																			<jstl:set var="imageUser"
+																				value="images/anonymous.png" />
+																		</jstl:otherwise>
+																	</jstl:choose> <img src="${imageUser}" name="aboutme" width="140"
+																	height="140" border="0" class="img-circle">
+
+																</a>
+															</div>
 										
 											<div class="info-salida col-lg-6" style="margin-bottom: 2%; font-size: 16px;">
 												<div class="cabecera">

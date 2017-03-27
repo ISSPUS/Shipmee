@@ -62,9 +62,24 @@
 
 			<div class="span3 well text-center"
 				style="margin-top: 2px; background-color: white;">
-				<a href="user/profile.do?userId=${route.creator.id}""><img
-					src="images/anonymous.png"
-					name="aboutme" width="140" height="140" class="img-circle"></a>
+				<a href="user/profile.do?userId=${route.creator.id}">
+				
+				
+				<jstl:choose>
+						<jstl:when test="${not empty route.creator.photo}">
+							<jstl:set var="imageUser" value="${route.creator.photo}" />
+						</jstl:when>
+						<jstl:otherwise>
+							<jstl:set var="imageUser" value="images/anonymous.png" />
+						</jstl:otherwise>
+					</jstl:choose>
+				<img src="${imageUser}" name="aboutme" width="140" height="140" border="0" class="img-circle">	
+					
+					
+					
+					
+					
+					</a>
 				<h3>
 					<a>${route.creator.name}</a>
 				</h3>
@@ -190,7 +205,7 @@
 					</jstl:forEach>
                        
                     </tbody>
-                </table>
+ 					 </table>
 					
 
 					

@@ -62,9 +62,19 @@
 			
 		<div class="span3 well text-center"
 				style="margin-top: 2px; background-color: white;">
-				<a href="user/profile.do?userId=${shipment.creator.id}"><img
-					src="images/anonymous.png"
-					name="aboutme" width="140" height="140" class="img-circle"></a>
+				
+				<a href="user/profile.do?userId=${shipment.creator.id}"> 
+					<jstl:choose>
+						<jstl:when test="${not empty shipment.creator.photo}">
+							<jstl:set var="imageUser" value="${shipment.creator.photo}" />
+						</jstl:when>
+						<jstl:otherwise>
+							<jstl:set var="imageUser" value="images/anonymous.png" />
+						</jstl:otherwise>
+					</jstl:choose> 
+					<img src="${imageUser}" name="aboutme" width="140" height="140"border="0" class="img-circle">
+
+				</a>
 				<h3>
 					<a>${shipment.creator.name}</a>
 				</h3>
@@ -142,11 +152,31 @@
 
 										</div>
 										<div class="row info1 col-xs-10 col-sm-12">
-										
-											<img class="imagen-envio"
-													 src="${shipment.itemPicture}">
-	
+
+							<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img
+								class="imagen-envio" src="${shipment.itemPicture}"></a>
+
+
+							<!-- Modal -->
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+
+										<div class="modal-body">
+
+
+											<img src="${shipment.itemPicture}">
+
 										</div>
+
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
 										
 										<div class="row info1 col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
