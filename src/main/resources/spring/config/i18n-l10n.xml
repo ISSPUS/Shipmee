@@ -22,6 +22,7 @@
 		<value>/views/message/messages</value>
 		<value>/views/vehicle/messages</value>
 		<value>/views/user/messages</value>
+		<value>/views/complaint/messages</value>
 		
 		<value>/views/about/messages</value>
 		

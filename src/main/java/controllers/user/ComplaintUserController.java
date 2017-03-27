@@ -58,7 +58,7 @@ public class ComplaintUserController extends AbstractController {
 
 	// Edition ----------------------------------------------------------------
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "create")
 	public ModelAndView save(@Valid Complaint complaint, BindingResult binding) {
 		ModelAndView result;
 

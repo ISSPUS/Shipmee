@@ -1,7 +1,8 @@
 package services;
 
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -67,9 +68,11 @@ public class ComplaintService {
 		Moderator moderator;
 		Complaint complaintPreSave;
 		
-		user = userService.findByPrincipal();
+		
 				
 		if(complaint.getId() == 0) {
+			user = userService.findByPrincipal();
+			
 			Assert.isTrue(user.getId() != complaint.getInvolved().getId());
 			
 			complaint.setCreator(user);
@@ -81,6 +84,7 @@ public class ComplaintService {
 		} else {
 			Assert.isTrue(actorService.checkAuthority("MODERATOR"),
 					"Only an moderator can resolve a complaint");
+			Assert.isTrue(checkType(complaint.getType()));
 			
 			complaintPreSave = this.findOne(complaint.getId());
 			
@@ -91,7 +95,7 @@ public class ComplaintService {
 						
 			complaint = complaintRepository.save(complaintPreSave);
 		}
-			
+
 		return complaint;
 	}
 	
@@ -104,15 +108,28 @@ public class ComplaintService {
 		return result;
 	}
 	
-	public Collection<Complaint> findAll() {
-		Collection<Complaint> result;
+	public Page<Complaint> findAllNotResolved(Pageable page) {
+		Page<Complaint> result;
 
-		result = complaintRepository.findAll();
-
+		result = complaintRepository.findAllNotResolved(page);
+		Assert.notNull(result);
 		return result;
 	}
 	
 
 	// Other business methods -------------------------------------------------
 	
+	private boolean checkType(String type) {
+		boolean res;
+		
+		res = false;
+
+		if(type.equals("Omitted") || type.equals("Mild") ||
+				type.equals("Serious") || type.equals("Omitido") ||
+				type.equals("Leve") || type.equals("Grave")) {
+			res = true;
+		}
+
+		return res;
+	}
 }

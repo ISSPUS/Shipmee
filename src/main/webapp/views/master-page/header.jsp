@@ -69,6 +69,10 @@
               			</ul>
             	</li>
 			</security:authorize>
+			
+			<security:authorize access="hasRole('MODERATOR')">
+				<li><a class="fNiv active" href="complaint/moderator/list.do?page=1"><spring:message code="master.page.complaints" /></a></li>
+			</security:authorize>
             
           </ul>
         </div>

@@ -225,6 +225,7 @@
 		<property name="explanation" value="His car is not an Audi"/>
 		<property name="creator" ref="user2"/>
 		<property name="involved" ref="user1"/>
+		<property name="type" value="Mild"/>
 		<property name="moderator" ref="moderator1"/>
 	</bean>
 	
