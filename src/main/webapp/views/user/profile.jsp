@@ -31,8 +31,19 @@
 			<div class="well profile-user profile">
 			<a href="complaint/create.do?userId=${user.id}"><i class="glyphicon glyphicon-exclamation-sign img-report" title="Complaint"></i></a>
 				<div class="modal-body text-center">
-                
-                    <img src="images/anonymous.png" name="aboutme" width="140" height="140" border="0" class="img-circle">
+
+					<jstl:choose>
+						<jstl:when test="${not empty user.photo}">
+							<jstl:set var="imageUser" value="${user.photo}" />
+						</jstl:when>
+						<jstl:otherwise>
+							<jstl:set var="imageUser" value="images/anonymous.png" />
+						</jstl:otherwise>
+					</jstl:choose>
+					<img src="${imageUser}" name="aboutme" width="140" height="140" border="0" class="img-circle">	
+					
+                	
+                    
                     <h3 class="media-heading profile-name">${user.name} <small>
                     <jstl:if test="${user.isVerified}">
                     	<i class="glyphicon glyphicon-ok img-verified" title="Verified"></i>

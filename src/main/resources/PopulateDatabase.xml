@@ -134,6 +134,7 @@
 		<property name="birthDate" value="1992/10/05 00:00"/>
 		<property name="phone" value="666777666"/>
 		<property name="dni" value="23456789B"/>
+		<property name="photo" value="http://i.imgur.com/0TQ9HiZ.jpg"/>
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
@@ -151,6 +152,7 @@
 		<property name="birthDate" value="1995/10/01 00:00"/>
 		<property name="phone" value="676554345"/>
 		<property name="dni" value="34567890C"/>
+		<property name="photo" value="http://i.imgur.com/qAEs1vs.jpg"/>
 		<property name="userAccount" ref="userAccount3"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
