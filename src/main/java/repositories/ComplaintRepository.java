@@ -13,4 +13,13 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Integer> {
 
 	@Query("select c from Complaint c where c.type is null")
 	Page<Complaint> findAllNotResolved(Pageable page);
+	
+	@Query("select c from Complaint c where c.type like 'Serious' or c.type like 'Grave'")
+	Page<Complaint> findAllSerious(Pageable page);
+	
+	@Query("select c from Complaint c where c.type like 'Mild' or c.type like 'Leve'")
+	Page<Complaint> findAllMild(Pageable page);
+	
+	@Query("select c from Complaint c where c.type like 'Omitted' or c.type like 'Omitido'")
+	Page<Complaint> findAllOmitted(Pageable page);
 }

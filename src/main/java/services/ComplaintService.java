@@ -116,6 +116,30 @@ public class ComplaintService {
 		return result;
 	}
 	
+	public Page<Complaint> findAllSerious(Pageable page) {
+		Page<Complaint> result;
+
+		result = complaintRepository.findAllSerious(page);
+		Assert.notNull(result);
+		return result;
+	}
+	
+	public Page<Complaint> findAllMild(Pageable page) {
+		Page<Complaint> result;
+
+		result = complaintRepository.findAllMild(page);
+		Assert.notNull(result);
+		return result;
+	}
+	
+	public Page<Complaint> findAllOmitted(Pageable page) {
+		Page<Complaint> result;
+
+		result = complaintRepository.findAllOmitted(page);
+		Assert.notNull(result);
+		return result;
+	}
+	
 
 	// Other business methods -------------------------------------------------
 	
