@@ -31,16 +31,16 @@
 <div class="container">
 	<div class="row formulario">
 		<form:form action="alert/user/edit.do" method="post"
-			class="form-horizontal" role="form">
+			modelAttribute="alert" class="form-horizontal" role="form">
 
 			<form:hidden path="id" />
 			<form:hidden path="version" />
 			<form:hidden path="user" />
-
+			
 			<div class="form-group">
 				<form:label path="origin" class="control-label col-md-2"
-					for="recipient"> 
-					<spring:message code="route.origin" />
+					for="origin"> 
+					<spring:message code="alert.origin" />
 				</form:label>
 				<div class="col-md-8">
 					<form:input path="origin" class="form-control" id="origin" />
@@ -49,9 +49,9 @@
 			</div>
 
 			<div class="form-group">
-				<form:label path="origin" class="control-label col-md-2"
+				<form:label path="destination" class="control-label col-md-2"
 					for="destination">
-					<spring:message code="route.destination" />
+					<spring:message code="alert.destination" />
 				</form:label>
 				<div class="col-md-8">
 					<form:input path="destination" class="form-control"
@@ -62,12 +62,12 @@
 			<div class="form-group">
 				<form:label path="date" class="control-label col-md-2"
 					for="date">
-					<spring:message code="route.departureTime" />
+					<spring:message code="alert.date" />
 				</form:label>
 				<div class="col-md-8">
 
 					<div class='input-group date input-text' id='datetimepicker1'>
-						<form:input path="departureTime" name="fecha"
+						<form:input path="date" name="fecha"
 							style="backgroud-color: white ! important;width:99% ! important" type="text"
 							class="form-control" />
 						 <span class="input-group-addon"> <span
@@ -75,38 +75,38 @@
 						</span>
 					</div>
 					<form:errors class="error create-message-error"
-						path="departureTime" />
+						path="date" />
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="itemEnvelope" class="control-label col-md-2"
-					for="itemEnvelope">
-					<spring:message code="route.itemEnvelope" />
+				<form:label path="type" class="control-label col-md-2"
+					for="type">
+					<spring:message code="alert.type" />
 				</form:label>
 				<div class="col-md-8">
 
-					<spring:message code="route.open" var="open" />
-					<spring:message code="route.closed" var="closed" />
+					<spring:message code="alert.type.route" var="route" />
+					<spring:message code="alert.type.shipment" var="shipment" />
 					<spring:message code="route.both" var="both" />
 
-					<form:select id="itemEnvelope" class="form-control" path="itemEnvelope">
+					<form:select id="type" class="form-control" path="type">
 						<form:option value="" label="----" />
-						<form:option value="${open }" label="${open }" />
-						<form:option value="${closed }" label="${closed }" />
-						<form:option value="${both }" label="${both }" />
+						<form:option value="Route" label="${route}" />
+						<form:option value="Shipment" label="${shipment}" />
 					</form:select>
-					<form:errors path="itemEnvelope" cssClass="error" />
+					<form:errors path="type" cssClass="error" />
 				</div>
 			</div>
+			
 						<!-- Action buttons -->
-			<acme:submit name="save" code="route.save" />
+			<acme:submit name="save" code="alert.save" />
 
 			<jstl:if test="${alert.id != 0}">
-				<acme:submit_confirm name="delete" code="route.delete"
-					codeConfirm="route.confirm.delete" />
+				<acme:submit_confirm name="delete" code="alert.delete"
+					codeConfirm="alert.confirm.delete" />
 			</jstl:if>
 
-			<acme:cancel code="route.cancel" url="route/user/list.do" />
+			<acme:cancel code="alert.cancel" url="alert/user/list.do" />
 			
 		</form:form>
 
@@ -117,11 +117,7 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#datetimepicker1').datetimepicker({format: 'DD-MM-YYYY  HH:mm'});
-
-	});
-	$(function() {
-		$('#datetimepicker2').datetimepicker({format: 'DD-MM-YYYY  HH:mm'});
+		$('#datetimepicker1').datetimepicker({format: 'DD/MM/YYYY'});
 
 	});
 </script>

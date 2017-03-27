@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -20,7 +21,9 @@ import services.AlertService;
 @Controller
 @RequestMapping("/alert/user")
 public class AlertUserController extends AbstractController {
-
+	
+	static Logger log = Logger.getLogger(AlertUserController.class);
+	
 	// Services ---------------------------------------------------------------
 
 	@Autowired
@@ -87,6 +90,7 @@ public class AlertUserController extends AbstractController {
 
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
+				log.error(oops.getMessage());
 				result = createEditModelAndView(alert, "alert.commit.error");
 			}
 		}

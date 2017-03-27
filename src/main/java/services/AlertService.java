@@ -1,5 +1,6 @@
 package services;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
@@ -46,6 +47,7 @@ public class AlertService {
 		Alert result;
 		
 		result = new Alert();
+		result.setUser(userService.findByPrincipal());
 		
 		return result;
 	}
@@ -102,14 +104,15 @@ public class AlertService {
 	}
 	
 	public void sendAlerts(Collection<Alert> alerts){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		
 		for(Alert alert: alerts){
 			if(alert.getType().equals("Route")){
 				messageService.sendMessage( actorService.findByUsername("shipmee"), alert.getUser(), "Nueva Alerta", 
-						"Se ha creado una nueva ruta "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+alert.getDate());
+						"Se ha creado una nueva ruta "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+dateFormat.format(alert.getDate()));
 			}else{
 				messageService.sendMessage(actorService.findByUsername("shipmee"), alert.getUser(), "Nueva Alerta", 
-						"Se ha creado un nuevo envío "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+alert.getDate());
+						"Se ha creado un nuevo envío "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+dateFormat.format(alert.getDate()));
 			}
 		}
 	}
