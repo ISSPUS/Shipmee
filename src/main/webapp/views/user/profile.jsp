@@ -94,7 +94,7 @@
 							</small>
 						</p>
 					</div>
-					<div class="col-xs-12 col-sm-4 emphasis"  id="clickeable" onclick="location.href='routes/list.do?userId=${user.id}';">
+					<div class="col-xs-12 col-sm-4 emphasis"  id="clickeable" onclick="location.href='route/list.do?userId=${user.id}';">
 						<h2>
 							<strong>
 								<jstl:out value=" ${routesCreated}" />
@@ -106,7 +106,7 @@
 							</small>
 						</p>
 					</div>
-					<div class="col-xs-12 col-sm-4 emphasis"  id="clickeable" onclick="location.href='shipments/list.do?userId=${user.id}';">
+					<div class="col-xs-12 col-sm-4 emphasis"  id="clickeable" onclick="location.href='shipment/list.do?userId=${user.id}';">
 						<h2>
 							<strong>
 								<jstl:out value=" ${commentsCreated}" />

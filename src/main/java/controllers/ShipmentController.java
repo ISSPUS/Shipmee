@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import domain.Shipment;
 import services.ShipmentService;
+import services.UserService;
 
 @Controller
 @RequestMapping("/shipment")
@@ -22,7 +22,8 @@ public class ShipmentController extends AbstractController {
 	@Autowired
 	private ShipmentService shipmentService;	
 
-
+	@Autowired
+	private UserService userService;
 	// Constructors -----------------------------------------------------------
 	
 	public ShipmentController() {
@@ -31,6 +32,21 @@ public class ShipmentController extends AbstractController {
 		
 	// Search ------------------------------------------------------------------		
 
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int userId) {
+		ModelAndView result;
+		Collection<Shipment> shipments;
+		
+
+		shipments = shipmentService.findAll();
+				
+		result = new ModelAndView("shipment/user");
+		result.addObject("shipments", shipments);
+		result.addObject("user", userService.findByPrincipal());
+
+		return result;
+	}		
 		@RequestMapping(value = "/search")
 		public ModelAndView search(String origin, String destination, @RequestParam(required=false) String date,
 				@RequestParam(required=false) String hour, @RequestParam(required=false) String envelope,

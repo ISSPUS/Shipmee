@@ -14,6 +14,7 @@ import domain.Route;
 import domain.SizePrice;
 import services.RouteService;
 import services.SizePriceService;
+import services.UserService;
 
 @Controller
 @RequestMapping("/route")
@@ -27,6 +28,8 @@ public class RouteController extends AbstractController {
 	@Autowired
 	private SizePriceService sizePriceService;
 	
+	@Autowired
+	private UserService userService;
 	// Constructors -----------------------------------------------------------
 	
 	public RouteController() {
@@ -61,6 +64,22 @@ public class RouteController extends AbstractController {
 		return result;
 
 	}
+	
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int userId) {
+		ModelAndView result;
+		Collection<Route> routes;
+		
+
+		routes = routeService.findAll();
+				
+		result = new ModelAndView("route/user");
+		result.addObject("routes", routes);
+		result.addObject("user", userService.findByPrincipal());
+
+		return result;
+	}		
 	
 	private ModelAndView createListModelAndView(int routeId){
 		ModelAndView result;
