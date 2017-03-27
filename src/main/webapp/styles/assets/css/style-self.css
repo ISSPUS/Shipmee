@@ -16,7 +16,7 @@
 .button-ok:hover {
     color: #fff;
     background-color: #3276b1;
-  	order-color: #285e8e;
+  	border-color: #285e8e;
 }
 
 .button-cancel{

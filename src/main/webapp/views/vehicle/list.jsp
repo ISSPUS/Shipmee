@@ -28,11 +28,11 @@
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
-<link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
+<link rel="stylesheet" href="styles/assets/css/style-list.css"
+	type="text/css">
 
 
 <style>
-
 @font-face {
 	font-family: 'icons';
 	src: url('styles/assets/fonts/iconos/iconos.eot?58322891');
@@ -47,103 +47,114 @@
 	font-style: normal;
 }
 
+.car-info h5 {
+	color: black ! important;
+}
+
+.car-info {
+	margin-top: 5%;
+}
+
+.panel-default {
+	margin: 0 auto;
+	float: None;
+}
+
+.row-vehicle {
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.buttons-vehicle {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+@media ( min-width : 770px) {
+	.buttons-vehicle {
+		margin-top: 20%
+	}
+}
+
 </style>
 
 <div class="blue-barra">
-	    <div class="container">
-			<div class="row">
-				<h3><spring:message code="vehicle.vehicles" /></h3>
-			</div><!-- /row -->
-	    </div>
+	<div class="container">
+		<div class="row">
+			<h3>
+				<spring:message code="vehicle.vehicles" />
+			</h3>
+		</div>
+		<!-- /row -->
 	</div>
+</div>
 
 
 <div class="container">
 
-	<div class="row profile">
-		<div class="col-md-9">
-			<div class="profile-content">
-					
-					<div class="panel panel-default">
-					<div class="panel-body">
-						
-						<div class="table-container">
-					<table class="table table-filter">
-								<tbody>
-								
-								
-								<jstl:choose>
-					<jstl:when test="${not empty vehicles}">
-						<jstl:forEach items="${vehicles}" var="vehicle">
-								
-									<tr>
-										
-										<td>
-											
-											
-										<div class="row">
-										
-											<div class="col-lg-3 text-center">
 
-												<img src="${vehicle.picture}" class="media-photo-shipment">
-													
-											</div>
-										
-											<div class="info-salida col-lg-6" style="margin-bottom: 2%; font-size: 16px;">
-												<div class="cabecera">
-												<div class="title">
-													<h4><a>${vehicle.brand}</a></h4>
-												</div>
-												</div>	
-						
 
-										
+	<jstl:choose>
+		<jstl:when test="${not empty vehicles}">
+			<jstl:forEach items="${vehicles}" var="vehicle">
+				<div class="row row-vehicle">
+					<div
+						class=" col-xs-12 col-sm-10 col-md-6 col-lg-6 table-container panel panel-default">
+						<div class="row">
+							<div class="col-xs-5 col-sm-6 col-md-2 col-lg-3">
+								<img src="${vehicle.picture}" class="media-photo-shipment"
+									style="padding: 1%; margin-top: 10%" />
+							</div>
+							<div class="col-xs-7 col-sm-6 col-md-3">
 
-												<spring:message code="vehicle.model" />: 
-												<jstl:out value="${vehicle.model}"/>
-												
-												
-												<br/>
-												<spring:message code="vehicle.color" />: 
-												<jstl:out value="${vehicle.color}"/>												
-													
-											</div>
-											
-											<div class="col-lg-3" style="margin-top: 5%;">				
-												<button type="button" class="btn btn-primary btn-md btn-block" onclick="location.href = 'vehicle/user/edit.do?vehicleId=${vehicle.id}';"><spring:message code="vehicle.edit" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>
-											</div>
-											
-										</div>
-											
-										
-											
-										</td>
-									</tr>
-									</jstl:forEach>
-					</jstl:when>
-					<jstl:otherwise>
-						<p><spring:message code="vehicle.results" /></p>
-					</jstl:otherwise>
-				</jstl:choose>
-								</tbody>
-							</table>
+								<div class="car-info">
+									<h4>
+										<a>${vehicle.brand}</a>
+									</h4>
+									<h5>
+										<spring:message code="vehicle.model" />
+										:
+										<jstl:out value="${vehicle.model}" />
+									</h5>
+									<h5>
+										<spring:message code="vehicle.color" />
+										:
+										<jstl:out value="${vehicle.color}" />
+									</h5>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-2 col-md-4 col-lg-3"
+								style="text-align: center;">
+								<div class="buttons-vehicle">
+									<a href="vehicle/user/edit.do?vehicleId=${vehicle.id}"
+										class="btn button-cancel"><span
+										class="glyphicon glyphicon-pencil"></span> <spring:message
+											code="vehicle.edit" /></a>
 
+								</div>
+							</div>
+						</div>
+					</div>
 
 				</div>
 
+			</jstl:forEach>
+		</jstl:when>
+		<jstl:otherwise>
+			<p>
+				<spring:message code="vehicle.results" />
+			</p>
+		</jstl:otherwise>
+	</jstl:choose>
+</div>
 
 
-
-			</div>
-</div></div>
-
-		</div>
-
-
-
-
-<button type="button" class="btn btn-primary btn-md btn-block" onclick="location.href = 'vehicle/user/create.do';"><spring:message code="vehicle.add" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>
-
-
+<div class="row">
+	<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" style="margin: 0 auto; float: none; margin-bottom: 5%; margin-top: 2%;">
+		<button   type="button" class="btn button-ok "
+			onclick="location.href = 'vehicle/user/create.do';">
+			<spring:message code="vehicle.add" />
+			&nbsp;<i class="glyphicon glyphicon-chevron-right"></i>
+		</button>
 	</div>
 </div>

@@ -22,118 +22,165 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <script src="scripts/jquery.bootpag.min.js"></script>
+<link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
+	type="text/css">
+<link rel="stylesheet" href="styles/assets/css/style-list.css"
+	type="text/css">
 
-<style>
-</style>
+<link rel="stylesheet" href="styles/assets/css/style-list.css"
+	type="text/css">
 
-<div class="sub-menu-messages">
-	<ul class="nav nav-pills nav-justified sub-menu-messages-options"
-		style="">
-		<li role="presentation"
-			<jstl:if test="${infoMessages eq 'messages.received'}">
-				class="active"
-			</jstl:if>>
-			<a href="message/actor/received.do?page=1"> <spring:message
-					code="messages.received" />
-		</a>
-		</li>
-		<li role="presentation"
-			<jstl:if test="${infoMessages eq 'messages.sent'}">
-				class="active"
-			</jstl:if>><a
-			href="message/actor/sent.do?page=1" > <spring:message
-					code="messages.sent" />
-		</a></li>
-		<li role="presentation"><a href="message/actor/create.do"> <spring:message
-					code="message.create" />
-		</a></li>
-	</ul>
+
+<link rel="stylesheet" href="styles/assets/css/style-messages.css"
+	type="text/css">
+
+<div class="blue-barra" >
+	<div class="container">
+		<div class="row">
+			<h3>
+				<spring:message code="message.message" />
+			</h3>
+		</div>
+		<!-- /row -->
+	</div>
 </div>
-
-
 
 <div class="container">
 
-	<jstl:if test="${not empty messages}">
-	<jstl:forEach items="${messages}" var="messageRow">
+	<div class="row inbox " style="margin-top: 2%;">
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-body inbox-menu">
+					<a href="message/actor/create.do" class="btn btn-danger btn-block"><spring:message
+							code="message.create" /></a>
+					<ul>
+						<li
+							<jstl:if test="${infoMessages eq 'messages.received'}">
+													
+								class="active"
+							</jstl:if>>
+							<a href="message/actor/received.do?page=1"><i
+								class="fa fa-inbox"></i> <spring:message
+									code="messages.received" /> <span class="label label-danger">${fn:length(messages)}</span></a>
+						</li>
 
-		<!-- /row -->
-		<div class="row">
+						<li
+							<jstl:if test="${infoMessages eq 'messages.sent'}">
+													
+								class="active"
+							</jstl:if>>
 
-			<div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-
-						<h4 class="messages-subject">
-							<jstl:out value="${messageRow.subject}" />
-						</h4>
-						<jstl:choose>
-							<jstl:when test="${infoMessages eq 'messages.received'}">
-								<spring:message code="message.sender" />: 
-								<a href="actor/profile.do?userId=${messageRow.sender.id}"><jstl:out value="${messageRow.sender.userAccount.username }" /></a>
-
-							</jstl:when>
-							<jstl:otherwise>
-								<spring:message code="message.recipient" />: 
-								<a href="actor/profile.do?userId=${messageRow.recipient.id}"><jstl:out value="${messageRow.recipient.userAccount.username }" /></a>
-
-							</jstl:otherwise>
-						</jstl:choose>
-
-						<br />
-						<fmt:formatDate value="${messageRow.moment}"
-							pattern="dd-MM-yyyy HH:mm" />
-						<br />
-
-					</div>
-					<div class="panel-body">
-						<p class="text-message-body">
-							<jstl:out value="${messageRow.body}"></jstl:out>
-						</p>
-					</div>
-					<!-- /panel-body -->
+							<a href="message/actor/sent.do?page=1"><i class="fa fa-inbox"></i>
+								<spring:message code="messages.sent" /> <span
+								class="label label-danger">${fn:length(messages)}</span></a>
+						</li>
+					</ul>
 				</div>
-				<!-- /panel panel-default -->
 			</div>
-			<br />
-
-			<!-- /col-sm-5 -->
 		</div>
-		<!-- /row -->
-	</jstl:forEach>
-	</jstl:if>
-</div>
 
-<jstl:if test="${fn:length(messages) ==0}">
-	<center>
-		<h2>
-			<spring:message code="messages.anything" />
-		</h2>
-	</center>
-</jstl:if>
+		<div class="col-md-9">
+			<div class="table-container">
+				<table class="table table-filter">
+					<tbody>
+						<jstl:if test="${not empty messages}">
+							<jstl:forEach items="${messages}" var="messageRow">
 
-<div id="pagination" class="copyright">
+								<tr data-status="pagado">
+									<td>
+										<div class="media">
 
-	<script>
-		$('#pagination').bootpag({
-			total : <jstl:out value="${total_pages}"></jstl:out>,
-			page : <jstl:out value="${p}"></jstl:out>,
-			maxVisible : 5,
-			leaps : true,
-			firstLastUse : true,
-			first : '<',
+											<jstl:choose>
+												<jstl:when test="${infoMessages eq 'messages.received'}">
+													<a href="#" class="pull-left"> <img
+														src="${messageRow.sender.photo}" class="media-photo"></a>
+
+												</jstl:when>
+												<jstl:otherwise>
+													<a href="#" class="pull-left"> <img
+														src="${messageRow.recipient.photo}" class="media-photo"></a>
+
+
+												</jstl:otherwise>
+											</jstl:choose>
+
+
+											<div class="media-body">
+												<span class="media-meta pull-right"> <fmt:formatDate
+														type="both" dateStyle="medium" timeStyle="medium"
+														value="${messageRow.moment}" /></span>
+												<h4 class="title">
+													<jstl:choose>
+														<jstl:when test="${infoMessages eq 'messages.received'}">
+															<a href="user/profile.do?userId=${messageRow.sender.id}"><jstl:out
+																	value="${messageRow.sender.userAccount.username }" /></a>
+
+														</jstl:when>
+														<jstl:otherwise>
+															<a
+																href="user/profile.do?userId=${messageRow.recipient.id}"><jstl:out
+																	value="${messageRow.recipient.userAccount.username }" /></a>
+
+														</jstl:otherwise>
+													</jstl:choose>
+												</h4>
+
+												<span class="pendiente"> <jstl:out
+														value="${messageRow.subject}" />
+												</span>
+
+												<p class="summary">
+													<jstl:out value="${messageRow.body}"></jstl:out>
+												</p>
+											</div>
+										</div>
+									</td>
+								</tr>
+
+							</jstl:forEach>
+						</jstl:if>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+		<jstl:if test="${fn:length(messages) ==0}">
+			<center>
+				<h2>
+					<spring:message code="messages.anything" />
+				</h2>
+			</center>
+		</jstl:if>
+
+		<div id="pagination" class="copyright">
+
+			<script>
+				$('#pagination').bootpag({
+					total : <jstl:out value="${total_pages}"></jstl:out>,
+					page : <jstl:out value="${p}"></jstl:out>,
+					maxVisible : 5,
+					leaps : true,
+					firstLastUse : true,
+					first : '<',
             last: '>',
-			wrapClass : 'pagination',
-			activeClass : 'active',
-			disabledClass : 'disabled',
-			nextClass : 'next',
-			prevClass : 'prev',
-			lastClass : 'last',
-			firstClass : 'first'
-		}).on('page', function(event, num) {
-			window.location.href = "${urlPage}" + num + "";
-			page = 1
-		});
-	</script>
+					wrapClass : 'pagination',
+					activeClass : 'active',
+					disabledClass : 'disabled',
+					nextClass : 'next',
+					prevClass : 'prev',
+					lastClass : 'last',
+					firstClass : 'first'
+				}).on('page', function(event, num) {
+					window.location.href = "${urlPage}" + num + "";
+					page = 1
+				});
+			</script>
+
+		</div>
+
+	</div>
+
 
 </div>

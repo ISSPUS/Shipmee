@@ -75,7 +75,7 @@
 
 					<div class='input-group date input-text' id='datetimepicker1'>
 						<form:input path="departureTime" name="fecha"
-							style="backgroud-color: white ! important;width:99% ! important" type="text"
+							style="backgroud-color: white ! important" type="text"
 							class="form-control" />
 						 <span class="input-group-addon"> <span
 							class="glyphicon glyphicon-calendar"></span>
@@ -94,9 +94,9 @@
 
 					<div class='input-group date input-text' id='datetimepicker2'>
 						<form:input path="arriveTime" name="fecha"
-							style="backgroud-color: white;width:99% ! important" type="text"
+							style="backgroud-color: white" type="text"
 							class="form-control" />
-						. <span class="input-group-addon"> <span
+						 <span class="input-group-addon"> <span
 							class="glyphicon glyphicon-calendar"></span>
 						</span>
 					</div>
