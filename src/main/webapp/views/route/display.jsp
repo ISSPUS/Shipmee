@@ -85,7 +85,7 @@
 				</h3>
 				<div class="profile-userbuttons">
 					<button type="button" class="btn button-profile btn-sm" onclick="location.href = 'user/profile.do?userId=${route.creator.id}';"><spring:message code="user.view" /></button>
-					<button type="button" class="btn button-report btn-sm" onclick="location.href = 'complaint/create.do?userId=${route.creator.id}';"><spring:message code="user.report" /></button>
+					<button type="button" class="btn button-report btn-sm" onclick="location.href = 'complaint/user/create.do?userId=${route.creator.id}';"><spring:message code="user.report" /></button>
 				</div>
 			</div>
 

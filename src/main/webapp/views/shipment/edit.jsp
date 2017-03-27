@@ -18,6 +18,7 @@
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
+<link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
 
 <style>
 .date .dropdown-menu {
@@ -57,8 +58,18 @@
 	padding-right: 30px;
 }
 </style>
+
+
+<div class="blue-barra">
+	    <div class="container">
+			<div class="row">
+				<h3><spring:message code="shipment.new.shipment" /></h3>
+			</div><!-- /row -->
+	    </div>
+	</div>
+
 <div class="container">
-	<div class="row formulario">
+	<div class="row formulario-sm">
 		<form:form action="shipment/user/edit.do"
 			modelAttribute="shipmentForm" method="post" class="form-horizontal"
 			role="form">
@@ -199,6 +210,8 @@
 				</div>
 			</div>
 			<!-- Action buttons -->
+			
+			<div class="text-center">
 			<acme:submit name="save" code="shipment.save" />
 
 			<jstl:if test="${shipmentForm.shipmentId != 0}">
@@ -208,7 +221,7 @@
 				</button>
 			</jstl:if>
 			<acme:cancel code="shipment.cancel" url="shipment/user/list.do" />
-
+			</div>
 		</form:form>
 
 

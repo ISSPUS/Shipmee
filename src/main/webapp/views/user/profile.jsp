@@ -29,7 +29,7 @@
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
 			<div class="well profile-user profile">
-			<a href="complaint/create.do?userId=${user.id}"><i class="glyphicon glyphicon-exclamation-sign img-report" title="Complaint"></i></a>
+			<a href="complaint/user/create.do?userId=${user.id}"><i class="glyphicon glyphicon-exclamation-sign img-report" title="Complaint"></i></a>
 				<div class="modal-body text-center">
 
 					<jstl:choose>

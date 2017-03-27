@@ -18,18 +18,57 @@
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
-	
+<link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+
+
 <style>
 .date .dropdown-menu{
 
 	background-color:white ! important;
 }
-.formulario {
-	padding: 10%;
-}
+
 </style>
+
+
+
+<div class="blue-barra">
+	    <div class="container">
+			<div class="row">
+				<h3><spring:message code="complaint.new.complaint" /></h3>
+			</div><!-- /row -->
+	    </div>
+	</div>
+
+
 <div class="container">
-	<div class="row formulario">
+
+
+<div class="span3 text-center"
+				style="margin-top: 20px;">
+				
+				<a href="user/profile.do?userId=${shipment.creator.id}"> 
+					<jstl:choose>
+						<jstl:when test="${not empty complaint.involved.photo}">
+							<jstl:set var="imageUser" value="${complaint.involved.photo}" />
+						</jstl:when>
+						<jstl:otherwise>
+							<jstl:set var="imageUser" value="images/anonymous.png" />
+						</jstl:otherwise>
+					</jstl:choose> 
+					<img src="${imageUser}" name="aboutme" width="140" height="140"border="0" class="img-circle">
+
+				</a>
+				<h3>
+					<a>${complaint.involved.name}</a>
+				</h3>
+			</div>
+			
+
+
+	<div class="row formulario-sm">
+	
+
+	
 		<form:form action="complaint/user/create.do" modelAttribute="complaint" method="post"
 			class="form-horizontal" role="form">
 
@@ -52,11 +91,14 @@
 			</div>
 
 						<!-- Action buttons -->
+						
+		<div class="text-center">		
+			
 			<acme:submit_confirm name="create" code="complaint.create"
 					codeConfirm="complaint.confirm.create" />
 
 			<acme:cancel code="complaint.cancel" url="" />
-			
+		</div>	
 		</form:form>
 
 
