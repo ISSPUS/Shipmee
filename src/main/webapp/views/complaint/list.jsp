@@ -105,44 +105,61 @@
 																:
 																<jstl:out value="${complaint.explanation}" />
 
-															</div>
+																<security:authorize access="hasRole('ADMIN')">
 
-															<div class="btn-group btn-group-justified">
+																	<br />
+																	<spring:message code="complaint.moderator" />
+																:
+																<jstl:out value="${complaint.moderator.userAccount.username}" />
 
-																<div class="col-lg-3" style="margin-top: 5%;">
-																	<spring:message code="complaint.omit" var="omit"/>
-																	<spring:message code="complaint.omitted" var="omitted"/>
-																	<button type="button"
-																		class="btn btn-success btn-md btn-block"
-																		onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${omitted }';">
-																		<jstl:out value="${omit}"/>
-																		&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i>
-																	</button>
-																</div>
+																	<br />
+																	<spring:message code="complaint.type" />
+																:
+																<jstl:out value="${complaint.type}" />
 
-																<div class="col-lg-3" style="margin-top: 5%;">
-																	<spring:message code="complaint.mild" var="mild"/>
-																	<button type="button"
-																		class="btn btn-warning btn-md btn-block"
-																		onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${mild }';">
-																		<jstl:out value="${mild}"/>
-																		&nbsp;<i class="glyphicon glyphicon-thumbs-down"></i>
-																	</button>
-																</div>
-
-																<div class="col-lg-3" style="margin-top: 5%;">
-																	<spring:message code="complaint.serious" var="serious"/>
-																	<button type="button"
-																		class="btn btn-danger btn-md btn-block"
-																		onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${serious }';">
-																		<jstl:out value="${serious}"/>
-																		&nbsp;<i class="glyphicon glyphicon-warning-sign"></i>
-																	</button>
-																</div>
+																</security:authorize>
 
 															</div>
+
+															<security:authorize access="hasRole('MODERATOR')">
+																<div class="btn-group btn-group-justified">
+
+																	<div class="col-lg-3" style="margin-top: 5%;">
+																		<spring:message code="complaint.omit" var="omit" />
+																		<spring:message code="complaint.omitted" var="omitted" />
+																		<button type="button"
+																			class="btn btn-success btn-md btn-block"
+																			onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${omitted }';">
+																			<jstl:out value="${omit}" />
+																			&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i>
+																		</button>
+																	</div>
+
+																	<div class="col-lg-3" style="margin-top: 5%;">
+																		<spring:message code="complaint.mild" var="mild" />
+																		<button type="button"
+																			class="btn btn-warning btn-md btn-block"
+																			onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${mild }';">
+																			<jstl:out value="${mild}" />
+																			&nbsp;<i class="glyphicon glyphicon-thumbs-down"></i>
+																		</button>
+																	</div>
+
+																	<div class="col-lg-3" style="margin-top: 5%;">
+																		<spring:message code="complaint.serious" var="serious" />
+																		<button type="button"
+																			class="btn btn-danger btn-md btn-block"
+																			onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${serious }';">
+																			<jstl:out value="${serious}" />
+																			&nbsp;<i class="glyphicon glyphicon-warning-sign"></i>
+																		</button>
+																	</div>
+
+																</div>
+															</security:authorize>
 
 														</div>
+
 
 
 
