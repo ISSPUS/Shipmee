@@ -14,6 +14,9 @@ package controllers.user;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -24,8 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.Shipment;
+import domain.User;
 import domain.form.ShipmentForm;
 import services.ShipmentService;
+import services.UserService;
 import services.form.ShipmentFormService;
 
 @Controller
@@ -40,6 +45,9 @@ public class ShipmentUserController extends AbstractController {
 	@Autowired
 	private ShipmentFormService shipmentFormService;
 	
+	@Autowired
+	private UserService userService;
+	
 	// Constructors -----------------------------------------------------------
 	
 	public ShipmentUserController() {
@@ -48,6 +56,27 @@ public class ShipmentUserController extends AbstractController {
 
 	// Listing ----------------------------------------------------------------
 	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(required=false, defaultValue="1") int page){
+		ModelAndView result;
+		Page<Shipment> ownShipments;
+		Pageable pageable;
+		User currentUser;
+		
+		pageable = new PageRequest(page - 1, 5);
+
+		
+		ownShipments = shipmentService.findAllByCurrentUser(pageable);
+		currentUser = userService.findByPrincipal();
+		
+		result = new ModelAndView("shipment/user");
+		result.addObject("shipments", ownShipments.getContent());
+		result.addObject("user", currentUser);
+		result.addObject("p", page);
+		result.addObject("total_pages", ownShipments.getTotalPages());
+		
+		return result;
+	}
 
 	// Creation ---------------------------------------------------------------
 
