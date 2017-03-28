@@ -7,6 +7,8 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -129,6 +131,26 @@ public class ShipmentService {
 		return result;
 	}
 	
+	protected Page<Shipment> findAllByUser(Pageable page){
+		Page<Shipment> result;
+		User user = userService.findByPrincipal();
+				
+		result = shipmentRepository.findAllByUserId(user.getId(), page);
+		
+		return result;
+	}
+	
+	public Page<Shipment> findAllByCurrentUser(Pageable page){
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can see his own shipments.");
+		
+		Page<Shipment> result;
+		
+		result = findAllByUser(page);
+		
+		return result;
+	}
+
+	
 	// Other business methods -------------------------------------------------
 
 	public Collection<Shipment> searchShipment(String origin, String destination, String date, String hour, String envelope, String itemSize){
@@ -206,7 +228,7 @@ public class ShipmentService {
 		
 		return shipmentOffer;
 	}
-	
+		
 	private boolean checkItemEnvelope(String itemEnvelope) {
 		boolean res;
 		
