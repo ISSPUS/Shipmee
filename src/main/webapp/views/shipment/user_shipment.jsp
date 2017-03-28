@@ -94,7 +94,7 @@
 						onclick="location.href = 'user/profile.do?userId=${route.creator.id}';">
 						<spring:message code="user.view" />
 					</button>
-					<button type="button" class="btn button-report btn-sm"
+					<button type="button" class="btn button-delete-lax btn-sm"
 						onclick="location.href = 'complaint/user/create.do?userId=${route.creator.id}';">
 						<spring:message code="user.report" />
 					</button>

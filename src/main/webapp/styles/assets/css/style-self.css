@@ -31,6 +31,52 @@
     border-color: #babdb6;
 }
 
+.button-view{
+    color: #fff;
+    background-color: #1abc9c;
+    border-color: #1abcaa;
+}
+
+.button-view:hover {
+    color: #fff;
+    background-color: #17a696;
+    border-color: #17a696;
+}
+
+/*
+.button-report{
+    color: #fff;
+    
+}
+
+.button-report:hover {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}*/
+
+.button-delete-lax{
+    color: #555753;
+    
+}
+
+.button-delete-lax:hover {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+.button-delete{
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+.button-delete:hover {
+    color: #fff;
+    background-color: #d43f3a;
+    border-color: #d43f3a;
+}
 
 .titlePrincipal{
 	text-shadow: 1px 2px #999;

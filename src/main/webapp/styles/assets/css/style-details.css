@@ -20,30 +20,7 @@
 	background-color: white;
 }
 
-.button-profile{
-    color: #fff;
-    background-color: #1abc9c;
-    border-color: #1abcaa;
-}
 
-.button-profile:hover {
-    color: #fff;
-    background-color: #17a696;
-    border-color: #1abcaa;
-}
-
-
-.button-report{
-    color: #fff;
-    /* background-color: #d9534f; */
-    /* border-color: #d43f3a; */;
-}
-
-.button-report:hover {
-    color: #fff;
-    background-color: #d9534f;
-    border-color: #d43f3a;
-}
 
 
 .cuadro {

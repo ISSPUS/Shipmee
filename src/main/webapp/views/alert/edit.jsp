@@ -16,8 +16,9 @@
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script type="text/javascript" src="scripts/moment.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
-<link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
-	type="text/css">
+<link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
+<link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+
 	
 <style>
 .date .dropdown-menu{
@@ -28,8 +29,20 @@
 	padding: 10%;
 }
 </style>
+
+<div class="blue-barra">
+	<div class="container">
+		<div class="row">
+			<h3>
+				<spring:message code="alert.new.alert" />
+			</h3>
+		</div>
+		<!-- /row -->
+	</div>
+</div>
+
 <div class="container">
-	<div class="row formulario">
+	<div class="row formulario-sm">
 		<form:form action="alert/user/edit.do" method="post"
 			modelAttribute="alert" class="form-horizontal" role="form">
 
@@ -99,6 +112,7 @@
 			</div>
 			
 						<!-- Action buttons -->
+			<div class="text-center profile-userbuttons">
 			<acme:submit name="save" code="alert.save" />
 
 			<jstl:if test="${alert.id != 0}">
@@ -107,7 +121,7 @@
 			</jstl:if>
 
 			<acme:cancel code="alert.cancel" url="alert/user/list.do" />
-			
+			</div>
 		</form:form>
 
 
