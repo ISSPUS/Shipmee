@@ -159,6 +159,16 @@ public class RouteService {
 		return result;
 	}
 	
+	public Page<Route> findAllByUserId(int userId, Pageable page){
+		Assert.isTrue(userId != 0, "The user must exist");
+		
+		Page<Route> result;
+		
+		result = routeRepository.findAllByUserId(userId, page);
+		
+		return result;
+	}
+	
 	public Page<Route> findAllByCurrentUser(Pageable page){
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can see his own routes.");
 		

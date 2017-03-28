@@ -140,6 +140,16 @@ public class ShipmentService {
 		return result;
 	}
 	
+	public Page<Shipment> findAllByUserId(int userId, Pageable page){
+		Assert.isTrue(userId != 0, "The user must exist");
+		
+		Page<Shipment> result;
+				
+		result = shipmentRepository.findAllByUserId(userId, page);
+		
+		return result;		
+	}
+	
 	public Page<Shipment> findAllByCurrentUser(Pageable page){
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can see his own shipments.");
 		
