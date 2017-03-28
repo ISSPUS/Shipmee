@@ -32,6 +32,8 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-details.css"
 	type="text/css">
+<script src="scripts/jquery.bootpag.min.js"></script>
+	
 <!-- Variables necesarias
 
 -routes:lista de rutas del usuario con id que se pasa en la ur
@@ -90,11 +92,11 @@
 					<a>${user.name}</a>
 				</h3>
 				<div class="profile-userbuttons">
-					<button type="button" class="btn button-profile btn-sm"
+					<button type="button" class="btn button-view btn-sm"
 						onclick="location.href = 'user/profile.do?userId=${route.creator.id}';">
 						<spring:message code="user.view" />
 					</button>
-					<button type="button" class="btn button-report btn-sm"
+					<button type="button" class="btn button-delete-lax btn-sm"
 						onclick="location.href = 'complaint/user/create.do?userId=${route.creator.id}';">
 						<spring:message code="user.report" />
 					</button>
@@ -219,13 +221,33 @@
 
 		</div>
 
-
-
-
-
-
-
+		<div id="c" class="copyright">
+		
+			<script>
+				$('#pagination').bootpag({
+					total : <jstl:out value="${total_pages}"></jstl:out>,
+					page : <jstl:out value="${p}"></jstl:out>,
+					maxVisible : 5,
+					leaps : true,
+					firstLastUse : true,
+					first : '<',
+		            last: '>',
+					wrapClass : 'pagination',
+					activeClass : 'active',
+					disabledClass : 'disabled',
+					nextClass : 'next',
+					prevClass : 'prev',
+					lastClass : 'last',
+					firstClass : 'first'
+				}).on('page', function(event, num) {
+					window.location.href = "${urlPage}" + num + "";
+					page = 1
+				});
+			</script>
+		
+		</div>
 	</div>
+
 </div>
 
 
