@@ -7,6 +7,8 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -145,6 +147,25 @@ public class RouteService {
 
 		result = routeRepository.findAll();
 
+		return result;
+	}
+	
+	protected Page<Route> findAllByUser(Pageable page){
+		Page<Route> result;
+		User user = userService.findByPrincipal();
+		
+		result = routeRepository.findAllByUserId(user.getId(), page);
+		
+		return result;
+	}
+	
+	public Page<Route> findAllByCurrentUser(Pageable page){
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can see his own routes.");
+		
+		Page<Route> result;
+		
+		result = findAllByUser(page);
+		
 		return result;
 	}
 

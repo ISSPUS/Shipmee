@@ -48,6 +48,8 @@
 							<ul class="dropdown-menu">
 								<li><a href="shipment/user/create.do"><spring:message
 											code="master.page.shipment.create" /></a></li>
+								<li><a href="shipment/user/list.do"><spring:message
+											code="master.page.shipment.list" /></a></li>
 							</ul></li>
 
 						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
@@ -56,6 +58,8 @@
 							<ul class="dropdown-menu">
 								<li><a href="route/user/create.do"><spring:message
 											code="master.page.route.create" /></a></li>
+								<li><a href="route/user/list.do"><spring:message
+											code="master.page.route.list" /></a></li>
 							</ul></li>
 
 						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"

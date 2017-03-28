@@ -64,7 +64,6 @@ public class ShipmentUserController extends AbstractController {
 		User currentUser;
 		
 		pageable = new PageRequest(page - 1, 5);
-
 		
 		ownShipments = shipmentService.findAllByCurrentUser(pageable);
 		currentUser = userService.findByPrincipal();

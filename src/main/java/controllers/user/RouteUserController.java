@@ -16,6 +16,9 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -26,9 +29,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.Route;
+import domain.User;
 import domain.Vehicle;
 import domain.form.RouteForm;
 import services.RouteService;
+import services.UserService;
 import services.VehicleService;
 import services.form.RouteFormService;
 
@@ -47,6 +52,9 @@ public class RouteUserController extends AbstractController {
 	@Autowired
 	private VehicleService vehicleService;
 	
+	@Autowired
+	private UserService userService;
+	
 	// Constructors -----------------------------------------------------------
 	
 	public RouteUserController() {
@@ -55,6 +63,26 @@ public class RouteUserController extends AbstractController {
 
 	// Listing ----------------------------------------------------------------
 	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(required=false, defaultValue="1") int page){
+		ModelAndView result;
+		Page<Route> ownRoutes;
+		Pageable pageable;
+		User currentUser;
+		
+		pageable = new PageRequest(page - 1, 5);
+
+		ownRoutes = routeService.findAllByCurrentUser(pageable);
+		currentUser = userService.findByPrincipal();
+		
+		result = new ModelAndView("route/user");
+		result.addObject("routes", ownRoutes.getContent());
+		result.addObject("user", currentUser);
+		result.addObject("p", page);
+		result.addObject("total_pages", ownRoutes.getTotalPages());
+		
+		return result;
+	}
 
 	// Creation ---------------------------------------------------------------
 
