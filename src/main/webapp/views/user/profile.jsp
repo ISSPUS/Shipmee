@@ -82,7 +82,7 @@
 					</jstl:if>
 					
 					<hr>
-					<div class="col-xs-12 col-sm-4 emphasis" id="clickeable" onclick="location.href='shipments/list.do?userId=${user.id}';" >
+					<div class="col-xs-12 col-sm-4 emphasis" id="clickeable" onclick="location.href='shipment/list.do?userId=${user.id}';" >
 						<h2>
 							<strong>
 								<jstl:out value=" ${shipmentsCreated}" />
