@@ -88,7 +88,6 @@ public class RatingService {
 		result = this.create(rating.getUser().getId());
 
 		result.setComment(rating.getComment());
-		result.setValoration(rating.getValoration());
 		result.setValue(rating.getValue());
 
 		this.validator.validate(result, binding);

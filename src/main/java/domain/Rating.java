@@ -25,7 +25,6 @@ public class Rating extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private int value;
-	private String valoration;
 	private String comment;
 	private Date createdDate;
 
@@ -36,15 +35,6 @@ public class Rating extends DomainEntity {
 	}
 	public void setValue(int value) {
 		this.value = value;
-	}
-	
-	@NotNull
-	@NotBlank
-	public String getValoration() {
-		return valoration;
-	}
-	public void setValoration(String valoration) {
-		this.valoration = valoration;
 	}
 	
 	@NotNull

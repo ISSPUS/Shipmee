@@ -91,9 +91,6 @@
 						<p><b><spring:message code="rating.value" /> : </b><jstl:out value="${ratingRow.value}" /></p>
 					</div>
 					<div>
-						<p><b><spring:message code="rating.valoration" /> : </b><jstl:out value="${ratingRow.valoration}" /></p>
-					</div>
-					<div>
 						<p><b><spring:message code="rating.comment" /> : </b><jstl:out value="${ratingRow.comment}" /></p>
 					</div>
 					<div>

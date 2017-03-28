@@ -216,7 +216,6 @@
 	
 	<bean id="rating1" class="domain.Rating">
 		<property name="value" value="4"/>
-		<property name="valoration" value="Very good"/>
 		<property name="comment" value="He is a great driver"/>
 		<property name="createdDate" value="2017/03/12 16:00"/>
 		<property name="user" ref="user1"/>

@@ -53,17 +53,6 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="valoration" class="control-label col-md-2"
-					for="itemPicture">
-					<spring:message code="rating.valoration" />
-				</form:label>
-				<div class="col-md-8">
-					<form:input path="valoration" class="form-control"
-						id="valoration" />
-					<form:errors class="error create-message-error" path="valoration" />
-				</div>
-			</div>
-			<div class="form-group">
 				<form:label path="comment" class="control-label col-md-2"
 					for="itemPicture">
 					<spring:message code="rating.comment" />
