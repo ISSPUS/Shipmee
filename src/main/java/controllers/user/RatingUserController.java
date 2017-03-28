@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.Rating;
+import services.ActorService;
 import services.RatingService;
 
 @Controller
@@ -20,6 +21,9 @@ public class RatingUserController extends AbstractController {
 
 	@Autowired
 	private RatingService ratingService;
+	
+	@Autowired
+	private ActorService actorService;
 	
 	
 	// Constructors -----------------------------------------------------------
@@ -60,6 +64,18 @@ public class RatingUserController extends AbstractController {
 				result = createEditModelAndView(reconstructed, "rating.commit.error");
 			}
 		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/mylist", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		int currentActorId;
+		
+		currentActorId = actorService.findByPrincipal().getId();
+				
+		result = new ModelAndView("redirect:../list.do?authorId=" + currentActorId);
 
 		return result;
 	}

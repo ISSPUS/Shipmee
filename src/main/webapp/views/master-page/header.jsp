@@ -81,6 +81,11 @@
 											code="master.page.vehicles" /></a></li>
 								<li><a href="alert/user/list.do"><spring:message
 											code="master.page.alerts" /></a></li>
+								<security:authorize access="hasRole('USER')">
+											<li><a href="rating/user/mylist.do">
+												<spring:message code="master.page.rating" />
+											</a></li>
+								</security:authorize>
 								<li><a href="j_spring_security_logout"><spring:message
 											code="master.page.logout" /> </a></li>
 							</ul></li>

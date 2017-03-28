@@ -59,6 +59,16 @@
 	</center>
 </jstl:if>
 
+<jstl:if test="${currentActorId != userReceivedId && userReceivedId > 0 && currentActorId > 0}">
+	<center>
+		<div class="profile-userbuttons">
+			<button type="button" class="btn button-profile btn-sm" onclick="location.href = 'rating/user/create.do?userReceivedId=${userReceivedId}';">
+				<spring:message code="rating.create" />
+			</button>
+		</div>
+	</center>
+</jstl:if>
+
 <div class="container">
 	<jstl:forEach items="${ratings.content}" var="ratingRow">
 		<div class="row"
