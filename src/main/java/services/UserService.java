@@ -1,17 +1,21 @@
 package services;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
+import domain.Rank;
+import domain.Route;
 import domain.User;
 import repositories.UserRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountService;
 
 @Service
 @Transactional
@@ -23,7 +27,14 @@ public class UserService {
 
 	//Supporting services ----------------------------------------------------
 	
+	@Autowired
+	private UserAccountService userAccountService;
 	
+	@Autowired
+	private RankService rankService;
+	
+	@Autowired
+	private ActorService actorService;
 	
 	//Constructors -----------------------------------------------------------
 
@@ -33,6 +44,28 @@ public class UserService {
 	
 	//Simple CRUD methods ----------------------------------------------------
 
+	public User create(){
+		User res;
+		Collection<Route> routes;
+		Rank rank;
+		UserAccount userAccount;
+		
+		routes = new ArrayList<>();
+		rank = rankService.initializeUser();
+		userAccount = userAccountService.create("USER");
+		
+		res = new User();
+		
+		res.setIsActive(true);
+		res.setIsVerified(false);
+		res.setRoutes(routes);
+		res.setRank(rank);
+		res.setUserAccount(userAccount);
+		
+		return res;
+	}
+	
+	
 	/**
 	 * 
 	 * @param user - Current user
@@ -46,6 +79,8 @@ public class UserService {
 		
 		Assert.notNull(user);
 		
+		this.checkUser(user);
+		
 		user = userRepository.save(user);
 		
 		return user;
@@ -53,6 +88,48 @@ public class UserService {
 	
 	//Other business methods -------------------------------------------------
 
+	
+	private void checkUser(User a){
+		boolean isAdmin;
+		boolean isAuthenticated;
+		User actUser = null;
+		User userInDB = null;
+		Authority userAuth = new Authority();
+		Authority adminAuth = new Authority();
+
+		isAdmin = actorService.checkAuthority("ADMIN");
+		isAuthenticated = actorService.checkLogin();
+		userAuth.setAuthority(Authority.USER);
+		adminAuth.setAuthority(Authority.ADMIN);
+		
+		if(!isAdmin && isAuthenticated){
+			actUser = this.findByPrincipal();
+		}
+		
+		if(a.getId() != 0){
+			userInDB = this.findOne(a.getId());
+			
+			Assert.isTrue((a.getId() == actUser.getId()) || isAdmin,
+					"UserService.checkUser.modifyByOtherUser");
+			
+			if(!(a.getDniPhoto().equals(userInDB.getDniPhoto()) && 
+					a.getDni().equals(userInDB.getDni()) &&
+					a.getPhone().equals(userInDB.getPhone()))){
+				a.setIsVerified(false);
+			}
+		}else{
+			Assert.isTrue(!isAuthenticated, 
+					"UserService.checkLogin.creatingUserAuthenticated");
+		}
+		
+		Assert.isTrue(a.getUserAccount().getAuthorities().contains(userAuth) &&
+				!a.getUserAccount().getAuthorities().contains(adminAuth),
+				"UserService.checkLogin.authorityIncorrect");
+
+	}
+	
+
+	
 	/**
 	 * Devuelve el user que está realizando la operación
 	 */
