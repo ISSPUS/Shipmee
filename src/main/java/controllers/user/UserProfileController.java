@@ -12,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.User;
+import services.RatingService;
+import services.RouteService;
+import services.ShipmentService;
 import services.UserService;
 
 @Controller
@@ -23,7 +26,14 @@ public class UserProfileController extends AbstractController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private ShipmentService shipmentService;
 	
+	@Autowired
+	private RouteService routeService;
+	
+	@Autowired
+	private RatingService ratingService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -38,7 +48,9 @@ public class UserProfileController extends AbstractController {
 		ModelAndView result;
 		User user;
 		Boolean isPrincipal = false;
-
+		int routesCreated, shipmentsCreated, ratingsCreated;
+	
+		
 		if(userId != null){
 			user = userService.findOne(userId);
 			Assert.notNull(user);
@@ -48,11 +60,16 @@ public class UserProfileController extends AbstractController {
 			isPrincipal = true;
 		}
 		
+		
+		shipmentsCreated   = shipmentService.countShipmentCreatedByUserId(user);
+		routesCreated   = routeService.countRouteCreatedByUserId(user);
+		ratingsCreated = ratingService.countRatingCreatedByUserId(user);
+		
 		result = new ModelAndView("user/profile");
 		result.addObject("isPrincipal", isPrincipal);
-		result.addObject("routesCreated", 0);
-		result.addObject("shipmentsCreated", 0);
-		result.addObject("commentsCreated", 0);
+		result.addObject("routesCreated", routesCreated);
+		result.addObject("shipmentsCreated", shipmentsCreated);
+		result.addObject("ratingsCreated", ratingsCreated);
 
 		result.addObject("user", user);
 		

@@ -159,6 +159,16 @@ public class ShipmentService {
 		
 		return result;
 	}
+	
+	public int countShipmentCreatedByUserId(User user){
+		Assert.notNull(user);
+		
+		int result;
+		
+		result = shipmentRepository.countShipmentCreatedByUserId(user.getId());
+		
+		return result;
+	}
 
 	
 	// Other business methods -------------------------------------------------

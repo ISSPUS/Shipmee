@@ -95,6 +95,16 @@ public class RatingService {
 		return result;
 		
 	}
+	
+	public int countRatingCreatedByUserId(User user){
+		Assert.notNull(user);
+		
+		int result;
+		
+		result = ratingRepository.countRatingCreatedByUserId(user.getId());
+		
+		return result;
+	}
 
 	// Other business methods -------------------------------------------------
 	

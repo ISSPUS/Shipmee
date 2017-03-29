@@ -15,5 +15,7 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
 			+ " AND (?2 <= 0 OR r.user.id = ?2)"
 			+ " ORDER BY r.createdDate DESC")
 	Page<Rating> findAllByAuthorOrUser(int authorId, int userReceivedId, Pageable page);
-
+	
+	@Query("select count(r) from Rating r where r.author.id = ?1")
+	int countRatingCreatedByUserId(int authorId);
 }

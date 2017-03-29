@@ -21,4 +21,7 @@ public interface ShipmentRepository extends JpaRepository<Shipment, Integer> {
 
 	@Query("select s from Shipment s where s.creator.id = ?1")
 	Page<Shipment> findAllByUserId(int userId, Pageable page);
+	
+	@Query("select count(s) from Shipment s where s.creator.id = ?1")
+	int countShipmentCreatedByUserId(int userId);
 }

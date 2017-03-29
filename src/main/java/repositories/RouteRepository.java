@@ -21,4 +21,7 @@ public interface RouteRepository extends JpaRepository<Route, Integer> {
 	
 	@Query("select r from Route r where r.creator.id = ?1")
 	Page<Route> findAllByUserId(int userId, Pageable page);
+	
+	@Query("select count(r) from Route r where r.creator.id = ?1")
+	int countRouteCreatedByUserId(int userId);
 }

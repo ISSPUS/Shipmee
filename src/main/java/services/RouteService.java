@@ -178,6 +178,16 @@ public class RouteService {
 		
 		return result;
 	}
+	
+	public int countRouteCreatedByUserId(User user){
+		Assert.notNull(user);
+		
+		int result;
+		
+		result = routeRepository.countRouteCreatedByUserId(user.getId());
+		
+		return result;
+	}
 
 	// Other business methods -------------------------------------------------
 	

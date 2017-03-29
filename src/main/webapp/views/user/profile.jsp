@@ -109,12 +109,12 @@
 					<div class="col-xs-12 col-sm-4 emphasis"  id="clickeable" onclick="location.href='shipment/list.do?userId=${user.id}';">
 						<h2>
 							<strong>
-								<jstl:out value=" ${commentsCreated}" />
+								<jstl:out value=" ${ratingsCreated}" />
 							</strong>
 						</h2>
 						<p>
 							<small>
-								<spring:message code="user.commentsCreated" />
+								<spring:message code="user.ratingsCreated" />
 							</small>
 						</p>
 					</div>
