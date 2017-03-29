@@ -1,17 +1,20 @@
 package services;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
+import domain.Rank;
+import domain.Route;
 import domain.User;
 import repositories.UserRepository;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountService;
 
 @Service
 @Transactional
@@ -23,7 +26,11 @@ public class UserService {
 
 	//Supporting services ----------------------------------------------------
 	
+	@Autowired
+	private UserAccountService userAccountService;
 	
+	@Autowired
+	private RankService rankService;
 	
 	//Constructors -----------------------------------------------------------
 
@@ -33,6 +40,28 @@ public class UserService {
 	
 	//Simple CRUD methods ----------------------------------------------------
 
+	public User create(){
+		User res;
+		Collection<Route> routes;
+		Rank rank;
+		UserAccount userAccount;
+		
+		routes = new ArrayList<>();
+		rank = rankService.initializeUser();
+		userAccount = userAccountService.createComplete("", "", "USER");
+		
+		res = new User();
+		
+		res.setIsActive(true);
+		res.setIsVerified(false);
+		res.setRoutes(routes);
+		res.setRank(rank);
+		res.setUserAccount(userAccount);
+		
+		return res;
+	}
+	
+	
 	/**
 	 * 
 	 * @param user - Current user
@@ -45,6 +74,8 @@ public class UserService {
 	public User save(User user){
 		
 		Assert.notNull(user);
+		
+		System.out.println("SaveUser need checks");
 		
 		user = userRepository.save(user);
 		
