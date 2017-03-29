@@ -45,8 +45,8 @@
 	<name>Shipmee</name>
 	<version>0.1</version>
 	<url>https://shipmee.es</url>
-	<scm><url>https://github.com/ISSPUS/Shipmee</url></scm>
-	<ciManagement><url>https://travis-ci.org/ISSPUS/Shipmee</url></ciManagement>
+	<scm><url>https://github.com/Shipmee/Shipmee</url></scm>
+	<ciManagement><url>https://travis-ci.org/Shipmee/Shipmee</url></ciManagement>
 	<issueManagement><url>http://red.mlr.duckdns.org/projects/c</url></issueManagement>
 
 
