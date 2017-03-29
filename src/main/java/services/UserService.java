@@ -4,6 +4,8 @@ package services;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -23,7 +25,8 @@ public class UserService {
 
 	//Supporting services ----------------------------------------------------
 	
-	
+	@Autowired
+	private ActorService actorService;
 	
 	//Constructors -----------------------------------------------------------
 
@@ -93,5 +96,45 @@ public class UserService {
 
 		return result;
 	}
+	
+	public Page<User> findAllVerified(Pageable page){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		
+		Page<User> result;
+		
+		result = userRepository.findAllVerified(page);
+		
+		return result;
+	}
+	
+	public int countAllVerified(){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
 
+		int result = 0;
+		
+		result = userRepository.countAllVerified();
+		
+		return result;
+	}
+	
+	public Page<User> findAllPending(Pageable page){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+
+		Page<User> result;
+		
+		result = userRepository.findAllPending(page);
+		
+		return result;
+	}
+	
+	public int countAllPending(){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+
+		int result = 0;
+		
+		result = userRepository.countAllPending();
+		
+		return result;
+	}
+	
 }
