@@ -67,6 +67,18 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="shipmee" />
+		<property name="password" value="a1e85a708eea1ae0ec182cdaf967e2f5" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Administrator -->	
 	
@@ -78,6 +90,16 @@
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
 		<property name="userAccount" ref="userAccount1"/>
+	</bean>
+	
+	<bean id="shipmee" class="domain.Administrator">
+		<property name="name" value="Shipmee"/>
+		<property name="surname" value="S.A"/>
+		<property name="email" value="no-reply@shipmee.es"/>
+		<property name="birthDate" value="2017/03/03 00:00"/>
+		<property name="phone" value="666777888"/>
+		<property name="dni" value="12345678A"/>
+		<property name="userAccount" ref="userAccount6"/>
 	</bean>
 	
 	<!-- Rank -->
@@ -112,6 +134,7 @@
 		<property name="birthDate" value="1992/10/05 00:00"/>
 		<property name="phone" value="666777666"/>
 		<property name="dni" value="23456789B"/>
+		<property name="photo" value="http://i.imgur.com/0TQ9HiZ.jpg"/>
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
@@ -129,6 +152,7 @@
 		<property name="birthDate" value="1995/10/01 00:00"/>
 		<property name="phone" value="676554345"/>
 		<property name="dni" value="34567890C"/>
+		<property name="photo" value="http://i.imgur.com/qAEs1vs.jpg"/>
 		<property name="userAccount" ref="userAccount3"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
@@ -173,14 +197,18 @@
 	<bean id="vehicle1" class="domain.Vehicle">
 		<property name="brand" value="Audi"/>
 		<property name="model" value="a7"/>
-		<property name="picture" value=""/>
+		<property name="picture" value="https://s-media-cache-ak0.pinimg.com/736x/1e/d0/8b/1ed08b487f02fc8c43aaab936d1f1e91.jpg"/>
+		<property name="color" value="Blue"/>
+		<property name="deleted" value="false"/>
 		<property name="user" ref="user1"/>
 	</bean>
 	
 	<bean id="vehicle2" class="domain.Vehicle">
 		<property name="brand" value="Fiat"/>
 		<property name="model" value="Panda"/>
-		<property name="picture" value=""/>
+		<property name="picture" value="https://imganuncios.mitula.net/vendo_fiat_panda_1_2_mamy_5p_en_venta_2009_2870132445115534496.jpg"/>
+		<property name="color" value="Red"/>
+		<property name="deleted" value="false"/>
 		<property name="user" ref="user2"/>
 	</bean>
 	
@@ -188,9 +216,10 @@
 	
 	<bean id="rating1" class="domain.Rating">
 		<property name="value" value="4"/>
-		<property name="valoration" value="Very good"/>
 		<property name="comment" value="He is a great driver"/>
+		<property name="createdDate" value="2017/03/12 16:00"/>
 		<property name="user" ref="user1"/>
+		<property name="author" ref="user2"/>
 	</bean>
 	
 	<!-- Complaint -->
@@ -199,6 +228,7 @@
 		<property name="explanation" value="His car is not an Audi"/>
 		<property name="creator" ref="user2"/>
 		<property name="involved" ref="user1"/>
+		<property name="type" value="Mild"/>
 		<property name="moderator" ref="moderator1"/>
 	</bean>
 	
@@ -469,12 +499,21 @@
 		<property name="shipment" ref="shipment2"/>
 	</bean>
 	
-	<!-- Notification -->
+	<!-- Alert -->
 	
-	<bean id="notification1" class="domain.Notification">
-		<property name="date" value="2017/03/09 11:02"/>
+	<bean id="alert1" class="domain.Alert">
+		<property name="date" value="2017/05/09 11:02"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
+		<property name="type" value="Route"/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
+	<bean id="alert2" class="domain.Alert">
+		<property name="date" value="2017/05/09 11:02"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="type" value="Shipment"/>
 		<property name="user" ref="user2"/>
 	</bean>
 	
@@ -489,4 +528,27 @@
 		<property name="cvvCode" value="303"/>
 	</bean>
 	
+	<!-- Messages -->
+	
+	<bean id="message1" class="domain.Message">
+		<property name="subject" value="Message1"/>
+		<property name="body" value="Hello world"/>
+		<property name="moment" value="2017/02/09 11:02"/>
+		<property name="sender" ref="user2"/>
+		<property name="recipient" ref="user1"/>
+	</bean>
+		<bean id="message2" class="domain.Message">
+		<property name="subject" value="Message2"/>
+		<property name="body" value="Hello world"/>
+		<property name="moment" value="2017/02/09 11:12"/>
+		<property name="sender" ref="user2"/>
+		<property name="recipient" ref="user1"/>
+	</bean>
+		<bean id="message3" class="domain.Message">
+		<property name="subject" value="Message3"/>
+		<property name="body" value="Hello world"/>
+		<property name="moment" value="2017/02/09 11:22"/>
+		<property name="sender" ref="user2"/>
+		<property name="recipient" ref="user1"/>
+	</bean>
 </beans>

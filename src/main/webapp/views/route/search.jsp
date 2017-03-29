@@ -170,14 +170,26 @@
 										
 											<div class="col-lg-3 text-center">
 
-												<a href="user/profile.do?userId=${route.creator.id}"><img src="images/anonymous.png" class="media-photo-route"></a>
-													
-											</div>
+																<a href="user/profile.do?userId=${route.creator.id}">
+																	<jstl:choose>
+																		<jstl:when test="${not empty route.creator.photo}">
+																			<jstl:set var="imageUser"
+																				value="${route.creator.photo}" />
+																		</jstl:when>
+																		<jstl:otherwise>
+																			<jstl:set var="imageUser"
+																				value="images/anonymous.png" />
+																		</jstl:otherwise>
+																	</jstl:choose> <img src="${imageUser}" name="aboutme" width="140"
+																	height="140" border="0" class="img-circle">
+
+																</a>
+															</div>
 										
 											<div class="info-salida col-lg-6" style="margin-bottom: 2%; font-size: 16px;">
 												<div class="cabecera">
 												<div class="title">
-													<h4><a>${route.creator.name}</a></h4>
+													<h4><a href="user/profile.do?userId=${route.creator.id}">${route.creator.name}</a></h4>
 												</div>
 												
 												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
@@ -205,9 +217,9 @@
 												
 													
 											</div>
-											<div class="col-lg-3" style="margin-top: 10%;">
+											<div class="col-lg-3 profile-userbuttons" style="margin-top: 10%;">
 											
-												<button type="button" class="btn btn-primary btn-md btn-block" onclick="location.href = 'route/display.do?routeId=${route.id}';"><spring:message code="route.details" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>	
+												<button type="button" class="btn button-ok btn-block" style="font-size: 15px;" onclick="location.href = 'route/display.do?routeId=${route.id}';"><spring:message code="route.details" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>	
 											
 
 											</div>

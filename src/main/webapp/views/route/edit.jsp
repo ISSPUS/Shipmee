@@ -18,7 +18,8 @@
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
-	
+<link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+
 <style>
 .date .dropdown-menu{
 
@@ -28,8 +29,16 @@
 	padding: 10%;
 }
 </style>
+
+<div class="blue-barra">
+	    <div class="container">
+			<div class="row">
+				<h3><spring:message code="route.new.route" /></h3>
+			</div><!-- /row -->
+	    </div>
+	</div>
 <div class="container">
-	<div class="row formulario">
+	<div class="row formulario-sm">
 		<form:form action="route/user/edit.do" modelAttribute="routeForm" method="post"
 			class="form-horizontal" role="form">
 
@@ -66,7 +75,7 @@
 
 					<div class='input-group date input-text' id='datetimepicker1'>
 						<form:input path="departureTime" name="fecha"
-							style="backgroud-color: white ! important;width:99% ! important" type="text"
+							style="backgroud-color: white ! important" type="text"
 							class="form-control" />
 						 <span class="input-group-addon"> <span
 							class="glyphicon glyphicon-calendar"></span>
@@ -85,9 +94,9 @@
 
 					<div class='input-group date input-text' id='datetimepicker2'>
 						<form:input path="arriveTime" name="fecha"
-							style="backgroud-color: white;width:99% ! important" type="text"
+							style="backgroud-color: white" type="text"
 							class="form-control" />
-						. <span class="input-group-addon"> <span
+						 <span class="input-group-addon"> <span
 							class="glyphicon glyphicon-calendar"></span>
 						</span>
 					</div>
@@ -135,6 +144,7 @@
 				</div>
 			</div>
 						<!-- Action buttons -->
+			<div class="text-center profile-userbuttons">
 			<acme:submit name="save" code="route.save" />
 
 			<jstl:if test="${routeForm.routeId != 0}">
@@ -143,7 +153,7 @@
 			</jstl:if>
 
 			<acme:cancel code="route.cancel" url="route/user/list.do" />
-			
+			</div>
 		</form:form>
 
 

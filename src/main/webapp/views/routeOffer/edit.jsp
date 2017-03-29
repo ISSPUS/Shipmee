@@ -12,6 +12,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <link rel="stylesheet" href="styles/assets/css/style-edits-offers.css"  type="text/css">
+<link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
 
 
 <div class="blue-barra" style="padding-top: 0.75%;padding-bottom: 0.75%;">
@@ -67,14 +68,14 @@
 					<form:errors class="error create-message-error" path="description" />
 				</div>
 			</div>
-			<div class="form-group" style="text-align: center;">
+			<div class="form-group text-center profile-userbuttons">
 				<!-- Action buttons -->
 				<acme:submit name="save" code="routeOffer.save" />
 
 				<acme:cancel code="routeOffer.cancel" url="route/display.do?routeId=${routeOffer.route.id}" />
 
 			</div>
-
+			
 		</form:form>
 
 

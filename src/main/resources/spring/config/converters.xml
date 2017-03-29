@@ -45,8 +45,8 @@
 		<bean class="converters.SizePriceToStringConverter" />
 		<bean class="converters.StringToSizePriceConverter" />
 		
-		<bean class="converters.NotificationToStringConverter" />
-		<bean class="converters.StringToNotificationConverter" />
+		<bean class="converters.AlertToStringConverter" />
+		<bean class="converters.StringToAlertConverter" />
 		
 		<bean class="converters.ShipmentToStringConverter" />
 		<bean class="converters.StringToShipmentConverter" />
@@ -56,6 +56,9 @@
 		
 		<bean class="converters.CreditCardToStringConverter" />
 		<bean class="converters.StringToCreditCardConverter" />
+		
+		<bean class="converters.MessageToStringConverter" />
+		<bean class="converters.StringToMessageConverter" />
 		
 	</util:list>
 	

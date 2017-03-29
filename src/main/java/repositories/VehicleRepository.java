@@ -11,7 +11,7 @@ import domain.Vehicle;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
 
-	@Query("select v from Vehicle v where v.user.id = ?1")
-	Collection<Vehicle> findAllByUserId(int id);
+	@Query("select v from Vehicle v where v.user.id = ?1 and v.deleted = false")
+	Collection<Vehicle> findAllNotDeletedByUserId(int id);
 
 }

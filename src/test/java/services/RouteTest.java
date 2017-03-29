@@ -53,7 +53,7 @@ public class RouteTest extends AbstractTest {
 		Route route;
 		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
-		Vehicle vehicle = vehicleService.findAllByUser().iterator().next();
+		Vehicle vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
 		
 		route = routeService.create();
 		route.setOrigin("Sevilla");
@@ -84,7 +84,7 @@ public class RouteTest extends AbstractTest {
 		Route route;
 		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
-		Vehicle vehicle = vehicleService.findAllByUser().iterator().next();
+		Vehicle vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
 		
 		route = routeService.create();
 		route.setOrigin("Sevilla");
@@ -116,7 +116,7 @@ public class RouteTest extends AbstractTest {
 		Route route;
 		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
-		Vehicle vehicle = vehicleService.findAllByUser().iterator().next();
+		Vehicle vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
 		
 		route = routeService.create();
 		route.setOrigin("Sevilla");

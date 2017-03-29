@@ -16,4 +16,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query("select u from User u join u.routes r where r.id = ?1")
 	Collection<User> findAllByRoutePurchased(int routeId);
+	
+	@Query("select c from User c where c.userAccount.username= ?1")
+	User findByUsername(String username);
 }

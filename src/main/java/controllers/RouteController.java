@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Route;
 import domain.SizePrice;
+import domain.User;
 import services.RouteService;
 import services.SizePriceService;
+import services.UserService;
 
 @Controller
 @RequestMapping("/route")
@@ -27,6 +32,8 @@ public class RouteController extends AbstractController {
 	@Autowired
 	private SizePriceService sizePriceService;
 	
+	@Autowired
+	private UserService userService;
 	// Constructors -----------------------------------------------------------
 	
 	public RouteController() {
@@ -61,6 +68,29 @@ public class RouteController extends AbstractController {
 		return result;
 
 	}
+	
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int userId,
+			@RequestParam(required=false, defaultValue="1") int page) {
+		ModelAndView result;
+		Page<Route> routes;
+		Pageable pageable;
+		User user;
+		
+		pageable = new PageRequest(page - 1, 5);
+
+		routes = routeService.findAllByUserId(userId, pageable);
+		user = userService.findOne(userId);
+				
+		result = new ModelAndView("route/user");
+		result.addObject("routes", routes.getContent());
+		result.addObject("user", user);
+		result.addObject("p", page);
+		result.addObject("total_pages", routes.getTotalPages());
+		
+		return result;
+	}		
 	
 	private ModelAndView createListModelAndView(int routeId){
 		ModelAndView result;

@@ -7,6 +7,8 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -37,6 +39,9 @@ public class ShipmentService {
 	
 	@Autowired
 	private ShipmentOfferService shipmentOfferService;
+	
+	@Autowired
+	private AlertService alertService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -80,6 +85,8 @@ public class ShipmentService {
 			shipment.setDate(date);
 			shipment.setCarried(null);
 			shipment = shipmentRepository.save(shipment);
+			alertService.checkAlerts(shipment.getOrigin(), shipment.getDestination(), 
+					shipment.getDepartureTime(), "Shipment");
 		} else {
 			shipment = shipmentRepository.save(shipment);
 		}
@@ -123,6 +130,46 @@ public class ShipmentService {
 
 		return result;
 	}
+	
+	protected Page<Shipment> findAllByUser(Pageable page){
+		Page<Shipment> result;
+		User user = userService.findByPrincipal();
+				
+		result = shipmentRepository.findAllByUserId(user.getId(), page);
+		
+		return result;
+	}
+	
+	public Page<Shipment> findAllByUserId(int userId, Pageable page){
+		Assert.isTrue(userId != 0, "The user must exist");
+		
+		Page<Shipment> result;
+				
+		result = shipmentRepository.findAllByUserId(userId, page);
+		
+		return result;		
+	}
+	
+	public Page<Shipment> findAllByCurrentUser(Pageable page){
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can see his own shipments.");
+		
+		Page<Shipment> result;
+		
+		result = findAllByUser(page);
+		
+		return result;
+	}
+	
+	public int countShipmentCreatedByUserId(User user){
+		Assert.notNull(user);
+		
+		int result;
+		
+		result = shipmentRepository.countShipmentCreatedByUserId(user.getId());
+		
+		return result;
+	}
+
 	
 	// Other business methods -------------------------------------------------
 
@@ -201,7 +248,7 @@ public class ShipmentService {
 		
 		return shipmentOffer;
 	}
-	
+		
 	private boolean checkItemEnvelope(String itemEnvelope) {
 		boolean res;
 		
