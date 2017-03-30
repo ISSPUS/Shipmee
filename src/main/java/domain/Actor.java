@@ -13,13 +13,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import security.UserAccount;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Actor extends DomainEntity {
+public abstract class Actor extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private String name;
@@ -28,6 +29,7 @@ public class Actor extends DomainEntity {
 	private Date birthDate;
 	private String phone;
 	private String dni;
+	private String photo;
 
 	
 	@NotBlank
@@ -81,6 +83,14 @@ public class Actor extends DomainEntity {
 		this.dni = dni;
 	}
 
+	@URL
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	
 	// Relationships ----------------------------------------------------------
 	private UserAccount userAccount;
 
@@ -94,5 +104,6 @@ public class Actor extends DomainEntity {
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
+	
 
 }

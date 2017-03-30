@@ -18,6 +18,7 @@ public class Complaint extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private String explanation;
+	private String type;
 	
 	@NotNull
 	@NotBlank
@@ -30,6 +31,15 @@ public class Complaint extends DomainEntity {
 		this.explanation = explanation;
 	}
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+
 	// Relationships ----------------------------------------------------------
 	private Moderator moderator;
 	private User creator;

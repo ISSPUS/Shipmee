@@ -20,5 +20,8 @@
 		<put-attribute name="title" value="Show shipment" />
 		<put-attribute name="body" value="/views/shipment/display.jsp" />
 	</definition>
-	
+	<definition name="shipment/user" extends="master.page">	
+		<put-attribute name="title" value="Shipments" />
+		<put-attribute name="body" value="/views/shipment/user_shipment.jsp" />
+	</definition>
 </tiles-definitions>

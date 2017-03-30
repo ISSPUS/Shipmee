@@ -6,19 +6,19 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.NotificationRepository;
-import domain.Notification;
+import repositories.AlertRepository;
+import domain.Alert;
 
 @Component
 @Transactional
-public class StringToNotificationConverter implements Converter<String, Notification> {
+public class StringToAlertConverter implements Converter<String, Alert> {
 
 	@Autowired
-	NotificationRepository notificationRepository;
+	AlertRepository alertRepository;
 
 	@Override
-	public Notification convert(String text) {
-		Notification result;
+	public Alert convert(String text) {
+		Alert result;
 		int id;
 
 		try {
@@ -26,7 +26,7 @@ public class StringToNotificationConverter implements Converter<String, Notifica
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				result = notificationRepository.findOne(id);
+				result = alertRepository.findOne(id);
 			}
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);

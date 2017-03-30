@@ -18,6 +18,12 @@
 		<value>/views/sizePrice/tiles.xml</value>
 		<value>/views/shipment/tiles.xml</value>
 		<value>/views/shipmentOffer/tiles.xml</value>
+		<value>/views/alert/tiles.xml</value>
+		<value>/views/message/tiles.xml</value>
+		<value>/views/vehicle/tiles.xml</value>
+		<value>/views/user/tiles.xml</value>
+		<value>/views/rating/tiles.xml</value>
+		<value>/views/complaint/tiles.xml</value>
 
 		<value>/views/about/tiles.xml</value>
 	</util:list>

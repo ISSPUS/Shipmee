@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="styles/assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="styles/assets/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="styles/assets/css/style-self.css"  type="text/css">
+    <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 
 	 <!-- Bootstrap core JavaScript
     ================================================== -->

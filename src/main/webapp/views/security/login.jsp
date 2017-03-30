@@ -50,7 +50,7 @@
 		</div>
 	</jstl:if>
 	<br />
-	<input class="btn btn-theme" type="submit" value="<spring:message code="security.login" />" />
+	<input class="btn btn-theme flotante-derecha" type="submit" value="<spring:message code="security.login" />" />
 	
 </form:form>
 </div>
