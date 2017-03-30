@@ -91,7 +91,6 @@ public class UserService {
 	public User findByUsername(String username) {
 		User result;
 
-		result = new User();
 		result = userRepository.findByUsername(username);
 
 		return result;
