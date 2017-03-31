@@ -173,33 +173,23 @@ public class RouteOfferService {
 	public void accept(int routeOfferId){
 		
 		Assert.isTrue(routeOfferId != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.must.be.user");
 		
 		RouteOffer routeOffer = findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
 		
-		Assert.notNull(route, "The route related to the offer must exist.");
-		Assert.isTrue(routeService.checkDates(route), "All routes dates must be valid.");
-		Assert.isTrue(route.getDepartureTime().after(new Date()), "The Departure Time must be future");
-		Assert.isTrue(route.getArriveTime().after(new Date()), "The Arrival Time must be future");
-		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the route can accept or deny a counter offer");
+		Assert.notNull(route, "message.error.route.must.exist");
+		Assert.isTrue(routeService.checkDates(route), "message.error.valid.dates");
+		Assert.isTrue(route.getDepartureTime().after(new Date()), "message.error.departure.future");
+		Assert.isTrue(route.getArriveTime().after(new Date()), "message.error.arrival.future");
+		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.only.creator");
 		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
 
-		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "The offer must not be accepted or rejected.");		
+		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "message.error.not.acepted.or.rejected");		
 		
 		routeOffer.setAcceptedByCarrier(true); // The offer is accepted.
 		routeOffer.setRejectedByCarrier(false); // The offer is not rejected.
 		save(routeOffer);
-		
-		// Now, we reject every other offer.
-
-		//Collection<RouteOffer> remaining = findAllPendingByRouteId(route.getId());
-		
-		//for(RouteOffer ro:remaining){
-			//if(!ro.getAcceptedByCarrier()){
-				//deny(ro.getId());
-			//}
-		//}
 		
 		/*
 		 * Here comes the notification to the carrier (Still not developed) 
@@ -216,17 +206,17 @@ public class RouteOfferService {
 	public void deny(int routeOfferId){
 		
 		Assert.isTrue(routeOfferId != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment.");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.must.be.user");
 		
 		RouteOffer routeOffer = findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
 		
-		Assert.notNull(route, "The route related to the offer must exist.");
-		Assert.isTrue(routeService.checkDates(route), "All routes dates must be valid.");
-		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the route can accept or deny a counter offer");
-		Assert.isTrue(route.getCreator().getIsVerified(), "The creator of the route must be verified.");
+		Assert.notNull(route, "message.error.route.must.exist");
+		Assert.isTrue(routeService.checkDates(route), "message.error.valid.dates");
+		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.only.creator");
+		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
 
-		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "The offer must not be accepted or rejected.");
+		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "message.error.not.acepted.or.rejected");
 		
 		routeOffer.setAcceptedByCarrier(false); // The offer is not accepted.
 		routeOffer.setRejectedByCarrier(true); // The offer is rejected.
