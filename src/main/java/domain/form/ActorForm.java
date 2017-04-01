@@ -64,7 +64,7 @@ public class ActorForm {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@NotNull
 	public Date getBirthDate() {
 		return birthDate;

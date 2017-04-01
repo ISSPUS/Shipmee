@@ -86,7 +86,7 @@
 		<property name="name" value="Miguel"/>
 		<property name="surname" value="Rodriguez"/>
 		<property name="email" value="miguel@gmail.com"/>
-		<property name="birthDate" value="1995/10/24 00:00"/>
+		<property name="birthDate" value="1995/10/24"/>
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
 		<property name="userAccount" ref="userAccount1"/>
@@ -96,7 +96,7 @@
 		<property name="name" value="Shipmee"/>
 		<property name="surname" value="S.A"/>
 		<property name="email" value="no-reply@shipmee.es"/>
-		<property name="birthDate" value="2017/03/03 00:00"/>
+		<property name="birthDate" value="2017/03/03"/>
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
 		<property name="userAccount" ref="userAccount6"/>
@@ -131,7 +131,7 @@
 		<property name="name" value="Manolo"/>
 		<property name="surname" value="Ruiz"/>
 		<property name="email" value="manolo@gmail.com"/>
-		<property name="birthDate" value="1992/10/05 00:00"/>
+		<property name="birthDate" value="1992/10/05"/>
 		<property name="phone" value="666777666"/>
 		<property name="dni" value="23456789B"/>
 		<property name="photo" value="http://i.imgur.com/0TQ9HiZ.jpg"/>
@@ -149,7 +149,7 @@
 		<property name="name" value="Guillermo"/>
 		<property name="surname" value="Gamero"/>
 		<property name="email" value="Guillermo@gmail.com"/>
-		<property name="birthDate" value="1995/10/01 00:00"/>
+		<property name="birthDate" value="1995/10/01"/>
 		<property name="phone" value="676554345"/>
 		<property name="dni" value="34567890C"/>
 		<property name="photo" value="http://i.imgur.com/qAEs1vs.jpg"/>
@@ -167,7 +167,7 @@
 		<property name="name" value="Carlos"/>
 		<property name="surname" value="García"/>
 		<property name="email" value="carlos@gmail.com"/>
-		<property name="birthDate" value="1983/02/09 00:00"/>
+		<property name="birthDate" value="1983/02/09"/>
 		<property name="phone" value="676554311"/>
 		<property name="dni" value="34567895C"/>
 		<property name="userAccount" ref="userAccount5"/>
@@ -186,7 +186,7 @@
 		<property name="name" value="Antonio"/>
 		<property name="surname" value="López"/>
 		<property name="email" value="Antonio@gmail.com"/>
-		<property name="birthDate" value="1994/11/28 00:00"/>
+		<property name="birthDate" value="1994/11/28"/>
 		<property name="phone" value="689836654"/>
 		<property name="dni" value="49983586H"/>
 		<property name="userAccount" ref="userAccount4"/>
