@@ -84,7 +84,7 @@ public class UserController extends AbstractController {
 		input.setPassword("");
 		input.setAcceptLegalCondition(false);
 		input.setRepeatedPassword("");
-
+	
 		result = new ModelAndView("user/edit");
 		result.addObject("actorForm", input);
 		result.addObject("url", "user/register.do");
