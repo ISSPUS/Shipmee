@@ -1,7 +1,5 @@
 package services.form;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -111,6 +109,7 @@ public class ActorFormService {
 				res.setPhone(actorForm.getPhone());
 				res.setDni(actorForm.getDni());
 				res.setDniPhoto(actorForm.getDniPhoto());
+
 				res.setPhoto(actorForm.getPhoto());
 				
 				uAccount.setUsername(actorForm.getUserName());
@@ -121,6 +120,7 @@ public class ActorFormService {
 					// User
 				this.addBinding(binding, actorForm.getAcceptLegalCondition(),
 						"acceptLegalCondition", "user.rejectedLegalConditions", null);
+
 				
 				validator.validate(actorForm, binding);
 				
