@@ -86,6 +86,9 @@ public class ComplaintService {
 			
 			moderator = userService.findByPrincipal();
 			
+			Assert.isTrue(moderator.getId() != complaint.getCreator().getId(), "The moderator can not be involved in the complaint.");
+			Assert.isTrue(moderator.getId() != complaint.getInvolved().getId(), "The moderator can not be involved in the complaint.");
+			
 			complaintPreSave.setModerator(moderator);
 			complaintPreSave.setType(complaint.getType());
 						
@@ -104,10 +107,13 @@ public class ComplaintService {
 		return result;
 	}
 	
-	public Page<Complaint> findAllNotResolved(Pageable page) {
+	public Page<Complaint> findAllNotResolvedAndNotInvolved(Pageable page) {
 		Page<Complaint> result;
+		User user;
+		
+		user = userService.findByPrincipal();
 
-		result = complaintRepository.findAllNotResolved(page);
+		result = complaintRepository.findAllNotResolvedAndNotInvolved(page, user.getId());
 		Assert.notNull(result);
 		return result;
 	}
