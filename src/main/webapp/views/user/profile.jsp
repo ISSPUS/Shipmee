@@ -1,12 +1,3 @@
-<%--
- * action-2.jsp
- *
- * Copyright (C) 2013 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- --%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -29,7 +20,12 @@
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
 			<div class="well profile-user profile">
-			<a href="complaint/user/create.do?userId=${user.id}"><i class="glyphicon glyphicon-exclamation-sign img-report" title="Complaint"></i></a>
+			<jstl:if test="${isPrincipal}">
+				<a href="user/user/edit.do"><i class="glyphicon glyphicon-pencil img-edit" title="Edit"></i></a>
+			</jstl:if>
+			<jstl:if test="${!isPrincipal}">
+				<a href="complaint/user/create.do?userId=${user.id}"><i class="glyphicon glyphicon-exclamation-sign img-report" title="Complaint"></i></a>
+			</jstl:if>
 				<div class="modal-body text-center">
 
 					<jstl:choose>

@@ -61,6 +61,10 @@ public class UserService {
 		res.setRoutes(routes);
 		res.setRank(rank);
 		res.setUserAccount(userAccount);
+		res.setDni("");
+		res.setDniPhoto("");
+		res.setPhone("");
+		res.setPhoto("");
 		
 		return res;
 	}
@@ -114,7 +118,12 @@ public class UserService {
 			
 			if(!(a.getDniPhoto().equals(userInDB.getDniPhoto()) && 
 					a.getDni().equals(userInDB.getDni()) &&
-					a.getPhone().equals(userInDB.getPhone()))){
+					a.getPhone().equals(userInDB.getPhone()) &&
+					a.getName().equals(userInDB.getName()) &&
+					a.getSurname().equals(userInDB.getSurname()) &&
+					a.getBirthDate().equals(userInDB.getBirthDate()) &&
+					a.getEmail().equals(userInDB.getEmail())
+					)){
 				a.setIsVerified(false);
 			}
 		}else{

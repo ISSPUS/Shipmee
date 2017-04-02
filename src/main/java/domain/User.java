@@ -34,6 +34,7 @@ public class User extends Actor {
 		this.isActive = isActive;
 	}
 		
+	@NotNull
 	public String getDniPhoto() {
 		return dniPhoto;
 	}

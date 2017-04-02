@@ -11,6 +11,7 @@ import org.springframework.validation.Validator;
 import domain.Actor;
 import domain.User;
 import domain.form.ActorForm;
+import security.Authority;
 import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
@@ -68,7 +69,7 @@ public class ActorFormService {
 		res.setUserName(a.getUserAccount().getUsername());
 		res.setId(a.getId());
 		
-		if(actorService.checkAuthority("USER")){
+		if(actorService.checkAuthority(Authority.USER)){
 			res.setDniPhoto(userService.findByPrincipal().getDniPhoto());
 		}
 		
@@ -76,23 +77,23 @@ public class ActorFormService {
 	}
 	
 	public Object reconstruct(ActorForm actorForm, BindingResult binding) {
-		Actor result;
-		boolean userNameInUse;
+		Actor userWithUserName;
+		Actor actActor;
 		
-		userNameInUse = userAccountService.findByUserNameWithoutAsserts(actorForm.getUserName()) != null;
+		userWithUserName = actorService.findByUsername(actorForm.getUserName());
 
 		
 		// Chequear nombre de usuario único
 		
 		if (!actorService.checkLogin() ||
-				(actorForm.getId() == 0 && actorService.checkAuthority("ADMIN"))){
+				(actorForm.getId() == 0 && actorService.checkAuthority(Authority.ADMIN))){
 			// Registry
 			
 			this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
 					"repeatedPassword", "user.passwordMismatch", null);
 			this.addBinding(binding, actorForm.getPassword().length() > 5,
 					"password", "javax.validation.constraints.Min.message", null);
-			this.addBinding(binding, !userNameInUse, "userName", "user.userName.inUse", null);
+			this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
 			
 			if (!actorService.checkLogin()){
 				// Registry User
@@ -106,12 +107,6 @@ public class ActorFormService {
 				res.setSurname(actorForm.getSurname());
 				res.setEmail(actorForm.getEmail());
 				res.setBirthDate(actorForm.getBirthDate());
-				res.setPhone(actorForm.getPhone());
-				res.setDni(actorForm.getDni());
-				res.setDniPhoto(actorForm.getDniPhoto());
-
-				res.setPhoto(actorForm.getPhoto());
-				
 				uAccount.setUsername(actorForm.getUserName());
 				uAccount.setPassword(actorForm.getPassword());
 				
@@ -127,51 +122,63 @@ public class ActorFormService {
 				return res;
 			}else{
 				Assert.notNull(null, "Registro de usuarios (de cualquier rol) como admin no implementado");
+				return null;
 			}
 			
 		}else{
 			// Editing 
-			Assert.notNull(null, "Edición de usuarios no implementado");
-		}
-		
-		if (!actorService.checkLogin()){
-			// Registry User
 			
-		}else if (actorService.checkAuthority("USER")){
-			// Editing user
-		}else if (actorService.checkAuthority("ADMIN")){
-			// Editing admin
-		}else if (actorForm.getId() == 0 && actorService.checkAuthority("ADMIN")){
-			// Registry from admin
-		}else{
-			return null;
-		}
+			actActor = actorService.findByPrincipal();
+			
+			if(!actorForm.getPassword().equals("") || !actorForm.getRepeatedPassword().equals("")){
+				// Password modified
+				this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
+						"repeatedPassword", "user.passwordMismatch", null);
+				this.addBinding(binding, actorForm.getPassword().length() > 5,
+						"password", "javax.validation.constraints.Min.message", null);
+			}
+			
+			if(!actorForm.getUserName().equals(actActor.getUserAccount().getUsername())){
+				// UserName modified
+				this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
+			}
+			
+			if (actorService.checkAuthority(Authority.USER)){
+				// Registry User
+				User res;
+				UserAccount uAccount;
 				
-//		if (routeForm.getRouteId() == 0) {
-//			result = routeService.createForm();
-//			
-//			result.setOrigin(routeForm.getOrigin());
-//			result.setDestination(routeForm.getDestination());
-//			result.setItemEnvelope(routeForm.getItemEnvelope());
-//			result.setVehicle(routeForm.getVehicle());
-//			result.setArriveTime(arriveTime);
-//			result.setDepartureTime(departureTime);
-//			
-//			
-//		} else if(routeForm.getRouteId() != 0) {			
-//			result = routeService.findOne(routeForm.getRouteId());
-//			result.setOrigin(routeForm.getOrigin());
-//			result.setDestination(routeForm.getDestination());
-//			result.setItemEnvelope(routeForm.getItemEnvelope());
-//			result.setVehicle(routeForm.getVehicle());
-//			result.setArriveTime(arriveTime);
-//			result.setDepartureTime(departureTime);
-//		} else {
-//			result = null;
-//		}
-		result = null;
-		
-		return result;
+				res = userService.findOne(actActor.getId());
+					// Commons
+				uAccount = res.getUserAccount();
+				res.setName(actorForm.getName());
+				res.setSurname(actorForm.getSurname());
+				res.setEmail(actorForm.getEmail());
+				res.setBirthDate(actorForm.getBirthDate());
+				res.setPhone(actorForm.getPhone());
+				res.setDni(actorForm.getDni());
+				res.setDniPhoto(actorForm.getDniPhoto());
+
+				res.setPhoto(actorForm.getPhoto());
+				
+				uAccount.setUsername(actorForm.getUserName());
+				
+				if(!actorForm.getPassword().equals("") || !actorForm.getRepeatedPassword().equals("")){
+					uAccount.setPassword(actorForm.getPassword());
+				
+					uAccount = userAccountService.encodePassword(uAccount);
+				}
+				res.setUserAccount(uAccount);
+				
+				validator.validate(actorForm, binding);
+				
+				return res;
+			}else{
+				Assert.notNull(null, "Edición de usuarios no Authority.USER no implementado");
+				return null;
+			}
+		}
+
 	}
 	
 	private void addBinding(Errors errors, boolean mustBeTrue, String field, String validationError, Object[] other){
