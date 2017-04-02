@@ -24,7 +24,12 @@
 	<div class="container">
 		<div class="row">
 			<h3>
-				<spring:message code="alert.new.alert" />
+				<jstl:if test="${actorForm.id == 0}">
+					<spring:message code="user.new.user" />
+				</jstl:if>
+				<jstl:if test="${actorForm.id != 0}">
+					<spring:message code="user.edit.user" />
+				</jstl:if>
 			</h3>
 		</div>
 		<!-- /row -->
@@ -149,7 +154,10 @@
 			<div class="form-group">
 				<form:label path="password" class="control-label col-md-2"
 					for="password">
-					<spring:message code="user.pass" /> <span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					<spring:message code="user.pass" />
+					<jstl:if test="${actorForm.id == 0}">
+						<span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					</jstl:if>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
@@ -163,7 +171,10 @@
 			<div class="form-group">
 				<form:label path="repeatedPassword" class="control-label col-md-2"
 					for="repeatedPassword">
-					<spring:message code="user.repeatPass" /> <span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					<spring:message code="user.repeatPass" />
+					<jstl:if test="${actorForm.id == 0}">
+						<span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					</jstl:if>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
