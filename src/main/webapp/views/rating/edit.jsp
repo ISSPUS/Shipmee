@@ -21,7 +21,7 @@
 			<h3>
 			<spring:message code="rating.create.for" />
 			
-			<a href="user/display.do?userId=${rating.user.id}">
+			<a href="user/profile.do?userId=${rating.user.id}">
 				<jstl:out value="${rating.user.name}" />
 				<jstl:out value="${rating.user.surname}" />
 				(<jstl:out value="${rating.user.userAccount.username}" />)
@@ -67,7 +67,7 @@
 				<!-- Action buttons -->
 				<acme:submit name="save" code="rating.save" />
 
-				<acme:cancel code="rating.cancel" url="user/display.do?userId=${rating.user.id}" />
+				<acme:cancel code="rating.cancel" url="user/profile.do?userId=${rating.user.id}" />
 
 			</div>
 			

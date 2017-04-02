@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import security.UserAccount;
@@ -69,6 +68,7 @@ public abstract class Actor extends DomainEntity {
 		this.birthDate = birthDate;
 	}
 
+	@NotNull
 	public String getPhone() {
 		return phone;
 	}
@@ -76,6 +76,7 @@ public abstract class Actor extends DomainEntity {
 		this.phone = phone;
 	}
 
+	@NotNull
 	public String getDni() {
 		return dni;
 	}
@@ -83,7 +84,7 @@ public abstract class Actor extends DomainEntity {
 		this.dni = dni;
 	}
 
-	@URL
+	@NotNull
 	public String getPhoto() {
 		return photo;
 	}

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.User;
+import services.ActorService;
 import services.RatingService;
 import services.RouteService;
 import services.ShipmentService;
@@ -35,6 +36,9 @@ public class UserProfileController extends AbstractController {
 	@Autowired
 	private RatingService ratingService;
 	
+	@Autowired
+	private ActorService actorService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public UserProfileController() {
@@ -54,6 +58,9 @@ public class UserProfileController extends AbstractController {
 		if(userId != null){
 			user = userService.findOne(userId);
 			Assert.notNull(user);
+			if(actorService.checkLogin()){
+				isPrincipal = actorService.findByPrincipal().getId() == user.getId();
+			}
 		}else{
 			user = userService.findByPrincipal();
 			Assert.notNull(user);

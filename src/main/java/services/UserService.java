@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -61,6 +63,10 @@ public class UserService {
 		res.setRoutes(routes);
 		res.setRank(rank);
 		res.setUserAccount(userAccount);
+		res.setDni("");
+		res.setDniPhoto("");
+		res.setPhone("");
+		res.setPhoto("");
 		
 		return res;
 	}
@@ -109,12 +115,17 @@ public class UserService {
 		if(a.getId() != 0){
 			userInDB = this.findOne(a.getId());
 			
-			Assert.isTrue((a.getId() == actUser.getId()) || isAdmin,
+			Assert.isTrue(isAdmin || (a.getId() == actUser.getId()),
 					"UserService.checkUser.modifyByOtherUser");
 			
 			if(!(a.getDniPhoto().equals(userInDB.getDniPhoto()) && 
 					a.getDni().equals(userInDB.getDni()) &&
-					a.getPhone().equals(userInDB.getPhone()))){
+					a.getPhone().equals(userInDB.getPhone()) &&
+					a.getName().equals(userInDB.getName()) &&
+					a.getSurname().equals(userInDB.getSurname()) &&
+					a.getBirthDate().equals(userInDB.getBirthDate()) &&
+					a.getEmail().equals(userInDB.getEmail())
+					)){
 				a.setIsVerified(false);
 			}
 		}else{
@@ -168,6 +179,69 @@ public class UserService {
 		result = userRepository.findByUsername(username);
 
 		return result;
+	}
+	
+	public Page<User> findAllByVerifiedActive(int isVerified, int isActive, Pageable page){
+		Page<User> result;
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "UserService.findAllByVerifiedActive.RoleNotPermitted");
+		
+		result = userRepository.findAllByVerifiedActive(isVerified, isActive, page);
+		
+		return result;		
+	}
+	
+	public void turnIntoModerator(int userId){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "UserService.findAllByVerifiedActive.RoleNotPermitted");
+
+		User dbUser;
+		Collection<Authority> authorities;
+		Authority modAuthority;
+		UserAccount userAccount;
+		
+		dbUser = this.findOne(userId);
+		modAuthority = new Authority();
+		
+		modAuthority.setAuthority(Authority.MODERATOR);
+		
+		userAccount = dbUser.getUserAccount();
+		authorities = userAccount.getAuthorities();
+		
+		if(!authorities.contains(modAuthority)){
+			authorities.add(modAuthority);
+			
+			userAccount.setAuthorities(authorities);
+			
+			dbUser.setUserAccount(userAccount);
+			
+			this.save(dbUser);
+		}
+	}
+	
+	public void unturnIntoModerator(int userId){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "UserService.findAllByVerifiedActive.RoleNotPermitted");
+
+		User dbUser;
+		Collection<Authority> authorities;
+		Authority modAuthority;
+		UserAccount userAccount;
+		
+		dbUser = this.findOne(userId);
+		modAuthority = new Authority();
+		
+		modAuthority.setAuthority(Authority.MODERATOR);
+		
+		userAccount = dbUser.getUserAccount();
+		authorities = userAccount.getAuthorities();
+		
+		if(authorities.contains(modAuthority)){
+			authorities.remove(modAuthority);
+			
+			userAccount.setAuthorities(authorities);
+			
+			dbUser.setUserAccount(userAccount);
+			
+			this.save(dbUser);
+		}
 	}
 
 }

@@ -24,7 +24,12 @@
 	<div class="container">
 		<div class="row">
 			<h3>
-				<spring:message code="alert.new.alert" />
+				<jstl:if test="${actorForm.id == 0}">
+					<spring:message code="user.new.user" />
+				</jstl:if>
+				<jstl:if test="${actorForm.id != 0}">
+					<spring:message code="user.edit.user" />
+				</jstl:if>
 			</h3>
 		</div>
 		<!-- /row -->
@@ -37,6 +42,8 @@
 		<form:form action="${url}"
 			modelAttribute="actorForm" method="post" class="form-horizontal"
 			role="form">
+			
+			<form:hidden path="id" />
 
 			<!-- Username -->
 			<div class="form-group">
@@ -147,7 +154,10 @@
 			<div class="form-group">
 				<form:label path="password" class="control-label col-md-2"
 					for="password">
-					<spring:message code="user.pass" /> <span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					<spring:message code="user.pass" />
+					<jstl:if test="${actorForm.id == 0}">
+						<span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					</jstl:if>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
@@ -161,7 +171,10 @@
 			<div class="form-group">
 				<form:label path="repeatedPassword" class="control-label col-md-2"
 					for="repeatedPassword">
-					<spring:message code="user.repeatPass" /> <span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					<spring:message code="user.repeatPass" />
+					<jstl:if test="${actorForm.id == 0}">
+						<span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					</jstl:if>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
@@ -173,6 +186,7 @@
 			
 			<!-- PhotoURL -->
 			
+			<jstl:if test="${actorForm.id != 0}">
 			<div class="form-group">
 				<form:label path="photo" class="control-label col-md-2"
 					for="photo">
@@ -185,6 +199,23 @@
 					<form:errors class="error create-message-error" path="photo" />
 				</div>
 			</div>
+			</jstl:if>
+			
+			<!-- DNIPhotoURL -->
+			<jstl:if test="${actorForm.id != 0}">
+				<div class="form-group">
+					<form:label path="dniPhoto" class="control-label col-md-2"
+						for="dniPhoto">
+						<spring:message code="user.dniPhoto" />
+					</form:label>
+					<div class="col-md-8">
+						<div class="inner-addon">
+							<form:input path="dniPhoto" class="form-control" id="dniPhoto" placeholder="Link"/>
+						</div>
+						<form:errors class="error create-message-error" path="dniPhoto" />
+					</div>
+				</div>
+			</jstl:if>
 			
 			<!-- AcceptLegalCondition -->
 			<security:authorize access="isAnonymous()">
@@ -212,7 +243,7 @@
 				<acme:submit name="save" code="rating.save" />
 				<jstl:choose>
 					<jstl:when test="${actorForm.id != 0}">
-						<acme:cancel code="rating.cancel" url="user/display.do?userId=${rating.user.id}" />
+						<acme:cancel code="rating.cancel" url="user/profile.do?userId=${actorForm.id}" />
 					</jstl:when>
 					<jstl:otherwise>
 						<acme:cancel code="rating.cancel" url="" />
