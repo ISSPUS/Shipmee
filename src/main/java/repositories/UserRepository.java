@@ -2,6 +2,8 @@ package repositories;
 
 import java.util.Collection;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,4 +21,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query("select c from User c where c.userAccount.username= ?1")
 	User findByUsername(String username);
+
+	@Query("select u from User u where (?1 < 0 OR u.isVerified = ?1)"
+			+ " AND (?2 < 0 OR u.isActive = ?2)")
+	Page<User> findAllByVerifiedActive(int isVerified, int isActive, Pageable page);
 }

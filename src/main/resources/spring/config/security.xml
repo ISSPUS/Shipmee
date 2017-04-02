@@ -48,6 +48,7 @@
 		<security:intercept-url pattern="/complaint/moderator/*" access="hasRole('MODERATOR')" />
 		
 		<security:intercept-url pattern="/complaint/administrator/*" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/user/administrator/*" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/user/*" access="permitAll" />
 
