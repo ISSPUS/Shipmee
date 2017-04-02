@@ -36,12 +36,7 @@
 					<li><a href="about/info.do"><spring:message
 								code="master.page.about" /></a></li>
 
-					<security:authorize access="isAnonymous()">
-						<li><a class="fNiv active" href="security/login.do"><spring:message
-									code="master.page.login" /></a></li>
-					</security:authorize>
-
-					<security:authorize access="isAuthenticated()">
+					<security:authorize access="hasRole('USER')">
 						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
 							data-toggle="dropdown"><spring:message
 									code="master.page.shipment" /><b class="caret"></b></a>
@@ -73,26 +68,6 @@
 								<li><a href="message/actor/create.do"><spring:message
 											code="master.page.messages.create" /></a></li>
 							</ul></li>
-
-						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
-							data-toggle="dropdown"><spring:message
-									code="master.page.profile" /> (<security:authentication
-									property="principal.username" />)<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="user/profile.do"><spring:message
-											code="master.page.info" /></a></li>
-								<li><a href="vehicle/user/list.do"><spring:message
-											code="master.page.vehicles" /></a></li>
-								<li><a href="alert/user/list.do"><spring:message
-											code="master.page.alerts" /></a></li>
-								<security:authorize access="hasRole('USER')">
-											<li><a href="rating/user/mylist.do">
-												<spring:message code="master.page.rating" />
-											</a></li>
-								</security:authorize>
-								<li><a href="j_spring_security_logout"><spring:message
-											code="master.page.logout" /> </a></li>
-							</ul></li>
 					</security:authorize>
 
 					<security:authorize access="hasRole('MODERATOR')">
@@ -120,6 +95,36 @@
 									href="complaint/administrator/list.do?type=${omitted}&page=1"><jstl:out
 											value="${omitted}" /></a></li>
 							</ul></li>
+						<li><a href="user/administrator/list.do"><spring:message
+								code="master.page.users" /></a></li>
+					</security:authorize>
+					
+					<security:authorize access="isAuthenticated()">
+						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
+							data-toggle="dropdown"><spring:message
+									code="master.page.profile" /> (<security:authentication
+									property="principal.username" />)<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<security:authorize access="hasRole('USER')">
+							
+									<li><a href="user/profile.do"><spring:message
+												code="master.page.info" /></a></li>
+									<li><a href="vehicle/user/list.do"><spring:message
+												code="master.page.vehicles" /></a></li>
+									<li><a href="alert/user/list.do"><spring:message
+												code="master.page.alerts" /></a></li>
+									<li><a href="rating/user/mylist.do">
+													<spring:message code="master.page.rating" />
+									</a></li>
+								</security:authorize>
+								<li><a href="j_spring_security_logout"><spring:message
+											code="master.page.logout" /> </a></li>
+							</ul></li>
+					</security:authorize>
+					
+					<security:authorize access="isAnonymous()">
+						<li><a class="fNiv active" href="security/login.do"><spring:message
+									code="master.page.login" /></a></li>
 					</security:authorize>
 
 				</ul>
