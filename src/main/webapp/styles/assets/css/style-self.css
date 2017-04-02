@@ -379,3 +379,13 @@ body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+
+/*	################################################################
+	OTROS
+################################################################# */
+
+.frase-box{
+	margin-left: 10px;
+    margin-bottom: 7px;
+    text-align: center;
+}

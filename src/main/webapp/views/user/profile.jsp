@@ -59,7 +59,7 @@
 					<div class="datos text-left">
 						<span> <strong><spring:message code="user.name" />: </strong>${user.name} ${user.surname}</span> 
 						<br/>
-						<span> <strong><spring:message code="user.birthDate" />: </strong><fmt:formatDate value="${user.birthDate}" pattern="dd/MM/yyyy '-' HH:mm" /></span>
+						<span> <strong><spring:message code="user.birthDate" />: </strong><fmt:formatDate value="${user.birthDate}" pattern="dd/MM/yyyy" /></span>
 						<br/>
 					</div>
 
