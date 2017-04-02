@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Complaint;
-import domain.Moderator;
 import domain.User;
 import repositories.ComplaintRepository;
 
@@ -28,9 +27,6 @@ public class ComplaintService {
 	
 	@Autowired
 	private ActorService actorService;
-	
-	@Autowired
-	private ModeratorService moderatorService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -65,7 +61,7 @@ public class ComplaintService {
 		Assert.notNull(complaint);
 		
 		User user;
-		Moderator moderator;
+		User moderator;
 		Complaint complaintPreSave;
 		
 		
@@ -88,7 +84,7 @@ public class ComplaintService {
 			
 			complaintPreSave = this.findOne(complaint.getId());
 			
-			moderator = moderatorService.findByPrincipal();
+			moderator = userService.findByPrincipal();
 			
 			complaintPreSave.setModerator(moderator);
 			complaintPreSave.setType(complaint.getType());
