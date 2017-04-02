@@ -75,19 +75,22 @@ public class RouteService {
 	
 	public Route save(Route route) {
 		Assert.notNull(route);
+		Assert.isTrue(route.getArriveTime().after(new Date()), "You cannot save a route that is in the past.");
 		Assert.isTrue(checkDates(route), "The departure date must be greater than the current date and the arrival date greater than the departure date.");
 		Assert.isTrue(checkItemEnvelope(route.getItemEnvelope()), "ItemEnvelope must be open, closed or both.");
+
 		if(route.getVehicle() != null) {
 			Assert.isTrue(route.getCreator().getId() == route.getVehicle().getUser().getId(), "Both Ids must be the same.");
 		}
-		
+
 		User user;
 		Date date;
 		
 		user = userService.findByPrincipal();
 		date = new Date();
 		
-		Assert.isTrue(user.getId() == route.getCreator().getId(), "Only the user who created the route can delete it");
+		Assert.isTrue(user.getId() == route.getCreator().getId(), "Only the user who created the route can save it");
+		Assert.isTrue(user.getIsVerified() == true, "The creator must be verified.");
 		
 		if(route.getId() == 0) {
 			route.setCreator(user);
