@@ -18,10 +18,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.util.Assert;
 
+import domain.Alert;
+import domain.Message;
 import domain.Route;
 import domain.RouteOffer;
 import domain.User;
 import domain.Vehicle;
+import repositories.AlertRepository;
+import repositories.MessageRepository;
 import utilities.AbstractTest;
 import utilities.UtilTest;
 
@@ -43,6 +47,12 @@ public class RouteTest extends AbstractTest {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private MessageRepository messageRepository;
+	
+	@Autowired
+	private AlertRepository alertRepository;
 
 	// Test cases -------------------------------------------------------------
 
@@ -56,10 +66,15 @@ public class RouteTest extends AbstractTest {
 		
 		Integer numberOfRoutesBefore = routeService.findAll().size();
 		
+		Collection<Message> beforeMessages;
+		Collection<Message> newsMessages;
+		boolean alertFound;
+		Alert alert;
 		Route route;
 		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		Vehicle vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		beforeMessages = messageRepository.findAll();
 		
 		route = routeService.create();
 		route.setOrigin("Sevilla");
@@ -74,6 +89,23 @@ public class RouteTest extends AbstractTest {
 		Integer numberOfRoutesAfter = routeService.findAll().size();
 		
 		Assert.isTrue(numberOfRoutesAfter - numberOfRoutesBefore == 1);
+		Assert.isTrue(beforeMessages.size() != messageRepository.findAll().size());
+		
+		newsMessages = messageRepository.findAll();
+		alert = alertRepository.findOne(UtilTest.getIdFromBeanName("alert3"));
+		
+		newsMessages.removeAll(beforeMessages);
+		alertFound = false;
+		
+		for(Message m:newsMessages){
+			if(m.getRecipient().getId() == alert.getUser().getId()){
+				Assert.isTrue(m.getBody().contains(alert.getOrigin()));
+				Assert.isTrue(m.getBody().contains(alert.getDestination()));
+				alertFound = true;
+			}
+		}
+		
+		Assert.isTrue(alertFound);
 		
 		unauthenticate();
 	}

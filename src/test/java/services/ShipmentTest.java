@@ -18,9 +18,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.util.Assert;
 
+import domain.Alert;
+import domain.Message;
 import domain.Shipment;
 import domain.ShipmentOffer;
 import domain.User;
+import repositories.AlertRepository;
+import repositories.MessageRepository;
 import utilities.AbstractTest;
 import utilities.UtilTest;
 
@@ -39,44 +43,72 @@ public class ShipmentTest extends AbstractTest {
 
 	 @Autowired 
 	 private UserService userService;
+	 
+	 @Autowired
+	 private MessageRepository messageRepository;
+	 
+	 @Autowired
+	 private AlertRepository alertRepository;
 
 	// Test cases -------------------------------------------------------------
 
-	 /**
-	  * @Test Create a Shipment
-	  * @result The shipment is created.
-	  */
-	 @Test
-	 public void positiveCreateShipment1(){
-		 
-		 authenticate("user1");
-		 
-		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
-		 
-		 Shipment shipment;
-		 Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
-		 Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
-		 
-		 shipment = shipmentService.create();
-		 shipment.setOrigin("Sevilla");
-		 shipment.setDestination("Madrid");
-		 shipment.setDepartureTime(departureTime);
-		 shipment.setMaximumArriveTime(maximumArrivalTime);
-		 shipment.setItemSize("L");
-		 shipment.setPrice(20.0);
-		 shipment.setItemName("Bolsa de deporte");
-		 shipment.setItemPicture("https://www.elitefts.com/black-red-crescent-duffel-bag.html");
-		 shipment.setItemEnvelope("Open");
-		 
-		 shipmentService.save(shipment);
-		 
-		 Integer numberOfShipmentAfter = shipmentService.findAll().size();
+	/**
+	 * @Test Create a Shipment
+	 * @result The shipment is created.
+	 */
+	@Test
+	public void positiveCreateShipment1() {
 
-		 Assert.isTrue(numberOfShipmentAfter - numberOfShipmentBefore == 1);
-		 
-		 unauthenticate();
-		 
-	 }
+		authenticate("user1");
+
+		Integer numberOfShipmentBefore = shipmentService.findAll().size();
+
+		Collection<Message> beforeMessages;
+		Collection<Message> newsMessages;
+		boolean alertFound;
+		Alert alert;
+		Shipment shipment;
+		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		beforeMessages = messageRepository.findAll();
+
+		shipment = shipmentService.create();
+		shipment.setOrigin("Sevilla");
+		shipment.setDestination("Madrid");
+		shipment.setDepartureTime(departureTime);
+		shipment.setMaximumArriveTime(maximumArrivalTime);
+		shipment.setItemSize("L");
+		shipment.setPrice(20.0);
+		shipment.setItemName("Bolsa de deporte");
+		shipment.setItemPicture("https://www.elitefts.com/black-red-crescent-duffel-bag.html");
+		shipment.setItemEnvelope("Open");
+
+		shipmentService.save(shipment);
+
+		Integer numberOfShipmentAfter = shipmentService.findAll().size();
+
+		Assert.isTrue(numberOfShipmentAfter - numberOfShipmentBefore == 1);
+		Assert.isTrue(beforeMessages.size() != messageRepository.findAll().size());
+
+		newsMessages = messageRepository.findAll();
+		alert = alertRepository.findOne(UtilTest.getIdFromBeanName("alert4"));
+
+		newsMessages.removeAll(beforeMessages);
+		alertFound = false;
+
+		for (Message m : newsMessages) {
+			if (m.getRecipient().getId() == alert.getUser().getId()) {
+				Assert.isTrue(m.getBody().contains(alert.getOrigin()));
+				Assert.isTrue(m.getBody().contains(alert.getDestination()));
+				alertFound = true;
+			}
+		}
+
+		Assert.isTrue(alertFound);
+
+		unauthenticate();
+
+	}
 	 
 	 /**
 	  * @Test Create a Shipment while been unauthenticated

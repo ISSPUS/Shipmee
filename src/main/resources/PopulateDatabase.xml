@@ -540,6 +540,22 @@
 		<property name="user" ref="user2"/>
 	</bean>
 	
+	<bean id="alert3" class="domain.Alert">
+		<property name="date" value="2017/07/01"/>
+		<property name="origin" value="Sevilla"/>
+		<property name="destination" value="Madrid"/>
+		<property name="type" value="Route"/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<bean id="alert4" class="domain.Alert">
+		<property name="date" value="2017/07/01"/>
+		<property name="origin" value="Sevilla"/>
+		<property name="destination" value="Madrid"/>
+		<property name="type" value="Shipment"/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
 	<!-- CreditCard -->
 	
 	<bean id="creditCard1" class="domain.CreditCard">
