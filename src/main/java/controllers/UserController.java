@@ -56,7 +56,7 @@ public class UserController extends AbstractController {
 			result = createEditModelAndView(actorForm);
 		} else {
 			try {
-				reconstructed = userService.save(reconstructed);
+				userService.save(reconstructed);
 
 				result = new ModelAndView("redirect:/security/login.do");
 				result.addObject("message", "user.register.ok");

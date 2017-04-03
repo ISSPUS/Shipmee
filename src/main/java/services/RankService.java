@@ -4,7 +4,6 @@ package services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import domain.Rank;
 import repositories.RankRepository;
@@ -42,16 +41,6 @@ public class RankService {
 		System.out.println("RankService.initializeUser funciona random ! !");
 		
 		res = rankRepository.findAll().iterator().next();
-		
-		return res;
-	}
-	
-	public Rank findOne(int rankId){
-		Rank res;
-		
-		res = rankRepository.findOne(rankId);
-		
-		Assert.notNull(res);
 		
 		return res;
 	}

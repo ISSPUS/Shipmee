@@ -107,12 +107,9 @@ public class UserService {
 		isAuthenticated = actorService.checkLogin();
 		userAuth.setAuthority(Authority.USER);
 		adminAuth.setAuthority(Authority.ADMIN);
-		
-		if(!isAdmin && isAuthenticated){
-			actUser = this.findByPrincipal();
-		}
-		
+
 		if(a.getId() != 0){
+			actUser = this.findByPrincipal();
 			userInDB = this.findOne(a.getId());
 			
 			Assert.isTrue(isAdmin || (a.getId() == actUser.getId()),
