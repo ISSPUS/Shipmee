@@ -10,6 +10,9 @@ import javax.transaction.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -531,4 +534,36 @@ public class ShipmentTest extends AbstractTest {
 		Assert.notNull(shipment);
 	}
 
+	/**
+	 * @Test Find all shipments by user
+	 */
+	@Test
+	public void positiveFindAllShipmentsByUser() {
+		Collection<Shipment> shipments;
+		Page<Shipment> pages;
+		Pageable pageable;
+		User user;
+		int count;
+		
+		authenticate("user2");
+		
+		user = userService.findByPrincipal();
+		pageable = new PageRequest(1 - 1, 5);
+
+		count = 0;
+		pages = shipmentService.findAllByCurrentUser(pageable);
+		shipments = pages.getContent();
+		
+		for(Shipment shipment : shipments) {
+			Assert.isTrue(shipment.getCreator().getId() == user.getId());
+		}
+		
+		for(Shipment shipment : shipmentService.findAll()) {
+			if(shipment.getCreator().getId() == user.getId()) {
+				count++;
+			}
+		}
+		
+		Assert.isTrue(count == shipments.size());
+	}
 }

@@ -10,6 +10,9 @@ import javax.transaction.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -17,6 +20,7 @@ import org.springframework.util.Assert;
 
 import domain.Route;
 import domain.RouteOffer;
+import domain.User;
 import domain.Vehicle;
 import utilities.AbstractTest;
 import utilities.UtilTest;
@@ -37,6 +41,8 @@ public class RouteTest extends AbstractTest {
 
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private UserService userService;
 
 	// Test cases -------------------------------------------------------------
 
@@ -538,6 +544,39 @@ public class RouteTest extends AbstractTest {
 		route = routeService.findOne(-200);
 		
 		Assert.notNull(route);
+	}
+	
+	/**
+	 * @Test Find all routes by user
+	 */
+	@Test
+	public void positiveFindAllRoutesByUser() {
+		Collection<Route> routes;
+		Page<Route> pages;
+		Pageable pageable;
+		User user;
+		int count;
+		
+		authenticate("user1");
+		
+		user = userService.findByPrincipal();
+		pageable = new PageRequest(1 - 1, 5);
+
+		count = 0;
+		pages = routeService.findAllByCurrentUser(pageable);
+		routes = pages.getContent();
+		
+		for(Route route : routes) {
+			Assert.isTrue(route.getCreator().getId() == user.getId());
+		}
+		
+		for(Route route : routeService.findAll()) {
+			if(route.getCreator().getId() == user.getId()) {
+				count++;
+			}
+		}
+		
+		Assert.isTrue(count == routes.size());
 	}
 
 }
