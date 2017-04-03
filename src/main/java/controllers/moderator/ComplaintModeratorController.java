@@ -71,7 +71,7 @@ public class ComplaintModeratorController extends AbstractController {
 		try {
 			complaint = complaintService.findOne(complaintId);
 			complaint.setType(type);
-			complaint = complaintService.save(complaint);
+			complaintService.save(complaint);
 
 			result = new ModelAndView("redirect:list.do?page=1");
 		} catch (Throwable oops) {
