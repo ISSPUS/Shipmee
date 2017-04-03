@@ -185,7 +185,7 @@
 		<property name="phone" value="676554311"/>
 		<property name="dni" value="34567895C"/>
 		<property name="dniPhoto" value=""/>
-		<property name="photo" value=""/>
+		<property name="photo" value="images/anonymous.png"/>
 		<property name="userAccount" ref="userAccount5"/>
 		<property name="isVerified" value="false"/>
 		<property name="isActive" value="true"/>
@@ -204,7 +204,7 @@
 		<property name="phone" value="689836654"/>
 		<property name="dni" value="49983586H"/>
 		<property name="dniPhoto" value=""/>
-		<property name="photo" value=""/>
+		<property name="photo" value="images/anonymous.png"/>
 		<property name="userAccount" ref="userAccount4"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>

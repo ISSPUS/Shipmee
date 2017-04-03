@@ -66,7 +66,7 @@ public class UserService {
 		res.setDni("");
 		res.setDniPhoto("");
 		res.setPhone("");
-		res.setPhoto("");
+		res.setPhoto("images/anonymous.png");
 		
 		return res;
 	}

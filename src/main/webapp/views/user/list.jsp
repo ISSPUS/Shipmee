@@ -24,6 +24,18 @@
 <link rel="stylesheet" href="styles/assets/css/style-messages.css"
 	type="text/css">
 
+<style>
+
+.panel-default {
+	margin: 0 auto;
+	float: None;
+	margin-bottom: 1%;
+	
+}
+
+</style>
+
+
 <div class="blue-barra" >
 	<div class="container">
 		<div class="row">
@@ -37,7 +49,11 @@
 
 <div class="container">
 
-		<div class="col-md-9">
+		<div class="col-md-9 panel-default">
+		<div class="profile-content">
+					
+				
+					<div class="panel-body panel">
 			<div class="table-container">
 				<table class="table table-filter">
 					<tbody>
@@ -50,14 +66,29 @@
 											<a href="#" class="pull-left"> <img
 												src="${userRow.photo}" class="media-photo"></a>
 
-											<div class="media-body">
+												<jstl:set var="isModerator" scope="session" value="FALSE" />
+												<jstl:forEach items="${userRow.userAccount.authorities}"
+													var="actRow">
+													<jstl:if test="${actRow.authority eq 'MODERATOR'}">
+														<jstl:set var="isModerator" scope="session" value="TRUE" />
+													</jstl:if>
+												</jstl:forEach>
+
+												<div class="media-body">
 												<span class="media-meta pull-right"> <fmt:formatDate
 														type="both" dateStyle="medium" timeStyle="medium"
 														value="${userRow.birthDate}" /></span>
 												<h4 class="title">
-													<a href="user/profile.do?userId=${usereRow.id}"><jstl:out
+													<jstl:if test="${isModerator}">
+															<i class="fa fa-gavel" aria-hidden="true" style="color:#f95300;" title="<spring:message code="user.moderator" />"></i>
+
+
+														</jstl:if><a href="user/profile.do?userId=${usereRow.id}"><jstl:out
 															value="${userRow.userAccount.username }" /></a>
-												</h4>
+
+														
+
+													</h4>
 
 												<span class="pendiente"> <jstl:out
 														value="${userRow.name}" /> <jstl:out
@@ -67,12 +98,7 @@
 												<p class="summary">
 													<jstl:out value="${userRow.dni}"></jstl:out>
 													
-													<jstl:set var="isModerator" scope="session" value="FALSE"/>
-													<jstl:forEach items="${userRow.userAccount.authorities}" var="actRow">
-														<jstl:if test="${actRow.authority eq 'MODERATOR'}">
-															<jstl:set var="isModerator" scope="session" value="TRUE"/>
-														</jstl:if>
-													</jstl:forEach>
+													
 																										
 													<br />
 													<jstl:if test="${!isModerator}">
@@ -81,7 +107,8 @@
 														</a>
 													</jstl:if>
 													<jstl:if test="${isModerator}">
-														<a href="user/administrator/unturnIntoModerator.do?userId=${userRow.id}">
+														<a href="user/administrator/unturnIntoModerator.do?userId=${userRow.id}"> 
+									
 															<spring:message code="user.unturnIntoModerator" />
 														</a>
 													</jstl:if>
@@ -97,7 +124,7 @@
 					</tbody>
 				</table>
 			</div>
-		</div>
+		</div></div></div>
 
 
 		<jstl:if test="${fn:length(users.content) ==0}">
@@ -137,4 +164,3 @@
 	</div>
 
 
-</div>
