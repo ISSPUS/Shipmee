@@ -58,7 +58,7 @@ public class RatingUserController extends AbstractController {
 			try {
 				reconstructed = ratingService.save(reconstructed);
 
-				result = new ModelAndView("redirect:../list.do?userReceivedId=" + reconstructed.getUser().getId());
+				result = new ModelAndView("redirect:/user/profile.do?userId=" + reconstructed.getUser().getId());
 				result.addObject("message", "rating.commit.ok");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(reconstructed, "rating.commit.error");
@@ -75,7 +75,7 @@ public class RatingUserController extends AbstractController {
 		
 		currentActorId = actorService.findByPrincipal().getId();
 				
-		result = new ModelAndView("redirect:../list.do?authorId=" + currentActorId);
+		result = new ModelAndView("redirect:user/profile.do?userId=" + currentActorId);
 
 		return result;
 	}
@@ -93,7 +93,7 @@ public class RatingUserController extends AbstractController {
 	protected ModelAndView createEditModelAndView(Rating input, String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("rating/edit");
+		result = new ModelAndView("user/profile");
 		result.addObject("rating", input);
 		result.addObject("message", message);
 
