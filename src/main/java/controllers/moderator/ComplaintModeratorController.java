@@ -49,7 +49,7 @@ public class ComplaintModeratorController extends AbstractController {
 		Pageable pageable;
 		pageable = new PageRequest(page - 1, 5);
 
-		items = complaintService.findAllNotResolved(pageable);
+		items = complaintService.findAllNotResolvedAndNotInvolved(pageable);
 
 		result = new ModelAndView("complaint/list");
 		result.addObject("complaints", items.getContent());

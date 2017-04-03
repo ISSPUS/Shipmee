@@ -349,9 +349,8 @@ len_serious: total de quejas graves
 
 									<div class="col-lg-4">
 										<spring:message code="complaint.omit" var="omit" />
-										<spring:message code="complaint.omitted" var="omitted" />
 										<button type="button" class="btn btn-success btn-md btn-block"
-											onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${omitted }';">
+											onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=Omitted';">
 											<jstl:out value="${omit}" />
 											&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i>
 										</button>
@@ -360,7 +359,7 @@ len_serious: total de quejas graves
 									<div class="col-lg-4">
 										<spring:message code="complaint.mild" var="mild" />
 										<button type="button" class="btn btn-warning btn-md btn-block"
-											onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${mild }';">
+											onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=Mild';">
 											<jstl:out value="${mild}" />
 											&nbsp;<i class="glyphicon glyphicon-thumbs-down"></i>
 										</button>
@@ -369,7 +368,7 @@ len_serious: total de quejas graves
 									<div class="col-lg-4">
 										<spring:message code="complaint.serious" var="serious" />
 										<button type="button" class="btn btn-danger btn-md btn-block"
-											onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${serious }';">
+											onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=Serious';">
 											<jstl:out value="${serious}" />
 											&nbsp;<i class="glyphicon glyphicon-warning-sign"></i>
 										</button>

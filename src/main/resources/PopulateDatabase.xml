@@ -50,6 +50,9 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+				<bean class="security.Authority">
 					<property name="authority" value="MODERATOR" />
 				</bean>
 			</list>
@@ -127,6 +130,13 @@
 		<property name="since" value="3"/>
 	</bean>
 	
+	<bean id="rank4" class="domain.Rank">
+		<property name="title" value="title4"/>
+		<property name="description" value="description4"/>
+		<property name="icon" value="http://www.icon4.com"/>
+		<property name="since" value="4"/>
+	</bean>
+	
 	<!-- User -->
 	
 	<bean id="user1" class="domain.User">
@@ -185,18 +195,24 @@
 			</list>
 		</property>
 	</bean>
-	
-	<!-- Moderator -->
-	
-	<bean id="moderator1" class="domain.Moderator">
+		
+	<bean id="moderator1" class="domain.User">
 		<property name="name" value="Antonio"/>
 		<property name="surname" value="López"/>
 		<property name="email" value="Antonio@gmail.com"/>
 		<property name="birthDate" value="1994/11/28"/>
 		<property name="phone" value="689836654"/>
 		<property name="dni" value="49983586H"/>
+		<property name="dniPhoto" value=""/>
 		<property name="photo" value=""/>
 		<property name="userAccount" ref="userAccount4"/>
+		<property name="isVerified" value="true"/>
+		<property name="isActive" value="true"/>
+		<property name="rank" ref="rank4"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Vehicle -->

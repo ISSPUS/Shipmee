@@ -41,16 +41,16 @@ public class Complaint extends DomainEntity {
 
 
 	// Relationships ----------------------------------------------------------
-	private Moderator moderator;
+	private User moderator;
 	private User creator;
 	private User involved;
 	
 	@Valid
 	@ManyToOne(optional=true)
-	public Moderator getModerator() {
+	public User getModerator() {
 		return moderator;
 	}
-	public void setModerator(Moderator moderator) {
+	public void setModerator(User moderator) {
 		this.moderator = moderator;
 	}
 	

@@ -11,8 +11,8 @@ import domain.Complaint;
 @Repository
 public interface ComplaintRepository extends JpaRepository<Complaint, Integer> {
 
-	@Query("select c from Complaint c where c.type is null")
-	Page<Complaint> findAllNotResolved(Pageable page);
+	@Query("select c from Complaint c where c.type is null and c.creator.id != ?1 and c.involved.id != ?1")
+	Page<Complaint> findAllNotResolvedAndNotInvolved(Pageable page, int id);
 	
 	@Query("select c from Complaint c where c.type like 'Serious' or c.type like 'Grave'")
 	Page<Complaint> findAllSerious(Pageable page);

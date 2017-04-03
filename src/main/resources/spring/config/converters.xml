@@ -21,9 +21,6 @@
 		<bean class="converters.UserToStringConverter" />
 		<bean class="converters.StringToUserConverter" />
 		
-		<bean class="converters.ModeratorToStringConverter" />
-		<bean class="converters.StringToModeratorConverter" />
-		
 		<bean class="converters.RankToStringConverter" />
 		<bean class="converters.StringToRankConverter" />
 		
