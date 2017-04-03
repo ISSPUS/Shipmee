@@ -68,8 +68,10 @@ public class UserTest extends AbstractTest {
 	 * @test Modify an User
 	 * @result The User is modified and persisted into database
 	 */
-	//@Test
+	@Test
 	public void positiveEditUser() {
+		authenticate("user2");
+		
 		User user;
 
 		user = userService.findOne(UtilTest.getIdFromBeanName("user2"));
@@ -80,5 +82,89 @@ public class UserTest extends AbstractTest {
 		user = userService.save(user);
 
 		Assert.isTrue(user.getName().equals("Mariano"));
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Register User
+	 * @result We try register an User without email
+	 *         <code>NullPointerException</code> is expected
+	 */
+	@Test(expected = NullPointerException.class)
+	public void negativeRegisterUser() {
+		User user;
+		DateFormat formatter;
+		
+		formatter = new SimpleDateFormat("dd/MM/yyyy");
+		user = userService.create();
+		user.setName("John");
+		user.setSurname("Doe");
+		user.setPhone("123456789");
+		try {
+			user.setBirthDate(formatter.parse("02/02/1995"));
+		} catch (ParseException e) {
+			log.error(e.getMessage());
+		}
+		
+		user = userService.save(user);
+
+		Assert.isTrue(user.getId() != 0 && userService.findOne(user.getId()).getName().equals("John")
+				&& userService.findOne(user.getId()).getEmail().equals("test@test.com"));
+	}
+	
+	/**
+	 * @Test Register User
+	 * @result We try register an User as logged User
+	 *         <code>IllegalArgumentException</code> is expected
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeRegisterUser1() {
+		authenticate("user2");
+		
+		User user;
+		DateFormat formatter;
+		
+		formatter = new SimpleDateFormat("dd/MM/yyyy");
+		user = userService.create();
+		user.setName("John");
+		user.setSurname("Doe");
+		user.setEmail("test@test.com");
+		user.setPhone("123456789");
+		try {
+			user.setBirthDate(formatter.parse("02/02/1995"));
+		} catch (ParseException e) {
+			log.error(e.getMessage());
+		}
+		
+		user = userService.save(user);
+
+		Assert.isTrue(user.getId() != 0 && userService.findOne(user.getId()).getName().equals("John")
+				&& userService.findOne(user.getId()).getEmail().equals("test@test.com"));
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Modify an User
+	 * @result We try modify other User 
+	 *         <code>IllegalArgumentException</code> is expected
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeEditUser() {
+		authenticate("user1");
+		
+		User user;
+
+		user = userService.findOne(UtilTest.getIdFromBeanName("user2"));
+
+		Assert.isTrue(user.getName().equals("Guillermo"));
+
+		user.setName("Mariano");
+		user = userService.save(user);
+
+		Assert.isTrue(user.getName().equals("Mariano"));
+		
+		unauthenticate();
 	}
 }
