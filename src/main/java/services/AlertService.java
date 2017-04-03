@@ -74,14 +74,6 @@ public class AlertService {
 		
 		return result;
 	}
-	
-	public Collection<Alert> findAll() {
-		Collection<Alert> result;
-
-		result = alertRepository.findAll();
-
-		return result;
-	}
 
 	// Other business methods -------------------------------------------------
 	
