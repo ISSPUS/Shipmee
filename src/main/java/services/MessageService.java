@@ -58,7 +58,17 @@ public class MessageService {
 	public Message save(Message message) {
 		Assert.notNull(message);
 		Message result;
-
+		Actor actor;
+		long segundos;
+		Date momento;
+		
+		actor = actorService.findByPrincipal();
+		segundos = System.currentTimeMillis() - 1;
+		momento = new Date(segundos);
+		message.setMoment(momento);
+		Assert.notNull(actor);
+		message.setSender(actor);
+		
 		result = messageRepository.save(message);
 		
 		return result;
