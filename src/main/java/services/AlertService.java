@@ -54,7 +54,8 @@ public class AlertService {
 	
 	public Alert save(Alert alert) {
 		Assert.notNull(alert);
-		
+		Assert.isTrue(alert.getUser().equals(userService.findByPrincipal()));
+		Assert.isTrue(alert.getType().equals("Route") || alert.getType().equals("Shipment"));
 		alert = alertRepository.save(alert);
 			
 		return alert;
@@ -63,6 +64,7 @@ public class AlertService {
 	public void delete(Alert alert) {
 		Assert.notNull(alert);
 		Assert.isTrue(alert.getId() != 0);
+		Assert.isTrue(alert.getUser().equals(userService.findByPrincipal()));
 						
 		alertRepository.delete(alert);
 	}
@@ -71,6 +73,8 @@ public class AlertService {
 		Alert result;
 		
 		result = alertRepository.findOne(alertId);
+		Assert.isTrue(result.getUser().equals(userService.findByPrincipal()));
+		
 		
 		return result;
 	}
