@@ -140,14 +140,14 @@
 	<!-- User -->
 	
 	<bean id="user1" class="domain.User">
-		<property name="name" value="Manolo"/>
-		<property name="surname" value="Ruiz"/>
-		<property name="email" value="manolo@gmail.com"/>
+		<property name="name" value="Mariano"/>
+		<property name="surname" value="García"/>
+		<property name="email" value="mariano@shipmee.es"/>
 		<property name="birthDate" value="1992/10/05"/>
 		<property name="phone" value="666777666"/>
 		<property name="dni" value="23456789B"/>
-		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
-		<property name="photo" value="http://i.imgur.com/0TQ9HiZ.jpg"/>
+		<property name="dniPhoto" value="http://i.imgur.com/38JnZ3Z.png"/>
+		<property name="photo" value="http://i.imgur.com/v11ts3z.png"/>
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
@@ -159,14 +159,14 @@
 	</bean>
 	
 	<bean id="user2" class="domain.User">
-		<property name="name" value="Guillermo"/>
-		<property name="surname" value="Gamero"/>
-		<property name="email" value="Guillermo@gmail.com"/>
+		<property name="name" value="Lola"/>
+		<property name="surname" value="Lopez"/>
+		<property name="email" value="lola@shipmee.es"/>
 		<property name="birthDate" value="1995/10/01"/>
 		<property name="phone" value="676554345"/>
 		<property name="dni" value="34567890C"/>
-		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
-		<property name="photo" value="http://i.imgur.com/qAEs1vs.jpg"/>
+		<property name="dniPhoto" value="http://i.imgur.com/MmE81ot.png"/>
+		<property name="photo" value="http://i.imgur.com/rDN9OW4.png"/>
 		<property name="userAccount" ref="userAccount3"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>

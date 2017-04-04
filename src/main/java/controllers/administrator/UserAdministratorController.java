@@ -62,6 +62,7 @@ public class UserAdministratorController extends AbstractController {
 		result.addObject("isActive", isActive);
 		result.addObject("verificationPending", verificationPending);
 		result.addObject("p", page);
+		result.addObject("total_pages", users.getTotalPages());
 
 		return result;
 	}

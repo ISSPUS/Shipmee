@@ -53,6 +53,7 @@
 		<security:intercept-url pattern="/user/*" access="permitAll" />
 
 		<security:intercept-url pattern="/about/info.do" access="permitAll" /> 
+		<security:intercept-url pattern="/userGeneralTerms/info.do" access="permitAll"/>
 		<security:intercept-url pattern="/shipment/*" access="permitAll" />
 		<security:intercept-url pattern="/rating/*" access="permitAll" />
 		<security:intercept-url pattern="/route/*" access="permitAll" />

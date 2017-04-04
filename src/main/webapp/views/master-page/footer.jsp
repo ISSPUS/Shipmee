@@ -18,6 +18,10 @@
 		 			<div class="hline-w"></div>
 		 			<p><spring:message code="master.page.about.foot.text" /></p>
 		 			
+		 			<p>
+		 				<a href="/Shipmee/userGeneralTerms/info.do" target="blank"><spring:message code="cgu.title" /></a>
+		 			</p>
+		 			
 		 			<div class="language text-sample">
 		 				<a id="es" href="?language=es"><img id="translate-flag" src="images/es.gif"/>Español</a> | 
 						<a id="en" href="?language=en"><img id="translate-flag" src="images/en.gif"/>English</a>
