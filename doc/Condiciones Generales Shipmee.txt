@@ -294,7 +294,7 @@ The prices are determined by the creator of the Service, thus, they are chosen b
 
 5.2 Costes de Gestión.
 
-En el contexto de las contraofertas, Shipmee, podrá cobrar por el uso de la Plataforma unos Gastos de Gestión. Se cobrarán en el momento de aceptar la oferta y dicha cuantía podrá cambiar a  lo largo del tiempo.
+En el contexto de las contraofertas, Shipmee, podrá cobrar por el uso de la Plataforma unos Gastos de Gestión. Se cobrarán en el momento de aceptar la oferta y dicha cuantía podrá cambiar a lo largo del tiempo.
 
 5.2 Management costs.
 
