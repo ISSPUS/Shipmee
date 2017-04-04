@@ -146,7 +146,7 @@
 		<property name="birthDate" value="1992/10/05"/>
 		<property name="phone" value="666777666"/>
 		<property name="dni" value="23456789B"/>
-		<property name="dniPhoto" value=""/>
+		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
 		<property name="photo" value="http://i.imgur.com/0TQ9HiZ.jpg"/>
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="isVerified" value="true"/>
@@ -165,7 +165,7 @@
 		<property name="birthDate" value="1995/10/01"/>
 		<property name="phone" value="676554345"/>
 		<property name="dni" value="34567890C"/>
-		<property name="dniPhoto" value=""/>
+		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
 		<property name="photo" value="http://i.imgur.com/qAEs1vs.jpg"/>
 		<property name="userAccount" ref="userAccount3"/>
 		<property name="isVerified" value="true"/>
@@ -184,7 +184,7 @@
 		<property name="birthDate" value="1983/02/09"/>
 		<property name="phone" value="676554311"/>
 		<property name="dni" value="34567895C"/>
-		<property name="dniPhoto" value=""/>
+		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
 		<property name="photo" value="images/anonymous.png"/>
 		<property name="userAccount" ref="userAccount5"/>
 		<property name="isVerified" value="false"/>
@@ -203,7 +203,7 @@
 		<property name="birthDate" value="1994/11/28"/>
 		<property name="phone" value="689836654"/>
 		<property name="dni" value="49983586H"/>
-		<property name="dniPhoto" value=""/>
+		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
 		<property name="photo" value="images/anonymous.png"/>
 		<property name="userAccount" ref="userAccount4"/>
 		<property name="isVerified" value="true"/>

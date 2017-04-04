@@ -98,7 +98,7 @@ public class UserService {
 	private void checkUser(User a){
 		boolean isAdmin;
 		boolean isAuthenticated;
-		User actUser = null;
+		int actUserId;
 		User userInDB = null;
 		Authority userAuth = new Authority();
 		Authority adminAuth = new Authority();
@@ -109,10 +109,10 @@ public class UserService {
 		adminAuth.setAuthority(Authority.ADMIN);
 
 		if(a.getId() != 0){
-			actUser = this.findByPrincipal();
+			actUserId = actorService.findByPrincipal().getId();
 			userInDB = this.findOne(a.getId());
 			
-			Assert.isTrue(isAdmin || (a.getId() == actUser.getId()),
+			Assert.isTrue(isAdmin || (a.getId() == actUserId),
 					"UserService.checkUser.modifyByOtherUser");
 			
 			if(!(a.getDniPhoto().equals(userInDB.getDniPhoto()) && 
@@ -188,7 +188,7 @@ public class UserService {
 	}
 	
 	public void turnIntoModerator(int userId){
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "UserService.findAllByVerifiedActive.RoleNotPermitted");
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "UserService.turnIntoModerator.RoleNotPermitted");
 
 		User dbUser;
 		Collection<Authority> authorities;
@@ -196,6 +196,8 @@ public class UserService {
 		UserAccount userAccount;
 		
 		dbUser = this.findOne(userId);
+		Assert.isTrue(dbUser.getIsVerified(), "UserService.turnIntoModerator.UserNotVerified");
+
 		modAuthority = new Authority();
 		
 		modAuthority.setAuthority(Authority.MODERATOR);
@@ -215,7 +217,7 @@ public class UserService {
 	}
 	
 	public void unturnIntoModerator(int userId){
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "UserService.findAllByVerifiedActive.RoleNotPermitted");
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "UserService.unturnIntoModerator.RoleNotPermitted");
 
 		User dbUser;
 		Collection<Authority> authorities;
@@ -239,6 +241,23 @@ public class UserService {
 			
 			this.save(dbUser);
 		}
+	}
+	
+	public void verifyUser(int userId){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "UserService.verifyUser.RoleNotPermitted");
+
+		User dbUser;
+		
+		dbUser = this.findOne(userId);
+		
+		Assert.isTrue(!dbUser.getPhoto().equals(""),"UserService.verifyUser.PhotoNotFound");
+		Assert.isTrue(!dbUser.getDniPhoto().equals(""),"UserService.verifyUser.PhotoDniNotFound");
+		Assert.isTrue(!dbUser.getDni().equals(""),"UserService.verifyUser.DniNumberNotFound");
+		Assert.isTrue(!dbUser.getPhone().equals(""),"UserService.verifyUser.PhoneNotFound");
+		
+		dbUser.setIsVerified(true);
+		
+		this.save(dbUser);
 	}
 
 }

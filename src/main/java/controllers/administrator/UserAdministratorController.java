@@ -101,5 +101,23 @@ public class UserAdministratorController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/verifyUser", method = RequestMethod.GET)
+	public ModelAndView verifyUser(@RequestParam int userId) {
+		ModelAndView result;
+		String message;
+
+		try {
+			userService.verifyUser(userId);
+			message = "user.verifyUser.ok";
+		} catch (Exception e) {
+			message = "user.verifyUser.error";
+		}
+
+		result = new ModelAndView("redirect:/user/administrator/list.do");
+		result.addObject("message", message);
+
+		return result;
+	}
 
 }
