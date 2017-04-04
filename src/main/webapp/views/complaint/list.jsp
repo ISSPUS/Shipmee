@@ -31,7 +31,15 @@
 <link rel="stylesheet" href="styles/assets/css/style-list.css"
 	type="text/css">
 
+<!-- variables necesarias para la vista 
 
+complaints: lista de quejas
+len_omitted: total de quejas omitidas
+len_mild: total de quejas  leves
+len_serious: total de quejas graves
+
+
+-->
 <style>
 @font-face {
 	font-family: 'icons';
@@ -46,6 +54,117 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+.info-moderator-Mild {
+	vertical-align: middle;
+	text-align: center;
+	color: white !important;
+	border: 0.5px solid #ed9c28;
+	background: #ed9c28;
+	border-radius: 10px;
+}
+
+.info-moderator-Omitted {
+	vertical-align: middle;
+	text-align: center;
+	color: white !important;
+	border: 0.5px solid #47a447;
+	background: #47a447;
+	border-radius: 10px;
+}
+
+.info-moderator-Serious {
+	vertical-align: middle;
+	text-align: center;
+	color: white !important;
+	border: 0.5px solid #d9534f;
+	background: #d9534f;
+	border-radius: 10px;
+}
+
+.well {
+	padding: 0 !important;
+}
+
+.panel-default {
+	margin: 0 auto;
+	float: None;
+}
+
+/*NUEVO*/
+.huge {
+	font-size: 40px;
+}
+
+.panel-green {
+	border-color: #5cb85c;
+}
+
+.panel-green>.panel-heading {
+	border-color: #5cb85c;
+	color: white;
+	background-color: #5cb85c;
+}
+
+.panel-green>a {
+	color: #5cb85c;
+}
+
+.panel-green>a:hover {
+	color: #3d8b3d;
+}
+
+.panel-red {
+	border-color: #d9534f;
+}
+
+.panel-red>.panel-heading {
+	border-color: #d9534f;
+	color: white;
+	background-color: #d9534f;
+}
+
+.panel-red>a {
+	color: #d9534f;
+}
+
+.panel-red>a:hover {
+	color: #b52b27;
+}
+
+.panel-yellow {
+	border-color: #f0ad4e;
+}
+
+.panel-yellow>.panel-heading {
+	border-color: #f0ad4e;
+	color: white;
+	background-color: #f0ad4e;
+}
+
+.panel-yellow>a {
+	color: #f0ad4e;
+}
+
+.panel-yellow>a:hover {
+	color: #df8a13;
+}
+
+.panel-red>.panel-heading {
+	border-color: #d9534f;
+	color: white;
+	background-color: #d9534f;
+}
+
+.panel-red>a {
+	color: #d9534f;
+}
+
+.panel-red>a:hover {
+	color: #d9534f;
+}
+
+
 </style>
 
 <div class="blue-barra">
@@ -62,131 +181,210 @@
 
 <div class="container">
 
-	<div class="row profile">
-		<div class="col-md-9">
-			<div class="profile-content">
+	<!-- Menu informacion de las quejas -->
+	<security:authorize access="hasRole('ADMIN')">
 
-				<div class="panel panel-default">
-					<div class="panel-body">
-
-						<div class="table-container">
-							<table class="table table-filter">
-								<tbody>
-
-
-									<jstl:choose>
-										<jstl:when test="${not empty complaints}">
-											<jstl:forEach items="${complaints}" var="complaint">
-
-												<tr>
-
-													<td>
-
-
-														<div class="row">
-
-															<div class="info-salida col-lg-6"
-																style="margin-bottom: 2%; font-size: 16px;">
-
-																<spring:message code="complaint.creator" />
-																:
-																<jstl:out
-																	value="${complaint.creator.userAccount.username}" />
-
-
-																<br />
-																<spring:message code="complaint.involved" />
-																:
-																<jstl:out
-																	value="${complaint.involved.userAccount.username}" />
-
-																<br />
-																<spring:message code="complaint.explanation" />
-																:
-																<jstl:out value="${complaint.explanation}" />
-
-																<security:authorize access="hasRole('ADMIN')">
-
-																	<br />
-																	<spring:message code="complaint.moderator" />
-																:
-																<jstl:out value="${complaint.moderator.userAccount.username}" />
-
-																	<br />
-																	<spring:message code="complaint.type" />
-																:
-																<jstl:out value="${complaint.type}" />
-
-																</security:authorize>
-
-															</div>
-
-															<security:authorize access="hasRole('MODERATOR')">
-																<div class="btn-group btn-group-justified">
-
-																	<div class="col-lg-3" style="margin-top: 5%;">
-																		<spring:message code="complaint.omit" var="omit" />
-																		<spring:message code="complaint.omitted" var="omitted" />
-																		<button type="button"
-																			class="btn btn-success btn-md btn-block"
-																			onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${omitted }';">
-																			<jstl:out value="${omit}" />
-																			&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i>
-																		</button>
-																	</div>
-
-																	<div class="col-lg-3" style="margin-top: 5%;">
-																		<spring:message code="complaint.mild" var="mild" />
-																		<button type="button"
-																			class="btn btn-warning btn-md btn-block"
-																			onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${mild }';">
-																			<jstl:out value="${mild}" />
-																			&nbsp;<i class="glyphicon glyphicon-thumbs-down"></i>
-																		</button>
-																	</div>
-
-																	<div class="col-lg-3" style="margin-top: 5%;">
-																		<spring:message code="complaint.serious" var="serious" />
-																		<button type="button"
-																			class="btn btn-danger btn-md btn-block"
-																			onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=${serious }';">
-																			<jstl:out value="${serious}" />
-																			&nbsp;<i class="glyphicon glyphicon-warning-sign"></i>
-																		</button>
-																	</div>
-
-																</div>
-															</security:authorize>
-
-														</div>
-
-
-
-
-													</td>
-												</tr>
-											</jstl:forEach>
-										</jstl:when>
-										<jstl:otherwise>
-											<p>
-												<spring:message code="complaint.results" />
-											</p>
-										</jstl:otherwise>
-									</jstl:choose>
-								</tbody>
-							</table>
-
-
+		<div class="row" style="margin-top: 2%">
+			<div class="center-block">
+				<div class="col-lg-4 col-md-4 cuadro">
+					<div class="panel panel-green">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-thumbs-up fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge">12</div>
+									<div>
+										<spring:message code="complaint.omitted" />
+										!
+									</div>
+								</div>
+							</div>
 						</div>
-
-
-
-
+						<a href="complaint/administrator/list.do?type=Omitted&page=1">
+							<div class="panel-footer">
+								<span class="pull-left"><spring:message code="complaint.details" /></span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 cuadro">
+					<div class="panel panel-yellow">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-thumbs-down fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge">124</div>
+									<div>
+										<spring:message code="complaint.mild" />
+										!
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="complaint/administrator/list.do?type=Mild&page=1">
+							<div class="panel-footer">
+								<span class="pull-left"><spring:message code="complaint.details" /></span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 cuadro">
+					<div class="panel panel-red">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-exclamation-triangle fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge">124</div>
+									<div>
+										<spring:message code="complaint.serious" />
+										!
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="complaint/administrator/list.do?type=Serious&page=1">
+							<div class="panel-footer">
+								<span class="pull-left"><spring:message code="complaint.details" /></span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
-
 		</div>
+	</security:authorize>
+	<!-- Listado de quejas -->
 
-	</div>
+	<jstl:choose>
+		<jstl:when test="${not empty complaints}">
+			<jstl:forEach items="${complaints}" var="complaint">
+				<div
+					class=" col-xs-12 col-sm-10 col-md-7 col-lg-7 table-container panel panel-default"
+					style="margin-top: 1%; margin-bottom: 1%">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="col-xs-6">
+								<div class="span3 text-center">
+									<h4>
+										<a><spring:message code="complaint.creator" />
+											${complaint.creator.userAccount.username}</a>
+									</h4>
+									<a href="user/profile.do?userId=${route.creator.id}"> <jstl:choose>
+											<jstl:when test="${not empty complaint.creator.photo}">
+												<jstl:set var="imageUser" value="${complaint.creator.photo}" />
+											</jstl:when>
+											<jstl:otherwise>
+												<jstl:set var="imageUser" value="images/anonymous.png" />
+											</jstl:otherwise>
+										</jstl:choose> <img src="${imageUser}" name="aboutme" width="70" height="70"
+										border="0" class="img-circle">
+									</a>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="span3 text-center">
+									<h4>
+										<a><spring:message code="complaint.involved" />
+											${complaint.involved.userAccount.username}</a>
+									</h4>
+									<a href="user/profile.do?userId=${route.involved.id}"> <jstl:choose>
+											<jstl:when test="${not empty route.involved.photo}">
+												<jstl:set var="imageUserEnvolved"
+													value="${complaint.involved.photo}" />
+											</jstl:when>
+											<jstl:otherwise>
+												<jstl:set var="imageUserEnvolved"
+													value="images/anonymous.png" />
+											</jstl:otherwise>
+										</jstl:choose> <img src="${imageUserEnvolved}" name="aboutme" width="70"
+										height="70" border="0" class="img-circle">
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12">
+							<p>${complaint.explanation}</p>
+						</div>
+						<security:authorize access="hasRole('ADMIN')">
+							<div class="col-xs-12">
+								<div class="info-moderator-${complaint.type}">
+									<spring:message code="complaint.mild" var="mild" />
+									<div style="margin-bottom: 0.5%">
+										<h5>
+											<jstl:choose>
+												<jstl:when test="${complaint.type == 'Omitted' }">
+													<i class="glyphicon glyphicon-thumbs-up"></i>
+												</jstl:when>
+												<jstl:when test="${complaint.type == 'Mild'   }">
+													<i class="glyphicon glyphicon-thumbs-down"></i>
+												</jstl:when>
+												<jstl:when test="${complaint.type == 'Serious'}">
+													<i class="glyphicon glyphicon-warning-sign"></i>
+												</jstl:when>
+											</jstl:choose>
+											<spring:message code="moderate.by" />
+											<a style="color: white ! important;"
+												href="user/profile.do?userId=${complaint.moderator.id}"><strong><jstl:out
+														value="${complaint.moderator.userAccount.username}" /></strong></a>
+										</h5>
+									</div>
+								</div>
+							</div>
+						</security:authorize>
+						<div class="col-xs-12">
+							<security:authorize access="hasRole('MODERATOR')">
+								<div class="btn-group btn-group-justified"
+									style="margin-bottom: 2% ! important">
+
+									<div class="col-lg-4">
+										<spring:message code="complaint.omit" var="omit" />
+										<button type="button" class="btn btn-success btn-md btn-block"
+											onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=Omitted';">
+											<jstl:out value="${omit}" />
+											&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i>
+										</button>
+									</div>
+
+									<div class="col-lg-4">
+										<spring:message code="complaint.mild" var="mild" />
+										<button type="button" class="btn btn-warning btn-md btn-block"
+											onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=Mild';">
+											<jstl:out value="${mild}" />
+											&nbsp;<i class="glyphicon glyphicon-thumbs-down"></i>
+										</button>
+									</div>
+
+									<div class="col-lg-4">
+										<spring:message code="complaint.serious" var="serious" />
+										<button type="button" class="btn btn-danger btn-md btn-block"
+											onclick="location.href = 'complaint/moderator/manage.do?complaintId=${complaint.id}&type=Serious';">
+											<jstl:out value="${serious}" />
+											&nbsp;<i class="glyphicon glyphicon-warning-sign"></i>
+										</button>
+									</div>
+
+								</div>
+							</security:authorize>
+						</div>
+					</div>
+				</div>
+			</jstl:forEach>
+		</jstl:when>
+		<jstl:otherwise>
+			<p>
+				<spring:message code="complaint.results" />
+			</p>
+		</jstl:otherwise>
+	</jstl:choose>
 </div>

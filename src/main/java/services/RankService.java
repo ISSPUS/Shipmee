@@ -4,20 +4,17 @@ package services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
-import domain.Moderator;
-import repositories.ModeratorRepository;
-import security.LoginService;
-import security.UserAccount;
+import domain.Rank;
+import repositories.RankRepository;
 
 @Service
 @Transactional
-public class ModeratorService {
+public class RankService {
 	//Managed repository -----------------------------------------------------
 	
 	@Autowired
-	private ModeratorRepository moderatorRepository;
+	private RankRepository rankRepository;
 
 	//Supporting services ----------------------------------------------------
 	
@@ -25,28 +22,26 @@ public class ModeratorService {
 	
 	//Constructors -----------------------------------------------------------
 
-	public ModeratorService(){
+	public RankService(){
 		super();
 	}
 	
 	//Simple CRUD methods ----------------------------------------------------
-
+	
 	
 	//Other business methods -------------------------------------------------
 
 	/**
-	 * Devuelve el user que está realizando la operación
+	 * Used by define the default Rank when a user is created
+	 * @return
 	 */
-	public Moderator findByPrincipal(){
-		Moderator result;
-		UserAccount userAccount;
+	public Rank initializeUser(){
+		Rank res;
 		
-		userAccount = LoginService.getPrincipal();
-		Assert.notNull(userAccount);
-		result = moderatorRepository.findByModeratorAccountId(userAccount.getId());
-		Assert.notNull(result);
+		System.out.println("RankService.initializeUser funciona random ! !");
 		
-		return result;
+		res = rankRepository.findAll().iterator().next();
+		
+		return res;
 	}
-
 }

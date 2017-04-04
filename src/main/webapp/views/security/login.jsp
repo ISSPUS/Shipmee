@@ -54,7 +54,14 @@
 	
 </form:form>
 </div>
-		</div>
+
+<div class="frase-box">
+						<spring:message code="login.notAccount.before" />
+						<b><a href="user/register.do" target="_blank">
+							<spring:message code="login.notAccount.link" />
+						</a></b>
+</div>
+	</div>
 		
 	</div>
 </div>

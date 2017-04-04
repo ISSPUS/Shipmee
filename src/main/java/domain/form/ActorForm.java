@@ -1,35 +1,40 @@
-package domain;
+package domain.form;
 
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import security.UserAccount;
-
-@Entity
-@Access(AccessType.PROPERTY)
-public abstract class Actor extends DomainEntity {
+public class ActorForm {
 
 	// Attributes -------------------------------------------------------------
+	private int id;
 	private String name;
 	private String surname;
 	private String email;
 	private Date birthDate;
 	private String phone;
 	private String dni;
+	private String dniPhoto;
 	private String photo;
-
+	private String userName;
+	private String password;
+	private String repeatedPassword;
+	private boolean acceptLegalCondition;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	@NotBlank
 	@NotNull
@@ -68,7 +73,6 @@ public abstract class Actor extends DomainEntity {
 		this.birthDate = birthDate;
 	}
 
-	@NotNull
 	public String getPhone() {
 		return phone;
 	}
@@ -76,7 +80,6 @@ public abstract class Actor extends DomainEntity {
 		this.phone = phone;
 	}
 
-	@NotNull
 	public String getDni() {
 		return dni;
 	}
@@ -84,7 +87,15 @@ public abstract class Actor extends DomainEntity {
 		this.dni = dni;
 	}
 
-	@NotNull
+	@URL
+	public String getDniPhoto() {
+		return dniPhoto;
+	}
+	public void setDniPhoto(String dniPhoto) {
+		this.dniPhoto = dniPhoto;
+	}
+	
+	@URL
 	public String getPhoto() {
 		return photo;
 	}
@@ -92,19 +103,35 @@ public abstract class Actor extends DomainEntity {
 		this.photo = photo;
 	}
 	
-	// Relationships ----------------------------------------------------------
-	private UserAccount userAccount;
-
+	@NotBlank
 	@NotNull
-	@Valid
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	public UserAccount getUserAccount() {
-		return userAccount;
+	@Size(min = 5, max = 32)
+	public String getUserName() {
+		return userName;
 	}
-
-	public void setUserAccount(UserAccount userAccount) {
-		this.userAccount = userAccount;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
-
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getRepeatedPassword() {
+		return repeatedPassword;
+	}
+	public void setRepeatedPassword(String repeatedPassword) {
+		this.repeatedPassword = repeatedPassword;
+	}
+	
+	public boolean getAcceptLegalCondition() {
+		return acceptLegalCondition;
+	}
+	public void setAcceptLegalCondition(boolean acceptLegalCondition) {
+		this.acceptLegalCondition = acceptLegalCondition;
+	}
+	
 }

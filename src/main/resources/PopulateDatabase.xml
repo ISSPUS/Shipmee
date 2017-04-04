@@ -50,6 +50,9 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+				<bean class="security.Authority">
 					<property name="authority" value="MODERATOR" />
 				</bean>
 			</list>
@@ -86,9 +89,10 @@
 		<property name="name" value="Miguel"/>
 		<property name="surname" value="Rodriguez"/>
 		<property name="email" value="miguel@gmail.com"/>
-		<property name="birthDate" value="1995/10/24 00:00"/>
+		<property name="birthDate" value="1995/10/24"/>
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
+		<property name="photo" value=""/>
 		<property name="userAccount" ref="userAccount1"/>
 	</bean>
 	
@@ -96,9 +100,10 @@
 		<property name="name" value="Shipmee"/>
 		<property name="surname" value="S.A"/>
 		<property name="email" value="no-reply@shipmee.es"/>
-		<property name="birthDate" value="2017/03/03 00:00"/>
+		<property name="birthDate" value="2017/03/03"/>
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
+		<property name="photo" value=""/>
 		<property name="userAccount" ref="userAccount6"/>
 	</bean>
 	
@@ -125,15 +130,23 @@
 		<property name="since" value="3"/>
 	</bean>
 	
+	<bean id="rank4" class="domain.Rank">
+		<property name="title" value="title4"/>
+		<property name="description" value="description4"/>
+		<property name="icon" value="http://www.icon4.com"/>
+		<property name="since" value="4"/>
+	</bean>
+	
 	<!-- User -->
 	
 	<bean id="user1" class="domain.User">
 		<property name="name" value="Manolo"/>
 		<property name="surname" value="Ruiz"/>
 		<property name="email" value="manolo@gmail.com"/>
-		<property name="birthDate" value="1992/10/05 00:00"/>
+		<property name="birthDate" value="1992/10/05"/>
 		<property name="phone" value="666777666"/>
 		<property name="dni" value="23456789B"/>
+		<property name="dniPhoto" value=""/>
 		<property name="photo" value="http://i.imgur.com/0TQ9HiZ.jpg"/>
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="isVerified" value="true"/>
@@ -149,9 +162,10 @@
 		<property name="name" value="Guillermo"/>
 		<property name="surname" value="Gamero"/>
 		<property name="email" value="Guillermo@gmail.com"/>
-		<property name="birthDate" value="1995/10/01 00:00"/>
+		<property name="birthDate" value="1995/10/01"/>
 		<property name="phone" value="676554345"/>
 		<property name="dni" value="34567890C"/>
+		<property name="dniPhoto" value=""/>
 		<property name="photo" value="http://i.imgur.com/qAEs1vs.jpg"/>
 		<property name="userAccount" ref="userAccount3"/>
 		<property name="isVerified" value="true"/>
@@ -167,9 +181,11 @@
 		<property name="name" value="Carlos"/>
 		<property name="surname" value="García"/>
 		<property name="email" value="carlos@gmail.com"/>
-		<property name="birthDate" value="1983/02/09 00:00"/>
+		<property name="birthDate" value="1983/02/09"/>
 		<property name="phone" value="676554311"/>
 		<property name="dni" value="34567895C"/>
+		<property name="dniPhoto" value=""/>
+		<property name="photo" value="images/anonymous.png"/>
 		<property name="userAccount" ref="userAccount5"/>
 		<property name="isVerified" value="false"/>
 		<property name="isActive" value="true"/>
@@ -179,17 +195,24 @@
 			</list>
 		</property>
 	</bean>
-	
-	<!-- Moderator -->
-	
-	<bean id="moderator1" class="domain.Moderator">
+		
+	<bean id="moderator1" class="domain.User">
 		<property name="name" value="Antonio"/>
 		<property name="surname" value="López"/>
 		<property name="email" value="Antonio@gmail.com"/>
-		<property name="birthDate" value="1994/11/28 00:00"/>
+		<property name="birthDate" value="1994/11/28"/>
 		<property name="phone" value="689836654"/>
 		<property name="dni" value="49983586H"/>
+		<property name="dniPhoto" value=""/>
+		<property name="photo" value="images/anonymous.png"/>
 		<property name="userAccount" ref="userAccount4"/>
+		<property name="isVerified" value="true"/>
+		<property name="isActive" value="true"/>
+		<property name="rank" ref="rank4"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Vehicle -->
@@ -513,6 +536,22 @@
 		<property name="date" value="2017/05/09 11:02"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
+		<property name="type" value="Shipment"/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
+	<bean id="alert3" class="domain.Alert">
+		<property name="date" value="2017/07/01"/>
+		<property name="origin" value="Sevilla"/>
+		<property name="destination" value="Madrid"/>
+		<property name="type" value="Route"/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<bean id="alert4" class="domain.Alert">
+		<property name="date" value="2017/07/01"/>
+		<property name="origin" value="Sevilla"/>
+		<property name="destination" value="Madrid"/>
 		<property name="type" value="Shipment"/>
 		<property name="user" ref="user2"/>
 	</bean>

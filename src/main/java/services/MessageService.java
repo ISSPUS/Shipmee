@@ -55,14 +55,6 @@ public class MessageService {
 		return result;
 	}
 	
-	public Message findOne(int messageId) {
-		Message result;
-
-		result = messageRepository.findOne(messageId);
-
-		return result;
-	}
-	
 	public Message save(Message message) {
 		Assert.notNull(message);
 		Message result;

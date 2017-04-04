@@ -20,7 +20,8 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-messages.css"
 	type="text/css">
-	
+<link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+
 <style>
 .date .dropdown-menu {
 	background-color: white ! important;
@@ -43,7 +44,7 @@
 </div>
 
 <div class="container">
-	<div class="row formulario">
+	<div class="row formulario-sm">
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"
 			style="margin: 0 auto; float: none;">
 			<form:form action="vehicle/user/edit.do" modelAttribute="vehicle"
@@ -59,7 +60,7 @@
 						<spring:message code="vehicle.brand" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="brand" class="form-control" id="brand" />
+						<form:input path="brand" class="form-control" id="brand" required="true"/>
 						<form:errors class="error create-message-error" path="brand" />
 					</div>
 				</div>
@@ -69,7 +70,7 @@
 						<spring:message code="vehicle.model" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="model" class="form-control" id="model" />
+						<form:input path="model" class="form-control" id="model" required="true"/>
 						<form:errors class="error create-message-error" path="model" />
 					</div>
 				</div>
@@ -79,7 +80,7 @@
 						<spring:message code="vehicle.color" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="color" class="form-control" id="color" />
+						<form:input path="color" class="form-control" id="color" required="true"/>
 						<form:errors class="error create-message-error" path="color" />
 					</div>
 				</div>
@@ -94,7 +95,8 @@
 						<form:errors class="error create-message-error" path="picture" />
 					</div>
 				</div>
-				<div class="col-md-12" style="text-align: center">
+				
+				<div class="form-group text-center profile-userbuttons">
 					<button type="submit" name="save" class="btn  btn-primary">
 						<span class="glyphicon glyphicon-floppy-disk"></span>
 						<spring:message code="vehicle.save" />
@@ -102,12 +104,11 @@
 					</button>
 
 					<jstl:if test="${vehicle.id != 0}">
-
-						<button type="submit" name="delete" class="btn btn-ok"
-							onclick="return confirm('<spring:message code="vehicle.confirm.delete" />')">
-							<span class="glyphicon glyphicon-trash"></span>
-							<spring:message code="vehicle.delete" />
-						</button>
+						
+						
+				<acme:submit_confirm name="delete" code="vehicle.delete"
+					codeConfirm="vehicle.confirm.delete" />
+			
 
 					</jstl:if>
 

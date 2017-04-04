@@ -48,7 +48,7 @@
 <div class="container">
 
 	<div class="row inbox " style="margin-top: 2%;">
-		<div class="col-md-3">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-body inbox-menu">
 					<a href="message/actor/create.do" class="btn btn-danger btn-block"><spring:message
@@ -61,7 +61,7 @@
 							</jstl:if>>
 							<a href="message/actor/received.do?page=1"><i
 								class="fa fa-inbox"></i> <spring:message
-									code="messages.received" /> <span class="label label-danger">${fn:length(messages)}</span></a>
+									code="messages.received" /> <span class="label label-danger">${total_received}</span></a>
 						</li>
 
 						<li
@@ -72,14 +72,14 @@
 
 							<a href="message/actor/sent.do?page=1"><i class="fa fa-inbox"></i>
 								<spring:message code="messages.sent" /> <span
-								class="label label-danger">${fn:length(messages)}</span></a>
+								class="label label-danger">${total_sent}</span></a>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 
-		<div class="col-md-9">
+		<div class="col-md-8">
 			<div class="table-container">
 				<table class="table table-filter">
 					<tbody>

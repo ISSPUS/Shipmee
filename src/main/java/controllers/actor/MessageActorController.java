@@ -85,13 +85,8 @@ public class MessageActorController extends AbstractController {
 		pageable = new PageRequest(page - 1, 5);
 
 		items = messageService.findAllReceived(pageable);
-
-		result = new ModelAndView("message/list");
-		result.addObject("messages", items.getContent());
-		result.addObject("p", page);
-		result.addObject("total_pages", items.getTotalPages());
-		result.addObject("infoMessages", "messages.received");
-		result.addObject("urlPage", "message/actor/received.do?page=");
+		
+		result = this.createListModelAndView(items, "messages.received", "message/actor/received.do?page=");
 
 		return result;
 	}
@@ -104,13 +99,8 @@ public class MessageActorController extends AbstractController {
 		pageable = new PageRequest(page - 1, 5);
 
 		items = messageService.findAllSent(pageable);
-
-		result = new ModelAndView("message/list");
-		result.addObject("messages", items.getContent());
-		result.addObject("p", page);
-		result.addObject("total_pages", items.getTotalPages());
-		result.addObject("infoMessages", "messages.sent");
-		result.addObject("urlPage", "message/actor/sent.do?page=");
+		
+		result = this.createListModelAndView(items, "messages.sent", "message/actor/sent.do?page=");
 
 		return result;
 	}
@@ -131,6 +121,22 @@ public class MessageActorController extends AbstractController {
 		result = new ModelAndView("message/edit");
 		result.addObject("messageForm", messageForm);
 		result.addObject("messageError", messageError);
+		result.addObject("total_received", messageService.countMessagesReceivedtByActor());
+		result.addObject("total_sent", messageService.countMessagesSentByActor());
+
+		return result;
+	}
+	protected ModelAndView createListModelAndView(Page<Message> messages, String infoMessages, String urlPage) {
+		ModelAndView result;
+
+		result = new ModelAndView("message/list");
+		result.addObject("messages", messages.getContent());
+		result.addObject("p", messages.getNumber() + 1);
+		result.addObject("total_pages", messages.getTotalPages());
+		result.addObject("total_received", messageService.countMessagesReceivedtByActor());
+		result.addObject("total_sent", messageService.countMessagesSentByActor());
+		result.addObject("infoMessages", infoMessages);
+		result.addObject("urlPage", urlPage);
 
 		return result;
 	}

@@ -7,71 +7,99 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.User;
+import services.ActorService;
 import services.UserService;
 
 @Controller
-@RequestMapping("/admin/user")
+@RequestMapping("/user/administrator")
 public class UserAdministratorController extends AbstractController {
 
-	// Supporting services -----------------------
+	// Services ---------------------------------------------------------------
+
+	@Autowired
+	private ActorService actorService;
 
 	@Autowired
 	private UserService userService;
-	
+
 	// Constructors -----------------------------------------------------------
 
 	public UserAdministratorController() {
 		super();
 	}
 
-	// ------------------------------------------------------------------------
+	// Search ------------------------------------------------------------------
 
-	@RequestMapping(value = "/listVerified", method = RequestMethod.GET)
-	public ModelAndView listAllVerified(int page) {
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(required = false, defaultValue = "-1") int isVerified,
+			@RequestParam(required = false, defaultValue = "-1") int isActive,
+			@RequestParam(required = false, defaultValue = "-1") int verificationPending,
+			@RequestParam(required = false, defaultValue = "1") int page) {
 		ModelAndView result;
-		Page<User> allVerified;
-		int countAllVerified = 0;
+		Page<User> users;
 		Pageable pageable;
-		
-		pageable = new PageRequest(page - 1, 5);
-		
-		allVerified = userService.findAllVerified(pageable);
-		countAllVerified = userService.countAllVerified();
-		
-		result = new ModelAndView("admin/user");
-		result.addObject("allVerified", allVerified.getContent());
-		result.addObject("countAllVerified", countAllVerified);
-		result.addObject("p", page);
-		result.addObject("total_pages", allVerified.getTotalPages());
-		
-		return result;
+		int currentActorId;
 
+		pageable = new PageRequest(page - 1, 5);
+
+		users = userService.findAllByVerifiedActiveVerificationPending(isVerified, isActive, verificationPending,
+				pageable);
+		try {
+			currentActorId = actorService.findByPrincipal().getId();
+		} catch (Exception e) {
+			currentActorId = -1;
+		}
+
+		result = new ModelAndView("user/list");
+		result.addObject("users", users);
+		result.addObject("currentActorId", currentActorId);
+		result.addObject("isVerified", isVerified);
+		result.addObject("isActive", isActive);
+		result.addObject("verificationPending", verificationPending);
+		result.addObject("p", page);
+
+		return result;
 	}
-	
-	@RequestMapping(value = "/listPending", method = RequestMethod.GET)
-	public ModelAndView listAllPending(int page) {
-		ModelAndView result;
-		Page<User> allPending;
-		int countAllPending = 0;
-		Pageable pageable;
-		
-		pageable = new PageRequest(page - 1, 5);
-		
-		allPending = userService.findAllPending(pageable);
-		countAllPending = userService.countAllPending();
-		
-		result = new ModelAndView("admin/user");
-		result.addObject("allVerified", allPending.getContent());
-		result.addObject("countAllVerified", countAllPending);
-		result.addObject("p", page);
-		result.addObject("total_pages", allPending.getTotalPages());
-		
-		return result;
 
+	@RequestMapping(value = "/turnIntoModerator", method = RequestMethod.GET)
+	public ModelAndView turnIntoModerator(@RequestParam int userId) {
+		ModelAndView result;
+		String message;
+
+		try {
+			userService.turnIntoModerator(userId);
+			message = "user.turnIntoModerator.ok";
+		} catch (Exception e) {
+			message = "user.turnIntoModerator.error";
+		}
+
+		result = new ModelAndView("redirect:/user/administrator/list.do");
+		result.addObject("message", message);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/unturnIntoModerator", method = RequestMethod.GET)
+	public ModelAndView unturnIntoModerator(@RequestParam int userId) {
+		ModelAndView result;
+		String message;
+
+		try {
+			userService.unturnIntoModerator(userId);
+			message = "user.unturnIntoModerator.ok";
+		} catch (Exception e) {
+			message = "user.unturnIntoModerator.error";
+		}
+
+		result = new ModelAndView("redirect:/user/administrator/list.do");
+		result.addObject("message", message);
+
+		return result;
 	}
 
 }

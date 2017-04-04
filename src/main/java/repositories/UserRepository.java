@@ -21,16 +21,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query("select c from User c where c.userAccount.username= ?1")
 	User findByUsername(String username);
-	
-	@Query("select u from User u where u.isVerified = true AND where u.fotoDNI != null")
-	Page<User> findAllVerified(Pageable page);
-	
-	@Query("select count(u) from User u where u.isVerified = true AND where u.fotoDNI != null")
-	int countAllVerified();
-	
-	@Query("select u from User u where u.isVerified = false AND where u.fotoDNI != null")
-	Page<User> findAllPending(Pageable page);
-	
-	@Query("select count(u) from User u where u.isVerified = false AND where u.fotoDNI != null")
-	int countAllPending();
+
+	@Query("select u from User u where (?1 < 0 OR u.isVerified = ?1)"
+			+ " AND (?2 < 0 OR u.isActive = ?2)"
+			+ " AND (?3 < 0 OR (u.isVerified = false AND u.dniPhoto IS NOT EMPTY))")
+	Page<User> findAllByVerifiedActiveVerificationPending(int isVerified, int isActive, int verificationPending, Pageable page);
 }

@@ -28,6 +28,18 @@
 	float: right;
 }
 
+.img-edit{
+	color: #d3d7cf;
+	font-size: 22px;
+	float: left;
+}
+
+.img-edit:hover{
+	color: #4db8ff;
+	font-size: 22px;
+	float: left;
+}
+
 
 .titulo-apartado{
 	margin-top: 20px;

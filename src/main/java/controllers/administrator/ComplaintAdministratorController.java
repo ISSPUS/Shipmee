@@ -55,7 +55,7 @@ public class ComplaintAdministratorController extends AbstractController {
 		} else if (type.equals("Omitted") || type.equals("Omitido")) {
 			items = complaintService.findAllOmitted(pageable);
 		} else {
-			items = complaintService.findAllSerious(pageable);
+			items = null;
 		}
 
 		result = new ModelAndView("complaint/list");

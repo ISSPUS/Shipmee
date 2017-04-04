@@ -49,7 +49,7 @@ public class ComplaintModeratorController extends AbstractController {
 		Pageable pageable;
 		pageable = new PageRequest(page - 1, 5);
 
-		items = complaintService.findAllNotResolved(pageable);
+		items = complaintService.findAllNotResolvedAndNotInvolved(pageable);
 
 		result = new ModelAndView("complaint/list");
 		result.addObject("complaints", items.getContent());
@@ -71,7 +71,7 @@ public class ComplaintModeratorController extends AbstractController {
 		try {
 			complaint = complaintService.findOne(complaintId);
 			complaint.setType(type);
-			complaint = complaintService.save(complaint);
+			complaintService.save(complaint);
 
 			result = new ModelAndView("redirect:list.do?page=1");
 		} catch (Throwable oops) {
