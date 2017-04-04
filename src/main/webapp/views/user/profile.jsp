@@ -135,6 +135,12 @@
 									(<spring:message code="user.verifyUser" />)
 								</a>
 							</jstl:if>
+							<jstl:if test="${isAdmin && user.isVerified}">
+								<br />
+								<a href="user/administrator/unverifyUser.do?userId=${user.id}"> 
+									(<spring:message code="user.unverifyUser" />)
+								</a>
+							</jstl:if>
 
 
 
@@ -177,6 +183,12 @@
 								<br />
 								<a href="user/administrator/verifyUser.do?userId=${user.id}"> 
 									(<spring:message code="user.verifyUser" />)
+								</a>
+							</jstl:if>
+							<jstl:if test="${isAdmin && user.isVerified}">
+								<br />
+								<a href="user/administrator/unverifyUser.do?userId=${user.id}"> 
+									(<spring:message code="user.unverifyUser" />)
 								</a>
 							</jstl:if>
 						

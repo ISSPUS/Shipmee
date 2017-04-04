@@ -166,21 +166,26 @@
 													
 																										
 													<br />
+													<jstl:if test="${!userRow.isVerified && userRow.dniPhoto != ''}">
+														<a href="user/administrator/verifyUser.do?userId=${userRow.id}"> 
+															<spring:message code="user.verifyUser" />
+														</a>
+													</jstl:if>
+													<jstl:if test="${userRow.isVerified}">
+														<a href="user/administrator/unverifyUser.do?userId=${userRow.id}">
+															<spring:message code="user.unverifyUser" />
+														</a>
+													</jstl:if>
 													<jstl:if test="${!isModerator && userRow.isVerified}">
+														<br />
 														<a href="user/administrator/turnIntoModerator.do?userId=${userRow.id}">
 															<spring:message code="user.turnIntoModerator" />
 														</a>
 													</jstl:if>
 													<jstl:if test="${isModerator}">
+														<br />
 														<a href="user/administrator/unturnIntoModerator.do?userId=${userRow.id}"> 
-									
 															<spring:message code="user.unturnIntoModerator" />
-														</a>
-													</jstl:if>
-													<jstl:if test="${!userRow.isVerified && userRow.dniPhoto != ''}">
-														<a href="user/administrator/verifyUser.do?userId=${userRow.id}"> 
-									
-															<spring:message code="user.verifyUser" />
 														</a>
 													</jstl:if>
 												</p>

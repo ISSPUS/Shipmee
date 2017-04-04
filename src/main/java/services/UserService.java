@@ -267,7 +267,7 @@ public class UserService {
 		
 		dbUser = this.findOne(userId);
 		
-		Assert.isTrue(!dbUser.getIsVerified(),"UserService.unVerifyUser.NotIsVerified");
+		Assert.isTrue(dbUser.getIsVerified(),"UserService.unVerifyUser.NotIsVerified");
 		
 		dbUser.setIsVerified(false);
 		
