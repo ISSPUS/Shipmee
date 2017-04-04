@@ -70,7 +70,6 @@ public class MessageTest extends AbstractTest {
 		Assert.isTrue(messageRepository.findAll().contains(savedMessage));
 		Assert.isTrue(savedMessage.getSubject().equals(messForm.getSubject()) &&
 				savedMessage.getBody().equals(messForm.getBody()) &&
-				savedMessage.getMoment().equals(messForm.getMoment()) &&
 				savedMessage.getRecipient().getUserAccount().getUsername()
 					.equals(recipient.getUserAccount().getUsername()) &&
 				savedMessage.getSender().equals(actorService.findByPrincipal()));
@@ -82,35 +81,29 @@ public class MessageTest extends AbstractTest {
 		
 		authenticate("user1");
 		
-		Collection<Message> previous;
 		Message message;
 		Message savedMessage;
 		Actor fakeSender;
-		Actor fakeRecipient;
+		Actor recipient;
 		MessageFormService messForm;
-		
-		previous = messageRepository.findAll();
 		
 		message = messageService.create();
 		messForm = messageService.messageToMessageForm(message);
 		fakeSender = actorService.findOne(UtilTest.getIdFromBeanName("user2"));
-		fakeRecipient = actorService.findOne(UtilTest.getIdFromBeanName("user3"));
+		recipient = actorService.findOne(UtilTest.getIdFromBeanName("user3"));
+
 		
 		messForm.setBody("Este es el cuerpo");
 		messForm.setSubject("Este es el asunto");
 		
-		// Cambiamos quien lo recibe y lo envia
-		messForm.setRecipient(fakeRecipient.getUserAccount().getUsername());
+		// Cambiamos quien lo envia
+		messForm.setRecipient(recipient.getUserAccount().getUsername());
 		messForm.setSender(fakeSender.getUserAccount().getUsername());
 		
 		savedMessage = messageService.save(messForm);
 		
-		Assert.isTrue(!(!savedMessage.getRecipient().getUserAccount().getUsername()
-					.equals(messForm.getRecipient()) &&
-				!savedMessage.getSender().getUserAccount().getUsername()
-					.equals(messForm.getSender())));
-		Assert.isTrue(messageRepository.findAll().contains(savedMessage));
-		Assert.isTrue(!(previous.size() == messageRepository.findAll().size()));
+		Assert.isTrue(savedMessage.getSender().getUserAccount().getUsername()
+					.equals(messForm.getSender()));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)

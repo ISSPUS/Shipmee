@@ -82,7 +82,7 @@ public class MessageService {
 		message = MessageFormToMessage(messageFormService);
 
 	
-		res = messageRepository.save(message);
+		res = this.save(message);
 		
 		return res;
 	}
