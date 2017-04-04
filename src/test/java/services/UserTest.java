@@ -218,7 +218,7 @@ public class UserTest extends AbstractTest {
 		page = new PageRequest(0, 10);
 
 		Assert.isTrue(
-				userService.findAllByVerifiedActiveVerificationPending(-1, -1, 1, page).getContent().contains(user));
+				userService.findAllByVerifiedActiveVerificationPending(-1, -1, 1, -1, page).getContent().contains(user));
 	
 		unauthenticate();
 	}
@@ -285,7 +285,7 @@ public class UserTest extends AbstractTest {
 		page = new PageRequest(0, 10);
 
 		Assert.isTrue(
-				userService.findAllByVerifiedActiveVerificationPending(-1, -1, 1, page).getContent().contains(user));
+				userService.findAllByVerifiedActiveVerificationPending(-1, -1, 1, -1, page).getContent().contains(user));
 	
 		unauthenticate();
 	}

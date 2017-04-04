@@ -78,7 +78,7 @@
 													
 								class="active"
 							</jstl:if>>
-							<a href="user/administrator/list.do?type=moderator"><i
+							<a href="user/administrator/list.do?isModerator=1"><i
 								class="fa fa-gavel" aria-hidden="true" style="color:#f95300;" ></i> <spring:message
 									code="users.moderator" /> </a>
 						</li>
@@ -87,7 +87,7 @@
 													
 								class="active"
 							</jstl:if>>
-							<a href="user/administrator/list.do?type=nomoderator"><i
+							<a href="user/administrator/list.do?isModerator=0"><i
 								class="fa fa-times-circle" aria-hidden="true" style="color:#f95300;" ></i> <spring:message
 									code="users.noModerator" /> </a>
 						</li>
@@ -96,7 +96,7 @@
 													
 								class="active"
 							</jstl:if>>
-							<a href="user/administrator/list.do?type=all"><i
+							<a href="user/administrator/list.do"><i
 								class="fa fa-users"></i> <spring:message
 									code="users.all" /> </a>
 						</li>

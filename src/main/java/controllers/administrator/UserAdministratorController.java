@@ -38,6 +38,7 @@ public class UserAdministratorController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam(required = false, defaultValue = "-1") int isVerified,
 			@RequestParam(required = false, defaultValue = "-1") int isActive,
+			@RequestParam(required = false, defaultValue = "-1") int isModerator,
 			@RequestParam(required = false, defaultValue = "-1") int verificationPending,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		ModelAndView result;
@@ -48,7 +49,7 @@ public class UserAdministratorController extends AbstractController {
 		pageable = new PageRequest(page - 1, 5);
 
 		users = userService.findAllByVerifiedActiveVerificationPending(isVerified, isActive, verificationPending,
-				pageable);
+				isModerator, pageable);
 		try {
 			currentActorId = actorService.findByPrincipal().getId();
 		} catch (Exception e) {

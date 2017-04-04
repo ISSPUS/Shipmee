@@ -178,11 +178,13 @@ public class UserService {
 		return result;
 	}
 	
-	public Page<User> findAllByVerifiedActiveVerificationPending(int isVerified, int isActive, int verificationPending,Pageable page){
+	public Page<User> findAllByVerifiedActiveVerificationPending(int isVerified, int isActive, int verificationPending,
+			int isModerator, Pageable page){
 		Page<User> result;
 		Assert.isTrue(actorService.checkAuthority("ADMIN"), "UserService.findAllByVerifiedActive.RoleNotPermitted");
 		
-		result = userRepository.findAllByVerifiedActiveVerificationPending(isVerified, isActive, verificationPending, page);
+		result = userRepository.findAllByVerifiedActiveVerificationPending(isVerified, isActive, verificationPending,
+				isModerator, page);
 		
 		return result;		
 	}
