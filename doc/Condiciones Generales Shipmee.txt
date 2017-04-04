@@ -478,3 +478,90 @@ It’s strictly forbidden the use or mining of the Platform and the Services, in
 
 (ii) decompile and apply inverse engineering to the Platform or Service, except by explicit permission of Shipmee.
 
+10.2 Contenido publicado por el Usuario de la Plataforma
+
+Con el objetivo de permitir la provisión de los Servicios, y en cumplimiento con el objetivo de la Plataforma, le otorgas a Shipmee una licencia no exclusiva para usar el contenido y los datos que has proporcionado en el contexto de utilización de los Servicios (de aquí en adelante denominados como el “Contenido desarrollado por el Usuario”). Para poder permitir a Shipmee distribuir por medio de la red digital y de conformidad con cualquier protocolo de comunicación (en especial Internet y las redes móviles) y para poder ofrecer al público el contenido de la Plataforma, autorizas a Shipmee a reproducir, representar, adaptar y traducir tu Contenido desarrollado por el Usuario para todo el mundo y durante la duración completa de tus relaciones contractuales con Shipmee, de conformidad con lo siguiente:
+
+(i) autorizas a Shipmee a reproducir todo o parte de tu Contenido desarrollado por el Usuario en cualquier medio de grabación digital, conocido o por conocer, en concreto en cualquier servidor, disco duro, tarjeta de memoria u otro medio equivalente, en cualquier formato y por medio de cualquier proceso, ya conocido o por conocer, en el grado necesario para cualquier operación de almacenamiento, copia de seguridad, transmisión o descarga relacionada con el funcionamiento de la Plataforma y el suministro del Servicio;
+
+(ii) autorizas a Shipmee a adaptar y traducir su Contenido desarrollado por el Usuario, y a reproducir dichas adaptaciones en cualquier medio digital, conocido o por conocer, establecido en el punto (i) arriba, con el objetivo de suministrar los Servicios en diferentes idiomas. Este derecho incluye la opción de realizar modificaciones en el formato de tu Contenido desarrollado por el Usuario, con respecto a tu derecho moral, con el objetivo de respetar el diseño gráfico de la Plataforma o para hacer que tu Contenido sea compatible a nivel técnico con nuestro software para su posterior publicación por medio de la Plataforma.
+
+10.2 Content published by the User of the Platform.
+
+With the Service provision purpose, and according with the Platform objective, you give Shipmee a non-exclusive license to user the content and the data supplied using the Services (from now on called “User developed content”). To let Shipmee to distribute it through digital networks, and according to any communication protocol (specially, Internet and mobile networks), and to offer the content to the public in the Platform, you let Shipmee to play, represent, adapt and translate your User developed content to everyone and during the entire contractual relationship with Shipmee, according to this:
+
+(i) you let Shipmee to play all or a fraction of your User developed content in any digital recording system, known or unknown, in any server, hard drive, memory drive or similar, in any format or by any process, known or unknown, to any store, security copy, transmission or download operation related with the good working of the Platform and the supply of the Services.
+
+(ii) you let Shipmee to adapt and translate your User developed content and to play those adaptations in any digital system, known or unknown established in the (i) section above, with the Multi-language Service supply objective. This right include the option to modify the format of your User developed content, according your moral rights, to follow the graphical design of the Platform or to make the content technically compatible with our software to its later release in the Platform.
+
+11. Función de Shipmee
+
+La Plataforma constituye una plataforma de conexión de red en línea en la cual, los Usuarios puede crear y publicar Envíos y Rutas, y hacer Ofertas con el objetivo de transportar o hacer llevar los paquetes de los Clientes. Estos anuncios serán visualizados por los demás Usuarios para comprobar las condiciones del Envío, Ruta u Oferta.
+
+Al utilizar Shipmee y aceptar las presentes Condiciones Generales de Uso, reconoces que Shipmee no es parte de ningún acuerdo formalizado entre tú y los demás Usuarios para transportar paquetes.
+
+Shipmee no tiene ningún tipo de control sobre el comportamiento de sus Usuarios y los usuarios de la Plataforma. No posee, explota, suministra ni administra los vehículos incluidos en los anuncios, ni ofrece Envíos, Rutas ni Ofertas.
+
+Reconoces y aceptas que Shipmee no controla la validez, veracidad o legalidad de los Envíos, Rutas y Ofertas. En su capacidad de intermediario, Shipmee no ofrece servicio de transporte ni actúa en calidad de transportista. La función de Shipmee se limita a facilitar el acceso a la Plataforma.
+
+Los Usuarios (Clientes y Transportistas) actúan bajo su única y total responsabilidad.
+
+En su capacidad de intermediario, Shipmee no será considerado responsable de ningún incidente que tenga lugar durante un trayecto, en especial en los relacionado con:
+
+(i) información errónea comunicada por el Conductor en su Anuncio, o por cualquier otro medio, con respecto a trayecto y sus condiciones.
+
+(ii) la cancelación o modificación de un Trayecto por parte de un Usuario.
+
+(iii) el impago por parte de un Cliente.
+
+(iv) el comportamiento de sus Usuarios antes o después del trayecto.
+
+11. Shipmee’s function
+
+The Platform made up an online connection platform where Users can create Shipments, Routes and Offers with the purpose of carrying and delivering Client’s packages. These ads will be view by any other User to check the Shipment, Routes and Offer conditions.
+
+By using Shipmee and accepting the present User General Terms, you accept Shipmee is not part of any formal agreement between you and any other User to carry packages.
+
+Shipmee has no control over the behavior of the Users and the users of the Platform. Shipmee does not own, exploit, supply or administrate the vehicles shown in the ads, and it does not offer Shipments, Routes or Offers.
+
+You recognize and accept that Shipmee has no control over the Shipments, Routes and Offers validity, truthfulness or legality. As a intermediary, Shipmee does not offer any service to transport packages or acts as a Carrier. The only function of Shipmee is to facilitate the access to the Platform.
+
+The Users (Clients and Carrier) acts under their own responsability.
+
+As a intermediary, Shipmee is not considered the responsable or any incident during the journey, specially related to:
+
+(i) wrong information in the ads o in any other platform on regard the journey or its conditions;
+
+(ii) the cancellation or modification of a journey by a User;
+
+(iii) the non-payment by a Cliente;
+
+(iv) the Users behavior before of after the journey;
+
+12. Funcionamiento, disponibilidad y funcionalidades de la Plataforma.
+
+Shipmee intentará en la medida de los posible mantener el funcionamiento constante de la Plataforma los 7 días de la semana y las 24 horas del día. Sin embargo, es posible que se pueda suspender de forma temporal el acceso a la Plataforma, sin previo aviso, por motivos técnicos, de mantenimiento, migración u operaciones de actualización, o debido a cortes de suministro o restricciones relacionadas con el funcionamiento de la red.
+
+Además, Shipmee se reserva el derecho a modificar o suspender en su totalidad o en parte el acceso a la Plataforma o sus funcionalidades, a su discreción, bien sea de forma temporal o permanente.
+
+12. Platform running, availability and functionalities
+
+Shipmee will try to keep the platform working 24/7. However, it’s possible that the service may not be online, without prior warning, due to technical difficulties, maintenance, migration, update operations, supply cut off or restrictions related to the network.
+
+Also, Shipmee reserve the right to modify or suspend, partially or totally, the access to the Platform, temporal or permanent.
+
+13. Modificaciones de las Condiciones Generales de Uso
+
+Estas Condiciones Generales de Uso y los documentos integrados por referencia forman el acuerdo completo entre tú y Shipmee con relación a la utilización de los Servicios. Cualquier otro documento mencionado en la Plataforma tiene solamente fines indicativos.
+
+Shipmee podrá modificar las presentes Condiciones Generales de Uso para adaptarlos a su entorno tecnológico y comercial, y para cumplir con la legislación en vigor.
+
+13. User General Terms modifications
+
+These User General Terms and the integrated documents make the agreement between you and Shipmee in regard with the user of its Services. Any other document mentioned in the Platform is purely informative.
+
+Shipmee will be able to modify the present User General Terms to adapt them to its technological and commercial environment to follow the current laws.
+
+Versión del 4 de Abril de 2017.
+
+April 4th, 2017 version. 
