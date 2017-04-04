@@ -33,7 +33,8 @@
 
 <link rel="stylesheet" href="styles/assets/css/style-messages.css"
 	type="text/css">
-
+<link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
+	type="text/css">
 <div class="blue-barra" >
 	<div class="container">
 		<div class="row">
