@@ -77,29 +77,6 @@ public class AlertTest extends AbstractTest {
 		Assert.isTrue(previous.size() + 1 == alertRepository.findAll().size());
 	}
 	
-
-	@Test(expected = IllegalArgumentException.class)
-	public void alertCreateNegative1(){
-		
-		authenticate("user1");
-		
-		Alert alert;
-		Alert savedAlert;
-		Calendar tomorrow = Calendar.getInstance();
-		tomorrow.setTime(new Date());
-		tomorrow.add(Calendar.DATE, -1);  // FECHA EN PASADO ! !
-				
-		alert = alertService.create();
-		alert.setDate(tomorrow.getTime());
-		alert.setDestination("San Roque");
-		alert.setOrigin("Sevilla");
-		alert.setType("Route");
-		
-		savedAlert = alertService.save(alert);
-		
-		Assert.isTrue(savedAlert.getDate().equals(alert.getDate()));
-	}
-	
 	@Test(expected = IllegalArgumentException.class)
 	public void alertCreateNegative2(){
 		
