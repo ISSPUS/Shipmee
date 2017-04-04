@@ -93,6 +93,9 @@
 }
 </style>
 
+<security:authorize access="hasRole('ADMIN')" var="isAdmin" />
+
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-lg-6">
@@ -125,6 +128,13 @@
 						<small> <jstl:if test="${user.isVerified}">
 								<i class="glyphicon glyphicon-ok img-verified" title="Verified"></i>
 							</jstl:if>
+							
+							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
+								<br />
+								<a href="user/administrator/verifyUser.do?userId=${user.id}"> 
+									(<spring:message code="user.verifyUser" />)
+								</a>
+							</jstl:if>
 
 
 
@@ -148,7 +158,7 @@
 								value="${user.birthDate}" pattern="dd/MM/yyyy" /></span> <br />
 					</div>
 
-					<jstl:if test="${isPrincipal}">
+					<jstl:if test="${isPrincipal || isAdmin}">
 
 						<div class="titulo-apartado">
 							<strong><spring:message code="user.private" /></strong> <i
@@ -161,6 +171,17 @@
 										code="user.email" />: </strong>${user.email}</span> <br /> <span> <strong><spring:message
 										code="user.phone" />: </strong>${user.phone}</span> <br /> <span> <strong><spring:message
 										code="user.dni" />: </strong>${user.dni}</span>
+						</div>
+						<div class="datos text-center">
+							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
+								<br />
+								<a href="user/administrator/verifyUser.do?userId=${user.id}"> 
+									(<spring:message code="user.verifyUser" />)
+								</a>
+							</jstl:if>
+						
+							<br />
+							<img src="${user.dniPhoto}" name="aboutme" width="300" border="0">
 						</div>
 					</jstl:if>
 

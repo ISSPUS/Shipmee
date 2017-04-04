@@ -63,9 +63,6 @@ public class UserProfileController extends AbstractController {
 		
 		pageable = new PageRequest(pagecomment - 1, 3);
 		
-		
-	
-		
 		if(userId != null){
 			user = userService.findOne(userId);
 			Assert.notNull(user);
@@ -94,7 +91,7 @@ public class UserProfileController extends AbstractController {
 		result.addObject("ratingsCreated", ratingsCreated);
 
 		result.addObject("user", user);
-		if(!isPrincipal){
+		if(!isPrincipal && !actorService.checkAuthority("ADMIN")){
 			Rating rating = ratingService.create(userId);
 			result.addObject("rating", rating);
 
