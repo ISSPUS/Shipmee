@@ -146,7 +146,7 @@
 														
 															<i class="fa fa-check-circle" aria-hidden="true"
 																style="color: #3e87fb;"
-																title="<spring:message code="user.moderator" />"></i>
+																title="<spring:message code="user.verified" />"></i>
 																
 														</jstl:if>
 														<a href="user/profile.do?userId=${userRow.id}"><jstl:out
