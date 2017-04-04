@@ -37,8 +37,30 @@
 </div>
 
 
+				<div class="modal-dialog">
+				
+					<div class="modal-content" style="padding:3%; border-color:#f1f3fa;">
+						<div>
+						<span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+						<span><spring:message code="user.required.info" /></span>
+						</div>
+						<jstl:if test="${actorForm.id != 0}">
+				
+						<div>
+					<span title="<spring:message code="user.verifyUser" />" class="glyphicon glyphicon-ok-circle" style="color:#1abc9c;"></span>
+						<span><spring:message code="user.verifyUser.info" /></span>
+						</div>
+					</jstl:if>
+					
+					</div>
+				</div>
+			
+
 <div class="container">
-	<div class="row formulario-sm">
+	<div class="row formulario">
+	
+		
+	
 		<form:form action="${url}"
 			modelAttribute="actorForm" method="post" class="form-horizontal"
 			role="form">
@@ -49,7 +71,7 @@
 			<div class="form-group">
 				<form:label path="userName" class="control-label col-md-2"
 					for="userName">
-					<spring:message code="user.username" /> <span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					<spring:message code="user.username" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
@@ -63,7 +85,7 @@
 			<div class="form-group">
 				<form:label path="name" class="control-label col-md-2"
 					for="name">
-					<spring:message code="user.name" /> <span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					<spring:message code="user.name" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
@@ -77,7 +99,7 @@
 			<div class="form-group">
 				<form:label path="surname" class="control-label col-md-2"
 					for="surname">
-					<spring:message code="user.surname" /> <span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					<spring:message code="user.surname" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
@@ -91,7 +113,7 @@
 			<div class="form-group">
 				<form:label path="email" class="control-label col-md-2"
 					for="email">
-					<spring:message code="user.email" /> <span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					<spring:message code="user.email" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
@@ -105,7 +127,7 @@
 			<div class="form-group">
 				<form:label path="birthDate" class="control-label col-md-2"
 					for="birthDate">
-					<spring:message code="user.birthDate" /> <span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+					<spring:message code="user.birthDate" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon input-group date fondoDesplegable input-text" id='datetimepicker1'>
@@ -122,7 +144,7 @@
 			<div class="form-group">
 				<form:label path="dni" class="control-label col-md-2"
 					for="dni">
-					<spring:message code="user.dni" />
+					<spring:message code="user.dni" /> <span title="<spring:message code="user.verifyUser" />" class="glyphicon glyphicon-ok-circle" style="color:#1abc9c;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
@@ -140,7 +162,7 @@
 			<div class="form-group">
 				<form:label path="phone" class="control-label col-md-2"
 					for="phone">
-					<spring:message code="user.phone" />
+					<spring:message code="user.phone" /> <span title="<spring:message code="user.verifyUser" />" class="glyphicon glyphicon-ok-circle" style="color:#1abc9c;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
@@ -156,7 +178,7 @@
 					for="password">
 					<spring:message code="user.pass" />
 					<jstl:if test="${actorForm.id == 0}">
-						<span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+						<span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</jstl:if>
 				</form:label>
 				<div class="col-md-8">
@@ -173,7 +195,7 @@
 					for="repeatedPassword">
 					<spring:message code="user.repeatPass" />
 					<jstl:if test="${actorForm.id == 0}">
-						<span title="<spring:message code="user.required" />" style="color:#d9534f;">(*)</span>
+						<span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</jstl:if>
 				</form:label>
 				<div class="col-md-8">
@@ -190,7 +212,7 @@
 			<div class="form-group">
 				<form:label path="photo" class="control-label col-md-2"
 					for="photo">
-					<spring:message code="user.photo" />
+					<spring:message code="user.photo" /> <span title="<spring:message code="user.verifyUser" />" class="glyphicon glyphicon-ok-circle" style="color:#1abc9c;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
@@ -206,7 +228,7 @@
 				<div class="form-group">
 					<form:label path="dniPhoto" class="control-label col-md-2"
 						for="dniPhoto">
-						<spring:message code="user.dniPhoto" />
+						<spring:message code="user.dniPhoto" /> <span title="<spring:message code="user.verifyUser" />" class="glyphicon glyphicon-ok-circle" style="color:#1abc9c;"></span>
 					</form:label>
 					<div class="col-md-8">
 						<div class="inner-addon">
@@ -236,7 +258,10 @@
 					</form:label>
 				</div>
 			</security:authorize>
+
 			
+
+
 			<!-- Buttons -->
 			<div class="form-group text-center profile-userbuttons">
 				<!-- Action buttons -->
@@ -249,6 +274,9 @@
 						<acme:cancel code="rating.cancel" url="" />
 					</jstl:otherwise>
 				</jstl:choose>
+				
+				
+				
 			</div>
 			
 		</form:form>
