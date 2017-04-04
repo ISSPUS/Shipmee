@@ -259,5 +259,19 @@ public class UserService {
 		
 		this.save(dbUser);
 	}
+	
+	public void unVerifyUser(int userId){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "UserService.unVerifyUser.RoleNotPermitted");
+
+		User dbUser;
+		
+		dbUser = this.findOne(userId);
+		
+		Assert.isTrue(!dbUser.getIsVerified(),"UserService.unVerifyUser.NotIsVerified");
+		
+		dbUser.setIsVerified(false);
+		
+		this.save(dbUser);
+	}
 
 }
