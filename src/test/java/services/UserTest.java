@@ -77,7 +77,7 @@ public class UserTest extends AbstractTest {
 
 		user = userService.findOne(UtilTest.getIdFromBeanName("user2"));
 
-		Assert.isTrue(user.getName().equals("Guillermo"));
+		Assert.isTrue(user.getName().equals("Lola"));
 
 		user.setName("Mariano");
 		user = userService.save(user);
@@ -159,7 +159,7 @@ public class UserTest extends AbstractTest {
 
 		user = userService.findOne(UtilTest.getIdFromBeanName("user2"));
 
-		Assert.isTrue(user.getName().equals("Guillermo"));
+		Assert.isTrue(user.getName().equals("Lola"));
 
 		user.setName("Mariano");
 		user = userService.save(user);
@@ -179,7 +179,7 @@ public class UserTest extends AbstractTest {
 
 		user = userService.findOne(UtilTest.getIdFromBeanName("user2"));
 
-		Assert.isTrue(user.getId() != 0 && userService.findOne(user.getId()).getName().equals("Guillermo")
+		Assert.isTrue(user.getId() != 0 && userService.findOne(user.getId()).getName().equals("Lola")
 				&& userService.findOne(user.getId()).getIsVerified());
 	}
 
