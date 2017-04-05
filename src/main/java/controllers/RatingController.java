@@ -63,6 +63,4 @@ public class RatingController extends AbstractController {
 		return result;
 	}
 
-
-
 }

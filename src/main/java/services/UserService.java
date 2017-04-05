@@ -170,14 +170,6 @@ public class UserService {
 		return result;
 	}
 	
-	public User findByUsername(String username) {
-		User result;
-
-		result = userRepository.findByUsername(username);
-
-		return result;
-	}
-	
 	public Page<User> findAllByVerifiedActiveVerificationPending(int isVerified, int isActive, int verificationPending,
 			int isModerator, Pageable page){
 		Page<User> result;

@@ -1,13 +1,3 @@
-/* AnnouncementAdministratorController.java
- *
- * Copyright (C) 2014 Universidad de Sevilla
- *
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- * 
- */
-
 package controllers.administrator;
 
 
@@ -52,10 +42,8 @@ public class ComplaintAdministratorController extends AbstractController {
 			items = complaintService.findAllSerious(pageable);
 		} else if(type.equals("Mild") || type.equals("Leve")) {
 			items = complaintService.findAllMild(pageable);
-		} else if (type.equals("Omitted") || type.equals("Omitido")) {
+		} else {   // if (type.equals("Omitted") || type.equals("Omitido")) {
 			items = complaintService.findAllOmitted(pageable);
-		} else {
-			items = null;
 		}
 
 		result = new ModelAndView("complaint/list");
