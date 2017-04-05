@@ -56,18 +56,6 @@
 								<li><a href="route/user/list.do"><spring:message
 											code="master.page.route.list" /></a></li>
 							</ul></li>
-
-						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
-							data-toggle="dropdown"><spring:message
-									code="master.page.messages" /><b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="message/actor/received.do?page=1"><spring:message
-											code="master.page.messages.received" /></a></li>
-								<li><a href="message/actor/sent.do?page=1"><spring:message
-											code="master.page.messages.sent" /></a></li>
-								<li><a href="message/actor/create.do"><spring:message
-											code="master.page.messages.create" /></a></li>
-							</ul></li>
 					</security:authorize>
 
 					<security:authorize access="hasRole('MODERATOR')">
@@ -102,6 +90,18 @@
 					<security:authorize access="isAuthenticated()">
 						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
 							data-toggle="dropdown"><spring:message
+									code="master.page.messages" /><b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="message/actor/received.do?page=1"><spring:message
+											code="master.page.messages.received" /></a></li>
+								<li><a href="message/actor/sent.do?page=1"><spring:message
+											code="master.page.messages.sent" /></a></li>
+								<li><a href="message/actor/create.do"><spring:message
+											code="master.page.messages.create" /></a></li>
+							</ul>
+						</li>
+						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
+							data-toggle="dropdown"><spring:message
 									code="master.page.profile" /> (<security:authentication
 									property="principal.username" />)<b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -113,9 +113,6 @@
 												code="master.page.vehicles" /></a></li>
 									<li><a href="alert/user/list.do"><spring:message
 												code="master.page.alerts" /></a></li>
-									<li><a href="rating/user/mylist.do">
-													<spring:message code="master.page.rating" />
-									</a></li>
 								</security:authorize>
 								<li><a href="j_spring_security_logout"><spring:message
 											code="master.page.logout" /> </a></li>

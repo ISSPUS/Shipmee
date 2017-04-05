@@ -91,7 +91,7 @@ public class UserProfileController extends AbstractController {
 		result.addObject("ratingsCreated", ratingsCreated);
 
 		result.addObject("user", user);
-		if(!isPrincipal && !actorService.checkAuthority("ADMIN")){
+		if(!isPrincipal && actorService.checkAuthority("USER")){
 			Rating rating = ratingService.create(userId);
 			result.addObject("rating", rating);
 

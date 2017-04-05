@@ -68,7 +68,7 @@ public class ComplaintUserController extends AbstractController {
 			try {				
 				complaint = complaintService.save(complaint);
 				
-				result = new ModelAndView("redirect:../../");
+				result = new ModelAndView("redirect:/user/profile.do?userId=" + complaint.getInvolved().getId());
 			} catch (Throwable oops) {
 
 				result = createEditModelAndView(complaint, "complaint.commit.error");				

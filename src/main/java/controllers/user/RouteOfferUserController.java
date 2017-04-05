@@ -121,7 +121,7 @@ public class RouteOfferUserController extends AbstractController {
 			try {
 				routeOffer = routeOfferService.save(routeOffer);
 
-				result = new ModelAndView("redirect:details.do?routeId=" + routeOffer.getRoute().getId());
+				result = new ModelAndView("redirect:list.do?routeId=" + routeOffer.getRoute().getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(routeOffer, "routeOffer.commit.error");
 			}

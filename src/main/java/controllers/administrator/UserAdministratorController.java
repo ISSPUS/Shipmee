@@ -80,7 +80,7 @@ public class UserAdministratorController extends AbstractController {
 			message = "user.turnIntoModerator.error";
 		}
 
-		result = new ModelAndView("redirect:/user/administrator/list.do");
+		result = new ModelAndView("redirect:list.do?isModerator=1");
 		result.addObject("message", message);
 
 		return result;
@@ -98,7 +98,7 @@ public class UserAdministratorController extends AbstractController {
 			message = "user.unturnIntoModerator.error";
 		}
 
-		result = new ModelAndView("redirect:/user/administrator/list.do");
+		result = new ModelAndView("redirect:list.do?isModerator=1");
 		result.addObject("message", message);
 
 		return result;
@@ -116,7 +116,7 @@ public class UserAdministratorController extends AbstractController {
 			message = "user.verifyUser.error";
 		}
 
-		result = new ModelAndView("redirect:/user/administrator/list.do");
+		result = new ModelAndView("redirect:list.do?isVerified=1");
 		result.addObject("message", message);
 
 		return result;
@@ -134,7 +134,7 @@ public class UserAdministratorController extends AbstractController {
 			message = "user.unverifyUser.error";
 		}
 
-		result = new ModelAndView("redirect:/user/administrator/list.do");
+		result = new ModelAndView("redirect:list.do?isVerified=1");
 		result.addObject("message", message);
 
 		return result;
