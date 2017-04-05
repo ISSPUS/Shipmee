@@ -227,10 +227,10 @@
 	</bean>
 	
 	<bean id="vehicle2" class="domain.Vehicle">
-		<property name="brand" value="Fiat"/>
-		<property name="model" value="Panda"/>
-		<property name="picture" value="https://imganuncios.mitula.net/vendo_fiat_panda_1_2_mamy_5p_en_venta_2009_2870132445115534496.jpg"/>
-		<property name="color" value="Red"/>
+		<property name="brand" value="Renault"/>
+		<property name="model" value="Fluence"/>
+		<property name="picture" value="https://i.imgur.com/G3BH68f.png"/>
+		<property name="color" value="Gray"/>
 		<property name="deleted" value="false"/>
 		<property name="user" ref="user2"/>
 	</bean>
