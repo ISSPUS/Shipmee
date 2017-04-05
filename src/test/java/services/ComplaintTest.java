@@ -6,6 +6,8 @@ import javax.validation.ConstraintViolationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -241,6 +243,148 @@ public class ComplaintTest extends AbstractTest {
 		
 		Assert.isTrue(result.getType().equals("Serious"));
 				
+	}
+	
+	/** The non-resolved and non-involved Complaints are listed well
+	 * 
+	 */
+	@Test
+	public void complaintFindAllNotResolvedAndNotInvolvedPositive1(){
+
+		authenticate("user1");
+		
+		Complaint result;
+		User userToComplaint;
+		Integer allBefore;
+		Integer allAfter;
+		Pageable page = new PageRequest(0, 10);
+		
+		userToComplaint = userService.findOne(UtilTest.getIdFromBeanName("user2"));
+		allBefore = complaintService.findAllNotResolvedAndNotInvolved(page).getContent().size();
+				
+		result = complaintService.create(userToComplaint.getId());
+		result.setExplanation("Esto es una queja de prueba");
+		result = complaintService.save(result);
+		
+		unauthenticate();
+		
+		authenticate("moderator1");
+		
+		allAfter = complaintService.findAllNotResolvedAndNotInvolved(page).getContent().size();
+		
+		Assert.isTrue(allAfter - allBefore == 1);
+		
+		result.setType("Serious");
+		result = complaintService.save(result);
+		
+		Assert.isTrue(result.getType().equals("Serious"));
+						
+		unauthenticate();
+	}
+	
+	/** The serious Complaints are listed well
+	 * 
+	 */
+	@Test
+	public void complaintFindAllSeriousPositive1(){
+
+		authenticate("user1");
+		
+		Complaint result;
+		User userToComplaint;
+		Integer allSeriousBefore;
+		Integer allSeriousAfter;
+		Pageable page = new PageRequest(0, 10);
+		
+		userToComplaint = userService.findOne(UtilTest.getIdFromBeanName("user2"));
+		allSeriousBefore = complaintService.findAllSerious(page).getContent().size();
+		
+		result = complaintService.create(userToComplaint.getId());
+		result.setExplanation("Esto es una queja de prueba");
+		result = complaintService.save(result);
+				
+		unauthenticate();
+		
+		authenticate("moderator1");
+		
+		result.setType("Serious");
+		result = complaintService.save(result);
+		
+		allSeriousAfter = complaintService.findAllSerious(page).getContent().size();
+		
+		Assert.isTrue(allSeriousAfter - allSeriousBefore == 1);
+						
+		unauthenticate();
+	}
+	
+	/** The serious Complaints are listed well
+	 * 
+	 */
+	@Test
+	public void complaintFindAllMildPositive1(){
+
+		authenticate("user1");
+		
+		Complaint result;
+		User userToComplaint;
+		Integer allMildBefore;
+		Integer allMildAfter;
+		Pageable page = new PageRequest(0, 10);
+		
+		userToComplaint = userService.findOne(UtilTest.getIdFromBeanName("user2"));
+		allMildBefore = complaintService.findAllMild(page).getContent().size();
+		
+		result = complaintService.create(userToComplaint.getId());
+		result.setExplanation("Esto es una queja de prueba");
+		result = complaintService.save(result);
+						
+		unauthenticate();
+		
+		authenticate("moderator1");
+		
+		result.setType("Mild");
+		result = complaintService.save(result);
+		
+		allMildAfter = complaintService.findAllMild(page).getContent().size();
+		
+		Assert.isTrue(allMildAfter - allMildBefore == 1);
+						
+		unauthenticate();
+	}
+	
+	/** The serious Complaints are listed well
+	 * 
+	 */
+	@Test
+	public void complaintFindAllOmittedPositive1(){
+
+		authenticate("user1");
+		
+		Complaint result;
+		User userToComplaint;
+		Integer allOmittedBefore;
+		Integer allOmittedAfter;
+		Pageable page = new PageRequest(0, 10);
+		
+		userToComplaint = userService.findOne(UtilTest.getIdFromBeanName("user2"));
+		allOmittedBefore = complaintService.findAllOmitted(page).getContent().size();
+		
+		result = complaintService.create(userToComplaint.getId());
+		result.setExplanation("Esto es una queja de prueba");
+		result = complaintService.save(result);
+				
+		unauthenticate();
+		
+		authenticate("moderator1");
+		
+		result.setType("Omitted");
+		result = complaintService.save(result);
+		
+		allOmittedAfter = complaintService.findAllOmitted(page).getContent().size();
+		
+		Assert.isTrue(allOmittedAfter - allOmittedBefore == 1);
+						
+		unauthenticate();
 	}
 
 
