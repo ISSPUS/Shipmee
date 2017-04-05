@@ -57,7 +57,7 @@
 
 <div class="frase-box">
 						<spring:message code="login.notAccount.before" />
-						<b><a href="user/register.do" target="_blank">
+						<b><a href="user/register.do">
 							<spring:message code="login.notAccount.link" />
 						</a></b>
 </div>

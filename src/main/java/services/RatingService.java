@@ -53,7 +53,7 @@ public class RatingService {
 
 		result.setAuthor(creator);
 		result.setUser(concerning);
-		result.setCreatedDate(new Date());
+		result.setCreatedDate(new Date((new Date()).getTime() - 1000));
 
 		return result;
 	}

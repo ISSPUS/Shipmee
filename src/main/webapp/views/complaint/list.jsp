@@ -194,7 +194,7 @@ len_serious: total de quejas graves
 									<i class="fa fa-thumbs-up fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">12</div>
+									<div class="huge">0</div>
 									<div>
 										<spring:message code="complaint.omitted" />
 										!
@@ -219,7 +219,7 @@ len_serious: total de quejas graves
 									<i class="fa fa-thumbs-down fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">124</div>
+									<div class="huge">0</div>
 									<div>
 										<spring:message code="complaint.mild" />
 										!
@@ -244,7 +244,7 @@ len_serious: total de quejas graves
 									<i class="fa fa-exclamation-triangle fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">124</div>
+									<div class="huge">1</div>
 									<div>
 										<spring:message code="complaint.serious" />
 										!
@@ -280,7 +280,7 @@ len_serious: total de quejas graves
 										<a><spring:message code="complaint.creator" />
 											${complaint.creator.userAccount.username}</a>
 									</h4>
-									<a href="user/profile.do?userId=${route.creator.id}"> <jstl:choose>
+									<a href="user/profile.do?userId=${complaint.creator.id}"> <jstl:choose>
 											<jstl:when test="${not empty complaint.creator.photo}">
 												<jstl:set var="imageUser" value="${complaint.creator.photo}" />
 											</jstl:when>
@@ -298,8 +298,8 @@ len_serious: total de quejas graves
 										<a><spring:message code="complaint.involved" />
 											${complaint.involved.userAccount.username}</a>
 									</h4>
-									<a href="user/profile.do?userId=${route.involved.id}"> <jstl:choose>
-											<jstl:when test="${not empty route.involved.photo}">
+									<a href="user/profile.do?userId=${complaint.involved.id}"> <jstl:choose>
+											<jstl:when test="${not empty complaint.involved.photo}">
 												<jstl:set var="imageUserEnvolved"
 													value="${complaint.involved.photo}" />
 											</jstl:when>
