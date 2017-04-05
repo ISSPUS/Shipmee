@@ -19,7 +19,7 @@
 		 			<p><spring:message code="master.page.about.foot.text" /></p>
 		 			
 		 			<p>
-		 				<a href="/Shipmee/userGeneralTerms/info.do" target="blank"><spring:message code="cgu.title" /></a>
+		 				<a href="userGeneralTerms/info.do" target="blank"><spring:message code="cgu.title" /></a>
 		 			</p>
 		 			
 		 			<div class="language text-sample">
@@ -34,7 +34,7 @@
 		 			<p>
 		 				<!--<a href="#"><i class="fa fa-dribbble"></i></a>-->
 		 				<!--<a href="#"><i class="fa fa-facebook"></i></a>-->
-		 				<a href="https://github.com/ISPPUS/Shipmee" target="blank"><i class="fa fa-github"></i></a>
+		 				<a href="https://github.com/Shipmee/Shipmee" target="blank"><i class="fa fa-github"></i></a>
 		 				<!--<a href="#"><i class="fa fa-instagram"></i></a>-->
 		 				<!--<a href="#"><i class="fa fa-tumblr"></i></a>-->
 		 			</p>-

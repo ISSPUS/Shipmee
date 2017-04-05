@@ -251,7 +251,7 @@
 							<form:checkbox path="acceptLegalCondition" class="" id="acceptLegalCondition"/>
 						
 						<spring:message code="user.acceptLegalCondition.before" />
-						<a href="/Shipmee/userGeneralTerms/info.do" target="_blank">
+						<a href="userGeneralTerms/info.do" target="_blank">
 							<spring:message code="user.acceptLegalCondition.link" />
 						</a>
 						<spring:message code="user.acceptLegalCondition.after" />
