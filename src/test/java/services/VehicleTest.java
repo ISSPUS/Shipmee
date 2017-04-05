@@ -83,7 +83,7 @@ public class VehicleTest extends AbstractTest {
 
 		vehicle = vehicleService.findOne(UtilTest.getIdFromBeanName("vehicle2"));
 
-		Assert.isTrue(vehicle.getColor().equals("Red"));
+		Assert.isTrue(vehicle.getColor().equals("Gray"));
 
 		vehicle.setColor("White");
 		vehicle = vehicleService.save(vehicle);
