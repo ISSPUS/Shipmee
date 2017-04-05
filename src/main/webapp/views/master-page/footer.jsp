@@ -54,8 +54,50 @@
 			<div class="licence text-sample">Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Shipmee Co., Inc.</div>
 	 	</div>
 	 </div>
+	 
+	<div
+	style="position: fixed; bottom: 0; width: 100%; background-color: #E2E4E6;"
+	id="infoCookies">
+		<p> <spring:message code="master.page.cookies.message"/>
+			<a href="userGeneralTerms/info.do"><spring:message code="master.page.cookies.here"/></a>.
+			<button onclick="hideInfoCookies()"><spring:message code="master.page.cookies.ok"/></button>
+		</p>
+	</div>
 
   </body>
+  
+  <script>
+	function getCookie(cname) {
+    	var name = cname + "=";
+    	var ca = document.cookie.split(';');
+    	for(var i=0; i<ca.length; i++) {
+        	var c = ca[i];
+        	while (c.charAt(0)==' ') c = c.substring(1);
+        	if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    	}
+    	return "";
+	} 
+	
+	function loadCookies(cookies){
+		// First cookie name, First cookie value
+		// ; Second cookie name, Second cookie value
+		arrayCookies = cookies.split(";");
+		for(var i=0; i<arrayCookies.length; i++){
+			var cook = arrayCookies[i].split(",");
+			var name = cook[0];
+			var value = cook[1];
+			document.cookie = name + "=" + value + "; path=/ ";
+		}
+	}
+	function hideInfoCookies() {
+		$("#infoCookies").hide();
+		loadCookies("infoCookies,hide");
+	}
+	
+	if(getCookie("infoCookies")=="hide"){
+		hideInfoCookies();
+	}
+</script>
 
 
 
