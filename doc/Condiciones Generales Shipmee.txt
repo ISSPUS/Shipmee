@@ -1,0 +1,567 @@
+Condiciones Generales de Uso de Shipmee:
+
+1. Descripción
+
+“Shipmee” ha desarrollado una plataforma de envío de paquetes a la que se puede acceder desde el sitio web www.shipmee.es, diseñado para poner en contacto a los transportistas que viajan a un determinado destino transportando paquetes a otros clientes que se encuentren en el mismo destino, de forma que puedan compartir los costes asociados al Trayecto (en adelante denominada la “Plataforma”).
+
+Los presentes términos y condiciones tienen por objeto regular el acceso y los términos de uso de la Plataforma. Se ruega leer atentamente estas condiciones. Entiendes y reconoces que BlaBlaCar no es parte en ningún contrato, acuerdo o relación contractual, de ninguna clase, suscrito entre los Usuarios de su Plataforma.
+
+Al hacer click en “Registrarse” reconoces que has leído y aceptado las presentes condiciones legales.
+
+1. Description
+
+“Shipmee” has developed a package delivery platform to which you can access from the website www.shipmee.es. “Shipmee” is designed to put in contact carriers which travel to a specific location carrying packages to clients who are at that location.  This way, they can share the cost of the Travel (from here on out, entitled the “Platform”).
+
+The present document want to regulate the access and the user terms of the Platform. Please, read carefully this terms. You understand and accept that Shipmee is not part of any contract,  agreement or contractual relationship, of any kind, signed between the Users of the Platform.
+
+When you click on “Register”, you accept that you has read and accepted the present legal terms.
+
+2. Definiciones
+
+En este documento,
+
+“Aceptar contraoferta“ significa que un Usuario que realizó un Envío o Ruta acepta la propuesta económica de otro Usuario.
+
+“Administrador” significa el Usuario con mayores poderes en la aplicación. Estos poderes incluyen la dotación del carácter de de Moderador a Usuarios de la aplicación.
+
+“Alerta” significa el Mensaje automático que se genera cuando un Transportista crea una Ruta que posee el Origen, Destino, Fecha de Salida y Fecha de Llegada pedido por el Usuario en la creación de la misma.
+
+“Cliente” significa el Usuario que puede crear envíos para que lleven sus Paquetes desde un Origen hasta un Destino.
+
+“Contraoferta” significa la propuesta de precio de un Usuario, ya sea Cliente o Transportista a la hora de Contratar o Transportar un paquete.
+
+“Contratar” significa que un Cliente acepta las condiciones económicas impuestas por el Transportista con el fin de que lleven su Paquete.
+
+“Cuenta” significa la cuenta que debe crear un Usuario para hacer uso de los servicios ofrecidos por la Plataforma.
+
+“Destino” significa la localización donde el Transportista acaba la Ruta.
+
+“Envío” significa una petición que realiza un Cliente para que un Transportista le lleve su Paquete desde una localización Origen hasta una localización destino antes de una fecha y hora límite.
+
+“Mensaje” significa el correo interno utilizado en la aplicación.
+
+“Moderador” significa el Usuario con permisos especiales en la aplicación. los cuales le permiten ejercer labores de moderación, tales como gestionar las Quejas de unos Usuarios sobre otros.
+
+“Origen” significa la localización desde donde el Transportista inicia la Ruta.
+
+“Paquete” significa el objeto u objetos de los Clientes a transportar por un Transportista.
+
+“Plataforma” tiene el significado que se le atribuye en el Artículo 1 arriba.
+
+“Queja” significa el reporte realizado por un Usuario a otro con el fin de hacerlo llegar a los Moderador.
+
+“Rechazar contraoferta” significa que un Usuario que realizó un Envío o Ruta no acepta la propuesta económica de otro Usuario.
+
+“Ruta” significa una propuesta que realiza un Transportista donde se ofrece a llevar Paquetes de distinto tamaño, a distinto precio según el tamaño de este desde una localización origen hasta una localización destino.
+
+“Shipmee” tiene el significado que se le atribuye en el Artículo 1 arriba.
+
+“Tamaño del paquete” significa el tamaño que se le asocia a cada paquete con el fin de tener una medida de referencia a la hora de que un Transportista lo transporte.
+
+“Tiempo máximo de llegada” significa la hora límite deseada para que el Paquete llegue al Destino.
+
+“Transportar” significa que un Transportista acepta las condiciones económicas impuestas por un Cliente con el fin de transportar un paquete.
+
+“Transportista” significa el Usuario con Vehículo asociado a su cuenta que se encuentra Verificado que realiza una Ruta para llevar un Paquete a un Cliente.
+
+“Vehículo” significa el medio de transporte que un Transportista tiene asociada a su cuenta y que le es imprescindible añadir con objeto de poder transportar paquetes.
+
+“Verificado” significa estado del Ssuario de la aplicación que ha autentificado su identidad ante el Administrador de la página.
+
+2. Definitions
+
+In this document, 
+
+“Accept counteroffer“ means that the User that created the Shipment or Route, accepts the economic offer of another User.
+
+“Account” means the account created by the User in order to user the services offered by the Platform.
+
+“Administrator” means the User with more power in the Application. These powers include giving other User the role of Moderators.
+
+“Alerts” means the automatic Message that is generated when the Carrier create a Route with an Origin, Destination, Departure Time and Arrival Time similar to the one requested by the User when the Alert was created.
+
+“Carrier” means the User with a Vehicle linked to his or her account who does the Route t deliver the package to the Client.
+
+“Carry” means that a Carrier accept the Client’s economic proposal to carry a package.
+
+“Client” means the User who can create Shipments to get his packages delivered from an Origin to a Destination.
+
+“Complaint” means the report done by a User to notice the Moderator about a problem with another User.
+
+“Contract” means that a Client accepts the economic terms imposed by the Carrier to get the Client’s Package delivered.
+
+“Counteroffer” means the price proposal by a User, whatever Client or Carrier when you Contract a service or Carry a package.
+
+“Deny counteroffer” means that the User that created a Shipment or Route deny the economic proposal proposed by another User.
+
+“Destination” means the location where the Carrier ends the Route.
+
+“Max time of arrival” means the desired limit date and time to deliver the package from Origin to Destination.
+
+“Message” means the internal email system used by the Application.
+
+“Moderator” means the User with special permission in the Application. Those permission give him or her the opportunity to moderate the Application via the complaints done by the Users.
+
+“Origin” means the location from where the Carrier starts the Route.
+
+“Package” means the Client’s object or objects to deliver by the Carrier.
+
+“Platform” has the meaning given in the Article 1 above.
+
+“Route” means the Carrier’s proposal where he offers to deliver a package of a specific size, with a price related to every size, from the Origin to a Destination.
+
+“Shipmee” has the meaning given in the Article 1 above.
+
+“Shipment” means a proposal from a Client to a Carrier to get his package delivered from Origin to Destination before a limit date and hour.
+
+“Size of the Package“ means the size given to a package to help the Carrier to figure out if he can carry it.
+
+“Vehicle” means the means of transportation linked to his or her account which is compulsory if he or she wants to carry packages.
+
+“Verified” means the User state where he has been authenticated by the Administrator of the Website.
+
+3. Registro en la Plataforma y creación de una Cuenta
+
+3.1 Condiciones de registro en la Plataforma.
+
+La Plataforma solamente puede ser utilizada por personas mayores de 18 años. Está estrictamente prohibido el registro en la plataforma por parte de un menor. Al acceder, utilizar o registrarse en la Plataforma, confirmas y garantizas que tienes más de 18 años.
+
+3.1 Registry terms in the Platform.
+
+The Platform can only be used by people over 18 years old. The registry by underage people it’s strictly forbidden. When you access, use or log in your account, you confirm and guarantee that you are over 18 years old.
+
+3.2 Creación de una cuenta
+
+La Platforma permite a los Usuarios crear Envíos y Rutas e interactuar entre ellos mediante el uso de Mensajes. Es posible ver los Envíos y Rutas sin estar registrado en la Plataforma. No obstante, no podrás crear ni Envíos ni Rutas sin haber primero creado una Cuenta para convertirse en Usuario.
+
+Para crear tu Cuenta sólo tienes que rellenar todos los campos obligatorios en el formulario de registro.
+
+Para registrarte en la Plataforma es necesario que hayas leído y aceptado las Condiciones Generales de Usuario y la Política de Privacidad.
+
+Al crear una cuenta, te comprometes a proporcionar información verídica y precisa, y a actualizar dicha información por medio de tu perfil, con el objetivo de garantizar su relevancia y precisión durante la duración total de tu relación contractual con Shipmee.
+
+Recuerda no crear ni utilizar, bajo tu propia identidad o bajo la identidad de un tercero, ninguna Cuenta adicional a la creada inicialmente.
+
+3.2 Creation of an account.
+
+The Platform let the Users to create Shipments and Routes and interact with each others using Messages. It’s possible to see the Shipments and Routes without been logged in the Platform. However, to create your own Shipments and Routes you must create an Account to become a User.
+
+In order to create an Account, you only have to fill all required fields from the registry form.
+
+In order to register in the Platform, it’s compulsory that the User General Terms and Privacy Terms must have been read.
+
+When an Account is created, you commit to give true and precise information, and to update that information via your own profile, in order to guaranty its relevance and precision during the total time of the contractual relationship with Shipmee.
+
+Remember not to create or use, using your own identity or a third person’ identity, any other additional Account different to the one initially created.
+
+3.3 Verificación
+
+Shipmee podrá, con fines de transparencia, de mejora de la veracidad o de prevención o detección de fraude, establecer un sistema para verificar parte de la información proporcionada en tu perfil. Se trata, fundamentalmente, de aquellos casos en los que proporcionas un Documento de Identidad.
+
+Reconoces y aceptas que cualquier referencia en la Plataforma “verificada”, o a cualquier otro término similar, significa solamente que un Usuario ha superado con éxito el procedimiento de verificación existente en la Plataforma para proporcionarle más información sobre el Usuario con el que está pensando enviar un paquete. Shipmee no puede garantizar la veracidad, fiabilidad o validez de la información sujeta al procedimiento de verificación.
+
+3.3 Verification
+
+Shipmee will be able to establish a system to verify part of the profile information in order to improve transparency, truthfulness, fraud prevention and detection. It’s basically the case where you give a Identity Document.
+
+You recognize and accept that every reference to “verified” or similar in the Platform only means that the User has passed the verification process to give more information about the User who will deliver the package. Shipmee cannot and will not guaranty the truthfulness, reliability and validity of the information under verification system.
+
+4. Utilización de los Servicios
+
+4.1 Publicación de Envíos
+
+Como Usuario, siempre y cuando cumplas las condiciones establecidas a continuación, podrás crear y publicar Envíos en la Plataforma, introduciendo información sobre el Trayecto (Paquete a transportar, Origen y Destino, etc.).
+
+Sólo puedes publicar Envíos si cumples todas y cada unas de las  condiciones indicadas a continuación:
+
+(i) Publicas solamente Envíos con Paquetes de tu propiedad o con el consentimiento del propietario.
+
+(ii) El paquete a enviar posee un contenido legal en cada uno uno de los Estados por los que el Envío se realice. En caso de no ser así, Shipmee no se hará responsable del contenido ni de las consecuencias de su transporte.
+
+Reconoces que tú eres el único responsable del contenido del Envío que publicas en la Plataforma. Por lo tanto, reconoces y garantizas la veracidad y precisión de toda la información incluida en tu Envío.
+
+Tu Envío, siempre y cuando cumpla con las Condiciones Generales de Usuario, será publicado en la Plataforma y por lo tanto podrá ser visto por todos los Usuarios y visitantes, incluso por las personas que no son Usuarios de la Plataforma, que realicen una búsqueda en la Plataforma. Shipmee se reserva el derecho, a su exclusivo criterio y sin necesidad de previo aviso, a no publicar o a borrar, en cualquier momento, cualquier Envío que no cumpla con las Condiciones Generales de Usuario o que considere que puede dañar su imagen o la imagen de la Plataforma.
+
+Reconoces y aceptas que los criterios utilizados en la clasificación y el establecimiento del orden de visualización de tu Envío entre los demás Envíos es criterio exclusivo de Shipmee.
+
+4.1 Shipment publishing
+
+As a User, anytime you follow the following terms, you will be able to create and publish Shipment in the Platform, adding information about the package (Package size, Origin, Destination, etc.).
+
+You can only publish Shipments if you keep everyone of these following terms:
+
+(i) You only publish Shipments about Packages of your ownership or with the permission of the owner.
+
+(ii) The Package to carry is not considered illegal in any of the States where the Shipment is done. If it does not, Shipmee will not be the responsible of the content or the consequences of the carry.
+
+You recognize that you are the only responsible of the content of the Shipment you publish in the Platform, thus, you recognize and guaranty the truthfulness and precision of all the information included in your Shipment.
+
+Your Shipment, if it follows the User General Terms, will be published, thus, will be visible by any User or visitor of the web, even by those who are not Users of the Platform. Shipmee reserves the right, by its own criteria and with no need to notify anyone, to delete, at any moment, any Shipment that does not follow the User General Terms or that could damage its image or the image of the Platform.
+
+You recognizes and accepts that the criteria used to show the Shipments is reserved and exclusive of Shipmee.
+
+4.2 Publicación de Rutas
+
+Como Transportista, siempre y cuando cumplas las condiciones establecidas a continuación, podrás crear y publicar Rutas en la Plataforma, introduciendo información sobre el Trayecto (Precios de los Paquetes por tamaño, Origen y Destino, fecha de salida y llegada, etc.).
+
+Sólo puedes publicar Rutas si cumples todas y cada unas de las  condiciones indicadas a continuación:
+
+(i) Posees un carnet de conducir válido.
+
+(ii) Publicas solamente Rutas con vehículos de tu propiedad o utilizados con consentimiento expreso del propietario, y siempre y cuando estés autorizado para utilizar el vehículo con fines de transporte de paquetes ajenos a la persona que crea la Ruta.
+
+(iii) No trabaja o ha trabajado en el sector de transportes de forma profesional.
+
+(iv) El Transportista será el conductor del vehículo de transporte.
+
+(v) No existe ninguna contraindicación ni incapacidad médica para conducir.
+
+Reconoces que tú eres el único responsable del contenido de la Ruta que publicas en la Plataforma. Por lo tanto, reconoces y garantizas la veracidad y precisión de toda la información incluida en tu Ruta.
+
+Tu Ruta, siempre y cuando cumpla con las Condiciones Generales de Usuario, será publicado en la Plataforma y por lo tanto podrá ser visto por todos los Usuarios y visitantes, incluso por las personas que no son Usuarios de la Plataforma, que realicen una búsqueda en la Plataforma. Shipmee se reserva el derecho, a su exclusivo criterio y sin necesidad de previo aviso, a no publicar o a borrar, en cualquier momento, cualquier Ruta que no cumpla con las Condiciones Generales de Usuario o que considere que puede dañar su imagen o la imagen de la Plataforma.
+
+Reconoces y aceptas que los criterios utilizados en la clasificación y el establecimiento del orden de visualización de tu Ruta entre las demás Rutas es criterio exclusivo de Shipmee.
+
+4.2 Routes publishing.
+
+As a User, anytime you follow the following terms, you will be able to create and publish Routes in the Platform, adding information about the travel (Package prices by size, Origin, Destination, etc.).
+
+You can only publish Routes if you keep everyone of these following terms:
+
+(i) You have got a driving license.
+
+(ii) You publish only Routes with vehicles of your ownership or used with owner’s permission to use it to carry packages from other people different to the one who create the Route.
+
+(iii) You don’t work or have not work as a professional Carrier.
+
+(iv) The Carrier will be the one who drives.
+
+(v) There is no contraindication or medical disability to drive.
+
+You recognize that you are the only responsible of the content of the Route you publish in the Platform, thus, you recognize and guaranty the truthfulness and precision of all the information included in your Route.
+
+Your Route, if it follows the User General Terms, will be published, thus, will be visible by any User or visitor of the web, even by those who are not Users of the Platform. Shipmee reserves the right, by its own criteria and with no need to notify anyone, to delete, at any moment, any Route that does not follow the User General Terms or that could damage its image or the image of the Platform.
+
+You recognizes and accepts that the criteria used to show the Routes is reserved and exclusive of Shipmee.
+
+4.3 Aceptación y Rechazo de un Envío.
+
+Como Usuario, siempre y cuando cumplas las condiciones establecidas a continuación, podrás aceptar o rechazar Envíos en la Plataforma, seleccionando entre las contraofertas propuestas por los Transportistas.
+
+En el caso de que algún Transportista no realice la entrega o se retrase en el trayecto, Shipmee no se hará responsable de las consecuencias que estos hechos ocasionen.
+
+4.3 Acceptance and Denial of a Shipment.
+
+As a User, anytime you follow the following terms, you will be able to accept or deny Shipments in the Platform, choosing a counteroffer created by the Carriers.
+
+If a Carrier does not complete the deliverable o complete it late, Shipmee will not be responsible of any consequence due to these events.
+
+4.4 Aceptación y Rechazo de una Ruta.
+
+Como Usuario, siempre y cuando cumplas las condiciones establecidas a continuación, podrás aceptar Rutas en la Plataforma, seleccionando entre las contraofertas propuestas por los Usuarios.
+
+En el caso de que algún Usuario no realice la entrega del producto a entregar o se retrase en la entrega, Shipmee no se hará responsable de las consecuencias que estos hechos ocasionen.
+
+4.4 Acceptance and Denial of a Route.
+
+As a User, anytime you follow the following terms, you will be able to accept or deny Routes in the Platform, choosing a counteroffer created by the Carriers.
+
+If a Client does not complete the deliverable to the Carrier to carry the package or complete it late, Shipmee will not be responsible of any consequence due to these events.
+
+4.5 Sistema de valoración.
+
+Reconoces y aceptas que Shipmee se reserva el derecho a no responder a una Queja impuesta por cualquier Usuario de la Plataforma si se considera que su contenido incumple lo establecido en el presente documento de Condiciones Generales de Uso.
+
+4.5 Moderation system.
+
+You recognize and accept that Shipmee reserves the right to not responde to a Complaint created by any User if the Platform consider that it does not follows the present document of User General Terms.
+
+5. Condiciones financieras
+
+El acceso y el registro en la Plataforma, así como la búsqueda, visualización y publicación de cualquier elemento, no tiene coste alguno.
+
+5. Financial terms
+
+The access and registry in the Platform, the search, visualization and publishing of any element, it’s totally free.
+
+5.1 Costes del Envío y Ruta.
+
+Los precios son determinados por el creador del Servicio, es decir, los elige el Cliente en el caso del Envío y el Transportista en el caso de la Ruta. Se determinarán bajo tu única responsabilidad. 
+
+5.1 Shipment and Routes costs.
+
+The prices are determined by the creator of the Service, thus, they are chosen by the Client in a Shipment, and by a Carrier in a Route. The prices will be chosen under your own responsibility.
+
+5.2 Costes de Gestión.
+
+En el contexto de las contraofertas, Shipmee, podrá cobrar por el uso de la Plataforma unos Gastos de Gestión. Se cobrarán en el momento de aceptar la oferta y dicha cuantía podrá cambiar a lo largo del tiempo.
+
+5.2 Management costs.
+
+In the counteroffers context, Shipmee, can charge some management costs due to the use of the Platform. It will be charged after accepting an offer and the value of this charge can change over time.
+
+5.3 Métodos de pago.
+
+Al utilizar a Plataforma como Transportista, concedes a Shipmee  autorización de cobro de la cantidad de Costes de Gestión.
+
+Te comprometes a responder con debida diligencia a cualquier solicitud de Shipmee, y en general, a cualquier autoridad administrativa o judicial competente, especialmente en lo relacionado con la prevención del blanqueo de capitales. Fundamentalmente aceptas proporcionar, tras su solicitud, cualquier elemento de prueba de tu dirección y/o identidad que sea de utilidad.
+
+En caso de falta de respuesta a dichas solicitudes, Shipmee podrá tomar las medidas que considere necesarias, como por ejemplo suspender tu Cuenta.
+
+5.3 Payment methods.
+
+When you use the Platform as a Carrier, you gives Shipmee the authorization to charge de Management Costs quantity.
+
+You commit to respond to any request from Shipmee or any other administrative and judicial authority, specially to any issue relate to money laundering. Basically you accept to supply any proof of your location or identity that would be useful.
+
+In case of any lack of respond to these request, Shipmee will be able to take any needful action, as the suspension of your account.
+
+6. Objetivo no comercial y no empresarial de los Servicios y la Plataforma
+
+Aceptas utilizar los Servicios y la Plataforma solamente para ponerte en contacto, con fines no comerciales y empresariales, con personas que desean enviar o transportar paquetes.
+
+Shipmee se reserva el derecho a suspender tu Cuenta en que caso de que utilices un vehículo comercial, taxi o vehículo de empresa con objetivo de generar un beneficio a través de la Plataforma. Recuerda proporcionar a Shipmee, en caso de que te lo solicite, una copia del certificado de registro de tu vehículo y cualquier otra información que demuestre que estás autorizado a utilizar el vehículo en cuestión en la Plataforma y que no estás obteniendo beneficio alguno por el uso de la misma.
+
+Shipmee también se reserva el derecho de suspender tu Cuenta en el caso que tu actividad en la plataforma sugiera a Shipmee que estás generando beneficios a través de la Plataforma.
+
+6. Non-commercial-use and non-business-use objective from the Platform’s Service.
+
+You accept to use the Service and the Platform exclusively to contact, with no financial or business purpose, with people who want to send or carry packages.
+
+Shipmee reserves the right to suspend your Account if you use any commercial vehicle, taxi or business vehicle with the purpose of earning a money using the Platform. Remember to supply Shipmee, if needed, a copy of the vehicle registry certificate and any other information that proves that you are authorize to use the vehicle in the Platform and that you are not getting any benefit from the Platform.
+
+Shipmee, also, reserves the right to suspend your Account if your activity indicates that you would be getting benefits from the Platform.
+
+7. Política de cancelación
+
+Shipmee no ofrece garantía alguna en caso de cancelación por cualquier motivo, ya sea por parte del Cliente o por parte del Transportista.
+
+7. Cancellation policy
+
+Shipmee does not offer any guaranty if there is a cancelation in any Service you have purchased.
+
+8. Comportamiento de las personas que visitan la Plataforma y los Usuarios.
+
+8.1 Compromiso de todas las personas que visitan la Plataforma
+
+Reconoces ser el único responsable de respetar todas las leyes, normativas y obligaciones aplicables a la utilización de la Plataforma.
+
+Además, al utilizar la Plataforma, te comprometes a:
+
+(i) no utilizar la Plataforma con fines profesionales, comerciales o con ánimo de lucro.
+
+(ii) no enviar a Shipmee (especialmente en el momento de crear o actualizar tu Cuenta) ni a los demás Usuarios de la Plataforma información falsa, confusa, maliciosas o fraudulenta.
+
+(iii) no hablar ni comportarse, ni publicar ningún contenido en la Plataforma que pueda resultar difamatorio, injurioso, obsceno, pornográfico, vulgar, ofensivo, agresivo, improcedente, violento, amenazante, acosador, de naturaleza racista o xenófoba, que tenga connotaciones sexuales, incite a la violencia, discriminación u odio, o que fomente actividades o el uso de substancias ilegales o de forma general que sea contrario a los objetivos de la Plataforma y que pueda infringir los derechos de Shipmee o una tercera parte, o que pueda ser contrario a las buenas costumbres;
+
+(iv) no infringir los derechos y no dañar la imagen de Shipmee, en especial en lo que respecta a sus derechos de propiedad intelectual;
+
+(v) no abrir más de una Cuenta en la Plataforma y no abrir una Cuenta en nombre de un tercero;
+
+(vi) no intentar eludir el sistema de contraofertas, principalmente intentando enviar a otro Usuario tu información de contacto para realizar fuera de la Plataforma con el objetivo de evitar el pago de los Gastos de Gestión.
+
+(vii) no ponerse en contacto con otro Usuario, por medio de la Plataforma, con otra finalidad que no sea la definición de las condiciones de un envío, transporte u contraofertas.
+
+(viii) no aceptar ni realizar el pago fuera de la Plataforma.
+
+(ix) cumplir con las presentes Condiciones Generales de Uso y con la Política de Privacidad.
+
+8.1 Compromise of everyone who visit the Platform
+
+You accept to be the unique responsible of the respect of every law, regulations and obligations applicable to the use of the Platform
+
+Also, when you use the Platform, you commit to:
+
+(i) not using the Platform with professional, commercial or profitable purposes.
+
+(ii) not send Shipmee (specially regarding the moment when you create or update the Account) or any other User from the Platform any false, confuse, malicious, or fraudulent information.
+
+(iii) not talk or behave, or upload any content to the Platform that could be defamatory, insulting, obscene, pornographic, vulgar, offensive, aggressive, inadmissible, violent, threatening, stalker, racist, xenophobe, with sexual connotations, incite to violence, discrimination or hatred, or that promotes activities or the use of illegal substances and in any way, conflicting with the purpose of the Platform and that could cause a violation of Shipmee or any third part’s rights.
+
+(iv) not violate Shipmee’s rights and do not damage Shipmee’s images, specially regarding issues about intelectual property;
+
+(v) not open more that one Account in the Platform, and not open an Account for a third person;
+
+(vi) not try to avoid the counteroffer system, basically trying to pay outside of the Platform with the purpose of saving the Management Costs.
+
+(vii) not try to make contact with any other User, via the Platform, with other purpose different to the ones defined in the User General Terms about Shipments, Routes and Counteroffers.
+
+(viii) not accept or pay outside of the Platform.
+
+(ix) follow the present User General Terms and Privacy Policy.
+
+8.2 Compromisos de los transportistas
+
+Cuando te verificas, obteniendo el rol de Transportista, te comprometes a:
+
+(i) respetar todas las leyes, normativas y códigos con respecto a la conducción y al vehículo, especialmente contar con un seguro de responsabilidad civil en vigor y estar en posesión de un carnet de conducir válido;
+
+(ii) comprobar que tu póliza de seguro cubre los desplazamientos compartidos;
+
+(iii) no asumir ningún riesgo durante la conducción, ni tomar ningún producto que pueda afectar negativamente a tu atención y a tu capacidad de conducir de manera atenta y completamente segura;
+
+(iv) realizar los trayectos según la descripción del Envío o la Ruta;
+
+(v) utilizar un vehículo que cumpla con todas las normativas legales, en especial con el Certificado de ITV en vigor;
+
+(vi) a compartir con Shipmee o con cualquier Usuario que lo solicite tu carnet de conducir, el certificado de registro de tu vehículo, tu póliza de seguro, el certificado de la ITV y cualquier otro documento que demuestre tu capacidad para utilizar el vehículo como Transportista en la Plataforma.
+
+(vii) en caso de retraso o cambio en la hora o en el propio trayecto, informar a tus Clientes sin demora;
+
+(viii) esperar a los Clientes en el punto de encuentro acordado al menos hasta 30 minutos después de la hora acordada;
+
+(ix) no publicar ninguna Ruta relativa a un vehículo que no sea tuyo o para el cual no tengas permiso para utilizarlo como transporte compartido.
+
+(x) asegúrate de que los Clientes pueden contactarte al número de teléfono registrado en tu perfil;
+
+(xi) no generar ningún beneficio a través de la Plataforma;
+
+(xii) no tener ninguna contraindicación ni incapacidad médica para conducir;
+
+8.2 Carrier compromise
+
+When you get verified in the Platform, getting Carrier privileges, you commit to:
+
+(i) respect every law, rules and codes regarding the driving and the vehicle, specially you must have a valid civil responsibility insurance and driving license;
+
+(ii) not taking on any driving risk, nor taking any product that affects in a bad way your driving skills, keeping you from driving in a secure way;
+
+(iii) complete the journeys as written in the Shipment or Route in the website;
+
+(iv) use a car that follows all legal terms, specially, a valid Spanish ITV Certificate.
+
+(v) share with Shipmee and any other User who ask for your driving license, your vehicle registry certificate, your insurance policy, your ITV certificate or any other document that validates your driving skills to use the vehicle as a Carrier in the Platform.
+
+(vi) if a delay happens in the journey, you must inform the Client as fast as possible.
+
+(vii) wait for the Clients in the meet point for at least 30 minutes after that hour.
+
+(viii) do not publish any Route with a vehicle you don’t own or you don’t have a permission to use it as a Carrier. 
+
+(ix) take care that the Client can contact you via the phone number in your profile.
+
+(x) do not generate any benefit through the Platform.
+
+(xi) do not have any contraindication or medical inability to drive.
+
+9. Datos de carácter personal.
+
+En el contexto de uso de la Plataforma por tu parte, Shipmee recopilará y procesará tu información personal. Al utilizar la Plataforma y registrarte como Usuario, reconoces y aceptas el procesamiento de tus datos personales por parte de Shipmee de conformidad con la legislación aplicable y lo establecido en la Política de Privacidad.
+
+9. Personal information.
+
+Using the Platform, Shipmee will collect and process your personal information. By using the Platform and register as a User, you accept el processing of your personal data by Shipmee, always following the current laws and the Privacy Policy.
+
+10. Propiedad intelectual
+
+10.1 Contenido publicado por Shipmee.
+
+Según dicta la ley en lo referente al contenido proporcionado por los Usuarios, Shipmee es el titular único de todos los derechos de propiedad intelectual relacionados con los Servicios, la Plataforma, su contenido (textos, imágenes, diseños, logotipos, vídeos, sonido, datos y gráficos) y con el software y base de datos que aseguran su funcionamiento.
+
+Shipmee te garantiza un derecho personal, no exclusivo y no transferible para utilizar la Plataforma y los Servicios, para su uso personal y privado, con objetivo no comercial y de conformidad con la finalidad de la Plataforma y los Servicios.
+
+Está totalmente prohibido utilizar o explotar la Plataforma y los Servicios, incluido su contenido, con cualquier otra finalidad que no sea la prevista sin previo consentimiento por escrito de Shipmee. En concreto, está totalmente prohibido lo siguiente:
+
+(i) reproducir, modificar, adaptar, distribuir, representar públicamente y diseminar la Plataforma, los Servicios y todo su contenido, salvo previa autorización expresa de Shipmee.
+
+(ii) descompilar y aplicar ingeniería inversa a la Plataforma o los Servicios, salvo las excepciones estipulada por los textos aplicables.
+
+10.1 Content published by Shipmee
+
+Following the law regarding the content given by the Users, Shipmee is the only owner of every intellectual property rights related to the Services, the Platform, its content (texts, images, designs, logos, videos, sounds, data and graphics), the software and the database make the system works.
+
+Shipmee guaranties a non exclusive and non transferable personal right to use the Platform and the Services, for its personal and private use, with a non commercial purpose.
+
+It’s strictly forbidden the use or mining of the Platform and the Services, includes its content, with any other purpose different to the one described in the User General Terms document without the explicit permission of Shipmee. It’s strictly forbidden to:
+
+(i) reproduce, modify, adapt, distribute, public representation or spread the Platform, the Services and all its content, except by explicit permission of Shipmee.
+
+(ii) decompile and apply inverse engineering to the Platform or Service, except by explicit permission of Shipmee.
+
+10.2 Contenido publicado por el Usuario de la Plataforma
+
+Con el objetivo de permitir la provisión de los Servicios, y en cumplimiento con el objetivo de la Plataforma, le otorgas a Shipmee una licencia no exclusiva para usar el contenido y los datos que has proporcionado en el contexto de utilización de los Servicios (de aquí en adelante denominados como el “Contenido desarrollado por el Usuario”). Para poder permitir a Shipmee distribuir por medio de la red digital y de conformidad con cualquier protocolo de comunicación (en especial Internet y las redes móviles) y para poder ofrecer al público el contenido de la Plataforma, autorizas a Shipmee a reproducir, representar, adaptar y traducir tu Contenido desarrollado por el Usuario para todo el mundo y durante la duración completa de tus relaciones contractuales con Shipmee, de conformidad con lo siguiente:
+
+(i) autorizas a Shipmee a reproducir todo o parte de tu Contenido desarrollado por el Usuario en cualquier medio de grabación digital, conocido o por conocer, en concreto en cualquier servidor, disco duro, tarjeta de memoria u otro medio equivalente, en cualquier formato y por medio de cualquier proceso, ya conocido o por conocer, en el grado necesario para cualquier operación de almacenamiento, copia de seguridad, transmisión o descarga relacionada con el funcionamiento de la Plataforma y el suministro del Servicio;
+
+(ii) autorizas a Shipmee a adaptar y traducir su Contenido desarrollado por el Usuario, y a reproducir dichas adaptaciones en cualquier medio digital, conocido o por conocer, establecido en el punto (i) arriba, con el objetivo de suministrar los Servicios en diferentes idiomas. Este derecho incluye la opción de realizar modificaciones en el formato de tu Contenido desarrollado por el Usuario, con respecto a tu derecho moral, con el objetivo de respetar el diseño gráfico de la Plataforma o para hacer que tu Contenido sea compatible a nivel técnico con nuestro software para su posterior publicación por medio de la Plataforma.
+
+10.2 Content published by the User of the Platform.
+
+With the Service provision purpose, and according with the Platform objective, you give Shipmee a non-exclusive license to user the content and the data supplied using the Services (from now on called “User developed content”). To let Shipmee to distribute it through digital networks, and according to any communication protocol (specially, Internet and mobile networks), and to offer the content to the public in the Platform, you let Shipmee to play, represent, adapt and translate your User developed content to everyone and during the entire contractual relationship with Shipmee, according to this:
+
+(i) you let Shipmee to play all or a fraction of your User developed content in any digital recording system, known or unknown, in any server, hard drive, memory drive or similar, in any format or by any process, known or unknown, to any store, security copy, transmission or download operation related with the good working of the Platform and the supply of the Services.
+
+(ii) you let Shipmee to adapt and translate your User developed content and to play those adaptations in any digital system, known or unknown established in the (i) section above, with the Multi-language Service supply objective. This right include the option to modify the format of your User developed content, according your moral rights, to follow the graphical design of the Platform or to make the content technically compatible with our software to its later release in the Platform.
+
+11. Función de Shipmee
+
+La Plataforma constituye una plataforma de conexión de red en línea en la cual, los Usuarios puede crear y publicar Envíos y Rutas, y hacer Ofertas con el objetivo de transportar o hacer llevar los paquetes de los Clientes. Estos anuncios serán visualizados por los demás Usuarios para comprobar las condiciones del Envío, Ruta u Oferta.
+
+Al utilizar Shipmee y aceptar las presentes Condiciones Generales de Uso, reconoces que Shipmee no es parte de ningún acuerdo formalizado entre tú y los demás Usuarios para transportar paquetes.
+
+Shipmee no tiene ningún tipo de control sobre el comportamiento de sus Usuarios y los usuarios de la Plataforma. No posee, explota, suministra ni administra los vehículos incluidos en los anuncios, ni ofrece Envíos, Rutas ni Ofertas.
+
+Reconoces y aceptas que Shipmee no controla la validez, veracidad o legalidad de los Envíos, Rutas y Ofertas. En su capacidad de intermediario, Shipmee no ofrece servicio de transporte ni actúa en calidad de transportista. La función de Shipmee se limita a facilitar el acceso a la Plataforma.
+
+Los Usuarios (Clientes y Transportistas) actúan bajo su única y total responsabilidad.
+
+En su capacidad de intermediario, Shipmee no será considerado responsable de ningún incidente que tenga lugar durante un trayecto, en especial en los relacionado con:
+
+(i) información errónea comunicada por el Conductor en su Anuncio, o por cualquier otro medio, con respecto a trayecto y sus condiciones.
+
+(ii) la cancelación o modificación de un Trayecto por parte de un Usuario.
+
+(iii) el impago por parte de un Cliente.
+
+(iv) el comportamiento de sus Usuarios antes o después del trayecto.
+
+11. Shipmee’s function
+
+The Platform made up an online connection platform where Users can create Shipments, Routes and Offers with the purpose of carrying and delivering Client’s packages. These ads will be view by any other User to check the Shipment, Routes and Offer conditions.
+
+By using Shipmee and accepting the present User General Terms, you accept Shipmee is not part of any formal agreement between you and any other User to carry packages.
+
+Shipmee has no control over the behavior of the Users and the users of the Platform. Shipmee does not own, exploit, supply or administrate the vehicles shown in the ads, and it does not offer Shipments, Routes or Offers.
+
+You recognize and accept that Shipmee has no control over the Shipments, Routes and Offers validity, truthfulness or legality. As a intermediary, Shipmee does not offer any service to transport packages or acts as a Carrier. The only function of Shipmee is to facilitate the access to the Platform.
+
+The Users (Clients and Carrier) acts under their own responsability.
+
+As a intermediary, Shipmee is not considered the responsable or any incident during the journey, specially related to:
+
+(i) wrong information in the ads o in any other platform on regard the journey or its conditions;
+
+(ii) the cancellation or modification of a journey by a User;
+
+(iii) the non-payment by a Cliente;
+
+(iv) the Users behavior before of after the journey;
+
+12. Funcionamiento, disponibilidad y funcionalidades de la Plataforma.
+
+Shipmee intentará en la medida de los posible mantener el funcionamiento constante de la Plataforma los 7 días de la semana y las 24 horas del día. Sin embargo, es posible que se pueda suspender de forma temporal el acceso a la Plataforma, sin previo aviso, por motivos técnicos, de mantenimiento, migración u operaciones de actualización, o debido a cortes de suministro o restricciones relacionadas con el funcionamiento de la red.
+
+Además, Shipmee se reserva el derecho a modificar o suspender en su totalidad o en parte el acceso a la Plataforma o sus funcionalidades, a su discreción, bien sea de forma temporal o permanente.
+
+12. Platform running, availability and functionalities
+
+Shipmee will try to keep the platform working 24/7. However, it’s possible that the service may not be online, without prior warning, due to technical difficulties, maintenance, migration, update operations, supply cut off or restrictions related to the network.
+
+Also, Shipmee reserve the right to modify or suspend, partially or totally, the access to the Platform, temporal or permanent.
+
+13. Modificaciones de las Condiciones Generales de Uso
+
+Estas Condiciones Generales de Uso y los documentos integrados por referencia forman el acuerdo completo entre tú y Shipmee con relación a la utilización de los Servicios. Cualquier otro documento mencionado en la Plataforma tiene solamente fines indicativos.
+
+Shipmee podrá modificar las presentes Condiciones Generales de Uso para adaptarlos a su entorno tecnológico y comercial, y para cumplir con la legislación en vigor.
+
+13. User General Terms modifications
+
+These User General Terms and the integrated documents make the agreement between you and Shipmee in regard with the user of its Services. Any other document mentioned in the Platform is purely informative.
+
+Shipmee will be able to modify the present User General Terms to adapt them to its technological and commercial environment to follow the current laws.
+
+Versión del 4 de Abril de 2017.
+
+April 4th, 2017 version. 

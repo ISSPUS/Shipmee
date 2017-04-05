@@ -18,8 +18,15 @@
 		<value>/views/sizePrice/messages</value>
 		<value>/views/shipment/messages</value>
 		<value>/views/shipmentOffer/messages</value>
+		<value>/views/alert/messages</value>
+		<value>/views/message/messages</value>
+		<value>/views/vehicle/messages</value>
+		<value>/views/user/messages</value>
+		<value>/views/rating/messages</value>
+		<value>/views/complaint/messages</value>
 		
 		<value>/views/about/messages</value>
+		<value>/views/userGeneralTerms/messages</value>
 		
 	</util:list>
 

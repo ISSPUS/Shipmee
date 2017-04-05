@@ -7,6 +7,8 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -21,7 +23,7 @@ import repositories.RouteRepository;
 @Transactional
 public class RouteService {
 	
-	static Logger log = Logger.getLogger(ShipmentService.class);
+	static Logger log = Logger.getLogger(RouteService.class);
 
 	// Managed repository -----------------------------------------------------
 
@@ -41,6 +43,9 @@ public class RouteService {
 	
 	@Autowired
 	private RouteOfferService routeOfferService;
+	
+	@Autowired
+	private AlertService alertService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -70,26 +75,30 @@ public class RouteService {
 	
 	public Route save(Route route) {
 		Assert.notNull(route);
+		Assert.isTrue(route.getArriveTime().after(new Date()), "You cannot save a route that is in the past.");
 		Assert.isTrue(checkDates(route), "The departure date must be greater than the current date and the arrival date greater than the departure date.");
 		Assert.isTrue(checkItemEnvelope(route.getItemEnvelope()), "ItemEnvelope must be open, closed or both.");
+
 		if(route.getVehicle() != null) {
 			Assert.isTrue(route.getCreator().getId() == route.getVehicle().getUser().getId(), "Both Ids must be the same.");
 		}
-		
+
 		User user;
 		Date date;
 		
 		user = userService.findByPrincipal();
 		date = new Date();
 		
-		Assert.isTrue(user.getId() == route.getCreator().getId(), "Only the user who created the route can delete it");
+		Assert.isTrue(user.getId() == route.getCreator().getId(), "Only the user who created the route can save it");
+		Assert.isTrue(user.getIsVerified() == true, "The creator must be verified.");
 		
 		if(route.getId() == 0) {
 			route.setCreator(user);
 			route.setDate(date);
 			
 			route = routeRepository.save(route);
-			
+			alertService.checkAlerts(route.getOrigin(), route.getDestination(), 
+					route.getDepartureTime(), "Route");
 		} else {
 			route = routeRepository.save(route);
 		}
@@ -141,6 +150,45 @@ public class RouteService {
 
 		result = routeRepository.findAll();
 
+		return result;
+	}
+	
+	protected Page<Route> findAllByUser(Pageable page){
+		Page<Route> result;
+		User user = userService.findByPrincipal();
+		
+		result = routeRepository.findAllByUserId(user.getId(), page);
+		
+		return result;
+	}
+	
+	public Page<Route> findAllByUserId(int userId, Pageable page){
+		Assert.isTrue(userId != 0, "The user must exist");
+		
+		Page<Route> result;
+		
+		result = routeRepository.findAllByUserId(userId, page);
+		
+		return result;
+	}
+	
+	public Page<Route> findAllByCurrentUser(Pageable page){
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can see his own routes.");
+		
+		Page<Route> result;
+		
+		result = findAllByUser(page);
+		
+		return result;
+	}
+	
+	public int countRouteCreatedByUserId(User user){
+		Assert.notNull(user);
+		
+		int result;
+		
+		result = routeRepository.countRouteCreatedByUserId(user.getId());
+		
 		return result;
 	}
 

@@ -213,10 +213,10 @@
 												
 													
 											</div>
-											<div class="col-lg-3" style="margin-top: 5%;">
+											<div class="col-lg-3 profile-userbuttons" style="margin-top: 5%;">
 											
 												<div class="price">${shipment.price}&#8364;</div>	
-												<button type="button" class="btn btn-primary btn-md btn-block" onclick="location.href = 'shipment/display.do?shipmentId=${shipment.id}';"><spring:message code="route.details" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>	
+												<button type="button" class="btn button-ok btn-block" style="font-size: 15px;" onclick="location.href = 'shipment/display.do?shipmentId=${shipment.id}';"><spring:message code="route.details" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>	
 											
 
 											</div>

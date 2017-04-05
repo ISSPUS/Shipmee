@@ -31,11 +31,13 @@
             src/main/java/converters/**,
             src/main/java/domain/form/**,
             src/main/java/domain/DomainEntity.*,
+            src/main/java/domain/CreditCard.*,
             src/main/java/security/**,
             src/main/java/repositories/**,
             src/main/java/utilities/**,
             src/main/java/services/form/**,
-            src/main/java/services/ActorService.*
+            src/main/java/services/ActorService.*,
+            src/main/java/services/AdministratorService.*,
             src/main/java/services/SizePriceService.*
         </sonar.coverage.exclusions>
 	</properties>
@@ -43,7 +45,7 @@
 	<!-- Indexing information -->
 
 	<name>Shipmee</name>
-	<version>0.1</version>
+	<version>0.2</version>
 	<url>https://shipmee.es</url>
 	<scm><url>https://github.com/Shipmee/Shipmee</url></scm>
 	<ciManagement><url>https://travis-ci.org/Shipmee/Shipmee</url></ciManagement>
@@ -130,11 +132,13 @@
 							<exclude>converters/**</exclude>
 							<exclude>domain/form/**</exclude>
 							<exclude>domain/DomainEntity.*</exclude>
+							<exclude>domain/CreditCard.*</exclude>
 							<exclude>security/**</exclude>
 							<exclude>repositories/**</exclude>
 							<exclude>utilities/**</exclude>
 							<exclude>services/form/**</exclude>
 							<exclude>services/ActorService.*</exclude>
+							<exclude>services/AdministratorService.*</exclude>
 							<exclude>services/SizePriceService.*</exclude>
 						</excludes>
 					</instrumentation>
@@ -288,7 +292,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.0.Final</version>
+			<version>4.3.11.Final</version>
 		</dependency>
 
 		<dependency>

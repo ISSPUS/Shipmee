@@ -18,6 +18,7 @@ public class User extends Actor {
 	
 	private boolean isVerified;
 	private boolean isActive;
+	private String dniPhoto;
 	
 	public boolean getIsVerified() {
 		return isVerified;
@@ -32,7 +33,17 @@ public class User extends Actor {
 	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	
+		
+	@NotNull
+	public String getDniPhoto() {
+		return dniPhoto;
+	}
+	public void setDniPhoto(String dniPhoto) {
+		this.dniPhoto = dniPhoto;
+	}
+
+
+
 	// Relationships ----------------------------------------------------------
 	private Collection<Route> routes;
 	private Rank rank;

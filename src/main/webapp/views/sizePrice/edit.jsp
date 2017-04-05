@@ -101,6 +101,12 @@
 			modelAttribute="sizePriceForm" class="form-horizontal">
 			<!-- Hidden Attributes -->
 			<form:hidden path="routeId" />
+			<form:hidden path="departureTime" />
+			<form:hidden path="arriveTime" />
+			<form:hidden path="origin" />
+			<form:hidden path="destination" />
+			<form:hidden path="itemEnvelope" />
+			<form:hidden path="vehicle" />
 
 			<div class="form-group">
 				<form:label path="priceS"
@@ -185,4 +191,3 @@
 
 	</div>
 </div>
-

@@ -19,7 +19,7 @@ import security.UserAccount;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Actor extends DomainEntity {
+public abstract class Actor extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private String name;
@@ -28,6 +28,7 @@ public class Actor extends DomainEntity {
 	private Date birthDate;
 	private String phone;
 	private String dni;
+	private String photo;
 
 	
 	@NotBlank
@@ -58,7 +59,7 @@ public class Actor extends DomainEntity {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@NotNull
 	public Date getBirthDate() {
 		return birthDate;
@@ -67,6 +68,7 @@ public class Actor extends DomainEntity {
 		this.birthDate = birthDate;
 	}
 
+	@NotNull
 	public String getPhone() {
 		return phone;
 	}
@@ -74,6 +76,7 @@ public class Actor extends DomainEntity {
 		this.phone = phone;
 	}
 
+	@NotNull
 	public String getDni() {
 		return dni;
 	}
@@ -81,6 +84,14 @@ public class Actor extends DomainEntity {
 		this.dni = dni;
 	}
 
+	@NotNull
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	
 	// Relationships ----------------------------------------------------------
 	private UserAccount userAccount;
 
@@ -94,5 +105,6 @@ public class Actor extends DomainEntity {
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
+	
 
 }

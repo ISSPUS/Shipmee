@@ -50,6 +50,9 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+				<bean class="security.Authority">
 					<property name="authority" value="MODERATOR" />
 				</bean>
 			</list>
@@ -67,6 +70,18 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="shipmee" />
+		<property name="password" value="a1e85a708eea1ae0ec182cdaf967e2f5" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Administrator -->	
 	
@@ -74,10 +89,22 @@
 		<property name="name" value="Miguel"/>
 		<property name="surname" value="Rodriguez"/>
 		<property name="email" value="miguel@gmail.com"/>
-		<property name="birthDate" value="1995/10/24 00:00"/>
+		<property name="birthDate" value="1995/10/24"/>
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
+		<property name="photo" value=""/>
 		<property name="userAccount" ref="userAccount1"/>
+	</bean>
+	
+	<bean id="shipmee" class="domain.Administrator">
+		<property name="name" value="Shipmee"/>
+		<property name="surname" value="S.A"/>
+		<property name="email" value="no-reply@shipmee.es"/>
+		<property name="birthDate" value="2017/03/03"/>
+		<property name="phone" value="666777888"/>
+		<property name="dni" value="12345678A"/>
+		<property name="photo" value=""/>
+		<property name="userAccount" ref="userAccount6"/>
 	</bean>
 	
 	<!-- Rank -->
@@ -103,15 +130,24 @@
 		<property name="since" value="3"/>
 	</bean>
 	
+	<bean id="rank4" class="domain.Rank">
+		<property name="title" value="title4"/>
+		<property name="description" value="description4"/>
+		<property name="icon" value="http://www.icon4.com"/>
+		<property name="since" value="4"/>
+	</bean>
+	
 	<!-- User -->
 	
 	<bean id="user1" class="domain.User">
-		<property name="name" value="Manolo"/>
-		<property name="surname" value="Ruiz"/>
-		<property name="email" value="manolo@gmail.com"/>
-		<property name="birthDate" value="1992/10/05 00:00"/>
+		<property name="name" value="Mariano"/>
+		<property name="surname" value="García"/>
+		<property name="email" value="mariano@shipmee.es"/>
+		<property name="birthDate" value="1992/10/05"/>
 		<property name="phone" value="666777666"/>
 		<property name="dni" value="23456789B"/>
+		<property name="dniPhoto" value="https://i.imgur.com/38JnZ3Z.png"/>
+		<property name="photo" value="https://i.imgur.com/v11ts3z.png"/>
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
@@ -123,12 +159,14 @@
 	</bean>
 	
 	<bean id="user2" class="domain.User">
-		<property name="name" value="Guillermo"/>
-		<property name="surname" value="Gamero"/>
-		<property name="email" value="Guillermo@gmail.com"/>
-		<property name="birthDate" value="1995/10/01 00:00"/>
+		<property name="name" value="Lola"/>
+		<property name="surname" value="Lopez"/>
+		<property name="email" value="lola@shipmee.es"/>
+		<property name="birthDate" value="1995/10/01"/>
 		<property name="phone" value="676554345"/>
 		<property name="dni" value="34567890C"/>
+		<property name="dniPhoto" value="https://i.imgur.com/MmE81ot.png"/>
+		<property name="photo" value="https://i.imgur.com/rDN9OW4.png"/>
 		<property name="userAccount" ref="userAccount3"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
@@ -143,9 +181,11 @@
 		<property name="name" value="Carlos"/>
 		<property name="surname" value="García"/>
 		<property name="email" value="carlos@gmail.com"/>
-		<property name="birthDate" value="1983/02/09 00:00"/>
+		<property name="birthDate" value="1983/02/09"/>
 		<property name="phone" value="676554311"/>
 		<property name="dni" value="34567895C"/>
+		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
+		<property name="photo" value="images/anonymous.png"/>
 		<property name="userAccount" ref="userAccount5"/>
 		<property name="isVerified" value="false"/>
 		<property name="isActive" value="true"/>
@@ -155,17 +195,24 @@
 			</list>
 		</property>
 	</bean>
-	
-	<!-- Moderator -->
-	
-	<bean id="moderator1" class="domain.Moderator">
+		
+	<bean id="moderator1" class="domain.User">
 		<property name="name" value="Antonio"/>
 		<property name="surname" value="López"/>
 		<property name="email" value="Antonio@gmail.com"/>
-		<property name="birthDate" value="1994/11/28 00:00"/>
+		<property name="birthDate" value="1994/11/28"/>
 		<property name="phone" value="689836654"/>
 		<property name="dni" value="49983586H"/>
+		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
+		<property name="photo" value="images/anonymous.png"/>
 		<property name="userAccount" ref="userAccount4"/>
+		<property name="isVerified" value="true"/>
+		<property name="isActive" value="true"/>
+		<property name="rank" ref="rank4"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Vehicle -->
@@ -173,14 +220,18 @@
 	<bean id="vehicle1" class="domain.Vehicle">
 		<property name="brand" value="Audi"/>
 		<property name="model" value="a7"/>
-		<property name="picture" value=""/>
+		<property name="picture" value="https://s-media-cache-ak0.pinimg.com/736x/1e/d0/8b/1ed08b487f02fc8c43aaab936d1f1e91.jpg"/>
+		<property name="color" value="Blue"/>
+		<property name="deleted" value="false"/>
 		<property name="user" ref="user1"/>
 	</bean>
 	
 	<bean id="vehicle2" class="domain.Vehicle">
-		<property name="brand" value="Fiat"/>
-		<property name="model" value="Panda"/>
-		<property name="picture" value=""/>
+		<property name="brand" value="Renault"/>
+		<property name="model" value="Fluence"/>
+		<property name="picture" value="https://i.imgur.com/G3BH68f.png"/>
+		<property name="color" value="Gray"/>
+		<property name="deleted" value="false"/>
 		<property name="user" ref="user2"/>
 	</bean>
 	
@@ -188,9 +239,10 @@
 	
 	<bean id="rating1" class="domain.Rating">
 		<property name="value" value="4"/>
-		<property name="valoration" value="Very good"/>
 		<property name="comment" value="He is a great driver"/>
+		<property name="createdDate" value="2017/03/12 16:00"/>
 		<property name="user" ref="user1"/>
+		<property name="author" ref="user2"/>
 	</bean>
 	
 	<!-- Complaint -->
@@ -199,6 +251,7 @@
 		<property name="explanation" value="His car is not an Audi"/>
 		<property name="creator" ref="user2"/>
 		<property name="involved" ref="user1"/>
+		<property name="type" value="Mild"/>
 		<property name="moderator" ref="moderator1"/>
 	</bean>
 	
@@ -376,7 +429,7 @@
 		<property name="destination" value="Sevilla"/>
 		<property name="price" value="2.00"/>
 		<property name="itemName" value="Equipo de música"/>
-		<property name="itemPicture" value="http://cde.3.elcomercio.pe/ima/0/1/0/2/1/1021917.jpg"/>
+		<property name="itemPicture" value="https://cde.3.elcomercio.pe/ima/0/1/0/2/1/1021917.jpg"/>
 		<property name="itemSize" value="L"/>
 		<property name="itemEnvelope" value="Open"/>
 		<property name="creator" ref="user2"/>
@@ -406,7 +459,7 @@
 		<property name="destination" value="Sevilla"/>
 		<property name="price" value="2.00"/>
 		<property name="itemName" value="Libro"/>
-		<property name="itemPicture" value="http://i.imgur.com/JX1E7.jpg"/>
+		<property name="itemPicture" value="https://i.imgur.com/JX1E7.jpg"/>
 		<property name="itemSize" value="M"/>
 		<property name="itemEnvelope" value="Open"/>
 		<property name="creator" ref="user2"/>
@@ -469,12 +522,37 @@
 		<property name="shipment" ref="shipment2"/>
 	</bean>
 	
-	<!-- Notification -->
+	<!-- Alert -->
 	
-	<bean id="notification1" class="domain.Notification">
-		<property name="date" value="2017/03/09 11:02"/>
+	<bean id="alert1" class="domain.Alert">
+		<property name="date" value="2017/05/09 11:02"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
+		<property name="type" value="Route"/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
+	<bean id="alert2" class="domain.Alert">
+		<property name="date" value="2017/05/09 11:02"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="type" value="Shipment"/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
+	<bean id="alert3" class="domain.Alert">
+		<property name="date" value="2017/07/01"/>
+		<property name="origin" value="Sevilla"/>
+		<property name="destination" value="Madrid"/>
+		<property name="type" value="Route"/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<bean id="alert4" class="domain.Alert">
+		<property name="date" value="2017/07/01"/>
+		<property name="origin" value="Sevilla"/>
+		<property name="destination" value="Madrid"/>
+		<property name="type" value="Shipment"/>
 		<property name="user" ref="user2"/>
 	</bean>
 	
@@ -489,4 +567,27 @@
 		<property name="cvvCode" value="303"/>
 	</bean>
 	
+	<!-- Messages -->
+	
+	<bean id="message1" class="domain.Message">
+		<property name="subject" value="Message1"/>
+		<property name="body" value="Hello world"/>
+		<property name="moment" value="2017/02/09 11:02"/>
+		<property name="sender" ref="user2"/>
+		<property name="recipient" ref="user1"/>
+	</bean>
+		<bean id="message2" class="domain.Message">
+		<property name="subject" value="Message2"/>
+		<property name="body" value="Hello world"/>
+		<property name="moment" value="2017/02/09 11:12"/>
+		<property name="sender" ref="user2"/>
+		<property name="recipient" ref="user1"/>
+	</bean>
+		<bean id="message3" class="domain.Message">
+		<property name="subject" value="Message3"/>
+		<property name="body" value="Hello world"/>
+		<property name="moment" value="2017/02/09 11:22"/>
+		<property name="sender" ref="user2"/>
+		<property name="recipient" ref="user1"/>
+	</bean>
 </beans>

@@ -50,11 +50,18 @@
 		</div>
 	</jstl:if>
 	<br />
-	<input class="btn btn-theme" type="submit" value="<spring:message code="security.login" />" />
+	<input class="btn btn-theme flotante-derecha" type="submit" value="<spring:message code="security.login" />" />
 	
 </form:form>
 </div>
-		</div>
+
+<div class="frase-box">
+						<spring:message code="login.notAccount.before" />
+						<b><a href="user/register.do">
+							<spring:message code="login.notAccount.link" />
+						</a></b>
+</div>
+	</div>
 		
 	</div>
 </div>

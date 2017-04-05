@@ -1,25 +1,22 @@
 package converters;
-
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import domain.Moderator;
+import domain.Message;
 
 @Component
 @Transactional
-public class ModeratorToStringConverter implements Converter<Moderator, String> {
-	
+public class MessageToStringConverter implements Converter<Message, String> {
+
 	@Override
-	public String convert(Moderator moderator) {
+	public String convert(Message message) {
 		String result;
 
-		if (moderator == null)
+		if (message == null)
 			result = null;
 		else
-			result = String.valueOf(moderator.getId());
+			result = String.valueOf(message.getId());
 
 		return result;
 	}
-
 }

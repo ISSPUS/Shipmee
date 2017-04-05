@@ -58,103 +58,47 @@
 
 	<div class="row profile">
 		<div class="col-md-3">
-			<div class="profile-sidebar">
 
-				<div class="profile-usermenu">
-					<form method="get" action="shipment/search.do">
 
-						<ul class="nav">
-
-							<li class="active"><a> <i
-									class="glyphicon glyphicon-map-marker img-origin"></i> <spring:message code="shipment.origin" />
-							</a></li>
-							<li class="li-input"><input type="text" name="origin"
-								class="form-control input-text" value="${origin}" required></li>
-							<li class="active"><a><i
-									class="glyphicon glyphicon-map-marker img-destination"></i>
-									<spring:message code="shipment.destination" />
-							</a></li>
-							<li class="li-input"><input name="destination" type="text"
-								class="form-control input-text" value="${destination}" required></li>
-							<li class="active"><a href="" target="_blank"> <i
-									class="glyphicon glyphicon-plane"></i> <spring:message code="shipment.date" />
-							</a></li>
-							<li class="li-input">
-								<div class='input-group fondoDesplegable input-text' id='datetimepicker1'>
-									<input name="date" style="backgroud-color: white;" type='text'
-										class="form-control" /> <span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-								</div>
-							</li>
-							<li class="active"><a href="" target="_blank"> <i
-									class="glyphicon glyphicon-time"></i> <spring:message code="shipment.hour" />
-							</a></li>
-							<li style="text-align: center" class="li-input">
-								<select class="selectpicker input-text fondoDesplegable" name="hour">
-								<option selected="selected" disabled value=''><spring:message code="shipment.select.hour" /></option>
-									<jstl:forEach begin="0" end="23" varStatus="i">
-										<jstl:choose>	
-											<jstl:when test="${i.index lt 10 }">
-												<option>0${i.index}:00</option>
-											</jstl:when>
-											<jstl:otherwise>
-												<option>${i.index}:00</option>
-											</jstl:otherwise>
-										</jstl:choose>
-									</jstl:forEach>
-								</select>
-							</li>
-							<li class="active"><a href="#"> <i
-									class="glyphicon glyphicon-eye-open"></i><spring:message code="shipment.package" />
-							</a></li>
-							<li style="padding-bottom: 2%;">
-								<div class="form-check form-check-inline input-text">
-									<label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox1" name="envelope"
-										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="shipment.open" />
-									</label> <label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox2" name="envelope"
-										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="shipment.closed" />
-									</label>
-								</div>
-
-							</li>
-							<li class="active"><a> <i
-									class="glyphicon glyphicon-resize-full"></i> <spring:message code="shipment.itemSize" />
-							</a></li>
-							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text fondoDesplegable" name="itemSize">
-									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
-									<option value="xs">XS</option>
-									<option value="s">S</option>
-									<option value="m">M</option>
-									<option value="l">L</option>
-									<option value="xl">XL</option>
-							</select></li>
-							<li class="active"><button type="submit"
-									class="btnSearch btn-lg btnSample btn-block btn-success">
-									<spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span>
-								</button></li>
-						</ul>
-					</form>
-
+			<div class="span3 well text-center"
+				style="margin-top: 2px; background-color: white;">
+				<a href="user/profile.do?userId=${route.creator.id}">
+				
+				
+				<jstl:choose>
+						<jstl:when test="${not empty route.creator.photo}">
+							<jstl:set var="imageUser" value="${route.creator.photo}" />
+						</jstl:when>
+						<jstl:otherwise>
+							<jstl:set var="imageUser" value="images/anonymous.png" />
+						</jstl:otherwise>
+					</jstl:choose>
+				<img src="${imageUser}" name="aboutme" width="140" height="140" border="0" class="img-circle">	
+					
+					
+					
+					
+					
+					</a>
+				<h3>
+					<a>${route.creator.name}</a>
+				</h3>
+				<div class="profile-userbuttons">
+					<button type="button" class="btn button-view btn-sm" onclick="location.href = 'user/profile.do?userId=${route.creator.id}';"><spring:message code="user.view" /></button>
+					<button type="button" class="btn button-delete-lax btn-sm" onclick="location.href = 'complaint/user/create.do?userId=${route.creator.id}';"><spring:message code="user.report" /></button>
 				</div>
-				<!-- END MENU -->
 			</div>
+
+
 		</div>
 		
 		
 		
 		<div class="col-md-9">
 			<div class="profile-content">
-							<div class="row ruta">
-								<div class="row rtitulo">
-									<div class="rtitulo col-sm-12 text-center ">
-										<h4 class="titulo">${route.creator.name}</h4>
-									</div>
-								</div>
+							<div class="row cuadro">
 								
+
 								<div class="rfecha separador"></div><span class="cretaion-date media-meta pull-right"><fmt:formatDate value="${route.date}" pattern="dd/MM/yyyy HH:mm" /></span>
 								
 								<div class="row info-ruta">
@@ -183,9 +127,16 @@
 										
 										
 										<div class="prueba"><div class="col-xs-12">
-												<img class="img-responsive center-block imagen-profile"
-													width="100" height="100" src="images/anonymous.png">
-													<spring:message code="route.profile" /> <a href="#">${route.creator.name}</a>
+												
+												
+			
+												
+												
+												
+												
+												
+												
+												
 											</div></div>
 									
 										<div class="row info1 col-xs-7 col-sm-9">
@@ -254,7 +205,7 @@
 					</jstl:forEach>
                        
                     </tbody>
-                </table>
+ 					 </table>
 					
 
 					

@@ -1,13 +1,3 @@
-<%--
- * submit.tag
- *
- * Copyright (C) 2014 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- --%>
-
 <%@ tag language="java" body-content="empty" %>
 
 <%-- Taglibs --%>
@@ -28,7 +18,7 @@
 
 <%-- Definition --%>
 
-<button type="submit" name="${name}" class="btn btn-primary" 
+<button type="submit" name="${name}" class="btn button-delete" 
 	onclick="return confirm('<spring:message code="${codeConfirm}" />')">
 	<spring:message code="${code}" />
 </button>
