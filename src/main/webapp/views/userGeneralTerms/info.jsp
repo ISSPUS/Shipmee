@@ -237,6 +237,13 @@ margin-bottom: 10%;
 		</div>
 		
 		<div class="row">
+			<h2><spring:message code="cgu.article14.title"/></h2><br>
+			<spring:message code="cgu.article14.body1"/><br>
+			<spring:message code="cgu.article14.body2"/><br>
+			<spring:message code="cgu.article14.body3"/><br>
+		</div>
+		
+		<div class="row">
 			<h2><spring:message code="cgu.version"/></h2><br>
 		</div>
 
