@@ -42,7 +42,7 @@
 <div class="container">
 
 	<div class="row inbox " style="margin-top: 2%;">
-		<div class="col-md-3">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-body inbox-menu">
 					<a href="message/actor/create.do" class="btn btn-danger btn-block"><spring:message
@@ -60,7 +60,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-9">
+		<div class="col-md-8">
 			<form:form action="message/actor/edit.do" method="post"
 				modelAttribute="messageForm" class="form-horizontal" role="form">
 

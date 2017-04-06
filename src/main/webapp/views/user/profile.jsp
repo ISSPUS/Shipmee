@@ -98,7 +98,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-8 col-lg-6">
+		<div class="col-md-6 col-lg-6">
 			<div class="well profile-user profile">
 				<jstl:if test="${isPrincipal}">
 					<a href="user/user/edit.do"><i
@@ -237,7 +237,7 @@
 
 			</div>
 		</div>
-		<div class="col-md-4 col-lg-6">
+		<div class="col-md-6 col-lg-6">
 			<div class="row " style="margin-top: 2%;">
 				<div class="col-sm-12" style="padding-left: 0% !important">
 
@@ -249,21 +249,21 @@
 										<spring:message code="rating.create" />
 									</h4>
 								</div>
-								<div class="col-xs-12 col-md-4">
-									<div class="center-block col-xs-4 col-lg-12"
+								<div class="col-xs-12 col-md-5">
+									<div class="center-block col-xs-3 col-lg-12"
 										style="text-align: center;">
 										<img class="img-responsive"
 											style="margin: 0 auto; width: 60px;"
 											src="${rating.author.photo}">
 									</div>
-									<div class="col-xs-6 col-lg-12 info-profile-comment">
+									<div class="col-xs-9 col-lg-12 info-profile-comment">
 										<div class="review-block-name">
 											<a href="user/profile.do?userId=${rating.author.id}">${rating.author.userAccount.username}</a>
 										</div>
 									</div>
 
 								</div>
-								<div class="col-xs-12 col col-md-8">
+								<div class="col-xs-12 col col-md-7">
 									<div class="review-block-rate"
 										style="text-align: right; margin-right: 10%;">
 										<div class="lead evaluation">
