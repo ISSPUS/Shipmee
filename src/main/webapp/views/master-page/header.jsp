@@ -8,8 +8,15 @@
 
 <body>
 
+
+	 
+
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	
+	
+        
+        
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -127,12 +134,19 @@
 				</ul>
 			</div>
 		</div>
+		
+	
 	</div>
+	
+	
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation" style="position: initial;">
 		
 	</div>
 
 
+	<div class="en-construccion text-center" role="alert">
+          <a href="" class="alert-link"><span class="glyphicon glyphicon-warning-sign"></span> <spring:message code="master.page.construction" /> <span class="glyphicon glyphicon-warning-sign"></span></a>
+        </div>
 
 </body>
 

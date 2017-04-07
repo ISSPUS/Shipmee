@@ -389,3 +389,13 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 7px;
     text-align: center;
 }
+
+.en-construccion{
+    color: #8a6d3b;
+    background-color: #fff4ba;
+    border-color: #faebcc;
+    padding: 3px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 130%;
+}
