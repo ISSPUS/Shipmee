@@ -72,14 +72,14 @@
 							<li class="active"><a> <i
 									class="glyphicon glyphicon-map-marker img-origin"></i> <spring:message code="shipment.origin" />
 							</a></li>
-							<li class="li-input"><input type="text" name="origin"
-								class="form-control input-text" value="${origin}" required></li>
+							<li class="li-input"><input type="text" id="origin" name="origin"
+								class="form-control input-text" value="${origin}" placeholder="" required></li>
 							<li class="active"><a><i
 									class="glyphicon glyphicon-map-marker img-destination"></i>
 									<spring:message code="shipment.destination" />
 							</a></li>
-							<li class="li-input"><input name="destination" type="text"
-								class="form-control input-text" value="${destination}" required></li>
+							<li class="li-input"><input id="destination" name="destination" type="text"
+								class="form-control input-text" value="${destination}" placeholder="" required></li>
 							<li class="active"><a href="" target="_blank"> <i
 									class="glyphicon glyphicon-plane"></i> <spring:message code="shipment.date" />
 							</a></li>
@@ -258,6 +258,21 @@
 
 
 <script type="text/javascript">
+
+function initialize() {
+
+	var input = document.getElementById('origin');
+	var input2 = document.getElementById('destination');
+	var autocomplete = new google.maps.places.Autocomplete(input);
+
+	var autocomplete = new google.maps.places.Autocomplete(input2);
+	}
+	
+	
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
 	$(function() {
 		$('#datetimepicker1').datetimepicker({
 			viewMode : 'days',

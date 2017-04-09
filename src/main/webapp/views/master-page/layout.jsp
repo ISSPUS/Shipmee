@@ -20,6 +20,7 @@
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
 <script type="text/javascript" src="scripts/jmenu.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdAr_iNZqmWFlGDqD6q5JFcG-sN7J6RpU&libraries=places"></script>
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 

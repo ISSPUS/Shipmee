@@ -11,8 +11,10 @@
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script type="text/javascript" src="scripts/moment.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
+<head>
 
 
+</head>
 
  <body>
 
@@ -44,16 +46,18 @@
 						<input name="options" value="route" type="radio"><spring:message code="welcome.searcher.choose2" /></label>
 			</div>
 			
+
 			
             <div class="group">
-                <input id="origin" class="camp" type="text" required>
+                <input id="origin" class="camp" type="text" placeholder="" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><span class="glyphicon glyphicon-pushpin">&nbsp;</span> <spring:message code="welcome.searcher.origin" /> </label>
             </div>
+                        
 
             <div class="group">
-                <input id="destination" class="camp" type="text" required>
+                <input id="destination" class="camp" type="text" placeholder=" " required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><span class="glyphicon glyphicon-pushpin">&nbsp;</span><spring:message code="welcome.searcher.destination" /></label>
@@ -112,7 +116,20 @@
 
 
 <script type="text/javascript">
+
+	function initialize() {
+
+	var input = document.getElementById('origin');
+	var input2 = document.getElementById('destination');
+	var autocomplete = new google.maps.places.Autocomplete(input);
+	var autocomplete = new google.maps.places.Autocomplete(input2);
+	}
 	
+	
+	google.maps.event.addDomListener(window, 'load', initialize);
+	
+	
+
 function sendForm(){
 	var origin = document.getElementById('origin').value;
 	var destination = document.getElementById('destination').value;
@@ -145,7 +162,8 @@ $(function() {
 		format : 'DD/MM/YYYY'
 	});
 });
-              
+
+      
 </script>
 </body>
 	
