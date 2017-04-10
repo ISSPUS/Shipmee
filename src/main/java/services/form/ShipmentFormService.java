@@ -14,6 +14,8 @@ import domain.User;
 import domain.form.ShipmentForm;
 import services.ShipmentService;
 import services.UserService;
+import utilities.ImageUpload;
+import utilities.ServerConfig;
 
 @Service
 @Transactional
@@ -35,6 +37,7 @@ public class ShipmentFormService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
+
 	public ShipmentForm create() {
 		ShipmentForm result;
 		
@@ -51,7 +54,6 @@ public class ShipmentFormService {
 		
 		departureTime = null;
 		maximumArriveTime = null;
-		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		
 		try {
@@ -60,16 +62,23 @@ public class ShipmentFormService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
+		
+		
 		if (shipmentForm.getShipmentId() == 0) {
 			result = shipmentService.create();
-			
+			String imageName = null;
+			try {
+				imageName = ImageUpload.subirImagen(shipmentForm.getImagen(),ServerConfig.PATH_UPLOAD);
+			} catch (Exception e) {
+			}
+
 			result.setOrigin(shipmentForm.getOrigin());
 			result.setDestination(shipmentForm.getDestination());
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			result.setItemPicture(shipmentForm.getItemPicture());
+			Assert.notNull(imageName,"image.error.upload");
+			result.setItemPicture(ServerConfig.URL_IMAGE+imageName);
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);			
@@ -80,7 +89,7 @@ public class ShipmentFormService {
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			result.setItemPicture(shipmentForm.getItemPicture());
+			result.setItemPicture(ServerConfig.URL_IMAGE+shipmentForm.getImagen().getName());
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);
@@ -113,7 +122,6 @@ public class ShipmentFormService {
 		result.setItemEnvelope(shipment.getItemEnvelope());
 		result.setPrice(shipment.getPrice());
 		result.setItemName(shipment.getItemName());
-		result.setItemPicture(shipment.getItemPicture());
 		result.setItemSize(shipment.getItemSize());
 		result.setMaximumArriveTime(maximumArriveTime);
 		result.setDepartureTime(departureTime);
@@ -126,4 +134,6 @@ public class ShipmentFormService {
 		shipment = shipmentService.findOne(shipmentForm.getShipmentId());
 		shipmentService.delete(shipment);
 	}
+	
+
 }

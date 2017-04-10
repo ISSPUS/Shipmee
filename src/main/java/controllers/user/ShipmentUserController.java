@@ -71,6 +71,8 @@ public class ShipmentUserController extends AbstractController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
+		
+		
 		ModelAndView result;
 		ShipmentForm shipmentForm;
 

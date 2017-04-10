@@ -71,7 +71,7 @@
 	<div class="row formulario-sm">
 		<form:form action="shipment/user/edit.do"
 			modelAttribute="shipmentForm" method="post" class="form-horizontal"
-			role="form">
+			role="form" enctype="multipart/form-data">
 
 			<form:hidden path="shipmentId" />
 
@@ -179,14 +179,14 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="itemPicture" class="control-label col-md-2"
-					for="itemPicture">
+				<form:label path="imagen" class="control-label col-md-2"
+					for="imagen">
 					<spring:message code="shipment.itemPicture" />
 				</form:label>
 				<div class="col-md-8">
-					<form:input path="itemPicture" class="form-control"
+					<form:input  type="file" path="imagen" class="form-control btn btn-default btn-file"
 						id="itemPicture" />
-					<form:errors class="error create-message-error" path="itemPicture" />
+					<form:errors class="error create-message-error" path="imagen" />
 				</div>
 			</div>
 			<div class="form-group">
