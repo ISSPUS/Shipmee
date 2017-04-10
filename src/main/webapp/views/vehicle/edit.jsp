@@ -47,13 +47,10 @@
 	<div class="row formulario-sm">
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"
 			style="margin: 0 auto; float: none;">
-			<form:form action="vehicle/user/edit.do" modelAttribute="vehicle"
+			<form:form enctype="multipart/form-data"  action="vehicle/user/edit.do" modelAttribute="vehicleForm"
 				method="post" class="form-horizontal" role="form">
 
-				<form:hidden path="id" />
-				<form:hidden path="version" />
-				<form:hidden path="user" />
-				<form:hidden path="deleted" />
+				<form:hidden path="vehicleId" />
 
 				<div class="form-group">
 					<form:label path="brand" class="control-label col-md-2" for="brand">
@@ -91,7 +88,7 @@
 						<spring:message code="vehicle.picture" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="picture" class="form-control" id="picture" />
+						<form:input path="picture" type="file" class="form-control" id="picture" />
 						<form:errors class="error create-message-error" path="picture" />
 					</div>
 				</div>
@@ -103,7 +100,7 @@
 
 					</button>
 
-					<jstl:if test="${vehicle.id != 0}">
+					<jstl:if test="${vehicle.vehicleId != 0}">
 						
 						
 				<acme:submit_confirm name="delete" code="vehicle.delete"
