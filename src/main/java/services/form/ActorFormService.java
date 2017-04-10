@@ -7,6 +7,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import domain.Actor;
 import domain.User;
@@ -16,6 +17,8 @@ import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
 import services.UserService;
+import utilities.ImageUpload;
+import utilities.ServerConfig;
 
 @Service
 @Transactional
@@ -65,13 +68,9 @@ public class ActorFormService {
 		res.setBirthDate(a.getBirthDate());
 		res.setPhone(a.getPhone());
 		res.setDni(a.getDni());
-		res.setPhoto(a.getPhoto());
 		res.setUserName(a.getUserAccount().getUsername());
 		res.setId(a.getId());
 		
-		if(actorService.checkAuthority(Authority.USER)){
-			res.setDniPhoto(userService.findByPrincipal().getDniPhoto());
-		}
 		
 		return res;
 	}
@@ -157,9 +156,38 @@ public class ActorFormService {
 				res.setBirthDate(actorForm.getBirthDate());
 				res.setPhone(actorForm.getPhone());
 				res.setDni(actorForm.getDni());
-				res.setDniPhoto(actorForm.getDniPhoto());
+				String nameImgDni = null;
+				String nameImgProfile = null;
+				
+				CommonsMultipartFile imageProfileUpload = actorForm.getPhoto();
+				CommonsMultipartFile imageDniUpload = actorForm.getDniPhoto();
+				
+				if (imageProfileUpload.getSize()>0){
+					try {
+						nameImgProfile = ImageUpload.subirImagen(imageProfileUpload,ServerConfig.PATH_UPLOAD);
 
-				res.setPhoto(actorForm.getPhoto());
+					} catch (Exception e) {
+					
+					}
+					Assert.notNull(nameImgProfile, "error.upload.image");
+					res.setPhoto(ServerConfig.URL_IMAGE + nameImgProfile);
+
+				}
+				if (imageDniUpload.getSize()>0){
+					try { 
+						nameImgDni = ImageUpload.subirImagen(imageDniUpload,ServerConfig.PATH_UPLOAD_PRIVATE);
+
+					} catch (Exception e) {
+						
+					}
+				Assert.notNull(nameImgDni, "error.upload.image");
+				res.setDniPhoto(ServerConfig.URL_IMAGE_PRIVATE + nameImgDni);
+				}
+				
+
+
+				
+
 				
 				uAccount.setUsername(actorForm.getUserName());
 				

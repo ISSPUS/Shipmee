@@ -9,8 +9,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class ActorForm {
 
@@ -22,8 +22,8 @@ public class ActorForm {
 	private Date birthDate;
 	private String phone;
 	private String dni;
-	private String dniPhoto;
-	private String photo;
+	private CommonsMultipartFile dniPhoto;
+	private CommonsMultipartFile photo;
 	private String userName;
 	private String password;
 	private String repeatedPassword;
@@ -87,19 +87,17 @@ public class ActorForm {
 		this.dni = dni;
 	}
 
-	@URL
-	public String getDniPhoto() {
+	public CommonsMultipartFile getDniPhoto() {
 		return dniPhoto;
 	}
-	public void setDniPhoto(String dniPhoto) {
+	public void setDniPhoto(CommonsMultipartFile dniPhoto) {
 		this.dniPhoto = dniPhoto;
 	}
 	
-	@URL
-	public String getPhoto() {
+	public CommonsMultipartFile getPhoto() {
 		return photo;
 	}
-	public void setPhoto(String photo) {
+	public void setPhoto(CommonsMultipartFile photo) {
 		this.photo = photo;
 	}
 	

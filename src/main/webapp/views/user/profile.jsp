@@ -192,8 +192,7 @@
 								</a>
 							</jstl:if>
 						
-							<br />
-							<img src="${user.dniPhoto}" name="aboutme" width="300" border="0">
+
 						</div>
 					</jstl:if>
 

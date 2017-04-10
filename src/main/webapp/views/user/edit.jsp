@@ -63,7 +63,7 @@
 	
 		<form:form action="${url}"
 			modelAttribute="actorForm" method="post" class="form-horizontal"
-			role="form">
+			role="form" enctype="multipart/form-data">
 			
 			<form:hidden path="id" />
 
@@ -207,7 +207,6 @@
 			</div>
 			
 			<!-- PhotoURL -->
-			
 			<jstl:if test="${actorForm.id != 0}">
 			<div class="form-group">
 				<form:label path="photo" class="control-label col-md-2"
@@ -216,7 +215,8 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
-						<form:input path="photo" class="form-control" id="photo" placeholder="Link"/>
+						<form:input type="file" path="photo"
+							class="form-control btn btn-default btn-file" id="photo" />
 					</div>
 					<form:errors class="error create-message-error" path="photo" />
 				</div>
@@ -232,12 +232,14 @@
 					</form:label>
 					<div class="col-md-8">
 						<div class="inner-addon">
-							<form:input path="dniPhoto" class="form-control" id="dniPhoto" placeholder="Link"/>
+							<form:input type="file" path="dniPhoto" class="form-control" id="dniPhoto" placeholder="Link"/>
 						</div>
 						<form:errors class="error create-message-error" path="dniPhoto" />
 					</div>
 				</div>
 			</jstl:if>
+			
+		
 			
 			<!-- AcceptLegalCondition -->
 			<security:authorize access="isAnonymous()">
