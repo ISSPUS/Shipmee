@@ -8,19 +8,19 @@ public class ServerConfig {
 	
 	
 	public static String getPATH_UPLOAD() {
-		return System.getenv("IMG_PATH");
+		return System.getenv("IMG_PATH")+"/";
 	}
 
 	public static String getPATH_UPLOAD_PRIVATE() {
-		return System.getenv("IMG_PRIVATE_PATH");
+		return System.getenv("IMG_PRIVATE_PATH")+"/";
 	}
 
 	public static String getURL_IMAGE() {
-		return System.getenv("URL_IMG_HOST");
+		return System.getenv("URL_IMG_HOST")+"/";
 	}
 
 	public static String getURL_IMAGE_PRIVATE() {
-		return System.getenv("URL_IMG_PRIVATE_HOST");
+		return System.getenv("URL_IMG_PRIVATE_HOST")+"/";
 	}
 	
 	
