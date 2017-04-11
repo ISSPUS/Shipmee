@@ -68,7 +68,7 @@ public class ShipmentFormService {
 			result = shipmentService.create();
 			String imageName = null;
 			try {
-				imageName = ImageUpload.subirImagen(shipmentForm.getImagen(),ServerConfig.PATH_UPLOAD);
+				imageName = ImageUpload.subirImagen(shipmentForm.getImagen(),ServerConfig.getPATH_UPLOAD());
 			} catch (Exception e) {
 			}
 
@@ -78,7 +78,7 @@ public class ShipmentFormService {
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
 			Assert.notNull(imageName,"image.error.upload");
-			result.setItemPicture(ServerConfig.URL_IMAGE+imageName);
+			result.setItemPicture(ServerConfig.getURL_IMAGE()+imageName);
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);			
@@ -89,7 +89,7 @@ public class ShipmentFormService {
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			result.setItemPicture(ServerConfig.URL_IMAGE+shipmentForm.getImagen().getName());
+			result.setItemPicture(ServerConfig.getURL_IMAGE()+shipmentForm.getImagen().getName());
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);

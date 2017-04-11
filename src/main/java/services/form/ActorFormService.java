@@ -164,24 +164,24 @@ public class ActorFormService {
 				
 				if (imageProfileUpload.getSize()>0){
 					try {
-						nameImgProfile = ImageUpload.subirImagen(imageProfileUpload,ServerConfig.PATH_UPLOAD);
+						nameImgProfile = ImageUpload.subirImagen(imageProfileUpload,ServerConfig.getPATH_UPLOAD());
 
 					} catch (Exception e) {
 					
 					}
 					Assert.notNull(nameImgProfile, "error.upload.image");
-					res.setPhoto(ServerConfig.URL_IMAGE + nameImgProfile);
+					res.setPhoto(ServerConfig.getURL_IMAGE() + nameImgProfile);
 
 				}
 				if (imageDniUpload.getSize()>0){
 					try { 
-						nameImgDni = ImageUpload.subirImagen(imageDniUpload,ServerConfig.PATH_UPLOAD_PRIVATE);
+						nameImgDni = ImageUpload.subirImagen(imageDniUpload,ServerConfig.getPATH_UPLOAD_PRIVATE());
 
 					} catch (Exception e) {
 						
 					}
 				Assert.notNull(nameImgDni, "error.upload.image");
-				res.setDniPhoto(ServerConfig.URL_IMAGE_PRIVATE + nameImgDni);
+				res.setDniPhoto(ServerConfig.getURL_IMAGE_PRIVATE() + nameImgDni);
 				}
 				
 

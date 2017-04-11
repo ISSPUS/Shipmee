@@ -17,7 +17,6 @@ public class ImageUpload {
     	File localFile = new File(path + nameImage);
     	FileOutputStream os = null;
     	String tipoArchivo = imagen.getContentType();
-    	System.out.println(tipoArchivo);
     	Assert.isTrue(tipoArchivo.equals("image/jpg")|| tipoArchivo.equals("image/jpeg")||tipoArchivo.equals("image/png"),"image.type.incompatible");
     	try {
     		
