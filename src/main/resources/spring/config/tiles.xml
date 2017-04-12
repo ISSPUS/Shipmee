@@ -24,6 +24,7 @@
 		<value>/views/user/tiles.xml</value>
 		<value>/views/rating/tiles.xml</value>
 		<value>/views/complaint/tiles.xml</value>
+		<value>/views/feepayment/tiles.xml</value>
 
 		<value>/views/about/tiles.xml</value>
 		<value>/views/userGeneralTerms/tiles.xml</value>

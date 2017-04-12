@@ -180,7 +180,7 @@ public class ShipmentOfferService {
 	 * 
 	 * The client (the user that created the shipment) accept the counter offer proposed by the carrier. 
 	 */
-	public void accept(int shipmentOfferId){
+	public ShipmentOffer accept(int shipmentOfferId){
 		
 		Assert.isTrue(shipmentOfferId != 0);
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment.");
@@ -210,7 +210,7 @@ public class ShipmentOfferService {
 		
 		shipmentOffer.setAcceptedBySender(true); // The offer is accepted
 		shipmentOffer.setRejectedBySender(false); // The offer is not rejected.
-		save(shipmentOffer);
+		shipmentOffer = save(shipmentOffer);
 		
 		// Now, we reject every other offer.
 		
@@ -221,6 +221,8 @@ public class ShipmentOfferService {
 				deny(so.getId());
 			}
 		}
+		
+		return shipmentOffer;
 		
 		/*
 		 * Here comes the notification to the carrier (Still not developed) 
