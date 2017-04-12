@@ -103,7 +103,10 @@
 
 				<div class="form-group" style="text-align: center;">
 					<div class="col-md-12">
-						<acme:submit name="save" code="route.save" />
+						<button type="submit" name="save" class="btn  btn-primary">
+							<span class="glyphicon glyphicon-floppy-disk"></span>
+							<spring:message code="route.save" />
+						</button>
 						<acme:cancel code="route.cancel" url="route/user/list.do" />
 					</div>
 				</div>

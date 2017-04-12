@@ -152,7 +152,10 @@
 				</div>
 				<!-- Action buttons -->
 				<div class="text-center profile-userbuttons">
-					<acme:submit name="save" code="route.save" />
+					<button type="submit" name="save" class="btn  btn-primary">
+						<span class="glyphicon glyphicon-floppy-disk"></span>
+						<spring:message code="route.save" />
+					</button>
 
 					<jstl:if test="${routeForm.routeId != 0}">
 						<acme:submit_confirm name="delete" code="route.delete"
