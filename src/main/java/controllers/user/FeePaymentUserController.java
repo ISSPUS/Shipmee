@@ -87,6 +87,7 @@ public class FeePaymentUserController extends AbstractController {
 		ModelAndView result;
 		RouteOffer routeOffer;
 		FeePayment feePayment;
+		String redirect = null;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(feePaymentForm);
@@ -103,7 +104,7 @@ public class FeePaymentUserController extends AbstractController {
 					
 					routeOffer = routeService.contractRoute(feePaymentForm.getId(), feePaymentForm.getSizePriceId());
 					feePaymentForm.setOfferId(routeOffer.getId());
-
+					redirect = "redirect:../../routeOffer/user/list.do?routeId=" + routeOffer.getRoute().getId();
 					break;
 					
 				case 2:
@@ -113,12 +114,16 @@ public class FeePaymentUserController extends AbstractController {
 					routeOffer = routeOfferService.save(routeOffer);
 					
 					feePaymentForm.setOfferId(routeOffer.getId());
+					redirect = "redirect:../../routeOffer/user/list.do?routeId=" + routeOffer.getRoute().getId();
+					break;
 					
 				case 3:
 					ShipmentOffer shipmentOffer;
 					shipmentOffer = shipmentOfferService.accept(feePaymentForm.getOfferId());
 					
 					feePaymentForm.setOfferId(shipmentOffer.getId());
+					redirect = "redirect:../../shipmentOffer/user/list.do?shipmentId="+shipmentOffer.getShipment().getId();
+					break;
 
 				default:
 					break;
@@ -127,8 +132,9 @@ public class FeePaymentUserController extends AbstractController {
 				feePayment = feePaymentFormService.reconstruct(feePaymentForm);
 				feePaymentService.save(feePayment);
 				
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView(redirect);
 			} catch (Throwable oops) {
+				System.out.println(oops);
 				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");				
 			}
 		}

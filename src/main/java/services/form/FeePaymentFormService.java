@@ -51,14 +51,17 @@ public class FeePaymentFormService {
 		case 1:
 			result.setId(id);
 			result.setSizePriceId(sizePriceId);
+			break;
 			
 		case 2:
 			result.setId(id);
 			result.setAmount(amount);
 			result.setDescription(description);
+			break;
 			
 		case 3:
 			result.setOfferId(id);
+			break;
 
 		default:
 			break;
@@ -82,6 +85,7 @@ public class FeePaymentFormService {
 			result.setAmount(routeOffer.getAmount());
 			result.setCreditCard(feePaymentForm.getCreditCard());
 			result.setCarrier(routeOffer.getRoute().getCreator());
+			break;
 			
 		case 2:
 			routeOffer = routeOfferService.findOne(feePaymentForm.getOfferId());
@@ -90,6 +94,7 @@ public class FeePaymentFormService {
 			result.setAmount(routeOffer.getAmount());
 			result.setCreditCard(feePaymentForm.getCreditCard());
 			result.setCarrier(routeOffer.getRoute().getCreator());
+			break;
 			
 		case 3:
 			ShipmentOffer shipmentOffer;
@@ -99,6 +104,7 @@ public class FeePaymentFormService {
 			result.setAmount(shipmentOffer.getAmount());
 			result.setCreditCard(feePaymentForm.getCreditCard());
 			result.setCarrier(shipmentOffer.getUser());
+			break;
 
 		default:
 			break;
