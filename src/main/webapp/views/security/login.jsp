@@ -41,7 +41,7 @@
 	<form:errors cssClass="error" path="password" />
 	<br />
 	</div>
-
+	
 	<jstl:if test="${showError == true}">
 		<div class="error">
 			<spring:message code="security.login.failed"/>
