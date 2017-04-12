@@ -134,7 +134,6 @@ public class FeePaymentUserController extends AbstractController {
 				
 				result = new ModelAndView(redirect);
 			} catch (Throwable oops) {
-				System.out.println(oops);
 				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");				
 			}
 		}
