@@ -119,9 +119,8 @@ public class RouteOfferUserController extends AbstractController {
 			result = createEditModelAndView(routeOffer);
 		} else {
 			try {
-				routeOffer = routeOfferService.save(routeOffer);
-
-				result = new ModelAndView("redirect:list.do?routeId=" + routeOffer.getRoute().getId());
+				result = new ModelAndView("redirect:../../feepayment/user/create.do?type=2&id=" + routeOffer.getRoute().getId()
+						+ "&amount=" + routeOffer.getAmount() + "&description=" + routeOffer.getDescription());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(routeOffer, "routeOffer.commit.error");
 			}

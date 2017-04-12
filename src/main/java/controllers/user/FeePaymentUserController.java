@@ -16,6 +16,7 @@ import domain.FeePayment;
 import domain.RouteOffer;
 import domain.form.FeePaymentForm;
 import services.FeePaymentService;
+import services.RouteOfferService;
 import services.RouteService;
 import services.form.FeePaymentFormService;
 
@@ -33,6 +34,9 @@ public class FeePaymentUserController extends AbstractController {
 	
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private RouteOfferService routeOfferService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -59,13 +63,13 @@ public class FeePaymentUserController extends AbstractController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int type, @RequestParam int id,
-			@RequestParam (required=false) Integer sizePriceId, @RequestParam (required=false) Double amount,
+			@RequestParam (required=false) Integer sizePriceId, @RequestParam (required=false, defaultValue = "0") Double amount,
 			@RequestParam (required=false) String description) {
 		
 		ModelAndView result;
 		FeePaymentForm feePaymentForm;
 
-		feePaymentForm = feePaymentFormService.create(type, id, sizePriceId, 0, description);
+		feePaymentForm = feePaymentFormService.create(type, id, sizePriceId, amount, description);
 		result = createEditModelAndView(feePaymentForm);
 
 		return result;
@@ -77,7 +81,7 @@ public class FeePaymentUserController extends AbstractController {
 	public ModelAndView save(@Valid FeePaymentForm feePaymentForm, BindingResult binding) {
 		ModelAndView result;
 		RouteOffer routeOffer;
-		FeePayment feePayment = null;
+		FeePayment feePayment;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(feePaymentForm);
@@ -94,14 +98,22 @@ public class FeePaymentUserController extends AbstractController {
 					
 					routeOffer = routeService.contractRoute(feePaymentForm.getId(), feePaymentForm.getSizePriceId());
 					feePaymentForm.setOfferId(routeOffer.getId());
-					feePayment = feePaymentFormService.reconstruct(feePaymentForm);
 
 					break;
+					
+				case 2:
+					routeOffer = routeOfferService.create(feePaymentForm.getId());
+					routeOffer.setAmount(feePaymentForm.getAmount());
+					routeOffer.setDescription(feePaymentForm.getDescription());
+					routeOffer = routeOfferService.save(routeOffer);
+					
+					feePaymentForm.setOfferId(routeOffer.getId());
 
 				default:
 					break;
 				}
 				
+				feePayment = feePaymentFormService.reconstruct(feePaymentForm);
 				feePaymentService.save(feePayment);
 				
 				result = new ModelAndView("redirect:list.do");

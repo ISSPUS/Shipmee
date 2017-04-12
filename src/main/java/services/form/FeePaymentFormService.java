@@ -47,6 +47,11 @@ public class FeePaymentFormService {
 			result.setId(id);
 			result.setSizePriceId(sizePriceId);
 			break;
+			
+		case 2:
+			result.setId(id);
+			result.setAmount(amount);
+			result.setDescription(description);
 
 		default:
 			break;
@@ -58,13 +63,12 @@ public class FeePaymentFormService {
 	
 	public FeePayment reconstruct(FeePaymentForm feePaymentForm) {
 		FeePayment result;
+		RouteOffer routeOffer;
 		
 		result = feePaymentService.create();
 		
 		switch (feePaymentForm.getType()) {
 		case 1:
-			RouteOffer routeOffer;
-			
 			routeOffer = routeOfferService.findOne(feePaymentForm.getOfferId());
 			
 			result.setRouteOffer(routeOffer);
@@ -72,6 +76,14 @@ public class FeePaymentFormService {
 			result.setCreditCard(feePaymentForm.getCreditCard());
 			result.setCarrier(routeOffer.getRoute().getCreator());
 			break;
+			
+		case 2:
+			routeOffer = routeOfferService.findOne(feePaymentForm.getOfferId());
+			
+			result.setRouteOffer(routeOffer);
+			result.setAmount(routeOffer.getAmount());
+			result.setCreditCard(feePaymentForm.getCreditCard());
+			result.setCarrier(routeOffer.getRoute().getCreator());
 
 		default:
 			break;
