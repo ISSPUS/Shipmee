@@ -4,6 +4,9 @@ package controllers.user;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,18 +54,22 @@ public class FeePaymentUserController extends AbstractController {
 
 	// Listing ----------------------------------------------------------------
 	
-	/*@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	@RequestMapping("/list")
+	public ModelAndView list(@RequestParam int page) {
 		ModelAndView result;
-		Collection<Vehicle> vehicles;
-		
-		vehicles = feePaymentService.findAllNotDeletedByUser();
-		
-		result = new ModelAndView("vehicle/list");
-		result.addObject("vehicles", vehicles);
+		Page<FeePayment> items;
+		Pageable pageable;
+		pageable = new PageRequest(page - 1, 5);
+
+		items = feePaymentService.findAllPendingByUser(pageable);
+
+		result = new ModelAndView("feepayment/list");
+		result.addObject("feePayments", items.getContent());
+		result.addObject("p", page);
+		result.addObject("total_pages", items.getTotalPages());
 
 		return result;
-	}*/
+	}
 
 	// Creation ---------------------------------------------------------------
 
@@ -136,6 +143,24 @@ public class FeePaymentUserController extends AbstractController {
 			} catch (Throwable oops) {
 				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");				
 			}
+		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/manage", method = RequestMethod.GET)
+	public ModelAndView save(@RequestParam int feepaymentId, @RequestParam String type) {
+		ModelAndView result;
+		FeePayment feePayment;
+
+		try {
+			feePayment = feePaymentService.findOne(feepaymentId);
+			feePayment.setType(type);
+			feePaymentService.save(feePayment);
+
+			result = new ModelAndView("redirect:list.do?page=1");
+		} catch (Throwable oops) {
+			result = new ModelAndView("redirect:list.do?page=1");
 		}
 
 		return result;

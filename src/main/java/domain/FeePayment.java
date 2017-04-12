@@ -23,6 +23,7 @@ public class FeePayment extends DomainEntity {
 	private Date paymentMoment;
 	private CreditCard creditCard;
 	private double amount;
+	private String type;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -55,6 +56,13 @@ public class FeePayment extends DomainEntity {
 
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	// Relationships ----------------------------------------------------------
