@@ -113,7 +113,10 @@
 			
 						<!-- Action buttons -->
 			<div class="text-center profile-userbuttons">
-			<acme:submit name="save" code="alert.save" />
+			<button type="submit" name="save" class="btn  btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				<spring:message code="alert.save" />
+			</button>
 
 			<jstl:if test="${alert.id != 0}">
 				<acme:submit_confirm name="delete" code="alert.delete"

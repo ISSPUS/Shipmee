@@ -30,7 +30,7 @@
 	<span class="input-group-addon">
 	<i class="glyphicon glyphicon-user"></i></span>
 	<form:input class="form-control" id="user" code="user.user" path="username" />	
-	<form:errors class="error" path="username" />
+	<form:errors cssClass="error" path="username" />
 	</div>
 	
 	<br />
@@ -38,17 +38,16 @@
 	<div class="input-group">
 	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 	<form:password code="user.password" path="password" id="password" class="form-control" />	
-	<form:errors class="error" path="password" />
+	<form:errors cssClass="error" path="password" />
 	<br />
 	</div>
-
-
-
+	
 	<jstl:if test="${showError == true}">
 		<div class="error">
-			<spring:message code="security.login.failed" />
+			<spring:message code="security.login.failed"/>
 		</div>
 	</jstl:if>
+	
 	<br />
 	<input class="btn btn-theme flotante-derecha" type="submit" value="<spring:message code="security.login" />" />
 	

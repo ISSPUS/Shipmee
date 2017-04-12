@@ -211,7 +211,10 @@
 			<!-- Action buttons -->
 			
 			<div class="text-center profile-userbuttons">
-			<acme:submit name="save" code="shipment.save" />
+			<button type="submit" name="save" class="btn  btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				<spring:message code="shipment.save" />
+			</button>
 
 			<jstl:if test="${shipmentForm.shipmentId != 0}">
 				<button type="submit" name="delete" class="btn btn-danger"

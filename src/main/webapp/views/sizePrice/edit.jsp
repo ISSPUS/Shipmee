@@ -177,7 +177,10 @@
 			</div>
 
 			<!-- Action buttons -->
-			<acme:submit name="save" code="sizePrice.save" />
+			<button type="submit" name="save" class="btn  btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				<spring:message code="sizePrice.save" />
+			</button>
 
 			<jstl:if test="${sizePriceForm.sizePriceFormId != 0}">
 				<button type="submit" name="delete" class="btn btn-danger"

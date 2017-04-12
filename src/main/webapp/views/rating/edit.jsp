@@ -65,7 +65,10 @@
 			</div>
 			<div class="form-group text-center profile-userbuttons">
 				<!-- Action buttons -->
-				<acme:submit name="save" code="rating.save" />
+				<button type="submit" name="save" class="btn  btn-primary">
+					<span class="glyphicon glyphicon-floppy-disk"></span>
+					<spring:message code="rating.save" />
+				</button>
 
 				<acme:cancel code="rating.cancel" url="user/profile.do?userId=${rating.user.id}" />
 

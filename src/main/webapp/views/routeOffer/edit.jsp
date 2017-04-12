@@ -71,6 +71,10 @@
 			<div class="form-group text-center profile-userbuttons">
 				<!-- Action buttons -->
 				<acme:submit name="save" code="routeOffer.save" />
+				<button type="submit" name="save" class="btn  btn-primary">
+					<span class="glyphicon glyphicon-floppy-disk"></span>
+					<spring:message code="routeOffer.save" />
+				</button>
 
 				<acme:cancel code="routeOffer.cancel" url="route/display.do?routeId=${routeOffer.route.id}" />
 
