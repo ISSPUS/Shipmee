@@ -24,6 +24,7 @@
 		<value>/views/user/messages</value>
 		<value>/views/rating/messages</value>
 		<value>/views/complaint/messages</value>
+		<value>/views/feepayment/messages</value>
 		
 		<value>/views/about/messages</value>
 		<value>/views/userGeneralTerms/messages</value>

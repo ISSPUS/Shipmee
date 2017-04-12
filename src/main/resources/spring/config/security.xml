@@ -44,6 +44,7 @@
 		<security:intercept-url pattern="/alert/user/*" access="hasRole('USER')" />
 		<security:intercept-url pattern="/user/user/*" access="hasRole('USER')" />
 		<security:intercept-url pattern="/complaint/user/*" access="hasRole('USER')" />
+		<security:intercept-url pattern="/feepayment/user/*" access="hasRole('USER')" />
 		
 		<security:intercept-url pattern="/complaint/moderator/*" access="hasRole('MODERATOR')" />
 		

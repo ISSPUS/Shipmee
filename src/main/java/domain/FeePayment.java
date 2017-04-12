@@ -61,9 +61,10 @@ public class FeePayment extends DomainEntity {
 
 	private RouteOffer routeOffer;
 	private ShipmentOffer shipmentOffer;
+	private User purchaser;
+	private User carrier;
 
 	@Valid
-	@NotNull
 	@ManyToOne(optional=true)
 	public RouteOffer getRouteOffer() {
 		return routeOffer;
@@ -73,13 +74,31 @@ public class FeePayment extends DomainEntity {
 	}
 	
 	@Valid
-	@NotNull
 	@ManyToOne(optional = true)
 	public ShipmentOffer getShipmentOffer() {
 		return shipmentOffer;
 	}
 	public void setShipmentOffer(ShipmentOffer shipmentOffer) {
 		this.shipmentOffer = shipmentOffer;
+	}
+	
+	@Valid
+	@NotNull
+	@ManyToOne(optional=false)
+	public User getPurchaser() {
+		return purchaser;
+	}
+	public void setPurchaser(User purchaser) {
+		this.purchaser = purchaser;
+	}
+	
+	@Valid
+	@ManyToOne(optional=false)
+	public User getCarrier() {
+		return carrier;
+	}
+	public void setCarrier(User carrier) {
+		this.carrier = carrier;
 	}
 
 }

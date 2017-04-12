@@ -168,8 +168,7 @@ public class RouteUserController extends AbstractController {
 		Route route = routeService.findOne(routeId);
 
 		try {
-			routeService.contractRoute(routeId, sizePriceId);
-			result = new ModelAndView("redirect:../../routeOffer/user/list.do?routeId=" + routeId);
+			result = new ModelAndView("redirect:../../feepayment/user/create.do?type=1&id=" + routeId + "&sizePriceId=" + sizePriceId);
 		} catch (Throwable oops) {
 			messageError = "route.commit.error";
 			if (oops.getMessage().contains("message.error")) {
