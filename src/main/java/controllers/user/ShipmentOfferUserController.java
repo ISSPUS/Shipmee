@@ -136,12 +136,11 @@ public class ShipmentOfferUserController extends AbstractController {
 		String messageError;
 		
 		ShipmentOffer shipmentOffer = shipmentOfferService.findOne(shipmentOfferId);
-		Shipment shipment = shipmentOffer.getShipment();
 		
 		try{
-			shipmentOfferService.accept(shipmentOfferId);
-			// This reditect may be change to other url.
-			result = new ModelAndView("redirect:../user/list.do?shipmentId="+shipment.getId());
+
+			result = new ModelAndView("redirect:../../feepayment/user/create.do?type=3&id=" + shipmentOfferId);
+			
 		}catch(Throwable oops){
 			messageError = "shipmentOffer.commit.error";
 			if(oops.getMessage().contains("message.error")){

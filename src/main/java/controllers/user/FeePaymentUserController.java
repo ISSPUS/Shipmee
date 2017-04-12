@@ -14,10 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 import domain.FeePayment;
 import domain.RouteOffer;
+import domain.ShipmentOffer;
 import domain.form.FeePaymentForm;
 import services.FeePaymentService;
 import services.RouteOfferService;
 import services.RouteService;
+import services.ShipmentOfferService;
 import services.form.FeePaymentFormService;
 
 @Controller
@@ -37,6 +39,9 @@ public class FeePaymentUserController extends AbstractController {
 	
 	@Autowired
 	private RouteOfferService routeOfferService;
+	
+	@Autowired
+	private ShipmentOfferService shipmentOfferService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -63,7 +68,7 @@ public class FeePaymentUserController extends AbstractController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int type, @RequestParam int id,
-			@RequestParam (required=false) Integer sizePriceId, @RequestParam (required=false, defaultValue = "0") Double amount,
+			@RequestParam (required=false, defaultValue="0") Integer sizePriceId, @RequestParam (required=false, defaultValue = "0") Double amount,
 			@RequestParam (required=false) String description) {
 		
 		ModelAndView result;
@@ -108,6 +113,12 @@ public class FeePaymentUserController extends AbstractController {
 					routeOffer = routeOfferService.save(routeOffer);
 					
 					feePaymentForm.setOfferId(routeOffer.getId());
+					
+				case 3:
+					ShipmentOffer shipmentOffer;
+					shipmentOffer = shipmentOfferService.accept(feePaymentForm.getOfferId());
+					
+					feePaymentForm.setOfferId(shipmentOffer.getId());
 
 				default:
 					break;

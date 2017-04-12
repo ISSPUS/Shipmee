@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import domain.FeePayment;
 import domain.RouteOffer;
+import domain.ShipmentOffer;
 import domain.form.FeePaymentForm;
 import services.FeePaymentService;
 import services.RouteOfferService;
+import services.ShipmentOfferService;
 
 @Service
 @Transactional
@@ -20,6 +22,9 @@ public class FeePaymentFormService {
 	
 	@Autowired
 	private RouteOfferService routeOfferService;
+	
+	@Autowired
+	private ShipmentOfferService shipmentOfferService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -46,12 +51,14 @@ public class FeePaymentFormService {
 		case 1:
 			result.setId(id);
 			result.setSizePriceId(sizePriceId);
-			break;
 			
 		case 2:
 			result.setId(id);
 			result.setAmount(amount);
 			result.setDescription(description);
+			
+		case 3:
+			result.setOfferId(id);
 
 		default:
 			break;
@@ -75,7 +82,6 @@ public class FeePaymentFormService {
 			result.setAmount(routeOffer.getAmount());
 			result.setCreditCard(feePaymentForm.getCreditCard());
 			result.setCarrier(routeOffer.getRoute().getCreator());
-			break;
 			
 		case 2:
 			routeOffer = routeOfferService.findOne(feePaymentForm.getOfferId());
@@ -84,6 +90,15 @@ public class FeePaymentFormService {
 			result.setAmount(routeOffer.getAmount());
 			result.setCreditCard(feePaymentForm.getCreditCard());
 			result.setCarrier(routeOffer.getRoute().getCreator());
+			
+		case 3:
+			ShipmentOffer shipmentOffer;
+			shipmentOffer = shipmentOfferService.findOne(feePaymentForm.getOfferId());
+			
+			result.setShipmentOffer(shipmentOffer);
+			result.setAmount(shipmentOffer.getAmount());
+			result.setCreditCard(feePaymentForm.getCreditCard());
+			result.setCarrier(shipmentOffer.getUser());
 
 		default:
 			break;
