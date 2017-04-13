@@ -114,7 +114,7 @@
 						<!-- Action buttons -->
 			<div class="text-center profile-userbuttons">
 			<button type="submit" name="save" class="btn  btn-primary">
-				<span class="glyphicon glyphicon-floppy-disk"></span>
+				<span class="fa fa-plus-circle"></span>
 				<spring:message code="alert.save" />
 			</button>
 
