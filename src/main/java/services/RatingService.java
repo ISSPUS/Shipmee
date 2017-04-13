@@ -105,6 +105,16 @@ public class RatingService {
 		
 		return result;
 	}
+	
+	public int countRatingReceivedByUserId(User user){
+		Assert.notNull(user);
+		
+		int result;
+		
+		result = ratingRepository.countRatingReceivedByUserId(user.getId());
+		
+		return result;
+	}
 
 	// Other business methods -------------------------------------------------
 	

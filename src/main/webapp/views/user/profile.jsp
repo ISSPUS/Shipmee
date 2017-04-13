@@ -220,9 +220,9 @@
 						</p>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-xs-4 emphasis" id="clickeable"
-						onclick="location.href='shipment/list.do?userId=${user.id}';">
+						onclick="location.href='rating/list.do?userReceivedId=${user.id}';">
 						<h2>
-							<strong> <jstl:out value=" ${ratingsCreated}" />
+							<strong> <jstl:out value=" ${ratingsReceived}" />
 							</strong>
 						</h2>
 						<p>
