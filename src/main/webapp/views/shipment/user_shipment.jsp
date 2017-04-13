@@ -97,13 +97,13 @@
 						<spring:message code="user.view" />
 					</button>
 					
-					<jstl:if test="${user.id != shipmentId}">
+					<jstl:if test="${(user.id != shipmentId) && shipmentId != 0 && (user.id != currentUser.id)}">
 						<button type="button" class="btn button-delete-lax btn-sm"
 							onclick="location.href = 'complaint/user/create.do?userId=${shipmentId}';">
 							<spring:message code="user.report" />
 						</button>
 					</jstl:if>
-					
+										
 				</div>
 			</div>
 
