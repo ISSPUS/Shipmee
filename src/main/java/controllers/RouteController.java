@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import domain.Route;
 import domain.SizePrice;
 import domain.User;
+import services.ActorService;
 import services.RouteService;
 import services.SizePriceService;
 import services.UserService;
@@ -34,6 +35,9 @@ public class RouteController extends AbstractController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ActorService actorService;
 	// Constructors -----------------------------------------------------------
 	
 	public RouteController() {
@@ -100,7 +104,11 @@ public class RouteController extends AbstractController {
 		
 		route = routeService.findOne(routeId);
 		sizePrices = sizePriceService.findAllByRouteId(routeId);
-		currentUser = userService.findByPrincipal();
+		currentUser = null;
+		
+		if(actorService.checkLogin()){
+			currentUser = userService.findByPrincipal();
+		}
 		
 		String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(route.getDepartureTime());
 		String departureTimeHour = new SimpleDateFormat("HH':'mm").format(route.getDepartureTime());

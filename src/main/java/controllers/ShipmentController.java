@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import domain.Shipment;
 import domain.User;
+import services.ActorService;
 import services.ShipmentService;
 import services.UserService;
 
@@ -28,6 +29,9 @@ public class ShipmentController extends AbstractController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ActorService actorService;
 	// Constructors -----------------------------------------------------------
 	
 	public ShipmentController() {
@@ -91,7 +95,11 @@ public class ShipmentController extends AbstractController {
 			User currentUser;
 			
 			shipment = shipmentService.findOne(shipmentId);
-			currentUser = userService.findByPrincipal();
+			currentUser = null;
+			
+			if(actorService.checkLogin()){
+				currentUser = userService.findByPrincipal();
+			}
 			
 			String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(shipment.getDepartureTime());
 			String departureTimeHour = new SimpleDateFormat("HH':'mm").format(shipment.getDepartureTime());

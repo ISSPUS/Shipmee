@@ -200,16 +200,17 @@
                             </td>
                             <td class="tabla-tam">${value.size}</td>
                             <td class="tabla-precio">${value.price}&#8364;
-                            
-                            <security:authorize access="hasRole('USER')">
-                            	<a href="routeOffer/user/create.do?routeId=${route.id}"><span title="<spring:message code="route.offer" />"><i class="glyphicon glyphicon-resize-small contraoferta-icon"></i></span></a>
-                            </security:authorize></td>
                          
                         </tr>
 					</jstl:forEach>
-                       
+     
                     </tbody>
  					 </table>
+ 					 
+					<security:authorize access="hasRole('USER')">
+						<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
+						value= "<spring:message code="route.offer" />" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';"></input>
+					</security:authorize>
 					
 
 					
