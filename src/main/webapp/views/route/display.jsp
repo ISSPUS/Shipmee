@@ -206,17 +206,8 @@
      
                     </tbody>
  					 </table>
- 					 
-					<security:authorize access="hasRole('USER')">
-						<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
-						value= "<spring:message code="route.offer" />" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';"></input>
-					</security:authorize>
-					
-
 					
 					<div class="rfecha separador-final"></div>
-
-
 
 								<div class="row info1 col-xs-12 col-sm-12 text-center">
 											
@@ -224,8 +215,15 @@
 											value= "<spring:message code="route.contract" />" onclick="contract(${route.id});"></input>
 
 								</div>
-								<div class="text-center"><a href="routeOffer/user/list.do?routeId=${route.id}"><spring:message code="route.offers" /><i class="glyphicon glyphicon-chevron-right"></i></a></div>
+								
+								<div class="row info1 col-xs-12 col-sm-12 text-center">
+											
+											<input type=submit class="btn-xs btn-llevar btn btn-success ok btn-danger contraoferta"
+											value= "<spring:message code="route.offer" />" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';"></input>
+
 								</div>
+								
+								<div class="text-center"><a href="routeOffer/user/list.do?routeId=${route.id}"><spring:message code="route.offers" /><i class="glyphicon glyphicon-chevron-right"></i></a></div>
 
 							</div>
 						

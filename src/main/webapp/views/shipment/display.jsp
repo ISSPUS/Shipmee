@@ -185,11 +185,6 @@
 											<div class="col-sm-12">
 												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.price" />: 
 												<span class="titles-info-price">${shipment.price}&#8364;</span>
-
-												<security:authorize access="hasRole('USER')">
-													<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
-													value= "<spring:message code="route.offer" />" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"></input>
-												</security:authorize>
 												<br/>
 
 											</div>
@@ -210,6 +205,14 @@
 											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
 
 								</div>
+								
+								<div class="row info1 col-xs-12 col-sm-12 text-center">
+											
+											<input type=submit class="btn-sm btn-llevar btn btn-success ok btn-danger contraoferta"
+											value= "<spring:message code="route.offer" />" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"></input>
+								
+								</div>
+								
 								<div class="text-center"><a href="shipmentOffer/user/list.do?shipmentId=${shipment.id}"><spring:message code="shipment.offers" /></a></div>
 							</div>
 							
