@@ -100,6 +100,13 @@
 						<form:errors class="error create-message-error" path="body" />
 					</div>
 				</div>
+				
+				<jstl:if test="${messageError != null}">
+					<div class="error" style="text-align: center;">
+						<spring:message code="${messageError}"/>
+						<br/><br/>
+					</div>
+				</jstl:if>
 
 				<div class="form-group" style="text-align: center;">
 					<div class="col-md-12">
