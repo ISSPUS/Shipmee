@@ -117,7 +117,7 @@ public class SizePriceUserController extends AbstractController {
 				}
 
 				sizePriceFormService.reconstruct(sizePriceForm);
-				result = new ModelAndView("redirect:../../");
+				result = new ModelAndView("redirect:../../route/user/list.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(sizePriceForm, "sizePrice.commit.error");
 			}
@@ -132,7 +132,7 @@ public class SizePriceUserController extends AbstractController {
 
 		try {
 			sizePriceFormService.delete(sizePriceForm);
-			result = new ModelAndView("redirect:../../");
+			result = new ModelAndView("redirect:../../route/user/list.do");
 		} catch (Throwable oops) {
 			result = createEditModelAndView(sizePriceForm, "sizePrice.commit.error");
 		}
