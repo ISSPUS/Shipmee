@@ -114,7 +114,7 @@
 							<span class="glyphicon glyphicon-floppy-disk"></span>
 							<spring:message code="route.save" />
 						</button>
-						<acme:cancel code="route.cancel" url="route/user/list.do" />
+						<acme:cancel code="route.cancel" url="/message/actor/received.do?page=1" />
 					</div>
 				</div>
 
