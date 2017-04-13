@@ -213,7 +213,13 @@
 								
 								</div>
 								
-								<div class="text-center"><a href="shipmentOffer/user/list.do?shipmentId=${shipment.id}"><spring:message code="shipment.offers" /></a></div>
+								<div class="row info1 col-xs-12 col-sm-12 text-center">
+											
+											<input type=submit class="btn-sm btn btn-success ok button-ok btn-block"
+											value= "<spring:message code="shipment.offers" />" onclick="location.href = 'shipmentOffer/user/list.do?shipmentId=${shipment.id}';"></input>
+								
+								</div>
+								
 							</div>
 							
 							

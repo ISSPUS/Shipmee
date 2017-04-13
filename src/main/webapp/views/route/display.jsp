@@ -223,9 +223,15 @@
 
 								</div>
 								
-								<div class="text-center"><a href="routeOffer/user/list.do?routeId=${route.id}"><spring:message code="route.offers" /><i class="glyphicon glyphicon-chevron-right"></i></a></div>
+								<div class="row info1 col-xs-12 col-sm-12 text-center">
+											
+											<input type=submit class="btn-sm btn btn-success ok button-ok btn-block"
+											value= "<spring:message code="route.offers" />" onclick="location.href = 'routeOffer/user/list.do?routeId=${route.id}';"></input>
 
-							</div>
+								</div>
+								
+								
+								</div>
 						
 			</div>
 
