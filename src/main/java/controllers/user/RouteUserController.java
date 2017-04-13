@@ -58,15 +58,22 @@ public class RouteUserController extends AbstractController {
 		Page<Route> ownRoutes;
 		Pageable pageable;
 		User currentUser;
+		Integer routeId;
 
 		pageable = new PageRequest(page - 1, 5);
 
 		ownRoutes = routeService.findAllByCurrentUser(pageable);
 		currentUser = userService.findByPrincipal();
+		routeId = 0;
+		
+		if(!ownRoutes.getContent().isEmpty()){
+			routeId = ownRoutes.getContent().iterator().next().getCreator().getId();
+		}
 
 		result = new ModelAndView("route/user");
 		result.addObject("routes", ownRoutes.getContent());
 		result.addObject("user", currentUser);
+		result.addObject("routeId", routeId);
 		result.addObject("p", page);
 		result.addObject("total_pages", ownRoutes.getTotalPages());
 

@@ -96,9 +96,11 @@ public class RouteController extends AbstractController {
 		ModelAndView result;
 		Route route;
 		Collection<SizePrice> sizePrices;
+		User currentUser;
 		
 		route = routeService.findOne(routeId);
 		sizePrices = sizePriceService.findAllByRouteId(routeId);
+		currentUser = userService.findByPrincipal();
 		
 		String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(route.getDepartureTime());
 		String departureTimeHour = new SimpleDateFormat("HH':'mm").format(route.getDepartureTime());
@@ -114,6 +116,7 @@ public class RouteController extends AbstractController {
 		result.addObject("arriveTime", arriveTime);
 		result.addObject("arriveTime_hour", arriveTimeHour);
 		result.addObject("sizePrices", sizePrices);
+		result.addObject("user", currentUser);
 		
 		return result;
 	}

@@ -85,7 +85,11 @@
 				</h3>
 				<div class="profile-userbuttons">
 					<button type="button" class="btn button-view btn-sm" onclick="location.href = 'user/profile.do?userId=${route.creator.id}';"><spring:message code="user.view" /></button>
-					<button type="button" class="btn button-delete-lax btn-sm" onclick="location.href = 'complaint/user/create.do?userId=${route.creator.id}';"><spring:message code="user.report" /></button>
+					
+					<jstl:if test="${route.creator.id != user.id}">
+						<button type="button" class="btn button-delete-lax btn-sm" onclick="location.href = 'complaint/user/create.do?userId=${route.creator.id}';"><spring:message code="user.report" /></button>
+					</jstl:if>
+									
 				</div>
 			</div>
 

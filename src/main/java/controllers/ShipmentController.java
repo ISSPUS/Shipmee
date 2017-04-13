@@ -88,8 +88,10 @@ public class ShipmentController extends AbstractController {
 		private ModelAndView createListModelAndView(int shipmentId){
 			ModelAndView result;
 			Shipment shipment;
+			User currentUser;
 			
 			shipment = shipmentService.findOne(shipmentId);
+			currentUser = userService.findByPrincipal();
 			
 			String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(shipment.getDepartureTime());
 			String departureTimeHour = new SimpleDateFormat("HH':'mm").format(shipment.getDepartureTime());
@@ -104,8 +106,7 @@ public class ShipmentController extends AbstractController {
 			result.addObject("departureTime_hour", departureTimeHour);
 			result.addObject("maximumArriveTime", maximumArriveTime);
 			result.addObject("maximumArriveTime_hour", maximumArriveTimeHour);
-
-			
+			result.addObject("user", currentUser);
 
 			return result;
 		}

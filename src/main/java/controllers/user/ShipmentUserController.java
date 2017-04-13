@@ -52,15 +52,22 @@ public class ShipmentUserController extends AbstractController {
 		Page<Shipment> ownShipments;
 		Pageable pageable;
 		User currentUser;
+		Integer shipmentId;
 		
 		pageable = new PageRequest(page - 1, 5);
 		
 		ownShipments = shipmentService.findAllByCurrentUser(pageable);
 		currentUser = userService.findByPrincipal();
+		shipmentId = 0;
+		
+		if(!ownShipments.getContent().isEmpty()){
+			shipmentId = ownShipments.getContent().iterator().next().getCreator().getId();
+		}
 		
 		result = new ModelAndView("shipment/user");
 		result.addObject("shipments", ownShipments.getContent());
 		result.addObject("user", currentUser);
+		result.addObject("shipmentId", shipmentId);
 		result.addObject("p", page);
 		result.addObject("total_pages", ownShipments.getTotalPages());
 		
