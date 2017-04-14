@@ -39,6 +39,7 @@
 		<!-- /row -->
 	</div>
 </div>
+
 <div class="container">
 
 	<div class="row inbox " style="margin-top: 2%;">
@@ -67,14 +68,13 @@
 				<form:hidden path="sender" />
 				<form:hidden path="moment" />
 
-
 				<div class="form-group">
 					<form:label path="recipient" class="control-label col-md-2"
 						for="recipient">
-						<spring:message code="message.recipient" />
+						<spring:message code="message.recipient"/>
 					</form:label>
 					<div class="col-md-8">
-						<form:input path="recipient" class="form-control" id="recipient" />
+						<form:input path="recipient" class="form-control" id="recipient"/>
 						<form:errors class="error create-message-error" path="recipient" />
 					</div>
 				</div>

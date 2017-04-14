@@ -50,6 +50,12 @@
 			<form:hidden path="version" />
 			<form:hidden path="user" />
 			
+			<div class=" text-center modal-content" style="padding:1%; border-color:#f1f3fa;">
+				<div>
+					<span><spring:message code="alert.info"/></span>
+				</div>
+			</div><br/>
+			
 			<div class="form-group">
 				<form:label path="origin" class="control-label col-md-2"
 					for="origin"> 
