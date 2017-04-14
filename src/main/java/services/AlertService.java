@@ -53,18 +53,20 @@ public class AlertService {
 	}
 	
 	public Alert save(Alert alert) {
-		Assert.notNull(alert);
-		Assert.isTrue(alert.getUser().equals(userService.findByPrincipal()));
-		Assert.isTrue(alert.getType().equals("Route") || alert.getType().equals("Shipment"));
+		Assert.notNull(alert, "message.error.alert.notNull");
+		Assert.isTrue(alert.getUser().equals(userService.findByPrincipal()), "message.error.alert.currentUser");
+		Assert.isTrue(alert.getType().equals("Route") || alert.getType().equals("Shipment"), "message.error.alert.wrongType");
+		Assert.isTrue(alert.getDate().after(new Date()), "message.error.alert.past");
+		
 		alert = alertRepository.save(alert);
 			
 		return alert;
 	}
 	
 	public void delete(Alert alert) {
-		Assert.notNull(alert);
-		Assert.isTrue(alert.getId() != 0);
-		Assert.isTrue(alert.getUser().equals(userService.findByPrincipal()));
+		Assert.notNull(alert, "message.error.alert.notNull");
+		Assert.isTrue(alert.getId() != 0, "message.error.alert.mustExists");
+		Assert.isTrue(alert.getUser().equals(userService.findByPrincipal()), "message.error.alert.currentUser");
 						
 		alertRepository.delete(alert);
 	}
@@ -73,7 +75,7 @@ public class AlertService {
 		Alert result;
 		
 		result = alertRepository.findOne(alertId);
-		Assert.isTrue(result.getUser().equals(userService.findByPrincipal()));
+		Assert.isTrue(result.getUser().equals(userService.findByPrincipal()), "message.error.alert.currentUser");
 		
 		
 		return result;

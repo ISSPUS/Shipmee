@@ -117,6 +117,12 @@
 				</div>
 			</div>
 			
+			<jstl:if test="${messageError != null}">
+				<div class="error" style="text-align: center;">
+					<spring:message code="${messageError}"/>
+					<br/><br/>
+				</div>
+			</jstl:if>		
 						<!-- Action buttons -->
 			<div class="text-center profile-userbuttons">
 			<button type="submit" name="save" class="btn  btn-primary">
@@ -131,6 +137,7 @@
 
 			<acme:cancel code="alert.cancel" url="alert/user/list.do" />
 			</div>
+			
 		</form:form>
 
 
