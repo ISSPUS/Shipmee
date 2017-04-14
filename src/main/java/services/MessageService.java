@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import utilities.SendMail;
 @Transactional
 public class MessageService {
 	
+	static Logger log = Logger.getLogger(ShipmentService.class);
 	private ApplicationContext context = new ClassPathXmlApplicationContext("Mail.xml");
 
 	// Managed repository -----------------------------------------------------
@@ -75,9 +77,10 @@ public class MessageService {
 		message.setSender(actor);
 		
 		result = messageRepository.save(message);
+		//log.trace(System.getenv("mailPassword"));
 		SendMail mail = (SendMail) context.getBean("sendMail");
 		mail.sendMail("shipmee.contact@gmail.com",
-    		   actor.getEmail(),
+    		   message.getRecipient().getEmail(),
     		   "Shipmee - "+message.getSubject(),
     		   message.getBody());
 
