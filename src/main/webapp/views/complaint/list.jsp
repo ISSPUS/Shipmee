@@ -191,7 +191,7 @@ len_serious: total de quejas graves
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-xs-3">
-									<i class="fa fa-thumbs-up fa-5x"></i>
+									<i class="fa fa-angle-down fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
 									<div class="huge">0</div>
@@ -216,7 +216,7 @@ len_serious: total de quejas graves
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-xs-3">
-									<i class="fa fa-thumbs-down fa-5x"></i>
+									<i class="fa fa-angle-up fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
 									<div class="huge">0</div>
@@ -241,7 +241,7 @@ len_serious: total de quejas graves
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-xs-3">
-									<i class="fa fa-exclamation-triangle fa-5x"></i>
+									<i class="fa fa-angle-double-up fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
 									<div class="huge">1</div>
