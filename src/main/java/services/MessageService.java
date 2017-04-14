@@ -9,15 +9,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import domain.Actor;
 import domain.Message;
 import repositories.MessageRepository;
 import services.form.MessageFormService;
+import utilities.SendMail;
 
 @Service
 @Transactional
 public class MessageService {
+	
+	private ApplicationContext context = new ClassPathXmlApplicationContext("Mail.xml");
 
 	// Managed repository -----------------------------------------------------
 
@@ -70,6 +75,12 @@ public class MessageService {
 		message.setSender(actor);
 		
 		result = messageRepository.save(message);
+		SendMail mail = (SendMail) context.getBean("sendMail");
+		mail.sendMail("shipmee.contact@gmail.com",
+    		   actor.getEmail(),
+    		   "Shipmee - "+message.getSubject(),
+    		   message.getBody());
+
 		
 		return result;
 	}
