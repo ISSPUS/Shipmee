@@ -89,6 +89,13 @@
 					<form:errors class="error create-message-error" path="explanation" />
 				</div>
 			</div>
+			
+			<jstl:if test="${messageError != null}">
+				<div class="error" style="text-align: center;">
+					<spring:message code="${messageError}"/>
+					<br/><br/>
+				</div>
+			</jstl:if>
 
 						<!-- Action buttons -->
 						

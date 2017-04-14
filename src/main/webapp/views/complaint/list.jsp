@@ -384,4 +384,11 @@ len_serious: total de quejas graves
 			</p>
 		</jstl:otherwise>
 	</jstl:choose>
+	
+	<jstl:if test="${messageError != null}">
+		<div class="error" style="text-align: center;">
+			<spring:message code="${messageError}"/>
+			<br/><br/>
+		</div>
+	</jstl:if>
 </div>
