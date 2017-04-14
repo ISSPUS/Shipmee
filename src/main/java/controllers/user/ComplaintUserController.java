@@ -3,6 +3,7 @@ package controllers.user;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,9 @@ import services.ComplaintService;
 @RequestMapping("/complaint/user")
 public class ComplaintUserController extends AbstractController {
 	
+	
+	static Logger log = Logger.getLogger(ComplaintUserController.class);
+
 	// Services ---------------------------------------------------------------
 	
 	@Autowired
@@ -51,6 +55,7 @@ public class ComplaintUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "create")
 	public ModelAndView save(@Valid Complaint complaint, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(complaint);
@@ -60,8 +65,12 @@ public class ComplaintUserController extends AbstractController {
 				
 				result = new ModelAndView("redirect:/user/profile.do?userId=" + complaint.getInvolved().getId());
 			} catch (Throwable oops) {
-
-				result = createEditModelAndView(complaint, "complaint.commit.error");				
+				log.error(oops.getMessage());
+				messageError = "complaint.commit.error";
+				if(oops.getMessage().contains("message.error")){
+					messageError=oops.getMessage();
+				}
+				result = createEditModelAndView(complaint, messageError);				
 			}
 		}
 
