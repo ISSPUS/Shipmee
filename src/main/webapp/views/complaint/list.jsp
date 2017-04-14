@@ -197,7 +197,6 @@ len_serious: total de quejas graves
 									<div class="huge">0</div>
 									<div>
 										<spring:message code="complaint.omitted" />
-										!
 									</div>
 								</div>
 							</div>
@@ -222,7 +221,6 @@ len_serious: total de quejas graves
 									<div class="huge">0</div>
 									<div>
 										<spring:message code="complaint.mild" />
-										!
 									</div>
 								</div>
 							</div>
@@ -247,7 +245,6 @@ len_serious: total de quejas graves
 									<div class="huge">1</div>
 									<div>
 										<spring:message code="complaint.serious" />
-										!
 									</div>
 								</div>
 							</div>
