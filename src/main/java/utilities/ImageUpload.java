@@ -15,10 +15,10 @@ public class ImageUpload {
 		String nameImage = getNameImage();
 		File directorio = new File(path);
     	File localFile = new File(path + nameImage);
-    	Assert.isTrue( directorio.getFreeSpace()>1500000000);
+    	Assert.isTrue(directorio.getFreeSpace()>1500000000, "message.error.imageUpload.freeSpace");
     	FileOutputStream os = null;
     	String tipoArchivo = imagen.getContentType();
-    	Assert.isTrue(tipoArchivo.equals("image/jpg")|| tipoArchivo.equals("image/jpeg")||tipoArchivo.equals("image/png"),"image.type.incompatible");
+    	Assert.isTrue(tipoArchivo.equals("image/jpg")|| tipoArchivo.equals("image/jpeg")||tipoArchivo.equals("image/png"),"message.error.imageUpload.incompatibleType");
     	try {
     		
     		os = new FileOutputStream(localFile);

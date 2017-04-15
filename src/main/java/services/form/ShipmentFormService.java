@@ -83,7 +83,7 @@ public class ShipmentFormService {
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			Assert.notNull(imageName,"image.error.upload");
+			Assert.notNull(imageName,"message.error.imageUpload.notNull");
 			result.setItemPicture(ServerConfig.getURL_IMAGE()+imageName);
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);

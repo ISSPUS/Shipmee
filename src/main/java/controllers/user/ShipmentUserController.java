@@ -3,6 +3,7 @@ package controllers.user;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,8 @@ import services.form.ShipmentFormService;
 @Controller
 @RequestMapping("/shipment/user")
 public class ShipmentUserController extends AbstractController {
+	
+	static Logger log = Logger.getLogger(ShipmentUserController.class);
 	
 	// Services ---------------------------------------------------------------
 
@@ -107,6 +110,7 @@ public class ShipmentUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid ShipmentForm shipmentForm, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(shipmentForm);
@@ -119,7 +123,12 @@ public class ShipmentUserController extends AbstractController {
 
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(shipmentForm, "shipment.commit.error");
+				log.error(oops.getMessage());
+				messageError = "shipment.commit.error";
+				if(oops.getMessage().contains("message.error")){
+					messageError=oops.getMessage();
+				}
+				result = createEditModelAndView(shipmentForm, messageError);
 			}
 		}
 
