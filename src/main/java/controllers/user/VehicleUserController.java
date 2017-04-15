@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -24,6 +25,8 @@ import services.form.VehicleFormService;
 @RequestMapping("/vehicle/user")
 public class VehicleUserController extends AbstractController {
 	
+	static Logger log = Logger.getLogger(VehicleUserController.class);
+
 	// Services ---------------------------------------------------------------
 	
 	@Autowired
@@ -83,6 +86,7 @@ public class VehicleUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid VehicleForm vehicleForm, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(vehicleForm);
@@ -93,8 +97,12 @@ public class VehicleUserController extends AbstractController {
 				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-
-				result = createEditModelAndView(vehicleForm, "vehicle.commit.error");				
+				log.error(oops.getMessage());
+				messageError = "vehicle.commit.error";
+				if(oops.getMessage().contains("message.error")){
+					messageError=oops.getMessage();
+				}
+				result = createEditModelAndView(vehicleForm, messageError);				
 			}
 		}
 
@@ -104,13 +112,19 @@ public class VehicleUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(VehicleForm vehicleForm, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		try {
 			Vehicle vehicle = vehicleService.findOne(vehicleForm.getVehicleId());
 			vehicleService.delete(vehicle);
 			result = new ModelAndView("redirect:list.do");						
 		} catch (Throwable oops) {
-			result = createEditModelAndView(vehicleForm, "vehicle.commit.error");
+			log.error(oops.getMessage());
+			messageError = "vehicle.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError=oops.getMessage();
+			}
+			result = createEditModelAndView(vehicleForm, messageError);
 		}
 
 		return result;
