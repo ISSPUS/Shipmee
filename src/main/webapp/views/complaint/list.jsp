@@ -194,7 +194,7 @@ len_serious: total de quejas graves
 									<i class="fa fa-angle-down fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">0</div>
+									<div class="huge"><jstl:out value="${allOmitted}"></jstl:out></div>
 									<div>
 										<spring:message code="complaint.omitted" />
 									</div>
@@ -218,7 +218,7 @@ len_serious: total de quejas graves
 									<i class="fa fa-angle-up fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">0</div>
+									<div class="huge"><jstl:out value="${allMild}"></jstl:out></div>
 									<div>
 										<spring:message code="complaint.mild" />
 									</div>
@@ -242,7 +242,7 @@ len_serious: total de quejas graves
 									<i class="fa fa-angle-double-up fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">1</div>
+									<div class="huge"><jstl:out value="${allSerious}"></jstl:out></div>
 									<div>
 										<spring:message code="complaint.serious" />
 									</div>
@@ -261,6 +261,7 @@ len_serious: total de quejas graves
 			</div>
 		</div>
 	</security:authorize>
+	
 	<!-- Listado de quejas -->
 
 	<jstl:choose>

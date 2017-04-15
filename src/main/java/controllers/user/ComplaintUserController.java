@@ -20,7 +20,6 @@ import services.ComplaintService;
 @RequestMapping("/complaint/user")
 public class ComplaintUserController extends AbstractController {
 	
-	
 	static Logger log = Logger.getLogger(ComplaintUserController.class);
 
 	// Services ---------------------------------------------------------------
