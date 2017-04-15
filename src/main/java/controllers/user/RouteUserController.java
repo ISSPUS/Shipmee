@@ -165,12 +165,18 @@ public class RouteUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(RouteForm routeForm, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		try {
 			routeFormService.delete(routeForm);
 			result = new ModelAndView("redirect:../../");
 		} catch (Throwable oops) {
-			result = createEditModelAndView(routeForm, "route.commit.error");
+			log.error(oops.getMessage());
+			messageError = "route.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError=oops.getMessage();
+			}
+			result = createEditModelAndView(routeForm, messageError);
 		}
 
 		return result;
