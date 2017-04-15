@@ -2,6 +2,7 @@ package controllers.user;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -24,6 +25,8 @@ import domain.form.SizePriceForm;
 @Controller
 @RequestMapping("/sizePrice/user")
 public class SizePriceUserController extends AbstractController {
+
+	static Logger log = Logger.getLogger(SizePriceUserController.class);
 
 	// Services ---------------------------------------------------------------
 
@@ -93,6 +96,7 @@ public class SizePriceUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid SizePriceForm sizePriceForm, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(sizePriceForm);
@@ -119,7 +123,12 @@ public class SizePriceUserController extends AbstractController {
 				sizePriceFormService.reconstruct(sizePriceForm);
 				result = new ModelAndView("redirect:../../route/user/list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(sizePriceForm, "sizePrice.commit.error");
+				log.error(oops.getMessage());
+				messageError = "sizePrice.commit.error";
+				if(oops.getMessage().contains("message.error")){
+					messageError=oops.getMessage();
+				}
+				result = createEditModelAndView(sizePriceForm, messageError);
 			}
 		}
 

@@ -39,7 +39,7 @@ public class SizePriceService {
 
 	public SizePrice create() {
 		Assert.isTrue(actorService.checkAuthority("USER"),
-				"Only an user can create a sizePrice");
+				"message.error.sizePrice.create.user");
 		
 		SizePrice result;
 		
@@ -49,14 +49,14 @@ public class SizePriceService {
 	}
 	
 	public SizePrice save(SizePrice sizePrice) {
-		Assert.notNull(sizePrice);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only an user can save sizePrices");
+		Assert.notNull(sizePrice, "message.error.sizePrice.notNull");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.sizePrice.save.user");
 		
 		User user;
 		
 		user = userService.findByPrincipal();
 		
-		Assert.isTrue(sizePrice.getRoute().getCreator().getId() == user.getId(), "Both Ids must be the same.");
+		Assert.isTrue(sizePrice.getRoute().getCreator().getId() == user.getId(), "message.error.sizePrice.save.user.own");
 		
 		sizePrice = sizePriceRepository.save(sizePrice);
 			
@@ -64,9 +64,9 @@ public class SizePriceService {
 	}
 	
 	public void delete(SizePrice sizePrice) {
-		Assert.notNull(sizePrice);
-		Assert.isTrue(sizePrice.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only an user can delete sizePrices");
+		Assert.notNull(sizePrice, "message.error.sizePrice.notNull");
+		Assert.isTrue(sizePrice.getId() != 0, "message.error.sizePrice.mustExists");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.sizePrice.delete.user");
 
 		sizePriceRepository.delete(sizePrice);
 	}
