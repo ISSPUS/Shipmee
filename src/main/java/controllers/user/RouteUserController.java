@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +30,8 @@ import services.form.RouteFormService;
 @Controller
 @RequestMapping("/route/user")
 public class RouteUserController extends AbstractController {
+
+	static Logger log = Logger.getLogger(RouteUserController.class);
 
 	// Services ---------------------------------------------------------------
 
@@ -112,6 +115,7 @@ public class RouteUserController extends AbstractController {
 	public ModelAndView save(@Valid RouteForm routeForm, BindingResult binding) {
 		ModelAndView result;
 		int id;
+		String messageError;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(routeForm);
@@ -146,7 +150,12 @@ public class RouteUserController extends AbstractController {
 					result = new ModelAndView("redirect:../../sizePrice/user/edit.do?routeId=" + route.getId());
 				}
 			} catch (Throwable oops) {
-				result = createEditModelAndView(routeForm, "route.commit.error");
+				log.error(oops.getMessage());
+				messageError = "route.commit.error";
+				if(oops.getMessage().contains("message.error")){
+					messageError=oops.getMessage();
+				}
+				result = createEditModelAndView(routeForm, messageError);
 			}
 		}
 
