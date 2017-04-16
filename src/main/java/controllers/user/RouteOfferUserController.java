@@ -208,7 +208,7 @@ public class RouteOfferUserController extends AbstractController {
 	protected ModelAndView createEditModelAndView2(RouteOffer input, String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("redirect:../user/list.do?routeId="+input.getRoute().getId());
+		result = new ModelAndView("routeOffer/list");
 		result.addObject("routeOffer", input);
 		result.addObject("message", message);
 
