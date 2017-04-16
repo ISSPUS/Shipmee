@@ -247,7 +247,7 @@ public class RouteOfferService {
 				routeOffer.getAmount() + 
 				" euros, originally posted by " + 
 				route.getCreator().getUserAccount().getUsername() + 
-				" has been denied.";
+				", has been denied.";
 		
 		messageService.sendMessage(sender, recipient, subject, body);
 	
