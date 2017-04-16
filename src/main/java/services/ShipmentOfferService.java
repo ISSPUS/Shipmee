@@ -52,7 +52,7 @@ public class ShipmentOfferService {
 		Shipment shipment;
 
 		shipment = shipmentService.findOne(shipmentId);
-		Assert.notNull(shipment, "service.shipmentOffer.create.isNullShipment");
+		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExists");
 
 		res = new ShipmentOffer();
 		res.setShipment(shipment);
@@ -65,7 +65,7 @@ public class ShipmentOfferService {
 		ShipmentOffer res;
 		ShipmentOffer act;
 		act = this.findOne(shipmentOfferId);
-		Assert.notNull(act, "service.shipmentOffer.createFromClone.isNullShipment");
+		Assert.notNull(act, "message.error.shipmentOffer.mustExists");
 
 		res = this.create(act.getShipment().getId());
 		res.setAmount(act.getAmount());
@@ -78,17 +78,17 @@ public class ShipmentOfferService {
 		User actUser;
 		ShipmentOffer tmp;
 
-		Assert.notNull(input, "service.shipmentOffer.save.isNull");
+		Assert.notNull(input, "message.error.shipmentOffer.mustExists");
 
 		actUser = userService.findByPrincipal();
 
 		if (actUser.equals(input.getUser())) { // User that create shipment
 			if (input.getId() != 0) {
 				tmp = this.findOne(input.getId());
-				Assert.notNull(tmp, "service.shipmentOffer.save.creator.dontFindID");
-				Assert.isTrue(tmp.getUser().equals(actUser), "service.shipmentOffer.save.creator.fake");
+				Assert.notNull(tmp, "message.error.shipmentOffer.save.dontFindID");
+				Assert.isTrue(tmp.getUser().equals(actUser), "message.error.shipmentOffer.save.user.own");
 				Assert.isTrue(!tmp.getAcceptedBySender() && !tmp.getRejectedBySender(),
-						"service.shipmentOffer.save.creator.isRejectedOrAccepted");
+						"message.error.shipmentOffer.notAcceptedOrRejected");
 			} else {
 				tmp = this.create(input.getShipment().getId());
 			}
@@ -105,18 +105,18 @@ public class ShipmentOfferService {
 																								// can't
 
 			tmp = this.findOne(input.getId());
-			Assert.notNull(tmp, "service.shipmentOffer.save.trans.dontFindID");
-			Assert.isTrue(tmp.getShipment().getCreator().equals(actUser), "service.shipmentOffer.save.trans.fake");
+			Assert.notNull(tmp, "message.error.shipmentOffer.save.dontFindID");
+			Assert.isTrue(tmp.getShipment().getCreator().equals(actUser), "message.error.shipmentOffer.save.user.own");
 			tmp.setAcceptedBySender(input.getAcceptedBySender());
 			tmp.setRejectedBySender(input.getRejectedBySender());
 		} else {
-			Assert.isTrue(false, "service.shipmentOffer.save.userNotPermitted");
+			Assert.isTrue(false, "shipmentOffer.commit.error");
 			return null;
 		}
 		Assert.isTrue(!tmp.getUser().equals(tmp.getShipment().getCreator()),
-				"service.shipmentOffer.save.equalsCreatorAndProposer");
+				"message.error.shipmentOffer.equalCreatorAndProposer");
 		Assert.isTrue(tmp.getShipment().getMaximumArriveTime().after(new Date()),
-				"service.shipmentOffer.create.inPast");
+				"message.error.shipmentOffer.shipment.maxArrivalTime.future");
 
 		tmp = shipmentOfferRepository.save(tmp);
 

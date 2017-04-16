@@ -117,6 +117,7 @@ public class ShipmentOfferUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid ShipmentOffer shipmentOffer, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(shipmentOffer);
@@ -126,7 +127,12 @@ public class ShipmentOfferUserController extends AbstractController {
 
 				result = new ModelAndView("redirect:list.do?shipmentId=" + shipmentOffer.getShipment().getId());
 			} catch (Throwable oops) {
-				result = createEditModelAndView(shipmentOffer, "shipmentOffer.commit.error");
+				log.error(oops.getMessage());
+				messageError = "shipmentOffer.commit.error";
+				if(oops.getMessage().contains("message.error")){
+					messageError = oops.getMessage();
+				}
+				result = createEditModelAndView(shipmentOffer, messageError);
 			}
 		}
 
