@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Actor;
 import domain.Shipment;
 import domain.ShipmentOffer;
 import domain.User;
@@ -35,6 +36,9 @@ public class ShipmentOfferService {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private MessageService messageService;
+		
 	// Constructors -----------------------------------------------------------
 
 	public ShipmentOfferService() {
@@ -222,11 +226,11 @@ public class ShipmentOfferService {
 			}
 		}
 		
-		return shipmentOffer;
-		
 		/*
 		 * Here comes the notification to the carrier (Still not developed) 
 		 */
+		
+		return shipmentOffer;
 		
 	}
 	
@@ -264,6 +268,30 @@ public class ShipmentOfferService {
 		/*
 		 * Here comes the notification to the carrier (Still not developed) 
 		 */
+		
+		Actor sender;
+		Actor recipient;
+		String subject;
+		String body;
+		
+		sender = shipment.getCreator();
+		recipient = shipmentOffer.getUser();
+		subject = "Your counteroffer has been denied.";
+		body = "The counteroffer you did for the following Shipment to carry " + 
+				shipment.getItemName() + 
+				" from " + 
+				shipment.getOrigin() + 
+				" to " + 
+				shipment.getDestination() + 
+				" with a proposed cost of " +
+				shipmentOffer.getAmount() + 
+				" euros, originally posted by " + 
+				shipment.getCreator().getUserAccount().getUsername() + 
+				" with a cost of " + 
+				shipment.getPrice() + 
+				" euros, has been denied.";
+		
+		messageService.sendMessage(sender, recipient, subject, body);	
 		
 	}
 	
