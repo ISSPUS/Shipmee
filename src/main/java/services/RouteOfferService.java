@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Actor;
 import domain.Route;
 import domain.RouteOffer;
 import domain.User;
@@ -34,6 +35,9 @@ public class RouteOfferService {
 
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private MessageService messageService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -235,6 +239,27 @@ public class RouteOfferService {
 		/*
 		 * Here comes the notification to the carrier (Still not developed) 
 		 */
+		
+		Actor sender;
+		Actor recipient;
+		String subject;
+		String body;
+		
+		sender = route.getCreator();
+		recipient = routeOffer.getUser();
+		subject = "Your counteroffer has been denied.";
+		body = "The counteroffer you did for a Route" + 				
+				" from " + 
+				route.getOrigin() + 
+				" to " + 
+				route.getDestination() + 
+				" with a proposed cost of " +
+				routeOffer.getAmount() + 
+				" euros, originally posted by " + 
+				route.getCreator().getUserAccount().getUsername() + 
+				" has been denied.";
+		
+		messageService.sendMessage(sender, recipient, subject, body);
 	
 	}
 	

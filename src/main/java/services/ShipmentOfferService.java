@@ -186,21 +186,21 @@ public class ShipmentOfferService {
 	 */
 	public ShipmentOffer accept(int shipmentOfferId){
 		
-		Assert.isTrue(shipmentOfferId != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment.");
+		Assert.isTrue(shipmentOfferId != 0, "message.error.shipmentOffer.mustExists");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipmentOffer.onlyUser");
 		
 		ShipmentOffer shipmentOffer = findOne(shipmentOfferId);		
 		Shipment shipment = shipmentOffer.getShipment();
 		
-		Assert.notNull(shipment, "The shipment related to the offer must exist.");
-		Assert.isTrue(shipmentService.checkDates(shipment), "All shipment dates must be valid.");
+		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExists");
+		Assert.isTrue(shipmentService.checkDates(shipment), "message.error.shipmentOffer.shipment.checkDates");
 		Assert.isTrue(shipment.getDepartureTime().after(new Date()),"The Departure Time must be future");
-		Assert.isTrue(shipment.getMaximumArriveTime().after(new Date()),"The Maximum Arrival Time must be future");
-		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the shipment can accept a counter offer.");
-		Assert.isTrue(!shipmentService.checkShipmentOfferAccepted(shipment.getId()), "The creator of the Shipment must not accept any other offer.");
+		Assert.isTrue(shipment.getMaximumArriveTime().after(new Date()),"message.error.shipmentOffer.shipment.maxArrivalTime.future");
+		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "message.error.shipmentOffer.accept.user.own");
+		Assert.isTrue(!shipmentService.checkShipmentOfferAccepted(shipment.getId()), "message.error.shipmentOffer.accept.alreadyAccepted");
 
-		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "The offer must not be accepted or rejected.");
-		Assert.isTrue(shipmentOffer.getUser().getIsVerified(), "The carrier must be verified");
+		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "message.error.shipmentOffer.notAcceptedOrRejected");
+		Assert.isTrue(shipmentOffer.getUser().getIsVerified(), "message.error.shipmentOffer.verifiedCarrier");
 		
 		/*
 		 * More possible constraints:
@@ -242,18 +242,18 @@ public class ShipmentOfferService {
 	 */
 	public void deny(int shipmentOfferId){
 		
-		Assert.isTrue(shipmentOfferId != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment.");
+		Assert.isTrue(shipmentOfferId != 0, "message.error.shipmentOffer.mustExists");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipmentOffer.onlyUser");
 		
 		ShipmentOffer shipmentOffer = findOne(shipmentOfferId);		
 		Shipment shipment = shipmentOffer.getShipment();
 		
-		Assert.notNull(shipment, "The shipment related to the offer must exist.");
-		Assert.isTrue(shipmentService.checkDates(shipment), "All shipment dates must be valid.");
-		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the shipment can accept a counter offer.");
+		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExists");
+		Assert.isTrue(shipmentService.checkDates(shipment), "message.error.shipmentOffer.shipment.checkDates");
+		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "message.error.shipmentOffer.deny.user.own");
 
-		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "The offer must not be accepted or rejected.");
-		Assert.isTrue(shipmentOffer.getUser().getIsVerified(), "The carrier must be verified");
+		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "message.error.shipmentOffer.notAcceptedOrRejected");
+		Assert.isTrue(shipmentOffer.getUser().getIsVerified(), "message.error.shipmentOffer.verifiedCarrier");
 
 		/*
 		 * More possible constraints:
@@ -277,7 +277,7 @@ public class ShipmentOfferService {
 		sender = shipment.getCreator();
 		recipient = shipmentOffer.getUser();
 		subject = "Your counteroffer has been denied.";
-		body = "The counteroffer you did for the following Shipment to carry " + 
+		body = "The counteroffer you did for a Shipment to carry " + 
 				shipment.getItemName() + 
 				" from " + 
 				shipment.getOrigin() + 
