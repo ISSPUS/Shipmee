@@ -37,7 +37,7 @@ public class VehicleService {
 
 	public Vehicle create() {
 		Assert.isTrue(actorService.checkAuthority("USER"),
-				"Only an user can create a vehicle");
+				"message.error.vehicle.create.user");
 		
 		Vehicle result;
 		User user;
@@ -52,7 +52,7 @@ public class VehicleService {
 	}
 	
 	public Vehicle save(Vehicle vehicle) {
-		Assert.notNull(vehicle);
+		Assert.notNull(vehicle, "message.error.vehicle.notNull");
 		
 		Vehicle vehiclePreSave;
 		User user;
@@ -68,8 +68,8 @@ public class VehicleService {
 		} else {
 			vehiclePreSave = this.findOne(vehicle.getId());
 			
-			Assert.isTrue(user.getId() == vehiclePreSave.getUser().getId(), "Only the owner can save this vehicle.");
-			Assert.isTrue(vehiclePreSave.isDeleted() == false, "The user cannot save a deleted vehicle.");
+			Assert.isTrue(user.getId() == vehiclePreSave.getUser().getId(), "message.error.vehicle.save.user.own");
+			Assert.isTrue(vehiclePreSave.isDeleted() == false, "message.error.vehicle.save.user.deleted");
 			
 			vehicle.setDeleted(false);
 			
@@ -80,15 +80,15 @@ public class VehicleService {
 	}
 	
 	public void delete(Vehicle vehicle) {
-		Assert.notNull(vehicle);
-		Assert.isTrue(vehicle.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only an user can delete vehicles");
+		Assert.notNull(vehicle, "message.error.vehicle.notNull");
+		Assert.isTrue(vehicle.getId() != 0, "message.error.vehicle.mustExists");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.vehicle.delete.user");
 
 		User user;
 		
 		user = userService.findByPrincipal();
 
-		Assert.isTrue(user.getId() == vehicle.getUser().getId(), "Only the user who created the vehicle can delete it");
+		Assert.isTrue(user.getId() == vehicle.getUser().getId(), "message.error.vehicle.delete.user.own");
 						
 		vehicle.setDeleted(true);
 		vehicleRepository.save(vehicle);

@@ -50,6 +50,12 @@
 			<form:hidden path="version" />
 			<form:hidden path="user" />
 			
+			<div class=" text-center modal-content" style="padding:1%; border-color:#f1f3fa;">
+				<div>
+					<span><spring:message code="alert.info"/></span>
+				</div>
+			</div><br/>
+			
 			<div class="form-group">
 				<form:label path="origin" class="control-label col-md-2"
 					for="origin"> 
@@ -111,10 +117,16 @@
 				</div>
 			</div>
 			
+			<jstl:if test="${messageError != null}">
+				<div class="error" style="text-align: center;">
+					<spring:message code="${messageError}"/>
+					<br/><br/>
+				</div>
+			</jstl:if>		
 						<!-- Action buttons -->
 			<div class="text-center profile-userbuttons">
 			<button type="submit" name="save" class="btn  btn-primary">
-				<span class="glyphicon glyphicon-floppy-disk"></span>
+				<span class="fa fa-plus-circle"></span>
 				<spring:message code="alert.save" />
 			</button>
 
@@ -125,6 +137,7 @@
 
 			<acme:cancel code="alert.cancel" url="alert/user/list.do" />
 			</div>
+			
 		</form:form>
 
 

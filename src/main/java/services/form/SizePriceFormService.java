@@ -86,7 +86,7 @@ public class SizePriceFormService {
 	}
 	
 	private Collection<SizePrice> saveCreate(SizePriceForm sizePriceForm) {
-		Assert.isTrue(checkSizePrices(sizePriceForm));
+		Assert.isTrue(checkSizePrices(sizePriceForm), "message.error.sizePrice.checkSizePrices");
 		
 		Collection<SizePrice> result;
 		SizePrice sizePrice;

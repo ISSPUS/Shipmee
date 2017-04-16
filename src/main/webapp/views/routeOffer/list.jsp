@@ -26,9 +26,10 @@
 		<div class="row">
 			<h3>
 				<spring:message code="routeOffer.list.for" />
-				<a href="route/display.do?routeId=${route.id}"> <jstl:out
-						value="${route.origin}" /> -> <jstl:out
-						value="${route.destination}" />
+				<a href="route/display.do?routeId=${route.id}">
+					<jstl:out value="${route.origin}" />
+					<jstl:if test="${route != null}"> -> </jstl:if>
+					<jstl:out value="${route.destination}" />
 				</a>
 			</h3>
 		</div>

@@ -80,8 +80,7 @@ public class MessageService {
 		Assert.notNull(messageFormService);
 
 		message = MessageFormToMessage(messageFormService);
-
-	
+		
 		res = this.save(message);
 		
 		return res;

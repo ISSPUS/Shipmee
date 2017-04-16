@@ -85,7 +85,11 @@
 				</h3>
 				<div class="profile-userbuttons">
 					<button type="button" class="btn button-view btn-sm" onclick="location.href = 'user/profile.do?userId=${route.creator.id}';"><spring:message code="user.view" /></button>
-					<button type="button" class="btn button-delete-lax btn-sm" onclick="location.href = 'complaint/user/create.do?userId=${route.creator.id}';"><spring:message code="user.report" /></button>
+					
+					<jstl:if test="${route.creator.id != user.id}">
+						<button type="button" class="btn button-delete-lax btn-sm" onclick="location.href = 'complaint/user/create.do?userId=${route.creator.id}';"><spring:message code="user.report" /></button>
+					</jstl:if>
+									
 				</div>
 			</div>
 
@@ -196,22 +200,14 @@
                             </td>
                             <td class="tabla-tam">${value.size}</td>
                             <td class="tabla-precio">${value.price}&#8364;
-                            
-                            <security:authorize access="hasRole('USER')">
-                            	<a href="routeOffer/user/create.do?routeId=${route.id}"><span title="<spring:message code="route.offer" />"><i class="glyphicon glyphicon-resize-small contraoferta-icon"></i></span></a>
-                            </security:authorize></td>
                          
                         </tr>
 					</jstl:forEach>
-                       
+     
                     </tbody>
  					 </table>
 					
-
-					
 					<div class="rfecha separador-final"></div>
-
-
 
 								<div class="row info1 col-xs-12 col-sm-12 text-center">
 											
@@ -219,10 +215,23 @@
 											value= "<spring:message code="route.contract" />" onclick="contract(${route.id});"></input>
 
 								</div>
-								<div class="text-center"><a href="routeOffer/user/list.do?routeId=${route.id}"><spring:message code="route.offers" /><i class="glyphicon glyphicon-chevron-right"></i></a></div>
-								</div>
+								
+								<div class="row info1 col-xs-12 col-sm-12 text-center">
+											
+											<input type=submit class="btn-xs btn-llevar btn btn-success ok btn-danger contraoferta"
+											value= "<spring:message code="route.offer" />" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';"></input>
 
-							</div>
+								</div>
+								
+								<div class="row info1 col-xs-12 col-sm-12 text-center">
+											
+											<input type=submit class="btn-sm btn btn-success ok button-ok btn-block"
+											value= "<spring:message code="route.offers" />" onclick="location.href = 'routeOffer/user/list.do?routeId=${route.id}';"></input>
+
+								</div>
+								
+								
+								</div>
 						
 			</div>
 

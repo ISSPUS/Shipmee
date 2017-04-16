@@ -172,8 +172,7 @@
 						</div>
 						<div class="datos text-left">
 							<span> <strong><spring:message
-										code="user.username" />: </strong> <security:authentication
-									property="principal.username" /></span> <br /> <span> <strong><spring:message
+										code="user.username" />: </strong> <spring:message text= "${user.userAccount.username}"/> </span> <br /> <span> <strong><spring:message
 										code="user.email" />: </strong>${user.email}</span> <br /> <span> <strong><spring:message
 										code="user.phone" />: </strong>${user.phone}</span> <br /> <span> <strong><spring:message
 										code="user.dni" />: </strong>${user.dni}</span>
@@ -220,9 +219,9 @@
 						</p>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-xs-4 emphasis" id="clickeable"
-						onclick="location.href='shipment/list.do?userId=${user.id}';">
+						onclick="location.href='rating/list.do?userReceivedId=${user.id}';">
 						<h2>
-							<strong> <jstl:out value=" ${ratingsCreated}" />
+							<strong> <jstl:out value=" ${ratingsReceived}" />
 							</strong>
 						</h2>
 						<p>

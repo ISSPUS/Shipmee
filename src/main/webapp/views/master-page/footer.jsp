@@ -38,7 +38,7 @@
 		 			</p>
 		 			
 		 			<div class="language text-sample">
-		 				<a id="es" href="?language=es"><img id="translate-flag" src="images/es.gif"/>Español</a> | 
+		 				<a id="es" href="?language=es"><img id="translate-flag" src="images/es.gif"/>Español</a> |
 						<a id="en" href="?language=en"><img id="translate-flag" src="images/en.gif"/>English</a>
 					</div>
 					
@@ -117,6 +117,3 @@
 		hideInfoCookies();
 	}
 </script>
-
-
-

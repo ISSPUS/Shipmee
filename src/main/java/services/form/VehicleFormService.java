@@ -66,7 +66,7 @@ public class VehicleFormService {
 			result.setColor(vehicleForm.getColor());
 			result.setModel(vehicleForm.getModel());
 			
-			Assert.notNull(nameImgVehicle, "error.upload.image");
+			Assert.notNull(nameImgVehicle, "message.error.imageUpload.notNull");
 
 			result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
 			
@@ -79,7 +79,7 @@ public class VehicleFormService {
 			result.setColor(vehicleForm.getColor());
 			result.setModel(vehicleForm.getModel());
 			
-			Assert.notNull(nameImgVehicle, "error.upload.image");
+			Assert.notNull(nameImgVehicle, "message.error.imageUpload.notNull");
 
 			result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
 

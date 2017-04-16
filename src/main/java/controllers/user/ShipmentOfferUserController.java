@@ -2,6 +2,7 @@ package controllers.user;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,8 @@ import services.UserService;
 @Controller
 @RequestMapping("/shipmentOffer/user")
 public class ShipmentOfferUserController extends AbstractController {
+
+	static Logger log = Logger.getLogger(ShipmentOfferUserController.class);
 
 	// Services ---------------------------------------------------------------
 
@@ -114,6 +117,7 @@ public class ShipmentOfferUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid ShipmentOffer shipmentOffer, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(shipmentOffer);
@@ -123,7 +127,12 @@ public class ShipmentOfferUserController extends AbstractController {
 
 				result = new ModelAndView("redirect:list.do?shipmentId=" + shipmentOffer.getShipment().getId());
 			} catch (Throwable oops) {
-				result = createEditModelAndView(shipmentOffer, "shipmentOffer.commit.error");
+				log.error(oops.getMessage());
+				messageError = "shipmentOffer.commit.error";
+				if(oops.getMessage().contains("message.error")){
+					messageError = oops.getMessage();
+				}
+				result = createEditModelAndView(shipmentOffer, messageError);
 			}
 		}
 
@@ -142,6 +151,7 @@ public class ShipmentOfferUserController extends AbstractController {
 			result = new ModelAndView("redirect:../../feepayment/user/create.do?type=3&id=" + shipmentOfferId);
 			
 		}catch(Throwable oops){
+			log.error(oops.getMessage());
 			messageError = "shipmentOffer.commit.error";
 			if(oops.getMessage().contains("message.error")){
 				messageError = oops.getMessage();
@@ -165,6 +175,7 @@ public class ShipmentOfferUserController extends AbstractController {
 			// This reditect may be change to other url.
 			result = new ModelAndView("redirect:../user/list.do?shipmentId="+shipment.getId());
 		}catch(Throwable oops){
+			log.error(oops.getMessage());
 			messageError = "shipmentOffer.commit.error";
 			if(oops.getMessage().contains("message.error")){
 				messageError = oops.getMessage();

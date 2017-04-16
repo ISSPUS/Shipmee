@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import domain.Route;
 import domain.SizePrice;
 import domain.User;
+import services.ActorService;
 import services.RouteService;
 import services.SizePriceService;
 import services.UserService;
@@ -34,6 +35,9 @@ public class RouteController extends AbstractController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ActorService actorService;
 	// Constructors -----------------------------------------------------------
 	
 	public RouteController() {
@@ -77,15 +81,22 @@ public class RouteController extends AbstractController {
 		Page<Route> routes;
 		Pageable pageable;
 		User user;
+		User currentUser;
 		
 		pageable = new PageRequest(page - 1, 5);
 
 		routes = routeService.findAllByUserId(userId, pageable);
 		user = userService.findOne(userId);
+		currentUser = null;
+		
+		if(actorService.checkLogin()){
+			currentUser = userService.findByPrincipal();
+		}
 				
 		result = new ModelAndView("route/user");
 		result.addObject("routes", routes.getContent());
 		result.addObject("user", user);
+		result.addObject("currentUser", currentUser);
 		result.addObject("p", page);
 		result.addObject("total_pages", routes.getTotalPages());
 		
@@ -96,9 +107,15 @@ public class RouteController extends AbstractController {
 		ModelAndView result;
 		Route route;
 		Collection<SizePrice> sizePrices;
+		User currentUser;
 		
 		route = routeService.findOne(routeId);
 		sizePrices = sizePriceService.findAllByRouteId(routeId);
+		currentUser = null;
+		
+		if(actorService.checkLogin()){
+			currentUser = userService.findByPrincipal();
+		}
 		
 		String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(route.getDepartureTime());
 		String departureTimeHour = new SimpleDateFormat("HH':'mm").format(route.getDepartureTime());
@@ -114,6 +131,7 @@ public class RouteController extends AbstractController {
 		result.addObject("arriveTime", arriveTime);
 		result.addObject("arriveTime_hour", arriveTimeHour);
 		result.addObject("sizePrices", sizePrices);
+		result.addObject("user", currentUser);
 		
 		return result;
 	}

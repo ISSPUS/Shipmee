@@ -18,4 +18,7 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
 	
 	@Query("select count(r) from Rating r where r.author.id = ?1")
 	int countRatingCreatedByUserId(int authorId);
+	
+	@Query("select count(r) from Rating r where r.user.id = ?1")
+	int countRatingReceivedByUserId(int userId);
 }
