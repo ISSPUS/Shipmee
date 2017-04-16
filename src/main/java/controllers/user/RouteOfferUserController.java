@@ -2,6 +2,7 @@ package controllers.user;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,8 @@ import services.UserService;
 @Controller
 @RequestMapping("/routeOffer/user")
 public class RouteOfferUserController extends AbstractController {
+
+	static Logger log = Logger.getLogger(RouteOfferUserController.class);
 
 	// Services ---------------------------------------------------------------
 
@@ -114,6 +117,7 @@ public class RouteOfferUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid RouteOffer routeOffer, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(routeOffer);
@@ -122,7 +126,12 @@ public class RouteOfferUserController extends AbstractController {
 				result = new ModelAndView("redirect:../../feepayment/user/create.do?type=2&id=" + routeOffer.getRoute().getId()
 						+ "&amount=" + routeOffer.getAmount() + "&description=" + routeOffer.getDescription());
 			} catch (Throwable oops) {
-				result = createEditModelAndView(routeOffer, "routeOffer.commit.error");
+				log.error(oops.getMessage());
+				messageError = "routeOffer.commit.error";
+				if(oops.getMessage().contains("message.error")){
+					messageError = oops.getMessage();
+				}
+				result = createEditModelAndView(routeOffer, messageError);
 			}
 		}
 
@@ -141,11 +150,12 @@ public class RouteOfferUserController extends AbstractController {
 			routeOfferService.accept(routeOfferId);
 			result = new ModelAndView("redirect:../user/list.do?routeId="+route.getId());
 		}catch(Throwable oops){
+			log.error(oops.getMessage());
 			messageError = "routeOffer.commit.error";
 			if(oops.getMessage().contains("message.error")){
 				messageError = oops.getMessage();
 			}
-			result = createEditModelAndView(routeOffer, messageError);
+			result = createEditModelAndView2(routeOffer, messageError);
 		}
 		
 		return result;
@@ -164,11 +174,13 @@ public class RouteOfferUserController extends AbstractController {
 			// This reditect may be change to other url.
 			result = new ModelAndView("redirect:../user/list.do?routeId="+route.getId());
 		}catch(Throwable oops){
+			log.error(oops.getMessage());
 			messageError = "routeOffer.commit.error";
 			if(oops.getMessage().contains("message.error")){
 				messageError = oops.getMessage();
 			}
-			result = createEditModelAndView(routeOffer, messageError);		}
+			result = createEditModelAndView2(routeOffer, messageError);		
+		}
 		
 		return result;
 	}
@@ -187,6 +199,16 @@ public class RouteOfferUserController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("routeOffer/edit");
+		result.addObject("routeOffer", input);
+		result.addObject("message", message);
+
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndView2(RouteOffer input, String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("redirect:../user/list.do?routeId="+input.getRoute().getId());
 		result.addObject("routeOffer", input);
 		result.addObject("message", message);
 
