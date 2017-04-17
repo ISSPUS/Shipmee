@@ -178,7 +178,7 @@
 
 <div class="container">
 
-	<!-- Menu informacion de las quejas -->
+	<!-- Menu informacion de las feePayments -->
 	<security:authorize access="hasRole('ADMIN')">
 
 		<div class="row" style="margin-top: 2%">
@@ -261,7 +261,7 @@
 			</div>
 		</div>
 	</security:authorize>
-	<!-- Listado de quejas -->
+	<!-- Listado de feePayments -->
 
 	<jstl:choose>
 		<jstl:when test="${not empty feePayments}">
@@ -321,13 +321,13 @@
 										<h5>
 											<jstl:choose>
 												<jstl:when test="${feePayment.type == 'Accepted' }">
-													<i class="glyphicon glyphicon-thumbs-up"></i>
+													<i class="fa fa-thumbs-up"></i>
 												</jstl:when>
 												<jstl:when test="${feePayment.type == 'Pending'   }">
-													<i class="glyphicon glyphicon-thumbs-down"></i>
+													<i class="fa fa-clock-o"></i>
 												</jstl:when>
 												<jstl:when test="${feePayment.type == 'Rejected'}">
-													<i class="glyphicon glyphicon-warning-sign"></i>
+													<i class="fa fa-thumbs-down"></i>
 												</jstl:when>
 											</jstl:choose>
 										</h5>

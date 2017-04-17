@@ -31,6 +31,72 @@
 	padding: 10%;
 }
 </style>
+<style>
+.date .dropdown-menu {
+	background-color: white ! important;
+}
+
+.paymentWrap {
+	padding: 50px;
+}
+
+.paymentWrap .paymentBtnGroup {
+	max-width: 500px;
+	margin: auto;
+}
+
+.paymentWrap .paymentBtnGroup .paymentMethod {
+	padding: 40px;
+	box-shadow: none;
+	position: relative;
+}
+
+.paymentWrap .paymentBtnGroup .paymentMethod.active {
+	outline: none !important;
+}
+
+.paymentWrap .paymentBtnGroup .paymentMethod.active .method {
+	border-color: #4cd264;
+	outline: none !important;
+	box-shadow: 0px 3px 22px 0px #7b7b7b;
+}
+
+.paymentWrap .paymentBtnGroup .paymentMethod .method {
+	position: absolute;
+	right: 0px;
+	top: -10px;
+	bottom: -10px;
+	left: 40px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	border: 2px solid transparent;
+	transition: all 0.5s;
+}
+
+.paymentWrap .paymentBtnGroup .paymentMethod .method.visa {
+	background-image: url("images/paypal_logo.png");
+}
+
+.paymentWrap .paymentBtnGroup .paymentMethod .method.master-card {
+	background-image: url("images/credit-card.png");
+}
+
+
+.paymentWrap .paymentBtnGroup .paymentMethod .method:hover {
+	border-color: #4cd264;
+	outline: none !important;
+}
+
+.paymentWrap .paymentBtnGroup .paymentMethod .method input[type="radio"]:checked+label {
+	border-color: #4cd264;
+	outline: none !important;
+}
+
+.formulario-sm {
+    padding: 0%;
+}
+</style>
 
 <div class="blue-barra">
 	<div class="container">
@@ -42,6 +108,42 @@
 		<!-- /row -->
 	</div>
 </div>
+
+<div class="container">
+	<div class="row">
+		<div style="margin:15px;" class="paymentCont">
+						<div class="headingWrap">
+								<h3 class="headingTop text-center"><spring:message code="feePayment.sentence" /></h3>	
+						</div>
+						<div class="paymentWrap">
+							<div class="btn-group paymentBtnGroup btn-group-justified" >
+					            <label class="btn paymentMethod">
+					            	<span class="method visa" style="opacity: 0.5;"></span>
+					                <input name="options" class="pago" type="radio"
+						value="paypal" style="visibility: hidden;" disabled/>
+					            </label>
+					            <label class="btn paymentMethod">
+					            	<span class="method master-card"></span>
+					                <input checked="checked" class="pago" name="options"
+						type="radio" value="creditcard" style="visibility: hidden;"/>
+					            </label>
+					        </div>        
+						</div>
+			
+		</div>
+		
+	</div>
+</div> 
+
+
+
+
+<div id="div2" style="display:none;">
+	PAYPAL
+</div>
+      
+      
+<div id="div1" style="display:;">
 <div class="container">
 	<div class="row formulario-sm">
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"
@@ -160,7 +262,7 @@
 
 					</button>
 
-					<acme:cancel code="feePayment.cancel" url="vehicle/user/list.do" />
+					<acme:cancel code="feePayment.cancel" url="" />
 					<a href="#aboutModal" data-toggle="modal" data-target="#myModal">
 				<span class="glyphicon glyphicon-info-sign"></span> <spring:message code="user.help" /></a>
 
@@ -185,3 +287,34 @@
 
 	</div>
 </div>
+</div>
+
+
+<script>
+
+$(function(){
+	$('div.product-chooser').not('.disabled').find('div.product-chooser-item').on('click', function(){
+		$(this).parent().parent().find('div.product-chooser-item').removeClass('selected');
+		$(this).addClass('selected');
+		$(this).find('input[type="radio"]').prop("checked", true);
+		
+	});
+});
+
+
+$(document).ready(function(){
+    $(".pago").click(function(evento){
+      
+        var valor = $(this).val();
+      
+        if(valor == 'creditcard'){
+        	$(this).addClass('selected');
+            $("#div1").css("display", "block");
+            $("#div2").css("display", "none");
+        }else{
+            $("#div1").css("display", "none");
+            $("#div2").css("display", "block");
+        }
+});
+});
+</script>
