@@ -28,6 +28,7 @@
 
 		<value>/views/about/tiles.xml</value>
 		<value>/views/userGeneralTerms/tiles.xml</value>
+		<value>/views/passwordRecovery/tiles.xml</value>
 
 	</util:list>
 
