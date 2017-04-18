@@ -28,7 +28,7 @@
 		
 		<value>/views/about/messages</value>
 		<value>/views/userGeneralTerms/messages</value>
-		
+		<value>/views/userCookies/messages</value>
 	</util:list>
 
 </beans>
