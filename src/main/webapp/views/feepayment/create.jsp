@@ -88,13 +88,21 @@
 	outline: none !important;
 }
 
-.paymentWrap .paymentBtnGroup .paymentMethod .method input[type="radio"]:checked+label {
-	border-color: #4cd264;
-	outline: none !important;
+.opaco{
+	opacity: 0.5;
 }
 
 .formulario-sm {
     padding: 0%;
+}
+
+
+.payPaypal{
+
+	display: block;
+    margin: 0 auto;
+    width: 12%;
+
 }
 </style>
 
@@ -115,14 +123,14 @@
 						<div class="headingWrap">
 								<h3 class="headingTop text-center"><spring:message code="feePayment.sentence" /></h3>	
 						</div>
-						<div class="paymentWrap">
+						<div class="paymentWrap ">
 							<div class="btn-group paymentBtnGroup btn-group-justified" >
-					            <label class="btn paymentMethod">
-					            	<span class="method visa" style="opacity: 0.5;"></span>
+					            <label class="btn paymentMethod partePaypal">
+					            	<span class="method visa"></span>
 					                <input name="options" class="pago" type="radio"
-						value="paypal" style="visibility: hidden;" disabled/>
+						value="paypal" style="visibility: hidden;"/>
 					            </label>
-					            <label class="btn paymentMethod">
+					            <label class="btn paymentMethod parteTarjeta">
 					            	<span class="method master-card"></span>
 					                <input checked="checked" class="pago" name="options"
 						type="radio" value="creditcard" style="visibility: hidden;"/>
@@ -133,17 +141,18 @@
 		</div>
 		
 	</div>
-</div> 
-
-
-
-
-<div id="div2" style="display:none;">
-	PAYPAL
 </div>
-      
-      
-<div id="div1" style="display:;">
+
+
+
+
+<div id="div2" style="display: none;">
+	<div style="margin-bottom:3%;">
+		<a class="payPaypal" href="https://paypal.com/myaccount" target="_blank"><img src="http://www.northportgirlslacrosse.com/sites/default/files/images/paypal-paynow-button-300x89.png"></a>
+	</div>
+</div>
+
+<div id="div1" style="display:none;">
 <div class="container">
 	<div class="row formulario-sm">
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"
@@ -304,17 +313,25 @@ $(function(){
 
 $(document).ready(function(){
     $(".pago").click(function(evento){
-      
+    	
         var valor = $(this).val();
-      
+        
         if(valor == 'creditcard'){
-        	$(this).addClass('selected');
             $("#div1").css("display", "block");
             $("#div2").css("display", "none");
+            $(".paymentMethod").click(function(evento){
+            	$(".partePaypal").addClass("opaco");
+            	$(".parteTarjeta").removeClass("opaco");
+            });
         }else{
             $("#div1").css("display", "none");
             $("#div2").css("display", "block");
+			$(".paymentMethod").click(function(evento){
+				$(".parteTarjeta").addClass("opaco");
+				$(".partePaypal").removeClass("opaco");
+            });
         }
-});
+	});
+	
 });
 </script>
