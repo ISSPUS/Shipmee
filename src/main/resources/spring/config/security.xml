@@ -59,6 +59,9 @@
 		<security:intercept-url pattern="/route/*" access="permitAll" />
 
 		
+		<security:intercept-url pattern="/user/payPal/**" access="permitAll" /> 
+		
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 
