@@ -96,7 +96,7 @@ public class ShipmentService {
 	
 	public void delete(Shipment shipment) {
 		Assert.notNull(shipment, "message.error.shipment.notNull");
-		Assert.isTrue(shipment.getId() != 0, "message.error.shipment.mustExists");
+		Assert.isTrue(shipment.getId() != 0, "message.error.shipment.mustExist");
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipment.user.delete");
 		Assert.isTrue(shipment.getCarried() == null, "message.error.shipment.user.delete.hasCarrier");
 		

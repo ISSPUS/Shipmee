@@ -52,7 +52,7 @@ public class ShipmentOfferService {
 		Shipment shipment;
 
 		shipment = shipmentService.findOne(shipmentId);
-		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExists");
+		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
 
 		res = new ShipmentOffer();
 		res.setShipment(shipment);
@@ -65,7 +65,7 @@ public class ShipmentOfferService {
 		ShipmentOffer res;
 		ShipmentOffer act;
 		act = this.findOne(shipmentOfferId);
-		Assert.notNull(act, "message.error.shipmentOffer.mustExists");
+		Assert.notNull(act, "message.error.shipmentOffer.mustExist");
 
 		res = this.create(act.getShipment().getId());
 		res.setAmount(act.getAmount());
@@ -78,7 +78,7 @@ public class ShipmentOfferService {
 		User actUser;
 		ShipmentOffer tmp;
 
-		Assert.notNull(input, "message.error.shipmentOffer.mustExists");
+		Assert.notNull(input, "message.error.shipmentOffer.mustExist");
 
 		actUser = userService.findByPrincipal();
 
@@ -186,13 +186,13 @@ public class ShipmentOfferService {
 	 */
 	public ShipmentOffer accept(int shipmentOfferId){
 		
-		Assert.isTrue(shipmentOfferId != 0, "message.error.shipmentOffer.mustExists");
+		Assert.isTrue(shipmentOfferId != 0, "message.error.shipmentOffer.mustExist");
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipmentOffer.onlyUser");
 		
 		ShipmentOffer shipmentOffer = findOne(shipmentOfferId);		
 		Shipment shipment = shipmentOffer.getShipment();
 		
-		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExists");
+		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
 		Assert.isTrue(shipmentService.checkDates(shipment), "message.error.shipmentOffer.shipment.checkDates");
 		Assert.isTrue(shipment.getDepartureTime().after(new Date()),"The Departure Time must be future");
 		Assert.isTrue(shipment.getMaximumArriveTime().after(new Date()),"message.error.shipmentOffer.shipment.maxArrivalTime.future");
@@ -242,13 +242,13 @@ public class ShipmentOfferService {
 	 */
 	public void deny(int shipmentOfferId){
 		
-		Assert.isTrue(shipmentOfferId != 0, "message.error.shipmentOffer.mustExists");
+		Assert.isTrue(shipmentOfferId != 0, "message.error.shipmentOffer.mustExist");
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipmentOffer.onlyUser");
 		
 		ShipmentOffer shipmentOffer = findOne(shipmentOfferId);		
 		Shipment shipment = shipmentOffer.getShipment();
 		
-		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExists");
+		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
 		Assert.isTrue(shipmentService.checkDates(shipment), "message.error.shipmentOffer.shipment.checkDates");
 		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "message.error.shipmentOffer.deny.user.own");
 

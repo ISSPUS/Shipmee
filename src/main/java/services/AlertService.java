@@ -65,7 +65,7 @@ public class AlertService {
 	
 	public void delete(Alert alert) {
 		Assert.notNull(alert, "message.error.alert.notNull");
-		Assert.isTrue(alert.getId() != 0, "message.error.alert.mustExists");
+		Assert.isTrue(alert.getId() != 0, "message.error.alert.mustExist");
 		Assert.isTrue(alert.getUser().equals(userService.findByPrincipal()), "message.error.alert.currentUser");
 						
 		alertRepository.delete(alert);
