@@ -19,6 +19,7 @@
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 <div class="blue-barra">
 	<div class="container">
@@ -296,6 +297,7 @@
 $(function() {
 	$('#datetimepicker1').datetimepicker({
 		viewMode : 'days',
+		locale: 'es',
 		format : 'DD/MM/YYYY'
 	});
 });
