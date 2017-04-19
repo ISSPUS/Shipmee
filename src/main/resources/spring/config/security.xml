@@ -59,6 +59,7 @@
 		<security:intercept-url pattern="/shipment/*" access="permitAll" />
 		<security:intercept-url pattern="/rating/*" access="permitAll" />
 		<security:intercept-url pattern="/route/*" access="permitAll" />
+		<security:intercept-url pattern="/passwordRecovery/*" access="permitAll" />
 
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
