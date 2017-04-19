@@ -52,7 +52,7 @@ public class RouteOfferService {
 		Route route;
 
 		route = routeService.findOne(routeId);
-		Assert.notNull(route, "message.error.routeOffer.route.mustExists");
+		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
 
 		res = new RouteOffer();
 		res.setRoute(route);
@@ -65,7 +65,7 @@ public class RouteOfferService {
 		RouteOffer res;
 		RouteOffer act;
 		act = this.findOne(routeOfferId);
-		Assert.notNull(act, "message.error.routeOffer.mustExists");
+		Assert.notNull(act, "message.error.routeOffer.mustExist");
 
 		res = this.create(act.getRoute().getId());
 		res.setAmount(act.getAmount());
@@ -78,7 +78,7 @@ public class RouteOfferService {
 		User actUser;
 		RouteOffer tmp;
 
-		Assert.notNull(input, "message.error.routeOffer.mustExists");
+		Assert.notNull(input, "message.error.routeOffer.mustExist");
 
 		actUser = userService.findByPrincipal();
 
@@ -176,13 +176,13 @@ public class RouteOfferService {
 	 */
 	public void accept(int routeOfferId){
 		
-		Assert.isTrue(routeOfferId != 0, "message.error.routeOffer.mustExists");
+		Assert.isTrue(routeOfferId != 0, "message.error.routeOffer.mustExist");
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.routeOffer.onlyUser");
 		
 		RouteOffer routeOffer = findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
 		
-		Assert.notNull(route, "message.error.routeOffer.route.mustExists");
+		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
 		Assert.isTrue(routeService.checkDates(route), "message.error.routeOffer.route.checkDates");
 		Assert.isTrue(route.getDepartureTime().after(new Date()), "message.error.routeOffer.route.departureTime.future");
 		Assert.isTrue(route.getArriveTime().after(new Date()), "message.error.routeOffer.route.arrivalTime.future");
@@ -209,13 +209,13 @@ public class RouteOfferService {
 	 */
 	public void deny(int routeOfferId){
 		
-		Assert.isTrue(routeOfferId != 0, "message.error.routeOffer.mustExists");
+		Assert.isTrue(routeOfferId != 0, "message.error.routeOffer.mustExist");
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.routeOffer.onlyUser");
 		
 		RouteOffer routeOffer = findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
 		
-		Assert.notNull(route, "message.error.routeOffer.route.mustExists");
+		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
 		Assert.isTrue(routeService.checkDates(route), "message.error.routeOffer.route.checkDates");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.routeOffer.deny.user.own");
 		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");

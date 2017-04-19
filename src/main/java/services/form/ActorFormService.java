@@ -175,13 +175,13 @@ public class ActorFormService {
 				}
 				if (imageDniUpload.getSize()>0){
 					try { 
-						nameImgDni = ImageUpload.subirImagen(imageDniUpload,ServerConfig.getPATH_UPLOAD_PRIVATE());
+						nameImgDni = ImageUpload.subirImagen(imageDniUpload,ServerConfig.getPATH_UPLOAD());
 
 					} catch (Exception e) {
 						
 					}
 				Assert.notNull(nameImgDni, "error.upload.image");
-				res.setDniPhoto(ServerConfig.getURL_IMAGE_PRIVATE() + nameImgDni);
+				res.setDniPhoto(ServerConfig.getURL_IMAGE() + nameImgDni);
 				}
 				
 

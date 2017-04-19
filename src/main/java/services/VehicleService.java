@@ -81,7 +81,7 @@ public class VehicleService {
 	
 	public void delete(Vehicle vehicle) {
 		Assert.notNull(vehicle, "message.error.vehicle.notNull");
-		Assert.isTrue(vehicle.getId() != 0, "message.error.vehicle.mustExists");
+		Assert.isTrue(vehicle.getId() != 0, "message.error.vehicle.mustExist");
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.vehicle.delete.user");
 
 		User user;

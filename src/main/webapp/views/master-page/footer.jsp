@@ -34,7 +34,8 @@
 		 			<p><spring:message code="master.page.about.foot.text" /></p>
 		 			
 		 			<p>
-		 				<a href="userGeneralTerms/info.do" target="blank"><spring:message code="cgu.title" /></a>
+		 				<a href="userGeneralTerms/info.do" target="blank"><spring:message code="cgu.title" /></a> |
+		 				<a href="userCookies/info.do" target="blank"><spring:message code="cookies.title" /></a>
 		 			</p>
 		 			
 		 			<div class="language text-sample">
@@ -71,18 +72,6 @@
 	 </div>
 	 
 	 
-	 
-	
-	<div class="text-center well-cookies"
-	id="infoCookies">
-		<p> <spring:message code="master.page.cookies.message"/>
-			<a href="userGeneralTerms/info.do"><spring:message code="master.page.cookies.here"/></a>.
-			<div class="text-center profile-userbuttons">
-			<button class="btn button-ok" onclick="hideInfoCookies()"><spring:message code="master.page.cookies.ok"/></button>
-			</div>
-		</p>
-	</div>
-
   </body>
   
   <script>

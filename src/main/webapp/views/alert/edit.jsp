@@ -18,6 +18,7 @@
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 	
 <style>
@@ -147,7 +148,10 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#datetimepicker1').datetimepicker({format: 'DD/MM/YYYY'});
-
+		$('#datetimepicker1').datetimepicker({
+			format: 'DD/MM/YYYY',
+			locale: 'es'
+			});
+			
 	});
 </script>

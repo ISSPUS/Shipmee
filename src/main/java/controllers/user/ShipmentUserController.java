@@ -73,6 +73,8 @@ public class ShipmentUserController extends AbstractController {
 		result.addObject("shipmentId", shipmentId);
 		result.addObject("p", page);
 		result.addObject("total_pages", ownShipments.getTotalPages());
+		result.addObject("urlPage", "shipment/user/list.do?page=");
+
 		
 		return result;
 	}

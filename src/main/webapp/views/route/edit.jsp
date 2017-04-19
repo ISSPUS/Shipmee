@@ -20,6 +20,7 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"
 	type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 <style>
 .date .dropdown-menu {
@@ -177,15 +178,22 @@
 
 
 <script type="text/javascript">
+
 	$(function() {
+		/*moment.locale('en', {
+			week : {
+				dow : 1
+			}
+		// Monday is the first day of the week
+		});*/
 		$('#datetimepicker1').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
-	});
-	$(function() {
 		$('#datetimepicker2').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
 	});
