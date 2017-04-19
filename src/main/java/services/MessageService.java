@@ -78,12 +78,14 @@ public class MessageService {
 		
 		result = messageRepository.save(message);
 		//log.trace(System.getenv("mailPassword"));
-		SendMail mail = (SendMail) context.getBean("sendMail");
-		mail.sendMail("shipmee.contact@gmail.com",
-    		   message.getRecipient().getEmail(),
-    		   "Shipmee - "+message.getSubject(),
-    		   message.getBody());
-
+		log.trace("Testing: "+System.getenv("testing"));
+		if(System.getenv("testing")==null || !System.getenv("testing").equals("true")){
+			SendMail mail = (SendMail) context.getBean("sendMail");
+			mail.sendMail("shipmee.contact@gmail.com",
+	    		   message.getRecipient().getEmail(),
+	    		   "Shipmee - "+message.getSubject(),
+	    		   message.getBody());
+		}
 		
 		return result;
 	}
