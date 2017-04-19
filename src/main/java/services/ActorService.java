@@ -17,7 +17,6 @@ import repositories.ActorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import security.UserAccountService;
 import utilities.SendMail;
 
 @Service
@@ -33,9 +32,6 @@ public class ActorService {
 	private ActorRepository actorRepository;
 	
 	// Supporting services ----------------------------------------------------
-	
-	@Autowired
-	private UserAccountService userAccountService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -148,7 +144,7 @@ public class ActorService {
 		
 		passwordResetToken = encoder.encodePassword(""+actor.getId()+i, null);
 		actor.setPasswordResetToken(passwordResetToken);
-		actor = actorRepository.save(actor);
+		actorRepository.save(actor);
 		
 		//log.trace(System.getenv("mailPassword"));
 		SendMail mail = (SendMail) context.getBean("sendMail");
@@ -165,15 +161,16 @@ public class ActorService {
 	}
 	
 	public Actor resetPassword(Actor actor, String password){
-		Assert.isTrue(actor!=null && password!=null & password!="");
-		UserAccount userAccount;
-		
+		Assert.isTrue(actor!=null && password!=null && password!="");
+		Md5PasswordEncoder encoder;
+		String hash;
+
+		encoder = new Md5PasswordEncoder();
+		hash = encoder.encodePassword(password, null);
+
 		actor.setPasswordResetToken("");
-		actor = actorRepository.save(actor);
-		
-		userAccount = actor.getUserAccount();
-		userAccount.setPassword(password);
-		userAccountService.save(userAccount);
+		actor.getUserAccount().setPassword(hash);
+		actorRepository.save(actor);
 	
 		return actor;
 	}

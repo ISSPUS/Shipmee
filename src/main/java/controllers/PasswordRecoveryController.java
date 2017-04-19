@@ -91,7 +91,7 @@ public class PasswordRecoveryController extends AbstractController {
 		
 		actor = actorService.findByPasswordResetToken(passwordResetToken);
 		
-		if(!password.equals("") && !confirmPassword.equals("") && password.equals(confirmPassword)){
+		if(!password.equals("") && !confirmPassword.equals("") && password.equals(confirmPassword) && password.length()>=5 && password.length()<=32){
 			try{
 				actorService.resetPassword(actor, password);
 				result = new ModelAndView("passwordRecovery/resultMessage");
@@ -107,6 +107,10 @@ public class PasswordRecoveryController extends AbstractController {
 				result = new ModelAndView("passwordRecovery/reset");
 				result.addObject("passwordResetToken", passwordResetToken);
 				result.addObject("message", "password.recovery.blank.password");
+			}else if(password.length()<5 || password.length()>32){
+				result = new ModelAndView("passwordRecovery/reset");
+				result.addObject("passwordResetToken", passwordResetToken);
+				result.addObject("message", "password.recovery.incorrect.size.password");
 			}else{
 				result = new ModelAndView("passwordRecovery/reset");
 				result.addObject("passwordResetToken", passwordResetToken);
