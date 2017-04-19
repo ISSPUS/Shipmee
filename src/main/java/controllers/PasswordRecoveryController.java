@@ -53,7 +53,7 @@ public class PasswordRecoveryController extends AbstractController {
 				result.addObject("resultMessage", "password.recovery.forgot.success");
 			}catch(Throwable oops){
 				log.error(oops);
-				result = new ModelAndView("passwordRecovery/reset");
+				result = new ModelAndView("passwordRecovery/forgot");
 				result.addObject("message", "password.recovery.commit.error");
 			}
 		}else{
