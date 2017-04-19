@@ -12,9 +12,9 @@ import services.ActorService;
 
 @Controller
 @RequestMapping("/passwordRecovery")
-public class PasswordRecovery extends AbstractController {
+public class PasswordRecoveryController extends AbstractController {
 	
-	static Logger log = Logger.getLogger(PasswordRecovery.class);
+	static Logger log = Logger.getLogger(PasswordRecoveryController.class);
 	
 	// Services ---------------------------------------------------------------
 
@@ -23,7 +23,7 @@ public class PasswordRecovery extends AbstractController {
 	
 	// Constructors -----------------------------------------------------------
 	
-	public PasswordRecovery() {
+	public PasswordRecoveryController() {
 		super();
 	}
 		
@@ -97,15 +97,19 @@ public class PasswordRecovery extends AbstractController {
 				result = new ModelAndView("passwordRecovery/resultMessage");
 				result.addObject("resultMessage", "password.recovery.reset.success");
 			}catch(Throwable oops){
+				log.error(oops);
 				result = new ModelAndView("passwordRecovery/reset");
+				result.addObject("passwordResetToken", passwordResetToken);
 				result.addObject("message", "password.recovery.commit.error");
 			}
 		}else{
 			if(password.equals("") || confirmPassword.equals("")){
-				result = new ModelAndView("user/reset");
+				result = new ModelAndView("passwordRecovery/reset");
+				result.addObject("passwordResetToken", passwordResetToken);
 				result.addObject("message", "password.recovery.blank.password");
 			}else{
-				result = new ModelAndView("user/reset");
+				result = new ModelAndView("passwordRecovery/reset");
+				result.addObject("passwordResetToken", passwordResetToken);
 				result.addObject("message", "password.recovery.same.password");
 			}
 		}

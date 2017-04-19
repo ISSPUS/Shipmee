@@ -33,7 +33,7 @@
 					<div class="input-group">
 						<span class="input-group-addon"> <i
 							class="glyphicon glyphicon-user"></i></span>
-							<input class="form-control" name="username" type="text" required>
+							<input class="form-control" name="username" type="text" placeholder="<spring:message code="password.recovery.user.placeholder" />" required>
 					</div>
 					<br />
 					<div class="text-center">
