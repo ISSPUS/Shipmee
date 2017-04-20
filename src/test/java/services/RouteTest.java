@@ -360,14 +360,16 @@ public class RouteTest extends AbstractTest {
 	public void positiveListRoute1() {
 		authenticate("user1");
 	
-		Collection<Route> routes;
+		Page<Route> routes;
 		Route route, routeResult;
-				
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);		
 		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
-		routes = routeService.searchRoute("Almeria", "Sevilla", "12/03/2017", "15:00", "Both", "M");
+		routes = routeService.searchRoute("Almeria", "Sevilla", "12/03/2017", "15:00", "Both", "M",pageable);
 		routeResult = routes.iterator().next();
 
-		Assert.isTrue(routes.size() == 1);
+		Assert.isTrue(routes.getContent().size() == 1);
 		Assert.isTrue(route.getId() == routeResult.getId());
 		
 		
@@ -382,19 +384,21 @@ public class RouteTest extends AbstractTest {
 	public void positiveListRoute2() {
 		authenticate("user1");
 	
-		Collection<Route> routes;
+		Page<Route> routes;
 		Route route1, route2;
-				
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);		
 		route1 = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
 		route2 = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
-		routes = routeService.searchRoute("Almeria", "Sevilla", "12/07/2017", "15:00", "Both", "M");
+		routes = routeService.searchRoute("Almeria", "Sevilla", "12/07/2017", "15:00", "Both", "M",pageable);
 
 		for(Route r : routes) {
 			if(r.getId() != route1.getId() && r.getId() != route2.getId())
 				Assert.isTrue(false);
 		}
 		
-		Assert.isTrue(routes.size() == 2);
+		Assert.isTrue(routes.getContent().size() == 2);
 		
 		
 		unauthenticate();
@@ -408,11 +412,13 @@ public class RouteTest extends AbstractTest {
 	public void positiveListRoute3() {
 		authenticate("user1");
 	
-		Collection<Route> routes;
-				
-		routes = routeService.searchRoute("Almeria", "Sevilla", "12/03/2017", "23:59", null, null);
+		Page<Route> routes;
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);				
+		routes = routeService.searchRoute("Almeria", "Sevilla", "12/03/2017", "23:59", null, null,pageable);
 		
-		Assert.isTrue(routes.isEmpty());
+		Assert.isTrue(routes.getContent().isEmpty());
 		
 		
 		unauthenticate();
@@ -425,8 +431,10 @@ public class RouteTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeListRoute1() {
 		authenticate("user1");
-					
-		routeService.searchRoute("", "Sevilla", "12/03/2017", "23:59", null, null);
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);
+		routeService.searchRoute("", "Sevilla", "12/03/2017", "23:59", null, null,pageable);
 				
 		unauthenticate();
 	}
@@ -438,8 +446,10 @@ public class RouteTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeListRoute2() {
 		authenticate("user1");
-					
-		routeService.searchRoute("Almeria", "", "12/03/2017", "23:59", null, null);
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);			
+		routeService.searchRoute("Almeria", "", "12/03/2017", "23:59", null, null,pageable);
 				
 		unauthenticate();
 	}
