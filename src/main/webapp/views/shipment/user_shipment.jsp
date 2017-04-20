@@ -235,7 +235,7 @@
 					lastClass : 'last',
 					firstClass : 'first'
 				}).on('page', function(event, num) {
-					window.location.href = "${urlPage}" + num + "";
+					window.location.href = "hola" + num + "";
 					page = 1
 				});
 			</script>

@@ -194,9 +194,9 @@ public class RouteService {
 
 	// Other business methods -------------------------------------------------
 	
-	public Collection<Route> searchRoute(String origin, String destination, String date, String hour, String envelope, String itemSize){
+	public Page<Route> searchRoute(String origin, String destination, String date, String hour, String envelope, String itemSize,Pageable page){
 		Assert.isTrue(origin != "" && destination != "");
-		Collection<Route> result;
+		Page<Route> result;
 		SimpleDateFormat formatter;
 		Date time;
 		Date finalDate;
@@ -217,7 +217,7 @@ public class RouteService {
 		}
 		
 		log.trace(origin+" - "+destination+" at "+finalDate);
-		result = routeRepository.searchRoute(origin, destination, finalDate, time, envelope, itemSize);
+		result = routeRepository.searchRoute(origin, destination, finalDate, time, envelope, itemSize,page);
 		log.trace(result);
 		return result;
 	}

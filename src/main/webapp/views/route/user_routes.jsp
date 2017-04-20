@@ -226,7 +226,7 @@
 
 		</div>
 
-		<div id="c" class="copyright">
+		<div id="pagination" class="copyright">
 		
 			<script>
 				$('#pagination').bootpag({
