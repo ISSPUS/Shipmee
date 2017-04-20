@@ -70,9 +70,9 @@ public class ShipmentService {
 	}
 	
 	public Shipment save(Shipment shipment) {
-		Assert.notNull(shipment);
-		Assert.isTrue(checkDates(shipment), "The departure date must be greater than the current date and the arrival date greater than the departure date.");
-		Assert.isTrue(checkItemEnvelope(shipment.getItemEnvelope()), "ItemEnvelope must be open or closed.");
+		Assert.notNull(shipment, "message.error.shipment.notNull");
+		Assert.isTrue(checkDates(shipment), "message.error.shipment.checkDates");
+		Assert.isTrue(checkItemEnvelope(shipment.getItemEnvelope()), "message.error.shipment.checkItemEnvelope");
 		
 		User user;
 		Date date;
@@ -95,17 +95,17 @@ public class ShipmentService {
 	}
 	
 	public void delete(Shipment shipment) {
-		Assert.notNull(shipment);
-		Assert.isTrue(shipment.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only an user can delete shipments");
-		Assert.isTrue(shipment.getCarried() == null, "An user cannot delete a shipment if it has a carrier");
+		Assert.notNull(shipment, "message.error.shipment.notNull");
+		Assert.isTrue(shipment.getId() != 0, "message.error.shipment.mustExist");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipment.user.delete");
+		Assert.isTrue(shipment.getCarried() == null, "message.error.shipment.user.delete.hasCarrier");
 		
 		User user;
 		Collection<ShipmentOffer> shipmentOffers;
 		
 		user = userService.findByPrincipal();
 
-		Assert.isTrue(user.getId() == shipment.getCreator().getId(), "Only the user who created the shipment can delete it");
+		Assert.isTrue(user.getId() == shipment.getCreator().getId(), "message.error.shipment.user.delete.own");
 		
 		shipmentOffers = shipmentOfferService.findAllByShipmentId(shipment.getId());
 		for(ShipmentOffer so : shipmentOffers) {

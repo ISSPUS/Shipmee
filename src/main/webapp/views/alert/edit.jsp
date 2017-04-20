@@ -18,6 +18,7 @@
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 	
 <style>
@@ -49,6 +50,12 @@
 			<form:hidden path="id" />
 			<form:hidden path="version" />
 			<form:hidden path="user" />
+			
+			<div class=" text-center modal-content" style="padding:1%; border-color:#f1f3fa;">
+				<div>
+					<span><spring:message code="alert.info"/></span>
+				</div>
+			</div><br/>
 			
 			<div class="form-group">
 				<form:label path="origin" class="control-label col-md-2"
@@ -111,9 +118,18 @@
 				</div>
 			</div>
 			
+			<jstl:if test="${messageError != null}">
+				<div class="error" style="text-align: center;">
+					<spring:message code="${messageError}"/>
+					<br/><br/>
+				</div>
+			</jstl:if>		
 						<!-- Action buttons -->
 			<div class="text-center profile-userbuttons">
-			<acme:submit name="save" code="alert.save" />
+			<button type="submit" name="save" class="btn  btn-primary">
+				<span class="fa fa-plus-circle"></span>
+				<spring:message code="alert.save" />
+			</button>
 
 			<jstl:if test="${alert.id != 0}">
 				<acme:submit_confirm name="delete" code="alert.delete"
@@ -122,6 +138,7 @@
 
 			<acme:cancel code="alert.cancel" url="alert/user/list.do" />
 			</div>
+			
 		</form:form>
 
 
@@ -131,7 +148,10 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#datetimepicker1').datetimepicker({format: 'DD/MM/YYYY'});
-
+		$('#datetimepicker1').datetimepicker({
+			format: 'DD/MM/YYYY',
+			locale: 'es'
+			});
+			
 	});
 </script>

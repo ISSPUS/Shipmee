@@ -4,10 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
 
 import domain.Shipment;
 import domain.User;
@@ -20,6 +22,8 @@ import utilities.ServerConfig;
 @Service
 @Transactional
 public class ShipmentFormService {
+
+	static Logger log = Logger.getLogger(ShipmentFormService.class);
 
 	// Supporting services ----------------------------------------------------
 
@@ -68,17 +72,19 @@ public class ShipmentFormService {
 			result = shipmentService.create();
 			String imageName = null;
 			try {
-				imageName = ImageUpload.subirImagen(shipmentForm.getImagen(),ServerConfig.PATH_UPLOAD);
+				log.trace("ruta extraida de variable del entorno:" + ServerConfig.getPATH_UPLOAD());
+				imageName = ImageUpload.subirImagen(shipmentForm.getImagen(),ServerConfig.getPATH_UPLOAD());
 			} catch (Exception e) {
+				log.error(e.getMessage());
 			}
-
+			
 			result.setOrigin(shipmentForm.getOrigin());
 			result.setDestination(shipmentForm.getDestination());
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			Assert.notNull(imageName,"image.error.upload");
-			result.setItemPicture(ServerConfig.URL_IMAGE+imageName);
+			Assert.notNull(imageName,"message.error.imageUpload.notNull");
+			result.setItemPicture(ServerConfig.getURL_IMAGE()+imageName);
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);			
@@ -89,7 +95,7 @@ public class ShipmentFormService {
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			result.setItemPicture(ServerConfig.URL_IMAGE+shipmentForm.getImagen().getName());
+			result.setItemPicture(ServerConfig.getURL_IMAGE()+shipmentForm.getImagen().getName());
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);

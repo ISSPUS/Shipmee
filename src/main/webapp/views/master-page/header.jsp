@@ -90,6 +90,25 @@
 									href="complaint/administrator/list.do?type=${omitted}&page=1"><jstl:out
 											value="${omitted}" /></a></li>
 							</ul></li>
+							
+						<spring:message code="feePayment.accepted" var="accepted" />
+						<spring:message code="feePayment.pending" var="pending" />
+						<spring:message code="feepayment.rejected" var="rejected" />
+						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
+							data-toggle="dropdown"><spring:message
+									code="master.page.feepayments" /><b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a
+									href="feepayment/administrator/list.do?type=${accepted}&page=1"><jstl:out
+											value="${accepted}" /></a></li>
+								<li><a
+									href="feepayment/administrator/list.do?type=${pending}&page=1"><jstl:out
+											value="${pending}" /></a></li>
+								<li><a
+									href="feepayment/administrator/list.do?type=${rejected}&page=1"><jstl:out
+											value="${rejected}" /></a></li>
+							</ul></li>
+							
 						<li><a href="user/administrator/list.do"><spring:message
 								code="master.page.users" /></a></li>
 					</security:authorize>
@@ -116,6 +135,8 @@
 							
 									<li><a href="user/profile.do"><spring:message
 												code="master.page.info" /></a></li>
+									<li><a href="feepayment/user/list.do?page=1"><spring:message
+												code="master.page.feepayments" /></a></li>
 									<li><a href="vehicle/user/list.do"><spring:message
 												code="master.page.vehicles" /></a></li>
 									<li><a href="alert/user/list.do"><spring:message

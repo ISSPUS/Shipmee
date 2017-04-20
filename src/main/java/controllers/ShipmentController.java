@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import domain.Shipment;
 import domain.User;
+import services.ActorService;
 import services.ShipmentService;
 import services.UserService;
 
@@ -28,6 +29,9 @@ public class ShipmentController extends AbstractController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ActorService actorService;
 	// Constructors -----------------------------------------------------------
 	
 	public ShipmentController() {
@@ -44,15 +48,22 @@ public class ShipmentController extends AbstractController {
 		Page<Shipment> shipments;
 		Pageable pageable;
 		User user;
+		User currentUser;
 
 		pageable = new PageRequest(page - 1, 5);
 
 		shipments = shipmentService.findAllByUserId(userId, pageable);
 		user = userService.findOne(userId);
+		currentUser = null;
+		
+		if(actorService.checkLogin()){
+			currentUser = userService.findByPrincipal();
+		}
 				
 		result = new ModelAndView("shipment/user");
 		result.addObject("shipments", shipments.getContent());
 		result.addObject("user", user);
+		result.addObject("currentUser", currentUser);
 		result.addObject("p", page);
 		result.addObject("total_pages", shipments.getTotalPages());
 
@@ -88,8 +99,14 @@ public class ShipmentController extends AbstractController {
 		private ModelAndView createListModelAndView(int shipmentId){
 			ModelAndView result;
 			Shipment shipment;
+			User currentUser;
 			
 			shipment = shipmentService.findOne(shipmentId);
+			currentUser = null;
+			
+			if(actorService.checkLogin()){
+				currentUser = userService.findByPrincipal();
+			}
 			
 			String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(shipment.getDepartureTime());
 			String departureTimeHour = new SimpleDateFormat("HH':'mm").format(shipment.getDepartureTime());
@@ -104,8 +121,7 @@ public class ShipmentController extends AbstractController {
 			result.addObject("departureTime_hour", departureTimeHour);
 			result.addObject("maximumArriveTime", maximumArriveTime);
 			result.addObject("maximumArriveTime_hour", maximumArriveTimeHour);
-
-			
+			result.addObject("user", currentUser);
 
 			return result;
 		}

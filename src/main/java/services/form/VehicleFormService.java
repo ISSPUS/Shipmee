@@ -52,7 +52,7 @@ public class VehicleFormService {
 		
 		if (imageVehicleUpload.getSize()>0){
 			try {
-				nameImgVehicle = ImageUpload.subirImagen(imageVehicleUpload,ServerConfig.PATH_UPLOAD);
+				nameImgVehicle = ImageUpload.subirImagen(imageVehicleUpload,ServerConfig.getPATH_UPLOAD());
 
 			} catch (Exception e) {
 			
@@ -66,9 +66,9 @@ public class VehicleFormService {
 			result.setColor(vehicleForm.getColor());
 			result.setModel(vehicleForm.getModel());
 			
-			Assert.notNull(nameImgVehicle, "error.upload.image");
+			Assert.notNull(nameImgVehicle, "message.error.imageUpload.notNull");
 
-			result.setPicture(ServerConfig.URL_IMAGE+nameImgVehicle);
+			result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
 			
 			
 		} else if(vehicleForm.getVehicleId() != 0) {			
@@ -79,9 +79,9 @@ public class VehicleFormService {
 			result.setColor(vehicleForm.getColor());
 			result.setModel(vehicleForm.getModel());
 			
-			Assert.notNull(nameImgVehicle, "error.upload.image");
+			Assert.notNull(nameImgVehicle, "message.error.imageUpload.notNull");
 
-			result.setPicture(ServerConfig.URL_IMAGE+nameImgVehicle);
+			result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
 
 			result.setUser(user);
 

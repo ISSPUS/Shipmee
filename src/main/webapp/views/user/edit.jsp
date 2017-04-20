@@ -19,6 +19,7 @@
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 <div class="blue-barra">
 	<div class="container">
@@ -267,7 +268,10 @@
 			<!-- Buttons -->
 			<div class="form-group text-center profile-userbuttons">
 				<!-- Action buttons -->
-				<acme:submit name="save" code="rating.save" />
+				<button type="submit" name="save" class="btn  btn-primary">
+					<span class="glyphicon glyphicon-floppy-disk"></span>
+					<spring:message code="rating.save" />
+				</button>
 				<jstl:choose>
 					<jstl:when test="${actorForm.id != 0}">
 						<acme:cancel code="rating.cancel" url="user/profile.do?userId=${actorForm.id}" />
@@ -293,6 +297,7 @@
 $(function() {
 	$('#datetimepicker1').datetimepicker({
 		viewMode : 'days',
+		locale: 'es',
 		format : 'DD/MM/YYYY'
 	});
 });

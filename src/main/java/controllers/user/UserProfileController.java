@@ -56,7 +56,7 @@ public class UserProfileController extends AbstractController {
 		ModelAndView result;
 		User user;
 		Boolean isPrincipal = false;
-		int shipmentsCreated,routesCreated,ratingsCreated;
+		int shipmentsCreated,routesCreated,ratingsCreated, ratingsReceived;
 		/*VARIABLES PARA LISTA DE COMENTARIOS */
 		Page<Rating> ratings;
 		Pageable pageable;
@@ -83,12 +83,14 @@ public class UserProfileController extends AbstractController {
 		shipmentsCreated   = shipmentService.countShipmentCreatedByUserId(user);
 		routesCreated   = routeService.countRouteCreatedByUserId(user);
 		ratingsCreated = ratingService.countRatingCreatedByUserId(user);
+		ratingsReceived = ratingService.countRatingReceivedByUserId(user);
 		
 		result = new ModelAndView("user/profile");
 		result.addObject("isPrincipal", isPrincipal);
 		result.addObject("routesCreated", routesCreated);
 		result.addObject("shipmentsCreated", shipmentsCreated);
 		result.addObject("ratingsCreated", ratingsCreated);
+		result.addObject("ratingsReceived", ratingsReceived);
 
 		result.addObject("user", user);
 		if(!isPrincipal && actorService.checkAuthority("USER")){

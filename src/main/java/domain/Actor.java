@@ -29,7 +29,7 @@ public abstract class Actor extends DomainEntity {
 	private String phone;
 	private String dni;
 	private String photo;
-
+	private String passwordResetToken;
 	
 	@NotBlank
 	@NotNull
@@ -90,6 +90,14 @@ public abstract class Actor extends DomainEntity {
 	}
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+	
+	@NotNull
+	public String getPasswordResetToken() {
+		return passwordResetToken;
+	}
+	public void setPasswordResetToken(String passwordResetToken) {
+		this.passwordResetToken = passwordResetToken;
 	}
 	
 	// Relationships ----------------------------------------------------------

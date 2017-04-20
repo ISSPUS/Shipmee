@@ -20,7 +20,7 @@
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
 <script type="text/javascript" src="scripts/jmenu.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdAr_iNZqmWFlGDqD6q5JFcG-sN7J6RpU&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdAr_iNZqmWFlGDqD6q5JFcG-sN7J6RpU&libraries=places&components=country:es"></script>
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="styles/assets/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="styles/assets/css/style-self.css"  type="text/css">
     <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
+    <link rel="stylesheet" href="styles/common.css" type="text/css">
 
 	 <!-- Bootstrap core JavaScript
     ================================================== -->

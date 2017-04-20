@@ -1,6 +1,7 @@
 package controllers.moderator;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,9 @@ import services.ComplaintService;
 @Controller
 @RequestMapping("/complaint/moderator")
 public class ComplaintModeratorController extends AbstractController {
+	
+	static Logger log = Logger.getLogger(ComplaintModeratorController.class);
+
 	
 	// Services ---------------------------------------------------------------
 	
@@ -57,6 +61,7 @@ public class ComplaintModeratorController extends AbstractController {
 	public ModelAndView save(@RequestParam int complaintId, @RequestParam String type) {
 		ModelAndView result;
 		Complaint complaint;
+		String messageError;
 
 		try {
 			complaint = complaintService.findOne(complaintId);
@@ -65,7 +70,13 @@ public class ComplaintModeratorController extends AbstractController {
 
 			result = new ModelAndView("redirect:list.do?page=1");
 		} catch (Throwable oops) {
+			log.error(oops.getMessage());
+			messageError = "complaint.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError=oops.getMessage();
+			}
 			result = new ModelAndView("redirect:list.do?page=1");
+			result.addObject("message", messageError);
 		}
 
 		return result;

@@ -28,6 +28,7 @@
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 <style>
 
@@ -269,9 +270,12 @@ function initialize() {
 
 	var input = document.getElementById('origin');
 	var input2 = document.getElementById('destination');
-	var autocomplete = new google.maps.places.Autocomplete(input);
-
-	var autocomplete = new google.maps.places.Autocomplete(input2);
+	var options = {
+		types: ['(cities)'],
+		componentRestrictions: {country: 'es'}
+	};
+	var autocomplete = new google.maps.places.Autocomplete(input, options);
+	var autocomplete = new google.maps.places.Autocomplete(input2, options);
 	}
 	
 	
@@ -281,12 +285,10 @@ function initialize() {
 	$(function() {
 		$('#datetimepicker1').datetimepicker({
 			viewMode : 'days',
-			format : 'DD/MM/YYYY'
+			format : 'DD/MM/YYYY',
+			locale: 'es'
+
 		});
 	});
 	
-	
-      $(function () {
-          $('#datetimepicker2').datetimepicker();
-      });
 </script>

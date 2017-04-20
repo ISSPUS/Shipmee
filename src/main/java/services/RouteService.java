@@ -74,13 +74,13 @@ public class RouteService {
 	}
 	
 	public Route save(Route route) {
-		Assert.notNull(route);
-		Assert.isTrue(route.getArriveTime().after(new Date()), "You cannot save a route that is in the past.");
-		Assert.isTrue(checkDates(route), "The departure date must be greater than the current date and the arrival date greater than the departure date.");
-		Assert.isTrue(checkItemEnvelope(route.getItemEnvelope()), "ItemEnvelope must be open, closed or both.");
+		Assert.notNull(route, "message.error.route.notNull");
+		Assert.isTrue(route.getArriveTime().after(new Date()), "message.error.route.past");
+		Assert.isTrue(checkDates(route), "message.error.route.checkDates");
+		Assert.isTrue(checkItemEnvelope(route.getItemEnvelope()), "message.error.route.checkItemEnvelope");
 
 		if(route.getVehicle() != null) {
-			Assert.isTrue(route.getCreator().getId() == route.getVehicle().getUser().getId(), "Both Ids must be the same.");
+			Assert.isTrue(route.getCreator().getId() == route.getVehicle().getUser().getId(), "message.error.route.vehicle");
 		}
 
 		User user;
@@ -89,8 +89,8 @@ public class RouteService {
 		user = userService.findByPrincipal();
 		date = new Date();
 		
-		Assert.isTrue(user.getId() == route.getCreator().getId(), "Only the user who created the route can save it");
-		Assert.isTrue(user.getIsVerified() == true, "The creator must be verified.");
+		Assert.isTrue(user.getId() == route.getCreator().getId(), "message.error.route.save.user.own");
+		Assert.isTrue(user.getIsVerified() == true, "message.error.route.save.user.verified");
 		
 		if(route.getId() == 0) {
 			route.setCreator(user);
@@ -109,9 +109,9 @@ public class RouteService {
 	}
 	
 	public void delete(Route route) {
-		Assert.notNull(route);
-		Assert.isTrue(route.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only an user can delete routes");
+		Assert.notNull(route, "message.error.route.notNull");
+		Assert.isTrue(route.getId() != 0, "message.error.route.mustExist");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.route.delete.user");
 
 		User user;
 		Collection<User> users;
@@ -121,8 +121,8 @@ public class RouteService {
 		user = userService.findByPrincipal();
 		users = userService.findAllByRoutePurchased(route.getId());
 
-		Assert.isTrue(user.getId() == route.getCreator().getId(), "Only the user who created the route can delete it");
-		Assert.isTrue(users.isEmpty(), "User can not delete a route if he has purchasers");
+		Assert.isTrue(user.getId() == route.getCreator().getId(), "message.error.route.delete.user.own");
+		Assert.isTrue(users.isEmpty(), "message.error.route.delete.noPurchasers");
 
 		sizePrices = sizePriceService.findAllByRouteId(route.getId());
 		for(SizePrice s : sizePrices) {

@@ -26,9 +26,10 @@
 		<div class="row">
 			<h3>
 				<spring:message code="routeOffer.list.for" />
-				<a href="route/display.do?routeId=${route.id}"> <jstl:out
-						value="${route.origin}" /> -> <jstl:out
-						value="${route.destination}" />
+				<a href="route/display.do?routeId=${route.id}">
+					<jstl:out value="${route.origin}" />
+					<jstl:if test="${route != null}"> -> </jstl:if>
+					<jstl:out value="${route.destination}" />
 				</a>
 			</h3>
 		</div>
@@ -43,15 +44,22 @@
 				style="float: none; margin: 0 auto;">
 				<div class="row perfil-info-offer">
 					<div class="img-perfil-offer col-xs-4 col-sm-3 col-lg-2">
-						<img
-							src="https://www.beautifulpeople.com/cdn/beautifulpeople/images/default_profile/signup_female.png"
-							class="img-thumbnail  profile-offer-img ">
+						<jstl:if test="${routeOfferRow.user.photo == null}">
+							<img
+								src="https://www.beautifulpeople.com/cdn/beautifulpeople/images/default_profile/signup_female.png"
+								class="img-thumbnail  profile-offer-img ">						
+						</jstl:if>
+						<jstl:if test="${routeOfferRow.user.photo != null}">
+							<img
+								src="${routeOfferRow.user.photo}"
+								class="img-thumbnail  profile-offer-img ">					
+						</jstl:if>
 					</div>
 					<div class="data-perfil col-xs-8 col-sm-4">
 						<div class="col-xs-12">
 							<h4>
 								<spring:message code="shipmentOffer.list.by" />
-								<a href="user/user/view.do?userId=${routeOfferRow.user.id}">
+								<a href="user/profile.do?userId=${routeOfferRow.user.id}">
 									<jstl:out value="${routeOfferRow.user.name}" />
 								</a>
 							</h4>

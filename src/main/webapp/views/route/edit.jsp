@@ -20,6 +20,7 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"
 	type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 <style>
 .date .dropdown-menu {
@@ -152,7 +153,10 @@
 				</div>
 				<!-- Action buttons -->
 				<div class="text-center profile-userbuttons">
-					<acme:submit name="save" code="route.save" />
+					<button type="submit" name="save" class="btn  btn-primary">
+						<span class="glyphicon glyphicon-floppy-disk"></span>
+						<spring:message code="route.save" />
+					</button>
 
 					<jstl:if test="${routeForm.routeId != 0}">
 						<acme:submit_confirm name="delete" code="route.delete"
@@ -174,15 +178,22 @@
 
 
 <script type="text/javascript">
+
 	$(function() {
+		/*moment.locale('en', {
+			week : {
+				dow : 1
+			}
+		// Monday is the first day of the week
+		});*/
 		$('#datetimepicker1').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
-	});
-	$(function() {
 		$('#datetimepicker2').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
 	});

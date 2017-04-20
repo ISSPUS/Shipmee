@@ -24,10 +24,14 @@
 		<value>/views/user/messages</value>
 		<value>/views/rating/messages</value>
 		<value>/views/complaint/messages</value>
+		<value>/views/feepayment/messages</value>
+		<value>/views/fundTransferPreference/messages</value>
 		
 		<value>/views/about/messages</value>
 		<value>/views/userGeneralTerms/messages</value>
-		
+		<value>/views/passwordRecovery/messages</value>
+		<value>/views/userCookies/messages</value>
+
 	</util:list>
 
 </beans>

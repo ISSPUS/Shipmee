@@ -91,6 +91,12 @@
 .review-block hr {
 	border: 1px solid #e4e4e4 !important;
 }
+
+
+.profile-user{
+	width: 95%;
+}
+
 </style>
 
 <security:authorize access="hasRole('ADMIN')" var="isAdmin" />
@@ -146,11 +152,6 @@
 
 						</small>
 					</h3>
-					<span><strong><spring:message
-								code="user.achievements" />: </strong></span> <span class="label label-warning">Nuevo</span>
-					<span class="label label-info">Primer envío</span> <span
-						class="label label-info">Primer viaje</span> <span
-						class="label label-success">Experimentado</span>
 					<hr>
 
 					<div class="titulo-apartado">
@@ -172,11 +173,12 @@
 						</div>
 						<div class="datos text-left">
 							<span> <strong><spring:message
-										code="user.username" />: </strong> <security:authentication
-									property="principal.username" /></span> <br /> <span> <strong><spring:message
+										code="user.username" />: </strong> <spring:message text= "${user.userAccount.username}"/> </span> <br /> <span> <strong><spring:message
 										code="user.email" />: </strong>${user.email}</span> <br /> <span> <strong><spring:message
 										code="user.phone" />: </strong>${user.phone}</span> <br /> <span> <strong><spring:message
-										code="user.dni" />: </strong>${user.dni}</span>
+										code="user.dni" />: </strong>${user.dni}</span><br /> <span> <strong><spring:message
+										code="user.fundTransferPreference" /></strong> (<a href="fundTransferPreference/user/edit.do"><spring:message
+										code="user.edit" /></a>)</span>
 						</div>
 						<div class="datos text-center">
 							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
@@ -220,9 +222,9 @@
 						</p>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-xs-4 emphasis" id="clickeable"
-						onclick="location.href='shipment/list.do?userId=${user.id}';">
+						onclick="location.href='rating/list.do?userReceivedId=${user.id}';">
 						<h2>
-							<strong> <jstl:out value=" ${ratingsCreated}" />
+							<strong> <jstl:out value=" ${ratingsReceived}" />
 							</strong>
 						</h2>
 						<p>

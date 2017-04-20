@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script type="text/javascript" src="scripts/moment.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
+<script type="text/javascript" src="scripts/es.js"></script>
+
 <head>
 
 
@@ -121,12 +123,18 @@
 
 	var input = document.getElementById('origin');
 	var input2 = document.getElementById('destination');
-	var autocomplete = new google.maps.places.Autocomplete(input);
-	var autocomplete = new google.maps.places.Autocomplete(input2);
+	var options = {
+		types: ['(cities)'],
+		componentRestrictions: {country: 'es'}
+	};
+	var autocomplete = new google.maps.places.Autocomplete(input, options);
+	var autocomplete = new google.maps.places.Autocomplete(input2, options);
 	}
 	
 	
 	google.maps.event.addDomListener(window, 'load', initialize);
+	
+	
 	
 	
 
@@ -159,6 +167,7 @@ $('.btn-toggle').click(function() {
 $(function() {
 	$('#datetimepicker1').datetimepicker({
 		viewMode : 'days',
+		locale: 'es',
 		format : 'DD/MM/YYYY'
 	});
 });

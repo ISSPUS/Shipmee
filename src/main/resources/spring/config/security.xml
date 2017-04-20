@@ -44,19 +44,24 @@
 		<security:intercept-url pattern="/alert/user/*" access="hasRole('USER')" />
 		<security:intercept-url pattern="/user/user/*" access="hasRole('USER')" />
 		<security:intercept-url pattern="/complaint/user/*" access="hasRole('USER')" />
-		
+		<security:intercept-url pattern="/feepayment/user/*" access="hasRole('USER')" />
+		<security:intercept-url pattern="/fundTransferPreference/user/*" access="hasRole('USER')" />
+
 		<security:intercept-url pattern="/complaint/moderator/*" access="hasRole('MODERATOR')" />
 		
 		<security:intercept-url pattern="/complaint/administrator/*" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/user/administrator/*" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/feepayment/administrator/*" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/user/*" access="permitAll" />
 
 		<security:intercept-url pattern="/about/info.do" access="permitAll" /> 
 		<security:intercept-url pattern="/userGeneralTerms/info.do" access="permitAll"/>
+		<security:intercept-url pattern="/userCookies/info.do" access="permitAll"/>
 		<security:intercept-url pattern="/shipment/*" access="permitAll" />
 		<security:intercept-url pattern="/rating/*" access="permitAll" />
 		<security:intercept-url pattern="/route/*" access="permitAll" />
+		<security:intercept-url pattern="/passwordRecovery/*" access="permitAll" />
 
 		
 		<security:intercept-url pattern="/user/payPal/**" access="permitAll" /> 

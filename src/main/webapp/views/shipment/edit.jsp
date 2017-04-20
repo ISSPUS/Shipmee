@@ -18,6 +18,7 @@
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 <style>
 .date .dropdown-menu {
@@ -211,7 +212,10 @@
 			<!-- Action buttons -->
 			
 			<div class="text-center profile-userbuttons">
-			<acme:submit name="save" code="shipment.save" />
+			<button type="submit" name="save" class="btn  btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				<spring:message code="shipment.save" />
+			</button>
 
 			<jstl:if test="${shipmentForm.shipmentId != 0}">
 				<button type="submit" name="delete" class="btn btn-danger"
@@ -231,13 +235,13 @@
 <script type="text/javascript">
 	$(function() {
 		$('#datetimepicker1').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
-	});
-	$(function() {
 		$('#datetimepicker2').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
 	});

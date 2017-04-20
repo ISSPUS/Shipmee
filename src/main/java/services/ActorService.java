@@ -1,8 +1,13 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -12,10 +17,14 @@ import repositories.ActorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import utilities.SendMail;
 
 @Service
 @Transactional
 public class ActorService {
+	
+	static Logger log = Logger.getLogger(ShipmentService.class);
+	private ApplicationContext context = new ClassPathXmlApplicationContext("Mail.xml");
 
 	// Managed repository -----------------------------------------------------
 
@@ -115,5 +124,54 @@ public class ActorService {
 		result = actorRepository.findByUsername(username);
 
 		return result;
+	}
+	
+	public Actor findByPasswordResetToken(String passwordResetToken){
+		Actor result;
+		
+		result = actorRepository.findByPasswordResetToken(passwordResetToken);
+		
+		return result;
+	}
+	
+	public Actor forgotPassword(Actor actor){
+		Assert.notNull(actor);
+		Md5PasswordEncoder encoder;
+		String passwordResetToken;
+
+		encoder = new Md5PasswordEncoder();
+		int i = (int) (new Date().getTime()/1000);
+		
+		passwordResetToken = encoder.encodePassword(""+actor.getId()+i, null);
+		actor.setPasswordResetToken(passwordResetToken);
+		actorRepository.save(actor);
+		
+		//log.trace(System.getenv("mailPassword"));
+		SendMail mail = (SendMail) context.getBean("sendMail");
+		mail.sendMail("shipmee.contact@gmail.com",
+    		   actor.getEmail(),
+    		   "Shipmee - Recuperación de contraseña",
+    		   "¡Hola "+actor.getName()+"! \n\n"
+    		   		+ "Para recuperar tu contraseña te pedimos que accedas al siguiente enlace: \n\n"
+    		   		+ "http://localhost:8080/Shipmee/passwordRecovery/reset.do?passwordResetToken="+passwordResetToken
+    		   		+ "\n\nSi no has sido tú quien ha pedido restablecer la contraseña te rogamos que ignores éste mensaje."
+    		   		+ "\n\nUn Saludo. \nShipmee.");
+		
+		return actor;
+	}
+	
+	public Actor resetPassword(Actor actor, String password){
+		Assert.isTrue(actor!=null && password!=null && password!="");
+		Md5PasswordEncoder encoder;
+		String hash;
+
+		encoder = new Md5PasswordEncoder();
+		hash = encoder.encodePassword(password, null);
+
+		actor.setPasswordResetToken("");
+		actor.getUserAccount().setPassword(hash);
+		actorRepository.save(actor);
+	
+		return actor;
 	}
 }

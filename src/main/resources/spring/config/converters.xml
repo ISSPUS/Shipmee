@@ -57,6 +57,12 @@
 		<bean class="converters.MessageToStringConverter" />
 		<bean class="converters.StringToMessageConverter" />
 		
+		<bean class="converters.FeePaymentToStringConverter" />
+		<bean class="converters.StringToFeePaymentConverter" />
+		
+		<bean class="converters.FundTransferPreferenceToStringConverter" />
+		<bean class="converters.StringToFundTransferPreferenceConverter" />
+		
 	</util:list>
 	
 </beans>

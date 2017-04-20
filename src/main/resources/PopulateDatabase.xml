@@ -93,6 +93,7 @@
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
 		<property name="photo" value=""/>
+		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount1"/>
 	</bean>
 	
@@ -104,6 +105,7 @@
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
 		<property name="photo" value=""/>
+		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount6"/>
 	</bean>
 	
@@ -151,6 +153,7 @@
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
 		<property name="rank" ref="rank1"/>
 		<property name="routes">
 			<list>
@@ -170,6 +173,7 @@
 		<property name="userAccount" ref="userAccount3"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
 		<property name="rank" ref="rank2"/>
 		<property name="routes">
 			<list>
@@ -189,6 +193,7 @@
 		<property name="userAccount" ref="userAccount5"/>
 		<property name="isVerified" value="false"/>
 		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
 		<property name="rank" ref="rank3"/>
 		<property name="routes">
 			<list>
@@ -204,10 +209,11 @@
 		<property name="phone" value="689836654"/>
 		<property name="dni" value="49983586H"/>
 		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
-		<property name="photo" value="images/anonymous.png"/>
+		<property name="photo" value="http://i.imgur.com/bHVDPaq.png"></property>
 		<property name="userAccount" ref="userAccount4"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
 		<property name="rank" ref="rank4"/>
 		<property name="routes">
 			<list>
