@@ -3,15 +3,12 @@ package controllers.user;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import com.paypal.exception.ClientActionRequiredException;
 import com.paypal.exception.HttpErrorException;
@@ -26,10 +23,6 @@ import com.paypal.svcs.types.ap.PaymentDetailsResponse;
 import com.paypal.svcs.types.ap.RefundResponse;
 
 import controllers.AbstractController;
-import domain.User;
-import domain.form.ActorForm;
-import services.UserService;
-import services.form.ActorFormService;
 import utilities.PayPal;
 import utilities.PayPalConfig;
 
@@ -39,12 +32,8 @@ public class PayPalUserController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private ActorFormService actorFormService;
-	
+//	@Autowired
+//	private UserService userService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -54,44 +43,6 @@ public class PayPalUserController extends AbstractController {
 		
 	// Creation ------------------------------------------------------------------		
 
-	@RequestMapping(value = "/pay", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-
-		Payment p = null;
-		
-		try {
-			p = PayPal.startTransaction(PayPal.generateTransaction(), PayPal.generatePayer());
-			System.out.println("Identificador del pago a guardar: " + p.getId());
-			System.out.println("Identificador de la venta: " + p.getTransactions().get(1).getRelatedResources().get(1).getSale().getId());
-			System.out.println("Estado del pago a guardar: " + p.getState());
-		} catch (PayPalRESTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		result = new ModelAndView("redirect:" + p.getLinks().get(1).getHref());
-
-		return result;
-	}
-	
-	@RequestMapping(value = "/doit", method = RequestMethod.GET)
-	public ModelAndView doit(@RequestParam String paymentId, @RequestParam String token, @RequestParam String PayerID) {
-		ModelAndView result;
-
-		Payment p = null;
-		
-		try {
-			p = PayPal.endTransaction(paymentId, PayerID);
-		} catch (PayPalRESTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		result = new ModelAndView("redirect:" + p.getLinks().get(1).getHref());
-
-		return result;
-	}
 	
 	@RequestMapping(value = "/adaptive/pay", method = RequestMethod.GET)
 	public ModelAndView adaptiveCreate() {
@@ -211,7 +162,7 @@ public class PayPalUserController extends AbstractController {
 			
 			System.out.println("Actualmente solo se puede devolver dinero a alguien que no le ha pasado el dinero al usuario final");
 
-			p = PayPal.refundAdaptativeTransaction(trackingId,
+			p = PayPal.refundAdaptiveTransaction(trackingId,
 					details.getPaymentInfoList().getPaymentInfo().get(0).getReceiver()
 					,details.getPaymentInfoList().getPaymentInfo().get(1).getReceiver());
 			
@@ -250,39 +201,6 @@ public class PayPalUserController extends AbstractController {
 			e.printStackTrace();
 		}
 
-		
-		result = new ModelAndView("redirect:");
-
-		return result;
-	}
-	
-	@RequestMapping(value = "/requestPemissions", method = RequestMethod.GET)
-	public ModelAndView requestPemissionsGet() {
-		ModelAndView result;
-
-		String res;
-		
-		res = PayPal.requestPemissions();
-		
-		result = new ModelAndView("redirect:" + res);
-
-		return result;
-	}
-	
-	@RequestMapping(value = "/requestPemissions", method = RequestMethod.POST)
-	public ModelAndView requestPemissionsPost(String code) {
-		ModelAndView result;
-
-		String res = null;
-		
-		try {
-			res = PayPal.obtainRefreshToken(code);
-		} catch (PayPalRESTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println(res);
 		
 		result = new ModelAndView("redirect:");
 

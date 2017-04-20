@@ -24,16 +24,6 @@ public class PayPalConfig {
 		return System.getenv("PAYPAL_BUSINESS_EMAIL");
 	}
 	
-	// ASHrG4WgF3VnnDPFjs9npUVxXaNtKgEg2lxz9iFVG5555555555555555555555552VeX
-	public static String getBusinessClientId() {
-		return System.getenv("PAYPAL_BUSINESS_CLIENT_ID");
-	}
-	
-	// EBetXh_oJDD0ce_6666666666666666-y6-Dlb2I4EicpyY_52-VU-dk3QmNaGXI6l_RK3hRJxT1
-	public static String getBusinessClientSecret() {
-		return System.getenv("PAYPAL_BUSINESS_CLIENT_SECRET");
-	}
-	
 	// APP-806767gfgcgh543T
 	public static String getBusinessAdaptiveApiKey() {
 		return System.getenv("PAYPAL_BUSINESS_ADAPTIVE_API_KEY");
