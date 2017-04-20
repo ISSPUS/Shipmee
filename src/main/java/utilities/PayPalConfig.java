@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class PayPalConfig {
 
-	private static final String CHARACTERS_TRACKING_ID = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-	private static final int LENGTH_TRACKING_ID = 25;
+	public static final String CHARACTERS_TRACKING_ID = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+	public static final int LENGTH_TRACKING_ID = 25;
 
 	// sandbox/live
 	public static String getMode() {
@@ -65,16 +65,5 @@ public class PayPalConfig {
 		return customConfigurationMap;
 	}
 
-	public static String generateTrackingId() {
-		String CARACTERES = CHARACTERS_TRACKING_ID;
-		StringBuilder salt = new StringBuilder();
-		Random rnd = new Random();
-		while (salt.length() < LENGTH_TRACKING_ID) {
-			int index = (int) (rnd.nextFloat() * CARACTERES.length());
-			salt.append(CARACTERES.charAt(index));
-		}
-		String saltStr = salt.toString();
-		return saltStr;
 
-	}
 }

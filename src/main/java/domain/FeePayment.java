@@ -36,15 +36,14 @@ public class FeePayment extends DomainEntity {
 		this.paymentMoment = paymentMoment;
 	}
 
-	@NotNull
-	@Valid
-	public CreditCard getCreditCard() {
-		return creditCard;
-	}
-
-	public void setCreditCard(CreditCard creditCard) {
-		this.creditCard = creditCard;
-	}
+////	@Valid
+//	public CreditCard getCreditCard() {
+//		return creditCard;
+//	}
+//
+//	public void setCreditCard(CreditCard creditCard) {
+//		this.creditCard = creditCard;
+//	}
 
 	@NotNull
 	@Min(0)

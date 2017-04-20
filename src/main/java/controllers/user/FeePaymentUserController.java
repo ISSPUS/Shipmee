@@ -141,7 +141,7 @@ public class FeePaymentUserController extends AbstractController {
 				
 				result = new ModelAndView(redirect);
 			} catch (Throwable oops) {
-				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");				
+				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");
 			}
 		}
 

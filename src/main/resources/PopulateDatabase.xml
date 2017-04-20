@@ -144,7 +144,7 @@
 	<bean id="user1" class="domain.User">
 		<property name="name" value="Mariano"/>
 		<property name="surname" value="García"/>
-		<property name="email" value="mariano@shipmee.es"/>
+		<property name="email" value="manoloorientacion-buyer@gmail.com"/>
 		<property name="birthDate" value="1992/10/05"/>
 		<property name="phone" value="666777666"/>
 		<property name="dni" value="23456789B"/>
@@ -164,7 +164,7 @@
 	<bean id="user2" class="domain.User">
 		<property name="name" value="Lola"/>
 		<property name="surname" value="Lopez"/>
-		<property name="email" value="lola@shipmee.es"/>
+		<property name="email" value="manoloorientacion-buyer-1@gmail.com"/>
 		<property name="birthDate" value="1995/10/01"/>
 		<property name="phone" value="676554345"/>
 		<property name="dni" value="34567890C"/>

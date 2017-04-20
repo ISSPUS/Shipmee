@@ -48,7 +48,7 @@ public class PayPal {
 	 * @throws InterruptedException
 	 */
 	public static PayResponse startAdaptiveTransaction(String receiverEmail, Double total, Double commission,
-			String uniqueTrackingId)
+			String uniqueTrackingId, String returnPath)
 			throws SSLConfigurationException, InvalidCredentialException, UnsupportedEncodingException,
 			HttpErrorException, InvalidResponseDataException, ClientActionRequiredException, MissingCredentialException,
 			OAuthException, IOException, InterruptedException {
@@ -87,8 +87,8 @@ public class PayPal {
 		// Comprobar que el trackingId sea único
 		payRequest.setTrackingId(uniqueTrackingId);
 
-		payRequest.setCancelUrl(PayPalConfig.getUrlBase() + "/actor/PayPal/capture.do" + "?trackingId=" + payRequest.getTrackingId());
-		payRequest.setReturnUrl(PayPalConfig.getUrlBase() + "/actor/PayPal/capture.do" + "?trackingId=" + payRequest.getTrackingId());
+		payRequest.setCancelUrl(PayPalConfig.getUrlBase() + "/" + returnPath + "?trackingId=" + payRequest.getTrackingId());
+		payRequest.setReturnUrl(PayPalConfig.getUrlBase() + "/" + returnPath + "?trackingId=" + payRequest.getTrackingId());
 
 		AdaptivePaymentsService adaptivePaymentsService = new AdaptivePaymentsService(PayPalConfig.getConfigurationMap());
 

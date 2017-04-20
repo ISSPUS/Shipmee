@@ -83,7 +83,7 @@ public class FeePaymentFormService {
 			
 			result.setRouteOffer(routeOffer);
 			result.setAmount(routeOffer.getAmount());
-			result.setCreditCard(feePaymentForm.getCreditCard());
+//			result.setCreditCard(feePaymentForm.getCreditCard());
 			result.setCarrier(routeOffer.getRoute().getCreator());
 			break;
 			
@@ -92,7 +92,7 @@ public class FeePaymentFormService {
 			
 			result.setRouteOffer(routeOffer);
 			result.setAmount(routeOffer.getAmount());
-			result.setCreditCard(feePaymentForm.getCreditCard());
+//			result.setCreditCard(feePaymentForm.getCreditCard());
 			result.setCarrier(routeOffer.getRoute().getCreator());
 			break;
 			
@@ -102,7 +102,7 @@ public class FeePaymentFormService {
 			
 			result.setShipmentOffer(shipmentOffer);
 			result.setAmount(shipmentOffer.getAmount());
-			result.setCreditCard(feePaymentForm.getCreditCard());
+//			result.setCreditCard(feePaymentForm.getCreditCard());
 			result.setCarrier(shipmentOffer.getUser());
 			break;
 
