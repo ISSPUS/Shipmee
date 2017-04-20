@@ -240,7 +240,7 @@
 
 	</div>
 
-
+</div>
 
 <script type="text/javascript">
 	function contract(routeId){

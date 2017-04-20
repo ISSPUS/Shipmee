@@ -19,6 +19,7 @@ public class User extends Actor {
 	private boolean isVerified;
 	private boolean isActive;
 	private String dniPhoto;
+	private FundTransferPreference fundTransferPreference;
 	
 	public boolean getIsVerified() {
 		return isVerified;
@@ -40,6 +41,14 @@ public class User extends Actor {
 	}
 	public void setDniPhoto(String dniPhoto) {
 		this.dniPhoto = dniPhoto;
+	}
+
+	@Valid
+	public FundTransferPreference getFundTransferPreference() {
+		return fundTransferPreference;
+	}
+	public void setFundTransferPreference(FundTransferPreference fundTransferPreference) {
+		this.fundTransferPreference = fundTransferPreference;
 	}
 
 

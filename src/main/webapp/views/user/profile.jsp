@@ -176,7 +176,9 @@
 										code="user.username" />: </strong> <spring:message text= "${user.userAccount.username}"/> </span> <br /> <span> <strong><spring:message
 										code="user.email" />: </strong>${user.email}</span> <br /> <span> <strong><spring:message
 										code="user.phone" />: </strong>${user.phone}</span> <br /> <span> <strong><spring:message
-										code="user.dni" />: </strong>${user.dni}</span>
+										code="user.dni" />: </strong>${user.dni}</span><br /> <span> <strong><spring:message
+										code="user.fundTransferPreference" /></strong> (<a href="fundTransferPreference/user/edit.do"><spring:message
+										code="user.edit" /></a>)</span>
 						</div>
 						<div class="datos text-center">
 							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
