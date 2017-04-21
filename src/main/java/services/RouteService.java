@@ -110,7 +110,7 @@ public class RouteService {
 	
 	public void delete(Route route) {
 		Assert.notNull(route, "message.error.route.notNull");
-		Assert.isTrue(route.getId() != 0, "message.error.route.mustExists");
+		Assert.isTrue(route.getId() != 0, "message.error.route.mustExist");
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.route.delete.user");
 
 		User user;

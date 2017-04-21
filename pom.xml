@@ -359,6 +359,20 @@
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 		</dependency>
+		
+		
+		<!-- PayPal -->
+		<dependency>
+			<groupId>com.paypal.sdk</groupId>
+			<artifactId>rest-api-sdk</artifactId>
+			<version>1.13.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.paypal.sdk</groupId>
+			<artifactId>adaptivepaymentssdk</artifactId>
+			<version>2.7.117</version>
+		</dependency>
 
 		<!-- Dependency patches -->
 
@@ -390,5 +404,12 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.0</version>
 		</dependency>
+		
+		<!-- Java Mail API -->
+    	<dependency>
+	    	<groupId>javax.mail</groupId>
+	    	<artifactId>mail</artifactId>
+	    	<version>1.4.3</version>
+    	</dependency>
 	</dependencies>
 </project> 

@@ -65,7 +65,7 @@ public class SizePriceService {
 	
 	public void delete(SizePrice sizePrice) {
 		Assert.notNull(sizePrice, "message.error.sizePrice.notNull");
-		Assert.isTrue(sizePrice.getId() != 0, "message.error.sizePrice.mustExists");
+		Assert.isTrue(sizePrice.getId() != 0, "message.error.sizePrice.mustExist");
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.sizePrice.delete.user");
 
 		sizePriceRepository.delete(sizePrice);

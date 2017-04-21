@@ -91,6 +91,12 @@
 .review-block hr {
 	border: 1px solid #e4e4e4 !important;
 }
+
+
+.profile-user{
+	width: 95%;
+}
+
 </style>
 
 <security:authorize access="hasRole('ADMIN')" var="isAdmin" />
@@ -146,11 +152,6 @@
 
 						</small>
 					</h3>
-					<span><strong><spring:message
-								code="user.achievements" />: </strong></span> <span class="label label-warning">Nuevo</span>
-					<span class="label label-info">Primer envío</span> <span
-						class="label label-info">Primer viaje</span> <span
-						class="label label-success">Experimentado</span>
 					<hr>
 
 					<div class="titulo-apartado">
