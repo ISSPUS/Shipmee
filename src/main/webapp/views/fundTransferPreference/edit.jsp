@@ -99,6 +99,16 @@
 						<form:errors class="error create-message-error" path="BIC" />
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<form:label path="paypalEmail" class="control-label col-md-2" for="paypalEmail">
+						<spring:message code="fundTransferPreference.paypalEmail" />
+					</form:label>
+					<div class="col-md-10">
+						<form:input path="paypalEmail" class="form-control" id="paypalEmail" required="true"/>
+						<form:errors class="error create-message-error" path="paypalEmail" />
+					</div>
+				</div>
 
 				
 				<div class="form-group text-center profile-userbuttons">
@@ -108,7 +118,7 @@
 					</button>
 
 
-					<acme:cancel code="fundTransferPreference.cancel" url="vehicle/user/list.do" />
+					<acme:cancel code="fundTransferPreference.cancel" url="/user/profile.do" />
 				</div>
 				<!-- Action buttons -->
 
