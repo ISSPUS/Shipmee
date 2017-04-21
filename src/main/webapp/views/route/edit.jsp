@@ -57,7 +57,7 @@
 						<spring:message code="route.origin" />
 					</form:label>
 					<div class="col-md-8">
-						<form:input path="origin" class="form-control" id="origin" />
+						<form:input path="origin" class="form-control" id="origin"/>
 						<form:errors class="error create-message-error" path="origin" />
 					</div>
 				</div>
@@ -69,7 +69,7 @@
 					</form:label>
 					<div class="col-md-8">
 						<form:input path="destination" class="form-control"
-							id="destination" />
+							id="destination"/>
 						<form:errors class="error create-message-error" path="destination" />
 					</div>
 				</div>
@@ -178,6 +178,26 @@
 
 
 <script type="text/javascript">
+
+
+function initialize() {
+
+	var input = document.getElementById('origin');
+	var input2 = document.getElementById('destination');
+	var options = {
+		types: ['(cities)'],
+		componentRestrictions: {country: 'es'}
+	};
+	var autocomplete = new google.maps.places.Autocomplete(input, options);
+	var autocomplete = new google.maps.places.Autocomplete(input2, options);
+	}
+	
+	
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+	$('#origin').attr('placeholder', '');
+	$('#destination').attr('placeholder', '');
+
 
 	$(function() {
 		/*moment.locale('en', {
