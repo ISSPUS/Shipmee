@@ -49,6 +49,9 @@
 	</jstl:if>
 	
 	<br />
+	<b><a href="passwordRecovery/forgot.do">
+							<spring:message code="login.forgot.password" />
+						</a></b>
 	<input class="btn btn-theme flotante-derecha" type="submit" value="<spring:message code="security.login" />" />
 	
 </form:form>
@@ -56,9 +59,9 @@
 
 <div class="frase-box">
 						<spring:message code="login.notAccount.before" />
-						<b><a href="user/register.do">
+						<h4><b><a href="user/register.do">
 							<spring:message code="login.notAccount.link" />
-						</a></b>
+						</a></b></h4>
 </div>
 	</div>
 		
