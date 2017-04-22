@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.CreditCard;
 import domain.FeePayment;
 import domain.User;
 import repositories.FeePaymentRepository;
@@ -67,9 +69,12 @@ public class FeePaymentService {
 		user = userService.findByPrincipal();
 		
 		if(feePayment.getId() == 0) {
+			Assert.isTrue(compruebaFecha(feePayment.getCreditCard()), "Credit card cannot be expired");
+			
 			feePayment.setPurchaser(user);
 			feePayment.setPaymentMoment(new Date());
 			feePayment.setType("Pending");
+			feePayment.setCommission(feePayment.getAmount()/10);
 			
 			feePayment = feePaymentRepository.save(feePayment);
 		} else {
@@ -137,4 +142,28 @@ public class FeePaymentService {
 		Assert.notNull(result);
 		return result;
 	}
+	
+	private boolean compruebaFecha(CreditCard creditCard) {
+		boolean result;
+		Calendar c;
+		int cMonth, cYear;
+		
+		result = false;
+		
+		c = Calendar.getInstance();
+				
+		cMonth = c.get(2) + 1; //Obtenemos numero del mes (Enero es 0)
+		cYear = c.get(1); //Obtenemos año
+		
+		if(creditCard.getExpirationYear() > cYear) {
+			result = true;
+		} else if(creditCard.getExpirationYear() == cYear) {
+			if(creditCard.getExpirationMonth() >= cMonth) {
+				result = true;
+			}
+		}
+		return result;		
+	}
 }
+
+

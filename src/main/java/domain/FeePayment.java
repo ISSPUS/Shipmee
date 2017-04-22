@@ -23,6 +23,7 @@ public class FeePayment extends DomainEntity {
 	private Date paymentMoment;
 	private CreditCard creditCard;
 	private double amount;
+	private double commission;
 	private String type;
 
 	@NotNull
@@ -58,6 +59,18 @@ public class FeePayment extends DomainEntity {
 		this.amount = amount;
 	}
 	
+	@NotNull
+	@Min(0)
+	@Digits(integer = 9, fraction = 2)
+	@Valid
+	public double getCommission() {
+		return commission;
+	}
+
+	public void setCommission(double commission) {
+		this.commission = commission;
+	}
+
 	public String getType() {
 		return type;
 	}
