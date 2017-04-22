@@ -3,6 +3,7 @@ package controllers.user;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,10 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.FeePayment;
+import domain.PayPalObject;
 import domain.RouteOffer;
 import domain.ShipmentOffer;
 import domain.form.FeePaymentForm;
 import services.FeePaymentService;
+import services.PayPalService;
 import services.RouteOfferService;
 import services.RouteService;
 import services.ShipmentOfferService;
@@ -28,6 +31,8 @@ import services.form.FeePaymentFormService;
 @Controller
 @RequestMapping("/feepayment/user")
 public class FeePaymentUserController extends AbstractController {
+	
+	static Logger log = Logger.getLogger(FeePaymentUserController.class);
 	
 	// Services ---------------------------------------------------------------
 	
@@ -45,6 +50,9 @@ public class FeePaymentUserController extends AbstractController {
 	
 	@Autowired
 	private ShipmentOfferService shipmentOfferService;
+	
+	@Autowired
+	private PayPalService payPalService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -152,14 +160,26 @@ public class FeePaymentUserController extends AbstractController {
 	public ModelAndView save(@RequestParam int feepaymentId, @RequestParam String type) {
 		ModelAndView result;
 		FeePayment feePayment;
+		PayPalObject po;
 
 		try {
 			feePayment = feePaymentService.findOne(feepaymentId);
 			feePayment.setType(type);
+			
+			po = payPalService.findByFeePaymentId(feepaymentId);
+			
+			if (type.equals("Accepted") && po != null){
+				payPalService.payToShipper(feepaymentId);
+			} else if (type.equals("Rejected") && po != null){
+				payPalService.refundToSender(feepaymentId);
+			}
+			
 			feePaymentService.save(feePayment);
 
 			result = new ModelAndView("redirect:list.do?page=1");
 		} catch (Throwable oops) {
+			oops.printStackTrace();
+			log.error(oops, oops);
 			result = new ModelAndView("redirect:list.do?page=1");
 		}
 

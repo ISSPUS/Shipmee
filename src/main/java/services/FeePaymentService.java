@@ -121,7 +121,7 @@ public class FeePaymentService {
 		try {
 			payPal = payPalService.findByFeePaymentId(feepaymentId);
 			if (payPal != null) {
-				payPalService.payToShipper(payPal.getTrackingId());
+				payPalService.payToShipper(feepaymentId);
 			}
 
 			res = this.save(feePayment);

@@ -20,6 +20,7 @@ import com.paypal.sdk.exceptions.OAuthException;
 import com.paypal.svcs.types.ap.ExecutePaymentResponse;
 import com.paypal.svcs.types.ap.PayResponse;
 import com.paypal.svcs.types.ap.PaymentDetailsResponse;
+import com.paypal.svcs.types.ap.RefundResponse;
 
 import domain.FeePayment;
 import domain.PayPalObject;
@@ -131,7 +132,7 @@ public class PayPalService {
 
 		PayPalObject payObject = this.findByTrackingId(trackingId);
 
-		PaymentDetailsResponse details = PayPal.fetchDetailsAdaptiveTransaction(trackingId);
+		PaymentDetailsResponse details = PayPal.fetchDetailsAdaptiveTransaction(payObject.getTrackingId());
 
 		Assert.isTrue(details.getError().isEmpty(), "PayPalService.returnFromPaypal.error.RetrievingDetailsFromPaypal");
 
@@ -142,20 +143,52 @@ public class PayPalService {
 		return details;
 	}
 	
-	public void payToShipper(String trackingId)
+	public void payToShipper(int feePaymentID)
 			throws SSLConfigurationException, InvalidCredentialException, UnsupportedEncodingException,
 			HttpErrorException, InvalidResponseDataException, ClientActionRequiredException, MissingCredentialException,
 			OAuthException, PayPalRESTException, IOException, InterruptedException {
 		ExecutePaymentResponse res;
+		
+		PayPalObject po = this.findByFeePaymentId(feePaymentID);
 
-		PaymentDetailsResponse payObject = this.returnPaymentFromPaypal(trackingId);
+		PaymentDetailsResponse payObject = this.returnPaymentFromPaypal(po.getTrackingId());
 
 		Assert.isTrue(payObject.getStatus().equals("INCOMPLETE"));
 
 		res = PayPal.adaptiveSendToSenconds(payObject.getPayKey());
 
-		Assert.isTrue(res.getError().size() == 0,
-				"PayPalService.payToShipper.error.payPalError: " + res.getError().get(0).getMessage());
+		if (res.getError().size() != 0){
+			log.error(res.getError().get(0).getMessage());
+			
+			Assert.isTrue(res.getError().size() == 0,
+					"PayPalService.payToShipper.error.payPalError");
+			
+		}
+	}
+	
+	public void refundToSender(int feePaymentID)
+			throws SSLConfigurationException, InvalidCredentialException, UnsupportedEncodingException,
+			HttpErrorException, InvalidResponseDataException, ClientActionRequiredException, MissingCredentialException,
+			OAuthException, PayPalRESTException, IOException, InterruptedException {
+		RefundResponse res;
+		
+		PayPalObject po = this.findByFeePaymentId(feePaymentID);
+
+		PaymentDetailsResponse payObject = this.returnPaymentFromPaypal(po.getTrackingId());
+
+		Assert.isTrue(payObject.getStatus().equals("INCOMPLETE"));
+
+		res = PayPal.refundAdaptiveTransaction(po.getTrackingId(), 
+				payObject.getPaymentInfoList().getPaymentInfo().get(0).getReceiver(), 
+				payObject.getPaymentInfoList().getPaymentInfo().get(1).getReceiver());
+
+		if (res.getError().size() != 0){
+			log.error(res.getError().get(0).getMessage());
+			
+			Assert.isTrue(res.getError().size() == 0,
+					"PayPalService.refundToSender.error.payPalError");
+			
+		}
 	}
 
 	
