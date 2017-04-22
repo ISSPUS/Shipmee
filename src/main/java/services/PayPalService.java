@@ -175,6 +175,14 @@ public class PayPalService {
 		return result;
 	}
 	
+	public PayPalObject findByRouteOfferId(int routeOfferId) {
+		PayPalObject result;
+		
+		result = payPalRepository.findByRouteOfferId(routeOfferId);
+		
+		return result;
+	}
+	
 	public String generateTrackingId() {
 		String CARACTERES = PayPalConfig.CHARACTERS_TRACKING_ID;
 		StringBuilder salt = new StringBuilder();

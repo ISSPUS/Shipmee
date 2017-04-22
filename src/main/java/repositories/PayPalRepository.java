@@ -17,4 +17,7 @@ public interface PayPalRepository extends JpaRepository<PayPalObject, Integer> {
 	
 	@Query("select r from PayPalObject r where r.feePayment.id = ?1")
 	PayPalObject findByFeePayment(int feePaymentId);
+	
+	@Query("select r from PayPalObject r where r.feePayment.routeOffer.id = ?1")
+	PayPalObject findByRouteOfferId(int routeOfferId);
 }

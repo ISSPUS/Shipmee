@@ -94,7 +94,7 @@ public class PayPalUserController extends AbstractController {
 				so = shipmentOfferService.accept(payPalService.findByTrackingId(trackingId).getFeePayment().getShipmentOffer().getId());
 				result = new ModelAndView("redirect:/shipmentOffer/user/list.do?shipmentId=" + so.getShipment().getId());
 			}else{
-				System.out.println("Estudiar pra routeOffer");
+				// Pagado correctamente
 				result = new ModelAndView("redirect:/?status=" + status);
 			}
 
