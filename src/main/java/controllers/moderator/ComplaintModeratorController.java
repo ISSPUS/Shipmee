@@ -75,7 +75,7 @@ public class ComplaintModeratorController extends AbstractController {
 			if(oops.getMessage().contains("message.error")){
 				messageError=oops.getMessage();
 			}
-			result = new ModelAndView("redirect:list.do?page=1");
+			result = list(1);
 			result.addObject("message", messageError);
 		}
 
