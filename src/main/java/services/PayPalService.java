@@ -99,14 +99,14 @@ public class PayPalService {
 		PayPalObject payObject = this.create();
 		payObject.setFeePayment(fp);;
 
-//		payObject = this.save(payObject);
+		payObject = this.save(payObject);	// Comentar para evitar tantas escrituras a la DB
 
 		PayResponse res;
 
 		try {
 			res = PayPal.startAdaptiveTransaction(
 //					fp.getCarrier().getEmail(), fp.getAmount() + 5,
-					fp.getPurchaser().getEmail(), fp.getAmount() + 5,
+					fp.getCarrier().getEmail(), fp.getAmount() + 5,
 					5.0,
 					payObject.getTrackingId(),
 					"user/payPal/returnPayment.do");
@@ -125,7 +125,7 @@ public class PayPalService {
 		return res;
 	}
 	
-	public PaymentDetailsResponse returnPaymentFromPaypal(String trackingId)
+	public PaymentDetailsResponse refreshPaymentStatusFromPaypal(String trackingId)
 			throws SSLConfigurationException, InvalidCredentialException, UnsupportedEncodingException,
 			HttpErrorException, InvalidResponseDataException, ClientActionRequiredException, MissingCredentialException,
 			OAuthException, PayPalRESTException, IOException, InterruptedException {
@@ -151,7 +151,7 @@ public class PayPalService {
 		
 		PayPalObject po = this.findByFeePaymentId(feePaymentID);
 
-		PaymentDetailsResponse payObject = this.returnPaymentFromPaypal(po.getTrackingId());
+		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId());
 
 		Assert.isTrue(payObject.getStatus().equals("INCOMPLETE"));
 
@@ -174,9 +174,11 @@ public class PayPalService {
 		
 		PayPalObject po = this.findByFeePaymentId(feePaymentID);
 
-		PaymentDetailsResponse payObject = this.returnPaymentFromPaypal(po.getTrackingId());
+		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId());
 
-		Assert.isTrue(payObject.getStatus().equals("INCOMPLETE"));
+		// Actualmente no tenemos permsisos por parte de PayPal para devolver una transacción ya pagada al usuario final
+		//		por lo que ese podría ser el error
+		Assert.isTrue(payObject.getStatus().equals("INCOMPLETE"), "PayPalService.refundToSender.error.NotIncomplete");
 
 		res = PayPal.refundAdaptiveTransaction(po.getTrackingId(), 
 				payObject.getPaymentInfoList().getPaymentInfo().get(0).getReceiver(), 

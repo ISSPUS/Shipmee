@@ -76,8 +76,8 @@ public class PayPal {
 		ReceiverList receiverlst = new ReceiverList(receiver);
 
 		payRequest.setReceiverList(receiverlst);
-		// payRequest.setActionType("CREATE");
-		payRequest.setActionType("PAY_PRIMARY");
+		// payRequest.setActionType("CREATE");  // En caso de querer actualizar el pago únicamente
+		payRequest.setActionType("PAY_PRIMARY");	// En caso de querer pagar a la empresa y dejar el pago al usuario final autorizado
 		payRequest.setCurrencyCode("EUR");
 
 		payRequest.setFeesPayer("PRIMARYRECEIVER");
@@ -166,6 +166,8 @@ public class PayPal {
 	/**
 	 * 
 	 * @param trackingID: Identificador ÚNICO de toda la transacción
+	 * @param rec1: Persona que recibio inicialmente el importe 1
+	 * @param rec2: Persona que recibio inicialmente el importe 2
 	 * @return
 	 * @throws PayPalRESTException
 	 * @throws SSLConfigurationException

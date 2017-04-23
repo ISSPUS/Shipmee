@@ -1,7 +1,6 @@
 package controllers.user;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +18,13 @@ import com.paypal.exception.InvalidResponseDataException;
 import com.paypal.exception.MissingCredentialException;
 import com.paypal.exception.SSLConfigurationException;
 import com.paypal.sdk.exceptions.OAuthException;
-import com.paypal.svcs.types.ap.ExecutePaymentResponse;
 import com.paypal.svcs.types.ap.PayResponse;
-import com.paypal.svcs.types.ap.PaymentDetailsResponse;
-import com.paypal.svcs.types.ap.RefundResponse;
 
 import controllers.AbstractController;
 import domain.PayPalObject;
 import domain.ShipmentOffer;
 import services.PayPalService;
 import services.ShipmentOfferService;
-import utilities.PayPal;
 import utilities.PayPalConfig;
 
 @Controller
@@ -37,9 +32,6 @@ import utilities.PayPalConfig;
 public class PayPalUserController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
-
-//	@Autowired
-//	private UserService userService;
 	
 	@Autowired
 	private PayPalService payPalService;
@@ -58,7 +50,6 @@ public class PayPalUserController extends AbstractController {
 		
 	// Creation ------------------------------------------------------------------		
 
-	
 	@RequestMapping(value = "/pay", method = RequestMethod.GET)
 	public ModelAndView adaptiveCreate(@RequestParam(required=false, defaultValue="-1") int routeOfferId,
 			@RequestParam(required=false, defaultValue="-1") int shipmentOfferId) {
@@ -71,22 +62,23 @@ public class PayPalUserController extends AbstractController {
 			result = new ModelAndView("redirect:" + PayPalConfig.getPayRedirectUrl()+ "?cmd=_ap-payment&paykey=" + p.getPayKey());
 
 		} catch (Throwable e) {
-			e.printStackTrace();
-			log.error(e,e);
+			log.error(e.getStackTrace(),e);
+			
+			// Debería devolverte a la vista donde te pregunta como pagar y mostrar ahí un error diciendo que actualmente hay un problema
+			// 		con el metodo seleccionado. Que pruebe posteriormente o con tarjeta
 			result = new ModelAndView("redirect:/?message=error");
 		}
 		return result;
 	}
 	
 	@RequestMapping(value = "/returnPayment", method = RequestMethod.GET)
-	public ModelAndView adaptiveSendToSenconds(@RequestParam String trackingId) {
+	public ModelAndView adaptiveReturnCreate(@RequestParam String trackingId) {
 		ModelAndView result;
-		String status = "ok";
 		ShipmentOffer so;
 		PayPalObject po;
 
 		try {
-			payPalService.returnPaymentFromPaypal(trackingId);
+			payPalService.refreshPaymentStatusFromPaypal(trackingId);
 			
 			po = payPalService.findByTrackingId(trackingId);
 			
@@ -94,76 +86,22 @@ public class PayPalUserController extends AbstractController {
 				so = shipmentOfferService.accept(payPalService.findByTrackingId(trackingId).getFeePayment().getShipmentOffer().getId());
 				result = new ModelAndView("redirect:/shipmentOffer/user/list.do?shipmentId=" + so.getShipment().getId());
 			}else{
-				// Pagado correctamente
-				result = new ModelAndView("redirect:/?status=" + status);
+				result = new ModelAndView("redirect:/routeOffer/user/list.do?routeId=" + po.getFeePayment().getRouteOffer().getRoute().getId());
 			}
+			// Pagado y registrado correctamente
 
 		} catch (SSLConfigurationException | InvalidCredentialException | HttpErrorException
 				| InvalidResponseDataException | ClientActionRequiredException | MissingCredentialException
 				| OAuthException | PayPalRESTException | IOException | InterruptedException e) {
-			log.error(e);
-			status = "error";
-			result = new ModelAndView("redirect:/?status=" + status);
+			log.error(e.getStackTrace(),e);
+			
+			// Si algo ha ido mal decirle al cliente que pruebe a acceder más tarde a user/payPal/returnPayment?trackingId= this.trackingid
+			
+			result = new ModelAndView("redirect:/?status=somethingWrongWithPayPal");
 		}
 		return result;
 	}
 	
-	@RequestMapping(value = "/refund", method = RequestMethod.GET)
-	public ModelAndView adaptiveRefundToSenconds(@RequestParam String trackingId) {
-		ModelAndView result;
-
-		RefundResponse p = null;
-		PaymentDetailsResponse details = null;
-		
-		try {
-			details = PayPal.fetchDetailsAdaptiveTransaction(trackingId);
-			
-			System.out.println("Actualmente solo se puede devolver dinero a alguien que no le ha pasado el dinero al usuario final");
-
-			p = PayPal.refundAdaptiveTransaction(trackingId,
-					details.getPaymentInfoList().getPaymentInfo().get(0).getReceiver()
-					,details.getPaymentInfoList().getPaymentInfo().get(1).getReceiver());
-			
-		} catch (SSLConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidCredentialException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HttpErrorException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidResponseDataException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClientActionRequiredException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MissingCredentialException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (OAuthException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (PayPalRESTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-		result = new ModelAndView("redirect:");
-
-		return result;
-	}
 	
 	// Ancillary methods ------------------------------------------------------
 

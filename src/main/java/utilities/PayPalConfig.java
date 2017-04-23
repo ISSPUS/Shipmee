@@ -2,7 +2,6 @@ package utilities;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class PayPalConfig {
 
@@ -51,7 +50,7 @@ public class PayPalConfig {
 	
 	public static Map<String, String> getConfigurationMap(){
 		Map<String, String> customConfigurationMap = new HashMap<String, String>();
-		customConfigurationMap.put("mode", getMode()); // Load the map with all mandatory parameters
+		customConfigurationMap.put("mode", getMode());
 //		customConfigurationMap.put("acct.ClientId", clientId);
 //		customConfigurationMap.put("acct.ClientSecret", clientSecret);
 		customConfigurationMap.put("acct1.AppId", getBusinessAdaptiveApiKey());
