@@ -90,8 +90,6 @@ public class ActorFormService {
 			
 			this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
 					"repeatedPassword", "user.passwordMismatch", null);
-			this.addBinding(binding, actorForm.getPassword().length() > 5,
-					"password", "javax.validation.constraints.Min.message", null);
 			this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
 			
 			if (!actorService.checkLogin()){

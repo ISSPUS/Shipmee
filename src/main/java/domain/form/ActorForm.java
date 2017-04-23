@@ -111,6 +111,9 @@ public class ActorForm {
 		this.userName = userName;
 	}
 	
+	@NotBlank
+	@NotNull
+	@Size(min = 5, max = 32)
 	public String getPassword() {
 		return password;
 	}
@@ -118,6 +121,9 @@ public class ActorForm {
 		this.password = password;
 	}
 	
+	@NotBlank
+	@NotNull
+	@Size(min = 5, max = 32)
 	public String getRepeatedPassword() {
 		return repeatedPassword;
 	}
