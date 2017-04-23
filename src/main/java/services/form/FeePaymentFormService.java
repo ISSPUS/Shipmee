@@ -9,6 +9,7 @@ import domain.ShipmentOffer;
 import domain.form.FeePaymentForm;
 import services.FeePaymentService;
 import services.RouteOfferService;
+import services.RouteService;
 import services.ShipmentOfferService;
 
 @Service
@@ -25,6 +26,9 @@ public class FeePaymentFormService {
 	
 	@Autowired
 	private ShipmentOfferService shipmentOfferService;
+	
+	@Autowired
+	private RouteService routeService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -60,6 +64,11 @@ public class FeePaymentFormService {
 			break;
 			
 		case 3:
+			ShipmentOffer shipmentOffer;
+			
+			shipmentOffer = shipmentOfferService.findOne(id);
+			
+			result.setId(shipmentOffer.getShipment().getId());
 			result.setOfferId(id);
 			break;
 
@@ -79,8 +88,9 @@ public class FeePaymentFormService {
 		
 		switch (feePaymentForm.getType()) {
 		case 1:
-			routeOffer = routeOfferService.findOne(feePaymentForm.getOfferId());
-			
+			routeOffer = routeService.contractRoute(feePaymentForm.getId(), feePaymentForm.getSizePriceId());
+			feePaymentForm.setOfferId(routeOffer.getId());
+						
 			result.setRouteOffer(routeOffer);
 			result.setAmount(routeOffer.getAmount());
 			result.setCreditCard(feePaymentForm.getCreditCard());
@@ -88,7 +98,12 @@ public class FeePaymentFormService {
 			break;
 			
 		case 2:
-			routeOffer = routeOfferService.findOne(feePaymentForm.getOfferId());
+			routeOffer = routeOfferService.create(feePaymentForm.getId());
+			routeOffer.setAmount(feePaymentForm.getAmount());
+			routeOffer.setDescription(feePaymentForm.getDescription());
+			routeOffer = routeOfferService.save(routeOffer);
+			
+			feePaymentForm.setOfferId(routeOffer.getId());
 			
 			result.setRouteOffer(routeOffer);
 			result.setAmount(routeOffer.getAmount());
@@ -98,7 +113,10 @@ public class FeePaymentFormService {
 			
 		case 3:
 			ShipmentOffer shipmentOffer;
-			shipmentOffer = shipmentOfferService.findOne(feePaymentForm.getOfferId());
+
+			shipmentOffer = shipmentOfferService.accept(feePaymentForm.getOfferId());
+			
+			feePaymentForm.setOfferId(shipmentOffer.getId());
 			
 			result.setShipmentOffer(shipmentOffer);
 			result.setAmount(shipmentOffer.getAmount());
