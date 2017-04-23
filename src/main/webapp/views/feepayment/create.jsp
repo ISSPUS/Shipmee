@@ -126,7 +126,12 @@
 						<div class="paymentWrap ">
 							<div class="btn-group paymentBtnGroup btn-group-justified" >
 					            <label class="btn paymentMethod partePaypal">
-				            	<a class="payPaypal" href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.id}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
+					            <jstl:if test="${feePaymentForm.type > 2}">
+				            		<a class="payPaypal" href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.offerId}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
+				            	</jstl:if>
+				            	<jstl:if test="${feePaymentForm.type < 3}">
+				            		<a class="payPaypal" href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.id}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
+				            	</jstl:if>
 					            	<span class="method visa"></span>
 					                <input name="options" class="pago" type="radio"
 										value="paypal" style="visibility: hidden;"/>
