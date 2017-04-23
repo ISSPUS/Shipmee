@@ -98,6 +98,7 @@ public class FeePaymentService {
 		PayPalObject po;
 		
 		user = userService.findByPrincipal();
+		po = payPalService.findByFeePaymentId(feePayment.getId());
 
 		if(feePayment.getId() == 0) {
 			if(feePayment.getCreditCard() != null) {
@@ -111,16 +112,16 @@ public class FeePaymentService {
 			
 			feePayment = feePaymentRepository.save(feePayment);
 		} else {
-			po = payPalService.findByFeePaymentId(feePayment.getId());
 			
 			Assert.isTrue(po != null ^ feePayment.getCreditCard() != null, "FeePaymentService.save.error.OrCreditCardOrPayPal");
-			feePayment.setIsPayed(po != null || feePayment.getCreditCard() != null);
 			
 			feePaymentPreSave = this.findOne(feePayment.getId());
 			feePaymentPreSave.setType(feePayment.getType());
 			
 			feePayment = feePaymentRepository.save(feePaymentPreSave);
 		}
+		
+		feePayment.setIsPayed(po != null || feePayment.getCreditCard() != null);
 
 		return feePayment;
 	}
