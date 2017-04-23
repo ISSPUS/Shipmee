@@ -106,8 +106,8 @@ public class PayPalService {
 		try {
 			res = PayPal.startAdaptiveTransaction(
 //					fp.getCarrier().getEmail(), fp.getAmount() + 5,
-					fp.getCarrier().getEmail(), fp.getAmount() + 5,
-					5.0,
+					fp.getCarrier().getEmail(), fp.getAmount() + fp.getCommission(),
+					fp.getCommission(),
 					payObject.getTrackingId(),
 					"user/payPal/returnPayment.do");
 		} catch (SSLConfigurationException | InvalidCredentialException | HttpErrorException
