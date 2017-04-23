@@ -273,10 +273,12 @@
 										</div>
 									</div>
 									<div class="review-block-description" style="">
-										<form:form action="rating/user/edit.do"
+										<form:form action="user/edit.do"
 											modelAttribute="rating" method="post" class="form-horizontal"
 											role="form">
 											<form:hidden path="user" />
+											<form:hidden path="author" />
+
 											<form:hidden id="value" path="value" value="0" />
 
 
@@ -285,7 +287,7 @@
 
 											<form:errors class="error create-message-error"
 												path="comment" />
-
+					
 											<!-- Action buttons -->
 											<acme:submit name="save" code="rating.save" />
 										</form:form>

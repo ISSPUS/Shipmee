@@ -28,6 +28,8 @@
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
+<script src="scripts/jquery.bootpag.min.js"></script>
+
 <script type="text/javascript" src="scripts/es.js"></script>
 
 <style>
@@ -231,14 +233,43 @@
 										</td>
 									</tr>
 									</jstl:forEach>
+									
 					</jstl:when>
+					
 					<jstl:otherwise>
 						<p><spring:message code="shipment.results" /></p>
 					</jstl:otherwise>
 				</jstl:choose>
+				
 								</tbody>
+								
 							</table>
 
+	<div id="pagination" class="copyright" style="text-align: center;">
+		
+			<script>
+				$('#pagination').bootpag({
+					total : <jstl:out value="${total_pages}"></jstl:out>,
+					page : <jstl:out value="${p}"></jstl:out>,
+					maxVisible : 5,
+					leaps : true,
+					firstLastUse : true,
+					first : '<',
+		            last: '>',
+					wrapClass : 'pagination',
+					activeClass : 'active',
+					disabledClass : 'disabled',
+					nextClass : 'next',
+					prevClass : 'prev',
+					lastClass : 'last',
+					firstClass : 'first'
+				}).on('page', function(event, num) {
+					window.location.href = "${urlPage}" + num + "";
+					page = 1
+				});
+			</script>
+		
+		</div>
 
 				</div>
 
@@ -249,7 +280,6 @@
 </div></div>
 
 		</div>
-
 
 
 

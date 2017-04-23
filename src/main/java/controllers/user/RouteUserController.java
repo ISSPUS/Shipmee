@@ -79,6 +79,7 @@ public class RouteUserController extends AbstractController {
 		result.addObject("routeId", routeId);
 		result.addObject("p", page);
 		result.addObject("total_pages", ownRoutes.getTotalPages());
+		result.addObject("urlPage", "route/user/list.do?page=");
 
 		return result;
 	}

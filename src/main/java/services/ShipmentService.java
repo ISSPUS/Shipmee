@@ -173,9 +173,9 @@ public class ShipmentService {
 	
 	// Other business methods -------------------------------------------------
 
-	public Collection<Shipment> searchShipment(String origin, String destination, String date, String hour, String envelope, String itemSize){
+	public Page<Shipment> searchShipment(String origin, String destination, String date, String hour, String envelope, String itemSize,Pageable page){
 		Assert.isTrue(origin != "" && destination != "");
-		Collection<Shipment> result;
+		Page<Shipment> result;
 		SimpleDateFormat formatter;
 		Date time;
 		Date finalDate;
@@ -197,7 +197,7 @@ public class ShipmentService {
 		}
 		
 		log.trace(origin+" - "+destination+" at "+finalDate);
-		result = shipmentRepository.searchShipment(origin, destination, finalDate, time, envelope, itemSize);
+		result = shipmentRepository.searchShipment(origin, destination, finalDate, time, envelope, itemSize,page);
 		log.trace(result);
 		//System.out.println(result);
 		
