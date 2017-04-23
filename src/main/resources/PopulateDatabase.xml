@@ -596,4 +596,106 @@
 		<property name="sender" ref="user2"/>
 		<property name="recipient" ref="user1"/>
 	</bean>
+	
+	<!-- Payments -->
+	
+	<bean id="payment1" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/03/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="2.00"/>
+		<property name="commission" value="5.0"/>
+		<property name="type" value="Pending"/>
+		<property name="routeOffer" ref="routeOffer1"/>
+		<property name="purchaser" ref="user2"/>
+		<property name="carrier" ref="user1"/>
+	</bean>
+	
+	<bean id="payment2" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/03/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="3.00"/>
+		<property name="commission" value="5.0"/>
+		<property name="type" value="Pending"/>
+		<property name="routeOffer" ref="routeOffer2"/>
+		<property name="purchaser" ref="user3"/>
+		<property name="carrier" ref="user1"/>
+	</bean>
+	
+	<bean id="payment3" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/03/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="0.50"/>
+		<property name="commission" value="5.0"/>
+		<property name="type" value="Rejected"/>
+		<property name="routeOffer" ref="routeOffer3"/>
+		<property name="purchaser" ref="user3"/>
+		<property name="carrier" ref="user1"/>
+	</bean>
+	
+	<bean id="payment4" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/03/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="2.00"/>
+		<property name="commission" value="5.0"/>
+		<property name="type" value="Accepted"/>
+		<property name="routeOffer" ref="routeOffer4"/>
+		<property name="purchaser" ref="user2"/>
+		<property name="carrier" ref="user1"/>
+	</bean>
+	
+	<bean id="payment5" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/04/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="2.00"/>
+		<property name="commission" value="5.0"/>
+		<property name="type" value="Pending"/>
+		<property name="routeOffer" ref="routeOffer5"/>
+		<property name="purchaser" ref="user1"/>
+		<property name="carrier" ref="user2"/>
+	</bean>
+	
+	<bean id="payment6" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/04/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="3.00"/>
+		<property name="commission" value="5.0"/>
+		<property name="type" value="Pending"/>
+		<property name="routeOffer" ref="routeOffer6"/>
+		<property name="purchaser" ref="user3"/>
+		<property name="carrier" ref="user2"/>
+	</bean>
+	
+	<bean id="payment7" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/04/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="0.50"/>
+		<property name="commission" value="5.0"/>
+		<property name="type" value="Rejected"/>
+		<property name="routeOffer" ref="routeOffer7"/>
+		<property name="purchaser" ref="user3"/>
+		<property name="carrier" ref="user2"/>
+	</bean>
+	
+	<bean id="payment8" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/04/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="2.00"/>
+		<property name="commission" value="5.0"/>
+		<property name="type" value="Accepted"/>
+		<property name="routeOffer" ref="routeOffer8"/>
+		<property name="purchaser" ref="user1"/>
+		<property name="carrier" ref="user2"/>
+	</bean>
+	
+	<bean id="payment9" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/03/11 16:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="1.50"/>
+		<property name="commission" value="5.0"/>
+		<property name="type" value="Accepted"/>
+		<property name="shipmentOffer" ref="shipmentOffer5"/>
+		<property name="purchaser" ref="user3"/>
+		<property name="carrier" ref="user1"/>
+	</bean>
+	
 </beans>
