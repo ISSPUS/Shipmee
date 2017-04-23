@@ -149,7 +149,7 @@
 										</div>
 										
 										<div class="row info1 col-xs-7 col-sm-9">
-										<h5 class="titulos">Photos</h5>
+										<h5 class="titulos"><spring:message code="shipment.itemPicture" /></h5>
 													
 											
 
