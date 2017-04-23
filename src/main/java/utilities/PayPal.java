@@ -48,7 +48,7 @@ public class PayPal {
 	 * @throws InterruptedException
 	 */
 	public static PayResponse startAdaptiveTransaction(String receiverEmail, Double total, Double commission,
-			String uniqueTrackingId)
+			String uniqueTrackingId, String returnPath)
 			throws SSLConfigurationException, InvalidCredentialException, UnsupportedEncodingException,
 			HttpErrorException, InvalidResponseDataException, ClientActionRequiredException, MissingCredentialException,
 			OAuthException, IOException, InterruptedException {
@@ -76,8 +76,8 @@ public class PayPal {
 		ReceiverList receiverlst = new ReceiverList(receiver);
 
 		payRequest.setReceiverList(receiverlst);
-		// payRequest.setActionType("CREATE");
-		payRequest.setActionType("PAY_PRIMARY");
+		// payRequest.setActionType("CREATE");  // En caso de querer actualizar el pago únicamente
+		payRequest.setActionType("PAY_PRIMARY");	// En caso de querer pagar a la empresa y dejar el pago al usuario final autorizado
 		payRequest.setCurrencyCode("EUR");
 
 		payRequest.setFeesPayer("PRIMARYRECEIVER");
@@ -87,8 +87,8 @@ public class PayPal {
 		// Comprobar que el trackingId sea único
 		payRequest.setTrackingId(uniqueTrackingId);
 
-		payRequest.setCancelUrl(PayPalConfig.getUrlBase() + "/actor/PayPal/capture.do" + "?trackingId=" + payRequest.getTrackingId());
-		payRequest.setReturnUrl(PayPalConfig.getUrlBase() + "/actor/PayPal/capture.do" + "?trackingId=" + payRequest.getTrackingId());
+		payRequest.setCancelUrl(PayPalConfig.getUrlBase() + "/" + returnPath + "?trackingId=" + payRequest.getTrackingId());
+		payRequest.setReturnUrl(PayPalConfig.getUrlBase() + "/" + returnPath + "?trackingId=" + payRequest.getTrackingId());
 
 		AdaptivePaymentsService adaptivePaymentsService = new AdaptivePaymentsService(PayPalConfig.getConfigurationMap());
 
@@ -166,6 +166,8 @@ public class PayPal {
 	/**
 	 * 
 	 * @param trackingID: Identificador ÚNICO de toda la transacción
+	 * @param rec1: Persona que recibio inicialmente el importe 1
+	 * @param rec2: Persona que recibio inicialmente el importe 2
 	 * @return
 	 * @throws PayPalRESTException
 	 * @throws SSLConfigurationException

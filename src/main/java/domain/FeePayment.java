@@ -37,7 +37,6 @@ public class FeePayment extends DomainEntity {
 		this.paymentMoment = paymentMoment;
 	}
 
-	@NotNull
 	@Valid
 	public CreditCard getCreditCard() {
 		return creditCard;

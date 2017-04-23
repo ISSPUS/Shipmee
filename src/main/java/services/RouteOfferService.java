@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Actor;
+import domain.PayPalObject;
 import domain.Route;
 import domain.RouteOffer;
 import domain.User;
@@ -38,6 +39,9 @@ public class RouteOfferService {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private PayPalService payPalService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -188,6 +192,9 @@ public class RouteOfferService {
 		Assert.isTrue(route.getArriveTime().after(new Date()), "message.error.routeOffer.route.arrivalTime.future");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.routeOffer.accept.user.own");
 		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
+		
+		PayPalObject po = payPalService.findByRouteOfferId(routeOfferId);
+		Assert.isTrue(po == null || po.getPayStatus().equals("INCOMPLETE"), "message.error.routeOffer.tryToAcceptNotPayOffer");
 
 		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "message.error.routeOffer.notAcceptedOrRejected");		
 		

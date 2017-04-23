@@ -2,12 +2,11 @@ package utilities;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class PayPalConfig {
 
-	private static final String CHARACTERS_TRACKING_ID = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-	private static final int LENGTH_TRACKING_ID = 25;
+	public static final String CHARACTERS_TRACKING_ID = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+	public static final int LENGTH_TRACKING_ID = 25;
 
 	// sandbox/live
 	public static String getMode() {
@@ -51,7 +50,7 @@ public class PayPalConfig {
 	
 	public static Map<String, String> getConfigurationMap(){
 		Map<String, String> customConfigurationMap = new HashMap<String, String>();
-		customConfigurationMap.put("mode", getMode()); // Load the map with all mandatory parameters
+		customConfigurationMap.put("mode", getMode());
 //		customConfigurationMap.put("acct.ClientId", clientId);
 //		customConfigurationMap.put("acct.ClientSecret", clientSecret);
 		customConfigurationMap.put("acct1.AppId", getBusinessAdaptiveApiKey());
@@ -65,16 +64,5 @@ public class PayPalConfig {
 		return customConfigurationMap;
 	}
 
-	public static String generateTrackingId() {
-		String CARACTERES = CHARACTERS_TRACKING_ID;
-		StringBuilder salt = new StringBuilder();
-		Random rnd = new Random();
-		while (salt.length() < LENGTH_TRACKING_ID) {
-			int index = (int) (rnd.nextFloat() * CARACTERES.length());
-			salt.append(CARACTERES.charAt(index));
-		}
-		String saltStr = salt.toString();
-		return saltStr;
 
-	}
 }
