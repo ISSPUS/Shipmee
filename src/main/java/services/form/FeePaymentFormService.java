@@ -90,7 +90,7 @@ public class FeePaymentFormService {
 		case 1:
 			routeOffer = routeService.contractRoute(feePaymentForm.getId(), feePaymentForm.getSizePriceId());
 			feePaymentForm.setOfferId(routeOffer.getId());
-						
+			
 			result.setRouteOffer(routeOffer);
 			result.setAmount(routeOffer.getAmount());
 			result.setCreditCard(feePaymentForm.getCreditCard());

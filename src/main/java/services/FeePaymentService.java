@@ -59,6 +59,9 @@ public class FeePaymentService {
 	@Autowired
 	private PayPalService payPalService;
 	
+	@Autowired
+	private RouteService routeService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public FeePaymentService() {
@@ -80,6 +83,7 @@ public class FeePaymentService {
 		result.setPurchaser(user);
 		result.setPaymentMoment(new Date());
 		result.setType("Pending");
+		result.setIsPayed(false);
 		
 		return result;
 	}
@@ -91,9 +95,11 @@ public class FeePaymentService {
 		
 		User user;
 		FeePayment feePaymentPreSave;
+		PayPalObject po;
 		
 		user = userService.findByPrincipal();
-		
+		po = payPalService.findByFeePaymentId(feePayment.getId());
+
 		if(feePayment.getId() == 0) {
 			if(feePayment.getCreditCard() != null) {
 				Assert.isTrue(compruebaFecha(feePayment.getCreditCard()), "Credit card cannot be expired");
@@ -106,11 +112,16 @@ public class FeePaymentService {
 			
 			feePayment = feePaymentRepository.save(feePayment);
 		} else {
+			
+			Assert.isTrue(po != null ^ feePayment.getCreditCard() != null, "FeePaymentService.save.error.OrCreditCardOrPayPal");
+			
 			feePaymentPreSave = this.findOne(feePayment.getId());
 			feePaymentPreSave.setType(feePayment.getType());
 			
 			feePayment = feePaymentRepository.save(feePaymentPreSave);
 		}
+		
+		feePayment.setIsPayed(po != null || feePayment.getCreditCard() != null);
 
 		return feePayment;
 	}
@@ -171,6 +182,63 @@ public class FeePaymentService {
 
 	// Other business methods -------------------------------------------------
 	
+	
+	public FeePayment createAndSave(int type, int id, int sizePriceId, double amount, String description){
+		FeePayment res;
+		RouteOffer ro;
+		ShipmentOffer so;
+
+		
+		res = this.create();
+		
+		/**
+		 * Type == 1 -> Contract a route
+		 * Type == 2 -> Create a routeOffer
+		 * Type == 3 -> Accept a shipmentOffer
+		 */
+		switch (type) {
+		case 1:
+			ro = routeService.contractRoute(id, sizePriceId);
+			res.setRouteOffer(ro);
+			
+			res.setAmount(ro.getAmount());
+			res.setCarrier(ro.getRoute().getCreator());
+			
+			res.setPurchaser(ro.getUser());
+			break;
+			
+		case 2:
+			ro = routeOfferService.create(id);
+			ro.setAmount(amount);
+			ro.setDescription(description);
+			
+			ro = routeOfferService.save(ro);
+			
+			res.setRouteOffer(ro);
+			res.setAmount(ro.getAmount());
+			res.setCarrier(ro.getRoute().getCreator());
+			res.setPurchaser(ro.getUser());
+			break;
+			
+		case 3:
+			so = shipmentOfferService.findOne(id);
+			
+			res.setShipmentOffer(so);
+			res.setAmount(so.getAmount());
+			res.setCarrier(so.getUser());
+			res.setPurchaser(so.getShipment().getCreator());
+			break;
+
+		default:
+			break;
+		}
+		
+		res = this.save(res);
+		
+		return res;
+	}
+	
+	
 	public Page<FeePayment> findAllRejected(Pageable page) {
 		Page<FeePayment> result;
 
@@ -193,36 +261,6 @@ public class FeePaymentService {
 		result = feePaymentRepository.findAllAccepted(page);
 		Assert.notNull(result);
 		return result;
-	}
-	
-	public FeePayment constructFromRouteOffer(int routeOfferId){
-		FeePayment res;
-		RouteOffer routeOffer;
-		
-		res = this.create();
-
-		routeOffer = routeOfferService.findOne(routeOfferId);
-		
-		res.setRouteOffer(routeOffer);
-		res.setAmount(routeOffer.getAmount());
-		res.setCarrier(routeOffer.getRoute().getCreator());
-		
-		return res;
-	}
-	
-	public FeePayment constructFromShipmentOffer(int shipmentOfferId){
-		FeePayment res;
-		ShipmentOffer shipmentOffer;
-		
-		res = this.create();
-		
-		shipmentOffer = shipmentOfferService.findOne(shipmentOfferId);
-		
-		res.setShipmentOffer(shipmentOffer);
-		res.setAmount(shipmentOffer.getAmount());
-		res.setCarrier(shipmentOffer.getUser());
-		
-		return res;
 	}
 
 	private boolean compruebaFecha(CreditCard creditCard) {

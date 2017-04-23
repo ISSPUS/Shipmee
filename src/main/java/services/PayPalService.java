@@ -82,19 +82,13 @@ public class PayPalService {
 
 	// Other business methods -------------------------------------------------
 	
-	public PayResponse authorizePay(int routeOfferId, int shipmentOfferId) {
-		
-		Assert.isTrue(routeOfferId > 0 || shipmentOfferId > 0, "PayPalService.authorizePay.error.notValidInputValue");
+	public PayResponse authorizePay(int feePaymentId) {
 		
 		FeePayment fp;
 		
-		if(routeOfferId > 0){
-			fp = feePaymentService.constructFromRouteOffer(routeOfferId);
-		}else{
-			fp = feePaymentService.constructFromShipmentOffer(shipmentOfferId);
-		}
+		fp = feePaymentService.findOne(feePaymentId);
 		
-		fp = feePaymentService.save(fp);
+		Assert.notNull(fp, "PayPalService.authorizePay.error.FeePaymentNotFound");
 		
 		PayPalObject payObject = this.create();
 		payObject.setFeePayment(fp);;

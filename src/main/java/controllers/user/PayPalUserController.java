@@ -21,8 +21,10 @@ import com.paypal.sdk.exceptions.OAuthException;
 import com.paypal.svcs.types.ap.PayResponse;
 
 import controllers.AbstractController;
+import domain.FeePayment;
 import domain.PayPalObject;
 import domain.ShipmentOffer;
+import services.FeePaymentService;
 import services.PayPalService;
 import services.ShipmentOfferService;
 import utilities.PayPalConfig;
@@ -39,6 +41,9 @@ public class PayPalUserController extends AbstractController {
 	@Autowired
 	private ShipmentOfferService shipmentOfferService;
 	
+	@Autowired
+	private FeePaymentService feePaymentService;
+	
 	static Logger log = Logger.getLogger(PayPalUserController.class);
 
 	
@@ -51,14 +56,18 @@ public class PayPalUserController extends AbstractController {
 	// Creation ------------------------------------------------------------------		
 
 	@RequestMapping(value = "/pay", method = RequestMethod.GET)
-	public ModelAndView adaptiveCreate(@RequestParam(required=false, defaultValue="-1") int routeOfferId,
-			@RequestParam(required=false, defaultValue="-1") int shipmentOfferId) {
+	public ModelAndView adaptiveCreate(@RequestParam int type, @RequestParam int id,
+			@RequestParam (required=false, defaultValue="0") Integer sizePriceId, @RequestParam (required=false, defaultValue = "0") Double amount,
+			@RequestParam (required=false) String description) {
 		ModelAndView result;
 
 		PayResponse p = null;
+		FeePayment feePayment;
 
 		try {
-			p = payPalService.authorizePay(routeOfferId, shipmentOfferId);
+			feePayment = feePaymentService.createAndSave(type, id, sizePriceId, amount, description);
+			
+			p = payPalService.authorizePay(feePayment.getId());
 			result = new ModelAndView("redirect:" + PayPalConfig.getPayRedirectUrl()+ "?cmd=_ap-payment&paykey=" + p.getPayKey());
 
 		} catch (Throwable e) {
