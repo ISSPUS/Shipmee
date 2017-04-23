@@ -149,6 +149,7 @@ public class FeePaymentUserController extends AbstractController {
 				
 				result = new ModelAndView(redirect);
 			} catch (Throwable oops) {
+				log.error(oops);
 				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");
 			}
 		}
@@ -178,7 +179,6 @@ public class FeePaymentUserController extends AbstractController {
 
 			result = new ModelAndView("redirect:list.do?page=1");
 		} catch (Throwable oops) {
-			oops.printStackTrace();
 			log.error(oops, oops);
 			result = new ModelAndView("redirect:list.do?page=1");
 		}
