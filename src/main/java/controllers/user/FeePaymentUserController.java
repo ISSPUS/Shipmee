@@ -18,8 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 import domain.FeePayment;
 import domain.PayPalObject;
-import domain.RouteOffer;
-import domain.ShipmentOffer;
 import domain.form.FeePaymentForm;
 import services.FeePaymentService;
 import services.PayPalService;
@@ -54,6 +52,7 @@ public class FeePaymentUserController extends AbstractController {
 	@Autowired
 	private PayPalService payPalService;
 	
+
 	// Constructors -----------------------------------------------------------
 	
 	public FeePaymentUserController() {
@@ -100,7 +99,6 @@ public class FeePaymentUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid FeePaymentForm feePaymentForm, BindingResult binding) {
 		ModelAndView result;
-		RouteOffer routeOffer;
 		FeePayment feePayment;
 		String redirect = null;
 
@@ -116,28 +114,15 @@ public class FeePaymentUserController extends AbstractController {
 				 */
 				switch (feePaymentForm.getType()) {
 				case 1:
-					
-					routeOffer = routeService.contractRoute(feePaymentForm.getId(), feePaymentForm.getSizePriceId());
-					feePaymentForm.setOfferId(routeOffer.getId());
-					redirect = "redirect:../../routeOffer/user/list.do?routeId=" + routeOffer.getRoute().getId();
+					redirect = "redirect:../../routeOffer/user/list.do?routeId=";
 					break;
 					
 				case 2:
-					routeOffer = routeOfferService.create(feePaymentForm.getId());
-					routeOffer.setAmount(feePaymentForm.getAmount());
-					routeOffer.setDescription(feePaymentForm.getDescription());
-					routeOffer = routeOfferService.save(routeOffer);
-					
-					feePaymentForm.setOfferId(routeOffer.getId());
-					redirect = "redirect:../../routeOffer/user/list.do?routeId=" + routeOffer.getRoute().getId();
+					redirect = "redirect:../../routeOffer/user/list.do?routeId=";
 					break;
 					
 				case 3:
-					ShipmentOffer shipmentOffer;
-					shipmentOffer = shipmentOfferService.accept(feePaymentForm.getOfferId());
-					
-					feePaymentForm.setOfferId(shipmentOffer.getId());
-					redirect = "redirect:../../shipmentOffer/user/list.do?shipmentId="+shipmentOffer.getShipment().getId();
+					redirect = "redirect:../../shipmentOffer/user/list.do?shipmentId=";
 					break;
 
 				default:
@@ -147,7 +132,7 @@ public class FeePaymentUserController extends AbstractController {
 				feePayment = feePaymentFormService.reconstruct(feePaymentForm);
 				feePaymentService.save(feePayment);
 				
-				result = new ModelAndView(redirect);
+				result = new ModelAndView(redirect+feePaymentForm.getId());
 			} catch (Throwable oops) {
 				log.error(oops);
 				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");
