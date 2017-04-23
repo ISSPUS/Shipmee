@@ -25,6 +25,7 @@ public class FeePayment extends DomainEntity {
 	private double amount;
 	private double commission;
 	private String type;
+	private boolean isPayed;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -76,6 +77,15 @@ public class FeePayment extends DomainEntity {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public boolean getIsPayed() {
+		return isPayed;
+	}
+
+	public void setIsPayed(boolean isPayed) {
+		this.isPayed = isPayed;
+	}
+
 
 	// Relationships ----------------------------------------------------------
 
