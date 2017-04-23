@@ -95,7 +95,9 @@ public class FeePaymentService {
 		user = userService.findByPrincipal();
 		
 		if(feePayment.getId() == 0) {
-			Assert.isTrue(compruebaFecha(feePayment.getCreditCard()), "Credit card cannot be expired");
+			if(feePayment.getCreditCard() != null) {
+				Assert.isTrue(compruebaFecha(feePayment.getCreditCard()), "Credit card cannot be expired");
+			}
 			
 			feePayment.setPurchaser(user);
 			feePayment.setPaymentMoment(new Date());
