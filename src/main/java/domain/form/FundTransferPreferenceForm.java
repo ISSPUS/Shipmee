@@ -1,7 +1,5 @@
 package domain.form;
 
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 
@@ -12,9 +10,9 @@ public class FundTransferPreferenceForm {
 	private String bankName;
 	private String IBAN;
 	private String BIC;
+	private String paypalEmail;
 	
 	@NotBlank
-	@NotNull
 	public String getCountry() {
 		return country;
 	}
@@ -23,7 +21,6 @@ public class FundTransferPreferenceForm {
 	}
 	
 	@NotBlank
-	@NotNull
 	public String getAccountHolder() {
 		return accountHolder;
 	}
@@ -32,7 +29,6 @@ public class FundTransferPreferenceForm {
 	}
 	
 	@NotBlank
-	@NotNull
 	public String getBankName() {
 		return bankName;
 	}
@@ -41,7 +37,6 @@ public class FundTransferPreferenceForm {
 	}
 	
 	@NotBlank
-	@NotNull
 	public String getIBAN() {
 		return IBAN;
 	}
@@ -50,12 +45,19 @@ public class FundTransferPreferenceForm {
 	}
 	
 	@NotBlank
-	@NotNull
 	public String getBIC() {
 		return BIC;
 	}
 	public void setBIC(String bIC) {
 		BIC = bIC;
+	}
+	
+	@NotBlank
+	public String getPaypalEmail() {
+		return paypalEmail;
+	}
+	public void setPaypalEmail(String paypalEmail) {
+		this.paypalEmail = paypalEmail;
 	}
 
 	

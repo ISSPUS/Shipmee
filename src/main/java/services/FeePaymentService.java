@@ -1,6 +1,7 @@
 package services;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -11,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.paypal.base.rest.PayPalRESTException;
 import com.paypal.exception.ClientActionRequiredException;
@@ -23,6 +22,7 @@ import com.paypal.exception.MissingCredentialException;
 import com.paypal.exception.SSLConfigurationException;
 import com.paypal.sdk.exceptions.OAuthException;
 
+import domain.CreditCard;
 import domain.FeePayment;
 import domain.PayPalObject;
 import domain.RouteOffer;
@@ -95,9 +95,12 @@ public class FeePaymentService {
 		user = userService.findByPrincipal();
 		
 		if(feePayment.getId() == 0) {
+			Assert.isTrue(compruebaFecha(feePayment.getCreditCard()), "Credit card cannot be expired");
+			
 			feePayment.setPurchaser(user);
 			feePayment.setPaymentMoment(new Date());
 			feePayment.setType("Pending");
+			feePayment.setCommission(feePayment.getAmount()/10);
 			
 			feePayment = feePaymentRepository.save(feePayment);
 		} else {
@@ -105,8 +108,8 @@ public class FeePaymentService {
 			feePaymentPreSave.setType(feePayment.getType());
 			
 			feePayment = feePaymentRepository.save(feePaymentPreSave);
-		}	
-			
+		}
+
 		return feePayment;
 	}
 	
@@ -219,4 +222,28 @@ public class FeePaymentService {
 		
 		return res;
 	}
+
+	private boolean compruebaFecha(CreditCard creditCard) {
+		boolean result;
+		Calendar c;
+		int cMonth, cYear;
+		
+		result = false;
+		
+		c = Calendar.getInstance();
+				
+		cMonth = c.get(2) + 1; //Obtenemos numero del mes (Enero es 0)
+		cYear = c.get(1); //Obtenemos año
+		
+		if(creditCard.getExpirationYear() > cYear) {
+			result = true;
+		} else if(creditCard.getExpirationYear() == cYear) {
+			if(creditCard.getExpirationMonth() >= cMonth) {
+				result = true;
+			}
+		}
+		return result;		
+	}
 }
+
+

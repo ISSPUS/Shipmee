@@ -43,6 +43,7 @@ public class FundTransferPreferenceFormService {
 			result.setBankName(fundTransferPreference.getBankName());
 			result.setIBAN(fundTransferPreference.getIBAN());
 			result.setBIC(fundTransferPreference.getBIC());
+			result.setPaypalEmail(fundTransferPreference.getPaypalEmail());
 		}
 		
 		return result;
@@ -60,6 +61,7 @@ public class FundTransferPreferenceFormService {
 		fundTransferPreference.setBankName(fundTransferPreferenceForm.getBankName());
 		fundTransferPreference.setIBAN(fundTransferPreferenceForm.getIBAN());
 		fundTransferPreference.setBIC(fundTransferPreferenceForm.getBIC());
+		fundTransferPreference.setPaypalEmail(fundTransferPreferenceForm.getPaypalEmail());
 		
 		result.setFundTransferPreference(fundTransferPreference);
 		

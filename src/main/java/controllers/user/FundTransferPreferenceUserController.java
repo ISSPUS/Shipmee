@@ -67,7 +67,7 @@ public class FundTransferPreferenceUserController extends AbstractController {
 				user = fundTransferPreferenceFormService.reconstruct(form);
 				userService.save(user);
 				
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:../../user/profile.do");
 			} catch (Throwable oops) {
 				log.error(oops.getMessage());
 				messageError = "fundTransferPreference.commit.error";
