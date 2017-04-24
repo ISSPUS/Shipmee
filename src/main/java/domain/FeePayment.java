@@ -23,7 +23,9 @@ public class FeePayment extends DomainEntity {
 	private Date paymentMoment;
 	private CreditCard creditCard;
 	private double amount;
+	private double commission;
 	private String type;
+	private boolean isPayed;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -36,7 +38,6 @@ public class FeePayment extends DomainEntity {
 		this.paymentMoment = paymentMoment;
 	}
 
-	@NotNull
 	@Valid
 	public CreditCard getCreditCard() {
 		return creditCard;
@@ -58,12 +59,33 @@ public class FeePayment extends DomainEntity {
 		this.amount = amount;
 	}
 	
+	@NotNull
+	@Min(0)
+	@Digits(integer = 9, fraction = 2)
+	@Valid
+	public double getCommission() {
+		return commission;
+	}
+
+	public void setCommission(double commission) {
+		this.commission = commission;
+	}
+
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public boolean getIsPayed() {
+		return isPayed;
+	}
+
+	public void setIsPayed(boolean isPayed) {
+		this.isPayed = isPayed;
+	}
+
 
 	// Relationships ----------------------------------------------------------
 

@@ -23,7 +23,7 @@ import utilities.SendMail;
 @Transactional
 public class ActorService {
 	
-	static Logger log = Logger.getLogger(ShipmentService.class);
+	static Logger log = Logger.getLogger(ActorService.class);
 	private ApplicationContext context = new ClassPathXmlApplicationContext("Mail.xml");
 
 	// Managed repository -----------------------------------------------------

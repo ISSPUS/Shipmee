@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
+import domain.FundTransferPreference;
 import domain.Rank;
 import domain.Route;
 import domain.User;
@@ -100,6 +102,8 @@ public class UserService {
 		boolean isAdmin;
 		boolean isAuthenticated;
 		int actUserId;
+		FundTransferPreference fundTransferPreference;
+		
 		User userInDB = null;
 		Authority userAuth = new Authority();
 		Authority adminAuth = new Authority();
@@ -125,6 +129,25 @@ public class UserService {
 					a.getEmail().equals(userInDB.getEmail())
 					)){
 				a.setIsVerified(false);
+			}
+			
+			if(a.getFundTransferPreference() != null) {
+				fundTransferPreference = a.getFundTransferPreference();
+				if(fundTransferPreference.getPaypalEmail() == null &&
+						fundTransferPreference.getCountry() == null &&
+						fundTransferPreference.getAccountHolder() == null &&
+						fundTransferPreference.getBankName() == null &&
+						fundTransferPreference.getIBAN() == null &&
+						fundTransferPreference.getBIC() == null){
+					Assert.isTrue(false,"You must fill in the information of your bank account or your PayPal.");
+				} else if(fundTransferPreference.getPaypalEmail() == null &&
+						(fundTransferPreference.getCountry() == null ||
+						fundTransferPreference.getAccountHolder() == null ||
+						fundTransferPreference.getBankName() == null ||
+						fundTransferPreference.getIBAN() == null ||
+						fundTransferPreference.getBIC() == null)) {
+					Assert.isTrue(false,"You must fill in the information of your bank account.");
+				}
 			}
 		}else{
 			Assert.isTrue(!isAuthenticated, 

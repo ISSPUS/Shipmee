@@ -161,7 +161,12 @@
 	color: #d9534f;
 }
 
+.price{
+font-size: 225%;
+    color: #ffae66;
+    font-weight: bold;
 
+}
 </style>
 
 <div class="blue-barra">
@@ -178,7 +183,7 @@
 
 <div class="container">
 
-	<!-- Menu informacion de las quejas -->
+	<!-- Menu informacion de las feePayments -->
 	<security:authorize access="hasRole('ADMIN')">
 
 		<div class="row" style="margin-top: 2%">
@@ -261,7 +266,7 @@
 			</div>
 		</div>
 	</security:authorize>
-	<!-- Listado de quejas -->
+	<!-- Listado de feePayments -->
 
 	<jstl:choose>
 		<jstl:when test="${not empty feePayments}">
@@ -270,7 +275,32 @@
 					class=" col-xs-12 col-sm-10 col-md-7 col-lg-7 table-container panel panel-default"
 					style="margin-top: 1%; margin-bottom: 1%">
 					<div class="row">
+					<security:authorize access="hasRole('ADMIN')">
+							<div class="col-xs-12">
+								<div class="info-moderator-${feePayment.type}">
+									<spring:message code="feePayment.pending" var="mild" />
+									<div style="margin-bottom: 0.5%;float: right;">
+										
+											<jstl:choose>
+												<jstl:when test="${feePayment.type == 'Accepted' }">
+													<span style="color:#5cb85c"><i class="fa fa-thumbs-up"></i></span>
+												</jstl:when>
+												<jstl:when test="${feePayment.type == 'Pending'   }">
+													<span style="color:#f0ad4e"><i class="fa fa-clock-o"></i></span>
+												</jstl:when>
+												<jstl:when test="${feePayment.type == 'Rejected'}">
+													<span style="color:#d9534f"><i class="fa fa-thumbs-down"></i></span>
+												</jstl:when>
+											</jstl:choose>
+										
+									</div>
+								</div>
+							</div>
+						</security:authorize>
 						<div class="col-xs-12">
+						
+							
+						
 							<div class="col-xs-6">
 								<div class="span3 text-center">
 									<h4>
@@ -310,57 +340,37 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-12">
-							<p>${feePayment.amount}</p>
+						<div class="col-xs-12 price">
+								<span>${feePayment.amount}&#8364;</span>
 						</div>
-						<security:authorize access="hasRole('ADMIN')">
-							<div class="col-xs-12">
-								<div class="info-moderator-${feePayment.type}">
-									<spring:message code="feePayment.pending" var="mild" />
-									<div style="margin-bottom: 0.5%">
-										<h5>
-											<jstl:choose>
-												<jstl:when test="${feePayment.type == 'Accepted' }">
-													<i class="glyphicon glyphicon-thumbs-up"></i>
-												</jstl:when>
-												<jstl:when test="${feePayment.type == 'Pending'   }">
-													<i class="glyphicon glyphicon-thumbs-down"></i>
-												</jstl:when>
-												<jstl:when test="${feePayment.type == 'Rejected'}">
-													<i class="glyphicon glyphicon-warning-sign"></i>
-												</jstl:when>
-											</jstl:choose>
-										</h5>
-									</div>
-								</div>
-							</div>
-						</security:authorize>
-						<div class="col-xs-12">
+						
+						<div class="col-xs-12 text-center profile-userbuttons">
 							<security:authorize access="hasRole('USER')">
-								<div class="btn-group btn-group-justified"
-									style="margin-bottom: 2% ! important">
+								<div class="text-center btn-group btn-group-justified">
+									
+									<div class="text-center profile-userbuttons">
+						
+							<spring:message code="feePayment.accept" var="accept" />
+							<button type="button" class="btn btn-success btn-md "
+								onclick="location.href = 'feepayment/user/manage.do?feepaymentId=${feePayment.id}&type=Accepted';">
+								<jstl:out value="${accept}" />
+								&nbsp;<i class="glyphicon glyphicon-ok-circle"></i>
+							</button>
 
-									<div class="col-lg-4">
-										<spring:message code="feePayment.accept" var="accept" />
-										<button type="button" class="btn btn-success btn-md btn-block"
-											onclick="location.href = 'feepayment/user/manage.do?feepaymentId=${feePayment.id}&type=Accepted';">
-											<jstl:out value="${accept}" />
-											&nbsp;<i class="glyphicon glyphicon-ok-circle"></i>
-										</button>
-									</div>
+							<spring:message code="feePayment.reject" var="reject" />
+							<button type="button" class="btn btn-danger btn-md"
+								onclick="location.href = 'feepayment/user/manage.do?feepaymentId=${feePayment.id}&type=Rejected';">
+								<jstl:out value="${reject}" />
+								&nbsp;<i class="glyphicon glyphicon-remove-circle"></i>
+							</button>
 
-									<div class="col-lg-4">
-										<spring:message code="feePayment.reject" var="reject" />
-										<button type="button" class="btn btn-danger btn-md btn-block"
-											onclick="location.href = 'feepayment/user/manage.do?feepaymentId=${feePayment.id}&type=Rejected';">
-											<jstl:out value="${reject}" />
-											&nbsp;<i class="glyphicon glyphicon-remove-circle"></i>
-										</button>
-									</div>
+
+						</div>
 
 								</div>
 							</security:authorize>
 						</div>
+						
 					</div>
 				</div>
 			</jstl:forEach>

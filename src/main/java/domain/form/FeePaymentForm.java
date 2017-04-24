@@ -18,7 +18,6 @@ public class FeePaymentForm {
 	private int offerId;
 	private int type;
 
-	@NotNull
 	@Valid
 	public CreditCard getCreditCard() {
 		return creditCard;

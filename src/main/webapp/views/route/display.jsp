@@ -236,7 +236,6 @@
 	</div>
 </div>
 
-
 <script type="text/javascript">
 	function contract(routeId){
 		//location.href = 'route/user/contract.do?routeId=${route.id}&sizePriceId=${value.id}';"
