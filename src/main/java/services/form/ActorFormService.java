@@ -90,6 +90,8 @@ public class ActorFormService {
 			
 			this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
 					"repeatedPassword", "user.passwordMismatch", null);
+			this.addBinding(binding, actorForm.getPassword().length() > 4 && actorForm.getPassword().length() < 33,
+					"password", "org.hibernate.validator.constraints.Length.message.personalize", null);
 			this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
 			
 			if (!actorService.checkLogin()){
@@ -131,8 +133,10 @@ public class ActorFormService {
 				// Password modified
 				this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
 						"repeatedPassword", "user.passwordMismatch", null);
-				this.addBinding(binding, actorForm.getPassword().length() > 5,
-						"password", "javax.validation.constraints.Min.message", null);
+				
+				this.addBinding(binding, actorForm.getPassword().length() > 4 && actorForm.getPassword().length() < 33,
+				"password", "org.hibernate.validator.constraints.Length.message.personalize", null);
+				
 			}
 			
 			if(!actorForm.getUserName().equals(actActor.getUserAccount().getUsername())){
