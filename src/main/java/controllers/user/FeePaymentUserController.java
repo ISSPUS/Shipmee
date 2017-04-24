@@ -2,6 +2,7 @@ package controllers.user;
 
 
 import javax.validation.Valid;
+import org.springframework.validation.Validator;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,6 @@ import domain.PayPalObject;
 import domain.form.FeePaymentForm;
 import services.FeePaymentService;
 import services.PayPalService;
-import services.RouteOfferService;
-import services.RouteService;
-import services.ShipmentOfferService;
 import services.form.FeePaymentFormService;
 
 @Controller
@@ -41,16 +39,10 @@ public class FeePaymentUserController extends AbstractController {
 	private FeePaymentFormService feePaymentFormService;
 	
 	@Autowired
-	private RouteService routeService;
-	
-	@Autowired
-	private RouteOfferService routeOfferService;
-	
-	@Autowired
-	private ShipmentOfferService shipmentOfferService;
-	
-	@Autowired
 	private PayPalService payPalService;
+	
+	@Autowired
+	private Validator validator;
 	
 
 	// Constructors -----------------------------------------------------------
@@ -165,7 +157,7 @@ public class FeePaymentUserController extends AbstractController {
 			result = new ModelAndView("redirect:list.do?page=1");
 		} catch (Throwable oops) {
 			log.error(oops, oops);
-			result = new ModelAndView("redirect:list.do?page=1");
+			result = new ModelAndView("redirect:list.do?page=1&message=error");
 		}
 
 		return result;

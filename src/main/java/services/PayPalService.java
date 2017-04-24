@@ -85,6 +85,7 @@ public class PayPalService {
 	public PayResponse authorizePay(int feePaymentId) {
 		
 		FeePayment fp;
+		PayResponse res;
 		
 		fp = feePaymentService.findOne(feePaymentId);
 		
@@ -94,8 +95,8 @@ public class PayPalService {
 		payObject.setFeePayment(fp);;
 
 		payObject = this.save(payObject);	// Comentar para evitar tantas escrituras a la DB
-
-		PayResponse res;
+		
+		Assert.isTrue(!fp.getCarrier().getFundTransferPreference().getPaypalEmail().equals(""), "PayPalService.authorizePay.error.CarrierWithoutPayPalEmail");
 
 		try {
 			res = PayPal.startAdaptiveTransaction(

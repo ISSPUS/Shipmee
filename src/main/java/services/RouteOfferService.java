@@ -1,8 +1,10 @@
 package services;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,16 +12,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import com.paypal.base.rest.PayPalRESTException;
+import com.paypal.exception.ClientActionRequiredException;
+import com.paypal.exception.HttpErrorException;
+import com.paypal.exception.InvalidCredentialException;
+import com.paypal.exception.InvalidResponseDataException;
+import com.paypal.exception.MissingCredentialException;
+import com.paypal.exception.SSLConfigurationException;
+import com.paypal.sdk.exceptions.OAuthException;
+
+import controllers.user.ShipmentOfferUserController;
 import domain.Actor;
 import domain.PayPalObject;
 import domain.Route;
 import domain.RouteOffer;
 import domain.User;
 import repositories.RouteOfferRepository;
+import utilities.ServerConfig;
 
 @Service
 @Transactional
 public class RouteOfferService {
+	
+	static Logger log = Logger.getLogger(RouteOfferService.class);
+
 
 	// Managed repository -----------------------------------------------------
 
@@ -193,9 +209,10 @@ public class RouteOfferService {
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.routeOffer.accept.user.own");
 		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
 		
-		PayPalObject po = payPalService.findByRouteOfferId(routeOfferId);
-		Assert.isTrue(po == null || po.getPayStatus().equals("INCOMPLETE"), "message.error.routeOffer.tryToAcceptNotPayOffer");
-
+		if(!ServerConfig.getTesting()){
+			PayPalObject po = payPalService.findByRouteOfferId(routeOfferId);
+			Assert.isTrue(po == null || po.getPayStatus().equals("INCOMPLETE"), "message.error.routeOffer.tryToAcceptNotPayOffer");
+		}
 		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "message.error.routeOffer.notAcceptedOrRejected");		
 		
 		routeOffer.setAcceptedByCarrier(true); // The offer is accepted.
@@ -228,6 +245,21 @@ public class RouteOfferService {
 		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
 
 		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "message.error.routeOffer.notAcceptedOrRejected");
+
+		PayPalObject po = payPalService.findByRouteOfferId(routeOfferId);
+
+		if(!ServerConfig.getTesting() && po != null){
+			Assert.isTrue(po.getPayStatus().equals("INCOMPLETE"), "message.error.routeOffer.tryToAcceptNotPayOffer");
+			
+			try {
+				payPalService.refundToSender(po.getFeePayment().getId());
+			} catch (SSLConfigurationException | InvalidCredentialException | HttpErrorException
+					| InvalidResponseDataException | ClientActionRequiredException | MissingCredentialException
+					| OAuthException | PayPalRESTException | IOException | InterruptedException e) {
+				log.error(e, e.getCause());
+				Assert.isTrue(false, "RouteOfferService.deny.error.RefundToSender");
+			}
+		}
 		
 		routeOffer.setAcceptedByCarrier(false); // The offer is not accepted.
 		routeOffer.setRejectedByCarrier(true); // The offer is rejected.
