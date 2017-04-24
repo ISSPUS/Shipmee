@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.Null;
 
 import org.junit.Test;
@@ -1822,6 +1823,206 @@ public class FeePaymentTest extends AbstractTest {
 		
 		numberOfPaymentAcceptedAfter = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 
+		unauthenticate();
+		
+		Assert.isTrue(numberOfPaymentAcceptedAfter - numberOfPaymentAcceptedBefore == 1, "Number of Accepted Payments must increase");
+		
+	}
+	
+	@Test(expected = ConstraintViolationException.class)
+	public void negativeCreatePaymentRoute5(){
+		
+		Pageable page = new PageRequest(0, 10);
+		
+		Route route;
+		
+		Integer numberOfPaymentsBefore;
+		Integer numberOfPaymentsAfter;
+		Integer numberOfPaymentPendingBefore;
+		Integer numberOfPaymentPendingAfter;
+		Integer numberOfPaymentAcceptedBefore;
+		Integer numberOfPaymentAcceptedAfter;
+				
+		authenticate("user1");
+		
+		Vehicle vehicle;
+		SizePrice sizePrice;
+		
+		route = routeService.create();
+		route.setOrigin("Sevilla");
+		route.setDestination("Luego");
+		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		route.setDepartureTime(departureTime);
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		route.setArriveTime(arrivalTime);
+		route.setItemEnvelope("Open");
+		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		route.setVehicle(vehicle);
+		
+		sizePrice = sizePriceService.create();
+		sizePrice.setPrice(10.0);
+		sizePrice.setSize("L");
+
+		route = routeService.save(route);
+		
+		sizePrice.setRoute(route);
+		sizePrice = sizePriceService.save(sizePrice);
+				
+		unauthenticate();
+		
+		FeePaymentForm feePaymentForm;
+		FeePayment payment;
+		CreditCard creditCard;
+		
+		authenticate("user2");
+		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
+				
+		route = routeService.findOne(route.getId());
+		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
+		
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		creditCard = new CreditCard();
+		creditCard.setHolderName("Nombre de Prueba");
+		creditCard.setBrandName("VISA");
+		creditCard.setNumber("4929772835813522");
+		creditCard.setExpirationMonth(6);
+		creditCard.setExpirationYear(2020);
+		creditCard.setCvvCode(1500);
+		feePaymentForm.setCreditCard(creditCard);
+		
+		payment = feePaymentFormService.reconstruct(feePaymentForm);
+		payment = feePaymentService.save(payment);
+				
+		numberOfPaymentsAfter = feePaymentService.findAll().size();
+
+		unauthenticate();
+		
+		authenticate("user1");
+		
+		routeOfferService.accept(feePaymentForm.getOfferId());
+		
+		unauthenticate();
+		
+		authenticate("user2");
+		
+		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+
+		unauthenticate();
+				
+		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
+		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
+
+		authenticate("user2");
+		
+		payment = feePaymentService.findOne(payment.getId());
+		payment.setType("Accepted");
+		payment = feePaymentService.save(payment);
+		
+		numberOfPaymentAcceptedAfter = (int) feePaymentService.findAllAccepted(page).getTotalElements();
+		
+		unauthenticate();
+		
+		Assert.isTrue(numberOfPaymentAcceptedAfter - numberOfPaymentAcceptedBefore == 1, "Number of Accepted Payments must increase");
+		
+	}
+	
+	@Test(expected = ConstraintViolationException.class)
+	public void negativeCreatePaymentRoute6(){
+		
+		Pageable page = new PageRequest(0, 10);
+		
+		Route route;
+		
+		Integer numberOfPaymentsBefore;
+		Integer numberOfPaymentsAfter;
+		Integer numberOfPaymentPendingBefore;
+		Integer numberOfPaymentPendingAfter;
+		Integer numberOfPaymentAcceptedBefore;
+		Integer numberOfPaymentAcceptedAfter;
+				
+		authenticate("user1");
+		
+		Vehicle vehicle;
+		SizePrice sizePrice;
+		
+		route = routeService.create();
+		route.setOrigin("Sevilla");
+		route.setDestination("Luego");
+		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		route.setDepartureTime(departureTime);
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		route.setArriveTime(arrivalTime);
+		route.setItemEnvelope("Open");
+		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		route.setVehicle(vehicle);
+		
+		sizePrice = sizePriceService.create();
+		sizePrice.setPrice(10.0);
+		sizePrice.setSize("L");
+
+		route = routeService.save(route);
+		
+		sizePrice.setRoute(route);
+		sizePrice = sizePriceService.save(sizePrice);
+				
+		unauthenticate();
+		
+		FeePaymentForm feePaymentForm;
+		FeePayment payment;
+		CreditCard creditCard;
+		
+		authenticate("user2");
+		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
+				
+		route = routeService.findOne(route.getId());
+		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
+		
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		creditCard = new CreditCard();
+		creditCard.setHolderName("Nombre de Prueba");
+		creditCard.setBrandName("VISA");
+		creditCard.setNumber("a");
+		creditCard.setExpirationMonth(6);
+		creditCard.setExpirationYear(2020);
+		creditCard.setCvvCode(123);
+		feePaymentForm.setCreditCard(creditCard);
+		
+		payment = feePaymentFormService.reconstruct(feePaymentForm);
+		payment = feePaymentService.save(payment);
+				
+		numberOfPaymentsAfter = feePaymentService.findAll().size();
+
+		unauthenticate();
+		
+		authenticate("user1");
+		
+		routeOfferService.accept(feePaymentForm.getOfferId());
+		
+		unauthenticate();
+		
+		authenticate("user2");
+		
+		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+
+		unauthenticate();
+				
+		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
+		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
+
+		authenticate("user2");
+		
+		payment = feePaymentService.findOne(payment.getId());
+		payment.setType("Accepted");
+		payment = feePaymentService.save(payment);
+		
+		numberOfPaymentAcceptedAfter = (int) feePaymentService.findAllAccepted(page).getTotalElements();
+		
 		unauthenticate();
 		
 		Assert.isTrue(numberOfPaymentAcceptedAfter - numberOfPaymentAcceptedBefore == 1, "Number of Accepted Payments must increase");
