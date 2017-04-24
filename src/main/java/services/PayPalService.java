@@ -107,7 +107,7 @@ public class PayPalService {
 		} catch (SSLConfigurationException | InvalidCredentialException | HttpErrorException
 				| InvalidResponseDataException | ClientActionRequiredException | MissingCredentialException
 				| OAuthException | IOException | InterruptedException e) {
-			log.error(e);
+			log.error(e, e.getCause());
 			return null;
 		}
 		
