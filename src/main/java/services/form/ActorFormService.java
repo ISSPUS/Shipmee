@@ -1,5 +1,6 @@
 package services.form;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,8 @@ import utilities.ServerConfig;
 @Service
 @Transactional
 public class ActorFormService {
+	
+	static Logger log = Logger.getLogger(ActorFormService.class);
 
 	// Supporting services ----------------------------------------------------
 	
@@ -80,6 +83,8 @@ public class ActorFormService {
 		Actor actActor;
 		
 		userWithUserName = actorService.findByUsername(actorForm.getUserName());
+		
+		validator.validate(actorForm, binding);
 
 		
 		// Chequear nombre de usuario único
@@ -90,8 +95,8 @@ public class ActorFormService {
 			
 			this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
 					"repeatedPassword", "user.passwordMismatch", null);
-			this.addBinding(binding, actorForm.getPassword().length() > 5,
-					"password", "javax.validation.constraints.Min.message", null);
+			this.addBinding(binding, actorForm.getPassword().length() > 4 && actorForm.getPassword().length() < 33,
+					"password", "org.hibernate.validator.constraints.Length.message.personalize", null);
 			this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
 			
 			if (!actorService.checkLogin()){
@@ -114,9 +119,6 @@ public class ActorFormService {
 					// User
 				this.addBinding(binding, actorForm.getAcceptLegalCondition(),
 						"acceptLegalCondition", "user.rejectedLegalConditions", null);
-
-				
-				validator.validate(actorForm, binding);
 				
 				return res;
 			}else{
@@ -133,8 +135,10 @@ public class ActorFormService {
 				// Password modified
 				this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
 						"repeatedPassword", "user.passwordMismatch", null);
-				this.addBinding(binding, actorForm.getPassword().length() > 5,
-						"password", "javax.validation.constraints.Min.message", null);
+				
+				this.addBinding(binding, actorForm.getPassword().length() > 4 && actorForm.getPassword().length() < 33,
+				"password", "org.hibernate.validator.constraints.Length.message.personalize", null);
+				
 			}
 			
 			if(!actorForm.getUserName().equals(actActor.getUserAccount().getUsername())){
@@ -162,43 +166,38 @@ public class ActorFormService {
 				CommonsMultipartFile imageProfileUpload = actorForm.getPhoto();
 				CommonsMultipartFile imageDniUpload = actorForm.getDniPhoto();
 				
-				if (imageProfileUpload.getSize()>0){
-					try {
-						nameImgProfile = ImageUpload.subirImagen(imageProfileUpload,ServerConfig.getPATH_UPLOAD());
+				if (!binding.hasErrors()) {
 
-					} catch (Exception e) {
-					
+					if (imageProfileUpload.getSize() > 0) {
+						try {
+							nameImgProfile = ImageUpload.subirImagen(imageProfileUpload, ServerConfig.getPATH_UPLOAD());
+
+						} catch (Exception e) {
+							log.error(e, e.getCause());
+						}
+						Assert.notNull(nameImgProfile, "error.upload.image");
+						res.setPhoto(ServerConfig.getURL_IMAGE() + nameImgProfile);
+
 					}
-					Assert.notNull(nameImgProfile, "error.upload.image");
-					res.setPhoto(ServerConfig.getURL_IMAGE() + nameImgProfile);
-
-				}
-				if (imageDniUpload.getSize()>0){
-					try { 
-						nameImgDni = ImageUpload.subirImagen(imageDniUpload,ServerConfig.getPATH_UPLOAD());
-
-					} catch (Exception e) {
-						
+					if (imageDniUpload.getSize() > 0) {
+						try {
+							nameImgDni = ImageUpload.subirImagen(imageDniUpload, ServerConfig.getPATH_UPLOAD());
+						} catch (Exception e) {
+							log.error(e, e.getCause());
+						}
+						Assert.notNull(nameImgDni, "error.upload.image");
+						res.setDniPhoto(ServerConfig.getURL_IMAGE() + nameImgDni);
 					}
-				Assert.notNull(nameImgDni, "error.upload.image");
-				res.setDniPhoto(ServerConfig.getURL_IMAGE() + nameImgDni);
+
+					uAccount.setUsername(actorForm.getUserName());
+
+					if (!actorForm.getPassword().equals("") || !actorForm.getRepeatedPassword().equals("")) {
+						uAccount.setPassword(actorForm.getPassword());
+
+						uAccount = userAccountService.encodePassword(uAccount);
+					}
+					res.setUserAccount(uAccount);
 				}
-				
-
-
-				
-
-				
-				uAccount.setUsername(actorForm.getUserName());
-				
-				if(!actorForm.getPassword().equals("") || !actorForm.getRepeatedPassword().equals("")){
-					uAccount.setPassword(actorForm.getPassword());
-				
-					uAccount = userAccountService.encodePassword(uAccount);
-				}
-				res.setUserAccount(uAccount);
-				
-				validator.validate(actorForm, binding);
 				
 				return res;
 			}else{

@@ -134,9 +134,9 @@
 											</div>
 										</div>
 										
-										<div class="row info1 col-xs-7 col-sm-9">
+										<div class="row info1 col-xs-11 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
-											<div class="col-xs-6">
+											<div class="col-xs-11">
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
 												<span class="titles-info">${shipment.itemEnvelope}</span>
 											
@@ -200,26 +200,29 @@
 
 
 
-								<div class="row info1 col-xs-12 col-sm-12 text-center">
+								<div class="row info1 col-xs-12 col-sm-12 text-center" style="margin-bottom:1%;">
 											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
 											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
 
 								</div>
+							
 								
-								<div class="row info1 col-xs-12 col-sm-12 text-center">
-											
-											<input type=submit class="btn-sm btn-llevar btn btn-success ok btn-danger contraoferta"
-											value= "<spring:message code="route.offer" />" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"></input>
 								
-								</div>
-								
-								<div class="row info1 col-xs-12 col-sm-12 text-center">
-											
-											<input type=submit class="btn-sm btn btn-success ok button-ok btn-block"
-											value= "<spring:message code="shipment.offers" />" onclick="location.href = 'shipmentOffer/user/list.do?shipmentId=${shipment.id}';"></input>
-								
-								</div>
+								<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
+						<button type="submit" class="btn button-view btn-primary"
+							onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
+							<span class="fa fa-plus-circle"></span>
+							<spring:message code="offer.new" />
+						</button>
+
+						<button type="submit" class="btn btn-primary"
+							onclick="location.href = 'shipmentOffer/user/list.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
+							<span class="fa fa-list"></span> 
+							<spring:message code="offer.list" />
+						</button>
+
+					</div>
 								
 							</div>
 							
