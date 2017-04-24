@@ -4,8 +4,9 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
@@ -45,9 +46,11 @@ public class CreditCard{
 	}
 	
 	@NotBlank
-	@CreditCardNumber
-	@NotNull
 	@Valid
+	@NotNull(message = "Credit card number is required")
+	@Size(min = 12, max = 16, message = "Credit card number must be between 12 and 16 digits long")
+	@Digits(fraction = 0, integer = 16)
+	@CreditCardNumber
 	public String getNumber() {
 		return number;
 	}

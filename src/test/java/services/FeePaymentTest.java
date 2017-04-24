@@ -6,7 +6,6 @@ import java.util.GregorianCalendar;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
-import javax.validation.constraints.Null;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
