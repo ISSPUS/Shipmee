@@ -195,7 +195,7 @@ public class RouteService {
 	// Other business methods -------------------------------------------------
 	
 	public Page<Route> searchRoute(String origin, String destination, String date, String hour, String envelope, String itemSize,Pageable page){
-		Assert.isTrue(origin != "" && destination != "");
+		Assert.isTrue(!origin.equals("") && !destination.equals(""));
 		Page<Route> result;
 		SimpleDateFormat formatter;
 		Date time;
@@ -205,10 +205,10 @@ public class RouteService {
 		time = null;
 		finalDate = null;
 		
-		if(date!="" && date!=null){
+		if(date!=null && !date.equals("")){
 			try {
 				finalDate = formatter.parse(date+" 00:00");
-				if(hour!="" && hour!=null){
+				if(hour!=null && !hour.equals("")){
 					time = formatter.parse(date+" "+hour);
 				}
 			} catch (ParseException e) {

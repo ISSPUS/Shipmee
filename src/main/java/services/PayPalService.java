@@ -219,7 +219,7 @@ public class PayPalService {
 		while (true) {
 			Random rnd = new Random();
 			while (salt.length() < PayPalConfig.LENGTH_TRACKING_ID) {
-				int index = (int) (rnd.nextFloat() * CARACTERES.length());
+				int index = (int) (rnd.nextInt() * CARACTERES.length());
 				salt.append(CARACTERES.charAt(index));
 			}
 			saltStr = salt.toString();

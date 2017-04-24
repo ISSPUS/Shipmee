@@ -161,7 +161,10 @@ public class ActorService {
 	}
 	
 	public Actor resetPassword(Actor actor, String password){
-		Assert.isTrue(actor!=null && password!=null && password!="");
+		Assert.notNull(actor);
+		Assert.notNull(password);
+		Assert.isTrue(!password.equals(""));
+		
 		Md5PasswordEncoder encoder;
 		String hash;
 

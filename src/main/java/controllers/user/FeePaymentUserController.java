@@ -106,9 +106,6 @@ public class FeePaymentUserController extends AbstractController {
 				 */
 				switch (feePaymentForm.getType()) {
 				case 1:
-					redirect = "redirect:../../routeOffer/user/list.do?routeId=";
-					break;
-					
 				case 2:
 					redirect = "redirect:../../routeOffer/user/list.do?routeId=";
 					break;
