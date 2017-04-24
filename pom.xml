@@ -38,7 +38,10 @@
             src/main/java/services/form/**,
             src/main/java/services/ActorService.*,
             src/main/java/services/AdministratorService.*,
+            src/main/java/services/PayPalService.*,
             src/main/java/services/SizePriceService.*
+            src/main/java/domain/FundTransferPreference.*
+            src/main/java/domain/PayPalObject.*
         </sonar.coverage.exclusions>
 	</properties>
 
@@ -133,12 +136,15 @@
 							<exclude>domain/form/**</exclude>
 							<exclude>domain/DomainEntity.*</exclude>
 							<exclude>domain/CreditCard.*</exclude>
+							<exclude>domain/FundTransferPreference.*</exclude>
+							<exclude>domain/PayPalObject.*</exclude>
 							<exclude>security/**</exclude>
 							<exclude>repositories/**</exclude>
 							<exclude>utilities/**</exclude>
 							<exclude>services/form/**</exclude>
 							<exclude>services/ActorService.*</exclude>
 							<exclude>services/AdministratorService.*</exclude>
+							<exclude>services/PayPalService.*</exclude>
 							<exclude>services/SizePriceService.*</exclude>
 						</excludes>
 					</instrumentation>
