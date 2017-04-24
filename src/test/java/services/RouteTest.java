@@ -299,9 +299,9 @@ public class RouteTest extends AbstractTest {
 	@Test
 	public void positiveDeleteRoute1(){
 		
-		authenticate("user2");
+		authenticate("user3");
 		
-		Route routeBefore = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		Route routeBefore = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
 		Integer numberOfRouteBefore = routeService.findAll().size();
 		
 		routeService.delete(routeBefore);
