@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.transaction.Transactional;
+import javax.validation.constraints.Null;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -439,7 +440,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void negativeCreatePaymentShipmentOffer3(){
 		
 		Pageable page = new PageRequest(0, 10);
@@ -638,13 +639,8 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentPendingAfter;
 		Integer numberOfPaymentAcceptedBefore;
 		Integer numberOfPaymentAcceptedAfter;
-		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
+				
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -677,6 +673,10 @@ public class FeePaymentTest extends AbstractTest {
 		
 		authenticate("user2");
 		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
+		
 		route = routeService.findOne(route.getId());
 		
 		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
@@ -693,7 +693,6 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
-		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
 		
@@ -702,11 +701,17 @@ public class FeePaymentTest extends AbstractTest {
 		routeOfferService.accept(feePaymentForm.getOfferId());
 		
 		unauthenticate();
+		
+		authenticate("user2");
+		
+		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		
+		unauthenticate();
 				
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
 		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
 
-		authenticate("user1");
+		authenticate("user2");
 		
 		payment = feePaymentService.findOne(payment.getId());
 		payment.setType("Accepted");
@@ -734,12 +739,7 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentRejectedBefore;
 		Integer numberOfPaymentRejectedAfter;
 		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentRejectedBefore = (int) feePaymentService.findAllRejected(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -772,6 +772,10 @@ public class FeePaymentTest extends AbstractTest {
 		
 		authenticate("user2");
 		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentRejectedBefore = (int) feePaymentService.findAllRejected(page).getTotalElements();
+		
 		route = routeService.findOne(route.getId());
 		
 		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
@@ -788,7 +792,6 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
-		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
 		
@@ -797,11 +800,17 @@ public class FeePaymentTest extends AbstractTest {
 		routeOfferService.accept(feePaymentForm.getOfferId());
 		
 		unauthenticate();
+		
+		authenticate("user2");
+		
+		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		
+		unauthenticate();
 				
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
 		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
 
-		authenticate("user1");
+		authenticate("user2");
 		
 		payment = feePaymentService.findOne(payment.getId());
 		payment.setType("Rejected");
@@ -829,12 +838,7 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentAcceptedBefore;
 		Integer numberOfPaymentAcceptedAfter;
 		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -867,6 +871,10 @@ public class FeePaymentTest extends AbstractTest {
 		
 		authenticate("user2");
 		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
+		
 		route = routeService.findOne(route.getId());
 		
 		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
@@ -883,7 +891,6 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
-		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
 		
@@ -892,11 +899,17 @@ public class FeePaymentTest extends AbstractTest {
 		routeOfferService.accept(feePaymentForm.getOfferId());
 		
 		unauthenticate();
+		
+		authenticate("user2");
+		
+		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		
+		unauthenticate();
 				
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
 		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
 
-		authenticate("user1");
+		authenticate("user2");
 		
 		payment = feePaymentService.findOne(payment.getId());
 		payment.setType("blablabla");
@@ -923,13 +936,8 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentPendingAfter;
 		Integer numberOfPaymentAcceptedBefore;
 		Integer numberOfPaymentAcceptedAfter;
-		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
+				
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -961,6 +969,10 @@ public class FeePaymentTest extends AbstractTest {
 		CreditCard creditCard;
 		
 		authenticate("user2");
+		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		route = routeService.findOne(route.getId());
 		
@@ -978,7 +990,6 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
-		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
 		
@@ -987,11 +998,17 @@ public class FeePaymentTest extends AbstractTest {
 		routeOfferService.accept(feePaymentForm.getOfferId());
 		
 		unauthenticate();
+		
+		authenticate("user2");
+		
+		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+
+		unauthenticate();
 				
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
 		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
 
-		authenticate("user1");
+		authenticate("user2");
 		
 		payment = feePaymentService.findOne(payment.getId());
 		payment.setType("Accepted");
@@ -1005,7 +1022,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void negativeCreatePaymentRouteOffer3(){
 		
 		Pageable page = new PageRequest(0, 10);
@@ -1018,13 +1035,8 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentPendingAfter;
 		Integer numberOfPaymentAcceptedBefore;
 		Integer numberOfPaymentAcceptedAfter;
-		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
+				
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -1057,6 +1069,10 @@ public class FeePaymentTest extends AbstractTest {
 		
 		authenticate("user2");
 		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
+		
 		route = routeService.findOne(route.getId());
 		
 		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
@@ -1073,8 +1089,7 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
-		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-
+		
 		unauthenticate();
 		
 		authenticate("user1");
@@ -1082,11 +1097,17 @@ public class FeePaymentTest extends AbstractTest {
 		routeOfferService.accept(feePaymentForm.getOfferId());
 		
 		unauthenticate();
+		
+		authenticate("user2");
+		
+		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		
+		unauthenticate();
 				
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
 		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
 
-		authenticate("user1");
+		authenticate("user2");
 		
 		payment = feePaymentService.findOne(payment.getId());
 		payment.setType("Accepted");
@@ -1113,13 +1134,8 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentPendingAfter;
 		Integer numberOfPaymentAcceptedBefore;
 		Integer numberOfPaymentAcceptedAfter;
-		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
+				
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -1152,6 +1168,10 @@ public class FeePaymentTest extends AbstractTest {
 		
 		authenticate("user2");
 		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
+		
 		route = routeService.findOne(route.getId());
 		
 		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
@@ -1168,7 +1188,6 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
-		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
 		
@@ -1176,6 +1195,12 @@ public class FeePaymentTest extends AbstractTest {
 		
 		routeOfferService.accept(feePaymentForm.getOfferId());
 		
+		unauthenticate();
+		
+		authenticate("user2");
+		
+		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+
 		unauthenticate();
 				
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
@@ -1189,7 +1214,7 @@ public class FeePaymentTest extends AbstractTest {
 				
 		unauthenticate();
 		
-		authenticate("user1");
+		authenticate("user2");
 		
 		numberOfPaymentAcceptedAfter = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
@@ -1212,13 +1237,8 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentPendingAfter;
 		Integer numberOfPaymentAcceptedBefore;
 		Integer numberOfPaymentAcceptedAfter;
-		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
+				
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -1250,6 +1270,10 @@ public class FeePaymentTest extends AbstractTest {
 		CreditCard creditCard;
 		
 		authenticate("user2");
+		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 				
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
@@ -1266,8 +1290,19 @@ public class FeePaymentTest extends AbstractTest {
 		
 		payment = feePaymentFormService.reconstruct(feePaymentForm);
 		payment = feePaymentService.save(payment);
-		
+				
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
+
+		unauthenticate();
+		
+		authenticate("user1");
+		
+		routeOfferService.accept(feePaymentForm.getOfferId());
+		
+		unauthenticate();
+		
+		authenticate("user2");
+		
 		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
@@ -1275,7 +1310,7 @@ public class FeePaymentTest extends AbstractTest {
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
 		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
 
-		authenticate("user1");
+		authenticate("user2");
 		
 		payment = feePaymentService.findOne(payment.getId());
 		payment.setType("Accepted");
@@ -1303,12 +1338,7 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentRejectedBefore;
 		Integer numberOfPaymentRejectedAfter;
 		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentRejectedBefore = (int) feePaymentService.findAllRejected(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -1340,6 +1370,10 @@ public class FeePaymentTest extends AbstractTest {
 		CreditCard creditCard;
 		
 		authenticate("user2");
+		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentRejectedBefore = (int) feePaymentService.findAllRejected(page).getTotalElements();
 				
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
@@ -1358,6 +1392,17 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
+
+		unauthenticate();
+		
+		authenticate("user1");
+		
+		routeOfferService.accept(feePaymentForm.getOfferId());
+		
+		unauthenticate();
+		
+		authenticate("user2");
+		
 		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
@@ -1365,7 +1410,7 @@ public class FeePaymentTest extends AbstractTest {
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
 		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
 
-		authenticate("user1");
+		authenticate("user2");
 		
 		payment = feePaymentService.findOne(payment.getId());
 		payment.setType("Rejected");
@@ -1392,13 +1437,8 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentPendingAfter;
 		Integer numberOfPaymentAcceptedBefore;
 		Integer numberOfPaymentAcceptedAfter;
-		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
+				
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -1430,6 +1470,10 @@ public class FeePaymentTest extends AbstractTest {
 		CreditCard creditCard;
 		
 		authenticate("user2");
+		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 				
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
@@ -1448,6 +1492,17 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
+
+		unauthenticate();
+		
+		authenticate("user1");
+		
+		routeOfferService.accept(feePaymentForm.getOfferId());
+		
+		unauthenticate();
+		
+		authenticate("user2");
+		
 		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
@@ -1455,7 +1510,7 @@ public class FeePaymentTest extends AbstractTest {
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
 		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
 
-		authenticate("user1");
+		authenticate("user2");
 		
 		payment = feePaymentService.findOne(payment.getId());
 		payment.setType("blablabla");
@@ -1482,13 +1537,8 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentPendingAfter;
 		Integer numberOfPaymentAcceptedBefore;
 		Integer numberOfPaymentAcceptedAfter;
-		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
+				
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -1520,6 +1570,10 @@ public class FeePaymentTest extends AbstractTest {
 		CreditCard creditCard;
 		
 		authenticate("user2");
+		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 				
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
@@ -1538,6 +1592,17 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
+
+		unauthenticate();
+		
+		authenticate("user1");
+		
+		routeOfferService.accept(feePaymentForm.getOfferId());
+		
+		unauthenticate();
+		
+		authenticate("user2");
+		
 		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
@@ -1545,7 +1610,7 @@ public class FeePaymentTest extends AbstractTest {
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
 		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
 
-		authenticate("user1");
+		authenticate("user2");
 		
 		payment = feePaymentService.findOne(payment.getId());
 		payment.setType("Accepted");
@@ -1559,7 +1624,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void negativetiveCreatePaymentRoute3(){
 		
 		Pageable page = new PageRequest(0, 10);
@@ -1572,13 +1637,8 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentPendingAfter;
 		Integer numberOfPaymentAcceptedBefore;
 		Integer numberOfPaymentAcceptedAfter;
-		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
+				
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -1610,6 +1670,10 @@ public class FeePaymentTest extends AbstractTest {
 		CreditCard creditCard;
 		
 		authenticate("user2");
+		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 				
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
@@ -1628,6 +1692,17 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
+
+		unauthenticate();
+		
+		authenticate("user1");
+		
+		routeOfferService.accept(feePaymentForm.getOfferId());
+		
+		unauthenticate();
+		
+		authenticate("user2");
+		
 		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
@@ -1635,7 +1710,7 @@ public class FeePaymentTest extends AbstractTest {
 		Assert.isTrue(numberOfPaymentsAfter - numberOfPaymentsBefore == 1, "Number of Payment must increase");
 		Assert.isTrue(numberOfPaymentPendingAfter - numberOfPaymentPendingBefore == 1, "Number of Pending Payments must increase");
 
-		authenticate("user1");
+		authenticate("user2");
 		
 		payment = feePaymentService.findOne(payment.getId());
 		payment.setType("Accepted");
@@ -1663,12 +1738,7 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentAcceptedBefore;
 		Integer numberOfPaymentAcceptedAfter;
 		
-		numberOfPaymentsBefore = feePaymentService.findAll().size();
-		
 		authenticate("user1");
-		
-		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
-		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 		
 		Vehicle vehicle;
 		SizePrice sizePrice;
@@ -1700,6 +1770,10 @@ public class FeePaymentTest extends AbstractTest {
 		CreditCard creditCard;
 		
 		authenticate("user2");
+		
+		numberOfPaymentsBefore = feePaymentService.findAll().size();
+		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 				
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
@@ -1718,6 +1792,17 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentsAfter = feePaymentService.findAll().size();
+
+		unauthenticate();
+		
+		authenticate("user1");
+		
+		routeOfferService.accept(feePaymentForm.getOfferId());
+		
+		unauthenticate();
+		
+		authenticate("user2");
+		
 		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 
 		unauthenticate();
@@ -1733,7 +1818,7 @@ public class FeePaymentTest extends AbstractTest {
 				
 		unauthenticate();
 		
-		authenticate("user1");
+		authenticate("user2");
 		
 		numberOfPaymentAcceptedAfter = (int) feePaymentService.findAllAccepted(page).getTotalElements();
 

@@ -1,13 +1,16 @@
 package services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -97,7 +100,9 @@ public class FeePaymentService {
 		FeePayment feePaymentPreSave;
 		PayPalObject po;
 		
-		user = userService.findByPrincipal();
+		user = userService.findByPrincipal();		
+		Assert.isTrue(user.getId() == feePayment.getPurchaser().getId());
+		
 		po = payPalService.findByFeePaymentId(feePayment.getId());
 
 		if(feePayment.getId() == 0) {
@@ -169,11 +174,16 @@ public class FeePaymentService {
 
 	public Page<FeePayment> findAllPendingByUser(Pageable pageable) {
 		Page<FeePayment> result;
+		List<FeePayment> allFeePaymentsPending;
 		User user;
 		
 		user = userService.findByPrincipal();
+		allFeePaymentsPending = new ArrayList<FeePayment>();
 
-		result = feePaymentRepository.findAllPendingByUser(user.getId(), pageable);
+		allFeePaymentsPending.addAll(feePaymentRepository.findAllPendingRouteOffersByUser(user.getId()));
+		allFeePaymentsPending.addAll(feePaymentRepository.findAllPendingShipmentOffersByUser(user.getId()));
+		
+		result = new PageImpl<FeePayment>(allFeePaymentsPending, pageable, allFeePaymentsPending.size());
 		Assert.notNull(result);
 		
 		return result;
