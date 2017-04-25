@@ -52,7 +52,7 @@ public class PayPal {
 			throws SSLConfigurationException, InvalidCredentialException, UnsupportedEncodingException,
 			HttpErrorException, InvalidResponseDataException, ClientActionRequiredException, MissingCredentialException,
 			OAuthException, IOException, InterruptedException {
-		Assert.isTrue(receiverEmail.length() > 0);
+//		Assert.isTrue(receiverEmail.length() > 0);
 		Assert.isTrue(total > commission);
 
 		RequestEnvelope env = new RequestEnvelope("en_US");
@@ -64,24 +64,30 @@ public class PayPal {
 		Receiver rec = new Receiver();
 		rec.setAmount(total);
 		rec.setEmail(PayPalConfig.getBusinessEmail());
-		rec.setPrimary(true);
-		receiver.add(rec);
 
-		Receiver rec2 = new Receiver();
-		rec2.setAmount(total - commission);
-		rec2.setEmail(receiverEmail);
-		rec2.setPrimary(false);
-		receiver.add(rec2);
+		payRequest.setActionType("CREATE");  // En caso de querer actualizar el pago únicamente
+
+
+		if (receiverEmail != null && !receiverEmail.equals("")) {
+			rec.setPrimary(true);
+			
+			Receiver rec2 = new Receiver();
+			rec2.setAmount(total - commission);
+			rec2.setEmail(receiverEmail);
+			rec2.setPrimary(false);
+			receiver.add(rec2);
+			payRequest.setActionType("PAY_PRIMARY");	// En caso de querer pagar a la empresa y dejar el pago al usuario final autorizado
+			payRequest.setFeesPayer("PRIMARYRECEIVER");
+
+		}
+		
+		receiver.add(rec);
 
 		ReceiverList receiverlst = new ReceiverList(receiver);
 
 		payRequest.setReceiverList(receiverlst);
-		// payRequest.setActionType("CREATE");  // En caso de querer actualizar el pago únicamente
-		payRequest.setActionType("PAY_PRIMARY");	// En caso de querer pagar a la empresa y dejar el pago al usuario final autorizado
 		payRequest.setCurrencyCode("EUR");
-
-		payRequest.setFeesPayer("PRIMARYRECEIVER");
-
+		
 		// responseEnvelope.timestamp=2017-04-19T04%3A00%3A27.676-07%3A00&responseEnvelope.ack=Success&responseEnvelope.correlationId=de635edcbc526&responseEnvelope.build=32250686&payKey=AP-8WD959703H6814522&paymentExecStatus=CREATED
 
 		// Comprobar que el trackingId sea único
@@ -201,7 +207,9 @@ public class PayPal {
 
 		List<Receiver> receiverList = new ArrayList<Receiver>();
 		receiverList.add(rec1);
-		receiverList.add(rec2);
+		if(rec2 != null){
+			receiverList.add(rec2);
+		}
 		ReceiverList receiverlst = new ReceiverList(receiverList);
 		req.setReceiverList(receiverlst);
 

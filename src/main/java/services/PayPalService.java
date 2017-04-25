@@ -20,6 +20,7 @@ import com.paypal.sdk.exceptions.OAuthException;
 import com.paypal.svcs.types.ap.ExecutePaymentResponse;
 import com.paypal.svcs.types.ap.PayResponse;
 import com.paypal.svcs.types.ap.PaymentDetailsResponse;
+import com.paypal.svcs.types.ap.Receiver;
 import com.paypal.svcs.types.ap.RefundResponse;
 
 import domain.FeePayment;
@@ -86,6 +87,7 @@ public class PayPalService {
 		
 		FeePayment fp;
 		PayResponse res;
+		String carrierPayPalEmail;
 		
 		fp = feePaymentService.findOne(feePaymentId);
 		
@@ -96,11 +98,16 @@ public class PayPalService {
 
 		payObject = this.save(payObject);	// Comentar para evitar tantas escrituras a la DB
 		
-		Assert.isTrue(!fp.getCarrier().getFundTransferPreference().getPaypalEmail().equals(""), "PayPalService.authorizePay.error.CarrierWithoutPayPalEmail");
+// 		Assert.isTrue(!fp.getCarrier().getFundTransferPreference().getPaypalEmail().equals(""), "PayPalService.authorizePay.error.CarrierWithoutPayPalEmail");
+		try{
+			carrierPayPalEmail = fp.getCarrier().getFundTransferPreference().getPaypalEmail();
+		} catch (NullPointerException e) {
+			carrierPayPalEmail = "";
+		}
 
 		try {
 			res = PayPal.startAdaptiveTransaction(
-					fp.getCarrier().getFundTransferPreference().getPaypalEmail(), fp.getAmount() + fp.getCommission(),
+					carrierPayPalEmail, fp.getAmount() + fp.getCommission(),
 					fp.getCommission(),
 					payObject.getTrackingId(),
 					"user/payPal/returnPayment.do");
@@ -147,16 +154,15 @@ public class PayPalService {
 
 		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId());
 
-		Assert.isTrue(payObject.getStatus().equals("INCOMPLETE"));
+		if (payObject.getStatus().equals("INCOMPLETE")) {
+			res = PayPal.adaptiveSendToSenconds(payObject.getPayKey());
 
-		res = PayPal.adaptiveSendToSenconds(payObject.getPayKey());
+			if (res.getError().size() != 0) {
+				log.error(res.getError().get(0).getMessage());
 
-		if (res.getError().size() != 0){
-			log.error(res.getError().get(0).getMessage());
-			
-			Assert.isTrue(res.getError().size() == 0,
-					"PayPalService.payToShipper.error.payPalError");
-			
+				Assert.isTrue(res.getError().size() == 0, "PayPalService.payToShipper.error.payPalError");
+
+			}
 		}
 	}
 	
@@ -165,26 +171,35 @@ public class PayPalService {
 			HttpErrorException, InvalidResponseDataException, ClientActionRequiredException, MissingCredentialException,
 			OAuthException, PayPalRESTException, IOException, InterruptedException {
 		RefundResponse res;
-		
+
 		PayPalObject po = this.findByFeePaymentId(feePaymentID);
 
 		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId());
 
-		// Actualmente no tenemos permsisos por parte de PayPal para devolver una transacción ya pagada al usuario final
-		//		por lo que ese podría ser el error
-		Assert.isTrue(payObject.getStatus().equals("INCOMPLETE"), "PayPalService.refundToSender.error.NotIncomplete");
+		// Actualmente no tenemos permsisos por parte de PayPal para devolver
+		// una transacción ya pagada al usuario final
+		// por lo que ese podría ser el error
 
-		res = PayPal.refundAdaptiveTransaction(po.getTrackingId(), 
-				payObject.getPaymentInfoList().getPaymentInfo().get(0).getReceiver(), 
-				payObject.getPaymentInfoList().getPaymentInfo().get(1).getReceiver());
+		Receiver rec1 = null;
+		Receiver rec2 = null;
 
-		if (res.getError().size() != 0){
-			log.error(res.getError().get(0).getMessage());
-			
-			Assert.isTrue(res.getError().size() == 0,
-					"PayPalService.refundToSender.error.payPalError");
-			
+		if (!payObject.getPaymentInfoList().getPaymentInfo().isEmpty()) {
+			rec1 = payObject.getPaymentInfoList().getPaymentInfo().get(0).getReceiver();
 		}
+
+		if (payObject.getPaymentInfoList().getPaymentInfo().size() > 1) {
+			rec2 = payObject.getPaymentInfoList().getPaymentInfo().get(1).getReceiver();
+		}
+
+		res = PayPal.refundAdaptiveTransaction(po.getTrackingId(), rec1, rec2);
+
+		if (res.getError().size() != 0) {
+			log.error(res.getError().get(0).getMessage());
+
+			Assert.isTrue(res.getError().size() == 0, "PayPalService.refundToSender.error.payPalError");
+
+		}
+
 	}
 
 	
@@ -219,7 +234,7 @@ public class PayPalService {
 		while (true) {
 			Random rnd = new Random();
 			while (salt.length() < PayPalConfig.LENGTH_TRACKING_ID) {
-				int index = rnd.nextInt(CARACTERES.length() + 1);
+				int index = rnd.nextInt(CARACTERES.length());
 				salt.append(CARACTERES.charAt(index));
 			}
 			saltStr = salt.toString();

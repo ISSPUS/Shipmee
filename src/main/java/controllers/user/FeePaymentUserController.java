@@ -139,7 +139,6 @@ public class FeePaymentUserController extends AbstractController {
 
 		try {
 			feePayment = feePaymentService.findOne(feepaymentId);
-			feePayment.setType(type);
 			
 			po = payPalService.findByFeePaymentId(feepaymentId);
 			
@@ -148,6 +147,8 @@ public class FeePaymentUserController extends AbstractController {
 			} else if (type.equals("Rejected") && po != null){
 				payPalService.refundToSender(feepaymentId);
 			}
+			
+			feePayment.setType(type);
 			
 			feePaymentService.save(feePayment);
 
