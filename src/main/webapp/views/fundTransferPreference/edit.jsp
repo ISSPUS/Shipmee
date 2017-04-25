@@ -176,7 +176,7 @@ input:valid ~ label {
 		<div style="margin: 15px;" class="">
 			<div class="headingWrap" style="margin-bottom:2%">
 				<h3 class="headingTop text-center">
-					<spring:message code="feePayment.sentence" />
+					<spring:message code="fundTransferPreference.sentence" />
 				</h3>
 			</div>
 			<div class="paymentWrap col-md-12" style="width: 25%;margin: 0 auto;float: none;">
@@ -186,14 +186,14 @@ input:valid ~ label {
 					<div class="funkyradio-primary">
 						<input name="options" class="pago" type="radio" value="paypal"
 							id="radio2"/> <label for="radio2"><span
-							class="glyphicon glyphicon-euro"></span> PayPal</label>
+							class="glyphicon glyphicon-euro"></span> <spring:message code="fundTransferPreference.paypal" /></label>
 					</div>
 
 
 					<div class="funkyradio-primary">
 						<input class="pago" name="options" type="radio" value="creditcard"
 							id="radio3" /> <label for="radio3"><i
-							class="fa fa-credit-card" aria-hidden="true"></i> Bank account</label>
+							class="fa fa-credit-card" aria-hidden="true"></i> <spring:message code="fundTransferPreference.bankAccount" /></label>
 					</div>
 				</div>
 
