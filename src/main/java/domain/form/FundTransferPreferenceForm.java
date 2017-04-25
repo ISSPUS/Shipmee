@@ -1,7 +1,5 @@
 package domain.form;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 
 public class FundTransferPreferenceForm {
 	
@@ -12,7 +10,6 @@ public class FundTransferPreferenceForm {
 	private String BIC;
 	private String paypalEmail;
 	
-	@NotBlank
 	public String getCountry() {
 		return country;
 	}
@@ -20,7 +17,7 @@ public class FundTransferPreferenceForm {
 		this.country = country;
 	}
 	
-	@NotBlank
+	
 	public String getAccountHolder() {
 		return accountHolder;
 	}
@@ -28,7 +25,6 @@ public class FundTransferPreferenceForm {
 		this.accountHolder = accountHolder;
 	}
 	
-	@NotBlank
 	public String getBankName() {
 		return bankName;
 	}
@@ -36,7 +32,6 @@ public class FundTransferPreferenceForm {
 		this.bankName = bankName;
 	}
 	
-	@NotBlank
 	public String getIBAN() {
 		return IBAN;
 	}
@@ -44,7 +39,6 @@ public class FundTransferPreferenceForm {
 		IBAN = iBAN;
 	}
 	
-	@NotBlank
 	public String getBIC() {
 		return BIC;
 	}
@@ -52,7 +46,6 @@ public class FundTransferPreferenceForm {
 		BIC = bIC;
 	}
 	
-	@NotBlank
 	public String getPaypalEmail() {
 		return paypalEmail;
 	}

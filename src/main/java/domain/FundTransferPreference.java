@@ -3,8 +3,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
-
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Email;
 
 
 @Embeddable
@@ -21,7 +20,6 @@ public class FundTransferPreference{
 	private String BIC;
 	private String paypalEmail;
 	
-	@NotBlank
 	public String getCountry() {
 		return country;
 	}
@@ -29,7 +27,6 @@ public class FundTransferPreference{
 		this.country = country;
 	}
 	
-	@NotBlank
 	public String getAccountHolder() {
 		return accountHolder;
 	}
@@ -37,7 +34,6 @@ public class FundTransferPreference{
 		this.accountHolder = accountHolder;
 	}
 	
-	@NotBlank
 	public String getBankName() {
 		return bankName;
 	}
@@ -45,7 +41,6 @@ public class FundTransferPreference{
 		this.bankName = bankName;
 	}
 	
-	@NotBlank
 	public String getIBAN() {
 		return IBAN;
 	}
@@ -53,7 +48,6 @@ public class FundTransferPreference{
 		IBAN = iBAN;
 	}
 	
-	@NotBlank
 	public String getBIC() {
 		return BIC;
 	}
@@ -61,7 +55,7 @@ public class FundTransferPreference{
 		BIC = bIC;
 	}
 	
-	@NotBlank
+	@Email
 	public String getPaypalEmail() {
 		return paypalEmail;
 	}

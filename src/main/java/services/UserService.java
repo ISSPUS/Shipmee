@@ -130,22 +130,22 @@ public class UserService {
 					)){
 				a.setIsVerified(false);
 			}
-			
+
 			if(a.getFundTransferPreference() != null) {
 				fundTransferPreference = a.getFundTransferPreference();
-				if(fundTransferPreference.getPaypalEmail() == null &&
-						fundTransferPreference.getCountry() == null &&
-						fundTransferPreference.getAccountHolder() == null &&
-						fundTransferPreference.getBankName() == null &&
-						fundTransferPreference.getIBAN() == null &&
-						fundTransferPreference.getBIC() == null){
-					Assert.isTrue(false,"You must fill in the information of your bank account or your PayPal.");
-				} else if(fundTransferPreference.getPaypalEmail() == null &&
-						(fundTransferPreference.getCountry() == null ||
-						fundTransferPreference.getAccountHolder() == null ||
-						fundTransferPreference.getBankName() == null ||
-						fundTransferPreference.getIBAN() == null ||
-						fundTransferPreference.getBIC() == null)) {
+				if(fundTransferPreference.getPaypalEmail() != null &&
+						fundTransferPreference.getPaypalEmail().equals("")){
+					Assert.isTrue(false,"You must fill in the information of your PayPal.");
+				} else if((fundTransferPreference.getCountry() != null &&
+						fundTransferPreference.getCountry().equals("")) ||
+						(fundTransferPreference.getAccountHolder() != null &&
+						fundTransferPreference.getAccountHolder().equals("")) ||
+						(fundTransferPreference.getBankName() != null &&
+						fundTransferPreference.getBankName().equals("")) ||
+						(fundTransferPreference.getIBAN() != null &&
+						fundTransferPreference.getIBAN().equals("")) ||
+						(fundTransferPreference.getBIC() != null &&
+						fundTransferPreference.getBIC().equals(""))) {
 					Assert.isTrue(false,"You must fill in the information of your bank account.");
 				}
 			}

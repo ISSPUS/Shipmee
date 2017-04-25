@@ -219,7 +219,7 @@ input:valid ~ label {
 						<spring:message code="fundTransferPreference.paypalEmail" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="paypalEmail" class="form-control" id="paypalEmail" type="email"/>
+						<form:input path="paypalEmail" class="form-control" id="paypalEmail" type="email" required="true"/>
 						<form:errors class="error create-message-error" path="paypalEmail" />
 					</div>
 				</div>
@@ -267,7 +267,7 @@ input:valid ~ label {
 						<spring:message code="fundTransferPreference.accountHolder" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="accountHolder" class="form-control" id="accountHolder"/>
+						<form:input path="accountHolder" class="form-control" id="accountHolder" required="true"/>
 						<form:errors class="error create-message-error" path="accountHolder" />
 					</div>
 				</div>
@@ -277,7 +277,7 @@ input:valid ~ label {
 						<spring:message code="fundTransferPreference.bankName" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="bankName" class="form-control" id="bankName"/>
+						<form:input path="bankName" class="form-control" id="bankName" required="true"/>
 						<form:errors class="error create-message-error" path="bankName" />
 					</div>
 				</div>
@@ -287,7 +287,7 @@ input:valid ~ label {
 						<spring:message code="fundTransferPreference.IBAN" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="IBAN" class="form-control" id="IBAN"/>
+						<form:input path="IBAN" class="form-control" id="IBAN" required="true"/>
 						<form:errors class="error create-message-error" path="IBAN" />
 					</div>
 				</div>
@@ -297,7 +297,7 @@ input:valid ~ label {
 						<spring:message code="fundTransferPreference.BIC" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="BIC" class="form-control" id="BIC"/>
+						<form:input path="BIC" class="form-control" id="BIC" required="true"/>
 						<form:errors class="error create-message-error" path="BIC" />
 					</div>
 				</div>
