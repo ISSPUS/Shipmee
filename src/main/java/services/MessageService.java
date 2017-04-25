@@ -15,6 +15,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import domain.Actor;
 import domain.Message;
+import domain.RouteOffer;
+import domain.ShipmentOffer;
 import repositories.MessageRepository;
 import services.form.MessageFormService;
 import utilities.SendMail;
@@ -153,6 +155,57 @@ public class MessageService {
 		
 		return res;
 
+	}
+	
+	public void autoMessageDenyShipmentOffer(ShipmentOffer shipmentOffer){
+		
+		Actor sender;
+		Actor recipient;
+		String subject;
+		String body;
+		
+		sender = shipmentOffer.getShipment().getCreator();
+		recipient = shipmentOffer.getUser();
+		subject = "Your counteroffer has been denied.";
+		body = "The counteroffer you did for a Shipment to carry " + 
+				shipmentOffer.getShipment().getItemName() + 
+				" from " + 
+				shipmentOffer.getShipment().getOrigin() + 
+				" to " + 
+				shipmentOffer.getShipment().getDestination() + 
+				" with a proposed cost of " +
+				shipmentOffer.getAmount() + 
+				" euros, originally posted by " + 
+				shipmentOffer.getShipment().getCreator().getUserAccount().getUsername() + 
+				" with a cost of " + 
+				shipmentOffer.getShipment().getPrice() + 
+				" euros, has been denied.";
+		
+		sendMessage(sender, recipient, subject, body);
+	}
+	
+	public void autoMessageDenyRouteOffer(RouteOffer routeOffer){
+		
+		Actor sender;
+		Actor recipient;
+		String subject;
+		String body;
+		
+		sender = routeOffer.getRoute().getCreator();
+		recipient = routeOffer.getUser();
+		subject = "Your counteroffer has been denied.";
+		body = "The counteroffer you did for a Route" + 				
+				" from " + 
+				routeOffer.getRoute().getOrigin() + 
+				" to " + 
+				routeOffer.getRoute().getDestination() + 
+				" with a proposed cost of " +
+				routeOffer.getAmount() + 
+				" euros, originally posted by " + 
+				routeOffer.getRoute().getCreator().getUserAccount().getUsername() + 
+				", has been denied.";
+		
+		sendMessage(sender, recipient, subject, body);
 	}
 
 	public Page<Message> findAllReceived(Pageable page) {

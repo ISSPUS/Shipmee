@@ -21,8 +21,6 @@ import com.paypal.exception.MissingCredentialException;
 import com.paypal.exception.SSLConfigurationException;
 import com.paypal.sdk.exceptions.OAuthException;
 
-import controllers.user.ShipmentOfferUserController;
-import domain.Actor;
 import domain.PayPalObject;
 import domain.Route;
 import domain.RouteOffer;
@@ -269,26 +267,7 @@ public class RouteOfferService {
 		 * Here comes the notification to the carrier (Still not developed) 
 		 */
 		
-		Actor sender;
-		Actor recipient;
-		String subject;
-		String body;
-		
-		sender = route.getCreator();
-		recipient = routeOffer.getUser();
-		subject = "Your counteroffer has been denied.";
-		body = "The counteroffer you did for a Route" + 				
-				" from " + 
-				route.getOrigin() + 
-				" to " + 
-				route.getDestination() + 
-				" with a proposed cost of " +
-				routeOffer.getAmount() + 
-				" euros, originally posted by " + 
-				route.getCreator().getUserAccount().getUsername() + 
-				", has been denied.";
-		
-		messageService.sendMessage(sender, recipient, subject, body);
+		messageService.autoMessageDenyRouteOffer(routeOffer);
 	
 	}
 	
