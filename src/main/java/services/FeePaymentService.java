@@ -112,7 +112,7 @@ public class FeePaymentService {
 			
 			feePayment.setPurchaser(user);
 			feePayment.setPaymentMoment(new Date());
-			feePayment.setType("Pending");
+			// feePayment.setType("Pending");
 			feePayment.setCommission(feePayment.getAmount()/10);
 			
 			feePayment = feePaymentRepository.save(feePayment);
@@ -244,6 +244,20 @@ public class FeePaymentService {
 		}
 		
 		res = this.save(res);
+		
+		return res;
+	}
+	
+	public FeePayment returnPayed(String trackingId){
+		FeePayment res;
+		
+		res = payPalService.findByTrackingId(trackingId).getFeePayment();
+		
+		if (res.getShipmentOffer() != null){
+			res.setType("Accepted");
+		} else {
+			res.setType("Pending");
+		}
 		
 		return res;
 	}

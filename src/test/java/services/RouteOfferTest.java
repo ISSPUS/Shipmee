@@ -488,7 +488,7 @@ public class RouteOfferTest extends AbstractTest {
 		routeOffersPage = routeOfferService.findAllByOrRouteIdAndOrUserId(routeId, userId, pageable);
 		routeOffers = routeOfferService.findAllByRouteId(routeId);
 		
-		Assert.isTrue(routeOffersPage.getNumberOfElements() == 	routeOffers.size());
+		Assert.isTrue(routeOffersPage.getNumberOfElements() == routeOffers.size());
 		unauthenticate();
 	}
 	
