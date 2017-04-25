@@ -173,7 +173,7 @@
 </jstl:if>
 
 <jstl:if test="${!user.isVerified}">
-	<spring:message code="user.isVerified" />: <a href="user/verify.do" ><spring:message code="user.verify" /></a>
+	<spring:message code="user.isVerified" />: <a href="user/user/edit.do" ><spring:message code="user.verify" /></a>
 </jstl:if>
 
 
