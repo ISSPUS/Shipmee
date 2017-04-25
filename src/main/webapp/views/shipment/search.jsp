@@ -128,14 +128,18 @@
 							<li class="active"><a> <i
 									class="glyphicon glyphicon-resize-full"></i> <spring:message code="shipment.itemSize" />
 							</a></li>
+							
+							<spring:message code="shipment.sizeS" var="s" />
+							<spring:message code="shipment.sizeM" var="m" />
+							<spring:message code="shipment.sizeL" var="l" />
+							<spring:message code="shipment.sizeXL" var="xl" />
 							<li style="text-align: center" class="li-input"><select
 								class="selectpicker input-text fondoDesplegable" name="itemSize">
 									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
-									<option value="xs">XS</option>
-									<option value="s">S</option>
-									<option value="m">M</option>
-									<option value="l">L</option>
-									<option value="xl">XL</option>
+									<option value="S">"${s }" </option>
+									<option value="M">"${m }" </option>
+									<option value="L">"${l }" </option>
+									<option value="XL">"${xl }" </option>
 							</select></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
