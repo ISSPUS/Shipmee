@@ -140,7 +140,17 @@
 												<span class="titles-info">${route.vehicle.brand} - ${route.vehicle.model}</span>
 												<br/>
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
-												<span class="titles-info">${route.itemEnvelope}</span>
+												<span class="titles-info">
+													<jstl:if test="${route.itemEnvelope == 'Both'}">
+														<spring:message code="route.both"/>
+													</jstl:if>
+													<jstl:if test="${route.itemEnvelope == 'Open'}">
+														<spring:message code="route.open"/>
+													</jstl:if>							
+													<jstl:if test="${route.itemEnvelope == 'Closed'}">
+														<spring:message code="route.closed"/>
+													</jstl:if>
+												</span>
 												
 												<br/>
 												

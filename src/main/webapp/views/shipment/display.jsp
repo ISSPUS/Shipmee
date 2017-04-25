@@ -138,7 +138,17 @@
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
 											<div class="col-xs-11">
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
-												<span class="titles-info">${shipment.itemEnvelope}</span>
+												<span class="titles-info">
+													<jstl:if test="${shipment.itemEnvelope == 'Both'}">
+														<spring:message code="shipment.both"/>
+													</jstl:if>
+													<jstl:if test="${shipment.itemEnvelope == 'Open'}">
+														<spring:message code="shipment.open"/>
+													</jstl:if>							
+													<jstl:if test="${shipment.itemEnvelope == 'Closed'}">
+														<spring:message code="shipment.closed"/>
+													</jstl:if>
+												</span>
 											
 											<br/>
 											

@@ -123,9 +123,9 @@
 						<form:select id="itemEnvelope" class="form-control"
 							path="itemEnvelope">
 							<form:option value="" label="----" />
-							<form:option value="${open }" label="${open }" />
-							<form:option value="${closed }" label="${closed }" />
-							<form:option value="${both }" label="${both }" />
+							<form:option value="Open" label="${open }" />
+							<form:option value="Closed" label="${closed }" />
+							<form:option value="Both" label="${both }" />
 						</form:select>
 						<form:errors path="itemEnvelope" cssClass="error" />
 					</div>
