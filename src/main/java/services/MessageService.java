@@ -157,6 +157,33 @@ public class MessageService {
 
 	}
 	
+	public void autoMessageAcceptShipmentOffer(ShipmentOffer shipmentOffer){
+		
+		Actor sender;
+		Actor recipient;
+		String subject;
+		String body;
+		
+		sender = shipmentOffer.getShipment().getCreator();
+		recipient = shipmentOffer.getUser();
+		subject = "Your counteroffer has been accepted.";
+		body = "The counteroffer you did for a Shipment to carry " + 
+				shipmentOffer.getShipment().getItemName() + 
+				" from " + 
+				shipmentOffer.getShipment().getOrigin() + 
+				" to " + 
+				shipmentOffer.getShipment().getDestination() + 
+				" with a proposed cost of " +
+				shipmentOffer.getAmount() + 
+				" euros, originally posted by " + 
+				shipmentOffer.getShipment().getCreator().getUserAccount().getUsername() + 
+				" with a cost of " + 
+				shipmentOffer.getShipment().getPrice() + 
+				" euros, has been accepted.";
+		
+		sendMessage(sender, recipient, subject, body);
+	}
+	
 	public void autoMessageDenyShipmentOffer(ShipmentOffer shipmentOffer){
 		
 		Actor sender;
@@ -180,6 +207,30 @@ public class MessageService {
 				" with a cost of " + 
 				shipmentOffer.getShipment().getPrice() + 
 				" euros, has been denied.";
+		
+		sendMessage(sender, recipient, subject, body);
+	}
+	
+	public void autoMessageAcceptRouteOffer(RouteOffer routeOffer){
+		
+		Actor sender;
+		Actor recipient;
+		String subject;
+		String body;
+		
+		sender = routeOffer.getRoute().getCreator();
+		recipient = routeOffer.getUser();
+		subject = "Your counteroffer has been accept.";
+		body = "The counteroffer you did for a Route" + 				
+				" from " + 
+				routeOffer.getRoute().getOrigin() + 
+				" to " + 
+				routeOffer.getRoute().getDestination() + 
+				" with a proposed cost of " +
+				routeOffer.getAmount() + 
+				" euros, originally posted by " + 
+				routeOffer.getRoute().getCreator().getUserAccount().getUsername() + 
+				", has been accept.";
 		
 		sendMessage(sender, recipient, subject, body);
 	}
