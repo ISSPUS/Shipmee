@@ -573,6 +573,15 @@
 		<property name="cvvCode" value="303"/>
 	</bean>
 	
+	
+	<!-- PayPalObject -->
+	<bean id="payPal1" class="domain.PayPalObject">
+		<property name="trackingId" value="xxxxxxxxxxxxxxxxxxx"/>
+		<property name="payStatus" value="CREATED"/>
+		<property name="refundStatus" value="UNKNOWN"/>
+		<property name="feePayment" ref="payment9"/>
+	</bean>
+	
 	<!-- Messages -->
 	
 	<bean id="message1" class="domain.Message">
@@ -689,10 +698,9 @@
 	
 	<bean id="payment9" class="domain.FeePayment">
 		<property name="paymentMoment" value="2017/03/11 16:00"/>
-		<property name="creditCard" ref="creditCard1"/>
 		<property name="amount" value="1.50"/>
 		<property name="commission" value="0.15"/>
-		<property name="type" value="Accepted"/>
+		<property name="type" value="Pending"/>
 		<property name="shipmentOffer" ref="shipmentOffer5"/>
 		<property name="purchaser" ref="user3"/>
 		<property name="carrier" ref="user1"/>
