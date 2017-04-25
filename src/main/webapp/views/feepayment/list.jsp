@@ -196,10 +196,9 @@ font-size: 225%;
 									<i class="fa fa-thumbs-up fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">0</div>
+									<div class="huge"><jstl:out value="${allAccepted}"/></div>
 									<div>
 										<spring:message code="feePayment.accepted" />
-										!
 									</div>
 								</div>
 							</div>
@@ -221,10 +220,9 @@ font-size: 225%;
 									<i class="fa fa-clock-o fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">0</div>
+									<div class="huge"><jstl:out value="${allPending}"/></div>
 									<div>
 										<spring:message code="feePayment.pending" />
-										!
 									</div>
 								</div>
 							</div>
@@ -246,10 +244,9 @@ font-size: 225%;
 									<i class="fa fa-thumbs-down fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">1</div>
+									<div class="huge"><jstl:out value="${allDenied}"/></div>
 									<div>
 										<spring:message code="feepayment.rejected" />
-										!
 									</div>
 								</div>
 							</div>
