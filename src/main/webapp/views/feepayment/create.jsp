@@ -104,6 +104,11 @@
     width: 12%;
 
 }
+.image-p:hover{
+ 
+filter: brightness(110%);
+
+}
 </style>
 
 <div class="blue-barra">
@@ -119,34 +124,27 @@
 
 <div class="container">
 	<div class="row">
-		<div style="margin:15px;" class="paymentCont">
-						<div class="headingWrap">
-								<h3 class="headingTop text-center"><spring:message code="feePayment.sentence" /></h3>	
-						</div>
-						<div class="paymentWrap ">
-							<div class="btn-group paymentBtnGroup btn-group-justified" >
-					            <label class="btn paymentMethod partePaypal">
-					            <jstl:if test="${feePaymentForm.type > 2}">
-				            		<a class="payPaypal" href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.offerId}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
-				            	</jstl:if>
-				            	<jstl:if test="${feePaymentForm.type < 3}">
-				            		<a class="payPaypal" href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.id}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
-				            	</jstl:if>
-					            	<span class="method visa"></span>
-					                <input name="options" class="pago" type="radio"
-										value="paypal" style="visibility: hidden;"/>
-								</a>
-					            </label>
-					            <label class="btn paymentMethod parteTarjeta">
-					            	<span class="method master-card"></span>
-					                <input checked="checked" class="pago" name="options"
-						type="radio" value="creditcard" style="visibility: hidden;"/>
-					            </label>
-					        </div>        
-						</div>
-			
+		<div style="margin: 15px;" class="paymentCont">
+			<div class="headingWrap">
+				<h3 class="headingTop text-center">
+					<spring:message code="feePayment.sentence" />
+				</h3>
+			</div>
+			<div class="paymentWrap ">
+				<div class="btn-group paymentBtnGroup btn-group-justified">
+					<label class="btn paymentMethod partePaypal"> <span
+						class="method visa"></span> <input name="options" class="pago"
+						type="radio" value="paypal" style="visibility: hidden;" />
+					</label> <label class="btn paymentMethod parteTarjeta"> <span
+						class="method master-card"></span> <input checked="checked"
+						class="pago" name="options" type="radio" value="creditcard"
+						style="visibility: hidden;" />
+					</label>
+				</div>
+			</div>
+
 		</div>
-		
+
 	</div>
 </div>
 
@@ -154,8 +152,16 @@
 
 
 <div id="div2" style="display: none;">
-	<div style="margin-bottom:3%;">
-		<a class="payPaypal" href="https://paypal.com/myaccount" target="_blank"><img src="http://www.northportgirlslacrosse.com/sites/default/files/images/paypal-paynow-button-300x89.png"></a>
+	<div style="margin-bottom: 3%;">
+		<a class="payPaypal" href="https://paypal.com/myaccount"
+			target="_blank"> <jstl:if test="${feePaymentForm.type > 2}">
+				<a class="payPaypal"
+					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.offerId}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
+			</jstl:if> <jstl:if test="${feePaymentForm.type < 3}">
+				<a class="payPaypal"
+					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.id}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
+			</jstl:if> <img class="image-p"
+			src="http://www.northportgirlslacrosse.com/sites/default/files/images/paypal-paynow-button-300x89.png"></a>
 	</div>
 </div>
 
