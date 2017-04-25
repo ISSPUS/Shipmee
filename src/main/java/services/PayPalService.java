@@ -170,8 +170,8 @@ public class PayPalService {
 
 		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId());
 
-		// Actualmente no tenemos permsisos por parte de PayPal para devolver una transacción ya pagada al usuario final
-		//		por lo que ese podría ser el error
+		// Actualmente no tenemos permsisos por parte de PayPal para devolver una transacciï¿½n ya pagada al usuario final
+		//		por lo que ese podrï¿½a ser el error
 		Assert.isTrue(payObject.getStatus().equals("INCOMPLETE"), "PayPalService.refundToSender.error.NotIncomplete");
 
 		res = PayPal.refundAdaptiveTransaction(po.getTrackingId(), 
