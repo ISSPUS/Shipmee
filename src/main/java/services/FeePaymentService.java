@@ -273,9 +273,16 @@ public class FeePaymentService {
 	
 	public Page<FeePayment> findAllPending(Pageable page) {
 		Page<FeePayment> result;
+		List<FeePayment> allFeePaymentsPending;
+		
+		allFeePaymentsPending = new ArrayList<FeePayment>();
 
-		result = feePaymentRepository.findAllPending(page);
+		allFeePaymentsPending.addAll(feePaymentRepository.findAllPendingRouteOffers());
+		allFeePaymentsPending.addAll(feePaymentRepository.findAllPendingShipmentOffers());
+		
+		result = new PageImpl<FeePayment>(allFeePaymentsPending, page, allFeePaymentsPending.size());
 		Assert.notNull(result);
+		
 		return result;
 	}
 	

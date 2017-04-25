@@ -43,7 +43,7 @@
 	</div>
 </div>
 
-<jstl:if test="${user.isVerified}">
+<jstl:if test="${user.isVerified && user.fundTransferPreference != null}">
 	<div class="container">
 		<div class="row formulario-sm">
 			<form:form action="route/user/edit.do" modelAttribute="routeForm"
@@ -174,6 +174,11 @@
 
 <jstl:if test="${!user.isVerified}">
 	<spring:message code="user.isVerified" />: <a href="user/user/edit.do" ><spring:message code="user.verify" /></a>
+	<br/>
+</jstl:if>
+
+<jstl:if test="${user.fundTransferPreference == null}">
+	<spring:message code="user.fundTransferPreference" />: <a href="fundTransferPreference/user/edit.do" ><spring:message code="user.fundTransferPreference.edit" /></a>
 </jstl:if>
 
 

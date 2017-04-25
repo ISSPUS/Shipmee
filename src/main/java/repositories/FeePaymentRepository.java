@@ -23,8 +23,11 @@ public interface FeePaymentRepository extends JpaRepository<FeePayment, Integer>
 	@Query("select f from FeePayment f where f.type like 'Rejected'")
 	Page<FeePayment> findAllRejected(Pageable page);
 	
-	@Query("select f from FeePayment f where f.type like 'Pending'")
-	Page<FeePayment> findAllPending(Pageable page);
+	@Query("select f from FeePayment f where f.type like 'Pending' and f.routeOffer.acceptedByCarrier is true")
+	Collection<FeePayment> findAllPendingRouteOffers();
+	
+	@Query("select f from FeePayment f where f.type like 'Pending' and f.shipmentOffer.acceptedBySender is true")
+	Collection<FeePayment> findAllPendingShipmentOffers();
 	
 	@Query("select f from FeePayment f where f.type like 'Accepted'")
 	Page<FeePayment> findAllAccepted(Pageable page);

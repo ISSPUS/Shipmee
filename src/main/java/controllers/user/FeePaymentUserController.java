@@ -2,7 +2,6 @@ package controllers.user;
 
 
 import javax.validation.Valid;
-import org.springframework.validation.Validator;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +39,6 @@ public class FeePaymentUserController extends AbstractController {
 	
 	@Autowired
 	private PayPalService payPalService;
-	
-	@Autowired
-	private Validator validator;
-	
 
 	// Constructors -----------------------------------------------------------
 	

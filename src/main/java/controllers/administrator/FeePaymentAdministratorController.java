@@ -45,9 +45,9 @@ public class FeePaymentAdministratorController extends AbstractController {
 		allPending = (int) feePaymentService.findAllPending(pageable).getTotalElements();
 		allDenied = (int) feePaymentService.findAllRejected(pageable).getTotalElements();
 
-		if(type.equals("Rejected")) {
+		if(type.equals("Rejected") || type.equals("Rechazados")) {
 			items = feePaymentService.findAllRejected(pageable);
-		} else if(type.equals("Pending")) {
+		} else if(type.equals("Pending") || type.equals("Pendientes")) {
 			items = feePaymentService.findAllPending(pageable);
 		} else {   // if (type.equals("Accepted")) {
 			items = feePaymentService.findAllAccepted(pageable);

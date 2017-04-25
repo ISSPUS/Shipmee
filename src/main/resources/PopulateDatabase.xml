@@ -139,6 +139,16 @@
 		<property name="since" value="4"/>
 	</bean>
 	
+	<!-- FundTransferPreference -->
+	
+	<bean id="fundTransferPreference1" class="domain.FundTransferPreference">
+		<property name="paypalEmail" value="user1@shipmee.es"/>
+	</bean>
+	
+	<bean id="fundTransferPreference2" class="domain.FundTransferPreference">
+		<property name="paypalEmail" value="user2@shipmee.es"/>
+	</bean>
+	
 	<!-- User -->
 	
 	<bean id="user1" class="domain.User">
@@ -159,6 +169,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="fundTransferPreference" ref="fundTransferPreference1"/>
 	</bean>
 	
 	<bean id="user2" class="domain.User">
@@ -179,6 +190,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="fundTransferPreference" ref="fundTransferPreference2"/>
 	</bean>
 	
 	<bean id="user3" class="domain.User">

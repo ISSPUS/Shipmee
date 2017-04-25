@@ -91,6 +91,7 @@ public class RouteService {
 		
 		Assert.isTrue(user.getId() == route.getCreator().getId(), "message.error.route.save.user.own");
 		Assert.isTrue(user.getIsVerified() == true, "message.error.route.save.user.verified");
+		Assert.isTrue(user.getFundTransferPreference() != null);
 		
 		if(route.getId() == 0) {
 			route.setCreator(user);
