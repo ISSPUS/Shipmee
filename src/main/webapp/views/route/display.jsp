@@ -200,17 +200,21 @@
 
 								<div class="row info1 col-xs-12 col-sm-12 text-center" style="margin-bottom:1%;">
 											
+										<jstl:if test="${route.creator != user}">
 											<input type=submit class="btn-sm btn btn-success ok"
 											value= "<spring:message code="route.contract" />" onclick="contract(${route.id});"></input>
-
+										</jstl:if>
 								</div>
 
 					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
+						
+						<jstl:if test="${route.creator != user}">
 						<button type="submit" class="btn button-view btn-primary"
 							onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-plus-circle"></span>
 							<spring:message code="offer.new" />
 						</button>
+						</jstl:if>
 
 						<button type="submit" class="btn btn-primary"
 							onclick="location.href = 'routeOffer/user/list.do?routeId=${route.id}';" style="margin-bottom: 10px;">

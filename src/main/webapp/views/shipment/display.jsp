@@ -202,19 +202,27 @@
 
 								<div class="row info1 col-xs-12 col-sm-12 text-center" style="margin-bottom:1%;">
 											
+										<jstl:if test="${shipment.creator != user}">
+											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
 											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
-
+										
+										</jstl:if>
+										
 								</div>
 							
 								
 								
-								<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
+					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
+						
+						<jstl:if test="${shipment.creator != user}">
 						<button type="submit" class="btn button-view btn-primary"
 							onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-plus-circle"></span>
 							<spring:message code="offer.new" />
 						</button>
+						</jstl:if>
+						
 
 						<button type="submit" class="btn btn-primary"
 							onclick="location.href = 'shipmentOffer/user/list.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
