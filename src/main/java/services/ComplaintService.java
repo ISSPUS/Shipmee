@@ -37,8 +37,7 @@ public class ComplaintService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Complaint create(int userId) {
-		Assert.isTrue(actorService.checkAuthority("USER"),
-				"Only an user can create a complaint");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.complaint.user");
 		
 		Complaint result;
 		User user, involved;
@@ -47,7 +46,7 @@ public class ComplaintService {
 		user = userService.findByPrincipal();
 		involved = userService.findOne(userId);
 		
-		Assert.isTrue(user.getId() != userId);
+		Assert.isTrue(user.getId() != userId, "message.error.complaint.notYou");
 		
 		result.setCreator(user);
 		result.setInvolved(involved);
@@ -58,7 +57,7 @@ public class ComplaintService {
 	}
 	
 	public Complaint save(Complaint complaint) {
-		Assert.notNull(complaint);
+		Assert.notNull(complaint, "message.error.complaint.notNull");
 		
 		User user;
 		User moderator;
@@ -69,7 +68,7 @@ public class ComplaintService {
 		if(complaint.getId() == 0) {
 			user = userService.findByPrincipal();
 			
-			Assert.isTrue(user.getId() != complaint.getInvolved().getId());
+			Assert.isTrue(user.getId() != complaint.getInvolved().getId(), "message.error.complaint.notYou");
 			
 			complaint.setCreator(user);
 			complaint.setModerator(null);
@@ -78,16 +77,15 @@ public class ComplaintService {
 			complaint = complaintRepository.save(complaint);
 			
 		} else {
-			Assert.isTrue(actorService.checkAuthority("MODERATOR"),
-					"Only an moderator can resolve a complaint");
-			Assert.isTrue(checkType(complaint.getType()));
+			Assert.isTrue(actorService.checkAuthority("MODERATOR"), "message.error.complaint.moderator");
+			Assert.isTrue(checkType(complaint.getType()), "message.error.complaint.type");
 			
 			complaintPreSave = this.findOne(complaint.getId());
 			
 			moderator = userService.findByPrincipal();
 			
-			Assert.isTrue(moderator.getId() != complaint.getCreator().getId(), "The moderator can not be involved in the complaint.");
-			Assert.isTrue(moderator.getId() != complaint.getInvolved().getId(), "The moderator can not be involved in the complaint.");
+			Assert.isTrue(moderator.getId() != complaint.getCreator().getId(), "message.error.complaint.moderator.creator");
+			Assert.isTrue(moderator.getId() != complaint.getInvolved().getId(), "message.error.complaint.moderator.involved");
 			
 			complaintPreSave.setModerator(moderator);
 			complaintPreSave.setType(complaint.getType());

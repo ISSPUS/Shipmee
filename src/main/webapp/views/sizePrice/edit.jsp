@@ -112,7 +112,8 @@
 				<form:label path="priceS"
 					class="control-label col-md-4 label-formulario-tam" for="priceS">
 					<i class="demo-icon icon-package-1 ">&#xE804;</i>
-					<spring:message code="sizePrice.priceS" />
+					<spring:message code="sizePrice.priceS" /><br/>
+					<spring:message code="shipment.sizeS" />
 				</form:label>
 				<div class="col-md-6">
 					<div class="inner-addon left-addon input-price">
@@ -129,7 +130,8 @@
 					<form:label path="priceM"
 						class="control-label col-md-4 label-formulario-tam" for="priceM">
 						<i class="demo-icon icon-package-1">&#xE803;</i>
-						<spring:message code="sizePrice.priceM" />
+						<spring:message code="sizePrice.priceM" /><br/>
+						<spring:message code="shipment.sizeM" />
 					</form:label>
 					<div class="col-md-6">
 						<div class="inner-addon left-addon input-price">
@@ -146,7 +148,8 @@
 				<form:label path="priceL"
 					class="control-label col-md-4 label-formulario-tam" for="priceL">
 					<i class="demo-icon icon-package-1">&#xe802;</i>
-					<spring:message code="sizePrice.priceL" />
+					<spring:message code="sizePrice.priceL" /><br/>
+					<spring:message code="shipment.sizeL" />
 				</form:label>
 				<div class="col-md-6">
 					<div class="inner-addon left-addon input-price">
@@ -161,7 +164,8 @@
 				<form:label path="priceXL"
 					class="control-label col-md-4 label-formulario-tam" for="priceXL">
 					<i class="demo-icon icon-package-1">&#xE805;</i>
-					<spring:message code="sizePrice.priceXL" />
+					<spring:message code="sizePrice.priceXL" /><br/>
+					<spring:message code="shipment.sizeXL" />
 				</form:label>
 				<div class="col-md-6">
 
@@ -177,7 +181,10 @@
 			</div>
 
 			<!-- Action buttons -->
-			<acme:submit name="save" code="sizePrice.save" />
+			<button type="submit" name="save" class="btn  btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				<spring:message code="sizePrice.save" />
+			</button>
 
 			<jstl:if test="${sizePriceForm.sizePriceFormId != 0}">
 				<button type="submit" name="delete" class="btn btn-danger"

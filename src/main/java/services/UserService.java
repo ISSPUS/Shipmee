@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
+import domain.FundTransferPreference;
 import domain.Rank;
 import domain.Route;
 import domain.User;
@@ -67,6 +69,7 @@ public class UserService {
 		res.setDniPhoto("");
 		res.setPhone("");
 		res.setPhoto("images/anonymous.png");
+		res.setPasswordResetToken("");
 		
 		return res;
 	}
@@ -99,6 +102,8 @@ public class UserService {
 		boolean isAdmin;
 		boolean isAuthenticated;
 		int actUserId;
+		FundTransferPreference fundTransferPreference;
+		
 		User userInDB = null;
 		Authority userAuth = new Authority();
 		Authority adminAuth = new Authority();
@@ -124,6 +129,25 @@ public class UserService {
 					a.getEmail().equals(userInDB.getEmail())
 					)){
 				a.setIsVerified(false);
+			}
+
+			if(a.getFundTransferPreference() != null) {
+				fundTransferPreference = a.getFundTransferPreference();
+				if(fundTransferPreference.getPaypalEmail() != null &&
+						fundTransferPreference.getPaypalEmail().equals("")){
+					Assert.isTrue(false,"You must fill in the information of your PayPal.");
+				} else if((fundTransferPreference.getCountry() != null &&
+						fundTransferPreference.getCountry().equals("")) ||
+						(fundTransferPreference.getAccountHolder() != null &&
+						fundTransferPreference.getAccountHolder().equals("")) ||
+						(fundTransferPreference.getBankName() != null &&
+						fundTransferPreference.getBankName().equals("")) ||
+						(fundTransferPreference.getIBAN() != null &&
+						fundTransferPreference.getIBAN().equals("")) ||
+						(fundTransferPreference.getBIC() != null &&
+						fundTransferPreference.getBIC().equals(""))) {
+					Assert.isTrue(false,"You must fill in the information of your bank account.");
+				}
 			}
 		}else{
 			Assert.isTrue(!isAuthenticated, 

@@ -19,6 +19,7 @@
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 <div class="blue-barra">
 	<div class="container">
@@ -63,7 +64,7 @@
 	
 		<form:form action="${url}"
 			modelAttribute="actorForm" method="post" class="form-horizontal"
-			role="form">
+			role="form" enctype="multipart/form-data">
 			
 			<form:hidden path="id" />
 
@@ -207,7 +208,6 @@
 			</div>
 			
 			<!-- PhotoURL -->
-			
 			<jstl:if test="${actorForm.id != 0}">
 			<div class="form-group">
 				<form:label path="photo" class="control-label col-md-2"
@@ -216,7 +216,8 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
-						<form:input path="photo" class="form-control" id="photo" placeholder="Link"/>
+						<form:input type="file" path="photo"
+							class="form-control btn btn-default btn-file" id="photo" />
 					</div>
 					<form:errors class="error create-message-error" path="photo" />
 				</div>
@@ -232,12 +233,14 @@
 					</form:label>
 					<div class="col-md-8">
 						<div class="inner-addon">
-							<form:input path="dniPhoto" class="form-control" id="dniPhoto" placeholder="Link"/>
+							<form:input type="file" path="dniPhoto" class="form-control" id="dniPhoto" placeholder="Link"/>
 						</div>
 						<form:errors class="error create-message-error" path="dniPhoto" />
 					</div>
 				</div>
 			</jstl:if>
+			
+		
 			
 			<!-- AcceptLegalCondition -->
 			<security:authorize access="isAnonymous()">
@@ -265,7 +268,10 @@
 			<!-- Buttons -->
 			<div class="form-group text-center profile-userbuttons">
 				<!-- Action buttons -->
-				<acme:submit name="save" code="rating.save" />
+				<button type="submit" name="save" class="btn  btn-primary">
+					<span class="glyphicon glyphicon-floppy-disk"></span>
+					<spring:message code="rating.save" />
+				</button>
 				<jstl:choose>
 					<jstl:when test="${actorForm.id != 0}">
 						<acme:cancel code="rating.cancel" url="user/profile.do?userId=${actorForm.id}" />
@@ -291,6 +297,7 @@
 $(function() {
 	$('#datetimepicker1').datetimepicker({
 		viewMode : 'days',
+		locale: 'es',
 		format : 'DD/MM/YYYY'
 	});
 });

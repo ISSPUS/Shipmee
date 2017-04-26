@@ -5,7 +5,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 
 public class ShipmentForm {
@@ -16,10 +16,18 @@ public class ShipmentForm {
 	private String destination;
 	private double price;
 	private String itemName;
-	private String itemPicture;
 	private String itemSize;
 	private String itemEnvelope;
 	private int shipmentId;
+	private CommonsMultipartFile imagen;
+	
+	@NotNull
+	public CommonsMultipartFile getImagen() {
+		return imagen;
+	}
+	public void setImagen(CommonsMultipartFile imagen) {
+		this.imagen = imagen;
+	}
 	
 	@NotNull
 	@NotBlank
@@ -73,16 +81,6 @@ public class ShipmentForm {
 	}
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
-	}
-	
-	@NotNull
-	@NotBlank
-	@URL
-	public String getItemPicture() {
-		return itemPicture;
-	}
-	public void setItemPicture(String itemPicture) {
-		this.itemPicture = itemPicture;
 	}
 	
 	@NotNull

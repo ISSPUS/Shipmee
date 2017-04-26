@@ -66,7 +66,10 @@
 			</div>
 			<div class="form-group text-center profile-userbuttons"">
 				<!-- Action buttons -->
-				<acme:submit name="save" code="shipmentOffer.save"/>
+				<button type="submit" name="save" class="btn  btn-primary">
+					<span class="glyphicon glyphicon-floppy-disk"></span>
+					<spring:message code="shipmentOffer.save" />
+				</button>
 				
 				<acme:cancel code="shipmentOffer.cancel" url="shipment/display.do?shipmentId=${shipmentOffer.shipment.id}"/>
 			</div>

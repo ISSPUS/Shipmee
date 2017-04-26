@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -16,17 +17,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.Vehicle;
+import domain.form.VehicleForm;
 import services.VehicleService;
+import services.form.VehicleFormService;
 
 @Controller
 @RequestMapping("/vehicle/user")
 public class VehicleUserController extends AbstractController {
 	
+	static Logger log = Logger.getLogger(VehicleUserController.class);
+
 	// Services ---------------------------------------------------------------
 	
 	@Autowired
 	private VehicleService vehicleService;
-	
+	@Autowired
+	private VehicleFormService vehicleFormService;
 	// Constructors -----------------------------------------------------------
 	
 	public VehicleUserController() {
@@ -53,10 +59,10 @@ public class VehicleUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Vehicle vehicle;
+		VehicleForm vehicleForm;
 
-		vehicle = vehicleService.create();
-		result = createEditModelAndView(vehicle);
+		vehicleForm = vehicleFormService.create();
+		result = createEditModelAndView(vehicleForm);
 
 		return result;
 	}
@@ -68,27 +74,35 @@ public class VehicleUserController extends AbstractController {
 		ModelAndView result;
 		Vehicle vehicle;
 
-		vehicle = vehicleService.findOne(vehicleId);		
+		vehicle = vehicleService.findOne(vehicleId);
 		Assert.notNull(vehicle);
-		result = createEditModelAndView(vehicle);
+		
+		VehicleForm vehicleForm = vehicleFormService.contruct(vehicle.getId());
+		result = createEditModelAndView(vehicleForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Vehicle vehicle, BindingResult binding) {
+	public ModelAndView save(@Valid VehicleForm vehicleForm, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(vehicle);
+			result = createEditModelAndView(vehicleForm);
 		} else {
-			try {				
-				vehicle = vehicleService.save(vehicle);
+			try {
+				Vehicle vehicle = vehicleFormService.reconstruct(vehicleForm);
+				vehicleService.save(vehicle);
 				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-
-				result = createEditModelAndView(vehicle, "vehicle.commit.error");				
+				log.error(oops.getMessage());
+				messageError = "vehicle.commit.error";
+				if(oops.getMessage().contains("message.error")){
+					messageError=oops.getMessage();
+				}
+				result = createEditModelAndView(vehicleForm, messageError);				
 			}
 		}
 
@@ -96,14 +110,21 @@ public class VehicleUserController extends AbstractController {
 	}
 			
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(Vehicle vehicle, BindingResult binding) {
+	public ModelAndView delete(VehicleForm vehicleForm, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		try {
+			Vehicle vehicle = vehicleService.findOne(vehicleForm.getVehicleId());
 			vehicleService.delete(vehicle);
 			result = new ModelAndView("redirect:list.do");						
 		} catch (Throwable oops) {
-			result = createEditModelAndView(vehicle, "vehicle.commit.error");
+			log.error(oops.getMessage());
+			messageError = "vehicle.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError=oops.getMessage();
+			}
+			result = createEditModelAndView(vehicleForm, messageError);
 		}
 
 		return result;
@@ -111,19 +132,19 @@ public class VehicleUserController extends AbstractController {
 	
 	// Ancillary methods ------------------------------------------------------
 	
-	protected ModelAndView createEditModelAndView(Vehicle vehicle) {
+	protected ModelAndView createEditModelAndView(VehicleForm vehicleform) {
 		ModelAndView result;
 
-		result = createEditModelAndView(vehicle, null);
+		result = createEditModelAndView(vehicleform, null);
 		
 		return result;
 	}	
 	
-	protected ModelAndView createEditModelAndView(Vehicle vehicle, String message) {
+	protected ModelAndView createEditModelAndView(VehicleForm vehicleForm, String message) {
 		ModelAndView result;
 						
 		result = new ModelAndView("vehicle/edit");
-		result.addObject("vehicle", vehicle);
+		result.addObject("vehicleForm", vehicleForm);
 		result.addObject("message", message);
 
 		return result;

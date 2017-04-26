@@ -39,10 +39,11 @@
 		<!-- /row -->
 	</div>
 </div>
+
 <div class="container">
 
 	<div class="row inbox " style="margin-top: 2%;">
-		<div class="col-md-3">
+		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-body inbox-menu">
 					<a href="message/actor/create.do" class="btn btn-danger btn-block"><spring:message
@@ -60,21 +61,20 @@
 			</div>
 		</div>
 
-		<div class="col-md-9">
+		<div class="col-md-8">
 			<form:form action="message/actor/edit.do" method="post"
 				modelAttribute="messageForm" class="form-horizontal" role="form">
 
 				<form:hidden path="sender" />
 				<form:hidden path="moment" />
 
-
 				<div class="form-group">
 					<form:label path="recipient" class="control-label col-md-2"
 						for="recipient">
-						<spring:message code="message.recipient" />
+						<spring:message code="message.recipient"/>
 					</form:label>
 					<div class="col-md-8">
-						<form:input path="recipient" class="form-control" id="recipient" />
+						<form:input path="recipient" class="form-control" id="recipient"/>
 						<form:errors class="error create-message-error" path="recipient" />
 					</div>
 				</div>
@@ -100,11 +100,21 @@
 						<form:errors class="error create-message-error" path="body" />
 					</div>
 				</div>
+				
+				<jstl:if test="${messageError != null}">
+					<div class="error" style="text-align: center;">
+						<spring:message code="${messageError}"/>
+						<br/><br/>
+					</div>
+				</jstl:if>
 
 				<div class="form-group" style="text-align: center;">
 					<div class="col-md-12">
-						<acme:submit name="save" code="route.save" />
-						<acme:cancel code="route.cancel" url="route/user/list.do" />
+						<button type="submit" name="save" class="btn  btn-primary">
+							<span class="glyphicon glyphicon-floppy-disk"></span>
+							<spring:message code="route.save" />
+						</button>
+						<acme:cancel code="route.cancel" url="/message/actor/received.do?page=1" />
 					</div>
 				</div>
 

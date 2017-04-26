@@ -91,6 +91,12 @@
 .review-block hr {
 	border: 1px solid #e4e4e4 !important;
 }
+
+
+.profile-user{
+	width: 95%;
+}
+
 </style>
 
 <security:authorize access="hasRole('ADMIN')" var="isAdmin" />
@@ -98,7 +104,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-8 col-lg-6">
+		<div class="col-md-6 col-lg-6">
 			<div class="well profile-user profile">
 				<jstl:if test="${isPrincipal}">
 					<a href="user/user/edit.do"><i
@@ -146,11 +152,6 @@
 
 						</small>
 					</h3>
-					<span><strong><spring:message
-								code="user.achievements" />: </strong></span> <span class="label label-warning">Nuevo</span>
-					<span class="label label-info">Primer envío</span> <span
-						class="label label-info">Primer viaje</span> <span
-						class="label label-success">Experimentado</span>
 					<hr>
 
 					<div class="titulo-apartado">
@@ -172,11 +173,12 @@
 						</div>
 						<div class="datos text-left">
 							<span> <strong><spring:message
-										code="user.username" />: </strong> <security:authentication
-									property="principal.username" /></span> <br /> <span> <strong><spring:message
+										code="user.username" />: </strong> <spring:message text= "${user.userAccount.username}"/> </span> <br /> <span> <strong><spring:message
 										code="user.email" />: </strong>${user.email}</span> <br /> <span> <strong><spring:message
 										code="user.phone" />: </strong>${user.phone}</span> <br /> <span> <strong><spring:message
-										code="user.dni" />: </strong>${user.dni}</span>
+										code="user.dni" />: </strong>${user.dni}</span><br /> <span> <strong><spring:message
+										code="user.fundTransferPreference" /></strong> (<a href="fundTransferPreference/user/edit.do"><spring:message
+										code="user.edit" /></a>)</span>
 						</div>
 						<div class="datos text-center">
 							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
@@ -192,8 +194,7 @@
 								</a>
 							</jstl:if>
 						
-							<br />
-							<img src="${user.dniPhoto}" name="aboutme" width="300" border="0">
+
 						</div>
 					</jstl:if>
 
@@ -221,9 +222,9 @@
 						</p>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-xs-4 emphasis" id="clickeable"
-						onclick="location.href='shipment/list.do?userId=${user.id}';">
+						onclick="location.href='rating/list.do?userReceivedId=${user.id}';">
 						<h2>
-							<strong> <jstl:out value=" ${ratingsCreated}" />
+							<strong> <jstl:out value=" ${ratingsReceived}" />
 							</strong>
 						</h2>
 						<p>
@@ -237,7 +238,7 @@
 
 			</div>
 		</div>
-		<div class="col-md-4 col-lg-6">
+		<div class="col-md-6 col-lg-6">
 			<div class="row " style="margin-top: 2%;">
 				<div class="col-sm-12" style="padding-left: 0% !important">
 
@@ -249,21 +250,21 @@
 										<spring:message code="rating.create" />
 									</h4>
 								</div>
-								<div class="col-xs-12 col-md-4">
-									<div class="center-block col-xs-4 col-lg-12"
+								<div class="col-xs-12 col-md-5">
+									<div class="center-block col-xs-3 col-lg-12"
 										style="text-align: center;">
 										<img class="img-responsive"
 											style="margin: 0 auto; width: 60px;"
 											src="${rating.author.photo}">
 									</div>
-									<div class="col-xs-6 col-lg-12 info-profile-comment">
+									<div class="col-xs-9 col-lg-12 info-profile-comment">
 										<div class="review-block-name">
 											<a href="user/profile.do?userId=${rating.author.id}">${rating.author.userAccount.username}</a>
 										</div>
 									</div>
 
 								</div>
-								<div class="col-xs-12 col col-md-8">
+								<div class="col-xs-12 col col-md-7">
 									<div class="review-block-rate"
 										style="text-align: right; margin-right: 10%;">
 										<div class="lead evaluation">
@@ -272,10 +273,12 @@
 										</div>
 									</div>
 									<div class="review-block-description" style="">
-										<form:form action="rating/user/edit.do"
+										<form:form action="user/edit.do"
 											modelAttribute="rating" method="post" class="form-horizontal"
 											role="form">
 											<form:hidden path="user" />
+											<form:hidden path="author" />
+
 											<form:hidden id="value" path="value" value="0" />
 
 
@@ -284,7 +287,7 @@
 
 											<form:errors class="error create-message-error"
 												path="comment" />
-
+					
 											<!-- Action buttons -->
 											<acme:submit name="save" code="rating.save" />
 										</form:form>

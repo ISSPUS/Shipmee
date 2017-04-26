@@ -81,6 +81,7 @@ public class AlertUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Alert alert, BindingResult binding) {
 		ModelAndView result;
+		String messageError;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(alert);
@@ -91,7 +92,11 @@ public class AlertUserController extends AbstractController {
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				log.error(oops.getMessage());
-				result = createEditModelAndView(alert, "alert.commit.error");
+				messageError = "alert.commit.error";
+				if(oops.getMessage().contains("message.error")){
+					messageError=oops.getMessage();
+				}
+				result = createEditModelAndView(alert, messageError);
 			}
 		}
 

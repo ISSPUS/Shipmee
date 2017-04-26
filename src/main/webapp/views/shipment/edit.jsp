@@ -18,6 +18,7 @@
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 <style>
 .date .dropdown-menu {
@@ -71,7 +72,7 @@
 	<div class="row formulario-sm">
 		<form:form action="shipment/user/edit.do"
 			modelAttribute="shipmentForm" method="post" class="form-horizontal"
-			role="form">
+			role="form" enctype="multipart/form-data">
 
 			<form:hidden path="shipmentId" />
 
@@ -179,14 +180,14 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="itemPicture" class="control-label col-md-2"
-					for="itemPicture">
+				<form:label path="imagen" class="control-label col-md-2"
+					for="imagen">
 					<spring:message code="shipment.itemPicture" />
 				</form:label>
 				<div class="col-md-8">
-					<form:input path="itemPicture" class="form-control"
+					<form:input  type="file" path="imagen" class="form-control btn btn-default btn-file"
 						id="itemPicture" />
-					<form:errors class="error create-message-error" path="itemPicture" />
+					<form:errors class="error create-message-error" path="imagen" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -201,9 +202,9 @@
 					<spring:message code="shipment.both" var="both" />
 					<form:select id="shipment" class="form-control" path="ItemEnvelope">
 						<form:option value="" label="----" />
-						<form:option value="${open }" label="${open }" />
-						<form:option value="${closed }" label="${closed }" />
-						<form:option value="${both }" label="${both }" />
+						<form:option value="Open" label="${open }" />
+						<form:option value="Closed" label="${closed }" />
+						<form:option value="Both" label="${both }" />
 					</form:select>
 					<form:errors path="itemEnvelope" cssClass="error" />
 				</div>
@@ -211,7 +212,10 @@
 			<!-- Action buttons -->
 			
 			<div class="text-center profile-userbuttons">
-			<acme:submit name="save" code="shipment.save" />
+			<button type="submit" name="save" class="btn  btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				<spring:message code="shipment.save" />
+			</button>
 
 			<jstl:if test="${shipmentForm.shipmentId != 0}">
 				<button type="submit" name="delete" class="btn btn-danger"
@@ -229,15 +233,35 @@
 
 
 <script type="text/javascript">
+
+function initialize() {
+
+	var input = document.getElementById('origin');
+	var input2 = document.getElementById('destination');
+	var options = {
+		types: ['(cities)'],
+		componentRestrictions: {country: 'es'}
+	};
+	var autocomplete = new google.maps.places.Autocomplete(input, options);
+	var autocomplete = new google.maps.places.Autocomplete(input2, options);
+	}
+	
+	
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+	$('#origin').attr('placeholder', '');
+	$('#destination').attr('placeholder', '');
+
+
 	$(function() {
 		$('#datetimepicker1').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
-	});
-	$(function() {
 		$('#datetimepicker2').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
 	});

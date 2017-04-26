@@ -93,6 +93,7 @@
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
 		<property name="photo" value=""/>
+		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount1"/>
 	</bean>
 	
@@ -104,6 +105,7 @@
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
 		<property name="photo" value=""/>
+		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount6"/>
 	</bean>
 	
@@ -137,6 +139,16 @@
 		<property name="since" value="4"/>
 	</bean>
 	
+	<!-- FundTransferPreference -->
+	
+	<bean id="fundTransferPreference1" class="domain.FundTransferPreference">
+		<property name="paypalEmail" value="user1@shipmee.es"/>
+	</bean>
+	
+	<bean id="fundTransferPreference2" class="domain.FundTransferPreference">
+		<property name="paypalEmail" value="user2@shipmee.es"/>
+	</bean>
+	
 	<!-- User -->
 	
 	<bean id="user1" class="domain.User">
@@ -151,11 +163,13 @@
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
 		<property name="rank" ref="rank1"/>
 		<property name="routes">
 			<list>
 			</list>
 		</property>
+		<property name="fundTransferPreference" ref="fundTransferPreference1"/>
 	</bean>
 	
 	<bean id="user2" class="domain.User">
@@ -170,11 +184,13 @@
 		<property name="userAccount" ref="userAccount3"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
 		<property name="rank" ref="rank2"/>
 		<property name="routes">
 			<list>
 			</list>
 		</property>
+		<property name="fundTransferPreference" ref="fundTransferPreference2"/>
 	</bean>
 	
 	<bean id="user3" class="domain.User">
@@ -189,6 +205,7 @@
 		<property name="userAccount" ref="userAccount5"/>
 		<property name="isVerified" value="false"/>
 		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
 		<property name="rank" ref="rank3"/>
 		<property name="routes">
 			<list>
@@ -204,10 +221,11 @@
 		<property name="phone" value="689836654"/>
 		<property name="dni" value="49983586H"/>
 		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
-		<property name="photo" value="images/anonymous.png"/>
+		<property name="photo" value="https://i.imgur.com/bHVDPaq.png"></property>
 		<property name="userAccount" ref="userAccount4"/>
 		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
 		<property name="rank" ref="rank4"/>
 		<property name="routes">
 			<list>
@@ -567,6 +585,15 @@
 		<property name="cvvCode" value="303"/>
 	</bean>
 	
+	
+	<!-- PayPalObject -->
+	<bean id="payPal1" class="domain.PayPalObject">
+		<property name="trackingId" value="xxxxxxxxxxxxxxxxxxx"/>
+		<property name="payStatus" value="CREATED"/>
+		<property name="refundStatus" value="UNKNOWN"/>
+		<property name="feePayment" ref="payment9"/>
+	</bean>
+	
 	<!-- Messages -->
 	
 	<bean id="message1" class="domain.Message">
@@ -590,4 +617,105 @@
 		<property name="sender" ref="user2"/>
 		<property name="recipient" ref="user1"/>
 	</bean>
+	
+	<!-- Payments -->
+	
+	<bean id="payment1" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/03/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="2.00"/>
+		<property name="commission" value="0.2"/>
+		<property name="type" value="Pending"/>
+		<property name="routeOffer" ref="routeOffer1"/>
+		<property name="purchaser" ref="user2"/>
+		<property name="carrier" ref="user1"/>
+	</bean>
+	
+	<bean id="payment2" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/03/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="3.00"/>
+		<property name="commission" value="0.3"/>
+		<property name="type" value="Pending"/>
+		<property name="routeOffer" ref="routeOffer2"/>
+		<property name="purchaser" ref="user3"/>
+		<property name="carrier" ref="user1"/>
+	</bean>
+	
+	<bean id="payment3" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/03/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="0.50"/>
+		<property name="commission" value="0.05"/>
+		<property name="type" value="Rejected"/>
+		<property name="routeOffer" ref="routeOffer3"/>
+		<property name="purchaser" ref="user3"/>
+		<property name="carrier" ref="user1"/>
+	</bean>
+	
+	<bean id="payment4" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/03/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="2.00"/>
+		<property name="commission" value="0.2"/>
+		<property name="type" value="Accepted"/>
+		<property name="routeOffer" ref="routeOffer4"/>
+		<property name="purchaser" ref="user2"/>
+		<property name="carrier" ref="user1"/>
+	</bean>
+	
+	<bean id="payment5" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/04/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="2.00"/>
+		<property name="commission" value="0.2"/>
+		<property name="type" value="Pending"/>
+		<property name="routeOffer" ref="routeOffer5"/>
+		<property name="purchaser" ref="user1"/>
+		<property name="carrier" ref="user2"/>
+	</bean>
+	
+	<bean id="payment6" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/04/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="3.00"/>
+		<property name="commission" value="0.3"/>
+		<property name="type" value="Pending"/>
+		<property name="routeOffer" ref="routeOffer6"/>
+		<property name="purchaser" ref="user3"/>
+		<property name="carrier" ref="user2"/>
+	</bean>
+	
+	<bean id="payment7" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/04/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="0.50"/>
+		<property name="commission" value="0.05"/>
+		<property name="type" value="Rejected"/>
+		<property name="routeOffer" ref="routeOffer7"/>
+		<property name="purchaser" ref="user3"/>
+		<property name="carrier" ref="user2"/>
+	</bean>
+	
+	<bean id="payment8" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/04/12 12:00"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="2.00"/>
+		<property name="commission" value="0.2"/>
+		<property name="type" value="Accepted"/>
+		<property name="routeOffer" ref="routeOffer8"/>
+		<property name="purchaser" ref="user1"/>
+		<property name="carrier" ref="user2"/>
+	</bean>
+	
+	<bean id="payment9" class="domain.FeePayment">
+		<property name="paymentMoment" value="2017/03/11 16:00"/>
+		<property name="amount" value="1.50"/>
+		<property name="commission" value="0.15"/>
+		<property name="type" value="Pending"/>
+		<property name="shipmentOffer" ref="shipmentOffer5"/>
+		<property name="purchaser" ref="user3"/>
+		<property name="carrier" ref="user1"/>
+	</bean>
+	
 </beans>

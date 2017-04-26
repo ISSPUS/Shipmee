@@ -9,7 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -56,7 +58,7 @@ public class UserProfileController extends AbstractController {
 		ModelAndView result;
 		User user;
 		Boolean isPrincipal = false;
-		int shipmentsCreated,routesCreated,ratingsCreated;
+		int shipmentsCreated,routesCreated,ratingsCreated, ratingsReceived;
 		/*VARIABLES PARA LISTA DE COMENTARIOS */
 		Page<Rating> ratings;
 		Pageable pageable;
@@ -83,12 +85,14 @@ public class UserProfileController extends AbstractController {
 		shipmentsCreated   = shipmentService.countShipmentCreatedByUserId(user);
 		routesCreated   = routeService.countRouteCreatedByUserId(user);
 		ratingsCreated = ratingService.countRatingCreatedByUserId(user);
+		ratingsReceived = ratingService.countRatingReceivedByUserId(user);
 		
 		result = new ModelAndView("user/profile");
 		result.addObject("isPrincipal", isPrincipal);
 		result.addObject("routesCreated", routesCreated);
 		result.addObject("shipmentsCreated", shipmentsCreated);
 		result.addObject("ratingsCreated", ratingsCreated);
+		result.addObject("ratingsReceived", ratingsReceived);
 
 		result.addObject("user", user);
 		if(!isPrincipal && actorService.checkAuthority("USER")){
@@ -100,6 +104,72 @@ public class UserProfileController extends AbstractController {
 		result.addObject("page", pagecomment);
 		result.addObject("total_pages", ratings.getTotalPages());
 		
+		return result;
+	}
+	
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam int userReceivedId) {
+		ModelAndView result;
+		Rating rating;
+
+		rating = ratingService.create(userReceivedId);
+		result = createEditModelAndView(rating);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(Rating rating, BindingResult binding) {
+		ModelAndView result;
+		Rating reconstructed;
+		
+		reconstructed = ratingService.reconstruct(rating, binding);
+
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(rating);
+		} else {
+			try {
+				reconstructed = ratingService.save(reconstructed);
+
+				result = new ModelAndView("redirect:/user/profile.do?userId=" + reconstructed.getUser().getId());
+				result.addObject("message", "rating.commit.ok");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(reconstructed, "rating.commit.error");
+			}
+		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/mylist", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		int currentActorId;
+		
+		currentActorId = actorService.findByPrincipal().getId();
+				
+		result = new ModelAndView("redirect:user/profile.do?userId=" + currentActorId);
+
+		return result;
+	}
+	
+	
+	// Ancillary methods ------------------------------------------------------
+
+	protected ModelAndView createEditModelAndView(Rating input) {
+		ModelAndView result;
+
+		result = createEditModelAndView(input, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(Rating input, String message) {
+		
+		ModelAndView result = profile(null, input.getUser().getId(), 1);
+		result.addObject("rating", input);
+		result.addObject("message", message);
+
 		return result;
 	}
 }

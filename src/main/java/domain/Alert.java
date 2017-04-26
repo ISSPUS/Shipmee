@@ -24,8 +24,9 @@ public class Alert extends DomainEntity {
 	private String destination;
 	private String type;
 	
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")	
 	public Date getDate() {
 		return date;
 	}

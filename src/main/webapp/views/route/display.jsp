@@ -85,7 +85,11 @@
 				</h3>
 				<div class="profile-userbuttons">
 					<button type="button" class="btn button-view btn-sm" onclick="location.href = 'user/profile.do?userId=${route.creator.id}';"><spring:message code="user.view" /></button>
-					<button type="button" class="btn button-delete-lax btn-sm" onclick="location.href = 'complaint/user/create.do?userId=${route.creator.id}';"><spring:message code="user.report" /></button>
+					
+					<jstl:if test="${route.creator.id != user.id}">
+						<button type="button" class="btn button-delete-lax btn-sm" onclick="location.href = 'complaint/user/create.do?userId=${route.creator.id}';"><spring:message code="user.report" /></button>
+					</jstl:if>
+									
 				</div>
 			</div>
 
@@ -126,28 +130,27 @@
 										</div>
 										
 										
-										<div class="prueba"><div class="col-xs-12">
-												
-												
-			
-												
-												
-												
-												
-												
-												
-												
-											</div></div>
+							
 									
-										<div class="row info1 col-xs-7 col-sm-9">
+										<div class="row info1 col-xs-11 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
-											<div class="col-xs-6">
+											<div class="col-xs-11">
 											
 												<i class="glyphicon glyphicon-road">&nbsp;</i>Vehicle: 
 												<span class="titles-info">${route.vehicle.brand} - ${route.vehicle.model}</span>
 												<br/>
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
-												<span class="titles-info">${route.itemEnvelope}</span>
+												<span class="titles-info">
+													<jstl:if test="${route.itemEnvelope == 'Both'}">
+														<spring:message code="route.both"/>
+													</jstl:if>
+													<jstl:if test="${route.itemEnvelope == 'Open'}">
+														<spring:message code="route.open"/>
+													</jstl:if>							
+													<jstl:if test="${route.itemEnvelope == 'Closed'}">
+														<spring:message code="route.closed"/>
+													</jstl:if>
+												</span>
 												
 												<br/>
 												
@@ -196,33 +199,48 @@
                             </td>
                             <td class="tabla-tam">${value.size}</td>
                             <td class="tabla-precio">${value.price}&#8364;
-                            
-                            <security:authorize access="hasRole('USER')">
-                            	<a href="routeOffer/user/create.do?routeId=${route.id}"><span title="<spring:message code="route.offer" />"><i class="glyphicon glyphicon-resize-small contraoferta-icon"></i></span></a>
-                            </security:authorize></td>
                          
                         </tr>
 					</jstl:forEach>
-                       
+     
                     </tbody>
  					 </table>
 					
-
-					
 					<div class="rfecha separador-final"></div>
 
-
-
-								<div class="row info1 col-xs-12 col-sm-12 text-center">
+								<div class="row info1 col-xs-12 col-sm-12 text-center" style="margin-bottom:1%;">
 											
-											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
+										<jstl:if test="${route.creator != user}">
+											<input type=submit class="btn-sm btn btn-success ok"
 											value= "<spring:message code="route.contract" />" onclick="contract(${route.id});"></input>
-
-								</div>
-								<div class="text-center"><a href="routeOffer/user/list.do?routeId=${route.id}"><spring:message code="route.offers" /><i class="glyphicon glyphicon-chevron-right"></i></a></div>
+										</jstl:if>
 								</div>
 
-							</div>
+					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
+						
+						<jstl:if test="${route.creator != user}">
+						<button type="submit" class="btn button-view btn-primary"
+							onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';" style="margin-bottom: 10px;">
+							<span class="fa fa-plus-circle"></span>
+							<spring:message code="offer.new" />
+						</button>
+						</jstl:if>
+
+						<button type="submit" class="btn btn-primary"
+							onclick="location.href = 'routeOffer/user/list.do?routeId=${route.id}';" style="margin-bottom: 10px;">
+							<span class="fa fa-list"></span> 
+							<spring:message code="offer.list" />
+						</button>
+
+					</div>
+
+
+
+
+
+
+
+				</div>
 						
 			</div>
 
@@ -230,8 +248,7 @@
 		</div>
 
 	</div>
-
-
+</div>
 
 <script type="text/javascript">
 	function contract(routeId){

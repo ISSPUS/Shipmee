@@ -4,20 +4,26 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
 
 import domain.Shipment;
 import domain.User;
 import domain.form.ShipmentForm;
 import services.ShipmentService;
 import services.UserService;
+import utilities.ImageUpload;
+import utilities.ServerConfig;
 
 @Service
 @Transactional
 public class ShipmentFormService {
+
+	static Logger log = Logger.getLogger(ShipmentFormService.class);
 
 	// Supporting services ----------------------------------------------------
 
@@ -35,6 +41,7 @@ public class ShipmentFormService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
+
 	public ShipmentForm create() {
 		ShipmentForm result;
 		
@@ -51,7 +58,6 @@ public class ShipmentFormService {
 		
 		departureTime = null;
 		maximumArriveTime = null;
-		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		
 		try {
@@ -60,16 +66,25 @@ public class ShipmentFormService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
+		
+		
 		if (shipmentForm.getShipmentId() == 0) {
 			result = shipmentService.create();
+			String imageName = null;
+			try {
+				log.trace("ruta extraida de variable del entorno:" + ServerConfig.getPATH_UPLOAD());
+				imageName = ImageUpload.subirImagen(shipmentForm.getImagen(),ServerConfig.getPATH_UPLOAD());
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
 			
 			result.setOrigin(shipmentForm.getOrigin());
 			result.setDestination(shipmentForm.getDestination());
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			result.setItemPicture(shipmentForm.getItemPicture());
+			Assert.notNull(imageName,"message.error.imageUpload.notNull");
+			result.setItemPicture(ServerConfig.getURL_IMAGE()+imageName);
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);			
@@ -80,7 +95,7 @@ public class ShipmentFormService {
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			result.setItemPicture(shipmentForm.getItemPicture());
+			result.setItemPicture(ServerConfig.getURL_IMAGE()+shipmentForm.getImagen().getName());
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);
@@ -113,7 +128,6 @@ public class ShipmentFormService {
 		result.setItemEnvelope(shipment.getItemEnvelope());
 		result.setPrice(shipment.getPrice());
 		result.setItemName(shipment.getItemName());
-		result.setItemPicture(shipment.getItemPicture());
 		result.setItemSize(shipment.getItemSize());
 		result.setMaximumArriveTime(maximumArriveTime);
 		result.setDepartureTime(departureTime);
@@ -126,4 +140,6 @@ public class ShipmentFormService {
 		shipment = shipmentService.findOne(shipmentForm.getShipmentId());
 		shipmentService.delete(shipment);
 	}
+	
+
 }

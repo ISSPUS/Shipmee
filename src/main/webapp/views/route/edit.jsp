@@ -20,6 +20,7 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"
 	type="text/css">
+<script type="text/javascript" src="scripts/es.js"></script>
 
 <style>
 .date .dropdown-menu {
@@ -42,7 +43,7 @@
 	</div>
 </div>
 
-<jstl:if test="${user.isVerified}">
+<jstl:if test="${user.isVerified && user.fundTransferPreference != null}">
 	<div class="container">
 		<div class="row formulario-sm">
 			<form:form action="route/user/edit.do" modelAttribute="routeForm"
@@ -56,7 +57,7 @@
 						<spring:message code="route.origin" />
 					</form:label>
 					<div class="col-md-8">
-						<form:input path="origin" class="form-control" id="origin" />
+						<form:input path="origin" class="form-control" id="origin"/>
 						<form:errors class="error create-message-error" path="origin" />
 					</div>
 				</div>
@@ -68,7 +69,7 @@
 					</form:label>
 					<div class="col-md-8">
 						<form:input path="destination" class="form-control"
-							id="destination" />
+							id="destination"/>
 						<form:errors class="error create-message-error" path="destination" />
 					</div>
 				</div>
@@ -122,9 +123,9 @@
 						<form:select id="itemEnvelope" class="form-control"
 							path="itemEnvelope">
 							<form:option value="" label="----" />
-							<form:option value="${open }" label="${open }" />
-							<form:option value="${closed }" label="${closed }" />
-							<form:option value="${both }" label="${both }" />
+							<form:option value="Open" label="${open }" />
+							<form:option value="Closed" label="${closed }" />
+							<form:option value="Both" label="${both }" />
 						</form:select>
 						<form:errors path="itemEnvelope" cssClass="error" />
 					</div>
@@ -152,7 +153,10 @@
 				</div>
 				<!-- Action buttons -->
 				<div class="text-center profile-userbuttons">
-					<acme:submit name="save" code="route.save" />
+					<button type="submit" name="save" class="btn  btn-primary">
+						<span class="glyphicon glyphicon-floppy-disk"></span>
+						<spring:message code="route.save" />
+					</button>
 
 					<jstl:if test="${routeForm.routeId != 0}">
 						<acme:submit_confirm name="delete" code="route.delete"
@@ -169,20 +173,52 @@
 </jstl:if>
 
 <jstl:if test="${!user.isVerified}">
-	<spring:message code="user.isVerified" />: <a href="user/verify.do" ><spring:message code="user.verify" /></a>
+	<spring:message code="user.isVerified" />: <a href="user/user/edit.do" ><spring:message code="user.verify" /></a>
+	<br/>
+</jstl:if>
+
+<jstl:if test="${user.fundTransferPreference == null}">
+	<spring:message code="user.fundTransferPreference" />: <a href="fundTransferPreference/user/edit.do" ><spring:message code="user.fundTransferPreference.edit" /></a>
 </jstl:if>
 
 
 <script type="text/javascript">
+
+
+function initialize() {
+
+	var input = document.getElementById('origin');
+	var input2 = document.getElementById('destination');
+	var options = {
+		types: ['(cities)'],
+		componentRestrictions: {country: 'es'}
+	};
+	var autocomplete = new google.maps.places.Autocomplete(input, options);
+	var autocomplete = new google.maps.places.Autocomplete(input2, options);
+	}
+	
+	
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+	$('#origin').attr('placeholder', '');
+	$('#destination').attr('placeholder', '');
+
+
 	$(function() {
+		/*moment.locale('en', {
+			week : {
+				dow : 1
+			}
+		// Monday is the first day of the week
+		});*/
 		$('#datetimepicker1').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
-	});
-	$(function() {
 		$('#datetimepicker2').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
 	});

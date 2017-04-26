@@ -1,6 +1,7 @@
 package controllers.administrator;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,8 @@ import services.ComplaintService;
 @RequestMapping("/complaint/administrator")
 public class ComplaintAdministratorController extends AbstractController {
 	
+	static Logger log = Logger.getLogger(ComplaintAdministratorController.class);
+
 	// Services ---------------------------------------------------------------
 	
 	@Autowired
@@ -35,8 +38,15 @@ public class ComplaintAdministratorController extends AbstractController {
 	public ModelAndView list(@RequestParam (required = false, defaultValue = "Serious") String type, @RequestParam int page) {
 		ModelAndView result;
 		Page<Complaint> items;
+		Integer allSerious;
+		Integer allMild;
+		Integer allOmitted;
 		Pageable pageable;
+		
 		pageable = new PageRequest(page - 1, 5);
+		allSerious = (int) complaintService.findAllSerious(pageable).getTotalElements();
+		allMild = (int) complaintService.findAllMild(pageable).getTotalElements();
+		allOmitted = (int) complaintService.findAllOmitted(pageable).getTotalElements();
 
 		if(type.equals("Serious") || type.equals("Grave")) {
 			items = complaintService.findAllSerious(pageable);
@@ -48,6 +58,9 @@ public class ComplaintAdministratorController extends AbstractController {
 
 		result = new ModelAndView("complaint/list");
 		result.addObject("complaints", items.getContent());
+		result.addObject("allSerious", allSerious);
+		result.addObject("allMild", allMild);
+		result.addObject("allOmitted", allOmitted);		
 		result.addObject("p", page);
 		result.addObject("total_pages", items.getTotalPages());
 

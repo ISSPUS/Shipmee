@@ -80,7 +80,10 @@
 				</h3>
 				<div class="profile-userbuttons">
 					<button type="button" class="btn button-view btn-sm" onclick="location.href = 'user/profile.do?userId=${shipment.creator.id}';"><spring:message code="user.view" /></button>
-					<button type="button" class="btn button-delete-lax btn-sm" onclick="location.href = 'complaint/user/create.do?userId=${shipment.creator.id}';"><spring:message code="user.report" /></button>
+					<jstl:if test="${shipment.creator.id != user.id}">
+						<button type="button" class="btn button-delete-lax btn-sm" onclick="location.href = 'complaint/user/create.do?userId=${shipment.creator.id}';"><spring:message code="user.report" /></button>
+					</jstl:if>
+
 				</div>
 			</div>
 		</div>
@@ -131,11 +134,21 @@
 											</div>
 										</div>
 										
-										<div class="row info1 col-xs-7 col-sm-9">
+										<div class="row info1 col-xs-11 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
-											<div class="col-xs-6">
+											<div class="col-xs-11">
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
-												<span class="titles-info">${shipment.itemEnvelope}</span>
+												<span class="titles-info">
+													<jstl:if test="${shipment.itemEnvelope == 'Both'}">
+														<spring:message code="shipment.both"/>
+													</jstl:if>
+													<jstl:if test="${shipment.itemEnvelope == 'Open'}">
+														<spring:message code="shipment.open"/>
+													</jstl:if>							
+													<jstl:if test="${shipment.itemEnvelope == 'Closed'}">
+														<spring:message code="shipment.closed"/>
+													</jstl:if>
+												</span>
 											
 											<br/>
 											
@@ -183,11 +196,6 @@
 											<div class="col-sm-12">
 												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.price" />: 
 												<span class="titles-info-price">${shipment.price}&#8364;</span>
-
-												<security:authorize access="hasRole('USER')">
-													<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
-													value= "<spring:message code="route.offer" />" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"></input>
-												</security:authorize>
 												<br/>
 
 											</div>
@@ -202,13 +210,38 @@
 
 
 
-								<div class="row info1 col-xs-12 col-sm-12 text-center">
+								<div class="row info1 col-xs-12 col-sm-12 text-center" style="margin-bottom:1%;">
+											
+										<jstl:if test="${shipment.creator != user}">
 											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
 											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
-
+										
+										</jstl:if>
+										
 								</div>
-								<div class="text-center"><a href="shipmentOffer/user/list.do?shipmentId=${shipment.id}"><spring:message code="shipment.offers" /></a></div>
+							
+								
+								
+					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
+						
+						<jstl:if test="${shipment.creator != user}">
+						<button type="submit" class="btn button-view btn-primary"
+							onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
+							<span class="fa fa-plus-circle"></span>
+							<spring:message code="offer.new" />
+						</button>
+						</jstl:if>
+						
+
+						<button type="submit" class="btn btn-primary"
+							onclick="location.href = 'shipmentOffer/user/list.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
+							<span class="fa fa-list"></span> 
+							<spring:message code="offer.list" />
+						</button>
+
+					</div>
+								
 							</div>
 							
 							

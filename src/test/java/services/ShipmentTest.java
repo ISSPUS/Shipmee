@@ -452,14 +452,16 @@ public class ShipmentTest extends AbstractTest {
 	public void positiveListShipment1() {
 		authenticate("user1");
 	
-		Collection<Shipment> shipments;
+		Page<Shipment> shipments;
 		Shipment shipment, shipmentResult;
-				
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);	
 		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
-		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/07/2017", "15:00", "Open", "M");
+		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/07/2017", "15:00", "Open", "M",pageable);
 		shipmentResult = shipments.iterator().next();
 
-		Assert.isTrue(shipments.size() == 1);
+		Assert.isTrue(shipments.getContent().size() == 1);
 		Assert.isTrue(shipment.getId() == shipmentResult.getId());
 		
 		
@@ -474,19 +476,21 @@ public class ShipmentTest extends AbstractTest {
 	public void positiveListShipment2() {
 		authenticate("user1");
 	
-		Collection<Shipment> shipments;
+		Page<Shipment> shipments;
 		Shipment shipment1, shipment2;
-				
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);
 		shipment1 = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
 		shipment2 = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment2"));
-		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/03/2017", "15:00", "Open", null);
+		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/03/2017", "15:00", "Open", null,pageable);
 
-		for(Shipment s : shipments) {
+		for(Shipment s : shipments.getContent()) {
 			if(s.getId() != shipment1.getId() && s.getId() != shipment2.getId())
 				Assert.isTrue(false);
 		}
 		
-		Assert.isTrue(shipments.size() == 1);
+		Assert.isTrue(shipments.getContent().size() == 1);
 		
 		
 		unauthenticate();
@@ -500,11 +504,13 @@ public class ShipmentTest extends AbstractTest {
 	public void positiveListShipment3() {
 		authenticate("user1");
 	
-		Collection<Shipment> shipments;
-				
-		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/03/2017", "23:59", null, null);
+		Page<Shipment> shipments;
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);		
+		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/03/2017", "23:59", null, null,pageable);
 		
-		Assert.isTrue(shipments.isEmpty());
+		Assert.isTrue(shipments.getContent().isEmpty());
 		
 		
 		unauthenticate();
@@ -517,8 +523,10 @@ public class ShipmentTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeListShipment1() {
 		authenticate("user1");
-					
-		shipmentService.searchShipment("", "Sevilla", "12/03/2017", "23:59", null, null);
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);				
+		shipmentService.searchShipment("", "Sevilla", "12/03/2017", "23:59", null, null,pageable);
 				
 		unauthenticate();
 	}
@@ -530,8 +538,10 @@ public class ShipmentTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void negativeListShipment2() {
 		authenticate("user1");
-					
-		shipmentService.searchShipment("Almeria", "", "12/03/2017", "23:59", null, null);
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);
+		shipmentService.searchShipment("Almeria", "", "12/03/2017", "23:59", null, null,pageable);
 				
 		unauthenticate();
 	}
