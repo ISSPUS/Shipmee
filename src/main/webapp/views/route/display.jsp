@@ -139,7 +139,30 @@
 												<i class="glyphicon glyphicon-road">&nbsp;</i>Vehicle: 
 												<span class="titles-info">${route.vehicle.brand} - ${route.vehicle.model}</span>
 												<br/>
-												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
+
+												<a href="#aboutModal" data-toggle="modal" data-target="#myModal">
+													<img class="imagen-envio" src="${route.vehicle.picture}">
+												</a>
+				
+				
+												<!-- Modal -->
+												<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+													aria-labelledby="myModalLabel" aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+				
+															<div class="modal-body">
+				
+				
+																<img src="${route.vehicle.picture}">
+				
+															</div>
+				
+														</div>
+													</div>
+												</div>
+												
+											<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
 												<span class="titles-info">
 													<jstl:if test="${route.itemEnvelope == 'Both'}">
 														<spring:message code="route.both"/>
