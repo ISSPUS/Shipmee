@@ -301,7 +301,7 @@ font-size: 225%;
 							<div class="col-xs-6">
 								<div class="span3 text-center">
 									<h4>
-										<a><spring:message code="feePayment.purchaser" />
+										<a href="user/profile.do?userId=${feePayment.purchaser.id}"><spring:message code="feePayment.purchaser" />
 											${feePayment.purchaser.userAccount.username}</a>
 									</h4>
 									<a href="user/profile.do?userId=${feePayment.purchaser.id}"> <jstl:choose>
@@ -319,7 +319,7 @@ font-size: 225%;
 							<div class="col-xs-6">
 								<div class="span3 text-center">
 									<h4>
-										<a><spring:message code="feePayment.carrier" />
+										<a href="user/profile.do?userId=${feePayment.carrier.id}"><spring:message code="feePayment.carrier" />
 											${feePayment.carrier.userAccount.username}</a>
 									</h4>
 									<a href="user/profile.do?userId=${feePayment.carrier.id}"> <jstl:choose>
