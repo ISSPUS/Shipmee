@@ -296,10 +296,26 @@ font-size: 225%;
 						</security:authorize>
 						<div class="col-xs-12">
 						
+							<div class="span3 text-center">
+								<jstl:if test="${feePayment.shipmentOffer != null}">
+									<h4>
+										<a href="shipment/display.do?shipmentId=${feePayment.shipmentOffer.shipment.id}"><spring:message code="shipmentOffer.shipment" />
+											${feePayment.shipmentOffer.shipment.itemName}</a>
+									</h4>
+								</jstl:if>
+								<jstl:if test="${feePayment.routeOffer != null}">
+									<h4>
+										<a href="route/display.do?routeId=${feePayment.routeOffer.route.id}"><spring:message code="route.route" />
+											${feePayment.routeOffer.route.origin} - ${feePayment.routeOffer.route.destination}<br/>
+											${feePayment.routeOffer.route.departureTime} - ${feePayment.routeOffer.route.arriveTime}</a>
+									</h4>
+								</jstl:if>
+							</div>
 							
+							<br/>
 						
 							<div class="col-xs-6">
-								<div class="span3 text-center">
+								<div class="span3 text-center">									
 									<h4>
 										<a href="user/profile.do?userId=${feePayment.purchaser.id}"><spring:message code="feePayment.purchaser" />
 											${feePayment.purchaser.userAccount.username}</a>
