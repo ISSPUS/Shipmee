@@ -189,6 +189,39 @@ public class FeePaymentService {
 		return result;
 	}
 	
+	public Page<FeePayment> findAllAcceptedByUser(Pageable pageable) {
+		Page<FeePayment> result;
+		List<FeePayment> allFeePaymentsAccepted;
+		User user;
+		
+		user = userService.findByPrincipal();
+		allFeePaymentsAccepted = new ArrayList<FeePayment>();
+
+		allFeePaymentsAccepted.addAll(feePaymentRepository.findAllAcceptedRouteOffersByUser(user.getId()));
+		allFeePaymentsAccepted.addAll(feePaymentRepository.findAllAcceptedShipmentOffersByUser(user.getId()));
+		
+		result = new PageImpl<FeePayment>(allFeePaymentsAccepted, pageable, allFeePaymentsAccepted.size());
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Page<FeePayment> findAllRejectedByUser(Pageable pageable) {
+		Page<FeePayment> result;
+		List<FeePayment> allFeePaymentsRejected;
+		User user;
+		
+		user = userService.findByPrincipal();
+		allFeePaymentsRejected = new ArrayList<FeePayment>();
+
+		allFeePaymentsRejected.addAll(feePaymentRepository.findAllRejectedRouteOffersByUser(user.getId()));
+		allFeePaymentsRejected.addAll(feePaymentRepository.findAllRejectedShipmentOffersByUser(user.getId()));
+		
+		result = new PageImpl<FeePayment>(allFeePaymentsRejected, pageable, allFeePaymentsRejected.size());
+		Assert.notNull(result);
+		
+		return result;
+	}
 
 	// Other business methods -------------------------------------------------
 	

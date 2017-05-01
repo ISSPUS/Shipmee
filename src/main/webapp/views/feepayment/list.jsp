@@ -184,7 +184,7 @@ font-size: 225%;
 <div class="container">
 
 	<!-- Menu informacion de las feePayments -->
-	<security:authorize access="hasRole('ADMIN')">
+	<security:authorize access="hasAnyRole('ADMIN', 'USER')">
 
 		<div class="row" style="margin-top: 2%">
 			<div class="center-block">
@@ -203,6 +203,7 @@ font-size: 225%;
 								</div>
 							</div>
 						</div>
+						<security:authorize access="hasRole('ADMIN')">
 						<a href="feepayment/administrator/list.do?type=Accepted&page=1">
 							<div class="panel-footer">
 								<span class="pull-left"><spring:message code="complaint.details" /></span> <span
@@ -210,6 +211,17 @@ font-size: 225%;
 								<div class="clearfix"></div>
 							</div>
 						</a>
+						</security:authorize>
+						
+						<security:authorize access="hasRole('USER')">
+						<a href="feepayment/user/list.do?type=Accepted&page=1">
+							<div class="panel-footer">
+								<span class="pull-left"><spring:message code="complaint.details" /></span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+						</security:authorize>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 cuadro">
@@ -227,6 +239,7 @@ font-size: 225%;
 								</div>
 							</div>
 						</div>
+						<security:authorize access="hasRole('ADMIN')">
 						<a href="feepayment/administrator/list.do?type=Pending&page=1">
 							<div class="panel-footer">
 								<span class="pull-left"><spring:message code="complaint.details" /></span> <span
@@ -234,6 +247,17 @@ font-size: 225%;
 								<div class="clearfix"></div>
 							</div>
 						</a>
+						</security:authorize>
+						
+						<security:authorize access="hasRole('USER')">
+						<a href="feepayment/user/list.do?type=Pending&page=1">
+							<div class="panel-footer">
+								<span class="pull-left"><spring:message code="complaint.details" /></span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+						</security:authorize>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 cuadro">
@@ -251,6 +275,7 @@ font-size: 225%;
 								</div>
 							</div>
 						</div>
+						<security:authorize access="hasRole('ADMIN')">
 						<a href="feepayment/administrator/list.do?type=Rejected&page=1">
 							<div class="panel-footer">
 								<span class="pull-left"><spring:message code="complaint.details" /></span> <span
@@ -258,6 +283,17 @@ font-size: 225%;
 								<div class="clearfix"></div>
 							</div>
 						</a>
+						</security:authorize>
+						
+						<security:authorize access="hasRole('USER')">
+						<a href="feepayment/user/list.do?type=Rejected&page=1">
+							<div class="panel-footer">
+								<span class="pull-left"><spring:message code="complaint.details" /></span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+						</security:authorize>
 					</div>
 				</div>
 			</div>
@@ -272,7 +308,7 @@ font-size: 225%;
 					class=" col-xs-12 col-sm-10 col-md-7 col-lg-7 table-container panel panel-default"
 					style="margin-top: 1%; margin-bottom: 1%">
 					<div class="row">
-					<security:authorize access="hasRole('ADMIN')">
+					<security:authorize access="hasAnyRole('ADMIN', 'USER')">
 							<div class="col-xs-12">
 								<div class="info-moderator-${feePayment.type}">
 									<spring:message code="feePayment.pending" var="mild" />
@@ -357,6 +393,7 @@ font-size: 225%;
 								<span>${feePayment.amount}&#8364;</span>
 						</div>
 						
+						<jstl:if test="${feePayment.type == 'Pending'}">
 						<div class="col-xs-12 text-center profile-userbuttons">
 							<security:authorize access="hasRole('USER')">
 								<div class="text-center btn-group btn-group-justified">
@@ -376,13 +413,13 @@ font-size: 225%;
 								<jstl:out value="${reject}" />
 								&nbsp;<i class="glyphicon glyphicon-remove-circle"></i>
 							</button>
-
-
-						</div>
-
+									</div>
 								</div>
 							</security:authorize>
 						</div>
+						
+						</jstl:if>
+					
 						
 					</div>
 				</div>

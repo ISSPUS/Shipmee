@@ -49,16 +49,32 @@ public class FeePaymentUserController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping("/list")
-	public ModelAndView list(@RequestParam int page) {
+	public ModelAndView list(@RequestParam (required = false, defaultValue = "Pending") String type, @RequestParam int page) {
 		ModelAndView result;
 		Page<FeePayment> items;
+		Integer allAccepted;
+		Integer allPending;
+		Integer allDenied;
 		Pageable pageable;
+		
 		pageable = new PageRequest(page - 1, 5);
+		allAccepted = (int) feePaymentService.findAllAcceptedByUser(pageable).getTotalElements();
+		allPending = (int) feePaymentService.findAllPendingByUser(pageable).getTotalElements();
+		allDenied = (int) feePaymentService.findAllRejectedByUser(pageable).getTotalElements();
 
-		items = feePaymentService.findAllPendingByUser(pageable);
-
+		if(type.equals("Rejected") || type.equals("Rechazados")) {
+			items = feePaymentService.findAllRejectedByUser(pageable);
+		} else if(type.equals("Pending") || type.equals("Pendientes")) {
+			items = feePaymentService.findAllPendingByUser(pageable);
+		} else {   // if (type.equals("Accepted")) {
+			items = feePaymentService.findAllAcceptedByUser(pageable);
+		}
+		
 		result = new ModelAndView("feepayment/list");
 		result.addObject("feePayments", items.getContent());
+		result.addObject("allAccepted", allAccepted);
+		result.addObject("allPending", allPending);
+		result.addObject("allDenied", allDenied);
 		result.addObject("p", page);
 		result.addObject("total_pages", items.getTotalPages());
 
