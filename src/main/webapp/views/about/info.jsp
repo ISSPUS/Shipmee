@@ -20,7 +20,7 @@ margin-bottom: 10%;
 	<div class="blue-barra">
 	    <div class="container">
 			<div class="row">
-				<h3><spring:message code="info.title" /></h3>
+				<h3><spring:message code="info.shipmee" /></h3>
 			</div><!-- /row -->
 	    </div>
 	</div>
@@ -32,7 +32,6 @@ margin-bottom: 10%;
 	 		</div>
 	 		
 	 		<div class="col-lg-6">
-		 		<h4><spring:message code="info.shipmee" /></h4>
 		 		<p><spring:message code="info.about.text1" /></p>
 		 		<p><spring:message code="info.about.text2" /></p>
 		 		
