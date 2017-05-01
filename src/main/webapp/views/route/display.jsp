@@ -154,11 +154,6 @@
 												
 												<br/>
 												
-												<i class="demo-icon icon-package-1">&#xe802;&nbsp;</i><spring:message code="route.size" />:
-												<jstl:forEach var="value" items="${sizePrices}">
-													<span class="titles-info">${value.size}</span>
-												</jstl:forEach>
-												
 											</div>
 											
 										</div>
