@@ -40,9 +40,10 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href=""><spring:message
 								code="master.page.home" /></a></li>
-					<li><a href="about/info.do"><spring:message
-								code="master.page.about" /></a></li>
-
+					<security:authorize access="isAnonymous()">			
+						<li><a href="about/info.do"><spring:message
+									code="master.page.about" /></a></li>
+					</security:authorize>
 					<security:authorize access="hasRole('USER')">
 						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
 							data-toggle="dropdown"><spring:message
@@ -166,7 +167,7 @@
 
 
 	<div class="en-construccion text-center" role="alert">
-          <a href="" class="alert-link"><span class="glyphicon glyphicon-warning-sign"></span> <spring:message code="master.page.construction" /> <span class="glyphicon glyphicon-warning-sign"></span></a>
+          <a class="alert-link"><span class="glyphicon glyphicon-warning-sign"></span> <spring:message code="master.page.construction" /> <span class="glyphicon glyphicon-warning-sign"></span></a>
         </div>
 
 </body>
