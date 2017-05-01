@@ -199,11 +199,11 @@
 													<h4><a href="user/profile.do?userId=${route.creator.id}">${route.creator.name}</a></h4>
 												</div>
 												
-												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
+												<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
 											
 												<i class="glyphicon glyphicon-sort"></i>
 											
-												<a> <i
+												<a target="_blank" href="http://maps.google.com/maps?q=${route.destination}"> <i
 													class="glyphicon glyphicon-map-marker img-destination"></i>${route.destination}
 												</a>
 												

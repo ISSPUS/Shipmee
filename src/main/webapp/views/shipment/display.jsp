@@ -110,9 +110,9 @@
 										
 										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
 										
-										<div class="col-xs-7 col-sm-9 row titles-details">
-										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<span class="titles-info">${shipment.origin}</span>&nbsp;&nbsp;<i
-									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<span class="titles-info">${shipment.destination}</span></div>
+										<div class="col-xs-7 col-sm-9 row titles-details" style="width: 100%">
+										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><span class="titles-info">${shipment.origin}</span></a>&nbsp;&nbsp;<i
+									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"><span class="titles-info">${shipment.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png"></div>
 										
 										
 									</div>
