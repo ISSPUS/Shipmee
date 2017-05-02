@@ -349,7 +349,7 @@
 		</property>
 	</bean>
 	
-		<bean id="user7" class="domain.User">
+	<bean id="user7" class="domain.User">
 		<property name="name" value="José"/>
 		<property name="surname" value="Rodríguez"/>
 		<property name="email" value="torres@gmail.com"/>
@@ -407,6 +407,51 @@
 		<property name="color" value="Gray"/>
 		<property name="deleted" value="false"/>
 		<property name="user" ref="user2"/>
+	</bean>
+
+	<bean id="vehicle3" class="domain.Vehicle">
+		<property name="brand" value="Open"/>
+		<property name="model" value="Corsa"/>
+		<property name="picture" value="https://goo.gl/3wM1tE"/>
+		<property name="color" value="Green"/>
+		<property name="deleted" value="false"/>
+		<property name="user" ref="user3"/>
+	</bean>
+	
+	<bean id="vehicle4" class="domain.Vehicle">
+		<property name="brand" value="Ford"/>
+		<property name="model" value="Focus"/>
+		<property name="picture" value="https://goo.gl/sxk0Ya"/>
+		<property name="color" value="Silver"/>
+		<property name="deleted" value="false"/>
+		<property name="user" ref="user4"/>
+	</bean>
+	
+	<bean id="vehicle5" class="domain.Vehicle">
+		<property name="brand" value="Citröen"/>
+		<property name="model" value="C4"/>
+		<property name="picture" value="https://goo.gl/b8XYko"/>
+		<property name="color" value="white"/>
+		<property name="deleted" value="false"/>
+		<property name="user" ref="user5"/>
+	</bean>
+	
+	<bean id="vehicle6" class="domain.Vehicle">
+		<property name="brand" value="Renault"/>
+		<property name="model" value="Megane"/>
+		<property name="picture" value="https://goo.gl/CiHQNk"/>
+		<property name="color" value="Red"/>
+		<property name="deleted" value="false"/>
+		<property name="user" ref="user6"/>
+	</bean>
+	
+	<bean id="vehicle7" class="domain.Vehicle">
+		<property name="brand" value="Fiat"/>
+		<property name="model" value="500"/>
+		<property name="picture" value="https://goo.gl/CDFjGl"/>
+		<property name="color" value="Blue"/>
+		<property name="deleted" value="false"/>
+		<property name="user" ref="user7"/>
 	</bean>
 	
 	<!-- Rating -->
