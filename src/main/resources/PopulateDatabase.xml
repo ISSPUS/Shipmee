@@ -187,6 +187,34 @@
 		<property name="since" value="4"/>
 	</bean>
 	
+	<bean id="rank5" class="domain.Rank">
+		<property name="title" value="title5"/>
+		<property name="description" value="description5"/>
+		<property name="icon" value="http://www.icon5.com"/>
+		<property name="since" value="5"/>
+	</bean>
+	
+	<bean id="rank6" class="domain.Rank">
+		<property name="title" value="title6"/>
+		<property name="description" value="description6"/>
+		<property name="icon" value="http://www.icon6.com"/>
+		<property name="since" value="6"/>
+	</bean>
+	
+	<bean id="rank7" class="domain.Rank">
+		<property name="title" value="title7"/>
+		<property name="description" value="description7"/>
+		<property name="icon" value="http://www.icon7.com"/>
+		<property name="since" value="7"/>
+	</bean>
+	
+		<bean id="rank8" class="domain.Rank">
+		<property name="title" value="title8"/>
+		<property name="description" value="description8"/>
+		<property name="icon" value="http://www.icon8.com"/>
+		<property name="since" value="8"/>
+	</bean>
+	
 	<!-- FundTransferPreference -->
 	
 	<bean id="fundTransferPreference1" class="domain.FundTransferPreference">
@@ -255,6 +283,86 @@
 		<property name="isActive" value="true"/>
 		<property name="passwordResetToken" value=""/>
 		<property name="rank" ref="rank3"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user4" class="domain.User">
+		<property name="name" value="Guillermo"/>
+		<property name="surname" value="Alcalá"/>
+		<property name="email" value="guillermo@gmail.com"/>
+		<property name="birthDate" value="1995/10/01"/>
+		<property name="phone" value="666555001"/>
+		<property name="dni" value="13859779W"/>
+		<property name="dniPhoto" value=""/>
+		<property name="photo" value="images/anonymous.png"/>
+		<property name="userAccount" ref="userAccount7"/>
+		<property name="isVerified" value="false"/>
+		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
+		<property name="rank" ref="rank5"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user5" class="domain.User">
+		<property name="name" value="Migue"/>
+		<property name="surname" value="Rodríguez"/>
+		<property name="email" value="migue@gmail.com"/>
+		<property name="birthDate" value="1995/10/25"/>
+		<property name="phone" value="666555002"/>
+		<property name="dni" value="77639570B"/>
+		<property name="dniPhoto" value=""/>
+		<property name="photo" value="images/anonymous.png"/>
+		<property name="userAccount" ref="userAccount8"/>
+		<property name="isVerified" value="false"/>
+		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
+		<property name="rank" ref="rank6"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user6" class="domain.User">
+		<property name="name" value="Manolo"/>
+		<property name="surname" value="López"/>
+		<property name="email" value="manolo@gmail.com"/>
+		<property name="birthDate" value="1995/12/09"/>
+		<property name="phone" value="666555003"/>
+		<property name="dni" value="28543244Z"/>
+		<property name="dniPhoto" value=""/>
+		<property name="photo" value="images/anonymous.png"/>
+		<property name="userAccount" ref="userAccount9"/>
+		<property name="isVerified" value="false"/>
+		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
+		<property name="rank" ref="rank7"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+		<bean id="user7" class="domain.User">
+		<property name="name" value="José"/>
+		<property name="surname" value="Rodríguez"/>
+		<property name="email" value="torres@gmail.com"/>
+		<property name="birthDate" value="1995/05/07"/>
+		<property name="phone" value="666555004"/>
+		<property name="dni" value="17318581H"/>
+		<property name="dniPhoto" value=""/>
+		<property name="photo" value="images/anonymous.png"/>
+		<property name="userAccount" ref="userAccount10"/>
+		<property name="isVerified" value="false"/>
+		<property name="isActive" value="true"/>
+		<property name="passwordResetToken" value=""/>
+		<property name="rank" ref="rank8"/>
 		<property name="routes">
 			<list>
 			</list>
