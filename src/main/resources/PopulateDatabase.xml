@@ -514,6 +514,46 @@
 		<property name="moderator" ref="moderator1"/>
 	</bean>
 	
+	<bean id="complaint2" class="domain.Complaint">
+		<property name="explanation" value="Bad delivery"/>
+		<property name="creator" ref="user4"/>
+		<property name="involved" ref="user5"/>
+		<property name="type" value="Serious"/>
+		<property name="moderator" ref="moderator1"/>
+	</bean>
+	
+	<bean id="complaint3" class="domain.Complaint">
+		<property name="explanation" value="He was very rude"/>
+		<property name="creator" ref="user4"/>
+		<property name="involved" ref="user6"/>
+		<property name="type" value="Serious"/>
+		<property name="moderator" ref="moderator1"/>
+	</bean>
+	
+	<bean id="complaint4" class="domain.Complaint">
+		<property name="explanation" value="He didn't pay me."/>
+		<property name="creator" ref="user6"/>
+		<property name="involved" ref="user4"/>
+		<property name="type" value="Serious"/>
+		<property name="moderator" ref="moderator1"/>
+	</bean>
+	
+	<bean id="complaint5" class="domain.Complaint">
+		<property name="explanation" value="How does this work?"/>
+		<property name="creator" ref="user7"/>
+		<property name="involved" ref="user2"/>
+		<property name="type" value="Omitted"/>
+		<property name="moderator" ref="moderator1"/>
+	</bean>
+	
+	<bean id="complaint6" class="domain.Complaint">
+		<property name="explanation" value="Mariano is better"/>
+		<property name="creator" ref="user4"/>
+		<property name="involved" ref="user3"/>
+		<property name="type" value="Omitted"/>
+		<property name="moderator" ref="moderator1"/>
+	</bean>
+	
 	<!-- Route -->
 	
 	<bean id="route1" class="domain.Route">
