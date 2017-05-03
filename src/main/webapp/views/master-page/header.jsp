@@ -73,9 +73,9 @@
 					</security:authorize>
 
 					<security:authorize access="hasRole('ADMIN')">
-						<spring:message code="complaint.omitted" var="omitted" />
-						<spring:message code="complaint.mild" var="mild" />
-						<spring:message code="complaint.serious" var="serious" />
+						<spring:message code="complaint.omitted.capitalLetter" var="omitted" />
+						<spring:message code="complaint.mild.capitalLetter" var="mild" />
+						<spring:message code="complaint.serious.capitalLetter" var="serious" />
 
 						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
 							data-toggle="dropdown"><spring:message
@@ -92,9 +92,9 @@
 											value="${omitted}" /></a></li>
 							</ul></li>
 							
-						<spring:message code="feePayment.accepted" var="accepted" />
-						<spring:message code="feePayment.pending" var="pending" />
-						<spring:message code="feepayment.rejected" var="rejected" />
+						<spring:message code="feePayment.accepted.capitalLetter" var="accepted" />
+						<spring:message code="feePayment.pending.capitalLetter" var="pending" />
+						<spring:message code="feepayment.rejected.capitalLetter" var="rejected" />
 						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
 							data-toggle="dropdown"><spring:message
 									code="master.page.feepayments" /><b class="caret"></b></a>

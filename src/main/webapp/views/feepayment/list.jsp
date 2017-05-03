@@ -342,9 +342,9 @@ font-size: 225%;
 								<jstl:if test="${feePayment.routeOffer != null}">
 									<h4>
 										<a href="route/display.do?routeId=${feePayment.routeOffer.route.id}"><spring:message code="route.route" />
-											${feePayment.routeOffer.route.origin} - ${feePayment.routeOffer.route.destination}<br/>
-											${feePayment.routeOffer.route.departureTime} - ${feePayment.routeOffer.route.arriveTime}</a>
-									</h4>
+											${feePayment.routeOffer.route.origin} - ${feePayment.routeOffer.route.destination}<br/></a></h4>
+											<fmt:formatDate value="${feePayment.routeOffer.route.departureTime}" pattern="dd/MM/yyyy '-' HH:mm" /> - <fmt:formatDate value="${feePayment.routeOffer.route.arriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
+									
 								</jstl:if>
 							</div>
 							

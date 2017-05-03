@@ -275,7 +275,7 @@ len_serious: total de quejas graves
 							<div class="col-xs-6">
 								<div class="span3 text-center">
 									<h4>
-										<a><spring:message code="complaint.creator" />
+										<a href="user/profile.do?userId=${complaint.creator.id}"><spring:message code="complaint.creator" />
 											${complaint.creator.userAccount.username}</a>
 									</h4>
 									<a href="user/profile.do?userId=${complaint.creator.id}"> <jstl:choose>
@@ -293,7 +293,7 @@ len_serious: total de quejas graves
 							<div class="col-xs-6">
 								<div class="span3 text-center">
 									<h4>
-										<a><spring:message code="complaint.involved" />
+										<a href="user/profile.do?userId=${complaint.involved.id}"><spring:message code="complaint.involved" />
 											${complaint.involved.userAccount.username}</a>
 									</h4>
 									<a href="user/profile.do?userId=${complaint.involved.id}"> <jstl:choose>
@@ -316,7 +316,7 @@ len_serious: total de quejas graves
 						</div>
 						<security:authorize access="hasRole('ADMIN')">
 							<div class="col-xs-12">
-								<div class="info-moderator-${complaint.type}">
+								<div class="info-moderator-${complaint.type}" style="margin-bottom: 15px;">
 									<spring:message code="complaint.mild" var="mild" />
 									<div style="margin-bottom: 0.5%">
 										<h5>

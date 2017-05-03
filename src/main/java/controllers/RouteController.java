@@ -141,7 +141,9 @@ public class RouteController extends AbstractController {
 		sizePrices = sizePriceService.findAllByRouteId(routeId);
 		currentUser = null;
 		
-		if(actorService.checkLogin()){
+		if(actorService.checkAuthority("ADMIN")){
+			currentUser = userService.findOne(route.getCreator().getId());
+		}else if (actorService.checkLogin()){
 			currentUser = userService.findByPrincipal();
 		}
 		
