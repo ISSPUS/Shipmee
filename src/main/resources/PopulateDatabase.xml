@@ -588,6 +588,49 @@
 		<property name="creator" ref="user3"/>
 	</bean>
 	
+	<bean id="route4" class="domain.Route">
+		<property name="date" value="2017/05/03 10:36"/>
+		<property name="departureTime" value="2017/06/26 16:00"/>
+		<property name="arriveTime" value="2017/06/26 19:00"/>
+		<property name="origin" value="Sevilla"/>
+		<property name="destination" value="Lugo"/>
+		<property name="itemEnvelope" value="Both"/>
+		<property name="creator" ref="user4"/>
+		<property name="vehicle" ref="vehicle4"/>
+	</bean>
+	
+	<bean id="route5" class="domain.Route">
+		<property name="date" value="2017/05/03 10:37"/>
+		<property name="departureTime" value="2017/06/28 16:00"/>
+		<property name="arriveTime" value="2017/06/28 19:00"/>
+		<property name="origin" value="Madrid"/>
+		<property name="destination" value="Barcelona"/>
+		<property name="itemEnvelope" value="Open"/>
+		<property name="creator" ref="user5"/>
+		<property name="vehicle" ref="vehicle5"/>
+	</bean>
+	
+	<bean id="route6" class="domain.Route">
+		<property name="date" value="2017/05/03 10:37"/>
+		<property name="departureTime" value="2017/07/01 16:00"/>
+		<property name="arriveTime" value="2017/07/01 19:00"/>
+		<property name="origin" value="Bibao"/>
+		<property name="destination" value="Valencia"/>
+		<property name="itemEnvelope" value="Closed"/>
+		<property name="creator" ref="user6"/>
+		<property name="vehicle" ref="vehicle6"/>
+	</bean>
+	
+	<bean id="route7" class="domain.Route">
+		<property name="date" value="2017/05/03 10:38"/>
+		<property name="departureTime" value="2017/07/03 16:00"/>
+		<property name="arriveTime" value="2017/07/03 19:00"/>
+		<property name="origin" value="Ciudad Real"/>
+		<property name="destination" value="Pamplona"/>
+		<property name="itemEnvelope" value="Open"/>
+		<property name="creator" ref="user7"/>
+	</bean>
+	
 	<!-- SizePrice -->
 	
 	<bean id="sizePrice1" class="domain.SizePrice">
