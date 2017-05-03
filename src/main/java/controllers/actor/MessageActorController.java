@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Message;
 import services.form.MessageFormService;
+import services.ActorService;
 import services.MessageService;
 @Controller
 @RequestMapping("/message/actor")
@@ -28,6 +30,9 @@ public class MessageActorController extends AbstractController {
 
 	@Autowired
 	MessageService messageService;
+	
+	@Autowired
+	ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -38,14 +43,20 @@ public class MessageActorController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam (required=false, defaultValue="0") String userId) {
 		ModelAndView result;
 		MessageFormService messageForm;
 		Message message;
+		Actor recipient = null;
 
 		message = messageService.create();
 		messageForm = messageService.messageToMessageForm(message);
-
+				
+		if(!userId.equals("0")) {
+			recipient = actorService.findOne(new Integer(userId));
+			messageForm.setRecipient(recipient.getUserAccount().getUsername());
+		}
+		
 		result = createEditModelAndView(messageForm);
 
 		return result;
@@ -115,11 +126,11 @@ public class MessageActorController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(MessageFormService messageForm, String messageError) {
+	protected ModelAndView createEditModelAndView(MessageFormService messageFormService, String messageError) {
 		ModelAndView result;
 
 		result = new ModelAndView("message/edit");
-		result.addObject("messageForm", messageForm);
+		result.addObject("messageFormService", messageFormService);
 		result.addObject("messageError", messageError);
 		result.addObject("total_received", messageService.countMessagesReceivedtByActor());
 		result.addObject("total_sent", messageService.countMessagesSentByActor());

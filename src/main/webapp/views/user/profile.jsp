@@ -114,6 +114,10 @@
 					<a href="complaint/user/create.do?userId=${user.id}"><i
 						class="glyphicon glyphicon-exclamation-sign img-report"
 						title="Complaint"></i></a>
+											
+					<a href="message/actor/create.do?userId=${user.id}"><i
+						class="glyphicon glyphicon-envelope img-report"
+						title="Message"></i></a>
 				</jstl:if>
 				<div class="modal-body text-center">
 

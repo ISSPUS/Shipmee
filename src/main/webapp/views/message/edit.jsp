@@ -63,7 +63,7 @@
 
 		<div class="col-md-8">
 			<form:form action="message/actor/edit.do" method="post"
-				modelAttribute="messageForm" class="form-horizontal" role="form">
+				modelAttribute="messageFormService" class="form-horizontal" role="form">
 
 				<form:hidden path="sender" />
 				<form:hidden path="moment" />
