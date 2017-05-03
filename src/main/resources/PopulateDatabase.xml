@@ -959,9 +959,9 @@
 		<property name="origin" value="Sevilla"/>
 		<property name="destination" value="Lugo"/>
 		<property name="price" value="3.00"/>
-		<property name="itemName" value="Balón de reglamento"/>
-		<property name="itemPicture" value="https://goo.gl/K53A6x"/>
-		<property name="itemSize" value="L"/>
+		<property name="itemName" value="Adaptador para el mac"/>
+		<property name="itemPicture" value="https://goo.gl/2vMdmj"/>
+		<property name="itemSize" value="S"/>
 		<property name="itemEnvelope" value="Open"/>
 		<property name="creator" ref="user4"/>
 		<!-- <property name="carried" ref=""/> -->
