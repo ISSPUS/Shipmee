@@ -1067,6 +1067,60 @@
 		<property name="user" ref="user2"/>
 		<property name="shipment" ref="shipment2"/>
 	</bean>
+
+	<bean id="shipmentOffer7" class="domain.ShipmentOffer">
+		<property name="amount" value="4.00"/>
+		<property name="description" value="Si usases Linux, no te haría falta."/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user6"/>
+		<property name="shipment" ref="shipment4"/>
+	</bean>
+	
+	<bean id="shipmentOffer8" class="domain.ShipmentOffer">
+		<property name="amount" value="1.80"/>
+		<property name="description" value="Si me aceptas, no te cambio el nick de Telegram"/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user5"/>
+		<property name="shipment" ref="shipment4"/>
+	</bean>
+	
+	<bean id="shipmentOffer9" class="domain.ShipmentOffer">
+		<property name="amount" value="3.00"/>
+		<property name="description" value="Vaya Hat-Trick que metió Cristiano en Semifinales"/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user4"/>
+		<property name="shipment" ref="shipment5"/>
+	</bean>
+	
+	<bean id="shipmentOffer10" class="domain.ShipmentOffer">
+		<property name="amount" value="3.00"/>
+		<property name="description" value="¿A quién le ha tocado al Barça en Semifinales?"/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user4"/>
+		<property name="shipment" ref="shipment5"/>
+	</bean>
+	
+	<bean id="shipmentOffer11" class="domain.ShipmentOffer">
+		<property name="amount" value="3.00"/>
+		<property name="description" value="Yo te lo llevo Manolito"/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user5"/>
+		<property name="shipment" ref="shipment6"/>
+	</bean>
+	
+	<bean id="shipmentOffer12" class="domain.ShipmentOffer">
+		<property name="amount" value="3.50"/>
+		<property name="description" value="¿Me llevo un tenedor o tienes allí?"/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user4"/>
+		<property name="shipment" ref="shipment7"/>
+	</bean>
 	
 	<!-- Alert -->
 	
