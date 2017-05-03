@@ -952,6 +952,66 @@
 <!-- 		<property name="carried" ref="user1"/> -->
 	</bean>
 	
+	<bean id="shipment4" class="domain.Shipment">
+		<property name="date" value="2017/05/03 10:58"/>
+		<property name="departureTime" value="2017/06/22 16:00"/>
+		<property name="maximumArriveTime" value="2017/06/22 19:00"/>
+		<property name="origin" value="Sevilla"/>
+		<property name="destination" value="Lugo"/>
+		<property name="price" value="3.00"/>
+		<property name="itemName" value="Balón de reglamento"/>
+		<property name="itemPicture" value="https://goo.gl/K53A6x"/>
+		<property name="itemSize" value="L"/>
+		<property name="itemEnvelope" value="Open"/>
+		<property name="creator" ref="user4"/>
+		<!-- <property name="carried" ref=""/> -->
+	</bean>
+	
+	<bean id="shipment5" class="domain.Shipment">
+		<property name="date" value="2017/05/03 11:07"/>
+		<property name="departureTime" value="2017/06/27 16:00"/>
+		<property name="maximumArriveTime" value="2017/06/27 19:00"/>
+		<property name="origin" value="Cádiz"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="price" value="5.00"/>
+		<property name="itemName" value="Periódico MARCA"/>
+		<property name="itemPicture" value="https://goo.gl/tky5xd"/>
+		<property name="itemSize" value="L"/>
+		<property name="itemEnvelope" value="Open"/>
+		<property name="creator" ref="user5"/>
+		<!-- <property name="carried" ref=""/> -->
+	</bean>
+	
+	<bean id="shipment6" class="domain.Shipment">
+		<property name="date" value="2017/05/03 11:01"/>
+		<property name="departureTime" value="2017/06/25 16:00"/>
+		<property name="maximumArriveTime" value="2017/06/25 19:00"/>
+		<property name="origin" value="San Roque"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="price" value="2.00"/>
+		<property name="itemName" value="Cubo antiestrés"/>
+		<property name="itemPicture" value="https://goo.gl/R8dNLK"/>
+		<property name="itemSize" value="S"/>
+		<property name="itemEnvelope" value="Open"/>
+		<property name="creator" ref="user6"/>
+		<!-- <property name="carried" ref=""/> -->
+	</bean>
+	
+	<bean id="shipment7" class="domain.Shipment">
+		<property name="date" value="2017/05/03 11:05"/>
+		<property name="departureTime" value="2017/06/25 16:00"/>
+		<property name="maximumArriveTime" value="2017/06/25 19:00"/>
+		<property name="origin" value="Sevilla"/>
+		<property name="destination" value="Huelva"/>
+		<property name="price" value="2.50"/>
+		<property name="itemName" value="Piña"/>
+		<property name="itemPicture" value="https://goo.gl/3Eg8dG"/>
+		<property name="itemSize" value="S"/>
+		<property name="itemEnvelope" value="Closed"/>
+		<property name="creator" ref="user7"/>
+		<!-- <property name="carried" ref=""/> -->
+	</bean>
+	
 	<!-- ShipmentOffer -->
 	
 	<bean id="shipmentOffer1" class="domain.ShipmentOffer">
