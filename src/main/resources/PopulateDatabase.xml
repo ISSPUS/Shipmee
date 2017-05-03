@@ -771,7 +771,7 @@
 	</bean>
 	
 	<bean id="routeOffer4" class="domain.RouteOffer">
-		<property name="amount" value="2.00"/>
+		<property name="amount" value="1.75"/>
 		<property name="description" value="Te doy 1.75€ por un artículo de tamaño M y me estoy arriesgando."/>
 		<property name="acceptedByCarrier" value="true"/>
 		<property name="rejectedByCarrier" value="false"/>
@@ -807,12 +807,102 @@
 	</bean>
 	
 	<bean id="routeOffer8" class="domain.RouteOffer">
-		<property name="amount" value="2.00"/>
+		<property name="amount" value="1.75"/>
 		<property name="description" value="Te doy 1.75€ por un artículo de tamaño M y me estoy arriesgando."/>
 		<property name="acceptedByCarrier" value="true"/>
 		<property name="rejectedByCarrier" value="false"/>
 		<property name="user" ref="user1"/>
 		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="routeOffer9" class="domain.RouteOffer">
+		<property name="amount" value="2.00"/>
+		<property name="description" value="Te doy 2€ por un artículo de tamaño M y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user5"/>
+		<property name="route" ref="route3"/>
+	</bean>
+	
+	<bean id="routeOffer10" class="domain.RouteOffer">
+		<property name="amount" value="0.50"/>
+		<property name="description" value="Te doy 0.5€ por un artículo de tamaño M y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="true"/>
+		<property name="user" ref="user6"/>
+		<property name="route" ref="route3"/>
+	</bean>
+	
+	<bean id="routeOffer11" class="domain.RouteOffer">
+		<property name="amount" value="2.00"/>
+		<property name="description" value="Te doy 2€ por un artículo de tamaño M y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user5"/>
+		<property name="route" ref="route4"/>
+	</bean>
+	
+	<bean id="routeOffer12" class="domain.RouteOffer">
+		<property name="amount" value="0.50"/>
+		<property name="description" value="Te doy 0.5€ por un artículo de tamaño S y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="true"/>
+		<property name="user" ref="user6"/>
+		<property name="route" ref="route4"/>
+	</bean>
+	
+	<bean id="routeOffer13" class="domain.RouteOffer">
+		<property name="amount" value="1.00"/>
+		<property name="description" value="Te doy 1€ por un artículo de tamaño M y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user2"/>
+		<property name="route" ref="route5"/>
+	</bean>
+	
+	<bean id="routeOffer14" class="domain.RouteOffer">
+		<property name="amount" value="0.50"/>
+		<property name="description" value="Te doy 0.5€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="true"/>
+		<property name="user" ref="user3"/>
+		<property name="route" ref="route5"/>
+	</bean>
+	
+	<bean id="routeOffer15" class="domain.RouteOffer">
+		<property name="amount" value="1.00"/>
+		<property name="description" value="Te doy 1€ por un artículo de tamaño XL y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user2"/>
+		<property name="route" ref="route6"/>
+	</bean>
+	
+	<bean id="routeOffer16" class="domain.RouteOffer">
+		<property name="amount" value="0.50"/>
+		<property name="description" value="Te doy 0.5€ por un artículo de tamaño XL y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="true"/>
+		<property name="user" ref="user3"/>
+		<property name="route" ref="route6"/>
+	</bean>
+	
+	<bean id="routeOffer17" class="domain.RouteOffer">
+		<property name="amount" value="2.00"/>
+		<property name="description" value="Te doy 2€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
+		<property name="user" ref="user2"/>
+		<property name="route" ref="route7"/>
+	</bean>
+	
+	<bean id="routeOffer18" class="domain.RouteOffer">
+		<property name="amount" value="0.50"/>
+		<property name="description" value="Te doy 0.5€ por un artículo de tamaño XL y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="true"/>
+		<property name="user" ref="user3"/>
+		<property name="route" ref="route7"/>
 	</bean>
 	
 	<!-- Shipment -->
