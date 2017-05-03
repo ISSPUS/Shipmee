@@ -208,7 +208,7 @@
 		<property name="since" value="7"/>
 	</bean>
 	
-		<bean id="rank8" class="domain.Rank">
+	<bean id="rank8" class="domain.Rank">
 		<property name="title" value="title8"/>
 		<property name="description" value="description8"/>
 		<property name="icon" value="http://www.icon8.com"/>
@@ -685,6 +685,60 @@
 		<property name="size" value="M"/>
 		<property name="price" value="3.50"/>
 		<property name="route" ref="route3"/>
+	</bean>
+	
+	<bean id="sizePrice10" class="domain.SizePrice">
+		<property name="size" value="S"/>
+		<property name="price" value="1.50"/>
+		<property name="route" ref="route4"/>
+	</bean>
+	
+	<bean id="sizePrice11" class="domain.SizePrice">
+		<property name="size" value="M"/>
+		<property name="price" value="2.00"/>
+		<property name="route" ref="route4"/>
+	</bean>
+	
+	<bean id="sizePrice12" class="domain.SizePrice">
+		<property name="size" value="M"/>
+		<property name="price" value="2.00"/>
+		<property name="route" ref="route5"/>
+	</bean>
+	
+	<bean id="sizePrice13" class="domain.SizePrice">
+		<property name="size" value="L"/>
+		<property name="price" value="2.50"/>
+		<property name="route" ref="route5"/>
+	</bean>
+	
+	<bean id="sizePrice14" class="domain.SizePrice">
+		<property name="size" value="S"/>
+		<property name="price" value="1.50"/>
+		<property name="route" ref="route6"/>
+	</bean>
+	
+	<bean id="sizePrice15" class="domain.SizePrice">
+		<property name="size" value="XL"/>
+		<property name="price" value="3.50"/>
+		<property name="route" ref="route6"/>
+	</bean>
+	
+	<bean id="sizePrice16" class="domain.SizePrice">
+		<property name="size" value="M"/>
+		<property name="price" value="2.00"/>
+		<property name="route" ref="route7"/>
+	</bean>
+	
+	<bean id="sizePrice17" class="domain.SizePrice">
+		<property name="size" value="L"/>
+		<property name="price" value="2.50"/>
+		<property name="route" ref="route7"/>
+	</bean>
+	
+	<bean id="sizePrice18" class="domain.SizePrice">
+		<property name="size" value="XL"/>
+		<property name="price" value="3.50"/>
+		<property name="route" ref="route7"/>
 	</bean>
 	
 	<!-- RouteOffer -->
