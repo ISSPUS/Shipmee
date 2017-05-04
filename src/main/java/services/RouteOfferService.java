@@ -221,6 +221,8 @@ public class RouteOfferService {
 		 * Here comes the notification to the carrier (Still not developed) 
 		 */
 		
+		messageService.autoMessageAcceptRouteOffer(routeOffer);
+		
 	}
 	
 	/**

@@ -65,6 +65,9 @@ public class FeePaymentService {
 	@Autowired
 	private RouteService routeService;
 	
+	@Autowired
+	private MessageService messageService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public FeePaymentService() {
@@ -116,6 +119,10 @@ public class FeePaymentService {
 			feePayment.setCommission(feePayment.getAmount()/10);
 			
 			feePayment = feePaymentRepository.save(feePayment);
+			
+			if(feePayment.getShipmentOffer() != null) {
+				messageService.autoMessageAcceptShipmentOffer(feePayment.getShipmentOffer());
+			}
 		} else {
 			
 			Assert.isTrue(po != null ^ feePayment.getCreditCard() != null, "FeePaymentService.save.error.OrCreditCardOrPayPal");
