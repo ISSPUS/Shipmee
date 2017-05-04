@@ -111,13 +111,15 @@
 						class="glyphicon glyphicon-pencil img-edit" title="Edit"></i></a>
 				</jstl:if>
 				<jstl:if test="${!isPrincipal}">
+				<div style="float:right;">
 					<a href="complaint/user/create.do?userId=${user.id}"><i
 						class="glyphicon glyphicon-exclamation-sign img-report"
-						title="Complaint"></i></a>
-											
-					<a href="message/actor/create.do?userId=${user.id}"><i
-						class="glyphicon glyphicon-envelope img-report"
-						title="Message"></i></a>
+						title="<spring:message code="complaint.complaint" />"></i></a>
+						<br /><br />			
+					<a href="message/actor/create.do?userId=${user.id}"><i 
+						class="glyphicon glyphicon-envelope img-message"
+						title="<spring:message code="message.new" />"></i></a>
+				</div>
 				</jstl:if>
 				<div class="modal-body text-center">
 
@@ -162,6 +164,8 @@
 						<strong><spring:message code="user.public" /></strong>
 					</div>
 					<div class="datos text-left">
+						<span> <strong><spring:message
+										code="user.username" />: </strong> <spring:message text= "${user.userAccount.username}"/> </span> <br />
 						<span> <strong><spring:message code="user.name" />:
 						</strong>${user.name} ${user.surname}
 						</span> <br /> <span> <strong><spring:message
@@ -176,8 +180,7 @@
 								class="glyphicon glyphicon-lock"></i>
 						</div>
 						<div class="datos text-left">
-							<span> <strong><spring:message
-										code="user.username" />: </strong> <spring:message text= "${user.userAccount.username}"/> </span> <br /> <span> <strong><spring:message
+										 <span> <strong><spring:message
 										code="user.email" />: </strong>${user.email}</span> <br /> <span> <strong><spring:message
 										code="user.phone" />: </strong>${user.phone}</span> <br /> <span> <strong><spring:message
 										code="user.dni" />: </strong>${user.dni}</span><br /> <span> <strong><spring:message

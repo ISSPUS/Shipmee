@@ -28,6 +28,19 @@
 	float: right;
 }
 
+.img-message{
+	color: #d3d7cf;
+	font-size: 21px;
+	float: right;
+}
+
+.img-message:hover{
+	color: #428bca;
+	font-size: 21px;
+	float: right;
+}
+
+
 .img-edit{
 	color: #d3d7cf;
 	font-size: 22px;

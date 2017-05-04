@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 import domain.Rating;
 import domain.User;
+import security.UserAccount;
 import services.ActorService;
 import services.RatingService;
 import services.RouteService;
@@ -57,6 +58,7 @@ public class UserProfileController extends AbstractController {
 	public ModelAndView profile(HttpServletRequest request, @RequestParam(required=false) Integer userId,@RequestParam(required=false, defaultValue="1") int pagecomment) {
 		ModelAndView result;
 		User user;
+		UserAccount userAccount;
 		Boolean isPrincipal = false;
 		int shipmentsCreated,routesCreated,ratingsCreated, ratingsReceived;
 		/*VARIABLES PARA LISTA DE COMENTARIOS */
@@ -80,7 +82,7 @@ public class UserProfileController extends AbstractController {
 			ratings = ratingService.findAllByAuthorOrUser(0, user.getId(), pageable);
 		}
 		
-		
+		userAccount = user.getUserAccount();
 		
 		shipmentsCreated   = shipmentService.countShipmentCreatedByUserId(user);
 		routesCreated   = routeService.countRouteCreatedByUserId(user);
@@ -93,7 +95,7 @@ public class UserProfileController extends AbstractController {
 		result.addObject("shipmentsCreated", shipmentsCreated);
 		result.addObject("ratingsCreated", ratingsCreated);
 		result.addObject("ratingsReceived", ratingsReceived);
-
+		result.addObject("userAccount", userAccount);
 		result.addObject("user", user);
 		if(!isPrincipal && actorService.checkAuthority("USER")){
 			Rating rating = ratingService.create(userId);
