@@ -168,11 +168,5 @@
 	$('#origin').attr('placeholder', '');
 	$('#destination').attr('placeholder', '');
 	
-	$(function() {
-		$('#datetimepicker1').datetimepicker({
-			format : 'DD/MM/YYYY',
-			locale : 'es'
-		});
-
-	});
+	
 </script>

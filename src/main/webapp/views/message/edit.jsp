@@ -13,7 +13,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<script src="scripts/jquery.bootpag.min.js"></script>
+<script async src="scripts/jquery.bootpag.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css"
