@@ -310,7 +310,7 @@
 	</bean>
 	
 	<bean id="user5" class="domain.User">
-		<property name="name" value="Migue"/>
+		<property name="name" value="Miguel"/>
 		<property name="surname" value="Rodríguez"/>
 		<property name="email" value="migue@gmail.com"/>
 		<property name="birthDate" value="1995/10/25"/>
