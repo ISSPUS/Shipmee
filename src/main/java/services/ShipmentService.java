@@ -179,10 +179,12 @@ public class ShipmentService {
 		SimpleDateFormat formatter;
 		Date time;
 		Date finalDate;
+		Date moment;
 		
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		time = null;
 		finalDate = null;
+		moment = new Date();
 		
 		
 		if(date!=null && !date.equals("")){
@@ -197,7 +199,7 @@ public class ShipmentService {
 		}
 		
 		log.trace(origin+" - "+destination+" at "+finalDate);
-		result = shipmentRepository.searchShipment(origin, destination, finalDate, time, envelope, itemSize,page);
+		result = shipmentRepository.searchShipment(origin, destination, finalDate, time, envelope, itemSize, moment, page);
 		log.trace(result);
 		//System.out.println(result);
 		

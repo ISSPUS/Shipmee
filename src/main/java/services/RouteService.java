@@ -201,10 +201,12 @@ public class RouteService {
 		SimpleDateFormat formatter;
 		Date time;
 		Date finalDate;
+		Date moment;
 		
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		time = null;
 		finalDate = null;
+		moment = new Date();
 		
 		if(date!=null && !date.equals("")){
 			try {
@@ -218,7 +220,7 @@ public class RouteService {
 		}
 		
 		log.trace(origin+" - "+destination+" at "+finalDate);
-		result = routeRepository.searchRoute(origin, destination, finalDate, time, envelope, itemSize,page);
+		result = routeRepository.searchRoute(origin, destination, finalDate, time, envelope, itemSize, moment, page);
 		log.trace(result);
 		return result;
 	}
