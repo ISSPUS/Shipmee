@@ -17,9 +17,9 @@
 
 <link rel="shortcut icon" href="favicon.ico"/> 
 
-<script async type="text/javascript" src="scripts/jquery.js"></script>
-<script async type="text/javascript" src="scripts/jquery-ui.js"></script>
-<script async type="text/javascript" src="scripts/jmenu.js"></script>
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="scripts/jmenu.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdAr_iNZqmWFlGDqD6q5JFcG-sN7J6RpU&libraries=places&language=es&components=country:es"></script>
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
@@ -44,8 +44,8 @@
 	 <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-	<script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script async src="styles/assets/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="styles/assets/js/bootstrap.min.js"></script>
 	
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
