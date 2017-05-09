@@ -43,8 +43,8 @@ public class Message extends DomainEntity {
 		this.subject = subject;
 	}
 
-	@SafeHtml(whitelistType = WhiteListType.NONE)
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBody() {
 		return body;
 	}
