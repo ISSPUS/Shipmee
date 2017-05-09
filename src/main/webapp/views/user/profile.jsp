@@ -177,7 +177,7 @@
 									</h4>
 								</div>
 								<div class="col-xs-12 col-md-5">
-									<div class="center-block col-xs-3 col-lg-12"
+									<div class="center-block"
 										style="text-align: center;">
 										<img class="img-responsive"
 											style="margin: 0 auto; width: 60px;"
@@ -238,7 +238,7 @@
 						<jstl:forEach items="${ratings.content}" var="ratingRow">
 							<div class="row ">
 								<div class="col-xs-12 col-md-4">
-									<div class="center-block col-xs-4 col-lg-12"
+									<div class="center-block"
 										style="text-align: center;">
 										<img class="img-responsive"
 											style="margin: 0 auto; width: 60px;"
