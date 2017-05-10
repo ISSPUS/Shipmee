@@ -94,7 +94,7 @@
 									class="glyphicon glyphicon-time"></i> <spring:message code="route.hour" />
 							</a></li>
 							<li style="text-align: center" class="li-input">
-								<select class="selectpicker fondoDesplegable input-text" name="hour">
+								<select class="form-control selectpicker fondoDesplegable input-text" name="hour">
 								<option selected="selected" disabled value=''><spring:message code="shipment.select.hour" /></option>
 									<jstl:forEach begin="0" end="23" varStatus="i">
 										<jstl:choose>	
@@ -132,7 +132,7 @@
 							<spring:message code="shipment.sizeL" var="l" />
 							<spring:message code="shipment.sizeXL" var="xl" />
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text fondoDesplegable" name="itemSize">
+								class="form-control selectpicker input-text fondoDesplegable" name="itemSize">
 									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
 									<option value="S">"${s }" </option>
 									<option value="M">"${m }" </option>
