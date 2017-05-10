@@ -34,10 +34,12 @@ margin-bottom: 10%;
 	 		<div class="col-lg-6">
 		 		<p><spring:message code="info.about.text1" /></p>
 		 		<p><spring:message code="info.about.text2" /></p>
-		 		
+		 		<p><span style="font-size:100%;font-weight: bold;"><spring:message code="info.about.text3" />:</span></p>
+		 		<i class="fa fa-envelope fa-2x"></i> <a href="mailto:shipmee.contact@gmail.com" style="font-size:150%;">shipmee.contact@gmail.com</a>
 		 		<!--<p><br/><a href="contact.html" class="btn btn-theme">Contact Us</a></p>-->
 	 		</div>
 	 	</div>
+
 
 	<div class="row centered">
 		<h3 class="mb"><spring:message code="equipo" /></h3>

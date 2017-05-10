@@ -55,6 +55,7 @@
 		 				<!--<a href="#"><i class="fa fa-dribbble"></i></a>-->
 		 				<!--<a href="#"><i class="fa fa-facebook"></i></a>-->
 		 				<a href="https://github.com/Shipmee/Shipmee" target="blank"><i class="fa fa-github"></i></a>
+		 				<a href="https://www.youtube.com/channel/UCBzfG9e3KDZYHllfd7yGHgA" target="blank"><i class="fa fa-youtube"></i></a>
 		 				<!--<a href="#"><i class="fa fa-instagram"></i></a>-->
 		 				<!--<a href="#"><i class="fa fa-tumblr"></i></a>-->
 		 			</p>-

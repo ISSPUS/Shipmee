@@ -159,6 +159,14 @@ public class RouteOfferService {
 
 		return result;
 	}
+	
+	public Collection<RouteOffer> findAll() {
+		Collection<RouteOffer> result;
+
+		result = routeOfferRepository.findAll();
+
+		return result;
+	}
 
 	// Other business methods -------------------------------------------------
 
