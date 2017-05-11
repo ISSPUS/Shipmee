@@ -17,87 +17,6 @@
 <link rel="stylesheet" href="styles/assets/css/style-self.css"
 	type="text/css">
 <script src="scripts/jquery.bootpag.min.js"></script>
-<style type="text/css">
-.btn-grey {
-	background-color: #D8D8D8;
-	color: #FFF;
-}
-
-.review-block-description .btn {
-	text-transform: uppercase;
-	font-size: 11px;
-	font-weight: 600;
-	padding: 6px 15px;
-	margin-right: 5px;
-}
-
-.rating-block {
-	padding: 15px 15px 20px 15px;
-	border-radius: 3px;
-}
-
-.bold {
-	font-weight: 700;
-}
-
-.padding-bottom-7 {
-	padding-bottom: 7px;
-}
-
-.review-block {
-	padding: 15px;
-	border-radius: 3px;
-	margin-bottom: 15px;
-}
-
-.review-block-name {
-	font-size: 12px;
-}
-
-.review-block-date {
-	font-size: 12px;
-}
-
-.review-block-rate {
-	font-size: 13px;
-	margin-bottom: 15px;
-}
-
-.review-block-title {
-	font-size: 15px;
-	font-weight: 700;
-	margin-bottom: 10px;
-}
-
-.review-block-description {
-	font-size: 16px;
-	text-align: center;
-}
-
-.info-profile-comment {
-	text-align: left;
-}
-
-.review-block-rate .glyphicon {
-	color: #ffcd00;
-}
-
-@media ( min-width : 770px) {
-	.info-profile-comment {
-		text-align: center;
-	}
-}
-
-.review-block hr {
-	border: 1px solid #e4e4e4 !important;
-}
-
-
-.profile-user{
-	width: 95%;
-}
-
-</style>
 
 <security:authorize access="hasRole('ADMIN')" var="isAdmin" />
 
@@ -111,9 +30,15 @@
 						class="glyphicon glyphicon-pencil img-edit" title="Edit"></i></a>
 				</jstl:if>
 				<jstl:if test="${!isPrincipal}">
+				<div style="float:right;">
 					<a href="complaint/user/create.do?userId=${user.id}"><i
 						class="glyphicon glyphicon-exclamation-sign img-report"
-						title="Complaint"></i></a>
+						title="<spring:message code="complaint.complaint" />"></i></a>
+						<br /><br />			
+					<a href="message/actor/create.do?userId=${user.id}"><i 
+						class="glyphicon glyphicon-envelope img-message"
+						title="<spring:message code="message.new" />"></i></a>
+				</div>
 				</jstl:if>
 				<div class="modal-body text-center">
 
@@ -158,6 +83,8 @@
 						<strong><spring:message code="user.public" /></strong>
 					</div>
 					<div class="datos text-left">
+						<span> <strong><spring:message
+										code="user.username" />: </strong> <spring:message text= "${user.userAccount.username}"/> </span> <br />
 						<span> <strong><spring:message code="user.name" />:
 						</strong>${user.name} ${user.surname}
 						</span> <br /> <span> <strong><spring:message
@@ -172,11 +99,12 @@
 								class="glyphicon glyphicon-lock"></i>
 						</div>
 						<div class="datos text-left">
-							<span> <strong><spring:message
-										code="user.username" />: </strong> <spring:message text= "${user.userAccount.username}"/> </span> <br /> <span> <strong><spring:message
+										 <span> <strong><spring:message
 										code="user.email" />: </strong>${user.email}</span> <br /> <span> <strong><spring:message
 										code="user.phone" />: </strong>${user.phone}</span> <br /> <span> <strong><spring:message
-										code="user.dni" />: </strong>${user.dni}</span>
+										code="user.dni" />: </strong>${user.dni}</span><br /> <span> <strong><spring:message
+										code="user.fundTransferPreference" /></strong> (<a href="fundTransferPreference/user/edit.do"><spring:message
+										code="user.edit" /></a>)</span>
 						</div>
 						<div class="datos text-center">
 							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
@@ -249,7 +177,7 @@
 									</h4>
 								</div>
 								<div class="col-xs-12 col-md-5">
-									<div class="center-block col-xs-3 col-lg-12"
+									<div class="center-block"
 										style="text-align: center;">
 										<img class="img-responsive"
 											style="margin: 0 auto; width: 60px;"
@@ -310,7 +238,7 @@
 						<jstl:forEach items="${ratings.content}" var="ratingRow">
 							<div class="row ">
 								<div class="col-xs-12 col-md-4">
-									<div class="center-block col-xs-4 col-lg-12"
+									<div class="center-block"
 										style="text-align: center;">
 										<img class="img-responsive"
 											style="margin: 0 auto; width: 60px;"

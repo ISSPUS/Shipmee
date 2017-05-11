@@ -11,12 +11,13 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+<link href='https://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css'>
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 	rel="stylesheet">
 <link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
+<script async src="scripts/jquery.bootpag.min.js"></script>
 
 <div class="blue-barra" style="padding-top: 0.75%;padding-bottom: 0.75%;">
 	<div class="container">

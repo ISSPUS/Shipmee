@@ -11,13 +11,13 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+<link href='https://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css'>
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 	rel="stylesheet">
 
-    <link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
+<link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
 
 
 <div class="blue-barra"
@@ -36,6 +36,8 @@
 		<!-- /row -->
 	</div>
 </div>
+<script src="scripts/jquery.bootpag.min.js"></script>
+
 <div class="container">
 	<jstl:forEach items="${routeOffers}" var="routeOfferRow">
 		<div class="row"
@@ -130,17 +132,7 @@
 
 	</jstl:forEach>
 
-</div>
-
-<jstl:if test="${fn:length(routeOffers) == 0}">
-	<center>
-		<h2>
-			<spring:message code="routeOffer.anything" />
-		</h2>
-	</center>
-</jstl:if>
-
-<div id="pagination" class="copyright">
+<div id="pagination" style="margin: auto;float: none" class="copyright">
 
 	<script>
 		$('#pagination').bootpag({
@@ -165,3 +157,13 @@
 	</script>
 
 </div>
+</div>
+
+<jstl:if test="${fn:length(routeOffers) == 0}">
+	<center>
+		<h2>
+			<spring:message code="routeOffer.anything" />
+		</h2>
+	</center>
+</jstl:if>
+

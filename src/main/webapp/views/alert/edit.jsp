@@ -147,11 +147,26 @@
 
 
 <script type="text/javascript">
-	$(function() {
-		$('#datetimepicker1').datetimepicker({
-			format: 'DD/MM/YYYY',
-			locale: 'es'
-			});
-			
-	});
+
+
+	function initialize() {
+
+		var input = document.getElementById('origin');
+		var input2 = document.getElementById('destination');
+		var options = {
+			types : [ '(cities)' ],
+			componentRestrictions : {
+				country : 'es'
+			}
+		};
+		var autocomplete = new google.maps.places.Autocomplete(input, options);
+		var autocomplete = new google.maps.places.Autocomplete(input2, options);
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+	$('#origin').attr('placeholder', '');
+	$('#destination').attr('placeholder', '');
+	
+	
 </script>

@@ -22,9 +22,6 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
@@ -255,19 +252,3 @@
 
 </div>
 
-
-
-
-
-<script type="text/javascript">
-	$(function() {
-		$('#datetimepicker1').datetimepicker({
-			viewMode : 'days',
-			format : 'DD/MM/YYYY'
-		});
-	});
-
-	$(function() {
-		$('#datetimepicker2').datetimepicker();
-	});
-</script>

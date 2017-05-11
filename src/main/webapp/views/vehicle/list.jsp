@@ -22,9 +22,6 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
@@ -61,7 +58,6 @@
 }
 
 .row-vehicle {
-	margin-top: 2%;
 	margin-bottom: 2%;
 }
 
@@ -69,7 +65,9 @@
 	margin-top: 5%;
 	margin-bottom: 5%;
 }
-
+.caja{
+margin-bottom: 5%;
+}
 @media ( min-width : 770px) {
 	.buttons-vehicle {
 		margin-top: 20%
@@ -90,14 +88,20 @@
 </div>
 
 
-<div class="container">
-
+<div class="container caja">
+<div class="row">
+	<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
+		<div class="text-center profile-userbuttons">
+			<button class="btn button-view" style="font-size: 20px;" onclick="location.href = 'vehicle/user/create.do';"><span class="fa fa-plus-circle"></span> <spring:message code="vehicle.add" /></button>
+			</div>
+	</div>
+</div>     
 
 
 	<jstl:choose>
 		<jstl:when test="${not empty vehicles}">
 			<jstl:forEach items="${vehicles}" var="vehicle">
-				<div class="row row-vehicle">
+				<div class="row">
 					<div
 						class=" col-xs-12 col-sm-10 col-md-6 col-lg-6 table-container panel panel-default">
 						<div class="row">
@@ -123,15 +127,16 @@
 									</h5>
 								</div>
 							</div>
+							
 							<div class="col-xs-12 col-sm-2 col-md-4 col-lg-3"
 								style="text-align: center;">
-								<div class="buttons-vehicle">
-									<a href="vehicle/user/edit.do?vehicleId=${vehicle.id}"
-										class="btn button-cancel"><span
-										class="glyphicon glyphicon-pencil"></span> <spring:message
-											code="vehicle.edit" /></a>
-
+								<div class="text-center profile-userbuttons alerts-buttons">
+									<button class="btn button-ok" onclick="location.href = 'vehicle/user/edit.do?vehicleId=${vehicle.id}';">
+										<span class="fa fa-pencil"></span>
+										<spring:message code="vehicle.edit" />
+									</button>
 								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -148,13 +153,3 @@
 	</jstl:choose>
 </div>
 
-
-<div class="row">
-	<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" style="margin: 0 auto; float: none; margin-bottom: 5%; margin-top: 2%;">
-		<button   type="button" class="btn button-ok "
-			onclick="location.href = 'vehicle/user/create.do';">
-			<spring:message code="vehicle.add" />
-			&nbsp;<i class="glyphicon glyphicon-chevron-right"></i>
-		</button>
-	</div>
-</div>

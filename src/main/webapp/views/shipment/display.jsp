@@ -12,18 +12,14 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
-<script type="text/javascript" src="scripts/moment.js"></script>
-<script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
+<script async type="text/javascript" src="scripts/moment.js"></script>
+<script async type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script
+<script async
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-details.css" type="text/css">
@@ -110,9 +106,9 @@
 										
 										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
 										
-										<div class="col-xs-7 col-sm-9 row titles-details">
-										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<span class="titles-info">${shipment.origin}</span>&nbsp;&nbsp;<i
-									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<span class="titles-info">${shipment.destination}</span></div>
+										<div class="col-xs-7 col-sm-9 row titles-details" style="width: 100%">
+										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><span class="titles-info">${shipment.origin}</span></a>&nbsp;&nbsp;<i
+									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"><span class="titles-info">${shipment.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png"></div>
 										
 										
 									</div>
@@ -134,11 +130,21 @@
 											</div>
 										</div>
 										
-										<div class="row info1 col-xs-7 col-sm-9">
+										<div class="row info1 col-xs-11 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
-											<div class="col-xs-6">
+											<div class="col-xs-11">
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
-												<span class="titles-info">${shipment.itemEnvelope}</span>
+												<span class="titles-info">
+													<jstl:if test="${shipment.itemEnvelope == 'Both'}">
+														<spring:message code="shipment.both"/>
+													</jstl:if>
+													<jstl:if test="${shipment.itemEnvelope == 'Open'}">
+														<spring:message code="shipment.open"/>
+													</jstl:if>							
+													<jstl:if test="${shipment.itemEnvelope == 'Closed'}">
+														<spring:message code="shipment.closed"/>
+													</jstl:if>
+												</span>
 											
 											<br/>
 											
@@ -200,26 +206,37 @@
 
 
 
-								<div class="row info1 col-xs-12 col-sm-12 text-center">
+								<div class="row info1 col-xs-12 col-sm-12 text-center" style="margin-bottom:1%;">
+											
+										<jstl:if test="${shipment.creator != user}">
 											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
 											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
+										
+										</jstl:if>
+										
+								</div>
+							
+								
+								
+					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
+						
+						<jstl:if test="${shipment.creator != user}">
+						<button type="submit" class="btn button-view btn-primary"
+							onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
+							<span class="fa fa-plus-circle"></span>
+							<spring:message code="offer.new" />
+						</button>
+						</jstl:if>
+						
 
-								</div>
-								
-								<div class="row info1 col-xs-12 col-sm-12 text-center">
-											
-											<input type=submit class="btn-sm btn-llevar btn btn-success ok btn-danger contraoferta"
-											value= "<spring:message code="route.offer" />" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"></input>
-								
-								</div>
-								
-								<div class="row info1 col-xs-12 col-sm-12 text-center">
-											
-											<input type=submit class="btn-sm btn btn-success ok button-ok btn-block"
-											value= "<spring:message code="shipment.offers" />" onclick="location.href = 'shipmentOffer/user/list.do?shipmentId=${shipment.id}';"></input>
-								
-								</div>
+						<button type="submit" class="btn btn-primary"
+							onclick="location.href = 'shipmentOffer/user/list.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
+							<span class="fa fa-list"></span> 
+							<spring:message code="offer.list" />
+						</button>
+
+					</div>
 								
 							</div>
 							

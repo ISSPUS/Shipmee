@@ -292,14 +292,3 @@
 
 </div>
 
-<script type="text/javascript">
-	
-$(function() {
-	$('#datetimepicker1').datetimepicker({
-		viewMode : 'days',
-		locale: 'es',
-		format : 'DD/MM/YYYY'
-	});
-});
-              
-</script>

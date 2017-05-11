@@ -299,9 +299,9 @@ public class RouteTest extends AbstractTest {
 	@Test
 	public void positiveDeleteRoute1(){
 		
-		authenticate("user2");
+		authenticate("user3");
 		
-		Route routeBefore = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		Route routeBefore = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
 		Integer numberOfRouteBefore = routeService.findAll().size();
 		
 		routeService.delete(routeBefore);
@@ -351,30 +351,30 @@ public class RouteTest extends AbstractTest {
 		
 		unauthenticate();
 	}
-	
-	/**
-	 * @Test List all routes
-	 * @result The routes are list
-	 */
-	@Test
-	public void positiveListRoute1() {
-		authenticate("user1");
-	
-		Page<Route> routes;
-		Route route, routeResult;
-		Pageable pageable;
-
-		pageable = new PageRequest(0, 5);		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
-		routes = routeService.searchRoute("Almeria", "Sevilla", "12/03/2017", "15:00", "Both", "M",pageable);
-		routeResult = routes.iterator().next();
-
-		Assert.isTrue(routes.getContent().size() == 1);
-		Assert.isTrue(route.getId() == routeResult.getId());
-		
-		
-		unauthenticate();
-	}
+//	
+//	/**
+//	 * @Test List all routes
+//	 * @result The routes are list
+//	 */
+//	@Test
+//	public void positiveListRoute1() {
+//		authenticate("user1");
+//	
+//		Page<Route> routes;
+//		Route route, routeResult;
+//		Pageable pageable;
+//
+//		pageable = new PageRequest(0, 5);		
+//		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+//		routes = routeService.searchRoute("Almeria", "Sevilla", "12/03/2017", "15:00", "Both", "M",pageable);
+//		routeResult = routes.iterator().next();
+//
+//		Assert.isTrue(routes.getContent().size() == 1);
+//		Assert.isTrue(route.getId() == routeResult.getId());
+//		
+//		
+//		unauthenticate();
+//	}
 	
 	/**
 	 * @Test List all routes

@@ -91,6 +91,7 @@ public class RouteService {
 		
 		Assert.isTrue(user.getId() == route.getCreator().getId(), "message.error.route.save.user.own");
 		Assert.isTrue(user.getIsVerified() == true, "message.error.route.save.user.verified");
+		Assert.isTrue(user.getFundTransferPreference() != null);
 		
 		if(route.getId() == 0) {
 			route.setCreator(user);
@@ -195,20 +196,22 @@ public class RouteService {
 	// Other business methods -------------------------------------------------
 	
 	public Page<Route> searchRoute(String origin, String destination, String date, String hour, String envelope, String itemSize,Pageable page){
-		Assert.isTrue(origin != "" && destination != "");
+		Assert.isTrue(!origin.equals("") && !destination.equals(""));
 		Page<Route> result;
 		SimpleDateFormat formatter;
 		Date time;
 		Date finalDate;
+		Date moment;
 		
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		time = null;
 		finalDate = null;
+		moment = new Date();
 		
-		if(date!="" && date!=null){
+		if(date!=null && !date.equals("")){
 			try {
 				finalDate = formatter.parse(date+" 00:00");
-				if(hour!="" && hour!=null){
+				if(hour!=null && !hour.equals("")){
 					time = formatter.parse(date+" "+hour);
 				}
 			} catch (ParseException e) {
@@ -217,7 +220,7 @@ public class RouteService {
 		}
 		
 		log.trace(origin+" - "+destination+" at "+finalDate);
-		result = routeRepository.searchRoute(origin, destination, finalDate, time, envelope, itemSize,page);
+		result = routeRepository.searchRoute(origin, destination, finalDate, time, envelope, itemSize, moment, page);
 		log.trace(result);
 		return result;
 	}

@@ -174,21 +174,23 @@ public class ShipmentService {
 	// Other business methods -------------------------------------------------
 
 	public Page<Shipment> searchShipment(String origin, String destination, String date, String hour, String envelope, String itemSize,Pageable page){
-		Assert.isTrue(origin != "" && destination != "");
+		Assert.isTrue(!origin.equals("") && !destination.equals(""));
 		Page<Shipment> result;
 		SimpleDateFormat formatter;
 		Date time;
 		Date finalDate;
+		Date moment;
 		
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		time = null;
 		finalDate = null;
+		moment = new Date();
 		
 		
-		if(date!="" && date!=null){
+		if(date!=null && !date.equals("")){
 			try {
 				finalDate = formatter.parse(date+" 00:00");
-				if(hour!="" && hour!=null){
+				if(hour!=null && !hour.equals("")){
 					time = formatter.parse(date+" "+hour);
 				}
 			} catch (ParseException e) {
@@ -197,7 +199,7 @@ public class ShipmentService {
 		}
 		
 		log.trace(origin+" - "+destination+" at "+finalDate);
-		result = shipmentRepository.searchShipment(origin, destination, finalDate, time, envelope, itemSize,page);
+		result = shipmentRepository.searchShipment(origin, destination, finalDate, time, envelope, itemSize, moment, page);
 		log.trace(result);
 		//System.out.println(result);
 		

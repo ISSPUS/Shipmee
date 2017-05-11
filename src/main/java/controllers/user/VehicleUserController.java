@@ -93,7 +93,7 @@ public class VehicleUserController extends AbstractController {
 		} else {
 			try {
 				Vehicle vehicle = vehicleFormService.reconstruct(vehicleForm);
-				vehicle = vehicleService.save(vehicle);
+				vehicleService.save(vehicle);
 				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {

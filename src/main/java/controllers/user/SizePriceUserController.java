@@ -62,7 +62,7 @@ public class SizePriceUserController extends AbstractController {
 		sizePriceForm = sizePriceFormService.create(0);
 		sizePriceForm.setSizePriceFormId(0);
 
-		if (vehicleId != "0") {
+		if (!vehicleId.equals("0")) {
 			vehicle = vehicleService.findOne(Integer.parseInt(vehicleId));
 			sizePriceForm.setVehicle(vehicle);
 		}

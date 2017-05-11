@@ -11,7 +11,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<script src="scripts/jquery.bootpag.min.js"></script>
+<script async src="scripts/jquery.bootpag.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css"
@@ -25,6 +25,7 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
+	
 <div class="blue-barra" >
 	<div class="container">
 		<div class="row">

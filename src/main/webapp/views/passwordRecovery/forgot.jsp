@@ -9,8 +9,8 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
-<script type="text/javascript" src="scripts/moment.js"></script>
-<script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
+<script async type="text/javascript" src="scripts/moment.js"></script>
+<script async type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <head>
 
 </head>

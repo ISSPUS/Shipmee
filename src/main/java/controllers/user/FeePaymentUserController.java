@@ -3,6 +3,7 @@ package controllers.user;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,18 +17,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.FeePayment;
-import domain.RouteOffer;
-import domain.ShipmentOffer;
+import domain.PayPalObject;
 import domain.form.FeePaymentForm;
 import services.FeePaymentService;
-import services.RouteOfferService;
-import services.RouteService;
-import services.ShipmentOfferService;
+import services.PayPalService;
 import services.form.FeePaymentFormService;
 
 @Controller
 @RequestMapping("/feepayment/user")
 public class FeePaymentUserController extends AbstractController {
+	
+	static Logger log = Logger.getLogger(FeePaymentUserController.class);
 	
 	// Services ---------------------------------------------------------------
 	
@@ -38,14 +38,8 @@ public class FeePaymentUserController extends AbstractController {
 	private FeePaymentFormService feePaymentFormService;
 	
 	@Autowired
-	private RouteService routeService;
-	
-	@Autowired
-	private RouteOfferService routeOfferService;
-	
-	@Autowired
-	private ShipmentOfferService shipmentOfferService;
-	
+	private PayPalService payPalService;
+
 	// Constructors -----------------------------------------------------------
 	
 	public FeePaymentUserController() {
@@ -55,16 +49,32 @@ public class FeePaymentUserController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping("/list")
-	public ModelAndView list(@RequestParam int page) {
+	public ModelAndView list(@RequestParam (required = false, defaultValue = "Pending") String type, @RequestParam int page) {
 		ModelAndView result;
 		Page<FeePayment> items;
+		Integer allAccepted;
+		Integer allPending;
+		Integer allDenied;
 		Pageable pageable;
+		
 		pageable = new PageRequest(page - 1, 5);
+		allAccepted = (int) feePaymentService.findAllAcceptedByUser(pageable).getTotalElements();
+		allPending = (int) feePaymentService.findAllPendingByUser(pageable).getTotalElements();
+		allDenied = (int) feePaymentService.findAllRejectedByUser(pageable).getTotalElements();
 
-		items = feePaymentService.findAllPendingByUser(pageable);
-
+		if(type.equals("Rejected") || type.equals("Rechazados")) {
+			items = feePaymentService.findAllRejectedByUser(pageable);
+		} else if(type.equals("Pending") || type.equals("Pendientes")) {
+			items = feePaymentService.findAllPendingByUser(pageable);
+		} else {   // if (type.equals("Accepted")) {
+			items = feePaymentService.findAllAcceptedByUser(pageable);
+		}
+		
 		result = new ModelAndView("feepayment/list");
 		result.addObject("feePayments", items.getContent());
+		result.addObject("allAccepted", allAccepted);
+		result.addObject("allPending", allPending);
+		result.addObject("allDenied", allDenied);
 		result.addObject("p", page);
 		result.addObject("total_pages", items.getTotalPages());
 
@@ -92,7 +102,6 @@ public class FeePaymentUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid FeePaymentForm feePaymentForm, BindingResult binding) {
 		ModelAndView result;
-		RouteOffer routeOffer;
 		FeePayment feePayment;
 		String redirect = null;
 
@@ -108,28 +117,12 @@ public class FeePaymentUserController extends AbstractController {
 				 */
 				switch (feePaymentForm.getType()) {
 				case 1:
-					
-					routeOffer = routeService.contractRoute(feePaymentForm.getId(), feePaymentForm.getSizePriceId());
-					feePaymentForm.setOfferId(routeOffer.getId());
-					redirect = "redirect:../../routeOffer/user/list.do?routeId=" + routeOffer.getRoute().getId();
-					break;
-					
 				case 2:
-					routeOffer = routeOfferService.create(feePaymentForm.getId());
-					routeOffer.setAmount(feePaymentForm.getAmount());
-					routeOffer.setDescription(feePaymentForm.getDescription());
-					routeOffer = routeOfferService.save(routeOffer);
-					
-					feePaymentForm.setOfferId(routeOffer.getId());
-					redirect = "redirect:../../routeOffer/user/list.do?routeId=" + routeOffer.getRoute().getId();
+					redirect = "redirect:../../routeOffer/user/list.do?routeId=";
 					break;
 					
 				case 3:
-					ShipmentOffer shipmentOffer;
-					shipmentOffer = shipmentOfferService.accept(feePaymentForm.getOfferId());
-					
-					feePaymentForm.setOfferId(shipmentOffer.getId());
-					redirect = "redirect:../../shipmentOffer/user/list.do?shipmentId="+shipmentOffer.getShipment().getId();
+					redirect = "redirect:../../shipmentOffer/user/list.do?shipmentId=";
 					break;
 
 				default:
@@ -139,9 +132,10 @@ public class FeePaymentUserController extends AbstractController {
 				feePayment = feePaymentFormService.reconstruct(feePaymentForm);
 				feePaymentService.save(feePayment);
 				
-				result = new ModelAndView(redirect);
+				result = new ModelAndView(redirect+feePaymentForm.getId());
 			} catch (Throwable oops) {
-				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");				
+				log.error(oops);
+				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");
 			}
 		}
 
@@ -152,15 +146,27 @@ public class FeePaymentUserController extends AbstractController {
 	public ModelAndView save(@RequestParam int feepaymentId, @RequestParam String type) {
 		ModelAndView result;
 		FeePayment feePayment;
+		PayPalObject po;
 
 		try {
 			feePayment = feePaymentService.findOne(feepaymentId);
+			
+			po = payPalService.findByFeePaymentId(feepaymentId);
+			
+			if (type.equals("Accepted") && po != null){
+				payPalService.payToShipper(feepaymentId);
+			} else if (type.equals("Rejected") && po != null){
+				payPalService.refundToSender(feepaymentId);
+			}
+			
 			feePayment.setType(type);
+			
 			feePaymentService.save(feePayment);
 
 			result = new ModelAndView("redirect:list.do?page=1");
 		} catch (Throwable oops) {
-			result = new ModelAndView("redirect:list.do?page=1");
+			log.error(oops, oops);
+			result = new ModelAndView("redirect:list.do?page=1&message=error");
 		}
 
 		return result;

@@ -19,12 +19,10 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script
+<script async
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
@@ -96,7 +94,7 @@
 									class="glyphicon glyphicon-time"></i> <spring:message code="route.hour" />
 							</a></li>
 							<li style="text-align: center" class="li-input">
-								<select class="selectpicker fondoDesplegable input-text" name="hour">
+								<select class="form-control selectpicker fondoDesplegable input-text" name="hour">
 								<option selected="selected" disabled value=''><spring:message code="shipment.select.hour" /></option>
 									<jstl:forEach begin="0" end="23" varStatus="i">
 										<jstl:choose>	
@@ -128,14 +126,18 @@
 							<li class="active"><a href="#"> <i
 									class="glyphicon glyphicon-resize-full"></i><spring:message code="route.sizes" />
 							</a></li>
+							
+							<spring:message code="shipment.sizeS" var="s" />
+							<spring:message code="shipment.sizeM" var="m" />
+							<spring:message code="shipment.sizeL" var="l" />
+							<spring:message code="shipment.sizeXL" var="xl" />
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text fondoDesplegable" name="itemSize">
+								class="form-control selectpicker input-text fondoDesplegable" name="itemSize">
 									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
-									<option value="xs">XS</option>
-									<option value="s">S</option>
-									<option value="m">M</option>
-									<option value="l">L</option>
-									<option value="xl">XL</option>
+									<option value="S">"${s }" </option>
+									<option value="M">"${m }" </option>
+									<option value="L">"${l }" </option>
+									<option value="XL">"${xl }" </option>
 							</select></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
@@ -195,11 +197,11 @@
 													<h4><a href="user/profile.do?userId=${route.creator.id}">${route.creator.name}</a></h4>
 												</div>
 												
-												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
+												<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
 											
 												<i class="glyphicon glyphicon-sort"></i>
 											
-												<a> <i
+												<a target="_blank" href="http://maps.google.com/maps?q=${route.destination}"> <i
 													class="glyphicon glyphicon-map-marker img-destination"></i>${route.destination}
 												</a>
 												

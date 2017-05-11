@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Actor;
 import domain.Shipment;
 import domain.ShipmentOffer;
 import domain.User;
@@ -269,29 +268,7 @@ public class ShipmentOfferService {
 		 * Here comes the notification to the carrier (Still not developed) 
 		 */
 		
-		Actor sender;
-		Actor recipient;
-		String subject;
-		String body;
-		
-		sender = shipment.getCreator();
-		recipient = shipmentOffer.getUser();
-		subject = "Your counteroffer has been denied.";
-		body = "The counteroffer you did for a Shipment to carry " + 
-				shipment.getItemName() + 
-				" from " + 
-				shipment.getOrigin() + 
-				" to " + 
-				shipment.getDestination() + 
-				" with a proposed cost of " +
-				shipmentOffer.getAmount() + 
-				" euros, originally posted by " + 
-				shipment.getCreator().getUserAccount().getUsername() + 
-				" with a cost of " + 
-				shipment.getPrice() + 
-				" euros, has been denied.";
-		
-		messageService.sendMessage(sender, recipient, subject, body);	
+		messageService.autoMessageDenyShipmentOffer(shipmentOffer);
 		
 	}
 	

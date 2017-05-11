@@ -46,12 +46,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="styles/assets/js/bootstrap.min.js"></script>
-	<script src="styles/assets/js/retina-1.1.0.js"></script>
-	<script src="styles/assets/js/jquery.hoverdir.js"></script>
-	<script src="styles/assets/js/jquery.hoverex.min.js"></script>
-	<script src="styles/assets/js/jquery.prettyPhoto.js"></script>
-  	<script src="styles/assets/js/jquery.isotope.min.js"></script>
-  	<script src="styles/assets/js/custom.js"></script>
 	
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -65,10 +59,6 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#jMenu").jMenu();
-	});
-
 	function askSubmission(msg, form) {
 		if (confirm(msg))
 			form.submit();

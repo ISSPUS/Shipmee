@@ -23,7 +23,11 @@ public class ServerConfig {
 		return System.getenv("URL_IMG_PRIVATE_HOST")+"/";
 	}
 	
-	
-	
-	
+	public static boolean getTesting(){
+		boolean res;
+		
+		res = !(System.getenv("testing")==null || !System.getenv("testing").equals("true"));
+		
+		return res;
+	}
 }
