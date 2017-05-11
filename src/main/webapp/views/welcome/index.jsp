@@ -11,8 +11,6 @@
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script async type="text/javascript" src="scripts/moment.min.js"></script>
 <script async type="text/javascript" src="scripts/datetimepicker.min.js"></script>
-<script async type="text/javascript" src="scripts/es.min.js"></script>
-
 <head>
 
 
@@ -54,7 +52,7 @@
                 <input id="origin" class="camp" type="text" placeholder="" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label><span class="glyphicon glyphicon-pushpin">&nbsp;</span> <spring:message code="welcome.searcher.origin" /> </label>
+                <label for="origin"><span class="glyphicon glyphicon-pushpin">&nbsp;</span> <spring:message code="welcome.searcher.origin" /> </label>
             </div>
                         
 
@@ -62,7 +60,7 @@
                 <input id="destination" class="camp" type="text" placeholder=" " required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label><span class="glyphicon glyphicon-pushpin">&nbsp;</span><spring:message code="welcome.searcher.destination" /></label>
+                <label for="destination"><span class="glyphicon glyphicon-pushpin">&nbsp;</span><spring:message code="welcome.searcher.destination" /></label>
             </div>
            
             <div class="group">
@@ -167,7 +165,6 @@ $('.btn-toggle').click(function() {
 $(function() {
 	$('#datetimepicker1').datetimepicker({
 		viewMode : 'days',
-		locale: 'es',
 		format : 'DD/MM/YYYY'
 	});
 });
