@@ -367,10 +367,13 @@ public class RouteTest extends AbstractTest {
 		pageable = new PageRequest(0, 5);		
 		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
 		routes = routeService.searchRoute("Almeria", "Sevilla", "12/03/2017", "15:00", "Both", "M",pageable);
-		routeResult = routes.iterator().next();
+		if(routes.iterator().hasNext())
+			routeResult = routes.iterator().next();
+		else
+			routeResult = new Route();
 
 		Assert.isTrue(routes.getContent().size() == 0);
-		Assert.isTrue(route.getId() == routeResult.getId());
+		Assert.isTrue(route.getId() != routeResult.getId());
 		
 		
 		unauthenticate();
