@@ -17,9 +17,9 @@
 
 <link rel="shortcut icon" href="favicon.ico"/> 
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
-<script type="text/javascript" src="scripts/jquery-ui.js"></script>
-<script type="text/javascript" src="scripts/jmenu.js"></script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="scripts/jmenu.min.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdAr_iNZqmWFlGDqD6q5JFcG-sN7J6RpU&libraries=places&language=es&components=country:es"></script>
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
@@ -31,7 +31,7 @@
 
     <!-- Bootstrap core CSS
     ================================================== -->
-    <link rel="stylesheet" href="styles/assets/css/bootstrap.css"  type="text/css">
+    <link rel="stylesheet" href="styles/assets/css/bootstrap.min.css"  type="text/css">
 
     <!-- Custom styles for this template
     ================================================== -->
