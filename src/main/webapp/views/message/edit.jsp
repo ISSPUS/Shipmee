@@ -127,13 +127,3 @@
 
 
 </div>
-<script>
-	function setDefaultUsername() {
-		var username = location.search.split('username=')[1] ? location.search
-				.split('username=')[1] : '';
-
-		document.getElementById("recipient").value = username;
-	}
-
-	window.onload = setDefaultUsername();
-</script>

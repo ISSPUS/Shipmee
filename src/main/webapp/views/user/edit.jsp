@@ -14,12 +14,12 @@
 
 <!-- Form -->
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
-<script type="text/javascript" src="scripts/moment.js"></script>
+<script type="text/javascript" src="scripts/moment.min.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
-<script type="text/javascript" src="scripts/es.js"></script>
+<script type="text/javascript" src="scripts/es.min.js"></script>
 
 <div class="blue-barra">
 	<div class="container">

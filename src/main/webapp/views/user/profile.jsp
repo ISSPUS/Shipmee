@@ -11,7 +11,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/style-profile.css"
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-self.css"

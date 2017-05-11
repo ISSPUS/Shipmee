@@ -13,14 +13,14 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
-<script type="text/javascript" src="scripts/moment.js"></script>
+<script type="text/javascript" src="scripts/moment.min.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+	href="styles/assets/css/bootstrap-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
 <script async
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+	src="styles/assets/js/bootstrap-select.min.js"></script>
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 
@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
 <script src="scripts/jquery.bootpag.min.js"></script>
 
-<script type="text/javascript" src="scripts/es.js"></script>
+<script type="text/javascript" src="scripts/es.min.js"></script>
 
 <style>
 
