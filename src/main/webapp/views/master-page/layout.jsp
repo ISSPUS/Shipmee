@@ -22,8 +22,7 @@
 <script type="text/javascript" src="scripts/jmenu.min.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdAr_iNZqmWFlGDqD6q5JFcG-sN7J6RpU&libraries=places&language=es&components=country:es"></script>
 
-<title><tiles:insertAttribute name="title" ignore="true" /></title>
-
+<meta name="description" content="Shipmee te ofrece la posibilidad de enviar o transportar paquetes conectando con otros usuarios.">
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
