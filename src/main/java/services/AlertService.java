@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import domain.Alert;
 import repositories.AlertRepository;
+import utilities.PayPalConfig;
 
 @Service
 @Transactional
@@ -108,11 +109,11 @@ public class AlertService {
 			if(alert.getType().equals("Route")){
 				messageService.sendMessage( actorService.findByUsername("shipmee"), alert.getUser(), "Nueva Alerta", 
 						"Se ha creado una nueva ruta "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+dateFormat.format(alert.getDate())+"."+
-						"Haz click en el enlace para ver la ruta: https://shipmee.es/route/search.do?origin="+alert.getOrigin()+"&destination="+alert.getDestination()+"&date="+dateFormat.format(alert.getDate()));
+						"Haz click en el enlace para ver la ruta: "+PayPalConfig.getUrlBase()+"/route/search.do?origin="+alert.getOrigin()+"&destination="+alert.getDestination()+"&date="+dateFormat.format(alert.getDate()));
 			}else{
 				messageService.sendMessage(actorService.findByUsername("shipmee"), alert.getUser(), "Nueva Alerta", 
 						"Se ha creado un nuevo envío "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+dateFormat.format(alert.getDate())+"."+
-						"Haz click en el enlace para ver el envío: https://shipmee.es/shipment/search.do?origin="+alert.getOrigin()+"&destination="+alert.getDestination()+"&date="+dateFormat.format(alert.getDate()));
+						"Haz click en el enlace para ver el envío: "+PayPalConfig.getUrlBase()+"/shipment/search.do?origin="+alert.getOrigin()+"&destination="+alert.getDestination()+"&date="+dateFormat.format(alert.getDate()));
 			}
 		}
 	}

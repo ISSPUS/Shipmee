@@ -17,6 +17,7 @@ import repositories.ActorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import utilities.PayPalConfig;
 import utilities.SendMail;
 
 @Service
@@ -153,7 +154,7 @@ public class ActorService {
     		   "Shipmee - Recuperación de contraseña",
     		   "¡Hola "+actor.getName()+"! \n\n"
     		   		+ "Para recuperar tu contraseña te pedimos que accedas al siguiente enlace: \n\n"
-    		   		+ "http://localhost:8080/Shipmee/passwordRecovery/reset.do?passwordResetToken="+passwordResetToken
+    		   		+ PayPalConfig.getUrlBase()+"/passwordRecovery/reset.do?passwordResetToken="+passwordResetToken
     		   		+ "\n\nSi no has sido tú quien ha pedido restablecer la contraseña te rogamos que ignores éste mensaje."
     		   		+ "\n\nUn Saludo. \nShipmee.");
 		

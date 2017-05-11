@@ -468,33 +468,32 @@ public class ShipmentTest extends AbstractTest {
 		unauthenticate();
 	}
 	
-//	/**
-//	 * @Test List all Shipments
-//	 * @result The shipments are list
-//	 */
-//	@Test
-//	public void positiveListShipment2() {
-//		authenticate("user1");
-//	
-//		Page<Shipment> shipments;
-//		Shipment shipment1, shipment2;
-//		Pageable pageable;
-//
-//		pageable = new PageRequest(0, 5);
-//		shipment1 = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
-//		shipment2 = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment2"));
-//		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/03/2017", "15:00", "Open", null,pageable);
-//
-//		for(Shipment s : shipments.getContent()) {
-//			if(s.getId() != shipment1.getId() && s.getId() != shipment2.getId())
-//				Assert.isTrue(false);
-//		}
-//		
-//		Assert.isTrue(shipments.getContent().size() == 1);
-//		
-//		
-//		unauthenticate();
-//	}
+	/**
+	 * @Test List all Shipments
+	 * @result The shipments are list
+	 */
+	@Test
+	public void positiveListShipment2() {
+		authenticate("user1");
+	
+		Page<Shipment> shipments;
+		Shipment shipment1, shipment2;
+		Pageable pageable;
+
+		pageable = new PageRequest(0, 5);
+		shipment1 = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		shipment2 = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment2"));
+		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/03/2017", "15:00", "Open", null,pageable);
+
+		for(Shipment s : shipments.getContent()) {
+			Assert.isTrue(s.getId() != shipment1.getId() && s.getId() != shipment2.getId());
+		}
+		
+		Assert.isTrue(shipments.getContent().size() == 0);
+		
+		
+		unauthenticate();
+	}
 	
 	/**
 	 * @Test List all Shipments
