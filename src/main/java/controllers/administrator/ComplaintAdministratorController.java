@@ -43,7 +43,7 @@ public class ComplaintAdministratorController extends AbstractController {
 		Integer allOmitted;
 		Pageable pageable;
 		
-		pageable = new PageRequest(page - 1, 5);
+		pageable = new PageRequest(page - 1, 999);
 		allSerious = (int) complaintService.findAllSerious(pageable).getTotalElements();
 		allMild = (int) complaintService.findAllMild(pageable).getTotalElements();
 		allOmitted = (int) complaintService.findAllOmitted(pageable).getTotalElements();
