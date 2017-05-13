@@ -15,7 +15,9 @@ public interface ShipmentRepository extends JpaRepository<Shipment, Integer> {
 	
 	@Query("select s from Shipment s where ?1 like CONCAT('%',s.origin,'%') AND ?2 like CONCAT('%',s.destination,'%')"
 			+ "AND (?3 IS NULL OR (year(s.departureTime) = year(?3) AND month(s.departureTime) = month(?3) AND day(s.departureTime) = day(?3)))"
-			+ "AND (?7 IS NULL OR (year(s.departureTime) >= year(?7) AND month(s.departureTime) >= month(?7) AND day(s.departureTime) >= day(?7)))"
+			+ "AND (?7 IS NULL OR (year(s.departureTime) > year(?7) OR "
+				+ "(year(s.departureTime) = year(?7) AND month(s.departureTime) > month(?7) OR "
+				+ "(year(s.departureTime) = year(?7) AND month(s.departureTime) = month(?7) AND day(s.departureTime) >= day(?7)))))"
 			+ "AND (?4 IS NULL OR s.departureTime >= ?4) AND (?5 IS NULL OR s.itemEnvelope = ?5  OR s.itemEnvelope LIKE 'both') "
 			+ "AND (?6 IS NULL OR s.itemSize = ?6) "
 			+ "AND s.carried IS NULL ORDER BY s.maximumArriveTime ASC")
