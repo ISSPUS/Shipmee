@@ -68,8 +68,8 @@ public class ShipmentTest extends AbstractTest {
 		boolean alertFound;
 		Alert alert;
 		Shipment shipment;
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
-		Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date departureTime = new GregorianCalendar(2018, Calendar.JULY, 01).getTime();
+		Date maximumArrivalTime = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
 		beforeMessages = messageRepository.findAll();
 
 		shipment = shipmentService.create();
@@ -120,8 +120,8 @@ public class ShipmentTest extends AbstractTest {
 		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
 		 
 		 Shipment shipment;
-		 Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
-		 Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		 Date departureTime = new GregorianCalendar(2018, Calendar.JULY, 01).getTime();
+		 Date maximumArrivalTime = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
 
 		 shipment = shipmentService.create();
 		 shipment.setOrigin("Sevilla");
@@ -155,8 +155,8 @@ public class ShipmentTest extends AbstractTest {
 		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
 		 
 		 Shipment shipment;
-		 Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
-		 Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		 Date departureTime = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
+		 Date maximumArrivalTime = new GregorianCalendar(2018, Calendar.JULY, 01).getTime();
 
 		 shipment = shipmentService.create();
 		 shipment.setOrigin("Sevilla");
@@ -261,8 +261,8 @@ public class ShipmentTest extends AbstractTest {
 		 
 		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
 
-		 Date departureTimeAfter = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
-		 Date maximumArrivalTimeAfter = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		 Date departureTimeAfter = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
+		 Date maximumArrivalTimeAfter = new GregorianCalendar(2018, Calendar.JULY, 01).getTime();
 		 
 		 shipmentBefore.setDepartureTime(departureTimeAfter);
 		 shipmentBefore.setMaximumArriveTime(maximumArrivalTimeAfter);
@@ -458,7 +458,7 @@ public class ShipmentTest extends AbstractTest {
 
 		pageable = new PageRequest(0, 5);	
 		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
-		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/07/2017", "15:00", "Open", "M",pageable);
+		shipments = shipmentService.searchShipment("Almeria", "Sevilla", "12/07/2018", "15:00", "Open", "M",pageable);
 		shipmentResult = shipments.iterator().next();
 
 		Assert.isTrue(shipments.getContent().size() == 1);
