@@ -8,10 +8,17 @@
 	URL: http://alvarez.is
 	
 ################################################################# */ 
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900);
-@import url(http://fonts.googleapis.com/css?family=Lato:400,900);
-@import url("prettyPhoto.css") screen;
-@import url("hoverex-all.css") screen;
+@import url();
+@import url();
+
+<style>
+@font-face {
+	font-family: 'icons';
+	src: url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
+	src: url('https://fonts.googleapis.com/css?family=Lato:400,900')
+
+}
+
 
 /*	################################################################
 	1. GENERAL STRUCTURES
@@ -457,4 +464,8 @@ csmall2 {
 .share i {
 	padding-right: 15px;
 	font-size: 18px;
+}
+
+.icon-maps{
+	width: 30px;
 }

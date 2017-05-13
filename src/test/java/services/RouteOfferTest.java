@@ -501,26 +501,24 @@ public class RouteOfferTest extends AbstractTest {
 	public void positiveListRouteOffer2() {
 		authenticate("user2");
 	
-		Route route;
-		Page<RouteOffer> routeOffers;
 		Page<RouteOffer> routeOffersByUser;
-		Integer routeId;
 		Pageable pageable = new PageRequest(1 - 1, 5);
 
 		User user2;
 		Integer user2Id;
-
+		int cont = 0;
 		
-		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
 		user2 = userService.findOne(UtilTest.getIdFromBeanName("user2"));
-		
-		routeId = route.getId();
 		user2Id = user2.getId();
-
-		routeOffers = routeOfferService.findAllByOrRouteIdAndOrUserId(routeId, user2Id, pageable);
 		routeOffersByUser = routeOfferService.findAllByOrRouteIdAndOrUserId(0, user2Id, pageable);
 		
-		Assert.isTrue(routeOffers.getNumberOfElements() == routeOffersByUser.getNumberOfElements());
+		for(RouteOffer r: routeOfferService.findAll()){
+			if(r.getUser().equals(user2)){
+				cont++;
+			}
+		}
+		
+		Assert.isTrue(cont == routeOffersByUser.getNumberOfElements());
 
 		unauthenticate();
 		

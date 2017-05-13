@@ -14,11 +14,11 @@
 
 <!-- Form -->
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
-<script type="text/javascript" src="scripts/moment.js"></script>
+<script type="text/javascript" src="scripts/moment.min.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
-<script type="text/javascript" src="scripts/es.js"></script>
+<script type="text/javascript" src="scripts/es.min.js"></script>
 
 	
 <style>
@@ -88,7 +88,7 @@
 
 					<div class='input-group date input-text' id='datetimepicker1'>
 						<form:input path="date" name="fecha"
-							style="backgroud-color: white ! important;width:99% ! important" type="text"
+							style="backgroud-color: white ! important;width:100% ! important" type="text"
 							class="form-control" />
 						 <span class="input-group-addon"> <span
 							class="glyphicon glyphicon-calendar"></span>
@@ -170,8 +170,8 @@
 	
 	$(function() {
 		$('#datetimepicker1').datetimepicker({
-			format : 'DD/MM/YYYY',
-			locale : 'es'
+			format : 'DD-MM-YYYY  HH:mm',
+			locale: 'es'
 		});
 
 	});

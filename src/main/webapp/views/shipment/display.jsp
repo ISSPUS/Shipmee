@@ -12,18 +12,14 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
-<script type="text/javascript" src="scripts/moment.js"></script>
-<script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
+<script async type="text/javascript" src="scripts/moment.min.js"></script>
+<script async type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+	href="styles/assets/css/bootstrap-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
+<script async
+	src="styles/assets/js/bootstrap-select.min.js"></script>
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-details.css" type="text/css">
@@ -110,9 +106,9 @@
 										
 										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
 										
-										<div class="col-xs-7 col-sm-9 row titles-details">
-										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<span class="titles-info">${shipment.origin}</span>&nbsp;&nbsp;<i
-									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<span class="titles-info">${shipment.destination}</span></div>
+										<div class="col-xs-7 col-sm-9 row titles-details" style="width: 100%">
+										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><span class="titles-info">${shipment.origin}</span></a>&nbsp;&nbsp;<i
+									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"><span class="titles-info">${shipment.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png"></div>
 										
 										
 									</div>
@@ -159,7 +155,7 @@
 										</div>
 										
 										<div class="row info1 col-xs-7 col-sm-9">
-										<h5 class="titulos">Photos</h5>
+										<h5 class="titulos"><spring:message code="shipment.itemPicture" /></h5>
 													
 											
 

@@ -11,13 +11,13 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+<link href='https://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css'>
 <link
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+	href="styles/assets/css/font-awesome.min.css"
 	rel="stylesheet">
 
-    <link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
+<link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
 
 
 <div class="blue-barra"
@@ -36,6 +36,8 @@
 		<!-- /row -->
 	</div>
 </div>
+<script src="scripts/jquery.bootpag.min.js"></script>
+
 <div class="container">
 	<jstl:forEach items="${routeOffers}" var="routeOfferRow">
 		<div class="row"
@@ -91,17 +93,28 @@
 					</div>
 					<div class="col-xs-2 col-sm-3"
 						style="padding-top: 1.5%; font-size: 190%; text-align: center; vertical-align: middle;">
-						<span class="badge badge-shipmentoffer-price"><jstl:out
+							
+						<jstl:choose>
+							<jstl:when test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier && currentUser.id != routeOfferRow.user.id}">
+							<span class="badge badge-shipmentoffer-price" style="background-color: #0b6a92;"><jstl:out
 								value="${routeOfferRow.amount}" />&#8364;</span>
+							
+							</jstl:when>
+							<jstl:otherwise>
+								<span class="badge badge-shipmentoffer-price"><jstl:out
+								value="${routeOfferRow.amount}" />&#8364;</span>
+							</jstl:otherwise>
+						</jstl:choose>		
+		
 					</div>
 					<div class="botones col-xs-10 col-sm-2 col-lg-3">
-						<div class="col-xs-12"
-							style="text-align: center; padding-top: 2%;">
+						<div class="col-xs-12 profile-userbuttons"
+							style="text-align: center;">
 							<jstl:if
 								test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier && currentUser.id != routeOfferRow.user.id}">
 								<div class="col-xs-6 col-sm-12">
 									<button type="button"
-										class="btn btn-primary btn-shipmentOffer-actions"
+										class="btn btn-success btn-shipmentOffer-actions"
 										onclick="location.href = 'routeOffer/user/accept.do?routeOfferId=${routeOfferRow.id}';">
 										<spring:message code="routeOffer.accept" />
 									</button>
@@ -130,17 +143,7 @@
 
 	</jstl:forEach>
 
-</div>
-
-<jstl:if test="${fn:length(routeOffers) == 0}">
-	<center>
-		<h2>
-			<spring:message code="routeOffer.anything" />
-		</h2>
-	</center>
-</jstl:if>
-
-<div id="pagination" class="copyright">
+<div id="pagination" style="margin: auto;float: none" class="copyright">
 
 	<script>
 		$('#pagination').bootpag({
@@ -165,3 +168,13 @@
 	</script>
 
 </div>
+</div>
+
+<jstl:if test="${fn:length(routeOffers) == 0}">
+	<center>
+		<h2>
+			<spring:message code="routeOffer.anything" />
+		</h2>
+	</center>
+</jstl:if>
+

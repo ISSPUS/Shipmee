@@ -13,24 +13,20 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
-<script type="text/javascript" src="scripts/moment.js"></script>
-<script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
+<script async type="text/javascript" src="scripts/moment.min.js"></script>
+<script async type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+	href="styles/assets/css/bootstrap-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
+<script async
+	src="styles/assets/js/bootstrap-select.min.js"></script>
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
 <script src="scripts/jquery.bootpag.min.js"></script>
 
-<script type="text/javascript" src="scripts/es.js"></script>
+<script async type="text/javascript" src="scripts/es.min.js"></script>
 
 <style>
 
@@ -96,7 +92,7 @@
 									class="glyphicon glyphicon-time"></i> <spring:message code="shipment.hour" />
 							</a></li>
 							<li style="text-align: center" class="li-input">
-								<select class="selectpicker input-text fondoDesplegable" name="hour">
+								<select class="form-control selectpicker input-text fondoDesplegable" name="hour">
 								<option selected="selected" disabled value=''><spring:message code="shipment.select.hour" /></option>
 									<jstl:forEach begin="0" end="23" varStatus="i">
 										<jstl:choose>	
@@ -134,7 +130,7 @@
 							<spring:message code="shipment.sizeL" var="l" />
 							<spring:message code="shipment.sizeXL" var="xl" />
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text fondoDesplegable" name="itemSize">
+								class="form-control selectpicker input-text fondoDesplegable" name="itemSize">
 									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
 									<option value="S">"${s }" </option>
 									<option value="M">"${m }" </option>
@@ -189,14 +185,14 @@
 											<div class="info-salida col-lg-6" style="margin-bottom: 2%; font-size: 16px;">
 												<div class="cabecera">
 												<div class="title">
-													<h4><a>${shipment.itemName}</a></h4>
+													<h4><a href="shipment/display.do?shipmentId=${shipment.id}">${shipment.itemName}</a></h4>
 												</div>
 												
-												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
+												<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
 											
 												<i class="glyphicon glyphicon-sort"></i>
 											
-												<a> <i
+												<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"> <i
 													class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
 												</a>
 														

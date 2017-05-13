@@ -19,6 +19,18 @@ public interface FeePaymentRepository extends JpaRepository<FeePayment, Integer>
 	
 	@Query("select f from FeePayment f where f.type like 'Pending' and f.purchaser.id = ?1 and f.shipmentOffer.acceptedBySender is true")
 	Collection<FeePayment> findAllPendingShipmentOffersByUser(int id);
+	
+	@Query("select f from FeePayment f where f.type like 'Accepted' and f.purchaser.id = ?1 and f.routeOffer.acceptedByCarrier is true")
+	Collection<FeePayment> findAllAcceptedRouteOffersByUser(int id);
+	
+	@Query("select f from FeePayment f where f.type like 'Accepted' and f.purchaser.id = ?1 and f.shipmentOffer.acceptedBySender is true")
+	Collection<FeePayment> findAllAcceptedShipmentOffersByUser(int id);
+	
+	@Query("select f from FeePayment f where f.type like 'Rejected' and f.purchaser.id = ?1 and f.routeOffer.acceptedByCarrier is true")
+	Collection<FeePayment> findAllRejectedRouteOffersByUser(int id);
+	
+	@Query("select f from FeePayment f where f.type like 'Rejected' and f.purchaser.id = ?1 and f.shipmentOffer.acceptedBySender is true")
+	Collection<FeePayment> findAllRejectedShipmentOffersByUser(int id);
 
 	@Query("select f from FeePayment f where f.type like 'Rejected'")
 	Page<FeePayment> findAllRejected(Pageable page);

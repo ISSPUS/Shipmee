@@ -71,8 +71,8 @@ public class RouteTest extends AbstractTest {
 		boolean alertFound;
 		Alert alert;
 		Route route;
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date departureTime = new GregorianCalendar(2018, Calendar.JULY, 01).getTime();
+		Date arrivalTime = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
 		Vehicle vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
 		beforeMessages = messageRepository.findAll();
 		
@@ -120,8 +120,8 @@ public class RouteTest extends AbstractTest {
 		Integer numberOfRoutesBefore = routeService.findAll().size();
 		
 		Route route;
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date departureTime = new GregorianCalendar(2018, Calendar.JULY, 01).getTime();
+		Date arrivalTime = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
 		Vehicle vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
 		
 		route = routeService.create();
@@ -152,8 +152,8 @@ public class RouteTest extends AbstractTest {
 		Integer numberOfRoutesBefore = routeService.findAll().size();
 		
 		Route route;
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
+		Date arrivalTime = new GregorianCalendar(2018, Calendar.JULY, 01).getTime();
 		Vehicle vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
 		
 		route = routeService.create();
@@ -185,8 +185,8 @@ public class RouteTest extends AbstractTest {
 		Integer numberOfRoutesBefore = routeService.findAll().size();
 		
 		Route route;
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date departureTime = new GregorianCalendar(2018, Calendar.JULY, 01).getTime();
+		Date arrivalTime = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
 		Vehicle vehicle = vehicleService.findOne(UtilTest.getIdFromBeanName("vehicle1"));
 		
 		route = routeService.create();
@@ -238,7 +238,7 @@ public class RouteTest extends AbstractTest {
 		authenticate("user2");
 		
 		Route routeBefore =  routeService.findOne(UtilTest.getIdFromBeanName("route2"));
-		Date arrivalTimeAfter = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
+		Date arrivalTimeAfter = new GregorianCalendar(2019, Calendar.JULY, 02).getTime();
 		
 		routeBefore.setArriveTime(arrivalTimeAfter);
 		
@@ -367,10 +367,13 @@ public class RouteTest extends AbstractTest {
 		pageable = new PageRequest(0, 5);		
 		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
 		routes = routeService.searchRoute("Almeria", "Sevilla", "12/03/2017", "15:00", "Both", "M",pageable);
-		routeResult = routes.iterator().next();
+		if(routes.iterator().hasNext())
+			routeResult = routes.iterator().next();
+		else
+			routeResult = new Route();
 
-		Assert.isTrue(routes.getContent().size() == 1);
-		Assert.isTrue(route.getId() == routeResult.getId());
+		Assert.isTrue(routes.getContent().size() == 0);
+		Assert.isTrue(route.getId() != routeResult.getId());
 		
 		
 		unauthenticate();
@@ -391,7 +394,7 @@ public class RouteTest extends AbstractTest {
 		pageable = new PageRequest(0, 5);		
 		route1 = routeService.findOne(UtilTest.getIdFromBeanName("route2"));
 		route2 = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
-		routes = routeService.searchRoute("Almeria", "Sevilla", "12/07/2017", "15:00", "Both", "M",pageable);
+		routes = routeService.searchRoute("Almeria", "Sevilla", "12/07/2018", "15:00", "Both", "M",pageable);
 
 		for(Route r : routes) {
 			if(r.getId() != route1.getId() && r.getId() != route2.getId())

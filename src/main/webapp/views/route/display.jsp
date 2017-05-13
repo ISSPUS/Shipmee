@@ -12,20 +12,18 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
-<script type="text/javascript" src="scripts/moment.js"></script>
+<script type="text/javascript" src="scripts/moment.min.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+<link  rel="stylesheet"
+	href="styles/assets/css/bootstrap-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script async
+	src="styles/assets/js/bootstrap-select.min.js"></script>
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
-<link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
+<link  rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-details.css" type="text/css">
 
 <style>
@@ -110,14 +108,14 @@
 										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
 										
 										<div class="row titles-details"><i
-									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="route.origin" />:<span class="titles-info">${route.origin}</span>&nbsp;&nbsp;<i
-									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="route.destination" />:<span class="titles-info">${route.destination}</span></div>
+									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="route.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><span class="titles-info">${route.origin}</span></a>&nbsp;&nbsp;<i
+									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="route.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><span class="titles-info">${route.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png"></div>
 										
 										</div>
 						
 										<div class="row col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.moments" /></h5>
-											<div class="info-salida col-sm-12 ">
+											<div class="info-salida col-sm-12" style="width: 100%">
 												
 												<i class="glyphicon glyphicon-plane"></i> 
 												<spring:message code="route.departureTime" />: <span class="titles-info">${departureTime}</span><i class="glyphicon glyphicon-time"></i><span class="titles-info">${departureTime_hour}</span>
@@ -139,7 +137,30 @@
 												<i class="glyphicon glyphicon-road">&nbsp;</i>Vehicle: 
 												<span class="titles-info">${route.vehicle.brand} - ${route.vehicle.model}</span>
 												<br/>
-												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
+
+												<a href="#aboutModal" data-toggle="modal" data-target="#myModal">
+													<img class="imagen-envio" src="${route.vehicle.picture}">
+												</a>
+				
+				
+												<!-- Modal -->
+												<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+													aria-labelledby="myModalLabel" aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+				
+															<div class="modal-body">
+				
+				
+																<img src="${route.vehicle.picture}">
+				
+															</div>
+				
+														</div>
+													</div>
+												</div>
+												
+											<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
 												<span class="titles-info">
 													<jstl:if test="${route.itemEnvelope == 'Both'}">
 														<spring:message code="route.both"/>
@@ -153,11 +174,6 @@
 												</span>
 												
 												<br/>
-												
-												<i class="demo-icon icon-package-1">&#xe802;&nbsp;</i><spring:message code="route.size" />:
-												<jstl:forEach var="value" items="${sizePrices}">
-													<span class="titles-info">${value.size}</span>
-												</jstl:forEach>
 												
 											</div>
 											
@@ -261,15 +277,4 @@
 			return true;
 		}
 	}
-	$(function() {
-		$('#datetimepicker1').datetimepicker({
-			viewMode : 'days',
-			format : 'DD/MM/YYYY'
-		});
-	});
-	
-	
-      $(function () {
-          $('#datetimepicker2').datetimepicker();
-      });
 </script>

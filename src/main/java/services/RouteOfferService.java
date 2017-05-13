@@ -159,6 +159,14 @@ public class RouteOfferService {
 
 		return result;
 	}
+	
+	public Collection<RouteOffer> findAll() {
+		Collection<RouteOffer> result;
+
+		result = routeOfferRepository.findAll();
+
+		return result;
+	}
 
 	// Other business methods -------------------------------------------------
 
@@ -220,6 +228,8 @@ public class RouteOfferService {
 		/*
 		 * Here comes the notification to the carrier (Still not developed) 
 		 */
+		
+		messageService.autoMessageAcceptRouteOffer(routeOffer);
 		
 	}
 	

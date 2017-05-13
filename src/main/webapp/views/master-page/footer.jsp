@@ -38,6 +38,10 @@
 		 				<a href="userCookies/info.do" target="blank"><spring:message code="cookies.title" /></a>
 		 			</p>
 		 			
+		 			<p>
+						<a href="about/info.do"><spring:message code="info.shipmee" /></a>
+					</p>
+		 			
 		 			<div class="language text-sample">
 		 				<a id="es" href="?language=es"><img id="translate-flag" src="images/es.gif"/>Español</a> |
 						<a id="en" href="?language=en"><img id="translate-flag" src="images/en.gif"/>English</a>
@@ -51,6 +55,7 @@
 		 				<!--<a href="#"><i class="fa fa-dribbble"></i></a>-->
 		 				<!--<a href="#"><i class="fa fa-facebook"></i></a>-->
 		 				<a href="https://github.com/Shipmee/Shipmee" target="blank"><i class="fa fa-github"></i></a>
+		 				<a href="https://www.youtube.com/channel/UCBzfG9e3KDZYHllfd7yGHgA" target="blank"><i class="fa fa-youtube"></i></a>
 		 				<!--<a href="#"><i class="fa fa-instagram"></i></a>-->
 		 				<!--<a href="#"><i class="fa fa-tumblr"></i></a>-->
 		 			</p>-

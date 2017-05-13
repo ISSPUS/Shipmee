@@ -40,7 +40,7 @@ public class FeePaymentAdministratorController extends AbstractController {
 		Integer allDenied;
 		Pageable pageable;
 		
-		pageable = new PageRequest(page - 1, 5);
+		pageable = new PageRequest(page - 1, 999);
 		allAccepted = (int) feePaymentService.findAllAccepted(pageable).getTotalElements();
 		allPending = (int) feePaymentService.findAllPending(pageable).getTotalElements();
 		allDenied = (int) feePaymentService.findAllRejected(pageable).getTotalElements();
