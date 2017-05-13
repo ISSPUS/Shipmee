@@ -215,7 +215,8 @@
 												path="comment" />
 					
 											<!-- Action buttons -->
-											<acme:submit name="save" code="rating.save" />
+											<div class="profile-userbuttons">
+											<acme:submit name="save" code="rating.save" /></div>
 										</form:form>
 
 									</div>
@@ -226,7 +227,7 @@
 						<jstl:if test="${empty ratings.content}">
 							<div class="row ">
 								<div class="col-xs-12">
-									<div class="center-block col-xs-4 col-lg-12"
+									<div class="center-block col-lg-12"
 										style="text-align: center;">
 										<h4>
 											<spring:message code="rating.anything" />

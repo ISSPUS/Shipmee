@@ -137,9 +137,7 @@
 																style="margin-bottom: 2%; font-size: 16px;">
 																<div class="cabecera">
 																	<div class="title">
-																		<h4>
-																			<a>${shipment.itemName}</a>
-																		</h4>
+																		<h4><a href="shipment/display.do?shipmentId=${shipment.id}">${shipment.itemName}</a></h4>
 																	</div>
 
 																	<a><i

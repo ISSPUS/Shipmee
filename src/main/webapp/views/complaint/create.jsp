@@ -59,7 +59,7 @@
 
 				</a>
 				<h3>
-					<a>${complaint.involved.name}</a>
+					<a href="user/profile.do?userId=${complaint.involved.id}">${complaint.involved.name}</a>
 				</h3>
 			</div>
 			
@@ -99,7 +99,7 @@
 
 						<!-- Action buttons -->
 						
-		<div class="text-center">		
+		<div class="text-center profile-userbuttons">		
 			
 			<acme:submit_confirm name="create" code="complaint.create"
 					codeConfirm="complaint.confirm.create" />

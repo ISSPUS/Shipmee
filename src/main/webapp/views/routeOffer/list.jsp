@@ -93,17 +93,28 @@
 					</div>
 					<div class="col-xs-2 col-sm-3"
 						style="padding-top: 1.5%; font-size: 190%; text-align: center; vertical-align: middle;">
-						<span class="badge badge-shipmentoffer-price"><jstl:out
+							
+						<jstl:choose>
+							<jstl:when test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier && currentUser.id != routeOfferRow.user.id}">
+							<span class="badge badge-shipmentoffer-price" style="background-color: #0b6a92;"><jstl:out
 								value="${routeOfferRow.amount}" />&#8364;</span>
+							
+							</jstl:when>
+							<jstl:otherwise>
+								<span class="badge badge-shipmentoffer-price"><jstl:out
+								value="${routeOfferRow.amount}" />&#8364;</span>
+							</jstl:otherwise>
+						</jstl:choose>		
+		
 					</div>
 					<div class="botones col-xs-10 col-sm-2 col-lg-3">
-						<div class="col-xs-12"
-							style="text-align: center; padding-top: 2%;">
+						<div class="col-xs-12 profile-userbuttons"
+							style="text-align: center;">
 							<jstl:if
 								test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier && currentUser.id != routeOfferRow.user.id}">
 								<div class="col-xs-6 col-sm-12">
 									<button type="button"
-										class="btn btn-primary btn-shipmentOffer-actions"
+										class="btn btn-success btn-shipmentOffer-actions"
 										onclick="location.href = 'routeOffer/user/accept.do?routeOfferId=${routeOfferRow.id}';">
 										<spring:message code="routeOffer.accept" />
 									</button>

@@ -10,6 +10,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<link rel="stylesheet" href="styles/assets/css/style-form.css"  type="text/css">
 
 <style>
 .formulario-precios {
@@ -93,7 +94,7 @@
 
 <!-- Form -->
 <div class="container">
-	<div class="row formulario-size">
+	<div class="row formulario-sm">
 		<div class="alert alert-info">
 			<strong><spring:message code="sizePrice.info" /> </strong>
 		</div>
@@ -181,19 +182,20 @@
 			</div>
 
 			<!-- Action buttons -->
-			<button type="submit" name="save" class="btn  btn-primary">
-				<span class="glyphicon glyphicon-floppy-disk"></span>
-				<spring:message code="sizePrice.save" />
-			</button>
-
-			<jstl:if test="${sizePriceForm.sizePriceFormId != 0}">
-				<button type="submit" name="delete" class="btn btn-danger"
-					onclick="return confirm('<spring:message code="sizePrice.confirm.delete" />')">
-					<spring:message code="sizePrice.delete" />
+			<div class="text-center profile-userbuttons">
+				<button type="submit" name="save" class="btn  btn-primary">
+					<span class="glyphicon glyphicon-floppy-disk"></span>
+					<spring:message code="sizePrice.save" />
 				</button>
-			</jstl:if>
-			<acme:cancel code="sizePrice.cancel" url="route/user/list.do" />
 
+				<jstl:if test="${sizePriceForm.sizePriceFormId != 0}">
+					<button type="submit" name="delete" class="btn btn-danger"
+					onclick="return confirm('<spring:message code="sizePrice.confirm.delete" />')">
+						<spring:message code="sizePrice.delete" />
+					</button>
+				</jstl:if>
+				<acme:cancel code="sizePrice.cancel" url="route/user/list.do" />
+			</div>
 		</form:form>
 
 	</div>
