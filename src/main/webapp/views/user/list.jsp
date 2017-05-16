@@ -228,8 +228,21 @@
 												.on(
 														'page',
 														function(event, num) {
-															window.location.href = "${urlPage}"
+															currentLocation = window.location.href;
+															if(currentLocation.indexOf('?')> -1){
+																if(currentLocation.indexOf('page=')> -1){
+																	var actualLocation = currentLocation.replace(/page=.*/g,"page="+ num);
+																	console.log(num);
+																	window.location.href = actualLocation;
+																}else{
+																	window.location.href = currentLocation+"&page="
 																	+ num + "";
+																}
+															}else{
+																window.location.href = currentLocation+"?page="
+																	+ num + "";
+															}
+															
 															page = 1
 														});
 									</script>
