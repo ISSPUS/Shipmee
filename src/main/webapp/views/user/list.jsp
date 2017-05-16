@@ -232,7 +232,6 @@
 															if(currentLocation.indexOf('?')> -1){
 																if(currentLocation.indexOf('page=')> -1){
 																	var actualLocation = currentLocation.replace(/page=.*/g,"page="+ num);
-																	console.log(num);
 																	window.location.href = actualLocation;
 																}else{
 																	window.location.href = currentLocation+"&page="
