@@ -6,13 +6,24 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 
-<body>
+<style>
 
-
-	 
+.buttonbajo {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>
 
 	<!-- Fixed navbar -->
-	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation" style="z-index: 3;">
 	
 	
         
@@ -165,10 +176,30 @@
 		
 	</div>
 
+	<!-- FEEDBACK -->	
+	<a title="Feedback" class="cd-popup-trigger button glyphicon glyphicon-bullhorn" data-toggle="modal" data-target="#myFeedback" href="#feedback"
+		style="z-index: 5;"></a>
+	<!-- Modal -->
+	<div class="modal fade" id="myFeedback" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
 
+				<div class="modal-body" style="height: 700px; padding: 0px;">
+					<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdVn-PiNkXWEMqI36uj_qnB5Lc5jL-4BSxkxuHC0eadYQLG2g/viewform?embedded=true" width="100%" height="100%">Cargando...</iframe>
+
+				</div>
+				<div class="text-center" style="background-color: #384452; font-size:18px;">
+				<!--<a href="https://goo.gl/forms/slX7WVCkNk4Fo39m2" target="_blank">Enlace a encuesta</a> <button class="buttonbajo" style="background-color: #e7e7e7; color: black;">Cerrar</button>-->
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- EN COSNTRUCIÓN -->
 	<div class="en-construccion text-center" role="alert">
           <a class="alert-link"><span class="glyphicon glyphicon-warning-sign"></span> <spring:message code="master.page.construction" /> <span class="glyphicon glyphicon-warning-sign"></span></a>
         </div>
 
-</body>
 
