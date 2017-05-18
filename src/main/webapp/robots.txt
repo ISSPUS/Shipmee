@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /userGeneralTerms/info.do
+Disallow: /userCookies/info.do

@@ -5,8 +5,8 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-    <link rel="stylesheet" href="styles/assets/css/bootstrap.min.css"  type="text/css">
-<link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
+<link rel="stylesheet" href="/styles/assets/css/bootstrap.min.css"  type="text/css">
+<link rel="stylesheet" href="/styles/assets/css/lateral-menu.css" type="text/css">
 
 
 
@@ -66,7 +66,7 @@
 			<h2>ERROR</h2>
 		</div>
 
-		<img src="images/furgoStop.svg" style="width: 30%;">
+		<img src="/images/furgoStop.svg" style="width: 30%;">
 		<p><spring:message code="error403.sentence" /></p>
 
 		<div class="profile-userbuttons" style="margin: 2%;">
