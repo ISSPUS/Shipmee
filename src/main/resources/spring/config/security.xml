@@ -20,6 +20,7 @@
 		<security:intercept-url pattern="/" access="permitAll" /> 
 
 		<security:intercept-url pattern="/robots.txt" access="permitAll" /> 
+		<security:intercept-url pattern="/e248e356d5d28f570bc328a406c09a8bd1a93b037ad5bab97618fe958ab0bfe5.txt" access="permitAll" /> 
 		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
 		<security:intercept-url pattern="/images/**" access="permitAll" /> 
 		<security:intercept-url pattern="/scripts/**" access="permitAll" /> 
