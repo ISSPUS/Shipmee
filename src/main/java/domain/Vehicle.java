@@ -8,7 +8,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -23,6 +25,7 @@ public class Vehicle extends DomainEntity {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBrand() {
 		return brand;
 	}
@@ -33,6 +36,7 @@ public class Vehicle extends DomainEntity {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getModel() {
 		return model;
 	}
@@ -42,6 +46,7 @@ public class Vehicle extends DomainEntity {
 	}
 	
 	@URL
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPicture() {
 		return picture;
 	}
@@ -52,6 +57,7 @@ public class Vehicle extends DomainEntity {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getColor() {
 		return color;
 	}
