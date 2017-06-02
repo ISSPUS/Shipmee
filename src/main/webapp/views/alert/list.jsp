@@ -102,7 +102,7 @@ margin-top: 32px;
 
 								<div class="alerta-info">
 									<h4>
-										<a>${alert.type}</a> <fmt:formatDate value="${alert.date}" pattern="dd/MM/yyyy '-' HH:mm" />
+										<a>${alert.type}</a> <fmt:formatDate value="${alert.date}" pattern="dd/MM/yyyy" />
 									</h4>
 									<h5>
 										<spring:message code="route.origin" />
