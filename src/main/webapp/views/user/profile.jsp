@@ -182,13 +182,10 @@
 										<img class="img-responsive"
 											style="margin: 0 auto; width: 60px;"
 											src="${rating.author.photo}">
-									</div>
-									<div class="col-xs-9 col-lg-12 info-profile-comment">
-										<div class="review-block-name">
+										<div class="review-block-name info-profile-comment">
 											<a href="user/profile.do?userId=${rating.author.id}">${rating.author.userAccount.username}</a>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xs-12 col col-md-7">
 									<div class="review-block-rate"

@@ -116,7 +116,7 @@ public class FeePaymentService {
 			feePayment.setPurchaser(user);
 			feePayment.setPaymentMoment(new Date());
 			// feePayment.setType("Pending");
-			feePayment.setCommission(feePayment.getAmount()/10);
+			feePayment.setCommission(feePayment.getAmount()/15);
 			
 			feePayment = feePaymentRepository.save(feePayment);
 			
