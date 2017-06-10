@@ -14,7 +14,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -65,6 +67,7 @@ public class Shipment extends DomainEntity {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getOrigin() {
 		return origin;
 	}
@@ -74,6 +77,7 @@ public class Shipment extends DomainEntity {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDestination() {
 		return destination;
 	}
@@ -92,6 +96,7 @@ public class Shipment extends DomainEntity {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getItemName() {
 		return itemName;
 	}
@@ -102,6 +107,7 @@ public class Shipment extends DomainEntity {
 	@NotNull
 	@NotBlank
 	@URL
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getItemPicture() {
 		return itemPicture;
 	}
@@ -111,6 +117,7 @@ public class Shipment extends DomainEntity {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getItemSize() {
 		return itemSize;
 	}
@@ -120,6 +127,7 @@ public class Shipment extends DomainEntity {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getItemEnvelope() {
 		return itemEnvelope;
 	}

@@ -107,7 +107,7 @@ public class PayPalService {
 
 		try {
 			res = PayPal.startAdaptiveTransaction(
-					carrierPayPalEmail, fp.getAmount() + fp.getCommission(),
+					carrierPayPalEmail, fp.getAmount(),
 					fp.getCommission(),
 					payObject.getTrackingId(),
 					"user/payPal/returnPayment.do");

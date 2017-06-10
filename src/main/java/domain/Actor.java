@@ -13,6 +13,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import security.UserAccount;
@@ -33,6 +35,7 @@ public abstract class Actor extends DomainEntity {
 	
 	@NotBlank
 	@NotNull
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return name;
 	}
@@ -42,6 +45,7 @@ public abstract class Actor extends DomainEntity {
 
 	@NotBlank
 	@NotNull
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSurname() {
 		return surname;
 	}
@@ -69,6 +73,7 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@NotNull
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhone() {
 		return phone;
 	}
@@ -77,6 +82,7 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@NotNull
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDni() {
 		return dni;
 	}
@@ -85,6 +91,7 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@NotNull
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhoto() {
 		return photo;
 	}
@@ -93,6 +100,7 @@ public abstract class Actor extends DomainEntity {
 	}
 	
 	@NotNull
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPasswordResetToken() {
 		return passwordResetToken;
 	}
