@@ -1,5 +1,7 @@
 package services;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -105,15 +107,25 @@ public class AlertService {
 	public void sendAlerts(Collection<Alert> alerts){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		
+		String origin = "";
+		String destination = "";
+				
 		for(Alert alert: alerts){
+			try {
+				origin = URLEncoder.encode(alert.getOrigin(), "ISO-8859-1");
+				destination = URLEncoder.encode(alert.getDestination(), "ISO-8859-1");
+			} catch (UnsupportedEncodingException e) {
+				log.trace(e);
+			}
+			
 			if(alert.getType().equals("Route")){
 				messageService.sendMessage( actorService.findByUsername("shipmee"), alert.getUser(), "Nueva Alerta", 
 						"Se ha creado una nueva ruta "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+dateFormat.format(alert.getDate())+"."+
-						"Haz click en el enlace para ver la ruta: "+PayPalConfig.getUrlBase()+"/route/search.do?origin="+alert.getOrigin()+"&destination="+alert.getDestination()+"&date="+dateFormat.format(alert.getDate()));
+						"Usa este enlace para ver la ruta: "+PayPalConfig.getUrlBase()+"/route/search.do?origin="+origin+"&destination="+destination+"&date="+dateFormat.format(alert.getDate()));
 			}else{
 				messageService.sendMessage(actorService.findByUsername("shipmee"), alert.getUser(), "Nueva Alerta", 
 						"Se ha creado un nuevo envío "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+dateFormat.format(alert.getDate())+"."+
-						"Haz click en el enlace para ver el envío: "+PayPalConfig.getUrlBase()+"/shipment/search.do?origin="+alert.getOrigin()+"&destination="+alert.getDestination()+"&date="+dateFormat.format(alert.getDate()));
+						"Usa este enlace para ver el envío: "+PayPalConfig.getUrlBase()+"/shipment/search.do?origin="+origin+"&destination="+destination+"&date="+dateFormat.format(alert.getDate()));
 			}
 		}
 	}
