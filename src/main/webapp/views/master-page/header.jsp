@@ -93,13 +93,13 @@
 									code="master.page.complaints" /><b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="complaint/administrator/list.do?type=${serious}&page=1"><jstl:out
+									href="complaint/administrator/list.do?type=Serious&page=1"><jstl:out
 											value="${serious}" /></a></li>
 								<li><a
-									href="complaint/administrator/list.do?type=${mild}&page=1"><jstl:out
+									href="complaint/administrator/list.do?type=Mild&page=1"><jstl:out
 											value="${mild}" /></a></li>
 								<li><a
-									href="complaint/administrator/list.do?type=${omitted}&page=1"><jstl:out
+									href="complaint/administrator/list.do?type=Omitted&page=1"><jstl:out
 											value="${omitted}" /></a></li>
 							</ul></li>
 							
