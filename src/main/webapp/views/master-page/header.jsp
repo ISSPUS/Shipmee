@@ -111,13 +111,13 @@
 									code="master.page.feepayments" /><b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="feepayment/administrator/list.do?type=${accepted}&page=1"><jstl:out
+									href="feepayment/administrator/list.do?type=Accepted&page=1"><jstl:out
 											value="${accepted}" /></a></li>
 								<li><a
-									href="feepayment/administrator/list.do?type=${pending}&page=1"><jstl:out
+									href="feepayment/administrator/list.do?type=Pending&page=1"><jstl:out
 											value="${pending}" /></a></li>
 								<li><a
-									href="feepayment/administrator/list.do?type=${rejected}&page=1"><jstl:out
+									href="feepayment/administrator/list.do?type=Rejected&page=1"><jstl:out
 											value="${rejected}" /></a></li>
 							</ul></li>
 							
