@@ -134,7 +134,7 @@
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
 											<div class="col-xs-11">
 											
-												<i class="glyphicon glyphicon-road">&nbsp;</i>Vehicle: 
+												<i class="glyphicon glyphicon-road">&nbsp;</i><spring:message code="route.vehicle"/>: 
 												<span class="titles-info">${route.vehicle.brand} - ${route.vehicle.model}</span>
 												<br/>
 
