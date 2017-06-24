@@ -102,7 +102,17 @@ margin-top: 32px;
 
 								<div class="alerta-info">
 									<h4>
-										<a>${alert.type}</a> <fmt:formatDate value="${alert.date}" pattern="dd/MM/yyyy" />
+										
+										<jstl:choose>
+											<jstl:when test="${alert.type eq 'Route'}">
+												<a><spring:message code="alert.type.route" /></a>
+											</jstl:when>
+											<jstl:when test="${alert.type eq 'Shipment'}">
+												<a><spring:message code="alert.type.shipment" /></a>
+											</jstl:when>
+
+										</jstl:choose>
+										<fmt:formatDate value="${alert.date}" pattern="dd/MM/yyyy" />
 									</h4>
 									<h5>
 										<spring:message code="route.origin" />

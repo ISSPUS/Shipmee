@@ -236,7 +236,7 @@ public class ShipmentService {
 		
 		shipmentOffer = shipmentOfferService.create(shipmentId);
 		shipmentOffer.setAmount(shipment.getPrice());
-		shipmentOffer.setDescription("This carrier accepts the conditions of your Shipment");
+		shipmentOffer.setDescription("shipmentOffer.description.after.accept");
 		
 		/*
 		 * This may include more sets to the ShipmentOffer.

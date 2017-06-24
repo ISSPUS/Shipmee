@@ -131,7 +131,7 @@
 				<div class="row description-offer">
 					<div class="descipcion-offer-inside col-xs-12"
 						style="font-family: sans-serif; font-size: 130%;">
-						<jstl:out value="${shipmentOfferRow.description}" />
+						<spring:message code="${shipmentOfferRow.description}" />
 					</div>
 				</div>
 			</div>
