@@ -131,7 +131,12 @@
 				<div class="row description-offer">
 					<div class="descipcion-offer-inside col-xs-12"
 						style="font-family: sans-serif; font-size: 130%;">
-						<spring:message code="${shipmentOfferRow.description}" />
+						<jstl:if test="${shipmentOfferRow.description == 'shipmentOffer.description.after.accept' }">
+							<spring:message code="${shipmentOfferRow.description}" />
+						</jstl:if>
+						<jstl:if test="${shipmentOfferRow.description != 'shipmentOffer.description.after.accept' }">
+							<jstl:out value="${shipmentOfferRow.description}" />
+						</jstl:if>
 					</div>
 				</div>
 			</div>
