@@ -109,7 +109,7 @@
 										
 										<div class="row titles-details"><i
 									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="route.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><span class="titles-info">${route.origin}</span></a>&nbsp;&nbsp;<i
-									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="route.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><span class="titles-info">${route.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png"></div>
+									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="route.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.destination}"><span class="titles-info">${route.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png"></div>
 										
 										</div>
 						
