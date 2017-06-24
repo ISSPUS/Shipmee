@@ -114,10 +114,10 @@
 							<li style="padding-bottom: 2%;">
 								<div class="form-check form-check-inline input-text">
 									<label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox1" name="envelope"
+										class="form-check-input" type="radio" id="inlineCheckbox1" name="envelope"
 										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="route.open" />
 									</label> <label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox2" name="envelope"
+										class="form-check-input" type="radio" id="inlineCheckbox2" name="envelope"
 										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="route.closed" />
 									</label>
 								</div>
