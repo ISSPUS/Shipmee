@@ -149,7 +149,12 @@
 											<br/>
 											
 												<i class="demo-icon icon-package-1">&#xe802;&nbsp;</i><spring:message code="shipment.itemSize" />: 
-												<span class="titles-info">${shipment.itemSize}</span>
+												<span class="titles-info">
+													<jstl:if test="${shipment.itemSize == 'S'}"><spring:message code="shipment.sizeS"/></jstl:if>
+													<jstl:if test="${shipment.itemSize == 'M'}"><spring:message code="shipment.sizeM"/></jstl:if>
+													<jstl:if test="${shipment.itemSize == 'L'}"><spring:message code="shipment.sizeL"/></jstl:if>
+													<jstl:if test="${shipment.itemSize == 'XL'}"><spring:message code="shipment.sizeXL"/></jstl:if>
+												</span>
 											</div>
 											
 										</div>
