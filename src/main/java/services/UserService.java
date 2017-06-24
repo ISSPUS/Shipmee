@@ -3,7 +3,10 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +27,9 @@ import security.UserAccountService;
 @Service
 @Transactional
 public class UserService {
+	
+	static Logger log = Logger.getLogger(UserService.class);
+
 	//Managed repository -----------------------------------------------------
 	
 	@Autowired
@@ -89,6 +95,7 @@ public class UserService {
 		Assert.notNull(user);
 		
 		this.checkUser(user);
+		this.checkDNI(user);
 		
 		user = userRepository.save(user);
 		
@@ -97,6 +104,23 @@ public class UserService {
 	
 	//Other business methods -------------------------------------------------
 
+	private void checkDNI(User user){
+		
+		log.trace(user.getDni());
+		
+		Pattern pattern;
+		Matcher matcher;
+		boolean match;
+		
+		pattern = Pattern.compile("^[0-9A-Z]{1}[0-9]{7}[A-Z]{1}$");
+		matcher = pattern.matcher(user.getDni());
+		match = matcher.find();
+		
+		log.trace(match);
+		
+		Assert.isTrue(user.getDni().equals("") || match, "user.edit.profile.dni.wrongPattern");
+		
+	}
 	
 	private void checkUser(User a){
 		boolean isAdmin;
