@@ -19,6 +19,8 @@ public class ImageUpload {
 		File directorio = new File(path);
     	File localFile = new File(path + nameImage);
     	Assert.isTrue(directorio.getFreeSpace()>1500000000, "message.error.imageUpload.freeSpace");
+    	Assert.isTrue(imagen.getSize()<4000000, "message.error.imageUpload.incompatibleType");
+  	
     	FileOutputStream os = null;
     	String tipoArchivo = imagen.getContentType();
     	Assert.isTrue(tipoArchivo.equals("image/jpg")|| tipoArchivo.equals("image/jpeg")||tipoArchivo.equals("image/png"),"message.error.imageUpload.incompatibleType");
