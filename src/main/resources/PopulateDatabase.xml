@@ -1125,7 +1125,7 @@
 	<!-- Alert -->
 	
 	<bean id="alert1" class="domain.Alert">
-		<property name="date" value="2018/05/09 11:02"/>
+		<property name="date" value="2018/05/09"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
 		<property name="type" value="Route"/>
@@ -1133,7 +1133,7 @@
 	</bean>
 	
 	<bean id="alert2" class="domain.Alert">
-		<property name="date" value="2018/05/09 11:02"/>
+		<property name="date" value="2018/05/09"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
 		<property name="type" value="Shipment"/>
