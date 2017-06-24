@@ -85,7 +85,7 @@
 							<li class="li-input">
 								<div class='input-group input-text fondoDesplegable' id='datetimepicker1'>
 									<input name="date" style="backgroud-color: white;" type='text'
-										class="form-control" /> <span class="input-group-addon">
+										class="form-control" value="${form_date}"/> <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
@@ -95,16 +95,20 @@
 							</a></li>
 							<li style="text-align: center" class="li-input">
 								<select class="form-control selectpicker fondoDesplegable input-text" name="hour">
-								<option selected="selected" disabled value=''><spring:message code="shipment.select.hour" /></option>
+								<option value=''><spring:message code="shipment.select.hour" /></option>
 									<jstl:forEach begin="0" end="23" varStatus="i">
+										<jstl:set var="selected_now" value=""/>
 										<jstl:choose>	
 											<jstl:when test="${i.index lt 10 }">
-												<option>0${i.index}:00</option>
+												<jstl:set var="hour_i" value="0${i.index}:00" />
 											</jstl:when>
 											<jstl:otherwise>
-												<option>${i.index}:00</option>
+												<jstl:set var="hour_i" value="${i.index}:00" />
 											</jstl:otherwise>
 										</jstl:choose>
+										<jstl:if test="${hour_i == form_hour}"><jstl:set var="selected_now" value="selected"/></jstl:if>
+										<option ${selected_now}>${hour_i}</option>
+										
 									</jstl:forEach>
 								</select>
 							</li>
@@ -113,12 +117,29 @@
 							</a></li>
 							<li style="padding-bottom: 2%;">
 								<div class="form-check form-check-inline input-text">
+								<jstl:choose>
+									<jstl:when test="${form_envelope == 'open'}">
+										<jstl:set var="form_envelope_open" value="checked"/>
+									</jstl:when>
+									<jstl:otherwise>
+										<jstl:set var="form_envelope_open" value=""/>
+									</jstl:otherwise>
+								</jstl:choose>
+								<jstl:choose>
+									<jstl:when test="${form_envelope == 'close'}">
+										<jstl:set var="form_envelope_close" value="checked"/>
+									</jstl:when>
+									<jstl:otherwise>
+										<jstl:set var="form_envelope_close" value=""/>
+									</jstl:otherwise>
+								</jstl:choose>
+								
 									<label class="form-check-label"> <input
-										class="form-check-input" type="radio" id="inlineCheckbox1" name="envelope"
-										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="route.open" />
+										class="form-check-input" type="checkbox" id="inlineCheckbox1" name="envelope"
+										value="open" ${form_envelope_open}> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="route.open" />
 									</label> <label class="form-check-label"> <input
-										class="form-check-input" type="radio" id="inlineCheckbox2" name="envelope"
-										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="route.closed" />
+										class="form-check-input" type="checkbox" id="inlineCheckbox2" name="envelope"
+										value="close" ${form_envelope_close}> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="route.closed" />
 									</label>
 								</div>
 
@@ -128,16 +149,21 @@
 							</a></li>
 							
 							<spring:message code="shipment.sizeS" var="s" />
+							<jstl:if test="${form_itemSize == 'S'}"><jstl:set var="selected_s" value="selected"/></jstl:if>
 							<spring:message code="shipment.sizeM" var="m" />
+							<jstl:if test="${form_itemSize == 'M'}"><jstl:set var="selected_m" value="selected"/></jstl:if>
 							<spring:message code="shipment.sizeL" var="l" />
+							<jstl:if test="${form_itemSize == 'L'}"><jstl:set var="selected_l" value="selected"/></jstl:if>
 							<spring:message code="shipment.sizeXL" var="xl" />
+							<jstl:if test="${form_itemSize == 'XL'}"><jstl:set var="selected_xl" value="selected"/></jstl:if>
+
 							<li style="text-align: center" class="li-input"><select
 								class="form-control selectpicker input-text fondoDesplegable" name="itemSize">
-									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
-									<option value="S">"${s }" </option>
-									<option value="M">"${m }" </option>
-									<option value="L">"${l }" </option>
-									<option value="XL">"${xl }" </option>
+									<option value=''><spring:message code="shipment.select.sizes" /></option>
+									<option value="S" ${selected_s}>"${s }" </option>
+									<option value="M" ${selected_m}>"${m }" </option>
+									<option value="L" ${selected_l}>"${l }" </option>
+									<option value="XL" ${selected_xl}>"${xl }" </option>
 							</select></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
@@ -322,5 +348,23 @@ function initialize() {
 
 		});
 	});
-	
+
+	// https://stackoverflow.com/a/9709425
+	// the selector will match all input controls of type :checkbox
+	// and attach a click event handler 
+	$("input:checkbox").on('click', function() {
+	  // in the handler, 'this' refers to the box clicked on
+	  var $box = $(this);
+	  if ($box.is(":checked")) {
+	    // the name of the box is retrieved using the .attr() method
+	    // as it is assumed and expected to be immutable
+	    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+	    // the checked state of the group/box on the other hand will change
+	    // and the current value is retrieved using .prop() method
+	    $(group).prop("checked", false);
+	    $box.prop("checked", true);
+	  } else {
+	    $box.prop("checked", false);
+	  }
+	});
 </script>

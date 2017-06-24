@@ -78,6 +78,14 @@ public class ShipmentController extends AbstractController {
 			ModelAndView result;
 			Page<Shipment> shipments;
 			Pageable pageable;
+			
+			if (itemSize != null && itemSize.equals("")){
+				itemSize=null;
+			}
+			
+			if (hour != null && hour.equals("")){
+				hour=null;
+			}
 
 			pageable = new PageRequest(page - 1, 5);
 			shipments = shipmentService.searchShipment(origin, destination, date, hour, envelope, itemSize,pageable);
@@ -86,6 +94,10 @@ public class ShipmentController extends AbstractController {
 			result.addObject("shipments", shipments.getContent());
 			result.addObject("origin", origin);
 			result.addObject("destination", destination);
+			result.addObject("form_date", date);
+			result.addObject("form_hour", hour);
+			result.addObject("form_envelope", envelope);
+			result.addObject("form_itemSize", itemSize);
 			result.addObject("p", page);
 			result.addObject("total_pages", shipments.getTotalPages());
 			

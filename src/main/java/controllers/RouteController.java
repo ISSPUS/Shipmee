@@ -55,6 +55,14 @@ public class RouteController extends AbstractController {
 		ModelAndView result;
 		Page<Route> routes;
 		Pageable pageable;
+		
+		if (itemSize != null && itemSize.equals("")){
+			itemSize=null;
+		}
+		
+		if (hour != null && hour.equals("")){
+			hour=null;
+		}
 
 		pageable = new PageRequest(page - 1, 5);
 		
@@ -64,6 +72,10 @@ public class RouteController extends AbstractController {
 		result.addObject("routes", routes.getContent());
 		result.addObject("origin", origin);
 		result.addObject("destination", destination);
+		result.addObject("form_date", date);
+		result.addObject("form_hour", hour);
+		result.addObject("form_envelope", envelope);
+		result.addObject("form_itemSize", itemSize);
 		result.addObject("p", page);
 		result.addObject("total_pages", routes.getTotalPages());
 		
