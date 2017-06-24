@@ -91,13 +91,13 @@
 				<div class="profile-userbuttons">
 				
 					<button type="button" class="btn button-view btn-sm"
-						onclick="location.href = 'user/profile.do?userId=${routeId}';">
+						onclick="location.href = 'user/profile.do?userId=${user.id}';">
 						<spring:message code="user.view" />
 					</button>
 					
 					<jstl:if test="${(user.id != routeId) && routeId != 0 && (user.id != currentUser.id)}">
 						<button type="button" class="btn button-delete-lax btn-sm"
-							onclick="location.href = 'complaint/user/create.do?userId=${routeId}';">
+							onclick="location.href = 'complaint/user/create.do?userId=${user.id}';">
 							<spring:message code="user.report" />
 						</button>
 					</jstl:if>
