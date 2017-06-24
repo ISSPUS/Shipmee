@@ -31,6 +31,7 @@
 		<property name="idleConnectionTestPeriod" value="3000" />
 		<property name="loginTimeout" value="300" />
 		<property name="testConnectionOnCheckout" value="true" />
+		<property name="preferredTestQuery">select 1;</property>
 	</bean>
 
 	<!-- JPA -->
