@@ -213,7 +213,13 @@ input:valid ~ label {
 			style="margin: 0 auto; float: none;">
 			<form:form enctype="multipart/form-data"  action="fundTransferPreference/user/edit.do" modelAttribute="fundTransferPreferenceForm"
 				method="post" class="form-horizontal" role="form">
-
+				
+				<form:hidden path="country"/>
+				<form:hidden path="accountHolder"/>
+				<form:hidden path="bankName"/>
+				<form:hidden path="IBAN"/>
+				<form:hidden path="BIC"/>
+				
 				<div class="form-group">
 					<form:label path="paypalEmail" class="control-label col-md-2" for="paypalEmail">
 						<spring:message code="fundTransferPreference.paypalEmail" />
@@ -243,15 +249,14 @@ input:valid ~ label {
 </div>
 <div id="div1" style="display:none;">
 
-
-
 <div class="container">
 	<div class="row formulario-sm">
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"
 			style="margin: 0 auto; float: none;">
 			<form:form enctype="multipart/form-data"  action="fundTransferPreference/user/edit.do" modelAttribute="fundTransferPreferenceForm"
 				method="post" class="form-horizontal" role="form">
-
+				<form:hidden path="paypalEmail"/>
+				
 				<div class="form-group">
 					<form:label path="country" class="control-label col-md-2" for="country">
 						<spring:message code="fundTransferPreference.country" />
