@@ -13,7 +13,7 @@ import domain.Route;
 @Repository
 public interface RouteRepository extends JpaRepository<Route, Integer> {
 	
-	@Query("select r from Route r where ?1 like CONCAT('%',r.origin,'%') AND ?2 like CONCAT('%',r.destination,'%') OR r.origin like CONCAT('%',?1,'%') AND r.destination like CONCAT('%',?2,'%')"
+	@Query("select r from Route r where (?1 like CONCAT('%',r.origin,'%') OR r.origin like CONCAT('%',?1,'%')) AND (?2 like CONCAT('%',r.destination,'%') OR r.destination like CONCAT('%',?2,'%'))"
 			+ "AND (?3 IS NULL OR (year(r.departureTime) = year(?3) AND month(r.departureTime) = month(?3) AND day(r.departureTime) = day(?3)))"
 			+ "AND (?7 IS NULL OR (year(r.departureTime) > year(?7) OR "
 				+ "(year(r.departureTime) = year(?7) AND month(r.departureTime) > month(?7) OR "

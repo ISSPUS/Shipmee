@@ -13,7 +13,7 @@ import domain.Shipment;
 @Repository
 public interface ShipmentRepository extends JpaRepository<Shipment, Integer> {
 	
-	@Query("select s from Shipment s where ?1 like CONCAT('%',s.origin,'%') AND ?2 like CONCAT('%',s.destination,'%') OR s.origin like CONCAT('%',?1,'%') AND s.destination like CONCAT('%',?2,'%')"
+	@Query("select s from Shipment s where (?1 like CONCAT('%',s.origin,'%') OR s.origin like CONCAT('%',?1,'%')) AND (?2 like CONCAT('%',s.destination,'%') OR s.destination like CONCAT('%',?2,'%'))"
 			+ "AND (?3 IS NULL OR (year(s.departureTime) = year(?3) AND month(s.departureTime) = month(?3) AND day(s.departureTime) = day(?3)))"
 			+ "AND (?7 IS NULL OR (year(s.departureTime) > year(?7) OR "
 				+ "(year(s.departureTime) = year(?7) AND month(s.departureTime) > month(?7) OR "
