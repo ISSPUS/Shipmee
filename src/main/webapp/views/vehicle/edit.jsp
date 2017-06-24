@@ -100,13 +100,9 @@
 
 					</button>
 
-					<jstl:if test="${vehicle.vehicleId != 0}">
-						
-						
-				<acme:submit_confirm name="delete" code="vehicle.delete"
-					codeConfirm="vehicle.confirm.delete" />
-			
-
+					<jstl:if test="${vehicleForm.vehicleId != 0}">
+						<acme:submit_confirm name="delete" code="vehicle.delete"
+							codeConfirm="vehicle.confirm.delete" />
 					</jstl:if>
 
 					<acme:cancel code="vehicle.cancel" url="vehicle/user/list.do" />
