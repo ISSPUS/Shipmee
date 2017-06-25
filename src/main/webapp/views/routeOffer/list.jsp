@@ -93,8 +93,8 @@
 						</div>
 					</div>
 					<div class="col-xs-2 col-sm-3"
-						style="padding-top: 1.5%; font-size: 190%; text-align: center; vertical-align: middle;">
-							
+						style="padding-top: 1.5%;text-align: center; vertical-align: middle;">
+						<div style="font-size: 190%;">
 						<jstl:choose>
 							<jstl:when test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier && currentUser.id != routeOfferRow.user.id}">
 							<span class="badge badge-shipmentoffer-price" style="background-color: #0b6a92;"><jstl:out
@@ -105,9 +105,12 @@
 								<span class="badge badge-shipmentoffer-price"><jstl:out
 								value="${routeOfferRow.amount}" />&#8364;</span>
 							</jstl:otherwise>
-						</jstl:choose>		
-		
+						</jstl:choose>
+						</div>
+						<spring:message code="master.page.comissions" />
+						
 					</div>
+
 					<div class="botones col-xs-10 col-sm-2 col-lg-3">
 						<div class="col-xs-12 profile-userbuttons"
 							style="text-align: center;">
