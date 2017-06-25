@@ -332,8 +332,8 @@ font-size: 225%;
 								<jstl:if test="${feePayment.shipmentOffer != null}">
 									<h4>
 										<a href="shipment/display.do?shipmentId=${feePayment.shipmentOffer.shipment.id}"><spring:message code="shipmentOffer.shipment" />
-											${feePayment.shipmentOffer.shipment.itemName}</a>
-									</h4>
+											${feePayment.shipmentOffer.shipment.itemName}</a></h4>
+											<fmt:formatDate value="${feePayment.shipmentOffer.shipment.departureTime}" pattern="dd/MM/yyyy '-' HH:mm" /> - <fmt:formatDate value="${feePayment.shipmentOffer.shipment.maximumArriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
 								</jstl:if>
 								<jstl:if test="${feePayment.routeOffer != null}">
 									<h4>
