@@ -104,8 +104,16 @@
 										code="user.phone" />: </strong>${user.phone}</span> <br /> <span> <strong><spring:message
 										code="user.dni" />: </strong>${user.dni}</span><br /> <span> <strong><spring:message
 										code="user.fundTransferPreference" /></strong> (<a href="fundTransferPreference/user/edit.do"><spring:message
-										code="user.edit" /></a>)</span>
+										code="user.edit" /></a>)</span><br />
+										
+										<jstl:if test="${isPrincipal && !user.isVerified && 
+											(user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')}">
+											<span> <strong><spring:message code="user.isVerified" /></strong>
+											(<a href="user/user/edit.do"><spring:message code="user.verify" /></a>)</span>
+										</jstl:if>
+				
 						</div>
+												
 						<div class="datos text-center">
 							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
 								<br />
