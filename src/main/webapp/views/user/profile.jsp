@@ -102,7 +102,7 @@
 										 <span> <strong><spring:message
 										code="user.email" />: </strong>${user.email}</span> <br /> <span> <strong><spring:message
 										code="user.phone" />: </strong>${user.phone}</span> <br /> <span> <strong><spring:message
-										code="user.dni" />: </strong>${user.dni}</span><br /><br /> <span> <strong><spring:message
+										code="user.dni" />: </strong>${user.dni}</span><br /><br /><span> <strong><spring:message
 										code="user.fundTransferPreference" /></strong> (<a href="fundTransferPreference/user/edit.do"><spring:message
 										code="user.edit" /></a>)</span><br /><br />
 										
