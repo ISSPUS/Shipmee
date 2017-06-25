@@ -137,7 +137,8 @@ public class FeePaymentUserController extends AbstractController {
 			} catch (Throwable oops) {
 				log.error(oops);
 				LocalDateTime now = LocalDateTime.now();
-				if(feePaymentForm.getCreditCard().getExpirationMonth() < now.getMonthValue()){
+				if(feePaymentForm.getCreditCard().getExpirationMonth() < now.getMonthValue() &&
+						feePaymentForm.getCreditCard().getExpirationYear() == now.getYear()){
 					System.out.println(now.getMonthValue());
 					result = createEditModelAndView(feePaymentForm, "feePayment.commit.error.month");
 				}else{
