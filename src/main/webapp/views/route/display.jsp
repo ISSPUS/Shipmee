@@ -216,9 +216,13 @@
                                     <span class="custom-control-indicator"></span>
                                 </label>
                             </td>
-                            <td class="tabla-tam">${value.size}</td>
+                            <td class="tabla-tam">                
+                            	<jstl:if test="${value.size == 'S'}"><span title="<spring:message code="shipment.sizeS"/>">${value.size}</span></jstl:if>
+								<jstl:if test="${value.size == 'M'}"><span title="<spring:message code="shipment.sizeM"/>">${value.size}</span></jstl:if>
+								<jstl:if test="${value.size == 'L'}"><span title="<spring:message code="shipment.sizeL"/>">${value.size}</span></jstl:if>
+								<jstl:if test="${value.size == 'XL'}"><span title="<spring:message code="shipment.sizeXL"/>">${value.size}</span></jstl:if>
+                            </td>
                             <td class="tabla-precio">${value.price}&#8364;
-                         
                         </tr>
 					</jstl:forEach>
      

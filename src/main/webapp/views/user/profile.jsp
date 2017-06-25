@@ -57,7 +57,7 @@
 
 					<h3 class="media-heading profile-name">${user.name}
 						<small> <jstl:if test="${user.isVerified}">
-								<i class="glyphicon glyphicon-ok img-verified" title="Verified"></i>
+								<i class="glyphicon glyphicon-ok img-verified" title="<spring:message code="user.verified"/>"></i>
 							</jstl:if>
 							
 							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
