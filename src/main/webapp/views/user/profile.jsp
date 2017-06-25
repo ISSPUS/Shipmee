@@ -111,6 +111,11 @@
 											<span> <strong><spring:message code="user.isVerified" /></strong>
 											(<a href="user/user/edit.do"><spring:message code="user.verify" /></a>)</span>
 										</jstl:if>
+										
+										<jstl:if test="${isPrincipal && !user.isVerified && 
+											(user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')}">
+											<span><strong><spring:message code="user.notVerified.waiting" /></strong></span>
+										</jstl:if>
 				
 						</div>
 												
