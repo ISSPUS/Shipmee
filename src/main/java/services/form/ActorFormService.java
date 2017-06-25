@@ -167,26 +167,46 @@ public class ActorFormService {
 				CommonsMultipartFile imageDniUpload = actorForm.getDniPhoto();
 				
 				if (!binding.hasErrors()) {
-
 					if (imageProfileUpload.getSize() > 0) {
 						try {
 							nameImgProfile = ImageUpload.subirImagen(imageProfileUpload, ServerConfig.getPATH_UPLOAD());
 
+							res.setPhoto(ServerConfig.getURL_IMAGE() + nameImgProfile);
 						} catch (Exception e) {
 							log.error(e, e.getCause());
+							switch (e.getMessage()) {
+							case "message.error.imageUpload.incompatibleType":
+								this.addBinding(binding, false, "photo", "message.error.imageUpload.incompatibleType", null);
+								break;
+							case "message.error.imageUpload.tooBig":
+								this.addBinding(binding, false, "photo", "message.error.imageUpload.tooBig", null);
+								break;
+							default:
+								this.addBinding(binding, false, "photo", "message.error.imageUpload.others", null);
+								break;
+							}
 						}
-						Assert.notNull(nameImgProfile, "error.upload.image");
-						res.setPhoto(ServerConfig.getURL_IMAGE() + nameImgProfile);
-
 					}
+
 					if (imageDniUpload.getSize() > 0) {
 						try {
 							nameImgDni = ImageUpload.subirImagen(imageDniUpload, ServerConfig.getPATH_UPLOAD());
+							
+							res.setDniPhoto(ServerConfig.getURL_IMAGE() + nameImgDni);
 						} catch (Exception e) {
 							log.error(e, e.getCause());
+							switch (e.getMessage()) {
+							case "message.error.imageUpload.incompatibleType":
+								this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.incompatibleType", null);
+								break;
+							case "message.error.imageUpload.tooBig":
+								this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.tooBig", null);
+								break;
+							default:
+								this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.others", null);
+								break;
+							}
 						}
-						Assert.notNull(nameImgDni, "error.upload.image");
-						res.setDniPhoto(ServerConfig.getURL_IMAGE() + nameImgDni);
 					}
 
 					uAccount.setUsername(actorForm.getUserName());
