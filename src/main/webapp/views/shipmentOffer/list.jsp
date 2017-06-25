@@ -104,7 +104,7 @@
 							</jstl:otherwise>
 						</jstl:choose>
 						</div>
-						<spring:message code="master.page.comissions" />
+						<div><a><spring:message code="master.page.comissions" /></a></div>
 					</div>
 					<div class="botones col-xs-10 col-sm-2 col-lg-3">
 						<div class="col-xs-12 profile-userbuttons"

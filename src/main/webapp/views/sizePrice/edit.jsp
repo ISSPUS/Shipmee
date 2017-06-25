@@ -183,7 +183,7 @@
 
 			<!-- Action buttons -->
 			<div class="text-center profile-userbuttons">
-			 	<div><spring:message code="master.page.comissions.must" /></div>
+			 	<div><a><spring:message code="master.page.comissions.must" /></a></div>
 				<br />
 				<button type="submit" name="save" class="btn  btn-primary">
 					<span class="glyphicon glyphicon-floppy-disk"></span>

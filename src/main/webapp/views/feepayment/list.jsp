@@ -404,7 +404,7 @@ font-size: 225%;
 							</jstl:when>
 						</jstl:choose>
 						
-						<spring:message code="master.page.comissions" />
+						<div class="text-center"><a><spring:message code="master.page.comissions" /></a></div>
 						
 
 						<jstl:if test="${feePayment.type == 'Pending'}">

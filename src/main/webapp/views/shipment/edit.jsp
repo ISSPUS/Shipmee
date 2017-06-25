@@ -168,7 +168,7 @@
 					</div>
 				</div>
 				<div class="col-md-6">
-					<div><spring:message code="master.page.comission.must" /></div>
+					<div><a><spring:message code="master.page.comission.must" /></a></div>
 				</div>
 			</div>
 			<div class="form-group">

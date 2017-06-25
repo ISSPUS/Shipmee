@@ -107,7 +107,7 @@
 							</jstl:otherwise>
 						</jstl:choose>
 						</div>
-						<spring:message code="master.page.comissions" />
+						<div><a><spring:message code="master.page.comissions" /></a></div>
 						
 					</div>
 

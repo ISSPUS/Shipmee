@@ -197,7 +197,7 @@
 											<div class="col-sm-12">
 												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.price" />: 
 												<span class="titles-info-price">${shipment.price}&#8364;</span>
-												<div><spring:message code="master.page.comission" /></div>
+												<div><a><spring:message code="master.page.comissions" /></a></div>
 												<br/>
 											</div>
 	

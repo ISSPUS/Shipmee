@@ -228,7 +228,7 @@
      
                     </tbody>
  					 </table>
- 					 <div><spring:message code="master.page.comissions" /></div>
+ 					 <div class="text-center"><a><spring:message code="master.page.comissions" /></a></div>
 					
 					<div class="rfecha separador-final"></div>
 
