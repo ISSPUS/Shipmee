@@ -95,7 +95,7 @@ public class UserService {
 		Assert.notNull(user);
 		
 		this.checkUser(user);
-		this.checkDNI(user);
+		Assert.isTrue(this.checkDNI(user.getDni()), "user.edit.profile.dni.wrongPattern");
 		
 		user = userRepository.save(user);
 		
@@ -104,21 +104,24 @@ public class UserService {
 	
 	//Other business methods -------------------------------------------------
 
-	private void checkDNI(User user){
+	public boolean checkDNI(String dni){
 		
-		log.trace(user.getDni());
+		log.trace(dni);
 		
 		Pattern pattern;
 		Matcher matcher;
 		boolean match;
+		boolean result;
 		
 		pattern = Pattern.compile("^[0-9A-Z]{1}[0-9]{7}[A-Z]{1}$");
-		matcher = pattern.matcher(user.getDni());
+		matcher = pattern.matcher(dni);
 		match = matcher.find();
 		
 		log.trace(match);
 		
-		Assert.isTrue(user.getDni().equals("") || match, "user.edit.profile.dni.wrongPattern");
+		result = dni.equals("") || match;
+		
+		return result;
 		
 	}
 	

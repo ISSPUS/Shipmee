@@ -141,6 +141,13 @@ public class ActorFormService {
 				
 			}
 			
+			if(!actorForm.getDni().equals("")){
+				// Password modified
+				this.addBinding(binding, userService.checkDNI(actorForm.getDni()),
+						"dni", "user.edit.profile.dni.wrongPattern", null);
+				
+			}
+			
 			if(!actorForm.getUserName().equals(actActor.getUserAccount().getUsername())){
 				// UserName modified
 				this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
