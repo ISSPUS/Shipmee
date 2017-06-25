@@ -90,7 +90,7 @@ public class VehicleFormService {
 			
 		} else if(vehicleForm.getVehicleId() != 0) {
 			result = vehicleService.findOne(vehicleForm.getVehicleId());
-			User user = userService.findByPrincipal();
+			//User user = userService.findByPrincipal();
 			
 			result.setBrand(vehicleForm.getBrand());
 			result.setColor(vehicleForm.getColor());
@@ -100,7 +100,7 @@ public class VehicleFormService {
 			if(nameImgVehicle != null)
 				result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
 
-			result.setUser(user);
+			//result.setUser(user);
 
 		} else {
 			result = null;
