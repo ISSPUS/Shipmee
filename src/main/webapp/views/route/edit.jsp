@@ -172,13 +172,19 @@
 	</div>
 </jstl:if>
 
-<jstl:if test="${!user.isVerified}">
+<jstl:if test="${!user.isVerified && (user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')}">
 	<spring:message code="user.isVerified" />: <a href="user/user/edit.do" ><spring:message code="user.verify" /></a>
+	<br/>
+</jstl:if>
+
+<jstl:if test="${!user.isVerified && (user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')}">
+	<spring:message code="user.notVerified.waiting" />
 	<br/>
 </jstl:if>
 
 <jstl:if test="${user.fundTransferPreference == null}">
 	<spring:message code="user.fundTransferPreference" />: <a href="fundTransferPreference/user/edit.do" ><spring:message code="user.fundTransferPreference.edit" /></a>
+	<br/>
 </jstl:if>
 
 
