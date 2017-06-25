@@ -134,6 +134,8 @@
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
 											<div class="col-xs-11">
 											
+												<jstl:if test="${not empty route.vehicle}">		
+												<div class="vehiclePart">
 												<i class="glyphicon glyphicon-road">&nbsp;</i><spring:message code="route.vehicle"/>: 
 												<span class="titles-info">${route.vehicle.brand} - ${route.vehicle.model}</span>
 												<br/>
@@ -159,7 +161,8 @@
 														</div>
 													</div>
 												</div>
-												
+												</div>
+												</jstl:if>
 											<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
 												<span class="titles-info">
 													<jstl:if test="${route.itemEnvelope == 'Both'}">

@@ -84,12 +84,12 @@
 
 											<jstl:choose>
 												<jstl:when test="${infoMessages eq 'messages.received'}">
-													<a href="#" class="pull-left"> <img
+													<a href="user/profile.do?userId=${messageRow.sender.id}" class="pull-left"> <img
 														src="${messageRow.sender.photo}" class="media-photo"></a>
 
 												</jstl:when>
 												<jstl:otherwise>
-													<a href="#" class="pull-left"> <img
+													<a href="user/profile.do?userId=${messageRow.recipient.id}" class="pull-left"> <img
 														src="${messageRow.recipient.photo}" class="media-photo"></a>
 
 
