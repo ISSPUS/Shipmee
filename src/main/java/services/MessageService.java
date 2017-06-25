@@ -19,6 +19,7 @@ import domain.RouteOffer;
 import domain.ShipmentOffer;
 import repositories.MessageRepository;
 import services.form.MessageFormService;
+import utilities.PayPalConfig;
 import utilities.SendMail;
 
 @Service
@@ -166,20 +167,22 @@ public class MessageService {
 		
 		sender = shipmentOffer.getShipment().getCreator();
 		recipient = shipmentOffer.getUser();
-		subject = "Your counteroffer has been accepted.";
-		body = "The counteroffer you did for a Shipment to carry " + 
+		subject = "Su contraoferta ha sido aceptada.";
+		body = "La contraoferta que hizo por un Envío para transportar " + 
 				shipmentOffer.getShipment().getItemName() + 
-				" from " + 
+				" desde " + 
 				shipmentOffer.getShipment().getOrigin() + 
-				" to " + 
+				" a " + 
 				shipmentOffer.getShipment().getDestination() + 
-				" with a proposed cost of " +
+				" con un coste propuesto de " +
 				shipmentOffer.getAmount() + 
-				" euros, originally posted by " + 
+				" euros, originalmente subida por " + 
 				shipmentOffer.getShipment().getCreator().getUserAccount().getUsername() + 
-				" with a cost of " + 
-				shipmentOffer.getShipment().getPrice() + 
-				" euros, has been accepted.";
+				" ha sido aceptada. " +
+				"Usa este enlace para ver el envío: "+ 
+				PayPalConfig.getUrlBase() +
+				"/shipment/display.do?shipmentId=" +
+				shipmentOffer.getShipment().getId();
 		
 		sendMessage(sender, recipient, subject, body);
 	}
@@ -193,20 +196,24 @@ public class MessageService {
 		
 		sender = shipmentOffer.getShipment().getCreator();
 		recipient = shipmentOffer.getUser();
-		subject = "Your counteroffer has been denied.";
-		body = "The counteroffer you did for a Shipment to carry " + 
+		subject = "Su contraoferta ha sido denegada.";
+		body = "La contraoferta que hizo por un Envío para transportar " + 
 				shipmentOffer.getShipment().getItemName() + 
-				" from " + 
+				" desde " + 
 				shipmentOffer.getShipment().getOrigin() + 
-				" to " + 
+				" a " + 
 				shipmentOffer.getShipment().getDestination() + 
-				" with a proposed cost of " +
+				" con un coste propuesto de " +
 				shipmentOffer.getAmount() + 
-				" euros, originally posted by " + 
+				" euros, originalmente subida por " + 
 				shipmentOffer.getShipment().getCreator().getUserAccount().getUsername() + 
-				" with a cost of " + 
+				" con un coste de " + 
 				shipmentOffer.getShipment().getPrice() + 
-				" euros, has been denied.";
+				" euros, ha sido denegada. " +
+				"Usa este enlace para ver el envío: "+ 
+				PayPalConfig.getUrlBase() +
+				"/shipment/display.do?shipmentId=" +
+				shipmentOffer.getShipment().getId();
 		
 		sendMessage(sender, recipient, subject, body);
 	}
@@ -220,17 +227,21 @@ public class MessageService {
 		
 		sender = routeOffer.getRoute().getCreator();
 		recipient = routeOffer.getUser();
-		subject = "Your counteroffer has been accept.";
-		body = "The counteroffer you did for a Route" + 				
-				" from " + 
+		subject = "Su contraoferta ha sido aceptada.";
+		body = "La contraoferta que hizo por una Ruta" + 				
+				" desde " + 
 				routeOffer.getRoute().getOrigin() + 
-				" to " + 
+				" a " + 
 				routeOffer.getRoute().getDestination() + 
-				" with a proposed cost of " +
+				" con un coste propuesto de " +
 				routeOffer.getAmount() + 
-				" euros, originally posted by " + 
+				" euros, originalmente subida por " + 
 				routeOffer.getRoute().getCreator().getUserAccount().getUsername() + 
-				", has been accept.";
+				", ha sido aceptada. " +
+				"Usa este enlace para ver la ruta: "+ 
+				PayPalConfig.getUrlBase() +
+				"/route/display.do?routeId=" +
+				routeOffer.getRoute().getId();
 		
 		sendMessage(sender, recipient, subject, body);
 	}
@@ -244,17 +255,21 @@ public class MessageService {
 		
 		sender = routeOffer.getRoute().getCreator();
 		recipient = routeOffer.getUser();
-		subject = "Your counteroffer has been denied.";
-		body = "The counteroffer you did for a Route" + 				
-				" from " + 
+		subject = "Su contraoferta ha sido rechazada.";
+		body = "La contraoferta que hizo por una Ruta" + 				
+				" desde " + 
 				routeOffer.getRoute().getOrigin() + 
-				" to " + 
+				" a " + 
 				routeOffer.getRoute().getDestination() + 
-				" with a proposed cost of " +
+				" con un coste propuesto de " +
 				routeOffer.getAmount() + 
-				" euros, originally posted by " + 
+				" euros, originalmente subida por " + 
 				routeOffer.getRoute().getCreator().getUserAccount().getUsername() + 
-				", has been denied.";
+				", ha sido rechazada. " +
+				"Usa este enlace para ver la ruta: "+ 
+				PayPalConfig.getUrlBase() +
+				"/route/display.do?routeId=" +
+				routeOffer.getRoute().getId();
 		
 		sendMessage(sender, recipient, subject, body);
 	}

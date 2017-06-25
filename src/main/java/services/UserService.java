@@ -162,7 +162,7 @@ public class UserService {
 				fundTransferPreference = a.getFundTransferPreference();
 				if(fundTransferPreference.getPaypalEmail() != null &&
 						fundTransferPreference.getPaypalEmail().equals("")){
-					Assert.isTrue(false,"You must fill in the information of your PayPal.");
+					Assert.isTrue(false,"message.error.fundTransferPreference.fillPayPal");
 				} else if((fundTransferPreference.getCountry() != null &&
 						fundTransferPreference.getCountry().equals("")) ||
 						(fundTransferPreference.getAccountHolder() != null &&
@@ -173,7 +173,7 @@ public class UserService {
 						fundTransferPreference.getIBAN().equals("")) ||
 						(fundTransferPreference.getBIC() != null &&
 						fundTransferPreference.getBIC().equals(""))) {
-					Assert.isTrue(false,"You must fill in the information of your bank account.");
+					Assert.isTrue(false,"message.error.fundTransferPreference.fillBankAccount");
 				}
 			}
 		}else{
