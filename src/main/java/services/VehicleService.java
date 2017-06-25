@@ -1,6 +1,8 @@
 package services;
 
 import java.util.Collection;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,8 @@ import repositories.VehicleRepository;
 @Service
 @Transactional
 public class VehicleService {
+
+	static Logger log = Logger.getLogger(VehicleService.class);
 
 	// Managed repository -----------------------------------------------------
 
