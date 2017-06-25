@@ -68,18 +68,18 @@
 
 						<ul class="nav">
 
-							<li class="active"><a href=""> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-map-marker img-origin"></i><spring:message code="route.origin" />
 							</a></li>
 							<li class="li-input"><input type="text" id="origin" name="origin"
 								class="form-control input-text" value="${origin}" placeholder="" required></li>
-							<li class="active"><a href=""> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-map-marker img-destination"></i>
 									<spring:message code="route.destination" />
 							</a></li>
 							<li class="li-input"><input id="destination" name="destination" type="text"
 								class="form-control input-text" value="${destination}" placeholder="" required></li>
-							<li class="active"><a href="" target="_blank"> <i
+							<li class="active"><a target="_blank"> <i
 									class="glyphicon glyphicon-plane"></i><spring:message code="route.date" />
 							</a></li>
 							<li class="li-input">
@@ -90,7 +90,7 @@
 									</span>
 								</div>
 							</li>
-							<li class="active"><a href="" target="_blank"> <i
+							<li class="active"><a target="_blank"> <i
 									class="glyphicon glyphicon-time"></i> <spring:message code="route.hour" />
 							</a></li>
 							<li style="text-align: center" class="li-input">
@@ -112,7 +112,7 @@
 									</jstl:forEach>
 								</select>
 							</li>
-							<li class="active"><a href="#"> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-eye-open"></i><spring:message code="route.package" />
 							</a></li>
 							<li style="padding-bottom: 2%;">
@@ -144,7 +144,7 @@
 								</div>
 
 							</li>
-							<li class="active"><a href="#"> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-resize-full"></i><spring:message code="route.sizes" />
 							</a></li>
 							

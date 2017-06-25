@@ -77,7 +77,7 @@
 							</a></li>
 							<li class="li-input"><input id="destination" name="destination" type="text"
 								class="form-control input-text" value="${destination}" placeholder="" required></li>
-							<li class="active"><a href="" target="_blank"> <i
+							<li class="active"><a target="_blank"> <i
 									class="glyphicon glyphicon-plane"></i> <spring:message code="shipment.date" />
 							</a></li>
 							<li class="li-input">
@@ -88,7 +88,7 @@
 									</span>
 								</div>
 							</li>
-							<li class="active"><a href="" target="_blank"> <i
+							<li class="active"><a target="_blank"> <i
 									class="glyphicon glyphicon-time"></i> <spring:message code="shipment.hour" />
 							</a></li>
 							<li style="text-align: center" class="li-input">
@@ -110,7 +110,7 @@
 									</jstl:forEach>
 								</select>
 							</li>
-							<li class="active"><a href="#"> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-eye-open"></i><spring:message code="shipment.package" />
 							</a></li>
 							<li style="padding-bottom: 2%;">
