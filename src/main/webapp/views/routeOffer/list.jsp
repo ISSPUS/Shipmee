@@ -67,24 +67,25 @@
 							</h4>
 						</div>
 						<div class="col-xs-12">
-							<h5 class="offer-profile-info">Ciudad:Sevilla</h5>
+							<h5 class="offer-profile-info"><spring:message code="route.origin" />: <a>${routeOfferRow.route.origin}</a></h5>
+							<h5 class="offer-profile-info"><spring:message code="route.destination" />: <a>${routeOfferRow.route.destination}</a></h5>
 						</div>
 						<div class="col-xs-12">
 							<h5 class="offer-profile-info">
 								<jstl:if test="${routeOfferRow.acceptedByCarrier}">
 									<p>
-										<b><spring:message code="routeOffer.accepted" /></b>
+										<b><spring:message code="routeOffer.status" />: <span style="color: #58e19d"><spring:message code="routeOffer.accepted" /></span></b>
 									</p>
 								</jstl:if>
 								<jstl:if test="${routeOfferRow.rejectedByCarrier}">
 									<p>
-										<b><spring:message code="routeOffer.rejected" /></b>
+										<b><spring:message code="routeOffer.status" />: <span style="color: #ff8686"><spring:message code="routeOffer.rejected" /></span></b>
 									</p>
 								</jstl:if>
 								<jstl:if
 									test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier}">
 									<p>
-										<b><spring:message code="routeOffer.pending" /></b>
+										<b><spring:message code="routeOffer.status" />: <span style="color: #ffb66d"><spring:message code="routeOffer.pending" /></span></b>
 									</p>
 								</jstl:if>
 

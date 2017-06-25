@@ -64,24 +64,25 @@
 							</h4>
 						</div>
 						<div class="col-xs-12">
-							<h5 class="offer-profile-info">Ciudad:Sevilla</h5>
+							<h5 class="offer-profile-info"><spring:message code="shipment.origin" />: <a>${shipmentOfferRow.shipment.origin}</a></h5>
+							<h5 class="offer-profile-info"><spring:message code="shipment.destination" />: <a>${shipmentOfferRow.shipment.destination}</a></h5>
 						</div>
 						<div class="col-xs-12">
 							<h5 class="offer-profile-info">
 								<jstl:if test="${shipmentOfferRow.acceptedBySender}">
 									<p>
-										<b><spring:message code="shipmentOffer.accepted" /></b>
+										<b><spring:message code="shipmentOffer.status" />: <span style="color: #58e19d"><spring:message code="shipmentOffer.accepted" /></span></b>
 									</p>
 								</jstl:if>
 								<jstl:if test="${shipmentOfferRow.rejectedBySender}">
 									<p>
-										<b><spring:message code="shipmentOffer.rejected" /></b>
+										<b><spring:message code="shipmentOffer.status" />: <span style="color: #ff8686"><spring:message code="shipmentOffer.rejected" /></span></b>
 									</p>
 								</jstl:if>
 								<jstl:if
 									test="${!shipmentOfferRow.rejectedBySender && !shipmentOfferRow.acceptedBySender}">
 									<p>
-										<b><spring:message code="shipmentOffer.pending" /></b>
+										<b><spring:message code="shipmentOffer.status" />: <span style="color: #ffb66d"><spring:message code="shipmentOffer.pending" /></span></b>
 									</p>
 								</jstl:if>
 
