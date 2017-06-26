@@ -7,6 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.iban4j.Bic;
+import org.iban4j.BicFormatException;
+import org.iban4j.BicUtil;
+import org.iban4j.IbanFormatException;
+import org.iban4j.IbanUtil;
+import org.iban4j.InvalidCheckDigitException;
+import org.iban4j.UnsupportedCountryException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -360,4 +367,19 @@ public class UserService {
 		this.save(dbUser);
 	}
 
+	
+	public Boolean IBANBICValidator(String IBAN, String BIC){
+		Boolean result = false;
+		
+		try{
+			IbanUtil.validate(IBAN);
+			BicUtil.validate(BIC);
+			
+			result = true;
+		}catch (IbanFormatException | InvalidCheckDigitException | UnsupportedCountryException | BicFormatException  e) {
+			log.error("Error al validar el IBAN O BIC", e);
+		}
+		
+		return result;
+	}
 }
