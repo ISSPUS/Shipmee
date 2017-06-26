@@ -153,7 +153,7 @@ public class ActorFormService {
 				this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
 			}
 			
-			if (actorService.checkAuthority(Authority.USER)){
+			if (actorService.checkAuthority(Authority.USER) && !binding.hasErrors()){
 				// Registry User
 				User res;
 				UserAccount uAccount;
@@ -173,47 +173,46 @@ public class ActorFormService {
 				CommonsMultipartFile imageProfileUpload = actorForm.getPhoto();
 				CommonsMultipartFile imageDniUpload = actorForm.getDniPhoto();
 				
-				if (!binding.hasErrors()) {
-					if (imageProfileUpload.getSize() > 0) {
-						try {
-							nameImgProfile = ImageUpload.subirImagen(imageProfileUpload, ServerConfig.getPATH_UPLOAD());
+				if (imageProfileUpload.getSize() > 0) {
+					try {
+						nameImgProfile = ImageUpload.subirImagen(imageProfileUpload, ServerConfig.getPATH_UPLOAD());
 
-							res.setPhoto(ServerConfig.getURL_IMAGE() + nameImgProfile);
-						} catch (Exception e) {
-							log.error(e, e.getCause());
-							switch (e.getMessage()) {
-							case "message.error.imageUpload.incompatibleType":
-								this.addBinding(binding, false, "photo", "message.error.imageUpload.incompatibleType", null);
-								break;
-							case "message.error.imageUpload.tooBig":
-								this.addBinding(binding, false, "photo", "message.error.imageUpload.tooBig", null);
-								break;
-							default:
-								this.addBinding(binding, false, "photo", "message.error.imageUpload.others", null);
-								break;
-							}
+						res.setPhoto(ServerConfig.getURL_IMAGE() + nameImgProfile);
+					} catch (Exception e) {
+						log.error(e, e.getCause());
+						switch (e.getMessage()) {
+						case "message.error.imageUpload.incompatibleType":
+							this.addBinding(binding, false, "photo", "message.error.imageUpload.incompatibleType", null);
+							break;
+						case "message.error.imageUpload.tooBig":
+							this.addBinding(binding, false, "photo", "message.error.imageUpload.tooBig", null);
+							break;
+						default:
+							this.addBinding(binding, false, "photo", "message.error.imageUpload.others", null);
+							break;
 						}
 					}
+				}
 
-					if (imageDniUpload.getSize() > 0) {
-						try {
-							nameImgDni = ImageUpload.subirImagen(imageDniUpload, ServerConfig.getPATH_UPLOAD());
-							
-							res.setDniPhoto(ServerConfig.getURL_IMAGE() + nameImgDni);
-						} catch (Exception e) {
-							log.error(e, e.getCause());
-							switch (e.getMessage()) {
-							case "message.error.imageUpload.incompatibleType":
-								this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.incompatibleType", null);
-								break;
-							case "message.error.imageUpload.tooBig":
-								this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.tooBig", null);
-								break;
-							default:
-								this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.others", null);
-								break;
-							}
+				if (imageDniUpload.getSize() > 0) {
+					try {
+						nameImgDni = ImageUpload.subirImagen(imageDniUpload, ServerConfig.getPATH_UPLOAD());
+						
+						res.setDniPhoto(ServerConfig.getURL_IMAGE() + nameImgDni);
+					} catch (Exception e) {
+						log.error(e, e.getCause());
+						switch (e.getMessage()) {
+						case "message.error.imageUpload.incompatibleType":
+							this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.incompatibleType", null);
+							break;
+						case "message.error.imageUpload.tooBig":
+							this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.tooBig", null);
+							break;
+						default:
+							this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.others", null);
+							break;
 						}
+					}
 					}
 
 					uAccount.setUsername(actorForm.getUserName());
@@ -224,11 +223,9 @@ public class ActorFormService {
 						uAccount = userAccountService.encodePassword(uAccount);
 					}
 					res.setUserAccount(uAccount);
-				}
 				
 				return res;
 			}else{
-				Assert.notNull(null, "Edición de usuarios no Authority.USER no implementado");
 				return null;
 			}
 		}
