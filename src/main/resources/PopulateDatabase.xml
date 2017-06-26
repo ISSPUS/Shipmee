@@ -143,6 +143,7 @@
 		<property name="photo" value=""/>
 		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount1"/>
+		<property name="localePreferences" value="en"/>
 	</bean>
 	
 	<bean id="shipmee" class="domain.Administrator">
@@ -155,6 +156,7 @@
 		<property name="photo" value=""/>
 		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount6"/>
+		<property name="localePreferences" value="es"/>
 	</bean>
 	
 	<!-- Rank -->
@@ -246,6 +248,7 @@
 			</list>
 		</property>
 		<property name="fundTransferPreference" ref="fundTransferPreference1"/>
+		<property name="localePreferences" value="en"/>
 	</bean>
 	
 	<bean id="user2" class="domain.User">
@@ -267,6 +270,7 @@
 			</list>
 		</property>
 		<property name="fundTransferPreference" ref="fundTransferPreference2"/>
+		<property name="localePreferences" value="es"/>
 	</bean>
 	
 	<bean id="user3" class="domain.User">
@@ -287,6 +291,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="en"/>
 	</bean>
 	
 	<bean id="user4" class="domain.User">
@@ -307,6 +312,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="es"/>
 	</bean>
 	
 	<bean id="user5" class="domain.User">
@@ -327,6 +333,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="en"/>
 	</bean>
 	
 	<bean id="user6" class="domain.User">
@@ -347,6 +354,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="es"/>
 	</bean>
 	
 	<bean id="user7" class="domain.User">
@@ -367,6 +375,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="en"/>
 	</bean>
 		
 	<bean id="moderator1" class="domain.User">
@@ -387,6 +396,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="es"/>
 	</bean>
 	
 	<!-- Vehicle -->
