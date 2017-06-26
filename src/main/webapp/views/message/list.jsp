@@ -124,6 +124,14 @@
 												<p class="summary">
 													<jstl:out value="${messageRow.body}"></jstl:out>
 												</p>
+												
+												<jstl:if test="${infoMessages eq 'messages.received'}">
+												<a href="message/actor/create.do?userId=${messageRow.sender.id}&subject=RE: ${messageRow.subject}">
+												<span class="btn  btn-primary summary pull-right"> 
+												<span class="glyphicon glyphicon-send"></span>
+												<spring:message code="messages.reply" />
+												</span></a>
+												</jstl:if>
 											</div>
 										</div>
 									</td>
