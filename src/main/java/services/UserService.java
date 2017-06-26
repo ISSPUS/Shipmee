@@ -102,7 +102,9 @@ public class UserService {
 		Assert.notNull(user);
 		
 		this.checkUser(user);
-		Assert.isTrue(this.checkDNI(user.getDni()), "user.edit.profile.dni.wrongPattern");
+		if(user.getDni()!=null && !user.getDni().equals("")){
+			Assert.isTrue(this.checkDNI(user.getDni()), "user.edit.profile.dni.wrongPattern");
+		}
 		
 		user = userRepository.save(user);
 		
