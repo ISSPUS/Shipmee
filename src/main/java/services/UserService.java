@@ -76,6 +76,7 @@ public class UserService {
 		res.setPhone("");
 		res.setPhoto("images/anonymous.png");
 		res.setPasswordResetToken("");
+		res.setLocalePreferences("es");
 		
 		return res;
 	}

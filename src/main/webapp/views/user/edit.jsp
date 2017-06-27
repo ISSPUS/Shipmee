@@ -67,6 +67,9 @@
 			role="form" enctype="multipart/form-data">
 			
 			<form:hidden path="id" />
+			 <jstl:if test="${actorForm.id == 0}">
+				<form:hidden path="localePreferences"/>
+			</jstl:if>
 
 			<!-- Username -->
 			<div class="form-group">
@@ -206,6 +209,28 @@
 					<form:errors class="error create-message-error" path="repeatedPassword" required="true"/>
 				</div>
 			</div>
+			
+			<!-- LocalePreferences -->
+			<jstl:if test="${actorForm.id != 0}">
+			<div class="form-group">
+				<form:label path="localePreferences" class="control-label col-md-2"
+					for="localePreferences">
+					<spring:message code="user.localePreferences" />
+					<span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+				</form:label>
+
+				<div class="col-md-8">
+					<div class="inner-addon">
+						<form:select path="localePreferences" class="form-control" id="localePreferences">
+							<form:option value="es"><spring:message code="user.localePreferences.spanish" /></form:option>
+							<form:option value="en"><spring:message code="user.localePreferences.english" /></form:option>
+						</form:select>
+					</div>
+					<form:errors class="error create-message-error" path="localePreferences" required="true"/>
+				</div>
+			</div>
+			</jstl:if>
+			
 			
 			<!-- PhotoURL -->
 			<jstl:if test="${actorForm.id != 0}">
