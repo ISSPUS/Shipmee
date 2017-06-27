@@ -123,7 +123,7 @@ public class ShipmentUserController extends AbstractController {
 				shipment = shipmentFormService.reconstruct(shipmentForm);
 				
 				//Añadimos la comisión al precio
-				shipment.setPrice(shipment.getPrice()*1.15);
+				shipment.setPrice(Math.round((shipment.getPrice()*1.15) * 100.0)/100.0);
 				shipmentService.save(shipment);
 
 				result = new ModelAndView("redirect:list.do");
