@@ -624,3 +624,14 @@ xpopup
     margin: 8em auto;
   }
 }
+
+/* -------------------------------- 
+
+Evita descuadre de formularios en movil
+
+-------------------------------- */
+
+.form-horizontal .form-group{
+	margin-right: 0px !important;
+ 
+}
