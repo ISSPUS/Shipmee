@@ -179,7 +179,7 @@ input:valid ~ label {
 					<spring:message code="fundTransferPreference.sentence" />
 				</h3>
 			</div>
-			<div class="paymentWrap col-md-12" style="width: 25%;margin: 0 auto;float: none;">
+			<div class="paymentWrap col-md-4" style="margin: 0 auto;float: none;">
 
 
 				<div class="funkyradio">

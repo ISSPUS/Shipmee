@@ -20,6 +20,10 @@
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.navbar-collapse {
+  max-height: none ! important;
+}
 </style>
 
 	<!-- Fixed navbar -->

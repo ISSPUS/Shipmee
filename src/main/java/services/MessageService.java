@@ -172,7 +172,7 @@ public class MessageService {
 		String body;
 		Locale locale;
 		
-		sender = shipmentOffer.getShipment().getCreator();
+		sender = actorService.findByUsername("shipmee");
 		recipient = shipmentOffer.getUser();
 		
 		locale = new Locale(recipient.getLocalePreferences());
@@ -199,7 +199,7 @@ public class MessageService {
 		String body;
 		Locale locale;
 		
-		sender = shipmentOffer.getShipment().getCreator();
+		sender = actorService.findByUsername("shipmee");
 		recipient = shipmentOffer.getUser();
 		
 		locale = new Locale(recipient.getLocalePreferences());
@@ -226,7 +226,7 @@ public class MessageService {
 		String body;
 		Locale locale;
 		
-		sender = routeOffer.getRoute().getCreator();
+		sender = actorService.findByUsername("shipmee");
 		recipient = routeOffer.getUser();
 		
 		locale = new Locale(recipient.getLocalePreferences());
@@ -252,7 +252,7 @@ public class MessageService {
 		String body;
 		Locale locale;
 		
-		sender = routeOffer.getRoute().getCreator();
+		sender = actorService.findByUsername("shipmee");
 		recipient = routeOffer.getUser();
 		
 		locale = new Locale(recipient.getLocalePreferences());
