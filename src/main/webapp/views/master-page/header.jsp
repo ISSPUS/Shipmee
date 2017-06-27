@@ -177,8 +177,10 @@
 	</div>
 
 	<!-- FEEDBACK -->	
-	<a title="Feedback" class="cd-popup-trigger button glyphicon glyphicon-bullhorn" data-toggle="modal" data-target="#myFeedback" href="#feedback"
+	<a title="Feedback" class="cd-popup-trigger button glyphicon glyphicon-bullhorn" target="_blank" href="https://goo.gl/forms/slX7WVCkNk4Fo39m2"
 		style="z-index: 5;"></a>
+	<!--<a title="Feedback" class="cd-popup-trigger button glyphicon glyphicon-bullhorn" data-toggle="modal" data-target="" href="https://docs.google.com/forms/d/e/1FAIpQLSdVn-PiNkXWEMqI36uj_qnB5Lc5jL-4BSxkxuHC0eadYQLG2g/viewform?embedded=true"
+		style="z-index: 5;"></a>-->		
 	<!-- Modal -->
 	<div class="modal fade" id="myFeedback" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
