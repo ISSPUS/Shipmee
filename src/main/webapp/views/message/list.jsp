@@ -26,6 +26,20 @@
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
 	
+<style>
+.row .msg{
+margin-right: 0px !important
+
+}
+.media-photo{
+max-width: none !important;
+width: 40px;
+}
+.ellipses{
+margin-bottom: 0px;
+margin-top: 0px;
+}
+</style>
 <div class="blue-barra" >
 	<div class="container">
 		<div class="row">
@@ -72,77 +86,86 @@
 		</div>
 
 		<div class="col-md-8">
-			<div class="table-container">
-				<table class="table table-filter">
-					<tbody>
-						<jstl:if test="${not empty messages}">
-							<jstl:forEach items="${messages}" var="messageRow">
+			<jstl:if test="${not empty messages}">
+				<jstl:forEach items="${messages}" var="messageRow">
+					<div class="row msg">
+						<div class=" col-xs-12 table-container panel panel-default">
 
-								<tr data-status="pagado">
-									<td>
-										<div class="media">
+							<div class="row">
+								<div class="col-xs-2 col-sm-1 col-md-1">
+									<jstl:choose>
+										<jstl:when test="${infoMessages eq 'messages.received'}">
+											<a href="user/profile.do?userId=${messageRow.sender.id}"
+												class="pull-left"> <img src="${messageRow.sender.photo}"
+												class="media-photo" style="width: 50px"></a>
 
+										</jstl:when>
+										<jstl:otherwise>
+											<a href="user/profile.do?userId=${messageRow.recipient.id}"
+												class="pull-left"> <img
+												src="${messageRow.recipient.photo}" class="media-photo" style="width: 50px"></a>
+
+										</jstl:otherwise>
+									</jstl:choose>
+
+								</div>
+								<div class="col-xs-10 col-sm-11 col-md-11">
+
+									<div class="car-info">
+										<span class="media-meta pull-right"> <fmt:formatDate
+												type="both" dateStyle="medium" timeStyle="medium"
+												value="${messageRow.moment}" />
+
+										</span>
+
+										<h4 class="title" style="margin-bottom: 1px !important">
 											<jstl:choose>
 												<jstl:when test="${infoMessages eq 'messages.received'}">
-													<a href="user/profile.do?userId=${messageRow.sender.id}" class="pull-left"> <img
-														src="${messageRow.sender.photo}" class="media-photo"></a>
+													<a href="user/profile.do?userId=${messageRow.sender.id}"><jstl:out
+															value="${messageRow.sender.userAccount.username }" /></a>
 
 												</jstl:when>
 												<jstl:otherwise>
-													<a href="user/profile.do?userId=${messageRow.recipient.id}" class="pull-left"> <img
-														src="${messageRow.recipient.photo}" class="media-photo"></a>
-
+													<a href="user/profile.do?userId=${messageRow.recipient.id}"><jstl:out
+															value="${messageRow.recipient.userAccount.username }" /></a>
 
 												</jstl:otherwise>
 											</jstl:choose>
+										</h4>
+										<span class="pendiente"> <jstl:out
+												value="${messageRow.subject}" />
+										</span>
+
+									</div>
+								</div>
 
 
-											<div class="media-body">
-												<span class="media-meta pull-right"> <fmt:formatDate
-														type="both" dateStyle="medium" timeStyle="medium"
-														value="${messageRow.moment}" /></span>
-												<h4 class="title">
-													<jstl:choose>
-														<jstl:when test="${infoMessages eq 'messages.received'}">
-															<a href="user/profile.do?userId=${messageRow.sender.id}"><jstl:out
-																	value="${messageRow.sender.userAccount.username }" /></a>
+							</div>
+							<div class="row" style="padding: 2%">
+								<p class="ellipses"
+									style="overflow-wrap: break-word; word-wrap: break-word; /* Adds a hyphen where the word breaks */ -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto;">
 
-														</jstl:when>
-														<jstl:otherwise>
-															<a
-																href="user/profile.do?userId=${messageRow.recipient.id}"><jstl:out
-																	value="${messageRow.recipient.userAccount.username }" /></a>
+									<jstl:out value="${messageRow.body}"></jstl:out>
 
-														</jstl:otherwise>
-													</jstl:choose>
-												</h4>
+								</p>
+								<jstl:if test="${infoMessages eq 'messages.received'}">
+									<a
+										href="message/actor/create.do?userId=${messageRow.sender.id}&subject=RE: ${messageRow.subject}">
+										<span class="btn  btn-primary summary pull-right"> <span
+											class="glyphicon glyphicon-send"></span> <spring:message
+												code="messages.reply" />
+									</span>
+									</a>
+								</jstl:if>
+							</div>
+						
+						</div>
 
-												<span class="pendiente"> <jstl:out
-														value="${messageRow.subject}" />
-												</span>
+					</div>
 
-												<p class="summary">
-													<jstl:out value="${messageRow.body}"></jstl:out>
-												</p>
-												
-												<jstl:if test="${infoMessages eq 'messages.received'}">
-												<a href="message/actor/create.do?userId=${messageRow.sender.id}&subject=RE: ${messageRow.subject}">
-												<span class="btn  btn-primary summary pull-right"> 
-												<span class="glyphicon glyphicon-send"></span>
-												<spring:message code="messages.reply" />
-												</span></a>
-												</jstl:if>
-											</div>
-										</div>
-									</td>
-								</tr>
-
-							</jstl:forEach>
-						</jstl:if>
-
-					</tbody>
-				</table>
-			</div>
+				</jstl:forEach>
+			</jstl:if>
+			
 		</div>
 
 
