@@ -56,6 +56,7 @@ public class ActorFormService {
 			result = this.createFromActor(actorService.findByPrincipal());
 		}else{
 			result = new ActorForm();
+			result.setLocalePreferences("es");
 		}
 		
 		return result;
@@ -73,6 +74,7 @@ public class ActorFormService {
 		res.setDni(a.getDni());
 		res.setUserName(a.getUserAccount().getUsername());
 		res.setId(a.getId());
+		res.setLocalePreferences(a.getLocalePreferences());
 		
 		
 		return res;
@@ -167,6 +169,7 @@ public class ActorFormService {
 				res.setBirthDate(actorForm.getBirthDate());
 				res.setPhone(actorForm.getPhone());
 				res.setDni(actorForm.getDni());
+				res.setLocalePreferences(actorForm.getLocalePreferences());
 				String nameImgDni = null;
 				String nameImgProfile = null;
 				

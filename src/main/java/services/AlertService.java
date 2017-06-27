@@ -5,9 +5,11 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -37,6 +39,9 @@ public class AlertService {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private MessageSource messageSource;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -109,6 +114,7 @@ public class AlertService {
 		
 		String origin = "";
 		String destination = "";
+		Locale locale;
 				
 		for(Alert alert: alerts){
 			try {
@@ -118,14 +124,32 @@ public class AlertService {
 				log.trace(e);
 			}
 			
+			locale = new Locale(alert.getUser().getLocalePreferences());
+			
 			if(alert.getType().equals("Route")){
-				messageService.sendMessage( actorService.findByUsername("shipmee"), alert.getUser(), "Nueva Alerta", 
-						"Se ha creado una nueva ruta "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+dateFormat.format(alert.getDate())+"."+
-						"Usa este enlace para ver la ruta: "+PayPalConfig.getUrlBase()+"/route/search.do?origin="+origin+"&destination="+destination+"&date="+dateFormat.format(alert.getDate()));
+				String url;
+				
+				url = PayPalConfig.getUrlBase()+"/route/search.do?origin="+origin+"&destination="+destination+"&date="+dateFormat.format(alert.getDate());
+
+				// https://stackoverflow.com/a/2764993
+
+				String[] args_body = { alert.getOrigin(), alert.getDestination(), dateFormat.format(alert.getDate()), url};
+				
+				messageService.sendMessage(actorService.findByUsername("shipmee"), alert.getUser(),
+						messageSource.getMessage("alert.toSend.route.subject", null, locale), 
+						messageSource.getMessage("alert.toSend.route.body", args_body, locale));
 			}else{
-				messageService.sendMessage(actorService.findByUsername("shipmee"), alert.getUser(), "Nueva Alerta", 
-						"Se ha creado un nuevo envío "+alert.getOrigin()+" -> "+alert.getDestination()+" el día "+dateFormat.format(alert.getDate())+"."+
-						"Usa este enlace para ver el envío: "+PayPalConfig.getUrlBase()+"/shipment/search.do?origin="+origin+"&destination="+destination+"&date="+dateFormat.format(alert.getDate()));
+				String url;
+				
+				url = PayPalConfig.getUrlBase()+"/shipment/search.do?origin="+origin+"&destination="+destination+"&date="+dateFormat.format(alert.getDate());
+
+				// https://stackoverflow.com/a/2764993
+
+				String[] args_body = { alert.getOrigin(), alert.getDestination(), dateFormat.format(alert.getDate()), url};
+				
+				messageService.sendMessage( actorService.findByUsername("shipmee"), alert.getUser(),
+						messageSource.getMessage("alert.toSend.shipment.subject", null, locale), 
+						messageSource.getMessage("alert.toSend.shipment.body", args_body, locale));
 			}
 		}
 	}
