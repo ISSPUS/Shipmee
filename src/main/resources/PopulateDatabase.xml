@@ -143,6 +143,7 @@
 		<property name="photo" value=""/>
 		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount1"/>
+		<property name="localePreferences" value="en"/>
 	</bean>
 	
 	<bean id="shipmee" class="domain.Administrator">
@@ -155,6 +156,7 @@
 		<property name="photo" value=""/>
 		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount6"/>
+		<property name="localePreferences" value="es"/>
 	</bean>
 	
 	<!-- Rank -->
@@ -233,7 +235,7 @@
 		<property name="email" value="mariano@shipmee.es"/>
 		<property name="birthDate" value="1992/10/05"/>
 		<property name="phone" value="666777666"/>
-		<property name="dni" value="23456789B"/>
+		<property name="dni" value="59087444F"/>
 		<property name="dniPhoto" value="https://i.imgur.com/38JnZ3Z.png"/>
 		<property name="photo" value="https://i.imgur.com/v11ts3z.png"/>
 		<property name="userAccount" ref="userAccount2"/>
@@ -246,6 +248,7 @@
 			</list>
 		</property>
 		<property name="fundTransferPreference" ref="fundTransferPreference1"/>
+		<property name="localePreferences" value="en"/>
 	</bean>
 	
 	<bean id="user2" class="domain.User">
@@ -254,7 +257,7 @@
 		<property name="email" value="lola@shipmee.es"/>
 		<property name="birthDate" value="1995/10/01"/>
 		<property name="phone" value="676554345"/>
-		<property name="dni" value="34567890C"/>
+		<property name="dni" value="58513506B"/>
 		<property name="dniPhoto" value="https://i.imgur.com/MmE81ot.png"/>
 		<property name="photo" value="https://i.imgur.com/rDN9OW4.png"/>
 		<property name="userAccount" ref="userAccount3"/>
@@ -267,6 +270,7 @@
 			</list>
 		</property>
 		<property name="fundTransferPreference" ref="fundTransferPreference2"/>
+		<property name="localePreferences" value="es"/>
 	</bean>
 	
 	<bean id="user3" class="domain.User">
@@ -275,7 +279,7 @@
 		<property name="email" value="carlos@gmail.com"/>
 		<property name="birthDate" value="1983/02/09"/>
 		<property name="phone" value="676554311"/>
-		<property name="dni" value="34567895C"/>
+		<property name="dni" value="97400390J"/>
 		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
 		<property name="photo" value="images/anonymous.png"/>
 		<property name="userAccount" ref="userAccount5"/>
@@ -287,6 +291,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="en"/>
 	</bean>
 	
 	<bean id="user4" class="domain.User">
@@ -307,6 +312,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="es"/>
 	</bean>
 	
 	<bean id="user5" class="domain.User">
@@ -327,6 +333,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="en"/>
 	</bean>
 	
 	<bean id="user6" class="domain.User">
@@ -347,6 +354,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="es"/>
 	</bean>
 	
 	<bean id="user7" class="domain.User">
@@ -367,6 +375,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="en"/>
 	</bean>
 		
 	<bean id="moderator1" class="domain.User">
@@ -387,6 +396,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="localePreferences" value="es"/>
 	</bean>
 	
 	<!-- Vehicle -->

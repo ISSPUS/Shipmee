@@ -64,24 +64,25 @@
 							</h4>
 						</div>
 						<div class="col-xs-12">
-							<h5 class="offer-profile-info">Ciudad:Sevilla</h5>
+							<h5 class="offer-profile-info"><spring:message code="shipment.origin" />: <a>${shipmentOfferRow.shipment.origin}</a></h5>
+							<h5 class="offer-profile-info"><spring:message code="shipment.destination" />: <a>${shipmentOfferRow.shipment.destination}</a></h5>
 						</div>
 						<div class="col-xs-12">
 							<h5 class="offer-profile-info">
 								<jstl:if test="${shipmentOfferRow.acceptedBySender}">
 									<p>
-										<b><spring:message code="shipmentOffer.accepted" /></b>
+										<b><spring:message code="shipmentOffer.status" />: <span style="color: #58e19d"><spring:message code="shipmentOffer.accepted" /></span></b>
 									</p>
 								</jstl:if>
 								<jstl:if test="${shipmentOfferRow.rejectedBySender}">
 									<p>
-										<b><spring:message code="shipmentOffer.rejected" /></b>
+										<b><spring:message code="shipmentOffer.status" />: <span style="color: #ff8686"><spring:message code="shipmentOffer.rejected" /></span></b>
 									</p>
 								</jstl:if>
 								<jstl:if
 									test="${!shipmentOfferRow.rejectedBySender && !shipmentOfferRow.acceptedBySender}">
 									<p>
-										<b><spring:message code="shipmentOffer.pending" /></b>
+										<b><spring:message code="shipmentOffer.status" />: <span style="color: #ffb66d"><spring:message code="shipmentOffer.pending" /></span></b>
 									</p>
 								</jstl:if>
 
@@ -89,8 +90,8 @@
 						</div>
 					</div>
 					<div class="col-xs-2 col-sm-3"
-						style="padding-top: 1.5%; font-size: 190%; text-align: center; vertical-align: middle;">
-								
+						style="padding-top: 1.5%; text-align: center; vertical-align: middle;">
+						<div style="font-size: 190%;">
 						<jstl:choose>
 							<jstl:when test="${!shipmentOfferRow.rejectedBySender && !shipmentOfferRow.acceptedBySender && currentUser.id != shipmentOfferRow.user.id}">
 							<span class="badge badge-shipmentoffer-price" style="background-color: #0b6a92;"><jstl:out
@@ -102,7 +103,8 @@
 								value="${shipmentOfferRow.amount}" />&#8364;</span>
 							</jstl:otherwise>
 						</jstl:choose>
-						
+						</div>
+						<div><a><spring:message code="master.page.comissions" /></a></div>
 					</div>
 					<div class="botones col-xs-10 col-sm-2 col-lg-3">
 						<div class="col-xs-12 profile-userbuttons"
@@ -131,7 +133,12 @@
 				<div class="row description-offer">
 					<div class="descipcion-offer-inside col-xs-12"
 						style="font-family: sans-serif; font-size: 130%;">
-						<spring:message code="${shipmentOfferRow.description}" />
+						<jstl:if test="${shipmentOfferRow.description == 'shipmentOffer.description.after.accept' }">
+							<spring:message code="${shipmentOfferRow.description}" />
+						</jstl:if>
+						<jstl:if test="${shipmentOfferRow.description != 'shipmentOffer.description.after.accept' }">
+							<jstl:out value="${shipmentOfferRow.description}" />
+						</jstl:if>
 					</div>
 				</div>
 			</div>

@@ -160,13 +160,15 @@
 				<form:label path="price" class="control-label col-md-2" for="price">
 					<spring:message code="shipment.price" />
 				</form:label>
-				<div class="col-md-8">
+				<div class="col-md-2">
 					<div class="inner-addon left-addon input-price">
 						<i class="glyphicon glyphicon-euro"></i>
 						<form:input path="price" class="form-control" id="price" min="0"
-							step="0.10" type="number" />
+							step="0.01" type="number" />
 					</div>
-					<form:errors class="error create-message-error" path="price" />
+				</div>
+				<div class="col-md-6">
+					<div><a><spring:message code="master.page.comission.must" /></a></div>
 				</div>
 			</div>
 			<div class="form-group">

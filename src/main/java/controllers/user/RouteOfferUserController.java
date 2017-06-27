@@ -72,6 +72,9 @@ public class RouteOfferUserController extends AbstractController {
 		result.addObject("userId", userId);
 		result.addObject("currentUser", currentUser);
 		result.addObject("route", route);
+		result.addObject("urlPage", "routeOffer/user/list.do?routeId=" + routeId 
+				+ "&userId=" + userId 
+				+ "&page=");
 
 		return result;
 	}

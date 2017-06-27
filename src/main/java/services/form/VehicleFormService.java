@@ -1,9 +1,11 @@
 package services.form;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import domain.User;
@@ -17,6 +19,8 @@ import utilities.ServerConfig;
 @Service
 @Transactional
 public class VehicleFormService {
+	
+	static Logger log = Logger.getLogger(ActorFormService.class);
 
 	// Supporting services ----------------------------------------------------
 
@@ -45,17 +49,30 @@ public class VehicleFormService {
 		return result;
 	}
 	
-	public Vehicle reconstruct(VehicleForm vehicleForm) {
+	public Vehicle reconstruct(VehicleForm vehicleForm, BindingResult binding) {
 		Vehicle result;
 		CommonsMultipartFile imageVehicleUpload = vehicleForm.getPicture();
-		String nameImgVehicle =null;
+		String nameImgVehicle = null;
+		boolean errorImg = false;
 		
 		if (imageVehicleUpload.getSize()>0){
 			try {
 				nameImgVehicle = ImageUpload.subirImagen(imageVehicleUpload,ServerConfig.getPATH_UPLOAD());
 
 			} catch (Exception e) {
-			
+				log.error(e, e.getCause());
+				errorImg = true;
+				switch (e.getMessage()) {
+				case "message.error.imageUpload.incompatibleType":
+					this.addBinding(binding, false, "picture", "message.error.imageUpload.incompatibleType", null);
+					break;
+				case "message.error.imageUpload.tooBig":
+					this.addBinding(binding, false, "picture", "message.error.imageUpload.tooBig", null);
+					break;
+				default:
+					this.addBinding(binding, false, "picture", "message.error.imageUpload.others", null);
+					break;
+				}
 			}
 		}
 		
@@ -66,24 +83,24 @@ public class VehicleFormService {
 			result.setColor(vehicleForm.getColor());
 			result.setModel(vehicleForm.getModel());
 			
-			Assert.notNull(nameImgVehicle, "message.error.imageUpload.notNull");
-
-			result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
+			this.addBinding(binding, nameImgVehicle != null || errorImg, "picture", "message.error.imageUpload.notNull", null);
+			if(nameImgVehicle != null)
+				result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
 			
 			
-		} else if(vehicleForm.getVehicleId() != 0) {			
+		} else if(vehicleForm.getVehicleId() != 0) {
 			result = vehicleService.findOne(vehicleForm.getVehicleId());
-			User user = userService.findByPrincipal();
+			//User user = userService.findByPrincipal();
 			
 			result.setBrand(vehicleForm.getBrand());
 			result.setColor(vehicleForm.getColor());
 			result.setModel(vehicleForm.getModel());
 			
-			Assert.notNull(nameImgVehicle, "message.error.imageUpload.notNull");
+			this.addBinding(binding, errorImg || (!errorImg && result.getPicture() != null), "picture", "message.error.imageUpload.notNull", null);
+			if(nameImgVehicle != null)
+				result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
 
-			result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
-
-			result.setUser(user);
+			//result.setUser(user);
 
 		} else {
 			result = null;
@@ -107,5 +124,11 @@ public class VehicleFormService {
 		result.setVehicleId(vehicle.getId());
 
 		return result;
+	}
+	
+	private void addBinding(Errors errors, boolean mustBeTrue, String field, String validationError, Object[] other){
+		if (!mustBeTrue){
+			errors.rejectValue(field, validationError, other, "");
+		}
 	}
 }

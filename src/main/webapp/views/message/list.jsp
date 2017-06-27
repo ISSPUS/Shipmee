@@ -84,12 +84,12 @@
 
 											<jstl:choose>
 												<jstl:when test="${infoMessages eq 'messages.received'}">
-													<a href="#" class="pull-left"> <img
+													<a href="user/profile.do?userId=${messageRow.sender.id}" class="pull-left"> <img
 														src="${messageRow.sender.photo}" class="media-photo"></a>
 
 												</jstl:when>
 												<jstl:otherwise>
-													<a href="#" class="pull-left"> <img
+													<a href="user/profile.do?userId=${messageRow.recipient.id}" class="pull-left"> <img
 														src="${messageRow.recipient.photo}" class="media-photo"></a>
 
 
@@ -124,6 +124,14 @@
 												<p class="summary">
 													<jstl:out value="${messageRow.body}"></jstl:out>
 												</p>
+												
+												<jstl:if test="${infoMessages eq 'messages.received'}">
+												<a href="message/actor/create.do?userId=${messageRow.sender.id}&subject=RE: ${messageRow.subject}">
+												<span class="btn  btn-primary summary pull-right"> 
+												<span class="glyphicon glyphicon-send"></span>
+												<spring:message code="messages.reply" />
+												</span></a>
+												</jstl:if>
 											</div>
 										</div>
 									</td>

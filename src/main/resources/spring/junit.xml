@@ -13,4 +13,14 @@
 	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 	
+	<import resource="config/i18n-l10n-junit.xml" />
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames" ref="messages" />
+		<property name="defaultEncoding" value="ISO-8859-1" />
+		<property name="fallbackToSystemLocale" value="false" />
+<!-- 		<property name="useCodeAsDefaultMessage" value="true" />
+ -->	</bean>
+	
 </beans>

@@ -11,12 +11,13 @@
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script async type="text/javascript" src="scripts/moment.min.js"></script>
 <script async type="text/javascript" src="scripts/datetimepicker.min.js"></script>
-<head>
+<script async type="text/javascript" src="scripts/es.min.js"></script>
 
+<head>
 
 </head>
 
- <body>
+<body>
 
 <div id="headerwrap">
 	    <div class="container">
@@ -132,7 +133,13 @@
 	
 	google.maps.event.addDomListener(window, 'load', initialize);
 	
-	
+	$(function() {
+		$('#datetimepicker1').datetimepicker({
+			viewMode : 'days',
+			locale: 'es',
+			format : 'DD/MM/YYYY'
+		});
+	});
 	
 	
 
@@ -161,16 +168,6 @@ $('.btn-toggle').click(function() {
 });
 
 
-
-$(function() {
-	$('#datetimepicker1').datetimepicker({
-		viewMode : 'days',
-		format : 'DD/MM/YYYY'
-	});
-});
-
       
-</script>
-</body>
-	
-	
+</script>	
+</body>	

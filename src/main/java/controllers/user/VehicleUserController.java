@@ -87,12 +87,14 @@ public class VehicleUserController extends AbstractController {
 	public ModelAndView save(@Valid VehicleForm vehicleForm, BindingResult binding) {
 		ModelAndView result;
 		String messageError;
+		
+		// This method add binding errors!. Don't move after check binding if
+		Vehicle vehicle = vehicleFormService.reconstruct(vehicleForm, binding);
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(vehicleForm);
 		} else {
 			try {
-				Vehicle vehicle = vehicleFormService.reconstruct(vehicleForm);
 				vehicleService.save(vehicle);
 				
 				result = new ModelAndView("redirect:list.do");

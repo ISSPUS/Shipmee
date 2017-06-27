@@ -149,7 +149,12 @@
 											<br/>
 											
 												<i class="demo-icon icon-package-1">&#xe802;&nbsp;</i><spring:message code="shipment.itemSize" />: 
-												<span class="titles-info">${shipment.itemSize}</span>
+												<span class="titles-info">
+													<jstl:if test="${shipment.itemSize == 'S'}"><spring:message code="shipment.sizeS"/></jstl:if>
+													<jstl:if test="${shipment.itemSize == 'M'}"><spring:message code="shipment.sizeM"/></jstl:if>
+													<jstl:if test="${shipment.itemSize == 'L'}"><spring:message code="shipment.sizeL"/></jstl:if>
+													<jstl:if test="${shipment.itemSize == 'XL'}"><spring:message code="shipment.sizeXL"/></jstl:if>
+												</span>
 											</div>
 											
 										</div>
@@ -190,10 +195,10 @@
 										<div class="row info1 col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
 											<div class="col-sm-12">
-												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.price" />: 
+												<!-- <i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.price" />: -->
 												<span class="titles-info-price">${shipment.price}&#8364;</span>
+												<a><spring:message code="master.page.comissions" /></a>
 												<br/>
-
 											</div>
 	
 											
@@ -208,10 +213,15 @@
 
 								<div class="row info1 col-xs-12 col-sm-12 text-center" style="margin-bottom:1%;">
 											
-										<jstl:if test="${shipment.creator != user}">
+										<jstl:if test="${shipment.creator != user && user.isVerified}">
 											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
 											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
+										
+										</jstl:if>
+										<jstl:if test="${shipment.creator != user && !user.isVerified}">
+											
+											<a href="user/user/edit.do"><spring:message code="message.error.shipmentOffer.verifiedCarrier.extended" /></a>
 										
 										</jstl:if>
 										
@@ -221,7 +231,7 @@
 								
 					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
 						
-						<jstl:if test="${shipment.creator != user}">
+						<jstl:if test="${shipment.creator != user && user.isVerified}">
 						<button type="submit" class="btn button-view btn-primary"
 							onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-plus-circle"></span>

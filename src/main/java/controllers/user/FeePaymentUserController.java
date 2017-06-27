@@ -1,6 +1,7 @@
 package controllers.user;
 
 
+import java.time.LocalDateTime;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -135,7 +136,15 @@ public class FeePaymentUserController extends AbstractController {
 				result = new ModelAndView(redirect+feePaymentForm.getId());
 			} catch (Throwable oops) {
 				log.error(oops);
-				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");
+				LocalDateTime now = LocalDateTime.now();
+				if(feePaymentForm.getCreditCard().getExpirationMonth() < now.getMonthValue() &&
+						feePaymentForm.getCreditCard().getExpirationYear() == now.getYear()){
+					System.out.println(now.getMonthValue());
+					result = createEditModelAndView(feePaymentForm, "feePayment.commit.error.month");
+				}else{
+					result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");
+				}
+				
 			}
 		}
 

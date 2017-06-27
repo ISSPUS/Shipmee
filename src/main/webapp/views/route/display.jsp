@@ -109,7 +109,7 @@
 										
 										<div class="row titles-details"><i
 									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="route.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><span class="titles-info">${route.origin}</span></a>&nbsp;&nbsp;<i
-									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="route.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><span class="titles-info">${route.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png"></div>
+									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="route.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.destination}"><span class="titles-info">${route.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png"></div>
 										
 										</div>
 						
@@ -134,7 +134,9 @@
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
 											<div class="col-xs-11">
 											
-												<i class="glyphicon glyphicon-road">&nbsp;</i>Vehicle: 
+												<jstl:if test="${not empty route.vehicle}">		
+												<div class="vehiclePart">
+												<i class="glyphicon glyphicon-road">&nbsp;</i><spring:message code="route.vehicle"/>: 
 												<span class="titles-info">${route.vehicle.brand} - ${route.vehicle.model}</span>
 												<br/>
 
@@ -159,7 +161,8 @@
 														</div>
 													</div>
 												</div>
-												
+												</div>
+												</jstl:if>
 											<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
 												<span class="titles-info">
 													<jstl:if test="${route.itemEnvelope == 'Both'}">
@@ -213,14 +216,19 @@
                                     <span class="custom-control-indicator"></span>
                                 </label>
                             </td>
-                            <td class="tabla-tam">${value.size}</td>
+                            <td class="tabla-tam">                
+                            	<jstl:if test="${value.size == 'S'}"><span title="<spring:message code="shipment.sizeS"/>">${value.size}</span></jstl:if>
+								<jstl:if test="${value.size == 'M'}"><span title="<spring:message code="shipment.sizeM"/>">${value.size}</span></jstl:if>
+								<jstl:if test="${value.size == 'L'}"><span title="<spring:message code="shipment.sizeL"/>">${value.size}</span></jstl:if>
+								<jstl:if test="${value.size == 'XL'}"><span title="<spring:message code="shipment.sizeXL"/>">${value.size}</span></jstl:if>
+                            </td>
                             <td class="tabla-precio">${value.price}&#8364;
-                         
                         </tr>
 					</jstl:forEach>
      
                     </tbody>
  					 </table>
+ 					 <div class="text-center"><a><spring:message code="master.page.comissions" /></a></div>
 					
 					<div class="rfecha separador-final"></div>
 

@@ -69,15 +69,15 @@ public class PayPal {
 
 
 		if (receiverEmail != null && !receiverEmail.equals("")) {
-			rec.setPrimary(true);
-			
-			Receiver rec2 = new Receiver();
-			rec2.setAmount(total - commission);
-			rec2.setEmail(receiverEmail);
-			rec2.setPrimary(false);
-			receiver.add(rec2);
-			payRequest.setActionType("PAY_PRIMARY");	// En caso de querer pagar a la empresa y dejar el pago al usuario final autorizado
-			payRequest.setFeesPayer("PRIMARYRECEIVER");
+//			rec.setPrimary(true);
+//			
+//			Receiver rec2 = new Receiver();
+//			rec2.setAmount(total - commission);
+//			rec2.setEmail(receiverEmail);
+//			rec2.setPrimary(false);
+//			receiver.add(rec2);
+//			payRequest.setActionType("PAY_PRIMARY");	// En caso de querer pagar a la empresa y dejar el pago al usuario final autorizado
+//			payRequest.setFeesPayer("PRIMARYRECEIVER");
 
 		}
 		

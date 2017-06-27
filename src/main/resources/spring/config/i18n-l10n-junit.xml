@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd 
+	">
+
+	<util:list id="messages">
+		<value>file:src/main/webapp/views/master-page/messages</value>
+		<value>file:src/main/webapp/views/misc/messages</value>
+		<value>file:src/main/webapp/views/security/messages</value>
+		<value>file:src/main/webapp/views/welcome/messages</value>
+
+		<value>file:src/main/webapp/views/route/messages</value>
+		<value>file:src/main/webapp/views/routeOffer/messages</value>
+		<value>file:src/main/webapp/views/sizePrice/messages</value>
+		<value>file:src/main/webapp/views/shipment/messages</value>
+		<value>file:src/main/webapp/views/shipmentOffer/messages</value>
+		<value>file:src/main/webapp/views/alert/messages</value>
+		<value>file:src/main/webapp/views/message/messages</value>
+		<value>file:src/main/webapp/views/vehicle/messages</value>
+		<value>file:src/main/webapp/views/user/messages</value>
+		<value>file:src/main/webapp/views/rating/messages</value>
+		<value>file:src/main/webapp/views/complaint/messages</value>
+		<value>file:src/main/webapp/views/feepayment/messages</value>
+		<value>file:src/main/webapp/views/fundTransferPreference/messages</value>
+		
+		<value>file:src/main/webapp/views/about/messages</value>
+		<value>file:src/main/webapp/views/userGeneralTerms/messages</value>
+		<value>file:src/main/webapp/views/passwordRecovery/messages</value>
+		<value>file:src/main/webapp/views/userCookies/messages</value>
+
+	</util:list>
+
+</beans>

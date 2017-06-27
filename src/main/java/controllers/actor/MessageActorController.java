@@ -43,7 +43,7 @@ public class MessageActorController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam (required=false, defaultValue="0") String userId) {
+	public ModelAndView create(@RequestParam (required=false, defaultValue="0") String userId , @RequestParam (required=false, defaultValue="") String subject) {
 		ModelAndView result;
 		MessageFormService messageForm;
 		Message message;
@@ -55,6 +55,10 @@ public class MessageActorController extends AbstractController {
 		if(!userId.equals("0")) {
 			recipient = actorService.findOne(new Integer(userId));
 			messageForm.setRecipient(recipient.getUserAccount().getUsername());
+		}
+		
+		if(!subject.isEmpty()){
+			messageForm.setSubject(subject);
 		}
 		
 		result = createEditModelAndView(messageForm);

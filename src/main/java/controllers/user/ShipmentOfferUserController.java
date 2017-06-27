@@ -72,6 +72,9 @@ public class ShipmentOfferUserController extends AbstractController {
 		result.addObject("userId", userId);
 		result.addObject("currentUser", currentUser);
 		result.addObject("shipment", shipment);
+		result.addObject("urlPage", "shipmentOffer/user/list.do?shipmentId=" + shipmentId 
+				+ "&userId=" + userId 
+				+ "&page=");
 
 		return result;
 	}

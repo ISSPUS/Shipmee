@@ -23,6 +23,15 @@
 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/Shipmee" />
 		<property name="user" value="shipmee-user" />
 		<property name="password" value="ACME-Us3r-P@ssw0rd" />
+		<!-- Pool properties -->
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="20" />
+		<property name="acquireIncrement" value="1" />
+		<property name="maxStatements" value="50" />
+		<property name="idleConnectionTestPeriod" value="3000" />
+		<property name="loginTimeout" value="300" />
+		<property name="testConnectionOnCheckout" value="true" />
+		<property name="preferredTestQuery" value="select 1;" />
 	</bean>
 
 	<!-- JPA -->

@@ -56,6 +56,7 @@ public class ActorFormService {
 			result = this.createFromActor(actorService.findByPrincipal());
 		}else{
 			result = new ActorForm();
+			result.setLocalePreferences("es");
 		}
 		
 		return result;
@@ -73,6 +74,7 @@ public class ActorFormService {
 		res.setDni(a.getDni());
 		res.setUserName(a.getUserAccount().getUsername());
 		res.setId(a.getId());
+		res.setLocalePreferences(a.getLocalePreferences());
 		
 		
 		return res;
@@ -141,12 +143,19 @@ public class ActorFormService {
 				
 			}
 			
+			if(actorForm.getDni()!=null && !actorForm.getDni().equals("")){
+				// Password modified
+				this.addBinding(binding, userService.checkDNI(actorForm.getDni()),
+						"dni", "user.edit.profile.dni.wrongPattern", null);
+				
+			}
+			
 			if(!actorForm.getUserName().equals(actActor.getUserAccount().getUsername())){
 				// UserName modified
 				this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
 			}
 			
-			if (actorService.checkAuthority(Authority.USER)){
+			if (actorService.checkAuthority(Authority.USER) && !binding.hasErrors()){
 				// Registry User
 				User res;
 				UserAccount uAccount;
@@ -160,33 +169,53 @@ public class ActorFormService {
 				res.setBirthDate(actorForm.getBirthDate());
 				res.setPhone(actorForm.getPhone());
 				res.setDni(actorForm.getDni());
+				res.setLocalePreferences(actorForm.getLocalePreferences());
 				String nameImgDni = null;
 				String nameImgProfile = null;
 				
 				CommonsMultipartFile imageProfileUpload = actorForm.getPhoto();
 				CommonsMultipartFile imageDniUpload = actorForm.getDniPhoto();
 				
-				if (!binding.hasErrors()) {
+				if (imageProfileUpload.getSize() > 0) {
+					try {
+						nameImgProfile = ImageUpload.subirImagen(imageProfileUpload, ServerConfig.getPATH_UPLOAD());
 
-					if (imageProfileUpload.getSize() > 0) {
-						try {
-							nameImgProfile = ImageUpload.subirImagen(imageProfileUpload, ServerConfig.getPATH_UPLOAD());
-
-						} catch (Exception e) {
-							log.error(e, e.getCause());
-						}
-						Assert.notNull(nameImgProfile, "error.upload.image");
 						res.setPhoto(ServerConfig.getURL_IMAGE() + nameImgProfile);
-
-					}
-					if (imageDniUpload.getSize() > 0) {
-						try {
-							nameImgDni = ImageUpload.subirImagen(imageDniUpload, ServerConfig.getPATH_UPLOAD());
-						} catch (Exception e) {
-							log.error(e, e.getCause());
+					} catch (Exception e) {
+						log.error(e, e.getCause());
+						switch (e.getMessage()) {
+						case "message.error.imageUpload.incompatibleType":
+							this.addBinding(binding, false, "photo", "message.error.imageUpload.incompatibleType", null);
+							break;
+						case "message.error.imageUpload.tooBig":
+							this.addBinding(binding, false, "photo", "message.error.imageUpload.tooBig", null);
+							break;
+						default:
+							this.addBinding(binding, false, "photo", "message.error.imageUpload.others", null);
+							break;
 						}
-						Assert.notNull(nameImgDni, "error.upload.image");
+					}
+				}
+
+				if (imageDniUpload.getSize() > 0) {
+					try {
+						nameImgDni = ImageUpload.subirImagen(imageDniUpload, ServerConfig.getPATH_UPLOAD());
+						
 						res.setDniPhoto(ServerConfig.getURL_IMAGE() + nameImgDni);
+					} catch (Exception e) {
+						log.error(e, e.getCause());
+						switch (e.getMessage()) {
+						case "message.error.imageUpload.incompatibleType":
+							this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.incompatibleType", null);
+							break;
+						case "message.error.imageUpload.tooBig":
+							this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.tooBig", null);
+							break;
+						default:
+							this.addBinding(binding, false, "dniPhoto", "message.error.imageUpload.others", null);
+							break;
+						}
+					}
 					}
 
 					uAccount.setUsername(actorForm.getUserName());
@@ -197,11 +226,9 @@ public class ActorFormService {
 						uAccount = userAccountService.encodePassword(uAccount);
 					}
 					res.setUserAccount(uAccount);
-				}
 				
 				return res;
 			}else{
-				Assert.notNull(null, "Edición de usuarios no Authority.USER no implementado");
 				return null;
 			}
 		}

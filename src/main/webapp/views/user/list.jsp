@@ -161,7 +161,7 @@
 												</span>
 
 												<p class="summary">
-													<jstl:out value="${userRow.dni}"></jstl:out>
+													NIF: <jstl:out value="${userRow.dni}"></jstl:out>
 													
 													
 																										

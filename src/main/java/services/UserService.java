@@ -3,7 +3,17 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
+import org.iban4j.Bic;
+import org.iban4j.BicFormatException;
+import org.iban4j.BicUtil;
+import org.iban4j.IbanFormatException;
+import org.iban4j.IbanUtil;
+import org.iban4j.InvalidCheckDigitException;
+import org.iban4j.UnsupportedCountryException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +34,9 @@ import security.UserAccountService;
 @Service
 @Transactional
 public class UserService {
+	
+	static Logger log = Logger.getLogger(UserService.class);
+
 	//Managed repository -----------------------------------------------------
 	
 	@Autowired
@@ -70,6 +83,7 @@ public class UserService {
 		res.setPhone("");
 		res.setPhoto("images/anonymous.png");
 		res.setPasswordResetToken("");
+		res.setLocalePreferences("es");
 		
 		return res;
 	}
@@ -89,6 +103,9 @@ public class UserService {
 		Assert.notNull(user);
 		
 		this.checkUser(user);
+		if(user.getDni()!=null && !user.getDni().equals("")){
+			Assert.isTrue(this.checkDNI(user.getDni()), "user.edit.profile.dni.wrongPattern");
+		}
 		
 		user = userRepository.save(user);
 		
@@ -96,7 +113,68 @@ public class UserService {
 	}
 	
 	//Other business methods -------------------------------------------------
+	
+	public boolean checkDNI(String dni) {
+	 
+     
+        String letraMayuscula = ""; //Guardaremos la letra introducida en formato mayúscula
+             
+        // Aquí excluimos cadenas distintas a 9 caracteres que debe tener un dni y también si el último caracter no es una letra
+        if(dni.length() != 9 || Character.isLetter(dni.charAt(8)) == false ) {
+            return false;
+        }
+ 
+        // Al superar la primera restricción, la letra la pasamos a mayúscula
+        letraMayuscula = (dni.substring(8)).toUpperCase();
+ 
+        // Por último validamos que sólo tengo 8 dígitos entre los 8 primeros caracteres y que la letra introducida es igual a la de la ecuación
+        // Llamamos a los métodos privados de la clase soloNumeros() y letraDNI()
+        if(soloNumeros(dni) == true && letraDNI(dni).equals(letraMayuscula)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+ 
+    private boolean soloNumeros(String dni) {
+ 
+            int i, j = 0;
+            String numero = ""; // Es el número que se comprueba uno a uno por si hay alguna letra entre los 8 primeros dígitos
+            String miDNI = ""; // Guardamos en una cadena los números para después calcular la letra
+            String[] unoNueve = {"0","1","2","3","4","5","6","7","8","9"};
+ 
+            for(i = 0; i < dni.length() - 1; i++) {
+                numero = dni.substring(i, i+1);
+ 
+                for(j = 0; j < unoNueve.length; j++) {
+                    if(numero.equals(unoNueve[j])) {
+                        miDNI += unoNueve[j];
+                    }
+                }
+            }
+ 
+            if(miDNI.length() != 8) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+ 
+     private String letraDNI(String dni) {
 
+        int miDNI = Integer.parseInt(dni.substring(0,8));
+        int resto = 0;
+        String miLetra = "";
+        String[] asignacionLetra = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
+ 
+        resto = miDNI % 23;
+ 
+        miLetra = asignacionLetra[resto];
+ 
+        return miLetra;
+    }
 	
 	private void checkUser(User a){
 		boolean isAdmin;
@@ -135,7 +213,7 @@ public class UserService {
 				fundTransferPreference = a.getFundTransferPreference();
 				if(fundTransferPreference.getPaypalEmail() != null &&
 						fundTransferPreference.getPaypalEmail().equals("")){
-					Assert.isTrue(false,"You must fill in the information of your PayPal.");
+					Assert.isTrue(false,"message.error.fundTransferPreference.fillPayPal");
 				} else if((fundTransferPreference.getCountry() != null &&
 						fundTransferPreference.getCountry().equals("")) ||
 						(fundTransferPreference.getAccountHolder() != null &&
@@ -146,7 +224,7 @@ public class UserService {
 						fundTransferPreference.getIBAN().equals("")) ||
 						(fundTransferPreference.getBIC() != null &&
 						fundTransferPreference.getBIC().equals(""))) {
-					Assert.isTrue(false,"You must fill in the information of your bank account.");
+					Assert.isTrue(false,"message.error.fundTransferPreference.fillBankAccount");
 				}
 			}
 		}else{
@@ -292,4 +370,19 @@ public class UserService {
 		this.save(dbUser);
 	}
 
+	
+	public Boolean IBANBICValidator(String IBAN, String BIC){
+		Boolean result = false;
+		
+		try{
+			IbanUtil.validate(IBAN);
+			BicUtil.validate(BIC);
+			
+			result = true;
+		}catch (IbanFormatException | InvalidCheckDigitException | UnsupportedCountryException | BicFormatException  e) {
+			log.error("Error al validar el IBAN O BIC", e);
+		}
+		
+		return result;
+	}
 }
