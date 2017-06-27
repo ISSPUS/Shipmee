@@ -63,18 +63,28 @@ public class FundTransferPreferenceUserController extends AbstractController {
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(form);
 		} else {
-			try {
-				user = fundTransferPreferenceFormService.reconstruct(form);
-				userService.save(user);
-				
-				result = new ModelAndView("redirect:../../user/profile.do");
-			} catch (Throwable oops) {
-				log.error(oops.getMessage());
-				messageError = "fundTransferPreference.commit.error";
-				if(oops.getMessage().contains("message.error")){
-					messageError=oops.getMessage();
+			if (userService.IBANBICValidator(form.getIBAN(), form.getBIC())){
+				try {
+					user = fundTransferPreferenceFormService.reconstruct(form);
+					userService.save(user);
+					
+					result = new ModelAndView("redirect:../../user/profile.do");
+				} catch (Throwable oops) {
+					log.error(oops.getMessage());
+					messageError = "fundTransferPreference.commit.error";
+					if(oops.getMessage().contains("message.error")){
+						messageError=oops.getMessage();
+					}
+					result = createEditModelAndView(form, messageError);				
 				}
-				result = createEditModelAndView(form, messageError);				
+			}else{
+				if(form.getIBAN().contains(" ")){
+					messageError = "message.error.fundTransferPreference.ibanbic.blankspace.error";
+				}else{
+					messageError = "message.error.fundTransferPreference.ibanbic.error";
+				}
+				
+				result = createEditModelAndView(form, messageError);
 			}
 		}
 
