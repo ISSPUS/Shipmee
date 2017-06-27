@@ -181,16 +181,18 @@
 	</div>
 
 	<!-- FEEDBACK -->	
-	<a title="Feedback" class="cd-popup-trigger button glyphicon glyphicon-bullhorn" target="_blank" href="https://goo.gl/forms/slX7WVCkNk4Fo39m2"
+	<a title="Feedback" class="cd-popup-trigger button glyphicon glyphicon-bullhorn" data-toggle="modal" data-target="#myFeedback" href="#feedback"
 		style="z-index: 5;"></a>
-	<!--<a title="Feedback" class="cd-popup-trigger button glyphicon glyphicon-bullhorn" data-toggle="modal" data-target="" href="https://docs.google.com/forms/d/e/1FAIpQLSdVn-PiNkXWEMqI36uj_qnB5Lc5jL-4BSxkxuHC0eadYQLG2g/viewform?embedded=true"
-		style="z-index: 5;"></a>-->		
 	<!-- Modal -->
 	<div class="modal fade" id="myFeedback" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-
+				<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center"><spring:message
+											code="master.page.feedback.header" /></h4>
+      </div>
 				<div class="modal-body" style="height: 700px; padding: 0px;">
 					<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdVn-PiNkXWEMqI36uj_qnB5Lc5jL-4BSxkxuHC0eadYQLG2g/viewform?embedded=true" width="100%" height="100%">Cargando...</iframe>
 
