@@ -177,7 +177,8 @@ margin-top: 0px;
 			</center>
 		</jstl:if>
 
-		<div id="pagination" class="copyright">
+		<div id="pagination" class="copyright" style="
+    text-align: right;">
 
 			<script>
 				$('#pagination').bootpag({

@@ -635,3 +635,17 @@ Evita descuadre de formularios en movil
 	margin-right: 0px !important;
  
 }
+
+
+.frontera{
+	overflow-wrap: break-word; 
+	word-wrap: break-word; 
+	/* Adds a hyphen where the word breaks */ 
+	-ms-hyphens: auto; 
+	-moz-hyphens: auto; 
+	hyphens: auto;"
+}
+
+.pagination-center{
+	text-align: center;
+}

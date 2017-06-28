@@ -104,16 +104,16 @@
 								<div class="rfecha separador"></div><span class="cretaion-date media-meta pull-right"><fmt:formatDate value="${route.date}" pattern="dd/MM/yyyy HH:mm" /></span>
 								
 								<div class="row info-ruta">
-										<div class="col-xs-7 col-sm-9">
+										<div class="col-xs-12 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
 										
-										<div class="row titles-details"><i
+										<div class="row titles-details frontera"><i
 									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="route.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><span class="titles-info">${route.origin}</span></a>&nbsp;&nbsp;<i
 									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="route.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.destination}"><span class="titles-info">${route.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png"></div>
 										
 										</div>
 						
-										<div class="row col-xs-7 col-sm-9">
+										<div class="row col-xs-12 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.moments" /></h5>
 											<div class="info-salida col-sm-12" style="width: 100%">
 												
@@ -130,7 +130,7 @@
 										
 							
 									
-										<div class="row info1 col-xs-11 col-sm-9">
+										<div class="row info1 col-xs-12 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
 											<div class="col-xs-11">
 											
@@ -154,7 +154,7 @@
 															<div class="modal-body">
 				
 				
-																<img src="${route.vehicle.picture}">
+																<img class="imagen-envio" src="${route.vehicle.picture}">
 				
 															</div>
 				
@@ -182,7 +182,7 @@
 											
 										</div>
 										
-										<div class="row info1 col-xs-7 col-sm-9">
+										<div class="row info1 col-xs-12 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
 											<div class="col-sm-12">
 												

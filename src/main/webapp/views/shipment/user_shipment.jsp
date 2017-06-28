@@ -211,7 +211,7 @@
 
 		</div>
 		
-		<div id="pagination" class="copyright">
+		<div id="pagination" class="copyright pagination-center">
 			<script>
 				$('#pagination').bootpag({
 					total : <jstl:out value="${total_pages}"></jstl:out>,

@@ -19,7 +19,6 @@
 
 <link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
 
-
 <div class="blue-barra"
 	style="padding-top: 0.75%; padding-bottom: 0.75%;">
 	<div class="container">
@@ -45,16 +44,16 @@
 			<div class="col-xs-12 col-lg-9 offer-shipment"
 				style="float: none; margin: 0 auto;">
 				<div class="row perfil-info-offer">
-					<div class="img-perfil-offer col-xs-4 col-sm-3 col-lg-2">
+					<div class="img-perfil-offer col-xs-4 col-sm-2 col-lg-2">
 						<jstl:if test="${routeOfferRow.user.photo == null}">
 							<img
 								src="https://www.beautifulpeople.com/cdn/beautifulpeople/images/default_profile/signup_female.png"
-								class="img-thumbnail  profile-offer-img ">						
+								class="img-thumbnail  profile-offer-img" style="margin-top: 21%;">						
 						</jstl:if>
 						<jstl:if test="${routeOfferRow.user.photo != null}">
 							<img
 								src="${routeOfferRow.user.photo}"
-								class="img-thumbnail  profile-offer-img ">					
+								class="img-thumbnail  profile-offer-img" style="margin-top: 21%;">					
 						</jstl:if>
 					</div>
 					<div class="data-perfil col-xs-8 col-sm-4">
@@ -66,7 +65,7 @@
 								</a>
 							</h4>
 						</div>
-						<div class="col-xs-12">
+						<div class="col-xs-12 frontera">
 							<h5 class="offer-profile-info"><spring:message code="route.origin" />: <a>${routeOfferRow.route.origin}</a></h5>
 							<h5 class="offer-profile-info"><spring:message code="route.destination" />: <a>${routeOfferRow.route.destination}</a></h5>
 						</div>
@@ -92,7 +91,7 @@
 							</h5>
 						</div>
 					</div>
-					<div class="col-xs-2 col-sm-3"
+					<div class="col-xs-11 col-sm-3"
 						style="padding-top: 1.5%;text-align: center; vertical-align: middle;">
 						<div style="font-size: 190%;">
 						<jstl:choose>
@@ -111,8 +110,8 @@
 						
 					</div>
 
-					<div class="botones col-xs-10 col-sm-2 col-lg-3">
-						<div class="col-xs-12 profile-userbuttons"
+					<div class="botones col-xs-11 col-sm-2 col-lg-3" style="padding-top: 1.5%;">
+						<div class="profile-userbuttons"
 							style="text-align: center;">
 							<jstl:if
 								test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier && currentUser.id != routeOfferRow.user.id}">
@@ -138,16 +137,17 @@
 				<hr>
 				<div class="row description-offer">
 					<div class="descipcion-offer-inside col-xs-12"
-						style="font-family: sans-serif; font-size: 130%;">
+						style="font-family: sans-serif; font-size: 14px;">
 						<jstl:out value="${routeOffer.description}" />
 					</div>
 				</div>
+				<hr>
 			</div>
 		</div>
 
 	</jstl:forEach>
 
-<div id="pagination" style="margin: auto;float: none" class="copyright">
+<div id="pagination" style="margin: auto;float: none" class="copyright pagination-center">
 
 	<script>
 		$('#pagination').bootpag({

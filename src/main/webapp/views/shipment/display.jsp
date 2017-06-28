@@ -101,14 +101,15 @@
 								<div class="rfecha separador"></div><span class="cretaion-date media-meta pull-right"><fmt:formatDate value="${shipment.date}" pattern="dd/MM/yyyy HH:mm" /></span>
 								
 								<div class="row info-ruta">
-									<div class="col-xs-7 col-sm-9">
+									<div class="col-xs-12 col-sm-9">
 																			
 										
 										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
 										
-										<div class="col-xs-7 col-sm-9 row titles-details" style="width: 100%">
-										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><span class="titles-info">${shipment.origin}</span></a>&nbsp;&nbsp;<i
-									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"><span class="titles-info">${shipment.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png"></div>
+										<div class="col-xs-7 col-sm-9 row titles-details frontera" style="width: 100%">
+										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><span class="titles-info">${shipment.origin}</span></a>&nbsp;&nbsp;
+										<i class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"><span class="titles-info">${shipment.destination}</span></a><img class="icon-maps" src="images/maps_64dp.png">
+										</div>
 										
 										
 									</div>
@@ -117,7 +118,7 @@
 										
 										
 
-										<div class="row col-xs-7 col-sm-9">
+										<div class="row col-xs-12 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.moments" /></h5>
 											<div class="info-salida col-sm-12 ">
 
@@ -130,7 +131,7 @@
 											</div>
 										</div>
 										
-										<div class="row info1 col-xs-11 col-sm-9">
+										<div class="row info1 col-xs-12 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
 											<div class="col-xs-11">
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
@@ -159,7 +160,7 @@
 											
 										</div>
 										
-										<div class="row info1 col-xs-7 col-sm-9">
+										<div class="row info1 col-xs-12 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.itemPicture" /></h5>
 													
 											
@@ -192,7 +193,7 @@
 
 						</div>
 										
-										<div class="row info1 col-xs-7 col-sm-9">
+										<div class="row info1 col-xs-12 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
 											<div class="col-sm-12">
 												<!-- <i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.price" />: -->
