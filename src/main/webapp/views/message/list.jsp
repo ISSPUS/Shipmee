@@ -164,27 +164,13 @@ margin-top: 0px;
 					</div>
 
 				</jstl:forEach>
-			</jstl:if>
-			
-		</div>
-
-
-		<jstl:if test="${fn:length(messages) ==0}">
-			<center>
-				<h2>
-					<spring:message code="messages.anything" />
-				</h2>
-			</center>
-		</jstl:if>
-
-		<div id="pagination" class="copyright" style="
-    text-align: right;">
+				<div id="pagination" class="copyright" style="text-align: center;">
 
 			<script>
 				$('#pagination').bootpag({
 					total : <jstl:out value="${total_pages}"></jstl:out>,
 					page : <jstl:out value="${p}"></jstl:out>,
-					maxVisible : 5,
+					maxVisible : 3,
 					leaps : true,
 					firstLastUse : true,
 					first : '<',
@@ -203,6 +189,20 @@ margin-top: 0px;
 			</script>
 
 		</div>
+			</jstl:if>
+			
+		</div>
+
+
+		<jstl:if test="${fn:length(messages) ==0}">
+			<center>
+				<h2>
+					<spring:message code="messages.anything" />
+				</h2>
+			</center>
+		</jstl:if>
+
+		
 
 	</div>
 

@@ -1,12 +1,14 @@
 package controllers.user;
 
 
-import java.util.Collection;
 
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -42,15 +44,20 @@ public class VehicleUserController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(required=false, defaultValue="1") int page) {
 		ModelAndView result;
-		Collection<Vehicle> vehicles;
-		
-		vehicles = vehicleService.findAllNotDeletedByUser();
+		Page<Vehicle> vehicles;
+		Pageable pageable;
+
+		pageable = new PageRequest(page - 1, 4);
+		vehicles = vehicleService.findAllNotDeletedByUser(pageable);
 		
 		result = new ModelAndView("vehicle/list");
-		result.addObject("vehicles", vehicles);
-
+		result.addObject("vehicles", vehicles.getContent());
+		result.addObject("p", page);
+		result.addObject("total_pages", vehicles.getTotalPages());
+		result.addObject("urlPage", "vehicle/user/list.do?page=");
+		
 		return result;
 	}
 

@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -117,14 +119,14 @@ public class VehicleService {
 
 	// Other business methods -------------------------------------------------
 	
-	public Collection<Vehicle> findAllNotDeletedByUser() {
-		Collection<Vehicle> result;
+	public Page<Vehicle> findAllNotDeletedByUser(Pageable page) {
+		Page<Vehicle> result;
 		User user;
 		
 		user = userService.findByPrincipal();
 
-		result = vehicleRepository.findAllNotDeletedByUserId(user.getId());
-
+		result = vehicleRepository.findAllNotDeletedByUserId(user.getId(),page);
+		
 		return result;
 	}
 }

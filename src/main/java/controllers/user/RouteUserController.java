@@ -1,6 +1,5 @@
 package controllers.user;
 
-import java.util.Collection;
 
 import javax.validation.Valid;
 
@@ -223,16 +222,17 @@ public class RouteUserController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(RouteForm routeForm, String message) {
 		ModelAndView result;
-		Collection<Vehicle> vehicles;
+		Page<Vehicle> vehicles;
 		User user;
-
-		vehicles = vehicleService.findAllNotDeletedByUser();
+		
+		Pageable page = new PageRequest(0, Integer.MAX_VALUE);
+		vehicles = vehicleService.findAllNotDeletedByUser(page);
 		user = userService.findByPrincipal();
 
 		result = new ModelAndView("route/edit");
 		result.addObject("routeForm", routeForm);
 		result.addObject("message", message);
-		result.addObject("vehicles", vehicles);
+		result.addObject("vehicles", vehicles.getContent());
 		result.addObject("user", user);
 
 		return result;
@@ -240,14 +240,15 @@ public class RouteUserController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(Route route, String message) {
 		ModelAndView result;
-		Collection<Vehicle> vehicles;
-
-		vehicles = vehicleService.findAllNotDeletedByUser();
+		Page<Vehicle> vehicles;
+		
+		Pageable page = new PageRequest(0, Integer.MAX_VALUE);
+		vehicles = vehicleService.findAllNotDeletedByUser(page);
 
 		result = new ModelAndView("route/search");
 		result.addObject("route", route);
 		result.addObject("message", message);
-		result.addObject("vehicles", vehicles);
+		result.addObject("vehicles", vehicles.getContent());
 
 		return result;
 	}

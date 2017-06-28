@@ -1,12 +1,14 @@
 package services;
 
-import java.util.Collection;
 
 import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -39,11 +41,12 @@ public class VehicleTest extends AbstractTest {
 	public void positiveListVehicle() {
 		authenticate("user2");
 
-		Collection<Vehicle> vehicles;
+		Page<Vehicle> vehicles;
+		Pageable page = new PageRequest(0, Integer.MAX_VALUE);
 
-		vehicles = vehicleService.findAllNotDeletedByUser();
+		vehicles = vehicleService.findAllNotDeletedByUser(page);
 
-		Assert.isTrue(vehicles.size() == 1);
+		Assert.isTrue(vehicles.getContent().size() == 1);
 
 		unauthenticate();
 	}

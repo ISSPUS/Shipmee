@@ -653,7 +653,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -752,7 +752,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -851,7 +851,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -950,7 +950,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1049,7 +1049,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1148,7 +1148,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1251,7 +1251,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1351,7 +1351,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1451,7 +1451,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1551,7 +1551,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1651,7 +1651,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1751,7 +1751,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1855,7 +1855,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1955,7 +1955,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();

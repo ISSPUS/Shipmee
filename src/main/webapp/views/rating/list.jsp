@@ -18,6 +18,7 @@
 	rel="stylesheet">
 
     <link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
+<script async src="scripts/jquery.bootpag.min.js"></script>
 
 <jstl:if test="${!empty ratings.content && userReceivedId > 0}">
 	<div class="blue-barra"
@@ -95,13 +96,13 @@
 
 </div>
 
-<div id="pagination" class="copyright">
+<div id="pagination" class="copyright" style="text-align: center;">
 
 	<script>
 		$('#pagination').bootpag({
 			total : <jstl:out value="${total_pages}"></jstl:out>,
 			page : <jstl:out value="${p}"></jstl:out>,
-			maxVisible : 5,
+			maxVisible : 4,
 			leaps : true,
 			firstLastUse : true,
 			first : '<',
