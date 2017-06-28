@@ -41,7 +41,7 @@ public class ComplaintModeratorController extends AbstractController {
 		ModelAndView result;
 		Page<Complaint> items;
 		Pageable pageable;
-		pageable = new PageRequest(page - 1, 5);
+		pageable = new PageRequest(page - 1, 3);
 
 		items = complaintService.findAllNotResolvedAndNotInvolved(pageable);
 
@@ -49,6 +49,7 @@ public class ComplaintModeratorController extends AbstractController {
 		result.addObject("complaints", items.getContent());
 		result.addObject("p", page);
 		result.addObject("total_pages", items.getTotalPages());
+		result.addObject("urlPage", "complaint/moderator/list.do?page=");
 
 		return result;
 	}
