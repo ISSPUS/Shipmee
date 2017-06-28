@@ -59,7 +59,7 @@ public class FeePaymentUserController extends AbstractController {
 		Pageable pageable;
 		String feePaymentsType;
 
-		pageable = new PageRequest(page - 1, 5);
+		pageable = new PageRequest(page - 1, 3);
 		allAccepted = (int) feePaymentService.findAllAcceptedByUser(pageable).getTotalElements();
 		allPending = (int) feePaymentService.findAllPendingByUser(pageable).getTotalElements();
 		allDenied = (int) feePaymentService.findAllRejectedByUser(pageable).getTotalElements();
@@ -83,6 +83,7 @@ public class FeePaymentUserController extends AbstractController {
 		result.addObject("p", page);
 		result.addObject("total_pages", items.getTotalPages());
 		result.addObject("feePaymentsType", feePaymentsType);
+		result.addObject("urlPage", "feepayment/user/list.do?type="+feePaymentsType+"&page=");
 
 		return result;
 	}
