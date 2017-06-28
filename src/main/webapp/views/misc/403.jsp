@@ -72,7 +72,7 @@
 		<div class="profile-userbuttons" style="margin: 2%;">
 
 			<button type="submit" class="btn btn-primary"
-				onclick="location.href = 'welcome/index.do';"
+				onclick = "window.location = document.location.href"
 				style="margin-bottom: 10px;">
 				<i class="glyphicon glyphicon-home"></i>
 				<spring:message code="error403.home" />
@@ -84,6 +84,7 @@
 			</button>
 
 		</div>
+		
 
 	</div>
 </div>
