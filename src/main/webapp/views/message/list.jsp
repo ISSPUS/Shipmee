@@ -91,7 +91,7 @@ margin-top: 0px;
 					<div class="row msg">
 						<div class=" col-xs-12 table-container panel panel-default">
 
-							<div class="row">
+							<div class="row" style="margin-top: 2%;">
 								<div class="col-xs-2 col-sm-1 col-md-1">
 									<jstl:choose>
 										<jstl:when test="${infoMessages eq 'messages.received'}">
@@ -141,7 +141,7 @@ margin-top: 0px;
 
 
 							</div>
-							<div class="row" style="padding: 2%">
+							<div class="row" style="padding: 2%; margin-top: 1%;">
 								<p class="ellipses"
 									style="overflow-wrap: break-word; word-wrap: break-word; /* Adds a hyphen where the word breaks */ -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto;">
 
@@ -149,13 +149,13 @@ margin-top: 0px;
 
 								</p>
 								<jstl:if test="${infoMessages eq 'messages.received'}">
-									<a
+									<div class="profile-userbuttons" style="text-align: right;"><a
 										href="message/actor/create.do?userId=${messageRow.sender.id}&subject=RE: ${messageRow.subject}">
-										<span class="btn  btn-primary summary pull-right"> <span
-											class="glyphicon glyphicon-send"></span> <spring:message
+										<span class="btn  btn-primary"> <span
+											class="glyphicon glyphicon-send"></span>&nbsp;<spring:message
 												code="messages.reply" />
 									</span>
-									</a>
+									</a></div>
 								</jstl:if>
 							</div>
 						
