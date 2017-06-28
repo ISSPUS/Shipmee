@@ -55,7 +55,7 @@ public class ShipmentFormService {
 	public Shipment reconstruct(ShipmentForm shipmentForm) {
 		Shipment result;
 		Date departureTime, maximumArriveTime;
-		String exceptionMessage = "";
+		String exceptionMessage = "message.error.imageUpload.notNull";
 		
 		departureTime = null;
 		maximumArriveTime = null;
