@@ -65,6 +65,10 @@
 	margin-top: 5%;
 	margin-bottom: 5%;
 }
+.alerts-buttons{
+	margin-top: 32px;
+	margin-bottom: 5%;
+}
 .caja{
 margin-bottom: 5%;
 }
@@ -90,7 +94,7 @@ margin-bottom: 5%;
 
 <div class="container caja">
 <div class="row">
-	<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
+	<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2" style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
 		<div class="text-center profile-userbuttons">
 			<button class="btn button-view" style="font-size: 20px;" onclick="location.href = 'vehicle/user/create.do';"><span class="fa fa-plus-circle"></span> <spring:message code="vehicle.add" /></button>
 			</div>
@@ -101,7 +105,7 @@ margin-bottom: 5%;
 	<jstl:choose>
 		<jstl:when test="${not empty vehicles}">
 			<jstl:forEach items="${vehicles}" var="vehicle">
-				<div class="row">
+				<div class="row" style="margin-right: 0px;">
 					<div
 						class=" col-xs-12 col-sm-10 col-md-6 col-lg-6 table-container panel panel-default">
 						<div class="row">
@@ -128,7 +132,7 @@ margin-bottom: 5%;
 								</div>
 							</div>
 							
-							<div class="col-xs-12 col-sm-2 col-md-4 col-lg-3"
+							<div
 								style="text-align: center;">
 								<div class="text-center profile-userbuttons alerts-buttons">
 									<button class="btn button-ok" onclick="location.href = 'vehicle/user/edit.do?vehicleId=${vehicle.id}';">
