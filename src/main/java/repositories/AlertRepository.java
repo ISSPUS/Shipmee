@@ -3,6 +3,8 @@ package repositories;
 import java.util.Collection;
 import java.util.Date;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,5 +20,5 @@ public interface AlertRepository extends JpaRepository<Alert, Integer> {
 	Collection<Alert> checkAlerts(String origin, String destination, Date date, String type);
 	
 	@Query("select a from Alert a where a.user.id = ?1")
-	Collection<Alert> getAlertsOfUser(int userId);
+	Page<Alert> getAlertsOfUser(int userId,Pageable page);
 }

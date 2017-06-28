@@ -1,11 +1,13 @@
 package controllers.user;
 
-import java.util.Collection;
 
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -38,14 +40,19 @@ public class AlertUserController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(required=false, defaultValue="1") int page) {
 		ModelAndView result;
-		Collection<Alert> alerts;
-		
-		alerts = alertService.getAlertsByPrincipal();
+		Page<Alert> alerts;
+		Pageable pageable;
+
+		pageable = new PageRequest(page - 1, 4);
+		alerts = alertService.getAlertsByPrincipal(pageable);
 		
 		result = new ModelAndView("alert/list");
-		result.addObject("alerts", alerts);
+		result.addObject("alerts", alerts.getContent());
+		result.addObject("p", page);
+		result.addObject("total_pages", alerts.getTotalPages());
+		result.addObject("urlPage", "alert/user/list.do?page=");
 
 		return result;
 	}

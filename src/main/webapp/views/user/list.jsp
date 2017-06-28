@@ -212,7 +212,7 @@
 														{
 															total : <jstl:out value="${total_pages}"></jstl:out>,
 															page : <jstl:out value="${p}"></jstl:out>,
-															maxVisible : 5,
+															maxVisible : 3,
 															leaps : true,
 															firstLastUse : true,
 															first : '<',

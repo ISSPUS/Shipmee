@@ -10,6 +10,8 @@ import java.util.Locale;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -154,10 +156,10 @@ public class AlertService {
 		}
 	}
 	
-	public Collection<Alert> getAlertsByPrincipal(){
-		Collection<Alert> result;
+	public Page<Alert> getAlertsByPrincipal(Pageable page){
+		Page<Alert> result;
 		
-		result = alertRepository.getAlertsOfUser(userService.findByPrincipal().getId());
+		result = alertRepository.getAlertsOfUser(userService.findByPrincipal().getId(),page);
 		
 		return result;
 	}

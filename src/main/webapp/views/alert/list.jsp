@@ -23,6 +23,7 @@
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-details.css" type="text/css">
+<script async src="scripts/jquery.bootpag.min.js"></script>
 
 <style>
 @font-face {
@@ -152,3 +153,29 @@ margin-bottom: 5%;
 </div>
 
 
+		<div id="pagination" class="copyright" style="
+    text-align: center;">
+
+			<script>
+				$('#pagination').bootpag({
+					total : <jstl:out value="${total_pages}"></jstl:out>,
+					page : <jstl:out value="${p}"></jstl:out>,
+					maxVisible : 3,
+					leaps : true,
+					firstLastUse : true,
+					first : '<',
+            last: '>',
+					wrapClass : 'pagination',
+					activeClass : 'active',
+					disabledClass : 'disabled',
+					nextClass : 'next',
+					prevClass : 'prev',
+					lastClass : 'last',
+					firstClass : 'first'
+				}).on('page', function(event, num) {
+					window.location.href = "${urlPage}" + num + "";
+					page = 1
+				});
+			</script>
+
+		</div>
