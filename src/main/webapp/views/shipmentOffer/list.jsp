@@ -129,7 +129,9 @@
 						</div>
 					</div>
 				</div>
+				<jstl:if test="${shipmentOfferRow.description != null}">
 				<hr>
+				</jstl:if>
 				<div class="row description-offer">
 					<div class="descipcion-offer-inside col-xs-12"
 						style="font-family: sans-serif; font-size: 14px;">
@@ -141,7 +143,14 @@
 						</jstl:if>
 					</div>
 				</div>
-				<hr>
+				<jstl:choose>
+					<jstl:when test="${shipmentOfferRow.description != null}">
+						<hr>
+					</jstl:when>
+					<jstl:otherwise>
+						<br>
+					</jstl:otherwise>
+				</jstl:choose>
 			</div>
 		</div>
 	</jstl:forEach>
