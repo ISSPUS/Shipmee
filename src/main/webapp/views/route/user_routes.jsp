@@ -204,7 +204,7 @@
 										</jstl:when>
 										<jstl:otherwise>
 											<p>
-												<spring:message code="shipment.results" />
+												<spring:message code="route.results" />
 											</p>
 										</jstl:otherwise>
 									</jstl:choose>
