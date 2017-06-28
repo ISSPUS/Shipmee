@@ -50,11 +50,18 @@
 				method="post" class="form-horizontal" role="form">
 
 				<form:hidden path="routeId" />
+				
+				<div class="text-center modal-content" style="padding:1%; border-color:#f1f3fa;">
+					<div>
+						<span title="<spring:message code="user.required"/>" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+						<span><spring:message code="user.required.info"/></span>
+					</div>
+				</div> <br/>
 
 				<div class="form-group">
 					<form:label path="origin" class="control-label col-md-2"
 						for="recipient">
-						<spring:message code="route.origin" />
+						<spring:message code="route.origin" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-8">
 						<form:input path="origin" class="form-control" id="origin"/>
@@ -65,7 +72,7 @@
 				<div class="form-group">
 					<form:label path="origin" class="control-label col-md-2"
 						for="destination">
-						<spring:message code="route.destination" />
+						<spring:message code="route.destination" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-8">
 						<form:input path="destination" class="form-control"
@@ -76,7 +83,7 @@
 				<div class="form-group">
 					<form:label path="departureTime" class="control-label col-md-2"
 						for="departureTime">
-						<spring:message code="route.departureTime" />
+						<spring:message code="route.departureTime" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-8">
 
@@ -89,13 +96,13 @@
 							</span>
 						</div>
 						<form:errors class="error create-message-error"
-							path="departureTime" />
+							path="departureTime" /> 
 					</div>
 				</div>
 				<div class="form-group">
 					<form:label path="arriveTime" class="control-label col-md-2"
 						for="arriveTime">
-						<spring:message code="route.arriveTime" />
+						<spring:message code="route.arriveTime" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-8">
 
@@ -112,7 +119,7 @@
 				<div class="form-group">
 					<form:label path="itemEnvelope" class="control-label col-md-2"
 						for="itemEnvelope">
-						<spring:message code="route.itemEnvelope" />
+						<spring:message code="route.itemEnvelope" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-8">
 

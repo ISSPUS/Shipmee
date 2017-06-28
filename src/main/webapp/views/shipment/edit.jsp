@@ -61,12 +61,12 @@
 
 
 <div class="blue-barra">
-	    <div class="container">
+	<div class="container">
 			<div class="row">
 				<h3><spring:message code="shipment.new.shipment" /></h3>
 			</div><!-- /row -->
-	    </div>
 	</div>
+</div>
 
 <div class="container">
 	<div class="row formulario-sm">
@@ -75,11 +75,18 @@
 			role="form" enctype="multipart/form-data">
 
 			<form:hidden path="shipmentId" />
+			
+			<div class="text-center modal-content" style="padding:1%; border-color:#f1f3fa;">
+				<div>
+					<span title="<spring:message code="user.required"/>" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+					<span><spring:message code="user.required.info"/></span>
+				</div>
+			</div> <br/>
 
 			<div class="form-group">
 				<form:label path="origin" class="control-label col-md-2"
 					for="recipient">
-					<spring:message code="shipment.origin" />
+					<spring:message code="shipment.origin" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<form:input path="origin" class="form-control" id="origin" />
@@ -90,7 +97,7 @@
 			<div class="form-group">
 				<form:label path="origin" class="control-label col-md-2"
 					for="destination">
-					<spring:message code="shipment.destination" />
+					<spring:message code="shipment.destination" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<form:input path="destination" class="form-control"
@@ -101,7 +108,7 @@
 			<div class="form-group">
 				<form:label path="departureTime" class="control-label col-md-2"
 					for="departureTime">
-					<spring:message code="shipment.departureTime" />
+					<spring:message code="shipment.departureTime" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 
@@ -119,7 +126,7 @@
 			<div class="form-group">
 				<form:label path="maximumArriveTime" class="control-label col-md-2"
 					for="maximumArriveTime">
-					<spring:message code="shipment.maximumArriveTime" />
+					<spring:message code="shipment.maximumArriveTime" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 
@@ -137,7 +144,7 @@
 			<div class="form-group">
 				<form:label path="itemSize" class="control-label col-md-2"
 					for="itemSize">
-					<spring:message code="shipment.itemSize" />
+					<spring:message code="shipment.itemSize" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 
@@ -158,7 +165,7 @@
 			</div>
 			<div class="form-group">
 				<form:label path="price" class="control-label col-md-2" for="price">
-					<spring:message code="shipment.price" />
+					<spring:message code="shipment.price" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-2">
 					<div class="inner-addon left-addon input-price">
@@ -174,7 +181,7 @@
 			<div class="form-group">
 				<form:label path="itemName" class="control-label col-md-2"
 					for="itemName">
-					<spring:message code="shipment.itemName" />
+					<spring:message code="shipment.itemName" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<form:input path="itemName" class="form-control" id="itemName" />
@@ -184,7 +191,7 @@
 			<div class="form-group">
 				<form:label path="imagen" class="control-label col-md-2"
 					for="imagen">
-					<spring:message code="shipment.itemPicture" />
+					<spring:message code="shipment.itemPicture" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<form:input  type="file" path="imagen" class="form-control btn btn-default btn-file"
@@ -195,7 +202,7 @@
 			<div class="form-group">
 				<form:label path="itemEnvelope" class="control-label col-md-2"
 					for="itemEnvelope">
-					<spring:message code="shipment.itemEnvelope" />
+					<spring:message code="shipment.itemEnvelope" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 

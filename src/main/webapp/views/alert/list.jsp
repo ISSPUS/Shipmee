@@ -145,7 +145,7 @@ margin-bottom: 5%;
 		</jstl:when>
 		<jstl:otherwise>
 			<p>
-				<spring:message code="vehicle.results" />
+				<spring:message code="alert.results" />
 			</p>
 		</jstl:otherwise>
 	</jstl:choose>

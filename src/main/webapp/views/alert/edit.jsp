@@ -57,10 +57,17 @@
 				</div>
 			</div><br/>
 			
+			<div class="text-center modal-content" style="padding:1%; border-color:#f1f3fa;">
+				<div>
+					<span title="<spring:message code="user.required"/>" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+					<span><spring:message code="user.required.info"/></span>
+				</div>
+			</div> <br/>
+			
 			<div class="form-group">
 				<form:label path="origin" class="control-label col-md-2"
 					for="origin"> 
-					<spring:message code="alert.origin" />
+					<spring:message code="alert.origin" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<form:input path="origin" class="form-control" id="origin" />
@@ -71,7 +78,7 @@
 			<div class="form-group">
 				<form:label path="destination" class="control-label col-md-2"
 					for="destination">
-					<spring:message code="alert.destination" />
+					<spring:message code="alert.destination" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 					<form:input path="destination" class="form-control"
@@ -82,7 +89,7 @@
 			<div class="form-group">
 				<form:label path="date" class="control-label col-md-2"
 					for="date">
-					<spring:message code="alert.date" />
+					<spring:message code="alert.date" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 
@@ -101,7 +108,7 @@
 			<div class="form-group">
 				<form:label path="type" class="control-label col-md-2"
 					for="type">
-					<spring:message code="alert.type" />
+					<spring:message code="alert.type" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
 

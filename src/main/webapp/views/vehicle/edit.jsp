@@ -47,14 +47,22 @@
 	<div class="row formulario-sm">
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"
 			style="margin: 0 auto; float: none;">
+			
 			<form:form enctype="multipart/form-data"  action="vehicle/user/edit.do" modelAttribute="vehicleForm"
 				method="post" class="form-horizontal" role="form">
 
 				<form:hidden path="vehicleId" />
+				
+				<div class="text-center modal-content" style="padding:1%; border-color:#f1f3fa;">
+					<div>
+						<span title="<spring:message code="user.required"/>" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+						<span><spring:message code="user.required.info"/></span>
+					</div>
+				</div> <br/>
 
 				<div class="form-group">
 					<form:label path="brand" class="control-label col-md-2" for="brand">
-						<spring:message code="vehicle.brand" />
+						<spring:message code="vehicle.brand" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-10">
 						<form:input path="brand" class="form-control" id="brand" required="true"/>
@@ -64,7 +72,7 @@
 
 				<div class="form-group">
 					<form:label path="model" class="control-label col-md-2" for="model">
-						<spring:message code="vehicle.model" />
+						<spring:message code="vehicle.model" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-10">
 						<form:input path="model" class="form-control" id="model" required="true"/>
@@ -74,7 +82,7 @@
 
 				<div class="form-group">
 					<form:label path="color" class="control-label col-md-2" for="color">
-						<spring:message code="vehicle.color" />
+						<spring:message code="vehicle.color" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-10">
 						<form:input path="color" class="form-control" id="color" required="true"/>
@@ -85,7 +93,7 @@
 				<div class="form-group">
 					<form:label path="picture" class="control-label col-md-2"
 						for="picture">
-						<spring:message code="vehicle.picture" />
+						<spring:message code="vehicle.picture" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-10">
 						<form:input path="picture" type="file" class="form-control" id="picture" />
