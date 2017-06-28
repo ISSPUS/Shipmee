@@ -55,6 +55,7 @@ public class ShipmentFormService {
 	public Shipment reconstruct(ShipmentForm shipmentForm) {
 		Shipment result;
 		Date departureTime, maximumArriveTime;
+		String exceptionMessage = "";
 		
 		departureTime = null;
 		maximumArriveTime = null;
@@ -75,6 +76,7 @@ public class ShipmentFormService {
 				log.trace("ruta extraida de variable del entorno:" + ServerConfig.getPATH_UPLOAD());
 				imageName = ImageUpload.subirImagen(shipmentForm.getImagen(),ServerConfig.getPATH_UPLOAD());
 			} catch (Exception e) {
+				exceptionMessage = e.getMessage();
 				log.error(e.getMessage());
 			}
 			
@@ -83,7 +85,7 @@ public class ShipmentFormService {
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			Assert.notNull(imageName,"message.error.imageUpload.notNull");
+			Assert.notNull(imageName, exceptionMessage);
 			result.setItemPicture(ServerConfig.getURL_IMAGE()+imageName);
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
