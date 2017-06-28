@@ -433,16 +433,35 @@ font-size: 225%;
 						</div>
 						
 						</jstl:if>
-					
-						
 					</div>
 				</div>
 			</jstl:forEach>
 		</jstl:when>
 		<jstl:otherwise>
-			<p>
-				<spring:message code="feePayment.results" />
-			</p>
+						<jstl:choose>
+							<jstl:when test="${feePaymentsType == 'Accepted'}">
+								<center>
+									<h4>
+										<spring:message code="feePayment.results.accepted" />
+									</h4>
+								</center>
+							</jstl:when>
+							<jstl:when test="${feePaymentsType == 'Pending'}">
+								<center>
+									<h4>
+										<spring:message code="feePayment.results.pending" />
+									</h4>
+								</center>
+							</jstl:when>
+							<jstl:when test="${feePaymentsType == 'Rejected'}">
+								<center>
+									<h4>
+										<spring:message code="feePayment.results.rejected" />
+									</h4>
+								</center>
+							</jstl:when>
+						</jstl:choose>
+
 		</jstl:otherwise>
 	</jstl:choose>
 </div>

@@ -39,6 +39,7 @@ public class FeePaymentAdministratorController extends AbstractController {
 		Integer allPending;
 		Integer allDenied;
 		Pageable pageable;
+		String feePaymentsType;
 		
 		pageable = new PageRequest(page - 1, 999);
 		allAccepted = (int) feePaymentService.findAllAccepted(pageable).getTotalElements();
@@ -47,10 +48,14 @@ public class FeePaymentAdministratorController extends AbstractController {
 
 		if(type.equals("Rejected") || type.equals("Rechazados")) {
 			items = feePaymentService.findAllRejected(pageable);
+			feePaymentsType="Rejected";
 		} else if(type.equals("Pending") || type.equals("Pendientes")) {
 			items = feePaymentService.findAllPending(pageable);
+			feePaymentsType="Pending";
 		} else {   // if (type.equals("Accepted")) {
 			items = feePaymentService.findAllAccepted(pageable);
+			feePaymentsType="Accepted";
+
 		}
 
 		result = new ModelAndView("feepayment/list");
@@ -60,6 +65,7 @@ public class FeePaymentAdministratorController extends AbstractController {
 		result.addObject("allDenied", allDenied);
 		result.addObject("p", page);
 		result.addObject("total_pages", items.getTotalPages());
+		result.addObject("feePaymentsType", feePaymentsType);
 
 		return result;
 	}
