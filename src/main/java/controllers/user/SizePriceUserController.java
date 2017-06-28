@@ -121,10 +121,19 @@ public class SizePriceUserController extends AbstractController {
 				}
 				
 				//Añadimos la comisión al precio
-				sizePriceForm.setPriceS(Math.round((sizePriceForm.getPriceS()*1.15) * 100.0)/100.0);
+				
+				if(sizePriceForm.getPriceS()!=null){
+					sizePriceForm.setPriceS(Math.round((sizePriceForm.getPriceS()*1.15) * 100.0)/100.0);
+				}
+				if(sizePriceForm.getPriceM()!=null){
 				sizePriceForm.setPriceM(Math.round((sizePriceForm.getPriceM()*1.15) * 100.0)/100.0);
+				}
+				if(sizePriceForm.getPriceL()!=null){
 				sizePriceForm.setPriceL(Math.round((sizePriceForm.getPriceL()*1.15) * 100.0)/100.0);
+				}
+				if(sizePriceForm.getPriceXL()!=null){
 				sizePriceForm.setPriceXL(Math.round((sizePriceForm.getPriceXL()*1.15) * 100.0)/100.0);
+				}
 
 				sizePriceFormService.reconstruct(sizePriceForm);
 				result = new ModelAndView("redirect:../../route/user/list.do");
