@@ -169,7 +169,7 @@ public class RouteUserController extends AbstractController {
 
 		try {
 			routeFormService.delete(routeForm);
-			result = new ModelAndView("redirect:../../");
+			result = new ModelAndView("redirect:../../route/user/list.do");
 		} catch (Throwable oops) {
 			log.error(oops.getMessage());
 			messageError = "route.commit.error";
