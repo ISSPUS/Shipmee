@@ -99,7 +99,7 @@ public class SizePriceFormService {
 			sizePrice = sizePriceService.create();
 			
 			sizePrice.setSize("S");
-			sizePrice.setPrice(sizePriceForm.getPriceS());
+			sizePrice.setPrice(Math.round((sizePriceForm.getPriceS()*1.15) * 100.0)/100.0);
 			sizePrice.setRoute(route);
 			
 			sizePrice = sizePriceService.save(sizePrice);
@@ -110,7 +110,7 @@ public class SizePriceFormService {
 			sizePrice = sizePriceService.create();
 			
 			sizePrice.setSize("M");
-			sizePrice.setPrice(sizePriceForm.getPriceM());
+			sizePrice.setPrice(Math.round((sizePriceForm.getPriceM()*1.15) * 100.0)/100.0);
 			sizePrice.setRoute(route);
 			
 			sizePrice = sizePriceService.save(sizePrice);
@@ -121,7 +121,7 @@ public class SizePriceFormService {
 			sizePrice = sizePriceService.create();
 			
 			sizePrice.setSize("L");
-			sizePrice.setPrice(sizePriceForm.getPriceL());
+			sizePrice.setPrice(Math.round((sizePriceForm.getPriceL()*1.15) * 100.0)/100.0);
 			sizePrice.setRoute(route);
 			
 			sizePrice = sizePriceService.save(sizePrice);
@@ -132,7 +132,7 @@ public class SizePriceFormService {
 			sizePrice = sizePriceService.create();
 			
 			sizePrice.setSize("XL");
-			sizePrice.setPrice(sizePriceForm.getPriceXL());
+			sizePrice.setPrice(Math.round((sizePriceForm.getPriceXL()*1.15) * 100.0)/100.0);
 			sizePrice.setRoute(route);
 			
 			sizePrice = sizePriceService.save(sizePrice);
