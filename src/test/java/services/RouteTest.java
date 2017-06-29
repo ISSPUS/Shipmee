@@ -216,9 +216,9 @@ public class RouteTest extends AbstractTest {
 	@Test
 	public void positiveEditShipment1(){
 		
-		authenticate("user2");
+		authenticate("user1");
 		
-		Route routeBefore =  routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		Route routeBefore =  routeService.findOne(UtilTest.getIdFromBeanName("route8"));
 		
 		routeBefore.setOrigin("Valencia");
 		
@@ -238,9 +238,9 @@ public class RouteTest extends AbstractTest {
 	@Test
 	public void positiveEditShipment2(){
 		
-		authenticate("user2");
+		authenticate("user1");
 		
-		Route routeBefore =  routeService.findOne(UtilTest.getIdFromBeanName("route2"));
+		Route routeBefore =  routeService.findOne(UtilTest.getIdFromBeanName("route8"));
 		Date arrivalTimeAfter = new GregorianCalendar(2019, Calendar.JULY, 02).getTime();
 		
 		routeBefore.setArriveTime(arrivalTimeAfter);
@@ -302,9 +302,9 @@ public class RouteTest extends AbstractTest {
 	@Test
 	public void positiveDeleteRoute1(){
 		
-		authenticate("user3");
+		authenticate("user1");
 		
-		Route routeBefore = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
+		Route routeBefore = routeService.findOne(UtilTest.getIdFromBeanName("route8"));
 		Integer numberOfRouteBefore = routeService.findAll().size();
 		
 		routeService.delete(routeBefore);

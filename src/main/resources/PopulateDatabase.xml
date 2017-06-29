@@ -641,6 +641,16 @@
 		<property name="creator" ref="user7"/>
 	</bean>
 	
+	<bean id="route8" class="domain.Route">
+		<property name="date" value="2017/03/12 00:00"/>
+		<property name="departureTime" value="2018/08/12 16:00"/>
+		<property name="arriveTime" value="2018/08/12 19:00"/>
+		<property name="origin" value="Sevilla"/>
+		<property name="destination" value="Almeria"/>
+		<property name="itemEnvelope" value="Both"/>
+		<property name="creator" ref="user1"/>
+	</bean>
+	
 	<!-- SizePrice -->
 	
 	<bean id="sizePrice1" class="domain.SizePrice">
@@ -749,6 +759,12 @@
 		<property name="size" value="XL"/>
 		<property name="price" value="3.50"/>
 		<property name="route" ref="route7"/>
+	</bean>
+	
+	<bean id="sizePrice19" class="domain.SizePrice">
+		<property name="size" value="S"/>
+		<property name="price" value="1.50"/>
+		<property name="route" ref="route8"/>
 	</bean>
 	
 	<!-- RouteOffer -->
