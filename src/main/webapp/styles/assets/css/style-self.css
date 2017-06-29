@@ -649,3 +649,9 @@ Evita descuadre de formularios en movil
 .pagination-center{
 	text-align: center;
 }
+
+.cretaion-date {
+	margin-right: 2%;
+	color: #999;
+	position: relative;
+}

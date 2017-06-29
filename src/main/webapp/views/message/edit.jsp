@@ -108,7 +108,7 @@
 					</div>
 				</jstl:if>
 
-				<div class="form-group" style="text-align: center;">
+				<div class="form-group text-center profile-userbuttons">
 					<div class="col-md-12">
 						<button type="submit" name="save" class="btn  btn-primary">
 							<span class="glyphicon glyphicon-floppy-disk"></span>

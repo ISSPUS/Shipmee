@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
 <script async src="scripts/jquery.bootpag.min.js"></script>
 
+
 <jstl:if test="${!empty ratings.content && userReceivedId > 0}">
 	<div class="blue-barra"
 		style="padding-top: 0.75%; padding-bottom: 0.75%;">
@@ -68,26 +69,22 @@
 				style="float: none; margin: 0 auto;">
 				<div class="row perfil-info-offer">
 					<div class="img-perfil-offer col-xs-4 col-sm-3 col-lg-2">
-						<img
-							src="${ratingRow.author.photo}"
-							class="img-thumbnail  profile-offer-img ">
+						<img src="${ratingRow.author.photo}" class="img-thumbnail  profile-offer-img" style="margin-top: 8%;">
 					</div>
 					<div>
-						<p><b><spring:message code="rating.author" /> : </b><jstl:out value="${ratingRow.author.userAccount.username}" /></p>
+						<p><b><spring:message code="rating.author" /> : </b><a><jstl:out value="${ratingRow.author.userAccount.username}" /></a></p>
 					</div>
 					<div>
-						<p><b><spring:message code="rating.user" /> : </b><jstl:out value="${ratingRow.user.userAccount.username}" /></p>
+						<p><b><spring:message code="rating.user" /> : </b><a><jstl:out value="${ratingRow.user.userAccount.username}" /></a></p>
 					</div>
 					<div>
-						<p><b><spring:message code="rating.value" /> : </b><jstl:out value="${ratingRow.value}" /></p>
+						<p><b><spring:message code="rating.value" /> : </b><a><jstl:out value="${ratingRow.value}" /></a></p>
 					</div>
-					<div>
+					<div style="padding-left: 1%;padding-right: 2%;">
 						<p><b><spring:message code="rating.comment" /> : </b><jstl:out value="${ratingRow.comment}" /></p>
 					</div>
-					<div>
-						<p><b><spring:message code="rating.createdDate" /> : </b><jstl:out value="${ratingRow.createdDate}" /></p>
-					</div>
-
+					<div class="rfecha separador"></div><span class="cretaion-date media-meta pull-right" style="margin-right: 1%;"><fmt:formatDate value="${ratingRow.createdDate}" pattern="dd/MM/yyyy HH:mm" /></span>
+						
  				</div>
 			</div>
 		</div>
