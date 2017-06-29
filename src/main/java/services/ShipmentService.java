@@ -71,7 +71,8 @@ public class ShipmentService {
 	
 	public Shipment save(Shipment shipment) {
 		Assert.notNull(shipment, "message.error.shipment.notNull");
-		Assert.isTrue(checkDates(shipment), "message.error.shipment.checkDates");
+		Assert.isTrue(checkFutureDepartureDate(shipment), "message.error.shipment.checkFutureDepartureDate");
+		Assert.isTrue(checkMaximumArriveTimeAfterDepartureDate(shipment), "message.error.shipment.checkMaximumArriveTimeAfterDepartureDate");
 		Assert.isTrue(checkItemEnvelope(shipment.getItemEnvelope()), "message.error.shipment.checkItemEnvelope");
 		
 		User user;
@@ -141,7 +142,7 @@ public class ShipmentService {
 	}
 	
 	public Page<Shipment> findAllByUserId(int userId, Pageable page){
-		Assert.isTrue(userId != 0, "The user must exist");
+		Assert.isTrue(userId != 0, "message.error.shipment.user.mustExist");
 		
 		Page<Shipment> result;
 				
@@ -151,7 +152,7 @@ public class ShipmentService {
 	}
 	
 	public Page<Shipment> findAllByCurrentUser(Pageable page){
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can see his own shipments.");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipment.user.list.own");
 		
 		Page<Shipment> result;
 		
@@ -216,21 +217,22 @@ public class ShipmentService {
 	 */
 	public ShipmentOffer carryShipment(int shipmentId){
 		
-		Assert.isTrue(shipmentId != 0, "The Shipment's ID must not be zero.");
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment.");
+		Assert.isTrue(shipmentId != 0, "message.error.shipment.IDnotZero");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipment.user.carry");
 				
 		Shipment shipment = findOne(shipmentId);
 		User carrier = userService.findByPrincipal();
 				
-		Assert.notNull(shipment, "The ID must match a Shipment.");
-		Assert.isNull(shipment.getCarried(), "The shipment must not have a carrier asigned.");
-		Assert.isTrue(checkDates(shipment), "All dates must be valid.");
-		Assert.isTrue(shipment.getDepartureTime().after(new Date()),"The Departure Time must be future");
-		Assert.isTrue(shipment.getMaximumArriveTime().after(new Date()),"The Maximum Arrival Time must be future");
-		Assert.notNull(carrier, "The carrier must not be empty.");
-		Assert.isTrue(carrier.getIsVerified(), "Only a verified user can carry packages.");
-		Assert.isTrue(!carrier.equals(shipment.getCreator()), "You cannot carry your own Shipment.");
-		Assert.isTrue(!checkShipmentOfferAccepted(shipmentId), "The creator of the Shipment must not accept any other offer.");
+		Assert.notNull(shipment, "message.error.shipment.mustExist");
+		Assert.isNull(shipment.getCarried(), "message.error.shipment.carrierAssigned");
+		Assert.isTrue(checkFutureDepartureDate(shipment), "message.error.shipment.checkFutureDepartureDate");
+		Assert.isTrue(checkMaximumArriveTimeAfterDepartureDate(shipment), "message.error.shipment.checkMaximumArriveTimeAfterDepartureDate");
+		Assert.isTrue(shipment.getDepartureTime().after(new Date()),"message.error.shipment.futureDepartureDate");
+		Assert.isTrue(shipment.getMaximumArriveTime().after(new Date()),"message.error.shipment.futureArrivalDate");
+		Assert.notNull(carrier, "message.error.shipment.user.carrier");
+		Assert.isTrue(carrier.getIsVerified(), "message.error.shipment.user.carrier.verified");
+		Assert.isTrue(!carrier.equals(shipment.getCreator()), "message.error.shipment.user.carrier.own");
+		Assert.isTrue(!checkShipmentOfferAccepted(shipmentId), "message.error.shipment.user.noMoreAcceptedOffers");
 		
 		ShipmentOffer shipmentOffer;
 		
@@ -265,7 +267,7 @@ public class ShipmentService {
 		return res;
 	}
 	
-	public boolean checkDates(Shipment shipment) {
+	public boolean checkFutureDepartureDate(Shipment shipment) {
 		boolean res;
 		
 		res = true;
@@ -273,6 +275,14 @@ public class ShipmentService {
 		if(shipment.getDate().compareTo(shipment.getDepartureTime()) >= 0) {
 			res = false;
 		}
+		
+		return res;
+	}
+	
+	public boolean checkMaximumArriveTimeAfterDepartureDate(Shipment shipment) {
+		boolean res;
+		
+		res = true;
 		
 		if(shipment.getDepartureTime().compareTo(shipment.getMaximumArriveTime()) >= 0) {
 			res = false;

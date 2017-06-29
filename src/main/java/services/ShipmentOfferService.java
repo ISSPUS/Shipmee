@@ -192,7 +192,8 @@ public class ShipmentOfferService {
 		Shipment shipment = shipmentOffer.getShipment();
 		
 		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
-		Assert.isTrue(shipmentService.checkDates(shipment), "message.error.shipmentOffer.shipment.checkDates");
+		Assert.isTrue(shipmentService.checkFutureDepartureDate(shipment), "message.error.shipment.checkFutureDepartureDate");
+		Assert.isTrue(shipmentService.checkMaximumArriveTimeAfterDepartureDate(shipment), "message.error.shipment.checkMaximumArriveTimeAfterDepartureDate");
 		Assert.isTrue(shipment.getDepartureTime().after(new Date()),"The Departure Time must be future");
 		Assert.isTrue(shipment.getMaximumArriveTime().after(new Date()),"message.error.shipmentOffer.shipment.maxArrivalTime.future");
 		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "message.error.shipmentOffer.accept.user.own");
@@ -248,7 +249,8 @@ public class ShipmentOfferService {
 		Shipment shipment = shipmentOffer.getShipment();
 		
 		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
-		Assert.isTrue(shipmentService.checkDates(shipment), "message.error.shipmentOffer.shipment.checkDates");
+		Assert.isTrue(shipmentService.checkFutureDepartureDate(shipment), "message.error.shipment.checkFutureDepartureDate");
+		Assert.isTrue(shipmentService.checkMaximumArriveTimeAfterDepartureDate(shipment), "message.error.shipment.checkMaximumArriveTimeAfterDepartureDate");
 		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "message.error.shipmentOffer.deny.user.own");
 
 		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "message.error.shipmentOffer.notAcceptedOrRejected");
