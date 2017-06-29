@@ -57,7 +57,7 @@ public class RouteService {
 
 	public Route create() {
 		Assert.isTrue(actorService.checkAuthority("USER"),
-				"Only an user can create a route");
+				"message.error.route.user.create");
 		
 		Route result;
 		User user;
@@ -76,7 +76,8 @@ public class RouteService {
 	public Route save(Route route) {
 		Assert.notNull(route, "message.error.route.notNull");
 		Assert.isTrue(route.getArriveTime().after(new Date()), "message.error.route.past");
-		Assert.isTrue(checkDates(route), "message.error.route.checkDates");
+		Assert.isTrue(checkFutureDepartureDate(route), "message.error.route.checkFutureDepartureDate");
+		Assert.isTrue(checkArriveTimeAfterDepartureDate(route), "message.error.route.checkArriveTimeAfterDepartureDate");
 		Assert.isTrue(checkItemEnvelope(route.getItemEnvelope()), "message.error.route.checkItemEnvelope");
 
 		if(route.getVehicle() != null) {
@@ -164,7 +165,7 @@ public class RouteService {
 	}
 	
 	public Page<Route> findAllByUserId(int userId, Pageable page){
-		Assert.isTrue(userId != 0, "The user must exist");
+		Assert.isTrue(userId != 0, "message.error.route.user.mustExist");
 		
 		Page<Route> result;
 		
@@ -174,7 +175,7 @@ public class RouteService {
 	}
 	
 	public Page<Route> findAllByCurrentUser(Pageable page){
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can see his own routes.");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.route.user.list.own");
 		
 		Page<Route> result;
 		
@@ -227,23 +228,24 @@ public class RouteService {
 	
 	public RouteOffer contractRoute(int routeId, int sizePriceId){
 		
-		Assert.isTrue(routeId != 0, "The Route's ID must not be zero.");
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment.");
+		Assert.isTrue(routeId != 0, "message.error.route.IDnotZero");
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.route.user.contract");
 		
 		Route route = findOne(routeId);
 		User client = userService.findByPrincipal();
 		SizePrice sizePrice = sizePriceService.findOne(sizePriceId);
 		
-		Assert.notNull(route, "The ID must match a Route.");
+		Assert.notNull(route, "message.error.route.mustExist");
 		Assert.isTrue(userService.findAllByRoutePurchased(routeId).isEmpty());
-		Assert.isTrue(checkDates(route));
-		Assert.isTrue(route.getDepartureTime().after(new Date()), "The Departure Time must be future");
-		Assert.isTrue(route.getArriveTime().after(new Date()), "The Arrival Time must be future");
-		Assert.notNull(client, "The client must not be empty.");
-		Assert.isTrue(!client.equals(route.getCreator()), "You cannot contract your own route.");
-		Assert.notNull(sizePrice, "The pair of a Size and its Price must not be null");
-		Assert.notNull(sizePrice.getSize(), "The Size must not be null");
-		Assert.isTrue(route.equals(sizePrice.getRoute()), "The Size and Price must refer to the same route");
+		Assert.isTrue(checkFutureDepartureDate(route), "message.error.route.checkFutureDepartureDate");
+		Assert.isTrue(checkArriveTimeAfterDepartureDate(route), "message.error.route.checkArriveTimeAfterDepartureDate");
+		Assert.isTrue(route.getDepartureTime().after(new Date()), "message.error.route.futureDepartureDate");
+		Assert.isTrue(route.getArriveTime().after(new Date()), "message.error.route.futureArrivalDate");
+		Assert.notNull(client, "message.error.route.user.client");
+		Assert.isTrue(!client.equals(route.getCreator()), "message.error.route.user.client.own");
+		Assert.notNull(sizePrice, "message.error.route.sizePrice.mustExist");
+		Assert.notNull(sizePrice.getSize(), "message.error.route.sizePrice.size.mustExist");
+		Assert.isTrue(route.equals(sizePrice.getRoute()), "message.error.route.sizePrice.sameRoute");
 		
 		RouteOffer routeOffer;
 		
@@ -278,7 +280,7 @@ public class RouteService {
 		return res;
 	}
 	
-	public boolean checkDates(Route route) {
+	public boolean checkFutureDepartureDate(Route route) {
 		boolean res;
 		
 		res = true;
@@ -286,6 +288,14 @@ public class RouteService {
 		if(route.getDate().compareTo(route.getDepartureTime()) >= 0) {
 			res = false;
 		}
+		
+		return res;
+	}
+	
+	public boolean checkArriveTimeAfterDepartureDate(Route route) {
+		boolean res;
+		
+		res = true;
 		
 		if(route.getDepartureTime().compareTo(route.getArriveTime()) >= 0) {
 			res = false;

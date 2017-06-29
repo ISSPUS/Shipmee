@@ -209,7 +209,8 @@ public class RouteOfferService {
 		Route route = routeOffer.getRoute();
 		
 		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
-		Assert.isTrue(routeService.checkDates(route), "message.error.routeOffer.route.checkDates");
+		Assert.isTrue(routeService.checkFutureDepartureDate(route), "message.error.route.checkFutureDepartureDate");
+		Assert.isTrue(routeService.checkArriveTimeAfterDepartureDate(route), "message.error.route.checkArriveTimeAfterDepartureDate");
 		Assert.isTrue(route.getDepartureTime().after(new Date()), "message.error.routeOffer.route.departureTime.future");
 		Assert.isTrue(route.getArriveTime().after(new Date()), "message.error.routeOffer.route.arrivalTime.future");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.routeOffer.accept.user.own");
@@ -248,7 +249,8 @@ public class RouteOfferService {
 		Route route = routeOffer.getRoute();
 		
 		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
-		Assert.isTrue(routeService.checkDates(route), "message.error.routeOffer.route.checkDates");
+		Assert.isTrue(routeService.checkFutureDepartureDate(route), "message.error.route.checkFutureDepartureDate");
+		Assert.isTrue(routeService.checkArriveTimeAfterDepartureDate(route), "message.error.route.checkArriveTimeAfterDepartureDate");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.routeOffer.deny.user.own");
 		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
 
