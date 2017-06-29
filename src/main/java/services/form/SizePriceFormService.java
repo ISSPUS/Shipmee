@@ -149,13 +149,13 @@ public class SizePriceFormService {
 		
 		for(SizePrice sp : sizePrices) {
 			if(sp.getSize().equals("S")) {
-				result.setPriceS(sp.getPrice());
+				result.setPriceS(Math.round((sp.getPrice()/1.15) * 100.0)/100.0);
 			} else if(sp.getSize().equals("M")) {
-				result.setPriceM(sp.getPrice());
+				result.setPriceM(Math.round((sp.getPrice()/1.15) * 100.0)/100.0);
 			} else if(sp.getSize().equals("L")) {
-				result.setPriceL(sp.getPrice());
+				result.setPriceL(Math.round((sp.getPrice()/1.15) * 100.0)/100.0);
 			} else if(sp.getSize().equals("XL")) {
-				result.setPriceXL(sp.getPrice());
+				result.setPriceXL(Math.round((sp.getPrice()/1.15) * 100.0)/100.0);
 			}
 		}
 		

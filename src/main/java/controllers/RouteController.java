@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Route;
+import domain.RouteOffer;
 import domain.SizePrice;
 import domain.User;
 import services.ActorService;
+import services.RouteOfferService;
 import services.RouteService;
 import services.SizePriceService;
 import services.UserService;
@@ -40,6 +42,9 @@ public class RouteController extends AbstractController {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private RouteOfferService routeOfferService;
 	// Constructors -----------------------------------------------------------
 	
 	public RouteController() {
@@ -147,11 +152,20 @@ public class RouteController extends AbstractController {
 		ModelAndView result;
 		Route route;
 		Collection<SizePrice> sizePrices;
+		Collection<RouteOffer> routeOffers;
 		User currentUser;
+		Boolean routeOffersIsEmpty;
 		
 		route = routeService.findOne(routeId);
 		sizePrices = sizePriceService.findAllByRouteId(routeId);
 		currentUser = null;
+		routeOffersIsEmpty = false;
+		
+		routeOffers = routeOfferService.findAllByRouteId(routeId);
+		
+		if(routeOffers.isEmpty()) {
+			routeOffersIsEmpty = true;
+		}
 		
 		if(actorService.checkAuthority("ADMIN")){
 			currentUser = userService.findOne(route.getCreator().getId());
@@ -174,6 +188,7 @@ public class RouteController extends AbstractController {
 		result.addObject("arriveTime_hour", arriveTimeHour);
 		result.addObject("sizePrices", sizePrices);
 		result.addObject("user", currentUser);
+		result.addObject("routeOffersIsEmpty", routeOffersIsEmpty);
 		
 		return result;
 	}

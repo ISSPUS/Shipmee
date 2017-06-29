@@ -86,6 +86,7 @@ public class RouteService {
 
 		User user;
 		Date date;
+		Collection<RouteOffer> routeOffers;
 		
 		user = userService.findByPrincipal();
 		date = new Date();
@@ -102,6 +103,9 @@ public class RouteService {
 			alertService.checkAlerts(route.getOrigin(), route.getDestination(), 
 					route.getDepartureTime(), "Route");
 		} else {
+			routeOffers = routeOfferService.findAllByRouteId(route.getId());
+			Assert.isTrue(routeOffers.isEmpty(), "message.error.route.edit");
+			
 			route = routeRepository.save(route);
 		}
 		
@@ -116,24 +120,18 @@ public class RouteService {
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.route.delete.user");
 
 		User user;
-		Collection<User> users;
 		Collection<SizePrice> sizePrices;
 		Collection<RouteOffer> routeOffers;
 		
 		user = userService.findByPrincipal();
-		users = userService.findAllByRoutePurchased(route.getId());
+		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 
 		Assert.isTrue(user.getId() == route.getCreator().getId(), "message.error.route.delete.user.own");
-		Assert.isTrue(users.isEmpty(), "message.error.route.delete.noPurchasers");
+		Assert.isTrue(routeOffers.isEmpty(), "message.error.route.delete.noPurchasers");
 
 		sizePrices = sizePriceService.findAllByRouteId(route.getId());
 		for(SizePrice s : sizePrices) {
 			sizePriceService.delete(s);
-		}
-		
-		routeOffers = routeOfferService.findAllByRouteId(route.getId());
-		for(RouteOffer ro : routeOffers) {
-			routeOfferService.delete(ro.getId());
 		}
 						
 		routeRepository.delete(route);

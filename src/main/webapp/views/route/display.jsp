@@ -249,13 +249,20 @@
 							<spring:message code="offer.new" />
 						</button>
 						</jstl:if>
+						
+						<jstl:if test="${route.creator == user && routeOffersIsEmpty}">
+						<button type="submit" class="btn button-view btn-primary"
+							onclick="location.href = 'route/user/edit.do?routeId=${route.id}';" style="margin-bottom: 10px;">
+							<span class="fa fa-plus-circle"></span>
+							<spring:message code="route.edit" />
+						</button>
+						</jstl:if>
 
 						<button type="submit" class="btn btn-primary"
 							onclick="location.href = 'routeOffer/user/list.do?routeId=${route.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-list"></span> 
 							<spring:message code="offer.list" />
 						</button>
-
 					</div>
 
 
