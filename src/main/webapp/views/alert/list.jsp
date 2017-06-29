@@ -55,10 +55,6 @@
 	
 }
 
-.caja{
-margin-bottom: 5%;
-}
-
 .alerts-buttons{
 margin-top: 32px;
 margin-bottom: 5%;

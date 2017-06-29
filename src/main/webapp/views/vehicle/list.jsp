@@ -70,9 +70,7 @@
 	margin-top: 32px;
 	margin-bottom: 5%;
 }
-.caja{
-margin-bottom: 5%;
-}
+
 @media ( min-width : 770px) {
 	.buttons-vehicle {
 		margin-top: 20%
