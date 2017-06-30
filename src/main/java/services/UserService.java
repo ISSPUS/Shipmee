@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.FundTransferPreference;
 import domain.Rank;
 import domain.Route;
 import domain.User;
@@ -177,7 +176,6 @@ public class UserService {
 		boolean isAdmin;
 		boolean isAuthenticated;
 		int actUserId;
-		FundTransferPreference fundTransferPreference;
 		
 		User userInDB = null;
 		Authority userAuth = new Authority();
@@ -205,25 +203,7 @@ public class UserService {
 					)){
 				a.setIsVerified(false);
 			}
-
-			if(a.getFundTransferPreference() != null) {
-				fundTransferPreference = a.getFundTransferPreference();
-				if(fundTransferPreference.getPaypalEmail() != null &&
-						fundTransferPreference.getPaypalEmail().equals("")){
-					Assert.isTrue(false,"message.error.fundTransferPreference.fillPayPal");
-				} else if((fundTransferPreference.getCountry() != null &&
-						fundTransferPreference.getCountry().equals("")) ||
-						(fundTransferPreference.getAccountHolder() != null &&
-						fundTransferPreference.getAccountHolder().equals("")) ||
-						(fundTransferPreference.getBankName() != null &&
-						fundTransferPreference.getBankName().equals("")) ||
-						(fundTransferPreference.getIBAN() != null &&
-						fundTransferPreference.getIBAN().equals("")) ||
-						(fundTransferPreference.getBIC() != null &&
-						fundTransferPreference.getBIC().equals(""))) {
-					Assert.isTrue(false,"message.error.fundTransferPreference.fillBankAccount");
-				}
-			}
+			
 		}else{
 			Assert.isTrue(!isAuthenticated, 
 					"UserService.checkLogin.creatingUserAuthenticated");

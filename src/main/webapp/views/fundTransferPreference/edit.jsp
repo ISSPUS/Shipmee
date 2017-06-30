@@ -232,7 +232,7 @@ input:valid ~ label {
 				
 				<!-- Action buttons -->
 				<div class="form-group text-center profile-userbuttons">
-					<button type="submit" name="save" class="btn  btn-primary">
+					<button type="submit" name="savePaypal" class="btn  btn-primary">
 						<span class="glyphicon glyphicon-floppy-disk"></span>
 						<spring:message code="fundTransferPreference.save" />
 					</button>
@@ -311,7 +311,7 @@ input:valid ~ label {
 
 				<!-- Action buttons -->
 				<div class="form-group text-center profile-userbuttons">
-					<button type="submit" name="save" class="btn  btn-primary">
+					<button type="submit" name="saveBankAccount" class="btn  btn-primary">
 						<span class="glyphicon glyphicon-floppy-disk"></span>
 						<spring:message code="fundTransferPreference.save" />
 					</button>
