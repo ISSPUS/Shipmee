@@ -228,7 +228,7 @@
      
                     </tbody>
  					 </table>
- 					 <div class="text-center"><a><spring:message code="master.page.comissions" /></a></div>
+ 					 <div id="routePricesMessage" class="text-center"><a><spring:message code="master.page.comissions" /></a></div>
 					
 					<div class="rfecha separador-final"></div>
 
@@ -289,6 +289,8 @@
 			window.location = 'route/user/contract.do?routeId='+routeId+'&sizePriceId='+sizePriceId;
 			return false;
 		}else{
+			var node = document.getElementById('routePricesMessage');
+			node.innerHTML = node.innerHTML+"<br/><div class='error'><spring:message code='route.sizeprice.select' /></div>";
 			return true;
 		}
 	}
