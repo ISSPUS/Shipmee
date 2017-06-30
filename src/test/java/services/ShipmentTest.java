@@ -187,17 +187,17 @@ public class ShipmentTest extends AbstractTest {
 		 
 		 authenticate("user2");
 		 
-		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
 		 
-		 Assert.isTrue(shipmentBefore.getItemName().equals("Equipo de música"));
+		 Assert.isTrue(shipmentBefore.getItemName().equals("Libro"));
 		 
-		 shipmentBefore.setItemName("Nuevo Equipo de Música");
+		 shipmentBefore.setItemName("Starting Strength");
 		 
 		 shipmentService.save(shipmentBefore);
 		 
 		 Shipment shipmentAfter = shipmentService.findOne(shipmentBefore.getId());
 		 
-		 Assert.isTrue(shipmentAfter.getItemName().equals("Nuevo Equipo de Música"));
+		 Assert.isTrue(shipmentAfter.getItemName().equals("Starting Strength"));
 		 
 		 unauthenticate();
 	 }
@@ -211,7 +211,7 @@ public class ShipmentTest extends AbstractTest {
 		 
 		 authenticate("user2");
 		 
-		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
 
 		 Date departureTimeAfter = new GregorianCalendar(2018, Calendar.JULY, 01).getTime();
 		 Date maximumArrivalTimeAfter = new GregorianCalendar(2018, Calendar.JULY, 02).getTime();
@@ -286,7 +286,7 @@ public class ShipmentTest extends AbstractTest {
 		 
 		 authenticate("user2");
 		 
-		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		 Shipment shipmentBefore = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment3"));
 		 Integer numberOfShipmentBefore = shipmentService.findAll().size();
 		 
 		 shipmentService.delete(shipmentBefore);
