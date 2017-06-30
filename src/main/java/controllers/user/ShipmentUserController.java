@@ -1,6 +1,8 @@
 package controllers.user;
 
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -18,8 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.Shipment;
+import domain.ShipmentOffer;
 import domain.User;
 import domain.form.ShipmentForm;
+import services.ShipmentOfferService;
 import services.ShipmentService;
 import services.UserService;
 import services.form.ShipmentFormService;
@@ -40,6 +44,9 @@ public class ShipmentUserController extends AbstractController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ShipmentOfferService shipmentOfferService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -113,6 +120,7 @@ public class ShipmentUserController extends AbstractController {
 	public ModelAndView save(@Valid ShipmentForm shipmentForm, BindingResult binding) {
 		ModelAndView result;
 		String messageError;
+		Collection<ShipmentOffer> shipmentOffers;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(shipmentForm);
@@ -124,6 +132,10 @@ public class ShipmentUserController extends AbstractController {
 				
 				//Añadimos la comisión al precio
 				shipment.setPrice(Math.round((shipment.getPrice()*1.15) * 100.0)/100.0);
+				
+				shipmentOffers = shipmentOfferService.findAllByShipmentId(shipment.getId());
+				Assert.isTrue(shipmentOffers.isEmpty(), "message.error.shipment.edit");
+				
 				shipmentService.save(shipment);
 
 				result = new ModelAndView("redirect:list.do");

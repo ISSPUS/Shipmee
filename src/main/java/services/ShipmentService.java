@@ -77,7 +77,6 @@ public class ShipmentService {
 		
 		User user;
 		Date date;
-		Collection<ShipmentOffer> shipmentOffers;
 
 		user = userService.findByPrincipal();
 		date = new Date();
@@ -90,9 +89,6 @@ public class ShipmentService {
 			alertService.checkAlerts(shipment.getOrigin(), shipment.getDestination(), 
 					shipment.getDepartureTime(), "Shipment");
 		} else {
-			shipmentOffers = shipmentOfferService.findAllByShipmentId(shipment.getId());
-			Assert.isTrue(shipmentOffers.isEmpty(), "message.error.shipment.edit");
-			
 			shipment = shipmentRepository.save(shipment);
 		}
 	
