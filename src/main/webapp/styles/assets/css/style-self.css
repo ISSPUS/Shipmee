@@ -655,3 +655,28 @@ Evita descuadre de formularios en movil
 	color: #999;
 	position: relative;
 }
+
+
+/* -------------------------------- 
+
+Evita descuadre de menu de cabecera con una resolución entre 768 y 992
+
+-------------------------------- */
+
+
+@media (min-width: 768px) {
+  .container {
+    width: 900px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
