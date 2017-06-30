@@ -128,7 +128,7 @@ public class ShipmentFormService {
 		result.setOrigin(shipment.getOrigin());
 		result.setDestination(shipment.getDestination());
 		result.setItemEnvelope(shipment.getItemEnvelope());
-		result.setPrice(shipment.getPrice());
+		result.setPrice(Math.round((shipment.getPrice()/1.15) * 100.0)/100.0);
 		result.setItemName(shipment.getItemName());
 		result.setItemSize(shipment.getItemSize());
 		result.setMaximumArriveTime(maximumArriveTime);

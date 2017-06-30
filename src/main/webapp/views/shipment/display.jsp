@@ -240,6 +240,14 @@
 						</button>
 						</jstl:if>
 						
+						<jstl:if test="${shipment.creator == user && shipmentOffersIsEmpty}">
+						<button type="submit" class="btn button-view btn-primary"
+							onclick="location.href = 'shipment/user/edit.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
+							<span class="fa fa-plus-circle"></span>
+							<spring:message code="shipment.edit" />
+						</button>
+						</jstl:if>
+						
 
 						<button type="submit" class="btn btn-primary"
 							onclick="location.href = 'shipmentOffer/user/list.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">

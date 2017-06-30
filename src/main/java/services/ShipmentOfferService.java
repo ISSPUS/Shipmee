@@ -147,15 +147,8 @@ public class ShipmentOfferService {
 
 	public Collection<ShipmentOffer> findAllByShipmentId(int shipmentId) {
 		Collection<ShipmentOffer> result;
-		User actUser;
 
-		actUser = userService.findByPrincipal();
 		result = shipmentOfferRepository.findAllByShipmentId(shipmentId);
-
-		if (!result.isEmpty()) {
-			Assert.isTrue(result.iterator().next().getShipment().getCreator().equals(actUser),
-					"service.shipmentOffer.delete.notPermitted");
-		}
 
 		return result;
 	}

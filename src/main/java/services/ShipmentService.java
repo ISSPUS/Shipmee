@@ -77,6 +77,7 @@ public class ShipmentService {
 		
 		User user;
 		Date date;
+		Collection<ShipmentOffer> shipmentOffers;
 
 		user = userService.findByPrincipal();
 		date = new Date();
@@ -89,6 +90,9 @@ public class ShipmentService {
 			alertService.checkAlerts(shipment.getOrigin(), shipment.getDestination(), 
 					shipment.getDepartureTime(), "Shipment");
 		} else {
+			shipmentOffers = shipmentOfferService.findAllByShipmentId(shipment.getId());
+			Assert.isTrue(shipmentOffers.isEmpty(), "message.error.shipment.edit");
+			
 			shipment = shipmentRepository.save(shipment);
 		}
 	
@@ -109,9 +113,7 @@ public class ShipmentService {
 		Assert.isTrue(user.getId() == shipment.getCreator().getId(), "message.error.shipment.user.delete.own");
 		
 		shipmentOffers = shipmentOfferService.findAllByShipmentId(shipment.getId());
-		for(ShipmentOffer so : shipmentOffers) {
-			shipmentOfferService.delete(so.getId());
-		}
+		Assert.isTrue(shipmentOffers.isEmpty(), "message.error.shipment.delete");
 						
 		shipmentRepository.delete(shipment);
 	}

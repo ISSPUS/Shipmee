@@ -1,6 +1,7 @@
 package controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import domain.Shipment;
+import domain.ShipmentOffer;
 import domain.User;
 import services.ActorService;
+import services.ShipmentOfferService;
 import services.ShipmentService;
 import services.UserService;
 
@@ -33,6 +36,9 @@ public class ShipmentController extends AbstractController {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private ShipmentOfferService shipmentOfferService;
 	// Constructors -----------------------------------------------------------
 	
 	public ShipmentController() {
@@ -139,14 +145,23 @@ public class ShipmentController extends AbstractController {
 			ModelAndView result;
 			Shipment shipment;
 			User currentUser;
+			Boolean shipmentOffersIsEmpty;
+			Collection<ShipmentOffer> shipmentOffers;
 			
 			shipment = shipmentService.findOne(shipmentId);
 			currentUser = null;
+			shipmentOffersIsEmpty = false;
 			
 			if(actorService.checkAuthority("ADMIN")){
 				currentUser = userService.findOne(shipment.getCreator().getId());
 			}else if (actorService.checkLogin()){
 				currentUser = userService.findByPrincipal();
+			}
+			
+			shipmentOffers = shipmentOfferService.findAllByShipmentId(shipment.getId());
+			
+			if(shipmentOffers.isEmpty()) {
+				shipmentOffersIsEmpty = true;
 			}
 			
 			String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(shipment.getDepartureTime());
@@ -163,6 +178,7 @@ public class ShipmentController extends AbstractController {
 			result.addObject("maximumArriveTime", maximumArriveTime);
 			result.addObject("maximumArriveTime_hour", maximumArriveTimeHour);
 			result.addObject("user", currentUser);
+			result.addObject("shipmentOffersIsEmpty", shipmentOffersIsEmpty);
 
 			return result;
 		}
