@@ -661,7 +661,7 @@ Evita descuadre de formularios en movil
 
 Evita descuadre de menu de cabecera con una resolución entre 768 y 992
 
--------------------------------- */
+-------------------------------- 
 
 
 @media (min-width: 768px) {
@@ -680,3 +680,5 @@ Evita descuadre de menu de cabecera con una resolución entre 768 y 992
     width: 1170px;
   }
 }
+
+*/
