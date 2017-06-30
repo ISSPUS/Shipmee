@@ -127,10 +127,9 @@
 														<div class="row">
 
 															<div class="col-lg-3 text-center">
-
-																<img src="${shipment.itemPicture}"
-																	class="media-photo-shipment">
-
+																<a href="shipment/display.do?shipmentId=${shipment.id}">
+																	<img src="${shipment.itemPicture}" class="media-photo-shipment">
+																</a>
 															</div>
 
 															<div class="info-salida col-lg-6"
@@ -140,11 +139,12 @@
 																		<h4><a href="shipment/display.do?shipmentId=${shipment.id}">${shipment.itemName}</a></h4>
 																	</div>
 
-																	<a><i
-																		class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
-
-																	<i class="glyphicon glyphicon-sort"></i> <a> <i
-																		class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
+																	<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
+											
+																	<i class="glyphicon glyphicon-sort"></i>
+											
+																	<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"> <i
+																	class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
 																	</a>
 
 

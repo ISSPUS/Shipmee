@@ -201,9 +201,9 @@
 										<div class="row">
 										
 											<div class="col-lg-3 text-center">
-
-												<img src="${shipment.itemPicture}" class="media-photo-shipment">
-													
+												<a href="shipment/display.do?shipmentId=${shipment.id}">
+													<img src="${shipment.itemPicture}" class="media-photo-shipment">
+												</a>	
 											</div>
 										
 											<div class="info-salida col-lg-6" style="margin-bottom: 2%; font-size: 16px;">

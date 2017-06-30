@@ -155,11 +155,12 @@
 																		</h4>
 																	</div>
 
-																	<a><i
-																		class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
-
-																	<i class="glyphicon glyphicon-sort"></i> <a> <i
-																		class="glyphicon glyphicon-map-marker img-destination"></i>${route.destination}
+																	<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
+											
+																	<i class="glyphicon glyphicon-sort"></i>
+											
+																	<a target="_blank" href="http://maps.google.com/maps?q=${route.destination}"> <i
+																	class="glyphicon glyphicon-map-marker img-destination"></i>${route.destination}
 																	</a>
 
 																</div>
