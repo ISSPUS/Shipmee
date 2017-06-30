@@ -172,16 +172,8 @@ public class RouteOfferService {
 
 	public Collection<RouteOffer> findAllByRouteId(int routeId) {
 		Collection<RouteOffer> result;
-		User actUser;
-
-		actUser = userService.findByPrincipal();
 
 		result = routeOfferRepository.findAllByRouteId(routeId);
-
-		if (!result.isEmpty()) {
-			Assert.isTrue(result.iterator().next().getRoute().getCreator().equals(actUser),
-					"service.routeOffer.delete.notPermitted");
-		}
 
 		return result;
 	}
