@@ -69,13 +69,15 @@
 				style="float: none; margin: 0 auto;">
 				<div class="row perfil-info-offer">
 					<div class="img-perfil-offer col-xs-4 col-sm-3 col-lg-2">
-						<img src="${ratingRow.author.photo}" class="img-thumbnail  profile-offer-img" style="margin-top: 8%;">
+						<a href="user/profile.do?userId=${ratingRow.author.id}">
+							<img src="${ratingRow.author.photo}" class="img-thumbnail  profile-offer-img" style="margin-top: 8%;">
+						</a>
 					</div>
 					<div>
-						<p><b><spring:message code="rating.author" /> : </b><a><jstl:out value="${ratingRow.author.userAccount.username}" /></a></p>
+						<p><b><spring:message code="rating.author" /> : </b><a href="user/profile.do?userId=${ratingRow.author.id}"><jstl:out value="${ratingRow.author.userAccount.username}" /></a></p>
 					</div>
 					<div>
-						<p><b><spring:message code="rating.user" /> : </b><a><jstl:out value="${ratingRow.user.userAccount.username}" /></a></p>
+						<p><b><spring:message code="rating.user" /> : </b><a href="user/profile.do?userId=${ratingRow.user.id}"><jstl:out value="${ratingRow.user.userAccount.username}" /></a></p>
 					</div>
 					<div>
 						<p><b><spring:message code="rating.value" /> : </b><a><jstl:out value="${ratingRow.value}" /></a></p>
