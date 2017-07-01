@@ -318,9 +318,10 @@
 </div>
 <script type="text/javascript">
 $(function() {
+	language = getCookie("language");
 	$('#datetimepicker1').datetimepicker({
 		viewMode : 'days',
-		locale: 'es',
+		locale: language,
 		format : 'DD/MM/YYYY'
 	});
 });          

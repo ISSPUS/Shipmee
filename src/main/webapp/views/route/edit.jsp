@@ -224,14 +224,15 @@ function initialize() {
 			}
 		// Monday is the first day of the week
 		});*/
+		language = getCookie("language");
 		$('#datetimepicker1').datetimepicker({
 			format : 'DD-MM-YYYY  HH:mm',
-			locale: 'es'
+			locale: language
 		});
 
 		$('#datetimepicker2').datetimepicker({
 			format : 'DD-MM-YYYY  HH:mm',
-			locale: 'es'
+			locale: language
 		});
 
 	});
