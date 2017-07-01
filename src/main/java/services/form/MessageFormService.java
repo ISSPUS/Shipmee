@@ -33,7 +33,7 @@ public class MessageFormService {
 		this.subject = subject;
 	}
 
-	@SafeHtml(whitelistType = WhiteListType.BASIC)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	@NotBlank
 	public String getBody() {
 		return body;
