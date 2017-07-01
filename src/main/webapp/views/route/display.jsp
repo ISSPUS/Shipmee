@@ -290,7 +290,7 @@
 			return false;
 		}else{
 			var node = document.getElementById('routePricesMessage');
-			node.innerHTML = node.innerHTML+"<br/><div class='error'><spring:message code='route.sizeprice.select' /></div>";
+			node.innerHTML = "<a><spring:message code='master.page.comissions' /></a><div class='error'><spring:message code='route.sizeprice.select' /></div>";
 			return true;
 		}
 	}
