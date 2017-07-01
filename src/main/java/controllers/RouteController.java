@@ -1,6 +1,7 @@
 package controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,11 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Route;
 import domain.RouteOffer;
+import domain.Shipment;
 import domain.SizePrice;
 import domain.User;
 import services.ActorService;
 import services.RouteOfferService;
 import services.RouteService;
+import services.ShipmentService;
 import services.SizePriceService;
 import services.UserService;
 
@@ -45,6 +48,9 @@ public class RouteController extends AbstractController {
 	
 	@Autowired
 	private RouteOfferService routeOfferService;
+	
+	@Autowired
+	private ShipmentService shipmentService;
 	// Constructors -----------------------------------------------------------
 	
 	public RouteController() {
@@ -109,10 +115,10 @@ public class RouteController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView seeThread(@RequestParam int routeId) {
+	public ModelAndView seeThread(@RequestParam int routeId, @RequestParam(required=false, defaultValue="1") int page) {
 		ModelAndView result;
 		
-		result = createListModelAndView(routeId);
+		result = createListModelAndView(routeId, page);
 		
 		return result;
 
@@ -148,18 +154,22 @@ public class RouteController extends AbstractController {
 		return result;
 	}		
 	
-	private ModelAndView createListModelAndView(int routeId){
+	private ModelAndView createListModelAndView(int routeId, @RequestParam(required=false, defaultValue="1") int page){
 		ModelAndView result;
 		Route route;
 		Collection<SizePrice> sizePrices;
 		Collection<RouteOffer> routeOffers;
 		User currentUser;
 		Boolean routeOffersIsEmpty;
+		Page<Shipment> shipmentsPage;
+		Pageable pageable;
+		Collection<Shipment> shipments;
 		
 		route = routeService.findOne(routeId);
 		sizePrices = sizePriceService.findAllByRouteId(routeId);
 		currentUser = null;
 		routeOffersIsEmpty = false;
+		shipments = new ArrayList<Shipment>();
 		
 		routeOffers = routeOfferService.findAllByRouteId(routeId);
 		
@@ -171,6 +181,10 @@ public class RouteController extends AbstractController {
 			currentUser = userService.findOne(route.getCreator().getId());
 		}else if (actorService.checkLogin()){
 			currentUser = userService.findByPrincipal();
+			
+			pageable = new PageRequest(page - 1, 5);
+			shipmentsPage = shipmentService.findAllByCurrentUser(pageable);
+			shipments = shipmentsPage.getContent();
 		}
 		
 		String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(route.getDepartureTime());
@@ -189,6 +203,7 @@ public class RouteController extends AbstractController {
 		result.addObject("sizePrices", sizePrices);
 		result.addObject("user", currentUser);
 		result.addObject("routeOffersIsEmpty", routeOffersIsEmpty);
+		result.addObject("shipments", shipments);
 		
 		return result;
 	}

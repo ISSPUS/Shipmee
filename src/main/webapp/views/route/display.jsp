@@ -266,9 +266,123 @@
 					</div>
 
 
+			<jstl:if test="${route.creator != user && not empty shipments}">
+					<div class="col-md-9">
+			<div class="profile-content">
+					
+					<div class="panel panel-default">
+					<div class="panel-body">
+						
+						<div class="table-container">
+					<table class="table table-filter">
+								<tbody>
+								
+								
+								<jstl:choose>
+					<jstl:when test="${not empty shipments}">
+						<jstl:forEach items="${shipments}" var="shipment">
+								
+									<tr>
+										
+										<td>
+											
+											
+										<div class="row">
+										
+											<div class="col-lg-3 text-center">
+												<a href="shipment/display.do?shipmentId=${shipment.id}">
+													<img src="${shipment.itemPicture}" class="media-photo-shipment">
+												</a>	
+											</div>
+										
+											<div class="info-salida col-lg-6" style="margin-bottom: 2%; font-size: 16px;">
+												<div class="cabecera">
+												<div class="title">
+													<h4><a href="shipment/display.do?shipmentId=${shipment.id}">${shipment.itemName}</a></h4>
+												</div>
+												
+												<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
+											
+												<i class="glyphicon glyphicon-sort"></i>
+											
+												<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"> <i
+													class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
+												</a>
+														
+												
+												</div>	
+						
+
+										
+
+												<i class="glyphicon glyphicon-plane"></i> 
+												<spring:message code="shipment.departureTime" />: 
+												<fmt:formatDate value="${shipment.departureTime}" pattern="dd/MM/yyyy '-' HH:mm" />
+												
+												
+												<br/>
+												<i class="glyphicon glyphicon-plane"></i> 
+												<spring:message code="shipment.maximumArriveTime" />: 
+												<fmt:formatDate value="${shipment.maximumArriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
+												
+													
+											</div>
+											<div class="col-lg-3 profile-userbuttons" style="margin-top: 5%;">
+											
+												<div class="price">${shipment.price}&#8364;</div>	
+												<button type="button" class="btn button-ok btn-block" style="font-size: 15px;" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}&shipmentId=${shipment.id}';"><spring:message code="route.details" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>	
+											
+
+											</div>
+										</div>
+											
+										
+											
+										</td>
+									</tr>
+									</jstl:forEach>
+					</jstl:when>
+					<jstl:otherwise>
+					</jstl:otherwise>
+				</jstl:choose>
+								</tbody>
+							</table>
+				<div id="pagination" class="copyright" style="text-align: center;">
+					
+						<script>
+							$('#pagination').bootpag({
+								total : <jstl:out value="${total_pages}"></jstl:out>,
+								page : <jstl:out value="${p}"></jstl:out>,
+								maxVisible : 3,
+								leaps : true,
+								firstLastUse : true,
+								first : '<',
+					            last: '>',
+								wrapClass : 'pagination',
+								activeClass : 'active',
+								disabledClass : 'disabled',
+								nextClass : 'next',
+								prevClass : 'prev',
+								lastClass : 'last',
+								firstClass : 'first'
+							}).on('page', function(event, num) {
+								window.location.href = "${urlPage}" + num + "";
+								page = 1
+							});
+						</script>
+					
+					</div>
+
+				</div>
 
 
 
+
+			</div>
+</div></div>
+
+		</div>
+		</jstl:if>
 
 
 				</div>
