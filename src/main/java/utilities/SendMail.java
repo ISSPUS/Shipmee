@@ -24,7 +24,7 @@ public class SendMail{
 		
 		MimeMessageHelper message;
 		try {
-			message = new MimeMessageHelper(mimeMessage, true);
+			message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 			message.setFrom(from);
 			message.setTo(to);
 			message.setSubject(subject);
