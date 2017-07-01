@@ -24,6 +24,14 @@
 .navbar-collapse {
   max-height: none ! important;
 }
+
+
+.acortar{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	
+}
 </style>
 
 	<!-- Fixed navbar -->
@@ -144,11 +152,11 @@
 						</li>
 						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
 							data-toggle="dropdown"><spring:message
-									code="master.page.profile" /> (<security:authentication
-									property="principal.username" />)<b class="caret"></b></a>
+									code="master.page.profile" /><b class="caret"></b></a>
 							<ul class="dropdown-menu">
+									<li style="text-align:center"><div class="acortar" style="color: #00b3fe;font-weight: 700;font-size: 16px;"><security:authentication
+									property="principal.username" /></div><hr style="margin-top: 0px;margin-bottom: 0px;border: 0;border-top: 1px solid #eee;"></li>
 								<security:authorize access="hasRole('USER')">
-							
 									<li><a href="user/profile.do"><spring:message
 												code="master.page.info" /></a></li>
 									<li><a href="feepayment/user/list.do?page=1"><spring:message
