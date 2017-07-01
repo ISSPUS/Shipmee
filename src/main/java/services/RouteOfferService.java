@@ -24,6 +24,7 @@ import com.paypal.sdk.exceptions.OAuthException;
 import domain.PayPalObject;
 import domain.Route;
 import domain.RouteOffer;
+import domain.Shipment;
 import domain.User;
 import repositories.RouteOfferRepository;
 import utilities.ServerConfig;
@@ -56,6 +57,9 @@ public class RouteOfferService {
 	
 	@Autowired
 	private PayPalService payPalService;
+	
+	@Autowired
+	private ShipmentService shipmentService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -65,15 +69,21 @@ public class RouteOfferService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public RouteOffer create(int routeId) {
+	public RouteOffer create(int routeId, int shipmentId) {
 		RouteOffer res;
 		Route route;
+		Shipment shipment;
 
 		route = routeService.findOne(routeId);
 		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
 
 		res = new RouteOffer();
 		res.setRoute(route);
+		if(shipmentId != 0) {
+			shipment = shipmentService.findOne(shipmentId);
+			res.setShipment(shipment);
+		}
+		
 		res.setUser(userService.findByPrincipal());
 
 		return res;
@@ -85,7 +95,7 @@ public class RouteOfferService {
 		act = this.findOne(routeOfferId);
 		Assert.notNull(act, "message.error.routeOffer.mustExist");
 
-		res = this.create(act.getRoute().getId());
+		res = this.create(act.getRoute().getId(), 0);
 		res.setAmount(act.getAmount());
 		res.setDescription(act.getDescription());
 
@@ -108,11 +118,17 @@ public class RouteOfferService {
 				Assert.isTrue(!tmp.getAcceptedByCarrier() && !tmp.getRejectedByCarrier(),
 						"message.error.routeOffer.notAcceptedOrRejected");
 			} else {
-				tmp = this.create(input.getRoute().getId());
+				tmp = this.create(input.getRoute().getId(), 0);
 			}
 
 			tmp.setAmount(input.getAmount());
 			tmp.setDescription(input.getDescription());
+			tmp.setShipment(input.getShipment());
+			
+			if(tmp.getShipment() != null) {
+				Assert.isTrue(actUser.getId() == tmp.getShipment().getCreator().getId());
+			}
+			
 		} else if (actUser.equals(input.getRoute().getCreator())) { // User that
 																	// put the
 																	// offer

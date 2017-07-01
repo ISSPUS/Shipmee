@@ -259,7 +259,7 @@ public class FeePaymentService {
 			break;
 			
 		case 2:
-			ro = routeOfferService.create(id);
+			ro = routeOfferService.create(id, 0);
 			ro.setAmount(amount);
 			ro.setDescription(description);
 			

@@ -247,7 +247,7 @@ public class RouteService {
 		
 		RouteOffer routeOffer;
 		
-		routeOffer = routeOfferService.create(routeId);
+		routeOffer = routeOfferService.create(routeId, 0);
 		routeOffer.setAmount(sizePrice.getPrice());
 		routeOffer.setDescription("This client accepts the conditions of your Route");
 		

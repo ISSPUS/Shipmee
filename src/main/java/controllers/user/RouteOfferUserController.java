@@ -82,11 +82,11 @@ public class RouteOfferUserController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int routeId) {
+	public ModelAndView create(@RequestParam int routeId, @RequestParam(required=false, defaultValue="0") int shipmentId) {
 		ModelAndView result;
 		RouteOffer routeOffer;
 
-		routeOffer = routeOfferService.create(routeId);
+		routeOffer = routeOfferService.create(routeId, shipmentId);
 		result = createEditModelAndView(routeOffer);
 
 		return result;

@@ -98,7 +98,7 @@ public class FeePaymentFormService {
 			break;
 			
 		case 2:
-			routeOffer = routeOfferService.create(feePaymentForm.getId());
+			routeOffer = routeOfferService.create(feePaymentForm.getId(), 0);
 			routeOffer.setAmount(feePaymentForm.getAmount());
 			routeOffer.setDescription(feePaymentForm.getDescription());
 			routeOffer = routeOfferService.save(routeOffer);
