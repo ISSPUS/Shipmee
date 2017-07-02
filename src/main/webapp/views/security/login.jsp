@@ -9,10 +9,19 @@
 
 
 <div class="container containerLogin">
-
+		<jstl:if test="${register == true}">
+			<div class="text-center modal-content"
+				style="padding: 1%; border-color: #f1f3fa;margin-bottom: 2%;">
+				<div>
+					<span title="<spring:message code="user.required"/>"
+						class="glyphicon glyphicon-ok" style="color: #3c763d;"></span>
+					<span><spring:message code="user.register.ok" /></span>
+				</div>
+			</div>
+		</jstl:if>
+		
 	<div id="loginbox"
 		class="mainbox col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
