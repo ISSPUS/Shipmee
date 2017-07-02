@@ -156,10 +156,10 @@ filter: brightness(110%);
 		<a class="payPaypal" href="https://paypal.com/myaccount"
 			target="_blank"> <jstl:if test="${feePaymentForm.type > 2}">
 				<a class="payPaypal"
-					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.offerId}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
+					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.offerId}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}&shipmentId=${feePaymentForm.shipmentId}">
 			</jstl:if> <jstl:if test="${feePaymentForm.type < 3}">
 				<a class="payPaypal"
-					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.id}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
+					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.id}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}&shipmentId=${feePaymentForm.shipmentId}">
 			</jstl:if> <img class="image-p"
 			src="http://www.northportgirlslacrosse.com/sites/default/files/images/paypal-paynow-button-300x89.png"></a>
 	</div>
@@ -179,6 +179,7 @@ filter: brightness(110%);
 				<form:hidden path="amount" />
 				<form:hidden path="offerId" />
 				<form:hidden path="type" />
+				<form:hidden path="shipmentId" />
 
 				<div class="form-group">
 					<form:label path="creditCard.holderName" class="control-label col-md-2" for="holderName">

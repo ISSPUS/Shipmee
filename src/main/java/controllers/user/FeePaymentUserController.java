@@ -93,12 +93,12 @@ public class FeePaymentUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int type, @RequestParam int id,
 			@RequestParam (required=false, defaultValue="0") Integer sizePriceId, @RequestParam (required=false, defaultValue = "0") Double amount,
-			@RequestParam (required=false) String description) {
+			@RequestParam (required=false) String description, @RequestParam (required=false, defaultValue="0") Integer shipmentId) {
 		
 		ModelAndView result;
 		FeePaymentForm feePaymentForm;
 
-		feePaymentForm = feePaymentFormService.create(type, id, sizePriceId, amount, description);
+		feePaymentForm = feePaymentFormService.create(type, id, sizePriceId, amount, description, shipmentId);
 		result = createEditModelAndView(feePaymentForm);
 
 		return result;

@@ -87,6 +87,11 @@
 										<b><spring:message code="routeOffer.status" />: <span style="color: #ffb66d"><spring:message code="routeOffer.pending" /></span></b>
 									</p>
 								</jstl:if>
+								<jstl:if test="${routeOfferRow.shipment != null}">
+									<b><spring:message code="routeOffer.shipment" />: <a href="shipment/display.do?shipmentId=${routeOfferRow.shipment.id}">
+									<jstl:out value="${routeOfferRow.shipment.itemName}" />
+								</a></b>
+								</jstl:if>
 
 							</h5>
 						</div>

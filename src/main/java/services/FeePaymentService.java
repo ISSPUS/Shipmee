@@ -234,7 +234,7 @@ public class FeePaymentService {
 	// Other business methods -------------------------------------------------
 	
 	
-	public FeePayment createAndSave(int type, int id, int sizePriceId, double amount, String description){
+	public FeePayment createAndSave(int type, int id, int sizePriceId, double amount, String description, int shipmentId){
 		FeePayment res;
 		RouteOffer ro;
 		ShipmentOffer so;
@@ -259,7 +259,7 @@ public class FeePaymentService {
 			break;
 			
 		case 2:
-			ro = routeOfferService.create(id, 0);
+			ro = routeOfferService.create(id, shipmentId);
 			ro.setAmount(amount);
 			ro.setDescription(description);
 			

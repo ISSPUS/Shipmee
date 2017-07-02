@@ -58,14 +58,14 @@ public class PayPalUserController extends AbstractController {
 	@RequestMapping(value = "/pay", method = RequestMethod.GET)
 	public ModelAndView adaptiveCreate(@RequestParam int type, @RequestParam int id,
 			@RequestParam (required=false, defaultValue="0") Integer sizePriceId, @RequestParam (required=false, defaultValue = "0") Double amount,
-			@RequestParam (required=false) String description) {
+			@RequestParam (required=false) String description, @RequestParam (required=false, defaultValue="0") int shipmentId) {
 		ModelAndView result;
 
 		PayResponse p = null;
 		FeePayment feePayment;
 
 		try {
-			feePayment = feePaymentService.createAndSave(type, id, sizePriceId, amount, description);
+			feePayment = feePaymentService.createAndSave(type, id, sizePriceId, amount, description, shipmentId);
 			
 			p = payPalService.authorizePay(feePayment.getId());
 			result = new ModelAndView("redirect:" + PayPalConfig.getPayRedirectUrl()+ "?cmd=_ap-payment&paykey=" + p.getPayKey());

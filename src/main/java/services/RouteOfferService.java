@@ -25,6 +25,7 @@ import domain.PayPalObject;
 import domain.Route;
 import domain.RouteOffer;
 import domain.Shipment;
+import domain.SizePrice;
 import domain.User;
 import repositories.RouteOfferRepository;
 import utilities.ServerConfig;
@@ -60,6 +61,9 @@ public class RouteOfferService {
 	
 	@Autowired
 	private ShipmentService shipmentService;
+	
+	@Autowired
+	private SizePriceService sizePriceService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -73,6 +77,7 @@ public class RouteOfferService {
 		RouteOffer res;
 		Route route;
 		Shipment shipment;
+		Collection<SizePrice> sizePrices;
 
 		route = routeService.findOne(routeId);
 		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
@@ -82,6 +87,17 @@ public class RouteOfferService {
 		if(shipmentId != 0) {
 			shipment = shipmentService.findOne(shipmentId);
 			res.setShipment(shipment);
+			
+			sizePrices = sizePriceService.findAllByRouteId(routeId);
+			for(SizePrice sizePrice : sizePrices) {
+				if(sizePrice.getSize().equals(shipment.getItemSize())) {
+					if(sizePrice.getPrice() < shipment.getPrice()) {
+						res.setAmount(sizePrice.getPrice());
+					} else {
+						res.setAmount(shipment.getPrice());
+					}
+				}
+			}
 		}
 		
 		res.setUser(userService.findByPrincipal());
@@ -95,7 +111,7 @@ public class RouteOfferService {
 		act = this.findOne(routeOfferId);
 		Assert.notNull(act, "message.error.routeOffer.mustExist");
 
-		res = this.create(act.getRoute().getId(), 0);
+		res = this.create(act.getRoute().getId(), act.getShipment().getId());
 		res.setAmount(act.getAmount());
 		res.setDescription(act.getDescription());
 
@@ -118,7 +134,12 @@ public class RouteOfferService {
 				Assert.isTrue(!tmp.getAcceptedByCarrier() && !tmp.getRejectedByCarrier(),
 						"message.error.routeOffer.notAcceptedOrRejected");
 			} else {
-				tmp = this.create(input.getRoute().getId(), 0);
+				if(input.getShipment() != null) {
+					tmp = this.create(input.getRoute().getId(), input.getShipment().getId());
+				} else {
+					tmp = this.create(input.getRoute().getId(), 0);
+				}
+				
 			}
 
 			tmp.setAmount(input.getAmount());
