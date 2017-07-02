@@ -105,6 +105,18 @@
 
 		</div>
 		<div class="col-md-9">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
+					style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
+					<div class="text-center profile-userbuttons">
+						<button class="btn button-view" style="font-size: 20px;"
+							onclick="location.href = 'shipment/user/create.do';">
+							<span class="fa fa-plus-circle"></span>
+							<spring:message code="shipment.create" />
+						</button>
+					</div>
+				</div>
+			</div>
 			<div class="profile-content">
 
 				<div class="panel panel-default">
