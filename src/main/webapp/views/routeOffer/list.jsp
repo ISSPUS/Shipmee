@@ -134,17 +134,17 @@
 						</div>
 					</div>
 				</div>
-				<jstl:if test="${routeOffer.description != null}">
+				<jstl:if test="${routeOfferRow.description != null}">
 				<hr>
 				</jstl:if>
 				<div class="row description-offer">
 					<div class="descipcion-offer-inside col-xs-12"
 						style="font-family: sans-serif; font-size: 14px;">
-						<jstl:out value="${routeOffer.description}" />
+						<jstl:out value="${routeOfferRow.description}" />
 					</div>
 				</div>
 				<jstl:choose>
-					<jstl:when test="${routeOffer.description != null}">
+					<jstl:when test="${routeOfferRow.description != null}">
 						<hr>
 					</jstl:when>
 					<jstl:otherwise>

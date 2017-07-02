@@ -34,7 +34,7 @@ public class LoginController extends AbstractController {
 	public ModelAndView login(
 			@Valid @ModelAttribute final Credentials credentials,
 			final BindingResult bindingResult,
-			@RequestParam(required = false) final boolean showError) {
+			@RequestParam(required = false) final boolean showError,@RequestParam(required = false) final boolean register) {
 		Assert.notNull(credentials);
 		Assert.notNull(bindingResult);
 		
@@ -43,6 +43,8 @@ public class LoginController extends AbstractController {
 		result = new ModelAndView("security/login");
 		result.addObject("credentials", credentials);
 		result.addObject("showError", showError);
+		result.addObject("register", register);
+
 
 		return result;
 	}

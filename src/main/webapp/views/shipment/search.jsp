@@ -49,7 +49,7 @@
 <div class="blue-barra">
 	    <div class="container">
 			<div class="row">
-				<h3><spring:message code="shipment.shipment" /></h3>
+				<h3><spring:message code="shipment.shipments" /></h3>
 			</div><!-- /row -->
 	    </div>
 	</div>

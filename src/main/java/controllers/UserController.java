@@ -58,8 +58,7 @@ public class UserController extends AbstractController {
 			try {
 				userService.save(reconstructed);
 
-				result = new ModelAndView("redirect:/security/login.do");
-				result.addObject("message", "user.register.ok");
+				result = new ModelAndView("redirect:/security/login.do?register=true");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(actorForm, "user.register.error");
 			}
