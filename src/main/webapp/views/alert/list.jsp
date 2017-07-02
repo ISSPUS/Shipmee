@@ -97,7 +97,7 @@ margin-bottom: 5%;
 
 							<div class="col-xs-12 col-sm-6 col-md-8">
 
-								<div class="alerta-info">
+								<div class="alerta-info frontera">
 									<h4>
 										
 										<jstl:choose>

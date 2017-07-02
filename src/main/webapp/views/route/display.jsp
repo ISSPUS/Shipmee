@@ -42,6 +42,12 @@
 	font-style: normal;
 }
 
+
+.separa_imagen{
+	margin-bottom:5%;
+
+}
+
 </style>
 
 <div class="blue-barra">
@@ -203,8 +209,52 @@
                     
                         <tr class="table-cabecera">
                             <th><spring:message code="route.table.choose" /></th>
-                            <th><spring:message code="route.table.size" /></th>
-                            <th><spring:message code="route.table.price" /></th>
+                            <th><spring:message code="route.table.size" /> 
+                            
+                            
+                            
+                            
+                            	<!-- FEEDBACK -->
+								<a title="InfoSize" data-toggle="modal"
+								data-target="#infoSize" href="#infoSize" style="z-index: 5;"><span class="glyphicon glyphicon-info-sign"></span></a> 
+								
+								<!-- Modal -->
+								<div class="modal fade" id="infoSize" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title text-center">
+													<spring:message code="route.sizes.window" />
+												</h4>
+											</div>
+											<div class="modal-body">
+											
+											<div class="separa_imagen"><img src="images/bolsillo.svg" style="width: 10%;"><br>
+											<spring:message code="shipment.sizeS"/></div>
+											
+											<div class="separa_imagen"><img src="images/mochila.svg" style="width: 20%;"><br>
+											<spring:message code="shipment.sizeM"/></div>
+											
+											<div class="separa_imagen"><img src="images/maleta.svg" style="width: 25%;"><br>
+											<spring:message code="shipment.sizeL"/></div>
+											
+											<div class="separa_imagen"><img src="images/maletero2.svg" style="width: 40%;"><br>
+											<spring:message code="shipment.sizeXL"/></div>
+											
+											</div>
+											
+										</div>
+									</div>
+								</div>
+								
+								
+								
+								
+								
+								</th>
+                            <th><spring:message code="route.table.price" /> </th>
                         </tr>
                    
                     <tbody>
