@@ -214,13 +214,13 @@
 
 								<div class="row info1 col-xs-12 col-sm-12 text-center" style="margin-bottom:1%;">
 											
-										<jstl:if test="${shipment.creator != user && user.isVerified}">
+										<jstl:if test="${shipment.creator != user && user.isVerified && shipment.carried == null}">
 											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
 											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
 										
 										</jstl:if>
-										<jstl:if test="${shipment.creator != user && !user.isVerified}">
+										<jstl:if test="${shipment.creator != user && !user.isVerified && shipment.carried == null}">
 											
 											<a href="user/user/edit.do"><spring:message code="message.error.shipmentOffer.verifiedCarrier.extended" /></a>
 										
@@ -232,7 +232,7 @@
 								
 					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
 						
-						<jstl:if test="${shipment.creator != user && user.isVerified}">
+						<jstl:if test="${shipment.creator != user && user.isVerified && shipment.carried == null}">
 						<button type="submit" class="btn button-view btn-primary"
 							onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-plus-circle"></span>
@@ -240,7 +240,7 @@
 						</button>
 						</jstl:if>
 						
-						<jstl:if test="${shipment.creator == user && shipmentOffersIsEmpty}">
+						<jstl:if test="${shipment.creator == user && shipmentOffersIsEmpty && shipment.carried == null}">
 						<button type="submit" class="btn button-view btn-primary"
 							onclick="location.href = 'shipment/user/edit.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-plus-circle"></span>

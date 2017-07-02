@@ -236,6 +236,10 @@ public class RouteOfferService {
 		
 		RouteOffer routeOffer = findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
+		Shipment shipment;
+		User user;
+		
+		user = userService.findByPrincipal();
 		
 		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
 		Assert.isTrue(routeService.checkFutureDepartureDate(route), "message.error.route.checkFutureDepartureDate");
@@ -253,6 +257,14 @@ public class RouteOfferService {
 		
 		routeOffer.setAcceptedByCarrier(true); // The offer is accepted.
 		routeOffer.setRejectedByCarrier(false); // The offer is not rejected.
+		
+		if(routeOffer.getShipment() != null) {
+			shipment = routeOffer.getShipment();
+			
+			shipment.setCarried(user);
+			shipment = shipmentService.save(shipment);
+		}
+		
 		save(routeOffer);
 		
 		/*
