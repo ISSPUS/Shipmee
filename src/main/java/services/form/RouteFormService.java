@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 
 import domain.Route;
 import domain.User;
@@ -118,5 +120,35 @@ public class RouteFormService {
 		Route route;
 		route = routeService.findOne(routeForm.getRouteId());
 		routeService.delete(route);
+	}
+
+	public BindingResult checkConditionsRoute(RouteForm routeForm,BindingResult binding) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+		Date departureTime, arriveTime;
+
+		departureTime = null;
+		arriveTime = null;
+		
+		try {
+			departureTime = formatter.parse(routeForm.getDepartureTime().toString());
+			arriveTime = formatter.parse(routeForm.getArriveTime().toString());
+		} catch (ParseException e) {
+		}
+		
+		this.addBinding(binding, departureTime.after(new Date()), "departureTime", "message.error.route.futureDepartureDate", null);
+		this.addBinding(binding, arriveTime.after(new Date()), "arriveTime", "message.error.route.futureArrivalDate", null);
+
+		this.addBinding(binding, arriveTime.after(departureTime), "arriveTime", "message.error.route.checkArriveTimeAfterDepartureDate", null);
+		this.addBinding(binding, routeForm.getItemEnvelope().equals("Open") || routeForm.getItemEnvelope().equals("Closed") ||
+				routeForm.getItemEnvelope().equals("Both") || routeForm.getItemEnvelope().equals("Abierto") ||
+				routeForm.getItemEnvelope().equals("Cerrado") || routeForm.getItemEnvelope().equals("Ambos"), "itemEnvelope", "message.error.route.checkItemEnvelope", null);
+
+		
+		return binding;
+	}
+	private void addBinding(Errors errors, boolean mustBeTrue, String field, String validationError, Object[] other){
+		if (!mustBeTrue){
+			errors.rejectValue(field, validationError, other, "");
+		}
 	}
 }
