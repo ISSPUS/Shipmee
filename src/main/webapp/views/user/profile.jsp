@@ -101,7 +101,35 @@
 						<div class="datos text-left">
 										 <span> <strong><spring:message	code="user.email" />: </strong>${user.email}</span> <br />
 										 <span> <strong><spring:message code="user.phone" />: </strong>${user.phone}</span> <br />
-										 <span> <strong><spring:message code="user.dni" />: </strong>${user.dni}</span> <br />
+										 <span> <strong><spring:message code="user.dni" />: </strong>${user.dni}
+										 <a data-toggle="modal"
+											data-target="#dniPhoto" href="#dniPhoto" style="z-index: 5;">(<spring:message code="user.view.link" />)</a> 
+										 </span> <br />
+										 
+										
+								<!-- Modal -->
+								<div class="modal fade" id="dniPhoto" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title text-center">
+													<spring:message code="user.photo" />
+												</h4>
+											</div>
+											<div class="modal-body" style="text-align: center">
+											
+											<span><img src="${user.dniPhoto}"></span><br />
+											
+											</div>
+											
+										</div>
+									</div>
+								</div>
+										 
+										 
+										 
 										 <span> <strong><spring:message code="user.localePreferences" />: </strong>
 										 <jstl:if test="${user.localePreferences == 'es'}">
 											<spring:message code="user.localePreferences.spanish" />
@@ -110,19 +138,18 @@
 											<spring:message code="user.localePreferences.english" />
 										 </jstl:if>
 										 </span> <br /><br />
-										 <span> <strong><spring:message code="user.fundTransferPreference" /></strong> (<a href="fundTransferPreference/user/edit.do"><spring:message code="user.edit" /></a>)</span><br /><br /> 
+										 <span> <strong><spring:message code="user.fundTransferPreference" /></strong> <a href="fundTransferPreference/user/edit.do">(<spring:message code="user.edit" />)</a></span><br /><br /> 
 										
 										<jstl:if test="${isPrincipal && !user.isVerified && 
 											(user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')}">
 											<span> <strong><spring:message code="user.isVerified" /></strong>
-											(<a href="user/user/edit.do"><spring:message code="user.verify" /></a>)</span>
+											<a href="user/user/edit.do">(<spring:message code="user.verify" />)</a></span>
 										</jstl:if>
 										
 										<jstl:if test="${isPrincipal && !user.isVerified && 
 											(user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')}">
 											<span><strong><spring:message code="user.notVerified.waiting" /></strong></span>
-										</jstl:if>
-				
+										</jstl:if>				
 						</div>
 												
 						<div class="datos text-center">
