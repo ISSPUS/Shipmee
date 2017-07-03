@@ -82,11 +82,11 @@ public class RouteOfferUserController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int routeId) {
+	public ModelAndView create(@RequestParam int routeId, @RequestParam(required=false, defaultValue="0") int shipmentId) {
 		ModelAndView result;
 		RouteOffer routeOffer;
 
-		routeOffer = routeOfferService.create(routeId);
+		routeOffer = routeOfferService.create(routeId, shipmentId);
 		result = createEditModelAndView(routeOffer);
 
 		return result;
@@ -121,13 +121,20 @@ public class RouteOfferUserController extends AbstractController {
 	public ModelAndView save(@Valid RouteOffer routeOffer, BindingResult binding) {
 		ModelAndView result;
 		String messageError;
+		int shipmentId;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(routeOffer);
 		} else {
 			try {
+				if(routeOffer.getShipment() != null) {
+					shipmentId = routeOffer.getShipment().getId();
+				} else {
+					shipmentId = 0;
+				}
+				
 				result = new ModelAndView("redirect:../../feepayment/user/create.do?type=2&id=" + routeOffer.getRoute().getId()
-						+ "&amount=" + routeOffer.getAmount() + "&description=" + routeOffer.getDescription());
+						+ "&amount=" + routeOffer.getAmount() + "&description=" + routeOffer.getDescription() + "&shipmentId=" + shipmentId);
 			} catch (Throwable oops) {
 				log.error(oops.getMessage());
 				messageError = "routeOffer.commit.error";

@@ -17,6 +17,7 @@ public class FeePaymentForm {
 	private int sizePriceId;
 	private int offerId;
 	private int type;
+	private int shipmentId;
 
 	@Valid
 	public CreditCard getCreditCard() {
@@ -88,5 +89,15 @@ public class FeePaymentForm {
 		this.type = type;
 	}
 
+	@Min(0)
+	public int getShipmentId() {
+		return shipmentId;
+	}
+
+	public void setShipmentId(int shipmentId) {
+		this.shipmentId = shipmentId;
+	}
+
+	
 	
 }

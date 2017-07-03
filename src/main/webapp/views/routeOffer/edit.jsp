@@ -42,6 +42,7 @@
 			<form:hidden path="user" />
 			<form:hidden path="acceptedByCarrier" />
 			<form:hidden path="rejectedByCarrier" />
+			<form:hidden path="shipment"/>
 
 			<div class="form-group">
 				<form:label path="amount" class="control-label col-md-2"

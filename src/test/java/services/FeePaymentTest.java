@@ -123,7 +123,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -217,7 +217,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -311,7 +311,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -405,7 +405,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, 0, 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, 0, 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -496,7 +496,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 //		creditCard.setHolderName("Nombre de Prueba");
 //		creditCard.setBrandName("VISA");
@@ -587,7 +587,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -679,7 +679,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -778,7 +778,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -877,7 +877,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -976,7 +976,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, 0, 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, 0, 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1075,7 +1075,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 //		creditCard.setHolderName("Nombre de Prueba");
 //		creditCard.setBrandName("VISA");
@@ -1174,7 +1174,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1278,7 +1278,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1378,7 +1378,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1478,7 +1478,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1578,7 +1578,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, 0, sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, 0, sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1678,7 +1678,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 //		creditCard.setHolderName("Nombre de Prueba");
 //		creditCard.setBrandName("VISA");
@@ -1778,7 +1778,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1882,7 +1882,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1982,7 +1982,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");

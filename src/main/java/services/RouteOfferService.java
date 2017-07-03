@@ -24,6 +24,8 @@ import com.paypal.sdk.exceptions.OAuthException;
 import domain.PayPalObject;
 import domain.Route;
 import domain.RouteOffer;
+import domain.Shipment;
+import domain.SizePrice;
 import domain.User;
 import repositories.RouteOfferRepository;
 import utilities.ServerConfig;
@@ -56,6 +58,12 @@ public class RouteOfferService {
 	
 	@Autowired
 	private PayPalService payPalService;
+	
+	@Autowired
+	private ShipmentService shipmentService;
+	
+	@Autowired
+	private SizePriceService sizePriceService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -65,15 +73,33 @@ public class RouteOfferService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public RouteOffer create(int routeId) {
+	public RouteOffer create(int routeId, int shipmentId) {
 		RouteOffer res;
 		Route route;
+		Shipment shipment;
+		Collection<SizePrice> sizePrices;
 
 		route = routeService.findOne(routeId);
 		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
 
 		res = new RouteOffer();
 		res.setRoute(route);
+		if(shipmentId != 0) {
+			shipment = shipmentService.findOne(shipmentId);
+			res.setShipment(shipment);
+			
+			sizePrices = sizePriceService.findAllByRouteId(routeId);
+			for(SizePrice sizePrice : sizePrices) {
+				if(sizePrice.getSize().equals(shipment.getItemSize())) {
+					if(sizePrice.getPrice() < shipment.getPrice()) {
+						res.setAmount(sizePrice.getPrice());
+					} else {
+						res.setAmount(shipment.getPrice());
+					}
+				}
+			}
+		}
+		
 		res.setUser(userService.findByPrincipal());
 
 		return res;
@@ -85,7 +111,7 @@ public class RouteOfferService {
 		act = this.findOne(routeOfferId);
 		Assert.notNull(act, "message.error.routeOffer.mustExist");
 
-		res = this.create(act.getRoute().getId());
+		res = this.create(act.getRoute().getId(), act.getShipment().getId());
 		res.setAmount(act.getAmount());
 		res.setDescription(act.getDescription());
 
@@ -108,11 +134,22 @@ public class RouteOfferService {
 				Assert.isTrue(!tmp.getAcceptedByCarrier() && !tmp.getRejectedByCarrier(),
 						"message.error.routeOffer.notAcceptedOrRejected");
 			} else {
-				tmp = this.create(input.getRoute().getId());
+				if(input.getShipment() != null) {
+					tmp = this.create(input.getRoute().getId(), input.getShipment().getId());
+				} else {
+					tmp = this.create(input.getRoute().getId(), 0);
+				}
+				
 			}
 
 			tmp.setAmount(input.getAmount());
 			tmp.setDescription(input.getDescription());
+			tmp.setShipment(input.getShipment());
+			
+			if(tmp.getShipment() != null) {
+				Assert.isTrue(actUser.getId() == tmp.getShipment().getCreator().getId());
+			}
+			
 		} else if (actUser.equals(input.getRoute().getCreator())) { // User that
 																	// put the
 																	// offer
@@ -199,6 +236,10 @@ public class RouteOfferService {
 		
 		RouteOffer routeOffer = findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
+		Shipment shipment;
+		User user;
+		
+		user = userService.findByPrincipal();
 		
 		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
 		Assert.isTrue(routeService.checkFutureDepartureDate(route), "message.error.route.checkFutureDepartureDate");
@@ -216,6 +257,14 @@ public class RouteOfferService {
 		
 		routeOffer.setAcceptedByCarrier(true); // The offer is accepted.
 		routeOffer.setRejectedByCarrier(false); // The offer is not rejected.
+		
+		if(routeOffer.getShipment() != null) {
+			shipment = routeOffer.getShipment();
+			
+			shipment.setCarried(user);
+			shipment = shipmentService.save(shipment);
+		}
+		
 		save(routeOffer);
 		
 		/*
