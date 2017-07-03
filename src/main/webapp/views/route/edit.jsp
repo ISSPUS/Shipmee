@@ -161,8 +161,8 @@
 				<!-- Action buttons -->
 				<div class="text-center profile-userbuttons">
 					<button type="submit" name="save" class="btn  btn-primary">
-						<span class="glyphicon glyphicon-floppy-disk"></span>
-						<spring:message code="route.save" />
+						<spring:message code="route.edit.next" />
+						<span class="glyphicon glyphicon-arrow-right"></span>
 					</button>
 
 					<jstl:if test="${routeForm.routeId != 0}">
@@ -224,14 +224,15 @@ function initialize() {
 			}
 		// Monday is the first day of the week
 		});*/
+		language = getCookie("language");
 		$('#datetimepicker1').datetimepicker({
 			format : 'DD-MM-YYYY  HH:mm',
-			locale: 'es'
+			locale: language
 		});
 
 		$('#datetimepicker2').datetimepicker({
 			format : 'DD-MM-YYYY  HH:mm',
-			locale: 'es'
+			locale: language
 		});
 
 	});

@@ -261,17 +261,24 @@ function initialize() {
 	$('#origin').attr('placeholder', '');
 	$('#destination').attr('placeholder', '');
 
-
+	
 	$(function() {
+		language = getCookie("language");
 		$('#datetimepicker1').datetimepicker({
-			format : 'DD-MM-YYYY  HH:mm',
-			locale: 'es'
+				format : 'DD-MM-YYYY  HH:mm',
+				locale: language
 		});
 
 		$('#datetimepicker2').datetimepicker({
 			format : 'DD-MM-YYYY  HH:mm',
-			locale: 'es'
+			locale: language
 		});
 
 	});
+	
+	
+	
+	
+	
+	
 </script>

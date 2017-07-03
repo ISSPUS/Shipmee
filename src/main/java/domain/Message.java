@@ -46,7 +46,7 @@ public class Message extends DomainEntity {
 
 	@NotBlank
 	@Column(length = 5000)
-	@SafeHtml(whitelistType = WhiteListType.NONE)
+	//@SafeHtml(whitelistType = WhiteListType.BASIC)
 	public String getBody() {
 		return body;
 	}

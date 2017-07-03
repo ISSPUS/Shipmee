@@ -49,7 +49,7 @@
 <div class="blue-barra">
 	    <div class="container">
 			<div class="row">
-				<h3><spring:message code="shipment.shipment" /></h3>
+				<h3><spring:message code="shipment.shipments" /></h3>
 			</div><!-- /row -->
 	    </div>
 	</div>
@@ -326,9 +326,10 @@ function initialize() {
 
 
 	$(function() {
+		language = getCookie("language");
 		$('#datetimepicker1').datetimepicker({
 			viewMode : 'days',
-			locale: 'es',
+			locale: language,
 			format : 'DD/MM/YYYY'
 		});
 	});

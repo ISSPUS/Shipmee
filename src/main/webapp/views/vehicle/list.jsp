@@ -56,6 +56,7 @@
 .panel-default {
 	margin: 0 auto;
 	float: None;
+	margin-bottom: 1%;
 }
 
 .row-vehicle {
@@ -112,21 +113,21 @@
 								<img src="${vehicle.picture}" class="media-photo-shipment"
 									style="padding: 1%; margin-top: 10%" />
 							</div>
-							<div class="col-xs-7 col-sm-6 col-md-3">
+							<div class="col-xs-7 col-sm-6 col-md-6">
 
-								<div class="car-info">
+								<div class="car-info frontera">
 									<h4>
 										<a>${vehicle.brand}</a>
 									</h4>
 									<h5>
 										<spring:message code="vehicle.model" />
 										:
-										<jstl:out value="${vehicle.model}" />
+										<a><jstl:out value="${vehicle.model}" /></a>
 									</h5>
 									<h5>
 										<spring:message code="vehicle.color" />
 										:
-										<jstl:out value="${vehicle.color}" />
+										<a><jstl:out value="${vehicle.color}" /></a>
 									</h5>
 								</div>
 							</div>

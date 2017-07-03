@@ -185,6 +185,12 @@
 			<div class="text-center profile-userbuttons">
 			 	<div><a><spring:message code="master.page.comissions.must" /></a></div>
 				<br />
+				
+				<button name="save" class="btn button-cancel" onclick="goBack()">
+					<span class="glyphicon glyphicon-arrow-left"></span>
+					<spring:message code="route.edit.previous" />
+				</button>
+			
 				<button type="submit" name="save" class="btn  btn-primary">
 					<span class="glyphicon glyphicon-floppy-disk"></span>
 					<spring:message code="sizePrice.save" />
@@ -202,3 +208,8 @@
 
 	</div>
 </div>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>

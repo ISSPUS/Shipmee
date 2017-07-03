@@ -147,7 +147,7 @@ margin-top: 0px;
 								<p class="ellipses"
 									style="overflow-wrap: break-word; word-wrap: break-word; /* Adds a hyphen where the word breaks */ -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto;">
 
-									<jstl:out value="${messageRow.body}"></jstl:out>
+									${messageRow.body}
 
 								</p>
 								<jstl:if test="${infoMessages eq 'messages.received'}">

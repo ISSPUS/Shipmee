@@ -176,9 +176,10 @@
 	$('#destination').attr('placeholder', '');
 	
 	$(function() {
+		language = getCookie("language");
 		$('#datetimepicker1').datetimepicker({
 			format : 'DD/MM/YYYY',
-			locale: 'es'
+			locale: language
 		});
 
 	});

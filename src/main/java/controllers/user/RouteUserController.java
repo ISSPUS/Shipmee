@@ -116,7 +116,10 @@ public class RouteUserController extends AbstractController {
 		ModelAndView result;
 		int id;
 		String messageError;
-
+		
+		if (!binding.hasErrors()) {
+			binding = routeFormService.checkConditionsRoute(routeForm,binding);
+		}
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(routeForm);
 		} else {
