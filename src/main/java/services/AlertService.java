@@ -120,8 +120,12 @@ public class AlertService {
 				
 		for(Alert alert: alerts){
 			
-			origin = alert.getOrigin();
-			destination = alert.getDestination();
+			try{
+				origin = URLEncoder.encode(alert.getOrigin(), "ISO-8859-1");
+				destination = URLEncoder.encode(alert.getDestination(), "ISO-8859-1");
+			}catch (UnsupportedEncodingException e) {
+				log.error("Error al codificar la URL",e);
+			}
 			locale = new Locale(alert.getUser().getLocalePreferences());
 			
 			if(alert.getType().equals("Route")){
