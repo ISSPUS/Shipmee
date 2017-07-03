@@ -140,7 +140,7 @@
 		<property name="birthDate" value="1995/10/24"/>
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
-		<property name="photo" value=""/>
+		<property name="photo" value="http://i.imgur.com/ByPalwV.png"/>
 		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount1"/>
 		<property name="localePreferences" value="en"/>
@@ -153,7 +153,7 @@
 		<property name="birthDate" value="2017/03/03"/>
 		<property name="phone" value="666777888"/>
 		<property name="dni" value="12345678A"/>
-		<property name="photo" value=""/>
+		<property name="photo" value="http://i.imgur.com/ByPalwV.png"/>
 		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount6"/>
 		<property name="localePreferences" value="es"/>
