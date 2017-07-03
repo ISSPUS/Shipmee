@@ -107,6 +107,7 @@
 
 		</div>
 		<div class="col-md-9" >
+			<jstl:if test="${(user.id == currentUser.id) || (user.id == routeId)}">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
 					style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
@@ -119,6 +120,8 @@
 					</div>
 				</div>
 			</div>
+			</jstl:if>
+						
 			<div class="profile-content">
 
 				<div class="panel panel-default">
