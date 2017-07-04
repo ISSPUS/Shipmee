@@ -177,12 +177,14 @@
 								aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
-
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title text-center">
+												<spring:message code="shipment.itemPicture" />
+											</h4>
+										</div>
 										<div class="modal-body">
-
-
 											<img src="${shipment.itemPicture}">
-
 										</div>
 
 									</div>
@@ -243,7 +245,7 @@
 						<jstl:if test="${shipment.creator == user && shipmentOffersIsEmpty && shipment.carried == null}">
 						<button type="submit" class="btn button-view btn-primary"
 							onclick="location.href = 'shipment/user/edit.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
-							<span class="fa fa-plus-circle"></span>
+							<span class="fa fa-pencil-square-o"></span>
 							<spring:message code="shipment.edit" />
 						</button>
 						</jstl:if>

@@ -14,8 +14,9 @@ import domain.Alert;
 @Repository
 public interface AlertRepository extends JpaRepository<Alert, Integer> {
 
-	@Query("select a from Alert a where ?1 like CONCAT('%',a.origin,'%') AND ?2 like CONCAT('%',a.destination,'%') AND "
-			+ "year(a.date) = year(?3) AND month(a.date) = month(?3) AND day(a.date) = day(?3)"
+	@Query("select a from Alert a where (?1 like CONCAT('%',a.origin,'%') OR a.origin like CONCAT('%',?1,'%')) "
+			+ "AND (?2 like CONCAT('%',a.destination,'%') OR a.destination like CONCAT('%',?2,'%'))"
+			+ "AND year(a.date) = year(?3) AND month(a.date) = month(?3) AND day(a.date) = day(?3)"
 			+ "AND a.type like ?4")
 	Collection<Alert> checkAlerts(String origin, String destination, Date date, String type);
 	

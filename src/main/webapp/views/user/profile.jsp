@@ -138,7 +138,11 @@
 											<spring:message code="user.localePreferences.english" />
 										 </jstl:if>
 										 </span> <br /><br />
-										 <span> <strong><spring:message code="user.fundTransferPreference" /></strong> <a href="fundTransferPreference/user/edit.do">(<spring:message code="user.edit" />)</a></span><br /><br /> 
+										 
+										 <jstl:if test="${isPrincipal && !isAdmin}">
+											<span> <strong><spring:message code="user.fundTransferPreference" /></strong> <a href="fundTransferPreference/user/edit.do">(<spring:message code="user.edit" />)</a></span><br /><br /> 
+										 </jstl:if>
+										 
 										
 										<jstl:if test="${isPrincipal && !user.isVerified && 
 											(user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')}">

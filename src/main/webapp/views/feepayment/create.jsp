@@ -267,9 +267,16 @@ filter: brightness(110%);
 					<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel2" aria-hidden="true">
 						<div class="modal-dialog">
-
-							<div class="modal-content text-center" style="padding: 3%;">
-								<img src="https://www.creditcards.com/credit-card-news/images/cc-security-codes-back-2.png" />
+							<div class="modal-content text-center">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title text-center">
+											<spring:message code="feePayment.cvvCode" />
+										</h4>
+									</div>
+									<div style="padding: 3%;">
+										<img src="images/cvv_code.png" />
+									</div>
 								<a href="https://www.teamline.cc/static/html/csv.html" target="_blank">Info</a>
 							</div>
 						</div>
@@ -291,17 +298,24 @@ filter: brightness(110%);
 
 
 			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-				
-					<div class="modal-content text-center" style="padding: 3%;">
-								<img src="http://blog.unibulmerchantservices.com/wp-content/uploads/2011/06/How-to-Authenticate-Credit-Cards-in-Face-to-Face-Transactions.png" />
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content text-center">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title text-center">
+											<spring:message code="user.help" />
+										</h4>
+									</div>
+									<div style="padding: 3%;">
+										<img src="images/info_tarjeta.png" />
+									</div>
+								</div>
 							</div>
-				</div>
 
-			</div>
-				</div>
+						</div>
+					</div>
 				<!-- Action buttons -->
 
 

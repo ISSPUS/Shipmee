@@ -111,7 +111,7 @@
 								
 								<div class="row info-ruta">
 										<div class="col-xs-12 col-sm-9">
-										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
+										<h5 class="titulos"><spring:message code="shipment.places" />&nbsp;<img src="images/maps_64dp.png" style="width: 22px;"></h5>
 										
 										<div class="row titles-details frontera"><i
 									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="route.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><span class="titles-info">${route.origin}</span></a>&nbsp;&nbsp;<br/><i
@@ -156,12 +156,14 @@
 													aria-labelledby="myModalLabel" aria-hidden="true">
 													<div class="modal-dialog">
 														<div class="modal-content">
-				
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title text-center">
+																	<spring:message code="route.vehicle"/>
+																</h4>
+															</div>
 															<div class="modal-body">
-				
-				
-																<img class="imagen-envio" src="${route.vehicle.picture}">
-				
+																<img src="${route.vehicle.picture}">
 															</div>
 				
 														</div>
@@ -214,8 +216,8 @@
                             
                             
                             
-                            	<!-- FEEDBACK -->
-								<a title="InfoSize" data-toggle="modal"
+                            	<!-- InfoSize -->
+								<a data-toggle="modal"
 								data-target="#infoSize" href="#infoSize" style="z-index: 5;"><span class="glyphicon glyphicon-info-sign"></span></a> 
 								
 								<!-- Modal -->
@@ -303,7 +305,7 @@
 						<jstl:if test="${route.creator == user && routeOffersIsEmpty}">
 						<button type="submit" class="btn button-view btn-primary"
 							onclick="location.href = 'route/user/edit.do?routeId=${route.id}';" style="margin-bottom: 10px;">
-							<span class="fa fa-plus-circle"></span>
+							<span class="fa fa-pencil-square-o"></span>
 							<spring:message code="route.edit" />
 						</button>
 						</jstl:if>
