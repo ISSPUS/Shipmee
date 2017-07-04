@@ -1,11 +1,14 @@
 package services;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,7 @@ import domain.Shipment;
 import domain.SizePrice;
 import domain.User;
 import repositories.RouteOfferRepository;
+import utilities.PayPalConfig;
 import utilities.ServerConfig;
 
 @Service
@@ -64,6 +68,9 @@ public class RouteOfferService {
 	
 	@Autowired
 	private SizePriceService sizePriceService;
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	// Constructors -----------------------------------------------------------
 
@@ -121,6 +128,8 @@ public class RouteOfferService {
 	public RouteOffer save(RouteOffer input) {
 		User actUser;
 		RouteOffer tmp;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String url;
 
 		Assert.notNull(input, "message.error.routeOffer.mustExist");
 
@@ -140,6 +149,13 @@ public class RouteOfferService {
 					tmp = this.create(input.getRoute().getId(), 0);
 				}
 				
+				url = PayPalConfig.getUrlBase()+"/routeOffer/user/list.do?routeId="+input.getRoute().getId();
+
+				String[] args_body = {input.getRoute().getOrigin(), input.getRoute().getDestination(), dateFormat.format(input.getRoute().getDate()),url};
+				
+				messageService.sendMessage(actorService.findByUsername("shipmee"), input.getRoute().getCreator(),
+						messageSource.getMessage("route.offer.alert.subject", null, new Locale(input.getRoute().getCreator().getLocalePreferences())), 
+						messageSource.getMessage("route.offer.alert.body", args_body, new Locale(input.getRoute().getCreator().getLocalePreferences())));
 			}
 
 			tmp.setAmount(input.getAmount());

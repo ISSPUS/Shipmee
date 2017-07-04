@@ -1,9 +1,12 @@
 package services;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,7 @@ import domain.Shipment;
 import domain.ShipmentOffer;
 import domain.User;
 import repositories.ShipmentOfferRepository;
+import utilities.PayPalConfig;
 
 @Service
 @Transactional
@@ -37,6 +41,9 @@ public class ShipmentOfferService {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private MessageSource messageSource;
 		
 	// Constructors -----------------------------------------------------------
 
@@ -76,6 +83,8 @@ public class ShipmentOfferService {
 	public ShipmentOffer save(ShipmentOffer input) {
 		User actUser;
 		ShipmentOffer tmp;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String url;
 
 		Assert.notNull(input, "message.error.shipmentOffer.mustExist");
 
@@ -90,6 +99,14 @@ public class ShipmentOfferService {
 						"message.error.shipmentOffer.notAcceptedOrRejected");
 			} else {
 				tmp = this.create(input.getShipment().getId());
+				
+				url = PayPalConfig.getUrlBase()+"/shipmentOffer/user/list.do?shipmentId="+input.getShipment().getId();
+
+				String[] args_body = {input.getShipment().getOrigin(), input.getShipment().getDestination(), dateFormat.format(input.getShipment().getDate()),url};
+				
+				messageService.sendMessage(actorService.findByUsername("shipmee"), input.getShipment().getCreator(),
+						messageSource.getMessage("shipment.offer.alert.subject", null, new Locale(input.getShipment().getCreator().getLocalePreferences())), 
+						messageSource.getMessage("shipment.offer.alert.body", args_body, new Locale(input.getShipment().getCreator().getLocalePreferences())));
 			}
 
 			tmp.setAmount(input.getAmount());
