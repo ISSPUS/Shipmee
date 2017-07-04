@@ -154,7 +154,7 @@ public class ShipmentController extends AbstractController {
 			
 			if(actorService.checkAuthority("ADMIN")){
 				currentUser = userService.findOne(shipment.getCreator().getId());
-			}else if (actorService.checkLogin()){
+			}else if (actorService.checkAuthority("USER")){
 				currentUser = userService.findByPrincipal();
 			}
 			
