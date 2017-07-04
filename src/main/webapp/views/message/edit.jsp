@@ -111,10 +111,10 @@
 				<div class="form-group text-center profile-userbuttons">
 					<div class="col-md-12">
 						<button type="submit" name="save" class="btn  btn-primary">
-							<span class="glyphicon glyphicon-floppy-disk"></span>
-							<spring:message code="route.save" />
+							<span class="glyphicon glyphicon-send"></span>
+							<spring:message code="message.send" />
 						</button>
-						<acme:cancel code="route.cancel" url="/message/actor/received.do?page=1" />
+						<acme:cancel code="message.cancel" url="/message/actor/received.do?page=1" />
 					</div>
 				</div>
 
