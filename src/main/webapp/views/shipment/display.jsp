@@ -242,7 +242,7 @@
 						</button>
 						</jstl:if>
 						
-						<jstl:if test="${shipment.creator == user && shipmentOffersIsEmpty && shipment.carried == null}">
+						<jstl:if test="${security.hasRole('USER') && shipment.creator == user && shipmentOffersIsEmpty && shipment.carried == null}">
 						<button type="submit" class="btn button-view btn-primary"
 							onclick="location.href = 'shipment/user/edit.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-pencil-square-o"></span>

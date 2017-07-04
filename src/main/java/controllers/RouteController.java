@@ -140,7 +140,7 @@ public class RouteController extends AbstractController {
 		user = userService.findOne(userId);
 		currentUser = null;
 		
-		if(actorService.checkLogin()){
+		if(actorService.checkAuthority("USER")){
 			currentUser = userService.findByPrincipal();
 		}
 				
@@ -179,7 +179,7 @@ public class RouteController extends AbstractController {
 		
 		if(actorService.checkAuthority("ADMIN")){
 			currentUser = userService.findOne(route.getCreator().getId());
-		}else if (actorService.checkLogin()){
+		}else if (actorService.checkAuthority("USER")){
 			currentUser = userService.findByPrincipal();
 			
 			pageable = new PageRequest(page - 1, 5);
