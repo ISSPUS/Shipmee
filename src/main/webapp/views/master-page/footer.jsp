@@ -3,25 +3,6 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:useBean id="date" class="java.util.Date" />
-<script>
-	window.onload = function () {
-		var documentURL = document.URL.replace(/\?language=e[sn]/gi,'');
-		var append = '';
-		
-		if (documentURL.includes('?')) {
-			append = '&';
-		} else {
-			append = '?';
-		}
-		append = append + 'language=e';
-		
-	    var es = document.getElementById('es');
-	    es.href = documentURL + append + 's';
-	    
-	    var en = document.getElementById('en');
-	    en.href = documentURL + append + 'n';
-	}
-</script>
 <style>
 
 .well-cookies {
@@ -129,5 +110,23 @@
 	
 	if(getCookie("infoCookies")=="hide"){
 		hideInfoCookies();
+	}
+	
+	window.onload = function () {
+		var documentURL = document.URL.replace(/[\?&]language=e[sn]/gi,'');
+		var append = '';
+		
+		if (documentURL.includes('?')) {
+			append = '&';
+		} else {
+			append = '?';
+		}
+		append = append + 'language=e';
+		
+		var es = document.getElementById('es');
+		es.href = documentURL + append + 's';
+	
+		var en = document.getElementById('en');
+		en.href = documentURL + append + 'n';
 	}
 </script>
