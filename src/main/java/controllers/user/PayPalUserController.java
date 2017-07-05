@@ -92,7 +92,9 @@ public class PayPalUserController extends AbstractController {
 			po = payPalService.findByTrackingId(trackingId);
 			
 			if (po.getFeePayment().getShipmentOffer() != null){
-				so = shipmentOfferService.accept(payPalService.findByTrackingId(trackingId).getFeePayment().getShipmentOffer().getId());
+				so = payPalService.findByTrackingId(trackingId).getFeePayment().getShipmentOffer();
+				if (!po.getPayStatus().equals("CREATED"))
+					so = shipmentOfferService.accept(so.getId());
 				result = new ModelAndView("redirect:/shipmentOffer/user/list.do?shipmentId=" + so.getShipment().getId());
 			}else{
 				result = new ModelAndView("redirect:/routeOffer/user/list.do?routeId=" + po.getFeePayment().getRouteOffer().getRoute().getId());
