@@ -1,5 +1,6 @@
 package domain.form;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import domain.Vehicle;
@@ -71,8 +72,8 @@ public class SizePriceForm {
 		this.vehicle = vehicle;
 	}
 	
-	@Min(0)
 	@Digits(integer=9,fraction=2)
+	@DecimalMin("0.00")
 	public Double getPriceS() {
 		return priceS;
 	}
@@ -80,8 +81,8 @@ public class SizePriceForm {
 		this.priceS = priceS;
 	}
 	
-	@Min(0)
 	@Digits(integer=9,fraction=2)
+	@DecimalMin("0.00")
 	public Double getPriceM() {
 		return priceM;
 	}
@@ -89,8 +90,8 @@ public class SizePriceForm {
 		this.priceM = priceM;
 	}
 	
-	@Min(0)
 	@Digits(integer=9,fraction=2)
+	@DecimalMin("0.00")
 	public Double getPriceL() {
 		return priceL;
 	}
@@ -98,8 +99,8 @@ public class SizePriceForm {
 		this.priceL = priceL;
 	}
 	
-	@Min(0)
 	@Digits(integer=9,fraction=2)
+	@DecimalMin("0.00")
 	public Double getPriceXL() {
 		return priceXL;
 	}

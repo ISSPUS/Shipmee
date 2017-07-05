@@ -1,5 +1,6 @@
 package domain.form;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -65,8 +66,8 @@ public class ShipmentForm {
 		this.destination = destination;
 	}
 	
-	@Min(0)
 	@Digits(integer=9,fraction=2)
+	@DecimalMin("0.00")
 	public double getPrice() {
 		return price;
 	}
