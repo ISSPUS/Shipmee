@@ -102,7 +102,8 @@ public class SizePriceUserController extends AbstractController {
 			result = createEditModelAndView(sizePriceForm);
 		} else {
 			try {
-				if (sizePriceForm.getRouteId() == 0) {
+				
+				if (sizePriceForm.getRouteId() == 0 && sizePriceFormService.checkSizePrices(sizePriceForm)) {
 					RouteForm routeForm;
 					Route route;
 

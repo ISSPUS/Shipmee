@@ -162,7 +162,7 @@ public class SizePriceFormService {
 		return result;
 	}
 	
-	private boolean checkSizePrices(SizePriceForm sizePriceForm) {
+	public boolean checkSizePrices(SizePriceForm sizePriceForm) {
 		boolean result;
 		
 		result = true;
