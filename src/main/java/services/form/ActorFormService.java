@@ -97,6 +97,8 @@ public class ActorFormService {
 			
 			this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
 					"repeatedPassword", "user.passwordMismatch", null);
+			this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
+					"password", "user.passwordMismatch", null);
 			this.addBinding(binding, actorForm.getPassword().length() > 4 && actorForm.getPassword().length() < 33,
 					"password", "org.hibernate.validator.constraints.Length.message.personalize", null);
 			this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
@@ -141,6 +143,8 @@ public class ActorFormService {
 				// Password modified
 				this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
 						"repeatedPassword", "user.passwordMismatch", null);
+				this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
+						"password", "user.passwordMismatch", null);
 				
 				this.addBinding(binding, actorForm.getPassword().length() > 4 && actorForm.getPassword().length() < 33,
 				"password", "org.hibernate.validator.constraints.Length.message.personalize", null);
