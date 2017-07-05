@@ -67,6 +67,16 @@
 							<h5 class="offer-profile-info"><spring:message code="shipment.origin" />: <a>${shipmentOfferRow.shipment.origin}</a></h5>
 							<h5 class="offer-profile-info"><spring:message code="shipment.destination" />: <a>${shipmentOfferRow.shipment.destination}</a></h5>
 						</div>
+						
+						<jstl:set var="actPayPalObject" value="${null}"/>
+						
+						<jstl:forEach var="a" items="${paypalObjects}">
+								<jstl:if test="${a.feePayment.shipmentOffer.id == shipmentOfferRow.id}">
+									<jstl:set var="actPayPalObject" value="${a}"/>
+								</jstl:if>
+						</jstl:forEach>
+
+						
 						<div class="col-xs-12">
 							<h5 class="offer-profile-info">
 								<jstl:if test="${shipmentOfferRow.acceptedBySender}">
@@ -85,7 +95,6 @@
 										<b><spring:message code="shipmentOffer.status" />: <span style="color: #ffb66d"><spring:message code="shipmentOffer.pending" /></span></b>
 									</p>
 								</jstl:if>
-
 							</h5>
 						</div>
 					</div>
@@ -124,8 +133,16 @@
 										<spring:message code="shipmentOffer.deny" />
 									</button>
 								</div>
+								<jstl:if test="${not empty actPayPalObject && actPayPalObject.payStatus == 'CREATED'}">
+									<div class="col-xs-6 col-sm-12">
+										<button type="button"
+											class="btn btn-success btn-shipmentOffer-actions"
+											onclick="location.href = 'user/payPal/returnPayment.do?trackingId=${actPayPalObject.trackingId}';">
+											<spring:message code="feePayment.button.refreshPayPal" />
+										</button>
+									</div>
+								</jstl:if>
 							</jstl:if>
-
 						</div>
 					</div>
 				</div>

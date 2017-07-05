@@ -19,6 +19,7 @@ import controllers.AbstractController;
 import domain.Route;
 import domain.RouteOffer;
 import domain.User;
+import services.PayPalService;
 import services.RouteOfferService;
 import services.RouteService;
 import services.UserService;
@@ -39,6 +40,9 @@ public class RouteOfferUserController extends AbstractController {
 	
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private PayPalService payPalService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -66,6 +70,7 @@ public class RouteOfferUserController extends AbstractController {
 		
 		result = new ModelAndView("routeOffer/list");
 		result.addObject("routeOffers", routeOffers.getContent());
+		result.addObject("paypalObjects", payPalService.findByRouteId(routeId));
 		result.addObject("p", page);
 		result.addObject("total_pages", routeOffers.getTotalPages());
 		result.addObject("routeId", routeId);
