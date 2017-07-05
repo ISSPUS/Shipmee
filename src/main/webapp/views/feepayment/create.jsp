@@ -199,7 +199,7 @@ filter: brightness(110%);
 					</form:label>
 					<div class="col-md-10">
 						<form:select id="brandName" class="form-control"
-							path="creditCard.brandName">
+							path="creditCard.brandName" required="required">
 							<form:option value="" label="----" />
 							<form:option value="American Express">American Express</form:option>
 							<form:option value="Diners Club">Diners Club</form:option>

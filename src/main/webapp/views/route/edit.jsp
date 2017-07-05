@@ -64,7 +64,7 @@
 						<spring:message code="route.origin" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-8">
-						<form:input path="origin" class="form-control" id="origin"/>
+						<form:input path="origin" class="form-control" id="origin" required="required"/>
 						<form:errors class="error create-message-error" path="origin" />
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 					</form:label>
 					<div class="col-md-8">
 						<form:input path="destination" class="form-control"
-							id="destination"/>
+							id="destination" required="required"/>
 						<form:errors class="error create-message-error" path="destination" />
 					</div>
 				</div>
@@ -90,7 +90,7 @@
 						<div class='input-group date input-text' id='datetimepicker1'>
 							<form:input path="departureTime" name="fecha"
 								style="backgroud-color: white ! important" type="text"
-								class="form-control" />
+								class="form-control" required="required"/>
 							<span class="input-group-addon"> <span
 								class="glyphicon glyphicon-calendar"></span>
 							</span>
@@ -108,7 +108,7 @@
 
 						<div class='input-group date input-text' id='datetimepicker2'>
 							<form:input path="arriveTime" name="fecha"
-								style="backgroud-color: white" type="text" class="form-control" />
+								style="backgroud-color: white" type="text" class="form-control" required="required"/>
 							<span class="input-group-addon"> <span
 								class="glyphicon glyphicon-calendar"></span>
 							</span>
@@ -128,7 +128,7 @@
 						<spring:message code="route.both" var="both" />
 
 						<form:select id="itemEnvelope" class="form-control"
-							path="itemEnvelope">
+							path="itemEnvelope" required="required">
 							<form:option value="" label="----" />
 							<form:option value="Open" label="${open }" />
 							<form:option value="Closed" label="${closed }" />

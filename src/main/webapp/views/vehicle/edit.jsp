@@ -96,7 +96,7 @@
 						<spring:message code="vehicle.picture" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="picture" type="file" class="form-control" id="picture" />
+						<form:input path="picture" type="file" accept=".jpg,.jpeg,.png" class="form-control" id="picture" required="required"/>
 						<form:errors class="error create-message-error" path="picture" />
 					</div>
 				</div>
@@ -123,3 +123,21 @@
 
 	</div>
 </div>
+
+<script type="text/javascript">
+	var inputImage = document.getElementById('picture');
+	inputImage.onchange = function(e){ 
+	    var nameFile = this.value.match(/\.(.+)$/)[1];
+	    switch(nameFile)
+	    {
+	        case 'jpg':
+	        case 'jpeg':
+	        case 'png':
+	            break;
+	        default:
+	        	var mssg ='<spring:message code="message.error.imageUpload.incompatibleType" />';
+	        	inputImage.insertAdjacentHTML('afterend', '<span id="picture.errors" class="error">'+mssg+'</span>');
+	            this.value='';
+	    }
+	};
+</script>

@@ -79,7 +79,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
-						<form:input path="userName" class="form-control" id="userName" required="true"/>
+						<form:input path="userName" class="form-control" id="userName" required="true"   maxlength="32" minlength="5"/>
 					</div>
 					<form:errors class="error create-message-error" path="userName" />
 				</div>
@@ -107,7 +107,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
-						<form:input path="surname" class="form-control" id="surname"/>
+						<form:input path="surname" class="form-control" id="surname" required="required"/>
 					</div>
 					<form:errors class="error create-message-error" path="surname" />
 				</div>
@@ -121,7 +121,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
-						<form:input type="email" path="email" class="form-control" id="email"/>
+						<form:input type="email" path="email" class="form-control" id="email" required="required"/>
 					</div>
 					<form:errors class="error create-message-error" path="email" />
 				</div>
@@ -135,7 +135,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon input-group date fondoDesplegable input-text" id='datetimepicker1'>
-						<form:input path="birthDate" class="form-control" id="birthDate" name="fecha" style="backgroud-color: white;" type='text'/>
+						<form:input path="birthDate" class="form-control" id="birthDate" name="fecha" style="backgroud-color: white;" type='text' required="required"/>
 						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 					</div>
 					<form:errors class="error create-message-error" path="birthDate" />
@@ -170,7 +170,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
-						<form:input path="phone" class="form-control" id="phone"/>
+						<form:input path="phone" class="form-control" id="phone" required="required"/>
 					</div>
 					<form:errors class="error create-message-error" path="phone" />
 				</div>
@@ -242,7 +242,7 @@
 				<div class="col-md-8">
 					<div class="inner-addon">
 						<form:input type="file" path="photo"
-							class="form-control btn btn-default btn-file" id="photo" />
+							class="form-control btn btn-default btn-file" id="photo" accept=".jpg,.jpeg,.png"/>
 					</div>
 					<form:errors class="error create-message-error" path="photo" />
 				</div>
@@ -258,7 +258,7 @@
 					</form:label>
 					<div class="col-md-8">
 						<div class="inner-addon">
-							<form:input type="file" path="dniPhoto" class="form-control" id="dniPhoto" placeholder="Link"/>
+							<form:input type="file" path="dniPhoto" class="form-control" id="dniPhoto" placeholder="Link" accept=".jpg,.jpeg,.png"/>
 						</div>
 						<form:errors class="error create-message-error" path="dniPhoto" />
 					</div>
@@ -324,5 +324,44 @@ $(function() {
 		locale: language,
 		format : 'DD/MM/YYYY'
 	});
-});          
+});    
+
 </script>
+
+<jstl:if test="${actorForm.id != 0}">
+	<script type="text/javascript">
+		var inputImage1 = document.getElementById('photo');
+		inputImage1.onchange = function(e) {
+			var nameFile = this.value.match(/\.(.+)$/)[1];
+			switch (nameFile) {
+			case 'jpg':
+			case 'jpeg':
+			case 'png':
+				break;
+			default:
+				var mssg = '<spring:message code="message.error.imageUpload.incompatibleType" />';
+				inputImage1.insertAdjacentHTML('afterend',
+						'<span id="photo.errors" class="error">' + mssg
+								+ '</span>');
+				this.value = '';
+			}
+		};
+
+		var inputImage2 = document.getElementById('dniPhoto');
+		inputImage2.onchange = function(e) {
+			var nameFile = this.value.match(/\.(.+)$/)[1];
+			switch (nameFile) {
+			case 'jpg':
+			case 'jpeg':
+			case 'png':
+				break;
+			default:
+				var mssg = '<spring:message code="message.error.imageUpload.incompatibleType" />';
+				inputImage2.insertAdjacentHTML('afterend',
+						'<span id="dniPhoto.errors" class="error">' + mssg
+								+ '</span>');
+				this.value = '';
+			}
+		};
+	</script>
+</jstl:if>
