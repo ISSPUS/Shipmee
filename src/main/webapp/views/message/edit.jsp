@@ -74,7 +74,9 @@
 						<spring:message code="message.recipient"/>
 					</form:label>
 					<div class="col-md-8">
-						<form:input path="recipient" class="form-control" id="recipient" required="required"/>
+						<spring:message code="message.placeholder.recipient" var="pRecipient"/>
+						
+						<form:input path="recipient" class="form-control" id="recipient" required="required" placeholder="${pRecipient}" />
 						<form:errors class="error create-message-error" path="recipient" />
 					</div>
 				</div>
