@@ -26,6 +26,7 @@ import domain.PayPalObject;
 import domain.ShipmentOffer;
 import services.FeePaymentService;
 import services.PayPalService;
+import services.RouteOfferService;
 import services.ShipmentOfferService;
 import utilities.PayPalConfig;
 
@@ -43,6 +44,9 @@ public class PayPalUserController extends AbstractController {
 	
 	@Autowired
 	private FeePaymentService feePaymentService;
+	
+	@Autowired
+	private RouteOfferService routeOfferService;
 	
 	static Logger log = Logger.getLogger(PayPalUserController.class);
 
@@ -97,6 +101,7 @@ public class PayPalUserController extends AbstractController {
 					so = shipmentOfferService.accept(so.getId());
 				result = new ModelAndView("redirect:/shipmentOffer/user/list.do?shipmentId=" + so.getShipment().getId());
 			}else{
+				routeOfferService.save(routeOfferService.findOne(po.getFeePayment().getRouteOffer().getId()));
 				result = new ModelAndView("redirect:/routeOffer/user/list.do?routeId=" + po.getFeePayment().getRouteOffer().getRoute().getId());
 			}
 			// Pagado y registrado correctamente
