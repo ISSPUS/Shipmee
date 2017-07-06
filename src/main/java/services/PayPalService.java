@@ -46,6 +46,9 @@ public class PayPalService {
 	@Autowired
 	private FeePaymentService feePaymentService;
 	
+	@Autowired
+	private UserService userService;
+	
 
 	// Constructors -----------------------------------------------------------
 
@@ -261,5 +264,17 @@ public class PayPalService {
 		}
 		return saltStr;
 
+	}
+	
+	public void delete(int payPalObjectId){
+		
+		PayPalObject po = this.findOne(payPalObjectId);
+		
+		Assert.notNull(po); //PayPalObject not found
+		Assert.isTrue(po.getPayStatus().equals("CREATED"), ""); // Only permitted cancel with paypalStatus created
+		Assert.isTrue(po.getFeePayment().getPurchaser().equals(userService.findByPrincipal())); // Only permitted cancel by purchaser
+
+
+		payPalRepository.delete(payPalObjectId);
 	}
 }

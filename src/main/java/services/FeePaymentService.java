@@ -230,6 +230,28 @@ public class FeePaymentService {
 		
 		return result;
 	}
+	
+	public void cancelPaymentInProgress(int feePaymentId){
+		FeePayment feePayment = this.findOne(feePaymentId);
+		PayPalObject po = payPalService.findByFeePaymentId(feePaymentId);
+		int routeOfferId = -1;
+		
+		Assert.notNull(feePayment); //FeePayment not found
+		
+		Assert.isTrue(!feePayment.getIsPayed(), "message.error.feePayment.notPayed"); // Only permitted cancel not Payed
+		Assert.notNull(po); // Only permitted cancel with PayPal
+		Assert.isTrue(feePayment.getPurchaser().equals(userService.findByPrincipal())); // Only permitted cancel by purchaser
+		
+		if (feePayment.getRouteOffer() != null)
+			routeOfferId = feePayment.getRouteOffer().getId();
+		
+		
+		payPalService.delete(po.getId());
+		feePaymentRepository.delete(feePaymentId);
+		
+		if (routeOfferId > 0)
+			routeOfferService.delete(routeOfferId);
+	}
 
 	// Other business methods -------------------------------------------------
 	

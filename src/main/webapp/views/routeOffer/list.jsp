@@ -164,6 +164,13 @@
 										<spring:message code="feePayment.button.refreshPayPal" />
 									</button>
 								</div>
+								<div class="col-xs-6 col-sm-12" style="text-align: center;">
+									<button type="button"
+										class="btn btn-danger btn-shipmentOffer-actions"
+										onclick="location.href = 'feepayment/user/cancelPaymentInProgress.do?feePaymentId=${actPayPalObject.feePayment.id}';">
+										<spring:message code="feePayment.button.cancelInProcessPayment.advanced" />
+									</button>
+								</div>
 							</jstl:if>
 
 						</div>

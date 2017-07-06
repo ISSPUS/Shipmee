@@ -119,20 +119,22 @@
 						<div class="profile-userbuttons"
 							style="text-align: center;">
 							<jstl:if test="${!shipmentOfferRow.rejectedBySender && !shipmentOfferRow.acceptedBySender && currentUser.id != shipmentOfferRow.user.id}">
-								<div class="col-xs-6 col-sm-12">
-									<button type="button"
-										class="btn btn-success btn-shipmentOffer-actions"
-										onclick="location.href = 'shipmentOffer/user/accept.do?shipmentOfferId=${shipmentOfferRow.id}';">
-										<spring:message code="shipmentOffer.accept" />
-									</button>
-								</div>
-								<div class="col-xs-6 col-sm-12" style="text-align: center;">
-									<button type="button"
-										class="btn btn-danger btn-shipmentOffer-actions"
-										onclick="location.href = 'shipmentOffer/user/deny.do?shipmentOfferId=${shipmentOfferRow.id}';">
-										<spring:message code="shipmentOffer.deny" />
-									</button>
-								</div>
+								<jstl:if test="${!(not empty actPayPalObject && actPayPalObject.payStatus == 'CREATED')}">
+									<div class="col-xs-6 col-sm-12">
+										<button type="button"
+											class="btn btn-success btn-shipmentOffer-actions"
+											onclick="location.href = 'shipmentOffer/user/accept.do?shipmentOfferId=${shipmentOfferRow.id}';">
+											<spring:message code="shipmentOffer.accept" />
+										</button>
+									</div>
+									<div class="col-xs-6 col-sm-12" style="text-align: center;">
+										<button type="button"
+											class="btn btn-danger btn-shipmentOffer-actions"
+											onclick="location.href = 'shipmentOffer/user/deny.do?shipmentOfferId=${shipmentOfferRow.id}';">
+											<spring:message code="shipmentOffer.deny" />
+										</button>
+									</div>
+								</jstl:if>
 								<jstl:if test="${not empty actPayPalObject && actPayPalObject.payStatus == 'CREATED'}">
 									<div class="col-xs-6 col-sm-12">
 										<button type="button"
@@ -141,7 +143,16 @@
 											<spring:message code="feePayment.button.refreshPayPal" />
 										</button>
 									</div>
+									<div class="col-xs-6 col-sm-12" style="text-align: center;">
+										<button type="button"
+											class="btn btn-danger btn-shipmentOffer-actions"
+											onclick="location.href = 'feepayment/user/cancelPaymentInProgress.do?feePaymentId=${actPayPalObject.feePayment.id}';">
+											<spring:message code="feePayment.button.cancelInProcessPayment" />
+										</button>
+									</div>
 								</jstl:if>
+								
+
 							</jstl:if>
 						</div>
 					</div>

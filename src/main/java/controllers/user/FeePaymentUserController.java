@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -184,6 +185,35 @@ public class FeePaymentUserController extends AbstractController {
 			result = new ModelAndView("redirect:list.do?page=1&message=error");
 		}
 
+		return result;
+	}
+	
+	@RequestMapping(value = "/cancelPaymentInProgress", method = RequestMethod.GET)
+	public ModelAndView cancelPaymentInProgress(@RequestParam int feePaymentId){
+		ModelAndView result;
+		String messageError;
+		
+		FeePayment feePayment = feePaymentService.findOne(feePaymentId);
+		
+		try{
+			Assert.notNull(feePayment);
+			
+			if(feePayment.getShipmentOffer() != null){
+				result = new ModelAndView("redirect:../../shipmentOffer/user/list.do?shipmentId=" + feePayment.getShipmentOffer().getShipment().getId());
+			}else{
+				result = new ModelAndView("redirect:../../routeOffer/user/list.do?routeId=" + feePayment.getRouteOffer().getRoute().getId());
+			}
+			feePaymentService.cancelPaymentInProgress(feePaymentId);
+			
+		}catch(Throwable oops){
+			log.error(oops.getMessage());
+			messageError = "shipmentOffer.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError = oops.getMessage();
+			}
+			result = new ModelAndView("redirect:/?message=" + messageError);
+		}
+		
 		return result;
 	}
 	
