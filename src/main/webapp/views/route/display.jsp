@@ -26,6 +26,9 @@
 <link  rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-details.css" type="text/css">
 
+
+<!-- (Attribution) https://www.iconfinder.com/iconsets/school-outline-hand-drawn -->
+
 <style>
 
 @font-face {
@@ -46,6 +49,19 @@
 .separa_imagen{
 	margin-bottom:5%;
 
+}
+
+.cuadro{
+	margin-bottom: 2%; 
+}
+
+
+.btn-default{
+color: #428bca;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+color: #428bca;
 }
 
 </style>
@@ -295,15 +311,15 @@
 					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
 						
 						<jstl:if test="${route.creator != user}">
-						<button type="submit" class="btn button-view btn-primary"
+						<button type="submit" class="btn button-view"
 							onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';" style="margin-bottom: 10px;">
-							<span class="fa fa-plus-circle"></span>
+							<span class="fa fa-bullhorn"></span>
 							<spring:message code="offer.new" />
 						</button>
 						</jstl:if>
 						
 						<jstl:if test="${security.hasRole('USER') && route.creator == user && routeOffersIsEmpty}">
-						<button type="submit" class="btn button-view btn-primary"
+						<button type="submit" class="btn button-view"
 							onclick="location.href = 'route/user/edit.do?routeId=${route.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-pencil-square-o"></span>
 							<spring:message code="route.edit" />
@@ -318,128 +334,49 @@
 					</div>
 
 
+				</div>
+						
+			</div>
+
+
+
+			<!-- LINK SHIPMENT -->
+
 			<jstl:if test="${route.creator != user && not empty shipments}">
-					<div class="col-md-9">
-			<div class="profile-content">
+				<div class="profile-content" style="min-height: 189px;">
+					<div class="row cuadro col-xs-12 col-sm-9">
 					
-					<div class="panel panel-default">
-					<div class="panel-body">
+						<h5 class="titulos text-center"><spring:message code="route.link.shipment" /></h5>
 						
-						<div class="table-container">
-					<table class="table table-filter">
-								<tbody>
-								
-								
-								<jstl:choose>
-					<jstl:when test="${not empty shipments}">
-						<jstl:forEach items="${shipments}" var="shipment">
-								
-									<tr>
-										
-										<td>
-											
-											
-										<div class="row">
-										
-											<div class="col-lg-3 text-center">
-												<a href="shipment/display.do?shipmentId=${shipment.id}">
-													<img src="${shipment.itemPicture}" class="media-photo-shipment">
-												</a>	
-											</div>
-										
-											<div class="info-salida col-lg-6" style="margin-bottom: 2%; font-size: 16px;">
-												<div class="cabecera">
-												<div class="title">
-													<h4><a href="shipment/display.do?shipmentId=${shipment.id}">${shipment.itemName}</a></h4>
-												</div>
-												
-												<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
-											
-												<i class="glyphicon glyphicon-sort"></i>
-											
-												<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"> <i
-													class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
-												</a>
-														
-												
-												</div>	
 						
+						<p style= "padding: 0.5%;">
+							<spring:message code="route.link.shipment.description" />						
+						</p>
+						
+						<div class="fondoDesplegable profile-usermenu text-center " style="">
+						<div class="select_class">
+						<select id="shipmentSelect" class="form-control selectpicker fondoDesplegable input-text" data-live-search="true">
+							<option value=''>--- <spring:message code="route.select.shipment" /> ---</option>
+							<jstl:forEach items="${shipments}" var="shipment">
+								<option value="${shipment.id}">${shipment.itemName} - ${shipment.price}&#8364;</option>
+							</jstl:forEach>
+						</select>
+						</div>
+						<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
+							<button type="submit" class="btn button-view"
+								onclick="submitForm(${route.id});" style="margin-bottom: 10px;">
+								<span class="fa fa-link"></span>
+								<spring:message code="route.link" />
+							</button>
+							<div id="routeLinkMessage" class="text-center"></div>
+							
+						</div>
+						
+						</div>
 
-										
-
-												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.departureTime" />: 
-												<fmt:formatDate value="${shipment.departureTime}" pattern="dd/MM/yyyy '-' HH:mm" />
-												
-												
-												<br/>
-												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.maximumArriveTime" />: 
-												<fmt:formatDate value="${shipment.maximumArriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
-												
-													
-											</div>
-											<div class="col-lg-3 profile-userbuttons" style="margin-top: 5%;">
-											
-												<div class="price">${shipment.price}&#8364;</div>	
-												<button type="button" class="btn button-ok btn-block" style="font-size: 15px;" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}&shipmentId=${shipment.id}';"><spring:message code="route.details" />&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>	
-											
-
-											</div>
-										</div>
-											
-										
-											
-										</td>
-									</tr>
-									</jstl:forEach>
-					</jstl:when>
-					<jstl:otherwise>
-					</jstl:otherwise>
-				</jstl:choose>
-								</tbody>
-							</table>
-				<div id="pagination" class="copyright" style="text-align: center;">
-					
-						<script>
-							$('#pagination').bootpag({
-								total : <jstl:out value="${total_pages}"></jstl:out>,
-								page : <jstl:out value="${p}"></jstl:out>,
-								maxVisible : 3,
-								leaps : true,
-								firstLastUse : true,
-								first : '<',
-					            last: '>',
-								wrapClass : 'pagination',
-								activeClass : 'active',
-								disabledClass : 'disabled',
-								nextClass : 'next',
-								prevClass : 'prev',
-								lastClass : 'last',
-								firstClass : 'first'
-							}).on('page', function(event, num) {
-								window.location.href = "${urlPage}" + num + "";
-								page = 1
-							});
-						</script>
-					
 					</div>
-
 				</div>
-
-
-
-
-			</div>
-</div></div>
-
-		</div>
-		</jstl:if>
-
-
-				</div>
-						
-			</div>
+			</jstl:if>
 
 
 		</div>
@@ -459,5 +396,20 @@
 			node.innerHTML = "<a><spring:message code='master.page.comissions' /></a><div class='error'><spring:message code='route.sizeprice.select' /></div>";
 			return true;
 		}
+	}
+	
+	function submitForm(route_id) {
+		var select = document.getElementById("shipmentSelect");
+		var shipment_id = select.options[select.selectedIndex].value;
+		//var route_id = ${route.id};
+		if(shipment_id!=0){
+			window.location = 'routeOffer/user/create.do?routeId='+route_id+'&shipmentId='+shipment_id;
+			return false;
+		}else{
+			var node = document.getElementById('routeLinkMessage');
+			node.innerHTML = "<div class='error'><spring:message code='route.link.select.error' /></div>";
+			return true;
+		}
+		
 	}
 </script>

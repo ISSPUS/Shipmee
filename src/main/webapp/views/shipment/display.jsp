@@ -235,15 +235,15 @@
 					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
 						
 						<jstl:if test="${shipment.creator != user && user.isVerified && shipment.carried == null}">
-						<button type="submit" class="btn button-view btn-primary"
+						<button type="submit" class="btn button-view"
 							onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
-							<span class="fa fa-plus-circle"></span>
+							<span class="fa fa-bullhorn"></span>
 							<spring:message code="offer.new" />
 						</button>
 						</jstl:if>
 						
 						<jstl:if test="${security.hasRole('USER') && shipment.creator == user && shipmentOffersIsEmpty && shipment.carried == null}">
-						<button type="submit" class="btn button-view btn-primary"
+						<button type="submit" class="btn button-view"
 							onclick="location.href = 'shipment/user/edit.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-pencil-square-o"></span>
 							<spring:message code="shipment.edit" />
