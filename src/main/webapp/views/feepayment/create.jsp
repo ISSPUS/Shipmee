@@ -228,7 +228,7 @@ filter: brightness(110%);
 					</form:label>
 					<div class="col-md-10">
 						<form:input path="creditCard.number" class="form-control" id="number" required="true"/>
-						<form:errors class="error create-message-error" path="creditCard.number" />
+						<form:errors class="error create-message-error" path="creditCard.number"/>
 					</div>
 				</div>
 				
@@ -247,7 +247,7 @@ filter: brightness(110%);
 						<spring:message code="feePayment.expirationYear" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="creditCard.expirationYear" class="form-control" id="expirationYear" required="true"/>
+						<form:input path="creditCard.expirationYear" class="form-control" id="expirationYear" required="true" type="number"/>
 						<form:errors class="error create-message-error" path="creditCard.expirationYear" />
 					</div>
 				</div>
@@ -259,7 +259,7 @@ filter: brightness(110%);
 						</a>
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="creditCard.cvvCode" class="form-control" id="cvvCode" required="true" maxlength="3"/>
+						<form:input path="creditCard.cvvCode" class="form-control" id="cvvCode" required="true" maxlength="3"  type="number"/>
 						<form:errors class="error create-message-error" path="creditCard.cvvCode" />
 					</div>
 					
@@ -340,6 +340,14 @@ $(function(){
 
 
 $(document).ready(function(){
+	if("${message}" || $(".error")[0]){
+		$("#div1").css("display", "block");
+        $("#div2").css("display", "none");
+        $(".paymentMethod").click(function(evento){
+        	$(".partePaypal").addClass("opaco");
+        	$(".parteTarjeta").removeClass("opaco");
+        });
+	}
     $(".pago").click(function(evento){
     	
         var valor = $(this).val();
