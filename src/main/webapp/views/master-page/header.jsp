@@ -61,7 +61,7 @@
 			</div>
 			<div class="navbar-collapse collapse navbar-right">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href=""><spring:message
+					<li><a href=""><spring:message
 								code="master.page.home" /></a></li>
 					<security:authorize access="isAnonymous()">			
 						<li><a href="about/info.do"><spring:message
@@ -219,3 +219,14 @@
         </div>
 
 
+<script >
+$(document).ready(function () {
+    var page = window.location;
+    $('ul.nav a[href="'+ page +'"]').parentsUntil( ".ul.nav" ).addClass('active');
+    $('ul.nav a').filter(function() {
+         return this.href == page;
+    }).parentsUntil( ".ul.nav" ).addClass('active');
+});
+
+
+</script>

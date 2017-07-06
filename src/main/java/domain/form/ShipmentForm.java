@@ -67,7 +67,7 @@ public class ShipmentForm {
 	}
 	
 	@Digits(integer=9,fraction=2)
-	@DecimalMin("0.00")
+	@DecimalMin("0.01")
 	public double getPrice() {
 		return price;
 	}

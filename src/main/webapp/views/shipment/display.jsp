@@ -199,7 +199,8 @@
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
 											<div class="col-sm-12">
 												<!-- <i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.price" />: -->
-												<span class="titles-info-price">${shipment.price}&#8364;</span>
+												<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${shipment.price}" var="formatPrice" />
+												<span class="titles-info-price">${formatPrice}&#8364;</span>
 												<a><spring:message code="master.page.comissions" /></a>
 												<br/>
 											</div>

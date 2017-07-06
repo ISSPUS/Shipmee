@@ -37,7 +37,9 @@
 }
 
 .paymentWrap {
-	padding: 50px;
+	margin-left: -50px;
+	margin-top: 30px;
+	margin-bottom: 50px;
 }
 
 .paymentWrap .paymentBtnGroup {
@@ -98,17 +100,22 @@
 
 
 .payPaypal{
-
 	display: block;
     margin: 0 auto;
-    width: 12%;
+    width: 150px;
 
 }
+
 .image-p:hover{
- 
-filter: brightness(110%);
+	filter: brightness(110%);
+}
+
+.image-p{
+	margin-top: 10px;
+    margin-bottom: 10px;
 
 }
+
 </style>
 
 <div class="blue-barra">
@@ -136,7 +143,7 @@ filter: brightness(110%);
 						class="method visa"></span> <input name="options" class="pago"
 						type="radio" value="paypal" style="visibility: hidden;" />
 					</label> <label class="btn paymentMethod parteTarjeta"> <span
-						class="method master-card"></span> <input checked="checked"
+						class="method master-card" style="margin-left: -18px;"></span> <input checked="checked"
 						class="pago" name="options" type="radio" value="creditcard"
 						style="visibility: hidden;" />
 					</label>
@@ -161,7 +168,7 @@ filter: brightness(110%);
 				<a class="payPaypal"
 					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.id}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}&shipmentId=${feePaymentForm.shipmentId}">
 			</jstl:if> <img class="image-p"
-			src="http://www.northportgirlslacrosse.com/sites/default/files/images/paypal-paynow-button-300x89.png"></a>
+			src="images/pay_paypal.png"></a>
 	</div>
 </div>
 
@@ -228,7 +235,7 @@ filter: brightness(110%);
 					</form:label>
 					<div class="col-md-10">
 						<form:input path="creditCard.number" class="form-control" id="number" required="true"/>
-						<form:errors class="error create-message-error" path="creditCard.number" />
+						<form:errors class="error create-message-error" path="creditCard.number"/>
 					</div>
 				</div>
 				
@@ -247,7 +254,7 @@ filter: brightness(110%);
 						<spring:message code="feePayment.expirationYear" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="creditCard.expirationYear" class="form-control" id="expirationYear" required="true"/>
+						<form:input path="creditCard.expirationYear" class="form-control" id="expirationYear" required="true" type="number"/>
 						<form:errors class="error create-message-error" path="creditCard.expirationYear" />
 					</div>
 				</div>
@@ -259,7 +266,7 @@ filter: brightness(110%);
 						</a>
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="creditCard.cvvCode" class="form-control" id="cvvCode" required="true" maxlength="3"/>
+						<form:input path="creditCard.cvvCode" class="form-control" id="cvvCode" required="true" maxlength="3"  type="number"/>
 						<form:errors class="error create-message-error" path="creditCard.cvvCode" />
 					</div>
 					
@@ -340,6 +347,14 @@ $(function(){
 
 
 $(document).ready(function(){
+	if("${message}" || $(".error")[0]){
+		$("#div1").css("display", "block");
+        $("#div2").css("display", "none");
+        $(".paymentMethod").click(function(evento){
+        	$(".partePaypal").addClass("opaco");
+        	$(".parteTarjeta").removeClass("opaco");
+        });
+	}
     $(".pago").click(function(evento){
     	
         var valor = $(this).val();

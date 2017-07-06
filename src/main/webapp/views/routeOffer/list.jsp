@@ -117,15 +117,15 @@
 					<div class="col-xs-11 col-sm-3"
 						style="padding-top: 1.5%;text-align: center; vertical-align: middle;">
 						<div style="font-size: 190%;">
+						<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${routeOfferRow.amount}" var="formatAmount" />
 						<jstl:choose>
 							<jstl:when test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier && currentUser.id != routeOfferRow.user.id}">
-							<span class="badge badge-shipmentoffer-price" style="background-color: #0b6a92;"><jstl:out
-								value="${routeOfferRow.amount}" />&#8364;</span>
-							
+							<span class="badge badge-shipmentoffer-price" style="background-color: #0b6a92;">
+								<jstl:out value="${formatAmount}" />&#8364;</span>
 							</jstl:when>
 							<jstl:otherwise>
 								<span class="badge badge-shipmentoffer-price"><jstl:out
-								value="${routeOfferRow.amount}" />&#8364;</span>
+								value="${formatAmount}" />&#8364;</span>
 							</jstl:otherwise>
 						</jstl:choose>
 						</div>

@@ -31,4 +31,7 @@ public interface ShipmentRepository extends JpaRepository<Shipment, Integer> {
 	
 	@Query("select count(s) from Shipment s where s.creator.id = ?1")
 	int countShipmentCreatedByUserId(int userId);
+	
+	@Query("select s from Shipment s where s.creator.id = ?1 AND (?2 IS NULL OR (year(s.departureTime) > year(?2) OR (year(s.departureTime) = year(?2) AND month(s.departureTime) > month(?2) OR (year(s.departureTime) = year(?2) AND month(s.departureTime) = month(?2) AND day(s.departureTime) >= day(?2))))) AND s.carried IS NULL ORDER BY s.itemName ASC")
+	Page<Shipment> findAllAvailableByUserId(int userId, Date moment, Pageable page);
 }

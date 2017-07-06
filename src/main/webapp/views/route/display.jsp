@@ -290,7 +290,9 @@ color: #428bca;
 								<jstl:if test="${value.size == 'L'}"><span title="<spring:message code="shipment.sizeL"/>">${value.size}</span></jstl:if>
 								<jstl:if test="${value.size == 'XL'}"><span title="<spring:message code="shipment.sizeXL"/>">${value.size}</span></jstl:if>
                             </td>
-                            <td class="tabla-precio">${value.price}&#8364;
+                            
+                            <fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${value.price}" var="formatPrice" />
+                            <td class="tabla-precio">${formatPrice}&#8364;
                         </tr>
 					</jstl:forEach>
      
@@ -360,7 +362,8 @@ color: #428bca;
 						<select id="shipmentSelect" class="form-control selectpicker fondoDesplegable input-text" data-live-search="true">
 							<option value=''>--- <spring:message code="route.select.shipment" /> ---</option>
 							<jstl:forEach items="${shipments}" var="shipment">
-								<option value="${shipment.id}">${shipment.itemName} - ${shipment.price}&#8364;</option>
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${shipment.price}" var="formatPrice" />
+								<option value="${shipment.id}">${shipment.itemName} - ${formatPrice}&#8364;</option>
 							</jstl:forEach>
 						</select>
 						</div>
