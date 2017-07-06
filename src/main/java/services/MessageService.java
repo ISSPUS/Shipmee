@@ -183,6 +183,7 @@ public class MessageService {
 				shipmentOffer.getShipment().getDestination(),
 				String.valueOf(shipmentOffer.getAmount()),
 				shipmentOffer.getShipment().getCreator().getUserAccount().getUsername(),
+				String.valueOf(shipmentOffer.getShipment().getPrice()),
 				PayPalConfig.getUrlBase() + "/shipment/display.do?shipmentId=" + shipmentOffer.getShipment().getId()
 				};
 		
