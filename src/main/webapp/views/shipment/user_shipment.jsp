@@ -185,8 +185,8 @@
 															</div>
 															<div class="col-lg-3 profile-userbuttons"
 																style="margin-top: 5%;">
-
-																<div class="price">${shipment.price}&#8364;</div>
+																<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${shipment.price}" var="formatPrice" />
+																<div class="price">${formatPrice}&#8364;</div>
 																<button type="button" class="btn button-ok btn-block"
 																	style="font-size: 15px;"
 																	onclick="location.href = 'shipment/display.do?shipmentId=${shipment.id}';">

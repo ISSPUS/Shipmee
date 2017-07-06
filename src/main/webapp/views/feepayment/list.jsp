@@ -386,21 +386,22 @@ font-size: 225%;
 								</div>
 							</div>
 						</div>
-
+						<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${feePayment.amount}" var="formatAmount" />
+						
 						<jstl:choose>
 							<jstl:when test="${feePayment.type == 'Accepted'}">
 								<div class="col-xs-12 price" style="color: #5cb85c">
-									<span>${feePayment.amount}&#8364;</span>
+									<span>${formatAmount}&#8364;</span>
 								</div>
 							</jstl:when>
 							<jstl:when test="${feePayment.type == 'Pending'}">
 								<div class="col-xs-12 price" style="color: #f0ad4e">
-									<span>${feePayment.amount}&#8364;</span>
+									<span>${formatAmount}&#8364;</span>
 								</div>
 							</jstl:when>
 							<jstl:when test="${feePayment.type == 'Rejected'}">
 								<div class="col-xs-12 price" style="color: #d9534f">
-									<span>${feePayment.amount}&#8364;</span>
+									<span>${formatAmount}&#8364;</span>
 								</div>
 							</jstl:when>
 						</jstl:choose>
