@@ -14,9 +14,9 @@ import domain.RouteOffer;
 public interface RouteOfferRepository extends JpaRepository<RouteOffer, Integer> {
 
 	@Query("select ro from RouteOffer ro ,PayPalObject po where ro.route.id = ?1"
-			+ " AND (ro.id NOT IN "
-				+ "(select ro.id from RouteOffer ro, PayPalObject po where po.feePayment.routeOffer.id = ro.id AND ro.route.id = ?1)"
-				+ " OR (po.feePayment.routeOffer.id = ro.id AND po.payStatus <> 'CREATED'))"
+//			+ " AND (ro.id NOT IN "
+//				+ "(select ro.id from RouteOffer ro, PayPalObject po where po.feePayment.routeOffer.id = ro.id AND ro.route.id = ?1)"
+//				+ " OR (po.feePayment.routeOffer.id = ro.id AND po.payStatus <> 'CREATED'))"
 			+ " GROUP BY ro.id"
 			)
 	Collection<RouteOffer> findAllByRouteId(int routeId);
@@ -27,9 +27,9 @@ public interface RouteOfferRepository extends JpaRepository<RouteOffer, Integer>
 	@Query("select ro from RouteOffer ro, PayPalObject po"
 			+ " where (?1 <= 0 OR ro.route.id = ?1)"
 			+ " AND (?2 <= 0 OR ro.user.id = ?2)"
-			+ " AND (ro.id NOT IN "
-				+ "(select ro.id from RouteOffer ro, PayPalObject po where po.feePayment.routeOffer.id = ro.id AND ro.route.id = ?1)"
-				+ " OR (po.feePayment.routeOffer.id = ro.id AND po.payStatus <> 'CREATED'))"
+//			+ " AND (ro.id NOT IN "
+//				+ "(select ro.id from RouteOffer ro, PayPalObject po where po.feePayment.routeOffer.id = ro.id AND ro.route.id = ?1)"
+//				+ " OR (po.feePayment.routeOffer.id = ro.id AND po.payStatus <> 'CREATED'))"
 			+ " GROUP BY ro.id"
 			+ " ORDER BY ro.rejectedByCarrier ASC")
 	Page<RouteOffer> findAllByRouteIdAndUserId(int routeId, int userId, Pageable page);

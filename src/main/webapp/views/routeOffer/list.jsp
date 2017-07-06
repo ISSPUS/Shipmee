@@ -69,29 +69,47 @@
 							<h5 class="offer-profile-info"><spring:message code="route.origin" />: <a>${routeOfferRow.route.origin}</a></h5>
 							<h5 class="offer-profile-info"><spring:message code="route.destination" />: <a>${routeOfferRow.route.destination}</a></h5>
 						</div>
+						
+						<jstl:set var="actPayPalObject" value="${null}"/>
+						
+						<jstl:forEach var="a" items="${paypalObjects}">
+								<jstl:if test="${a.feePayment.routeOffer.id == routeOfferRow.id}">
+									<jstl:set var="actPayPalObject" value="${a}"/>
+								</jstl:if>
+						</jstl:forEach>
+						
 						<div class="col-xs-12">
 							<h5 class="offer-profile-info">
-								<jstl:if test="${routeOfferRow.acceptedByCarrier}">
-									<p>
-										<b><spring:message code="routeOffer.status" />: <span style="color: #58e19d"><spring:message code="routeOffer.accepted" /></span></b>
-									</p>
+								<jstl:if test="${empty actPayPalObject or actPayPalObject.payStatus ne 'CREATED'}">
+									<jstl:if test="${routeOfferRow.acceptedByCarrier}">
+										<p>
+											<b><spring:message code="routeOffer.status" />: <span style="color: #58e19d"><spring:message code="routeOffer.accepted" /></span></b>
+										</p>
+									</jstl:if>
+									<jstl:if test="${routeOfferRow.rejectedByCarrier}">
+										<p>
+											<b><spring:message code="routeOffer.status" />: <span style="color: #ff8686"><spring:message code="routeOffer.rejected" /></span></b>
+										</p>
+									</jstl:if>
+									<jstl:if
+										test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier}">
+										<p>
+											<b><spring:message code="routeOffer.status" />: <span style="color: #ffb66d"><spring:message code="routeOffer.pending" /></span></b>
+										</p>
+									</jstl:if>
 								</jstl:if>
-								<jstl:if test="${routeOfferRow.rejectedByCarrier}">
-									<p>
-										<b><spring:message code="routeOffer.status" />: <span style="color: #ff8686"><spring:message code="routeOffer.rejected" /></span></b>
-									</p>
+								<jstl:if test="${not (empty actPayPalObject or actPayPalObject.payStatus ne 'CREATED')}">
+										<p>
+											<b><spring:message code="routeOffer.status" />: <span style="color: #ffb66d"><spring:message code="routeOffer.pending.payment" /></span></b>
+										</p>
 								</jstl:if>
-								<jstl:if
-									test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier}">
-									<p>
-										<b><spring:message code="routeOffer.status" />: <span style="color: #ffb66d"><spring:message code="routeOffer.pending" /></span></b>
-									</p>
-								</jstl:if>
+								
 								<jstl:if test="${routeOfferRow.shipment != null}">
 									<b><spring:message code="routeOffer.shipment" />: <a href="shipment/display.do?shipmentId=${routeOfferRow.shipment.id}">
 									<jstl:out value="${routeOfferRow.shipment.itemName}" />
 								</a></b>
 								</jstl:if>
+
 
 							</h5>
 						</div>
@@ -118,20 +136,32 @@
 					<div class="botones col-xs-11 col-sm-2 col-lg-3" style="padding-top: 1.5%;">
 						<div class="profile-userbuttons"
 							style="text-align: center;">
+							
 							<jstl:if
 								test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier && currentUser.id != routeOfferRow.user.id}">
-								<div class="col-xs-6 col-sm-12">
-									<button type="button"
-										class="btn btn-success btn-shipmentOffer-actions"
-										onclick="location.href = 'routeOffer/user/accept.do?routeOfferId=${routeOfferRow.id}';">
-										<spring:message code="routeOffer.accept" />
-									</button>
-								</div>
+								<jstl:if test="${empty actPayPalObject or actPayPalObject.payStatus != 'CREATED'}">
+									<div class="col-xs-6 col-sm-12">
+										<button type="button"
+											class="btn btn-success btn-shipmentOffer-actions"
+											onclick="location.href = 'routeOffer/user/accept.do?routeOfferId=${routeOfferRow.id}';">
+											<spring:message code="routeOffer.accept" />
+										</button>
+									</div>
+									<div class="col-xs-6 col-sm-12" style="text-align: center;">
+										<button type="button"
+											class="btn btn-danger btn-shipmentOffer-actions"
+											onclick="location.href = 'routeOffer/user/deny.do?routeOfferId=${routeOfferRow.id}';">
+											<spring:message code="routeOffer.deny" />
+										</button>
+									</div>
+								</jstl:if>
+							</jstl:if>
+							<jstl:if test="${currentUser.id == routeOfferRow.user.id && not (empty actPayPalObject or actPayPalObject.payStatus ne 'CREATED')}">
 								<div class="col-xs-6 col-sm-12" style="text-align: center;">
 									<button type="button"
-										class="btn btn-danger btn-shipmentOffer-actions"
-										onclick="location.href = 'routeOffer/user/deny.do?routeOfferId=${routeOfferRow.id}';">
-										<spring:message code="routeOffer.deny" />
+										class="btn btn-success btn-shipmentOffer-actions"
+										onclick="location.href = 'user/payPal/returnPayment.do?trackingId=${actPayPalObject.trackingId}';">
+										<spring:message code="feePayment.button.refreshPayPal" />
 									</button>
 								</div>
 							</jstl:if>

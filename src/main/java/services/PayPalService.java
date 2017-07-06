@@ -2,6 +2,7 @@ package services;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -223,6 +224,22 @@ public class PayPalService {
 		PayPalObject result;
 		
 		result = payPalRepository.findByRouteOfferId(routeOfferId);
+		
+		return result;
+	}
+	
+	public Collection<PayPalObject> findByRouteId(int routeId) {
+		Collection<PayPalObject> result;
+		
+		result = payPalRepository.findByRouteId(routeId);
+		
+		return result;
+	}
+	
+	public Collection<PayPalObject> findByShipmentId(int shipmentId) {
+		Collection<PayPalObject> result;
+		
+		result = payPalRepository.findByShipmentId(shipmentId);
 		
 		return result;
 	}

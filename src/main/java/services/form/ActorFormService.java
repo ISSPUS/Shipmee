@@ -97,11 +97,15 @@ public class ActorFormService {
 			
 			this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
 					"repeatedPassword", "user.passwordMismatch", null);
+			this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
+					"password", "user.passwordMismatch", null);
 			this.addBinding(binding, actorForm.getPassword().length() > 4 && actorForm.getPassword().length() < 33,
 					"password", "org.hibernate.validator.constraints.Length.message.personalize", null);
 			this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
 			
-			if (!actorService.checkLogin()){
+			this.addBinding(binding, ActorService.checkBirthDate(actorForm.getBirthDate()), "birthDate", "user.birthDate.younger", null);
+			
+			if (!actorService.checkLogin() && !binding.hasErrors()){
 				// Registry User
 				User res;
 				UserAccount uAccount;
@@ -123,8 +127,10 @@ public class ActorFormService {
 						"acceptLegalCondition", "user.rejectedLegalConditions", null);
 				
 				return res;
-			}else{
+			}else if (!binding.hasErrors()){
 				Assert.notNull(null, "Registro de usuarios (de cualquier rol) como admin no implementado");
+				return null;
+			}else{
 				return null;
 			}
 			
@@ -137,6 +143,8 @@ public class ActorFormService {
 				// Password modified
 				this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
 						"repeatedPassword", "user.passwordMismatch", null);
+				this.addBinding(binding, actorForm.getPassword().equals(actorForm.getRepeatedPassword()),
+						"password", "user.passwordMismatch", null);
 				
 				this.addBinding(binding, actorForm.getPassword().length() > 4 && actorForm.getPassword().length() < 33,
 				"password", "org.hibernate.validator.constraints.Length.message.personalize", null);
@@ -154,6 +162,9 @@ public class ActorFormService {
 				// UserName modified
 				this.addBinding(binding, userWithUserName == null, "userName", "user.userName.inUse", null);
 			}
+			
+			this.addBinding(binding, ActorService.checkBirthDate(actorForm.getBirthDate()), "birthDate", "user.birthDate.younger", null);
+
 			
 			if (actorService.checkAuthority(Authority.USER) && !binding.hasErrors()){
 				// Registry User

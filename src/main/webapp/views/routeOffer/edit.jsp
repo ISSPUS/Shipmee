@@ -53,7 +53,7 @@
 					<div class="inner-addon left-addon input-price">
 						<i class="glyphicon glyphicon-euro"></i>
 						<form:input path="amount" class="form-control" id="amount" min="0"
-							step="0.01" type="number" />
+							step="0.01" type="number" required="required"/>
 					</div>
 					<form:errors class="error create-message-error" path="amount" />
 				</div>
@@ -65,7 +65,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<form:textarea path="description" class="form-control"
-						id="description" />
+						id="description" required="required"/>
 					<form:errors class="error create-message-error" path="description" />
 				</div>
 			</div>

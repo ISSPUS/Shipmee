@@ -74,7 +74,9 @@
 						<spring:message code="message.recipient"/>
 					</form:label>
 					<div class="col-md-8">
-						<form:input path="recipient" class="form-control" id="recipient"/>
+						<spring:message code="message.placeholder.recipient" var="pRecipient"/>
+						
+						<form:input path="recipient" class="form-control" id="recipient" required="required" placeholder="${pRecipient}" />
 						<form:errors class="error create-message-error" path="recipient" />
 					</div>
 				</div>
@@ -86,7 +88,7 @@
 					</form:label>
 					<div class="col-md-8">
 						<form:input path="subject" class="form-control noresize"
-							id="subject" />
+							id="subject" required="required"/>
 						<form:errors class="error create-message-error" path="subject" />
 					</div>
 				</div>
@@ -96,7 +98,7 @@
 					</form:label>
 					<div class="col-md-8">
 						<form:textarea rows="3" path="body" class="form-control noresize"
-							id="body" />
+							id="body" required="required"/>
 						<form:errors class="error create-message-error" path="body" />
 					</div>
 				</div>

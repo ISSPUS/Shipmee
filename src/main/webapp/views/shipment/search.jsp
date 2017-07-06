@@ -58,7 +58,7 @@
 <div class="container">
 
 	<div class="row profile">
-		<div class="col-md-3">
+		<div class="col-md-4">
 			<div class="profile-sidebar">
 
 				<div class="profile-usermenu">
@@ -178,7 +178,7 @@
 
 
 
-		<div class="col-md-9">
+		<div class="col-md-8">
 			<div class="profile-content">
 					
 					<div class="panel panel-default">

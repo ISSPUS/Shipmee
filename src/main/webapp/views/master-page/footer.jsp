@@ -113,7 +113,8 @@
 	}
 	
 	window.onload = function () {
-		var documentURL = document.URL.replace(/[\?&]language=e[sn]/gi,'');
+		var documentURL = document.URL.replace(/&language=e[sn]/gi,'');
+		documentURL = documentURL.replace(/\?language=e[sn]/gi,'?');
 		var append = '';
 		
 		if (documentURL.includes('?')) {

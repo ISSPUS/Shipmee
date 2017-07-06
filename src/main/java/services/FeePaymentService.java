@@ -134,7 +134,7 @@ public class FeePaymentService {
 			feePayment = feePaymentRepository.save(feePaymentPreSave);
 		}
 		
-		feePayment.setIsPayed(po != null || feePayment.getCreditCard() != null);
+		feePayment.setIsPayed((po != null && po.getPayStatus().equals("COMPLETED")) || feePayment.getCreditCard() != null);
 
 		return feePayment;
 	}

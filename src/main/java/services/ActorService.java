@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -177,5 +178,24 @@ public class ActorService {
 		actorRepository.save(actor);
 	
 		return actor;
+	}
+	
+	public static boolean checkBirthDate(Date bithdate){
+		int minimumAge = 18;
+		
+		Date limitBirthDate;
+		Calendar calTmp;
+		boolean res = false;
+		
+		if (bithdate != null){
+			calTmp = Calendar.getInstance();
+			
+			calTmp.add(Calendar.YEAR, -minimumAge);
+			
+			limitBirthDate = calTmp.getTime();
+			
+			res = ! (limitBirthDate.compareTo(bithdate) < 0);
+		}
+		return res;
 	}
 }

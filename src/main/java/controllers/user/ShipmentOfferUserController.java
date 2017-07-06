@@ -19,6 +19,7 @@ import controllers.AbstractController;
 import domain.Shipment;
 import domain.ShipmentOffer;
 import domain.User;
+import services.PayPalService;
 import services.ShipmentOfferService;
 import services.ShipmentService;
 import services.UserService;
@@ -39,6 +40,9 @@ public class ShipmentOfferUserController extends AbstractController {
 	
 	@Autowired
 	private ShipmentService shipmentService;
+	
+	@Autowired
+	private PayPalService payPalService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -66,6 +70,7 @@ public class ShipmentOfferUserController extends AbstractController {
 		
 		result = new ModelAndView("shipmentOffer/list");
 		result.addObject("shipmentOffers", shipmentOffers.getContent());
+		result.addObject("paypalObjects", payPalService.findByShipmentId(shipmentId));
 		result.addObject("p", page);
 		result.addObject("total_pages", shipmentOffers.getTotalPages());
 		result.addObject("shipmentId", shipmentId);

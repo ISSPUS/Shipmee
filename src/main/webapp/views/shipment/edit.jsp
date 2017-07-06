@@ -89,7 +89,7 @@
 					<spring:message code="shipment.origin" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
-					<form:input path="origin" class="form-control" id="origin" />
+					<form:input path="origin" class="form-control" id="origin" required="required"/>
 					<form:errors class="error create-message-error" path="origin" />
 				</div>
 			</div>
@@ -101,7 +101,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<form:input path="destination" class="form-control"
-						id="destination" />
+						id="destination" required="required"/>
 					<form:errors class="error create-message-error" path="destination" />
 				</div>
 			</div>
@@ -114,7 +114,7 @@
 
 					<div class='input-group date input-text' id='datetimepicker1'>
 						<form:input id="date" path="departureTime" name="departureTime"
-							type="text" class="form-control" />
+							type="text" class="form-control" required="required"/>
 						<span class="input-group-addon"> <span
 							class="glyphicon glyphicon-calendar"></span>
 						</span>
@@ -131,8 +131,8 @@
 				<div class="col-md-8">
 
 					<div class='input-group date input-text' id='datetimepicker2'>
-						<form:input path="maximumArriveTime" name="maximumArriveTime"
-							type="text" class="form-control" />
+						<form:input path="maximumArriveTime"  name="maximumArriveTime"
+							type="text" class="form-control" required="required"/>
 						<span class="input-group-addon"> <span
 							class="glyphicon glyphicon-calendar"></span>
 						</span>
@@ -153,7 +153,7 @@
 					<spring:message code="shipment.sizeL" var="l" />
 					<spring:message code="shipment.sizeXL" var="xl" />
 
-					<form:select id="shipment" class="form-control" path="ItemSize">
+					<form:select id="shipment" class="form-control" path="ItemSize" required="required">
 						<form:option value="" label="----" />
 						<form:option value="S" label="${s }" />
 						<form:option value="M" label="${m }" />
@@ -171,7 +171,7 @@
 					<div class="inner-addon left-addon input-price">
 						<i class="glyphicon glyphicon-euro"></i>
 						<form:input path="price" class="form-control" id="price" min="0"
-							step="0.01" type="number" />
+							step="0.01" type="number" required="required"/>
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -184,7 +184,7 @@
 					<spring:message code="shipment.itemName" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
-					<form:input path="itemName" class="form-control" id="itemName" />
+					<form:input path="itemName" class="form-control" id="itemName" required="required"/>
 					<form:errors class="error create-message-error" path="itemName" />
 				</div>
 			</div>
@@ -194,8 +194,8 @@
 					<spring:message code="shipment.itemPicture" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
 				<div class="col-md-8">
-					<form:input  type="file" path="imagen" class="form-control btn btn-default btn-file"
-						id="itemPicture" />
+					<form:input  type="file" path="imagen" accept=".jpg,.jpeg,.png" class="form-control btn btn-default btn-file"
+						id="itemPicture" required="required"/>
 					<form:errors class="error create-message-error" path="imagen" />
 				</div>
 			</div>
@@ -209,7 +209,7 @@
 					<spring:message code="shipment.open" var="open" />
 					<spring:message code="shipment.closed" var="closed" />
 					<spring:message code="shipment.both" var="both" />
-					<form:select id="shipment" class="form-control" path="ItemEnvelope">
+					<form:select id="shipment" class="form-control" path="ItemEnvelope" required="required">
 						<form:option value="" label="----" />
 						<form:option value="Open" label="${open }" />
 						<form:option value="Closed" label="${closed }" />
@@ -276,7 +276,23 @@ function initialize() {
 
 	});
 	
-	
+
+	var inputImage = document.getElementById('itemPicture');
+	inputImage.onchange = function(e){ 
+	    var nameFile = this.value.match(/\.(.+)$/)[1];
+	    switch(nameFile)
+	    {
+	        case 'jpg':
+	        case 'jpeg':
+	        case 'png':
+	            break;
+	        default:
+	        	var mssg ='<spring:message code="message.error.imageUpload.incompatibleType" />';
+	        	inputImage.insertAdjacentHTML('afterend', '<span id="itemPicture.errors" class="error">'+mssg+'</span>');
+	            this.value='';
+	    }
+	};
+
 	
 	
 	

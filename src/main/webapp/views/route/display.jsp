@@ -318,7 +318,9 @@ color: #428bca;
 						</button>
 						</jstl:if>
 						
-						<jstl:if test="${security.hasRole('USER') && route.creator == user && routeOffersIsEmpty}">
+						<security:authorize access="hasRole('USER')" var="isUser" />
+						
+						<jstl:if test="${isUser && route.creator == user && routeOffersIsEmpty}">
 						<button type="submit" class="btn button-view"
 							onclick="location.href = 'route/user/edit.do?routeId=${route.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-pencil-square-o"></span>

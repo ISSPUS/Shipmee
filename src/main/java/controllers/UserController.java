@@ -80,8 +80,8 @@ public class UserController extends AbstractController {
 	protected ModelAndView createEditModelAndView(ActorForm input, String message) {
 		ModelAndView result;
 		
-		input.setPassword("");
 		input.setAcceptLegalCondition(false);
+		input.setPassword("");
 		input.setRepeatedPassword("");
 
 		result = new ModelAndView("user/edit");

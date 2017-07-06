@@ -1,6 +1,7 @@
 package domain.form;
 
 import javax.validation.Valid;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -29,8 +30,8 @@ public class FeePaymentForm {
 	}
 
 	@NotNull
-	@Min(0)
 	@Digits(integer = 9, fraction = 2)
+	@DecimalMin("0.00")
 	@Valid
 	public double getAmount() {
 		return amount;
