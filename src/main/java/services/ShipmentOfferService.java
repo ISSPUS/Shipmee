@@ -59,6 +59,7 @@ public class ShipmentOfferService {
 
 		shipment = shipmentService.findOne(shipmentId);
 		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
+		Assert.isTrue(userService.findByPrincipal().getIsVerified(), "message.error.shipmentOffer.verifiedCarrier");
 
 		res = new ShipmentOffer();
 		res.setShipment(shipment);
@@ -129,6 +130,7 @@ public class ShipmentOfferService {
 			Assert.isTrue(false, "shipmentOffer.commit.error");
 			return null;
 		}
+		Assert.isTrue(tmp.getUser().getIsVerified(), "message.error.shipmentOffer.verifiedCarrier");
 		Assert.isTrue(!tmp.getUser().equals(tmp.getShipment().getCreator()),
 				"message.error.shipmentOffer.equalCreatorAndProposer");
 		Assert.isTrue(tmp.getShipment().getMaximumArriveTime().after(new Date()),

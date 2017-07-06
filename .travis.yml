@@ -7,10 +7,10 @@ jdk:
 before_install:
 - mysql -u root < initialize.sql
 script:
-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+- mvn clean install org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 - ls -lah
 after_success:
-- mvn clean cobertura:cobertura coveralls:report -DrepoToken=$tokenCoverall
+- mvn clean install cobertura:cobertura coveralls:report -DrepoToken=$tokenCoverall
 cache:
   directories:
   - "$HOME/.m2"
