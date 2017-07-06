@@ -159,6 +159,21 @@ public class ShipmentService {
 		return result;
 	}
 	
+	public Page<Shipment> findAllAvailableByCurrentUser(Pageable page){
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipment.user.list.own");
+		
+		Page<Shipment> result;
+		Date moment;
+		User user;
+		
+		user = userService.findByPrincipal();
+		moment = new Date();
+		
+		result = shipmentRepository.findAllAvailableByUserId(user.getId(), moment, page);
+		
+		return result;
+	}
+	
 	public int countShipmentCreatedByUserId(User user){
 		Assert.notNull(user);
 		

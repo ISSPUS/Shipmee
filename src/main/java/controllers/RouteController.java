@@ -183,7 +183,7 @@ public class RouteController extends AbstractController {
 			currentUser = userService.findByPrincipal();
 			
 			pageable = new PageRequest(page - 1, 5);
-			shipmentsPage = shipmentService.findAllByCurrentUser(pageable);
+			shipmentsPage = shipmentService.findAllAvailableByCurrentUser(pageable);
 			shipments = shipmentsPage.getContent();
 		}
 		
