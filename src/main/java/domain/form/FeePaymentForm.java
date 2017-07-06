@@ -31,7 +31,7 @@ public class FeePaymentForm {
 
 	@NotNull
 	@Digits(integer = 9, fraction = 2)
-	@DecimalMin("0.00")
+	@DecimalMin("0.01")
 	@Valid
 	public double getAmount() {
 		return amount;

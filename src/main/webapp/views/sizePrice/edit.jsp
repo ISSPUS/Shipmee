@@ -119,7 +119,7 @@
 				<div class="col-md-6">
 					<div class="inner-addon left-addon input-price">
 						<i class="glyphicon glyphicon-euro"></i>
-						<form:input path="priceS" class="form-control" id="priceS" min="0"
+						<form:input path="priceS" class="form-control" id="priceS" min="0.01"
 							step="0.01" type="number" />
 					</div>
 					<form:errors class="error create-message-error" path="priceS" />
@@ -138,7 +138,7 @@
 						<div class="inner-addon left-addon input-price">
 
 							<i class="glyphicon glyphicon-euro"></i>
-							<form:input path="priceM" class="form-control" min="0"
+							<form:input path="priceM" class="form-control" min="0.01"
 								step="0.01" type="number" id="priceM" />
 						</div>
 						<form:errors class="error create-message-error" path="priceM" />
@@ -155,7 +155,7 @@
 				<div class="col-md-6">
 					<div class="inner-addon left-addon input-price">
 						<i class="glyphicon glyphicon-euro"></i>
-						<form:input path="priceL" class="form-control" id="priceL" min="0"
+						<form:input path="priceL" class="form-control" id="priceL" min="0.01"
 							step="0.01" type="number" />
 					</div>
 					<form:errors class="error create-message-error" path="priceL" />
@@ -174,7 +174,7 @@
 
 						<i class="glyphicon glyphicon-euro"></i>
 						<form:input path="priceXL" class="form-control" id="priceXL"
-							min="0" step="0.01" type="number" />
+							min="0.01" step="0.01" type="number" />
 					</div>
 
 					<form:errors class="error create-message-error" path="priceXL" />

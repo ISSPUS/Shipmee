@@ -73,7 +73,7 @@ public class SizePriceForm {
 	}
 	
 	@Digits(integer=9,fraction=2)
-	@DecimalMin("0.00")
+	@DecimalMin("0.01")
 	public Double getPriceS() {
 		return priceS;
 	}
@@ -82,7 +82,7 @@ public class SizePriceForm {
 	}
 	
 	@Digits(integer=9,fraction=2)
-	@DecimalMin("0.00")
+	@DecimalMin("0.01")
 	public Double getPriceM() {
 		return priceM;
 	}
@@ -91,7 +91,7 @@ public class SizePriceForm {
 	}
 	
 	@Digits(integer=9,fraction=2)
-	@DecimalMin("0.00")
+	@DecimalMin("0.01")
 	public Double getPriceL() {
 		return priceL;
 	}
@@ -100,7 +100,7 @@ public class SizePriceForm {
 	}
 	
 	@Digits(integer=9,fraction=2)
-	@DecimalMin("0.00")
+	@DecimalMin("0.01")
 	public Double getPriceXL() {
 		return priceXL;
 	}

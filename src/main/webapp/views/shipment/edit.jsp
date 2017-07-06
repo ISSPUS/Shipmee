@@ -170,7 +170,7 @@
 				<div class="col-md-2">
 					<div class="inner-addon left-addon input-price">
 						<i class="glyphicon glyphicon-euro"></i>
-						<form:input path="price" class="form-control" id="price" min="0"
+						<form:input path="price" class="form-control" id="price" min="0.01"
 							step="0.01" type="number" required="required"/>
 					</div>
 				</div>
