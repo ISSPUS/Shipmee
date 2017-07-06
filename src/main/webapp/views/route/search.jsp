@@ -46,6 +46,11 @@
 	font-style: normal;
 }
 
+
+#select_size .filter-option{
+	font-size: 12px;
+}
+
 </style>
 
 <div class="blue-barra">
@@ -60,7 +65,7 @@
 <div class="container">
 
 	<div class="row profile">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="profile-sidebar">
 
 				<div class="profile-usermenu">
@@ -157,14 +162,14 @@
 							<spring:message code="shipment.sizeXL" var="xl" />
 							<jstl:if test="${form_itemSize == 'XL'}"><jstl:set var="selected_xl" value="selected"/></jstl:if>
 
-							<li style="text-align: center" class="li-input"><select
+							<li style="text-align: center; font-size: 12px;" class="li-input"><div id="select_size"><select
 								class="form-control selectpicker input-text fondoDesplegable" name="itemSize">
 									<option value=''><spring:message code="shipment.select.sizes" /></option>
 									<option value="S" ${selected_s}>"${s }" </option>
 									<option value="M" ${selected_m}>"${m }" </option>
 									<option value="L" ${selected_l}>"${l }" </option>
 									<option value="XL" ${selected_xl}>"${xl }" </option>
-							</select></li>
+							</select></div></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
 									<spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span>
@@ -177,7 +182,7 @@
 			</div>
 		</div>
 		
-	<div class="col-md-8">
+	<div class="col-md-9">
 			<div class="profile-content">
 					
 					<div class="panel panel-default">
