@@ -37,7 +37,9 @@
 }
 
 .paymentWrap {
-	padding: 50px;
+	margin-left: -50px;
+	margin-top: 30px;
+	margin-bottom: 50px;
 }
 
 .paymentWrap .paymentBtnGroup {
@@ -98,17 +100,22 @@
 
 
 .payPaypal{
-
 	display: block;
     margin: 0 auto;
-    width: 12%;
+    width: 150px;
 
 }
+
 .image-p:hover{
- 
-filter: brightness(110%);
+	filter: brightness(110%);
+}
+
+.image-p{
+	margin-top: 10px;
+    margin-bottom: 10px;
 
 }
+
 </style>
 
 <div class="blue-barra">
@@ -136,7 +143,7 @@ filter: brightness(110%);
 						class="method visa"></span> <input name="options" class="pago"
 						type="radio" value="paypal" style="visibility: hidden;" />
 					</label> <label class="btn paymentMethod parteTarjeta"> <span
-						class="method master-card"></span> <input checked="checked"
+						class="method master-card" style="margin-left: -18px;"></span> <input checked="checked"
 						class="pago" name="options" type="radio" value="creditcard"
 						style="visibility: hidden;" />
 					</label>
@@ -161,7 +168,7 @@ filter: brightness(110%);
 				<a class="payPaypal"
 					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.id}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}&shipmentId=${feePaymentForm.shipmentId}">
 			</jstl:if> <img class="image-p"
-			src="http://www.northportgirlslacrosse.com/sites/default/files/images/paypal-paynow-button-300x89.png"></a>
+			src="images/pay_paypal.png"></a>
 	</div>
 </div>
 
