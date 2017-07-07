@@ -55,6 +55,7 @@ public class FeePaymentFormService {
 		case 1:
 			result.setId(id);
 			result.setSizePriceId(sizePriceId);
+			result.setAmount(0.1); // Posteriormente se reseteará al valor oportuno
 			break;
 			
 		case 2:
@@ -71,6 +72,7 @@ public class FeePaymentFormService {
 			
 			result.setId(shipmentOffer.getShipment().getId());
 			result.setOfferId(id);
+			result.setAmount(0.1);
 			break;
 
 		default:
