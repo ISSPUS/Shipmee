@@ -72,7 +72,7 @@ public class PayPalService {
 	private PayPalObject save(PayPalObject payPalObject) {
 		Assert.notNull(payPalObject, "message.error.PayPalObject.notNull");
 		
-		payPalObject = payPalRepository.save(payPalObject);
+		payPalObject = payPalRepository.saveAndFlush(payPalObject); // No quitar flush puesto que necesita guardarse totalmente
 			
 		return payPalObject;
 	}
