@@ -351,7 +351,7 @@ public class UserService {
 	public Boolean IBANBICValidator(String IBAN, String BIC){
 		Boolean result = false;
 		
-		if(IBAN.isEmpty() && IBAN.isEmpty()){
+		if(IBAN.isEmpty() && BIC.isEmpty()){
 			result = true;
 		}else{
 			try{
