@@ -104,7 +104,7 @@
 			<acme:submit_confirm name="create" code="complaint.create"
 					codeConfirm="complaint.confirm.create" />
 
-			<acme:cancel code="complaint.cancel" url="" />
+			<acme:cancel code="complaint.cancel" url="user/profile.do?userId=${complaint.involved.id}" />
 		</div>	
 		</form:form>
 
