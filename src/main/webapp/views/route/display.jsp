@@ -139,10 +139,10 @@ color: #428bca;
 										<h5 class="titulos"><spring:message code="shipment.moments" /></h5>
 											<div class="info-salida col-sm-12" style="width: 100%">
 												
-												<i class="glyphicon glyphicon-plane"></i> 
+												<i class="fa fa-calendar"></i> 
 												<spring:message code="route.departureTime" />: <span class="titles-info">${departureTime}</span><i class="glyphicon glyphicon-time"></i><span class="titles-info">${departureTime_hour}</span>
 												<br/>
-												<i class="glyphicon glyphicon-plane"></i> 
+												<i class="fa fa-calendar"></i> 
 												<spring:message code="route.arriveTime" />: <span class="titles-info">${arriveTime}</span><i class="glyphicon glyphicon-time"></i><span class="titles-info">${arriveTime_hour}</span>
 												
 

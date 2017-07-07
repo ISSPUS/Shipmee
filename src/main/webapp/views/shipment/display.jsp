@@ -102,9 +102,8 @@
 								
 								<div class="row info-ruta">
 									<div class="col-xs-12 col-sm-9">
-																			
-										
-										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
+
+										<h5 class="titulos"><spring:message code="shipment.places" />&nbsp;<img src="images/maps_64dp.png" style="width: 22px;"></h5>
 										
 										<div class="col-xs-7 col-sm-9 row titles-details frontera" style="width: 100%">
 										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><span class="titles-info">${shipment.origin}</span></a>&nbsp;&nbsp;<br/>
@@ -122,10 +121,10 @@
 										<h5 class="titulos"><spring:message code="shipment.moments" /></h5>
 											<div class="info-salida col-sm-12 ">
 
-												<i class="glyphicon glyphicon-plane"></i> 
+												<i class="fa fa-calendar"></i> 
 												<spring:message code="shipment.departureTime" />: <span class="titles-info">${departureTime}</span><i class="glyphicon glyphicon-time"></i><span class="titles-info">${departureTime_hour}</span>
 												<br/>
-												<i class="glyphicon glyphicon-plane"></i> 
+												<i class="fa fa-calendar"></i> 
 												<spring:message code="shipment.maximumArriveTime" />: <span class="titles-info">${maximumArriveTime}</span><i class="glyphicon glyphicon-time"></i><span class="titles-info">${maximumArriveTime_hour}</span>
 
 											</div>

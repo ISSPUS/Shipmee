@@ -82,7 +82,7 @@
 							<li class="li-input"><input id="destination" name="destination" type="text"
 								class="form-control input-text" value="${destination}" placeholder="" required></li>
 							<li class="active"><a target="_blank"> <i
-									class="glyphicon glyphicon-plane"></i> <spring:message code="shipment.date" />
+									class="fa fa-calendar"></i> <spring:message code="shipment.date" />
 							</a></li>
 							<li class="li-input">
 								<div class='input-group fondoDesplegable input-text' id='datetimepicker1'>
@@ -230,13 +230,13 @@
 
 										
 
-												<i class="glyphicon glyphicon-plane"></i> 
+												<i class="glyphicon glyphicon-time"></i> 
 												<spring:message code="shipment.departureTime" />: 
 												<fmt:formatDate value="${shipment.departureTime}" pattern="dd/MM/yyyy '-' HH:mm" />
 												
 												
 												<br/>
-												<i class="glyphicon glyphicon-plane"></i> 
+												<i class="glyphicon glyphicon-time"></i> 
 												<spring:message code="shipment.maximumArriveTime" />: 
 												<fmt:formatDate value="${shipment.maximumArriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
 												

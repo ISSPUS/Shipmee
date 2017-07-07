@@ -183,14 +183,14 @@
 
 
 
-																<i class="glyphicon glyphicon-plane"></i>
+																<i class="glyphicon glyphicon-time"></i>
 																<spring:message code="route.departureTime" />
 																:
 																<fmt:formatDate value="${route.departureTime}"
 																	pattern="dd/MM/yyyy '-' HH:mm" />
 
 
-																<br /> <i class="glyphicon glyphicon-plane"></i>
+																<br /> <i class="glyphicon glyphicon-time"></i>
 																<spring:message code="route.arriveTime" />
 																:
 																<fmt:formatDate value="${route.arriveTime}"
