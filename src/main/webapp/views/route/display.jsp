@@ -158,7 +158,7 @@ color: #428bca;
 											
 												<jstl:if test="${not empty route.vehicle}">		
 												<div class="vehiclePart">
-												<i class="glyphicon glyphicon-road">&nbsp;</i><spring:message code="route.vehicle"/>: 
+												<i class="glyphicon glyphicon-car">&nbsp;</i><spring:message code="route.vehicle"/>: 
 												<span class="titles-info">${route.vehicle.brand} - ${route.vehicle.model}</span>
 												<br/>
 

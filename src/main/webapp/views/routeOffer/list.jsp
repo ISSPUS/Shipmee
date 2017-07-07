@@ -156,26 +156,21 @@
 									</div>
 								</jstl:if>
 							</jstl:if>
-							<jstl:if test="${currentUser.id == routeOfferRow.user.id && not (empty actPayPalObject or actPayPalObject.payStatus ne 'CREATED')}">
-								<div class="col-xs-6 col-sm-12" style="text-align: center;">
-									<button type="button"
-										class="btn btn-success btn-shipmentOffer-actions"
-										onclick="location.href = 'user/payPal/returnPayment.do?trackingId=${actPayPalObject.trackingId}';">
-										<spring:message code="feePayment.button.refreshPayPal" />
-									</button>
-								</div>
-								<div class="col-xs-6 col-sm-12" style="text-align: center;">
-									<button type="button"
-										class="btn btn-danger btn-shipmentOffer-actions"
-										onclick="location.href = 'feepayment/user/cancelPaymentInProgress.do?feePaymentId=${actPayPalObject.feePayment.id}';">
-										<spring:message code="feePayment.button.cancelInProcessPayment.advanced" />
-									</button>
-								</div>
-							</jstl:if>
-
 						</div>
 					</div>
 				</div>
+				
+				<jstl:if test="${currentUser.id == routeOfferRow.user.id && not (empty actPayPalObject or actPayPalObject.payStatus ne 'CREATED')}">
+
+				<div class="alert alert-warning">
+					<strong><spring:message code="feePayment.message.failurePayPal1" />.</strong> <spring:message code="feePayment.message.failurePayPal2" />:<br>
+					- <a href="user/payPal/returnPayment.do?trackingId=${actPayPalObject.trackingId}"><spring:message code="feePayment.message.failurePayPal.sentence1.link" /></a>, <spring:message code="feePayment.message.failurePayPal.sentence1" />.<br>
+					- <a href="feepayment/user/cancelPaymentInProgress.do?feePaymentId=${actPayPalObject.feePayment.id}"><spring:message code="feePayment.message.failurePayPal.sentence2.link" /></a>, <spring:message code="feePayment.message.failurePayPal.sentence2" />.
+				</div>
+			
+				</jstl:if>
+				
+				
 				<jstl:if test="${routeOfferRow.description != null}">
 				<hr>
 				</jstl:if>
