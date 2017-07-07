@@ -254,6 +254,7 @@ public class RouteOfferService {
 		Route route = routeOffer.getRoute();
 		Shipment shipment;
 		User user;
+		PayPalObject po;
 		
 		user = userService.findByPrincipal();
 		
@@ -265,10 +266,9 @@ public class RouteOfferService {
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.routeOffer.accept.user.own");
 		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
 		
-		if(!ServerConfig.getTesting()){
-			PayPalObject po = payPalService.findByRouteOfferId(routeOfferId);
-			Assert.isTrue(po == null || po.getPayStatus().equals("INCOMPLETE"), "message.error.routeOffer.tryToAcceptNotPayOffer");
-		}
+		po = payPalService.findByRouteOfferId(routeOfferId);
+		Assert.isTrue(po == null || po.getPayStatus().equals("COMPLETED"), "message.error.routeOffer.tryToAcceptNotPayOffer");
+
 		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "message.error.routeOffer.notAcceptedOrRejected");		
 		
 		routeOffer.setAcceptedByCarrier(true); // The offer is accepted.
@@ -315,8 +315,8 @@ public class RouteOfferService {
 
 		PayPalObject po = payPalService.findByRouteOfferId(routeOfferId);
 
-		if(!ServerConfig.getTesting() && po != null){
-			Assert.isTrue(po.getPayStatus().equals("INCOMPLETE"), "message.error.routeOffer.tryToAcceptNotPayOffer");
+		if(po != null){
+			Assert.isTrue(po.getPayStatus().equals("COMPLETED"), "message.error.routeOffer.tryToAcceptNotPayOffer");
 			
 			try {
 				payPalService.refundToSender(po.getFeePayment().getId());

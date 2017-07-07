@@ -72,7 +72,7 @@ public class PayPalService {
 	private PayPalObject save(PayPalObject payPalObject) {
 		Assert.notNull(payPalObject, "message.error.PayPalObject.notNull");
 		
-		payPalObject = payPalRepository.saveAndFlush(payPalObject); // No quitar flush puesto que necesita guardarse totalmente
+		payPalObject = payPalRepository.save(payPalObject); // No añadir flush puesto que falla todo
 			
 		return payPalObject;
 	}
@@ -140,6 +140,8 @@ public class PayPalService {
 		PaymentDetailsResponse details = PayPal.fetchDetailsAdaptiveTransaction(payObject.getTrackingId());
 
 		Assert.isTrue(details.getError().isEmpty(), "PayPalService.returnFromPaypal.error.RetrievingDetailsFromPaypal");
+		
+		// payObject = this.findByTrackingId(trackingId);
 
 		payObject.setPayStatus(details.getStatus());
 
