@@ -79,6 +79,7 @@
 						
 						<div class="col-xs-12">
 							<h5 class="offer-profile-info">
+							<jstl:if test="${empty actPayPalObject or actPayPalObject.payStatus ne 'CREATED'}">
 								<jstl:if test="${shipmentOfferRow.acceptedBySender}">
 									<p>
 										<b><spring:message code="shipmentOffer.status" />: <span style="color: #58e19d"><spring:message code="shipmentOffer.accepted" /></span></b>
@@ -94,6 +95,12 @@
 									<p>
 										<b><spring:message code="shipmentOffer.status" />: <span style="color: #ffb66d"><spring:message code="shipmentOffer.pending" /></span></b>
 									</p>
+								</jstl:if>
+								</jstl:if>
+								<jstl:if test="${not (empty actPayPalObject or actPayPalObject.payStatus ne 'CREATED')}">
+										<p>
+											<b><spring:message code="routeOffer.status" />: <span style="color: #ffb66d"><spring:message code="routeOffer.pending.payment" /></span></b>
+										</p>
 								</jstl:if>
 							</h5>
 						</div>
@@ -136,28 +143,23 @@
 										</button>
 									</div>
 								</jstl:if>
-								<jstl:if test="${not empty actPayPalObject && actPayPalObject.payStatus == 'CREATED'}">
-									<div class="col-xs-6 col-sm-12">
-										<button type="button"
-											class="btn btn-success btn-shipmentOffer-actions"
-											onclick="location.href = 'user/payPal/returnPayment.do?trackingId=${actPayPalObject.trackingId}';">
-											<spring:message code="feePayment.button.refreshPayPal" />
-										</button>
-									</div>
-									<div class="col-xs-6 col-sm-12" style="text-align: center;">
-										<button type="button"
-											class="btn btn-danger btn-shipmentOffer-actions"
-											onclick="location.href = 'feepayment/user/cancelPaymentInProgress.do?feePaymentId=${actPayPalObject.feePayment.id}';">
-											<spring:message code="feePayment.button.cancelInProcessPayment" />
-										</button>
-									</div>
-								</jstl:if>
-								
-
 							</jstl:if>
 						</div>
 					</div>
 				</div>
+				
+				
+				<jstl:if test="${(!shipmentOfferRow.rejectedBySender && !shipmentOfferRow.acceptedBySender && currentUser.id != shipmentOfferRow.user.id) && not (empty actPayPalObject or actPayPalObject.payStatus ne 'CREATED')}">
+
+				<div class="alert alert-warning">
+					<strong><spring:message code="feePayment.message.failurePayPal1" />.</strong> <spring:message code="feePayment.message.failurePayPal2" />:<br>
+					- <a href="user/payPal/returnPayment.do?trackingId=${actPayPalObject.trackingId}"><spring:message code="feePayment.message.failurePayPal.sentence1.link" /></a>, <spring:message code="feePayment.message.failurePayPal.sentence1" />.<br>
+					- <a href="feepayment/user/cancelPaymentInProgress.do?feePaymentId=${actPayPalObject.feePayment.id}"><spring:message code="feePayment.message.failurePayPal.sentence2.link" /></a>, <spring:message code="feePayment.message.failurePayPal.sentence2.shipment" />.
+				</div>
+			
+				</jstl:if>
+				
+				
 				<jstl:if test="${shipmentOfferRow.description != null}">
 				<hr>
 				</jstl:if>
