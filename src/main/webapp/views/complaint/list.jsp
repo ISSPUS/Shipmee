@@ -377,9 +377,12 @@ len_serious: total de quejas graves
 			</jstl:forEach>
 		</jstl:when>
 		<jstl:otherwise>
-			<p>
-				<spring:message code="complaint.results" />
-			</p>
+			<div class="container" style="margin-top: 25px">
+				<div class="alert alert-info">
+					<strong><spring:message code="complaint.results" /></strong>
+				</div>
+			</div>
+
 		</jstl:otherwise>
 	</jstl:choose>
 	

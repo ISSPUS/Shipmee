@@ -219,9 +219,9 @@
 											</jstl:forEach>
 										</jstl:when>
 										<jstl:otherwise>
-											<p>
-												<spring:message code="route.results" />
-											</p>
+											<div class="alert alert-info">
+												<strong><spring:message code="route.results" /></strong>
+											</div>
 										</jstl:otherwise>
 									</jstl:choose>
 								</tbody>

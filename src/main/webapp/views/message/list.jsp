@@ -193,18 +193,14 @@ margin-top: 0px;
 		</div>
 			</jstl:if>
 			
+			<jstl:if test="${fn:length(messages) ==0}">
+				<div class="alert alert-info">
+					<strong><spring:message code="messages.anything" /></strong>
+				</div>
+			</jstl:if>
+	
 		</div>
 
-
-		<jstl:if test="${fn:length(messages) ==0}">
-			<center>
-				<h2>
-					<spring:message code="messages.anything" />
-				</h2>
-			</center>
-		</jstl:if>
-
-		
 
 	</div>
 

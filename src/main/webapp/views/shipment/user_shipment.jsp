@@ -206,9 +206,9 @@
 											
 										</jstl:when>
 										<jstl:otherwise>
-											<p>
-												<spring:message code="shipment.results" />
-											</p>
+											<div class="alert alert-info">
+												<strong><spring:message code="shipment.results" /></strong>
+											</div>
 										</jstl:otherwise>
 									</jstl:choose>
 								</tbody>
