@@ -12,6 +12,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<jsp:useBean id="javaMethods" class="utilities.ViewsMethods" />
+
+
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script type="text/javascript" src="scripts/moment.min.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
@@ -228,11 +231,11 @@
 													<h4><a href="user/profile.do?userId=${route.creator.id}">${route.creator.name}</a></h4>
 												</div>
 												
-												<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
+												<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(route.origin)}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
 											
 												<i class="glyphicon glyphicon-sort"></i>
 											
-												<a target="_blank" href="http://maps.google.com/maps?q=${route.destination}"> <i
+												<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(route.destination)}"> <i
 													class="glyphicon glyphicon-map-marker img-destination"></i>${route.destination}
 												</a>
 												

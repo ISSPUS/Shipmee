@@ -12,6 +12,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<jsp:useBean id="javaMethods" class="utilities.ViewsMethods" />
+
+
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script async type="text/javascript" src="scripts/moment.min.js"></script>
 <script async type="text/javascript" src="scripts/datetimepicker.min.js"></script>
@@ -216,11 +219,11 @@
 													<h4><a href="shipment/display.do?shipmentId=${shipment.id}">${shipment.itemName}</a></h4>
 												</div>
 												
-												<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
+												<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(shipment.origin)}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
 											
 												<i class="glyphicon glyphicon-sort"></i>
 											
-												<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"> <i
+												<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(shipment.destination)}"> <i
 													class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
 												</a>
 														

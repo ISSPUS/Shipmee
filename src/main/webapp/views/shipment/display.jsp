@@ -11,6 +11,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jsp:useBean id="javaMethods" class="utilities.ViewsMethods" />
+
+
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script async type="text/javascript" src="scripts/moment.min.js"></script>
 <script async type="text/javascript" src="scripts/datetimepicker.min.js"></script>
@@ -106,8 +109,8 @@
 										<h5 class="titulos"><spring:message code="shipment.places" />&nbsp;<img src="images/maps_64dp.png" style="width: 22px;"></h5>
 										
 										<div class="col-xs-7 col-sm-9 row titles-details frontera" style="width: 100%">
-										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.origin}"><span class="titles-info">${shipment.origin}</span></a>&nbsp;&nbsp;<br/>
-										<i class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<a target="_blank" href="http://maps.google.com/maps?q=${shipment.destination}"><span class="titles-info">${shipment.destination}</span></a><!--<img class="icon-maps" src="images/maps_64dp.png">-->
+										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(shipment.origin)}"><span class="titles-info">${shipment.origin}</span></a>&nbsp;&nbsp;<br/>
+										<i class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(shipment.destination)}"><span class="titles-info">${shipment.destination}</span></a><!--<img class="icon-maps" src="images/maps_64dp.png">-->
 										</div>
 										
 										
