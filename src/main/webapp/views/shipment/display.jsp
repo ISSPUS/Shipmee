@@ -182,7 +182,7 @@
 												<spring:message code="shipment.itemPicture" />
 											</h4>
 										</div>
-										<div class="modal-body">
+										<div class="modal-body" style="text-align: center;">
 											<img src="${shipment.itemPicture}">
 										</div>
 

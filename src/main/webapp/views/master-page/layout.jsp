@@ -52,8 +52,6 @@
 	}
 </script>
 
-
-
 </head>
 
 <body>
@@ -66,7 +64,10 @@
 		<tiles:insertAttribute name="body" />	
 		<jstl:if test="${message != null}">
 			<br />
-			<span class="message"><spring:message code="${message}" /></span>
+			<div class="mensaje_error_servidor">
+					<strong><span class="message"><spring:message code="${message}" /></span></strong>
+			</div>
+			<br />
 		</jstl:if>	
 	</div>
 	<div>
