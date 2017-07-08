@@ -139,7 +139,7 @@
 		<property name="email" value="miguel@gmail.com"/>
 		<property name="birthDate" value="1995/10/24"/>
 		<property name="phone" value="666777888"/>
-		<property name="dni" value="12345678A"/>
+		<property name="dni" value="76530653Q"/>
 		<property name="photo" value="https://i.imgur.com/ByPalwV.png"/>
 		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount1"/>
@@ -152,7 +152,7 @@
 		<property name="email" value="no-reply@shipmee.es"/>
 		<property name="birthDate" value="2017/03/03"/>
 		<property name="phone" value="666777888"/>
-		<property name="dni" value="12345678A"/>
+		<property name="dni" value="10417550E"/>
 		<property name="photo" value="https://i.imgur.com/ByPalwV.png"/>
 		<property name="passwordResetToken" value=""/>
 		<property name="userAccount" ref="userAccount6"/>
@@ -384,7 +384,7 @@
 		<property name="email" value="Antonio@gmail.com"/>
 		<property name="birthDate" value="1994/11/28"/>
 		<property name="phone" value="689836654"/>
-		<property name="dni" value="49983586H"/>
+		<property name="dni" value="49983586D"/>
 		<property name="dniPhoto" value="https://www.letranif.com/wp-content/uploads/2015/05/foto-dni.jpg"/>
 		<property name="photo" value="https://i.imgur.com/bHVDPaq.png"></property>
 		<property name="userAccount" ref="userAccount4"/>

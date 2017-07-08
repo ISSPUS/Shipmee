@@ -1,5 +1,6 @@
 package controllers.administrator;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,8 @@ import services.UserService;
 @Controller
 @RequestMapping("/user/administrator")
 public class UserAdministratorController extends AbstractController {
+	
+	static Logger log = Logger.getLogger(UserAdministratorController.class);
 
 	// Services ---------------------------------------------------------------
 
@@ -95,6 +98,7 @@ public class UserAdministratorController extends AbstractController {
 			userService.unturnIntoModerator(userId);
 			message = "user.unturnIntoModerator.ok";
 		} catch (Exception e) {
+			log.error(e);
 			message = "user.unturnIntoModerator.error";
 		}
 
