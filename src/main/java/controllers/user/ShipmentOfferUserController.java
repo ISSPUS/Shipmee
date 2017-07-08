@@ -90,10 +90,15 @@ public class ShipmentOfferUserController extends AbstractController {
 	public ModelAndView create(@RequestParam int shipmentId) {
 		ModelAndView result;
 		ShipmentOffer offer;
-
+		User user;
+		
+		user = userService.findByPrincipal();
+		Assert.notNull(user);
+		
 		offer = shipmentOfferService.create(shipmentId);
 		result = createEditModelAndView(offer);
-
+		result.addObject("user", user);
+		
 		return result;
 	}
 
