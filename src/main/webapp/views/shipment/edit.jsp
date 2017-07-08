@@ -235,7 +235,12 @@
 					<spring:message code="shipment.delete" />
 				</button>
 			</jstl:if>
-			<acme:cancel code="shipment.cancel" url="shipment/user/list.do" />
+			<jstl:if test="${shipmentForm.shipmentId == 0}">
+				<acme:cancel code="shipment.cancel" url="shipment/user/list.do" />
+			</jstl:if>
+			<jstl:if test="${shipmentForm.shipmentId != 0}">
+				<acme:cancel code="shipment.cancel" url="shipment/display.do?shipmentId=${shipmentForm.shipmentId}" />
+			</jstl:if>
 			</div>
 		</form:form>
 
