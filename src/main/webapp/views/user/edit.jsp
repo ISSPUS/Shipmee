@@ -170,7 +170,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
-						<form:input path="phone" class="form-control" id="phone" required="required"/>
+						<form:input path="phone" class="form-control" id="phone"/>
 					</div>
 					<form:errors class="error create-message-error" path="phone" />
 				</div>
