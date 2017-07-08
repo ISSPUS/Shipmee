@@ -198,7 +198,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<form:input  type="file" path="imagen" accept=".jpg,.jpeg,.png" class="form-control btn btn-default btn-file"
-						id="itemPicture" required="${shipmentForm.shipmentId == 0 ? 'selected' : ''}"/>
+						id="itemPicture" required="${shipmentForm.shipmentId == 0 ? 'required' : ''}"/>
 					<form:errors class="error create-message-error" path="imagen" />
 				</div>
 			</div>

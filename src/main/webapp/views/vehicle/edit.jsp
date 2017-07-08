@@ -93,10 +93,13 @@
 				<div class="form-group">
 					<form:label path="picture" class="control-label col-md-2"
 						for="picture">
-						<spring:message code="vehicle.picture" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+						<spring:message code="vehicle.picture" /> 
+						<jstl:if test="${vehicleForm.vehicleId == 0}">
+							<span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+						</jstl:if>
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="picture" type="file" accept=".jpg,.jpeg,.png" class="form-control" id="picture" required="required"/>
+						<form:input path="picture" type="file" accept=".jpg,.jpeg,.png" class="form-control" id="picture" required="${vehicleForm.vehicleId == 0 ? 'required' : ''}"/>
 						<form:errors class="error create-message-error" path="picture" />
 					</div>
 				</div>

@@ -50,7 +50,7 @@ public class VehicleFormService {
 	}
 	
 	public Vehicle reconstruct(VehicleForm vehicleForm, BindingResult binding) {
-		Vehicle result;
+		Vehicle result = null;
 		CommonsMultipartFile imageVehicleUpload = vehicleForm.getPicture();
 		String nameImgVehicle = null;
 		boolean errorImg = false;
@@ -77,33 +77,31 @@ public class VehicleFormService {
 		}
 		
 		if (vehicleForm.getVehicleId() == 0) {
-			result = vehicleService.create();
-			
-			result.setBrand(vehicleForm.getBrand());
-			result.setColor(vehicleForm.getColor());
-			result.setModel(vehicleForm.getModel());
-			
 			this.addBinding(binding, nameImgVehicle != null || errorImg, "picture", "message.error.imageUpload.notNull", null);
-			if(nameImgVehicle != null)
-				result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
-			
-			
-		} else if(vehicleForm.getVehicleId() != 0) {
-			result = vehicleService.findOne(vehicleForm.getVehicleId());
-			//User user = userService.findByPrincipal();
-			
-			result.setBrand(vehicleForm.getBrand());
-			result.setColor(vehicleForm.getColor());
-			result.setModel(vehicleForm.getModel());
-			
-			this.addBinding(binding, errorImg || (!errorImg && result.getPicture() != null), "picture", "message.error.imageUpload.notNull", null);
-			if(nameImgVehicle != null)
-				result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
 
+			if (!binding.hasErrors()){
+				result = vehicleService.create();
+				
+				result.setBrand(vehicleForm.getBrand());
+				result.setColor(vehicleForm.getColor());
+				result.setModel(vehicleForm.getModel());
+				
+				if(nameImgVehicle != null)
+					result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
+			}
+			
+		} else if(vehicleForm.getVehicleId() != 0 && !binding.hasErrors()) {
+				result = vehicleService.findOne(vehicleForm.getVehicleId());
+				//User user = userService.findByPrincipal();
+				
+				result.setBrand(vehicleForm.getBrand());
+				result.setColor(vehicleForm.getColor());
+				result.setModel(vehicleForm.getModel());
+				
+				if(nameImgVehicle != null)
+					result.setPicture(ServerConfig.getURL_IMAGE()+nameImgVehicle);
 			//result.setUser(user);
 
-		} else {
-			result = null;
 		}
 		
 		return result;
