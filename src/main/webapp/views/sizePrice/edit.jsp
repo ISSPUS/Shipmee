@@ -196,12 +196,6 @@
 					<spring:message code="sizePrice.save" />
 				</button>
 
-				<jstl:if test="${sizePriceForm.sizePriceFormId != 0}">
-					<button type="submit" name="delete" class="btn btn-danger"
-					onclick="return confirm('<spring:message code="sizePrice.confirm.delete" />')">
-						<spring:message code="sizePrice.delete" />
-					</button>
-				</jstl:if>
 				<acme:cancel code="sizePrice.cancel" url="route/user/list.do" />
 			</div>
 		</form:form>

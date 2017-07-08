@@ -77,6 +77,7 @@ public class ShipmentUserController extends AbstractController {
 		result = new ModelAndView("shipment/user");
 		result.addObject("shipments", ownShipments.getContent());
 		result.addObject("user", currentUser);
+		result.addObject("currentUser", currentUser);
 		result.addObject("shipmentId", shipmentId);
 		result.addObject("p", page);
 		result.addObject("total_pages", ownShipments.getTotalPages());
