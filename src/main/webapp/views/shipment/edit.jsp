@@ -191,11 +191,14 @@
 			<div class="form-group">
 				<form:label path="imagen" class="control-label col-md-2"
 					for="imagen">
-					<spring:message code="shipment.itemPicture" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+					<spring:message code="shipment.itemPicture" /> 
+					<jstl:if test="${shipmentForm.shipmentId == 0}">
+						<span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+					</jstl:if>
 				</form:label>
 				<div class="col-md-8">
 					<form:input  type="file" path="imagen" accept=".jpg,.jpeg,.png" class="form-control btn btn-default btn-file"
-						id="itemPicture" required="required"/>
+						id="itemPicture" required="${shipmentForm.shipmentId == 0 ? 'selected' : ''}"/>
 					<form:errors class="error create-message-error" path="imagen" />
 				</div>
 			</div>
