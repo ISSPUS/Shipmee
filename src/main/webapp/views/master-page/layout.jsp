@@ -52,15 +52,6 @@
 	}
 </script>
 
-<style>
-
-.mensaje_error_servidor{
-	text-align: center;
-}
-
-
-</style>
-
 </head>
 
 <body>
@@ -73,11 +64,10 @@
 		<tiles:insertAttribute name="body" />	
 		<jstl:if test="${message != null}">
 			<br />
-			<div class="container mensaje_error_servidor">
-				<div class="alert alert-danger">
+			<div class="mensaje_error_servidor">
 					<strong><span class="message"><spring:message code="${message}" /></span></strong>
-				</div>
 			</div>
+			<br />
 		</jstl:if>	
 	</div>
 	<div>

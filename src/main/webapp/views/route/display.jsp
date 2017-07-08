@@ -178,7 +178,7 @@ color: #428bca;
 																	<spring:message code="route.vehicle"/>
 																</h4>
 															</div>
-															<div class="modal-body">
+															<div class="modal-body" style="text-align: center;">
 																<img src="${route.vehicle.picture}">
 															</div>
 				

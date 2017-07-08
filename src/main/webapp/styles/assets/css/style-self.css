@@ -734,4 +734,6 @@ Evita descuadre de menu de cabecera con una resolución entre 768 y 992
 
 }
 
-
+.mensaje_error_servidor{
+	text-align: center;
+}
