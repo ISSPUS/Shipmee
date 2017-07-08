@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
 <script async src="scripts/jquery.bootpag.min.js"></script>
 
-
-<jstl:if test="${!empty ratings.content && userReceivedId > 0}">
+<jstl:choose>					
+<jstl:when test="${!empty ratings.content && userReceivedId > 0}">
 	<div class="blue-barra"
 		style="padding-top: 0.75%; padding-bottom: 0.75%;">
 		<div class="container">
@@ -36,6 +36,16 @@
 					</a>
 				</jstl:if>
 				</h3>
+			</div>
+			<!-- /row -->
+		</div>
+	</div>
+</jstl:when>
+<jstl:when test="${!empty ratings.content && authorId > 0}">
+	<div class="blue-barra"
+		style="padding-top: 0.75%; padding-bottom: 0.75%;">
+		<div class="container">
+			<div class="row">
 				<h3>
 				<jstl:if test="${authorId > 0}">
 					<spring:message code="rating.list.by" />
@@ -50,15 +60,29 @@
 			<!-- /row -->
 		</div>
 	</div>
-</jstl:if>
+</jstl:when>
+<jstl:when test="${empty ratings.content}">
+	<div class="blue-barra"
+		style="padding-top: 0.75%; padding-bottom: 0.75%;">
+		<div class="container">
+			<div class="row">
+				<h3>
+				<spring:message code="rating.list" />
 
+				</h3>
+			</div>
+			<!-- /row -->
+		</div>
+	</div>
+</jstl:when>
+</jstl:choose>
 
 <jstl:if test="${empty ratings.content}">
-	<center>
-		<h2>
-			<spring:message code="rating.anything" />
-		</h2>
-	</center>
+	<div class="container" style="margin-top:25px">
+			<div class="alert alert-info">
+				<strong><spring:message code="rating.anything" /></strong>
+			</div>
+		</div>
 </jstl:if>
 
 <div class="container">
