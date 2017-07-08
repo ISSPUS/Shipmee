@@ -152,7 +152,8 @@
 							<form:option value="" label="----" />
 							<c:forEach items="${vehicles}" var="vehicle">
 								<form:option value="${vehicle.id }"
-									label="${vehicle.brand} - ${ vehicle.model}" />
+									label="${vehicle.brand} - ${ vehicle.model}" selected="${vehicle.id == routeForm.vehicle.id ? 'selected' : ''}">
+									</form:option>
 							</c:forEach>
 						</form:select>
 						<form:errors path="vehicle" cssClass="error" />
