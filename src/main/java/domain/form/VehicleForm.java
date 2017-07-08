@@ -4,6 +4,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 
@@ -27,6 +29,7 @@ public class VehicleForm {
 
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBrand() {
 		return brand;
 	}
@@ -37,6 +40,7 @@ public class VehicleForm {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getModel() {
 		return model;
 	}
@@ -56,6 +60,7 @@ public class VehicleForm {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getColor() {
 		return color;
 	}
