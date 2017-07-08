@@ -141,9 +141,11 @@ margin-bottom: 5%;
 			</jstl:forEach>
 		</jstl:when>
 		<jstl:otherwise>
-			<p>
-				<spring:message code="alert.results" />
-			</p>
+			<div class="container" style="margin-top:25px">
+			<div class="alert alert-info">
+				<strong><spring:message code="alert.results" /></strong>
+			</div>
+			</div>
 		</jstl:otherwise>
 	</jstl:choose>
 </div>

@@ -250,21 +250,22 @@
 								</div>
 							</div>
 						</jstl:if>
+
+						<jstl:if test="${fn:length(users.content) ==0}">
+							<div class="alert alert-info">
+								<strong><spring:message code="user.wihtout.results" /></strong>
+							</div>
+						</jstl:if>
+
 					</div>
+					
+					
 		</div></div>
 	</div>
 
 </div>
 
-		<jstl:if test="${fn:length(users.content) ==0}">
-			<center>
-				<h2>
-					<spring:message code="messages.anything" />
-				</h2>
-			</center>
-		</jstl:if>
-
-
+	
 	</div>
 
 

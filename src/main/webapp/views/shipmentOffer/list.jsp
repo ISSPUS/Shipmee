@@ -189,11 +189,11 @@
 	<!--   
 	   -->
 	<jstl:if test="${fn:length(shipmentOffers) == 0}">
-		<center>
-			<h2>
-				<spring:message code="shipmentOffer.anything" />
-			</h2>
-		</center>
+		<div class="container" style="margin-top:25px">
+			<div class="alert alert-info">
+				<strong><spring:message code="shipmentOffer.anything" /></strong>
+			</div>
+		</div>
 	</jstl:if>
 
 	<div id="pagination" class="copyright pagination-center">

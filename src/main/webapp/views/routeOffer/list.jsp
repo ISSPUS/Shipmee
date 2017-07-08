@@ -221,10 +221,10 @@
 </div>
 
 <jstl:if test="${fn:length(routeOffers) == 0}">
-	<center>
-		<h2>
-			<spring:message code="routeOffer.anything" />
-		</h2>
-	</center>
+	<div class="container" style="margin-top:25px">
+		<div class="alert alert-info">
+			<strong><spring:message code="routeOffer.anything" /></strong>
+		</div>
+	</div>
 </jstl:if>
 

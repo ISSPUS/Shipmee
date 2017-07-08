@@ -442,25 +442,25 @@ font-size: 225%;
 		<jstl:otherwise>
 						<jstl:choose>
 							<jstl:when test="${feePaymentsType == 'Accepted'}">
-								<center>
-									<h4>
-										<spring:message code="feePayment.results.accepted" />
-									</h4>
-								</center>
+								<div class="container" style="margin-top: 25px">
+									<div class="alert alert-info">
+										<strong><spring:message code="feePayment.results.accepted" /></strong>
+									</div>
+								</div>
 							</jstl:when>
 							<jstl:when test="${feePaymentsType == 'Pending'}">
-								<center>
-									<h4>
-										<spring:message code="feePayment.results.pending" />
-									</h4>
-								</center>
+								<div class="container" style="margin-top: 25px">
+									<div class="alert alert-info">
+										<strong><spring:message code="feePayment.results.pending" /></strong>
+									</div>
+								</div>
 							</jstl:when>
 							<jstl:when test="${feePaymentsType == 'Rejected'}">
-								<center>
-									<h4>
-										<spring:message code="feePayment.results.rejected" />
-									</h4>
-								</center>
+								<div class="container" style="margin-top: 25px">
+									<div class="alert alert-info">
+										<strong><spring:message code="feePayment.results.rejected" /></strong>
+									</div>
+								</div>
 							</jstl:when>
 						</jstl:choose>
 

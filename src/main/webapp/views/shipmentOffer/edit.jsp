@@ -27,6 +27,9 @@
 		<!-- /row -->
 	</div>
 </div>
+
+<jstl:if test="${user.isVerified && user.fundTransferPreference != null}">
+
 <div class="container">
 	<div class="row formulario">
 		<form:form action="shipmentOffer/user/edit.do" modelAttribute="shipmentOffer" method="post" class="form-horizontal"
@@ -80,3 +83,46 @@
 	</div>
 
 </div>
+
+</jstl:if>
+
+<jstl:if test="${(!user.isVerified && (user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')) || 
+(!user.isVerified && (user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')) ||
+(user.fundTransferPreference == null)}">
+	
+	<div class="" style="margin-top:25px">
+		
+	</div>
+	
+</jstl:if>
+
+
+<jstl:if test="${!user.isVerified && (user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')}">
+	
+	<div class="container">
+		<div class="alert alert-info">
+			<strong><spring:message code="user.isVerified" />: <a href="user/user/edit.do" ><spring:message code="user.verify" /></a></strong>
+		</div>
+	</div>
+	
+</jstl:if>
+<jstl:if test="${!user.isVerified && (user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')}">
+
+	<div class="container" >
+		<div class="alert alert-success">
+			<strong><spring:message code="user.notVerified.waiting" /></strong>
+		</div>
+	</div>
+
+</jstl:if>
+
+<jstl:if test="${user.fundTransferPreference == null}">
+	
+	<div class="container">
+		<div class="alert alert-info">
+			<strong><spring:message code="message.error.shipmentOffer.fundTransferPreference" /> <spring:message code="message.error.shipmentOffer.fundTransferPreference.can" />: <a href="fundTransferPreference/user/edit.do" ><spring:message code="message.error.shipmentOffer.fundTransferPreference.edit" /></a></strong>
+		</div>
+	</div>
+	
+	<br/>
+</jstl:if>

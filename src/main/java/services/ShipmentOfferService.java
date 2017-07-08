@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.FundTransferPreference;
 import domain.Shipment;
 import domain.ShipmentOffer;
 import domain.User;
@@ -135,7 +136,9 @@ public class ShipmentOfferService {
 				"message.error.shipmentOffer.equalCreatorAndProposer");
 		Assert.isTrue(tmp.getShipment().getMaximumArriveTime().after(new Date()),
 				"message.error.shipmentOffer.shipment.maxArrivalTime.future");
-
+		Assert.isTrue(isValidMethodPayment(tmp.getUser().getFundTransferPreference()),
+				"message.error.shipmentOffer.fundTransferPreference");
+		
 		tmp = shipmentOfferRepository.save(tmp);
 
 		return tmp;
@@ -328,5 +331,11 @@ public class ShipmentOfferService {
 			return false;
 		}
 	}
-
+	public boolean isValidMethodPayment(FundTransferPreference form){
+		return (form.getAccountHolder() != null && !form.getAccountHolder().equals("")) &&
+		(form.getBankName() != null && !form.getBankName().equals("")) &&
+		(form.getIBAN() != null && !form.getIBAN().equals("")) &&
+		(form.getBIC() != null && !form.getBIC().equals("")) || 
+		(form.getPaypalEmail() != null && !form.getPaypalEmail().equals(""));
+	}
 }

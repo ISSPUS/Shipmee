@@ -20,6 +20,16 @@
 
 <security:authorize access="hasRole('ADMIN')" var="isAdmin" />
 
+<div class="blue-barra">
+	<div class="container">
+		<div class="row">
+			<h3>
+				<spring:message code="user.view" />
+			</h3>
+		</div>
+		<!-- /row -->
+	</div>
+</div>
 
 <div class="container">
 	<div class="row">
@@ -276,9 +286,10 @@
 								<div class="col-xs-12">
 									<div class="center-block col-lg-12"
 										style="text-align: center;">
-										<h4>
-											<spring:message code="rating.anything" />
-										</h4>
+										<div class="alert alert-info">
+											<strong><spring:message code="rating.anything" /></strong>
+										</div>
+										
 									</div>
 								</div>
 							</div>
