@@ -31,6 +31,7 @@ public class CreditCard{
 	
 	@NotBlank
 	@NotNull
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getHolderName() {
 		return holderName;
 	}

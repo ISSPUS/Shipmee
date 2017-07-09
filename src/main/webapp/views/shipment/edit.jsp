@@ -84,33 +84,33 @@
 			</div> <br/>
 
 			<div class="form-group">
-				<form:label path="origin" class="control-label col-md-2"
+				<form:label path="origin" class="control-label col-md-3"
 					for="recipient">
 					<spring:message code="shipment.origin" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
-				<div class="col-md-8">
+				<div class="col-md-7">
 					<form:input path="origin" class="form-control" id="origin" required="required"/>
 					<form:errors class="error create-message-error" path="origin" />
 				</div>
 			</div>
 
 			<div class="form-group">
-				<form:label path="origin" class="control-label col-md-2"
+				<form:label path="origin" class="control-label col-md-3"
 					for="destination">
 					<spring:message code="shipment.destination" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
-				<div class="col-md-8">
+				<div class="col-md-7">
 					<form:input path="destination" class="form-control"
 						id="destination" required="required"/>
 					<form:errors class="error create-message-error" path="destination" />
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="departureTime" class="control-label col-md-2"
+				<form:label path="departureTime" class="control-label col-md-3"
 					for="departureTime">
 					<spring:message code="shipment.departureTime" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
-				<div class="col-md-8">
+				<div class="col-md-7">
 
 					<div class='input-group date input-text' id='datetimepicker1'>
 						<form:input id="date" path="departureTime" name="departureTime"
@@ -124,11 +124,11 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="maximumArriveTime" class="control-label col-md-2"
+				<form:label path="maximumArriveTime" class="control-label col-md-3"
 					for="maximumArriveTime">
 					<spring:message code="shipment.maximumArriveTime" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
-				<div class="col-md-8">
+				<div class="col-md-7">
 
 					<div class='input-group date input-text' id='datetimepicker2'>
 						<form:input path="maximumArriveTime"  name="maximumArriveTime"
@@ -142,11 +142,11 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="itemSize" class="control-label col-md-2"
+				<form:label path="itemSize" class="control-label col-md-3"
 					for="itemSize">
 					<spring:message code="shipment.itemSize" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
-				<div class="col-md-8">
+				<div class="col-md-7">
 
 					<spring:message code="shipment.sizeS" var="s" />
 					<spring:message code="shipment.sizeM" var="m" />
@@ -164,10 +164,10 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="price" class="control-label col-md-2" for="price">
+				<form:label path="price" class="control-label col-md-3" for="price">
 					<spring:message code="shipment.price" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<div class="inner-addon left-addon input-price">
 						<i class="glyphicon glyphicon-euro"></i>
 						<form:input path="price" class="form-control" id="price" min="0.01"
@@ -179,35 +179,35 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="itemName" class="control-label col-md-2"
+				<form:label path="itemName" class="control-label col-md-3"
 					for="itemName">
 					<spring:message code="shipment.itemName" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
-				<div class="col-md-8">
+				<div class="col-md-7">
 					<form:input path="itemName" class="form-control" id="itemName" required="required"/>
 					<form:errors class="error create-message-error" path="itemName" />
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="imagen" class="control-label col-md-2"
+				<form:label path="imagen" class="control-label col-md-3"
 					for="imagen">
 					<spring:message code="shipment.itemPicture" /> 
 					<jstl:if test="${shipmentForm.shipmentId == 0}">
 						<span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 					</jstl:if>
 				</form:label>
-				<div class="col-md-8">
+				<div class="col-md-7">
 					<form:input  type="file" path="imagen" accept=".jpg,.jpeg,.png" class="form-control btn btn-default btn-file"
 						id="itemPicture" required="${shipmentForm.shipmentId == 0 ? 'required' : ''}"/>
 					<form:errors class="error create-message-error" path="imagen" />
 				</div>
 			</div>
 			<div class="form-group">
-				<form:label path="itemEnvelope" class="control-label col-md-2"
+				<form:label path="itemEnvelope" class="control-label col-md-3"
 					for="itemEnvelope">
 					<spring:message code="shipment.itemEnvelope" /> <span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
 				</form:label>
-				<div class="col-md-8">
+				<div class="col-md-7">
 
 					<spring:message code="shipment.open" var="open" />
 					<spring:message code="shipment.closed" var="closed" />

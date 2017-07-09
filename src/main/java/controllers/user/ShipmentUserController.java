@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
+import controllers.ShipmentController;
 import domain.Shipment;
 import domain.ShipmentOffer;
 import domain.User;
@@ -47,6 +48,9 @@ public class ShipmentUserController extends AbstractController {
 	
 	@Autowired
 	private ShipmentOfferService shipmentOfferService;
+	
+	@Autowired
+	private ShipmentController shipmentController;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -182,7 +186,8 @@ public class ShipmentUserController extends AbstractController {
 			if(oops.getMessage().contains("message.error")){
 				messageError = oops.getMessage();
 			}
-			result = createEditModelAndView(shipment, messageError);
+			result = shipmentController.createListModelAndView(shipment.getId());
+		    result.addObject("message", messageError);
 		}
 		
 		return result;		
@@ -198,13 +203,6 @@ public class ShipmentUserController extends AbstractController {
 		return result;
 	}	
 	
-	protected ModelAndView createEditModelAndView(Shipment shipment) {
-		ModelAndView result;
-
-		result = createEditModelAndView(shipment, null);
-		
-		return result;
-	}	
 	
 	protected ModelAndView createEditModelAndView(ShipmentForm shipmentForm, String message) {
 		ModelAndView result;
@@ -216,14 +214,6 @@ public class ShipmentUserController extends AbstractController {
 		return result;
 	}
 	
-	protected ModelAndView createEditModelAndView(Shipment shipment, String message) {
-		ModelAndView result;
-						
-		result = new ModelAndView("shipment/search");
-		result.addObject("shipment", shipment);
-		result.addObject("message", message);
 
-		return result;
-	}
 
 }
