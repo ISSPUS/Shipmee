@@ -225,10 +225,15 @@
 											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
 										
 										</jstl:if>
-										<jstl:if test="${shipment.creator != user && !user.isVerified && shipment.carried == null}">
+										<jstl:if test="${shipment.creator != user && !user.isVerified && shipment.carried == null && (user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')}">
 											
 											<a href="user/user/edit.do"><spring:message code="message.error.shipmentOffer.verifiedCarrier.extended" /></a>
 										
+										</jstl:if>
+										<jstl:if test="${shipment.creator != user && !user.isVerified && shipment.carried == null  && (user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')}">
+
+											<a><spring:message code="user.notVerified.waiting" /></a>
+
 										</jstl:if>
 										<jstl:if test="${shipment.creator != user && user.fundTransferPreference == null && shipment.carried == null}">
 										<br/>
