@@ -70,6 +70,9 @@ public class RouteOfferService {
 	
 	@Autowired
 	private MessageSource messageSource;
+	
+	@Autowired
+	private ShipmentOfferService shipmentOfferService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -92,6 +95,8 @@ public class RouteOfferService {
 		res.setRoute(route);
 		if(shipmentId != 0) {
 			shipment = shipmentService.findOne(shipmentId);
+			Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
+			
 			res.setShipment(shipment);
 			
 			sizePrices = sizePriceService.findAllByRouteId(routeId);
@@ -102,6 +107,7 @@ public class RouteOfferService {
 					} else {
 						res.setAmount(shipment.getPrice());
 					}
+					break;
 				}
 			}
 		}
@@ -134,13 +140,15 @@ public class RouteOfferService {
 
 		actUser = userService.findByPrincipal();
 
-		if (actUser.equals(input.getUser())) { // User that create route
+		if (actUser.equals(input.getUser())) { // User that put the offer
 			if (input.getId() != 0) {
 				tmp = this.findOne(input.getId());
 				Assert.notNull(tmp, "message.error.routeOffer.save.dontFindID");
 				Assert.isTrue(tmp.getUser().equals(actUser), "message.error.routeOffer.save.user.own");
-				Assert.isTrue(!tmp.getAcceptedByCarrier() && !tmp.getRejectedByCarrier(),
-						"message.error.routeOffer.notAcceptedOrRejected");
+				// Assert.isTrue(!tmp.getAcceptedByCarrier() && !tmp.getRejectedByCarrier(),
+				// 		"message.error.routeOffer.notAcceptedOrRejected"); // Not neccessary.
+				// Conflictive with autoDenyRelatedOffersNotAcceptedYet when accept from shipmentOffer 
+
 			} else {
 				if(input.getShipment() != null) {
 					tmp = this.create(input.getRoute().getId(), input.getShipment().getId());
@@ -160,14 +168,15 @@ public class RouteOfferService {
 			tmp.setAmount(input.getAmount());
 			tmp.setDescription(input.getDescription());
 			tmp.setShipment(input.getShipment());
+			tmp.setRejectedByCarrier(input.getRejectedByCarrier());
 			
 			if(tmp.getShipment() != null) {
 				Assert.isTrue(actUser.getId() == tmp.getShipment().getCreator().getId());
 			}
 			
 		} else if (actUser.equals(input.getRoute().getCreator())) { // User that
-																	// put the
-																	// offer
+																	// create
+																	// the route
 			Assert.isTrue(input.getId() != 0, "service.routeOffer.save.ProposerCreating"); // The
 																							// routeCreator
 																							// can't
@@ -178,8 +187,9 @@ public class RouteOfferService {
 			tmp.setAcceptedByCarrier(input.getAcceptedByCarrier());
 			tmp.setRejectedByCarrier(input.getRejectedByCarrier());
 		} else {
-			Assert.isTrue(false, "routeOffer.commit.error");
-			return null;
+			tmp = routeOfferRepository.findOne(input.getId());
+			Assert.notNull(tmp, "message.error.routeOffer.save.dontFindID");
+			tmp.setRejectedByCarrier(input.getRejectedByCarrier());
 		}
 		Assert.isTrue(!tmp.getUser().equals(tmp.getRoute().getCreator()),
 				"message.error.routeOffer.equalCreatorAndProposer");
@@ -238,6 +248,14 @@ public class RouteOfferService {
 		return result;
 	}
 	
+	public Collection<RouteOffer> findAllPendingByShipmentId(int shipmentId){
+		Collection<RouteOffer> result;
+		
+		result = routeOfferRepository.findAllPendingByShipmentId(shipmentId);
+		
+		return result;
+	}
+	
 	/**
 	 * 
 	 * @param routeOfferId - The if of the RouteOffer
@@ -278,6 +296,8 @@ public class RouteOfferService {
 			
 			shipment.setCarried(user);
 			shipment = shipmentService.save(shipment);
+			
+			shipmentOfferService.autoDenyRelatedOffersNotAcceptedYet(shipment.getId());
 		}
 		
 		save(routeOffer);
@@ -290,6 +310,7 @@ public class RouteOfferService {
 		
 	}
 	
+	
 	/**
 	 * 
 	 * @param routeOfferId - The id of the RouteOffer
@@ -301,18 +322,25 @@ public class RouteOfferService {
 		Assert.isTrue(routeOfferId != 0, "message.error.routeOffer.mustExist");
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.routeOffer.onlyUser");
 		
-		RouteOffer routeOffer = findOne(routeOfferId);
+		RouteOffer routeOffer = routeOfferRepository.findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
 		
-		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
-		Assert.isTrue(routeService.checkFutureDepartureDate(route), "message.error.route.checkFutureDepartureDate");
-		Assert.isTrue(routeService.checkArriveTimeAfterDepartureDate(route), "message.error.route.checkArriveTimeAfterDepartureDate");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.routeOffer.deny.user.own");
 		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
 
 		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "message.error.routeOffer.notAcceptedOrRejected");
 
-		PayPalObject po = payPalService.findByRouteOfferId(routeOfferId);
+		this.internalDeny(routeOffer);
+	}
+	
+	public void internalDeny(RouteOffer routeOffer){
+		Assert.notNull(routeOffer);
+		
+		Assert.notNull(routeOffer.getRoute(), "message.error.routeOffer.route.mustExist");
+		Assert.isTrue(routeService.checkFutureDepartureDate(routeOffer.getRoute()), "message.error.route.checkFutureDepartureDate");
+		Assert.isTrue(routeService.checkArriveTimeAfterDepartureDate(routeOffer.getRoute()), "message.error.route.checkArriveTimeAfterDepartureDate");
+
+		PayPalObject po = payPalService.findByRouteOfferId(routeOffer.getId());
 
 		if(po != null){
 			Assert.isTrue(po.getPayStatus().equals("COMPLETED"), "message.error.routeOffer.tryToAcceptNotPayOffer");
@@ -336,7 +364,6 @@ public class RouteOfferService {
 		 */
 		
 		messageService.autoMessageDenyRouteOffer(routeOffer);
-	
 	}
 	
 	// IDs could be <= 0 to ignore in the find

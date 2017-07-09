@@ -33,5 +33,8 @@ public interface RouteOfferRepository extends JpaRepository<RouteOffer, Integer>
 			+ " GROUP BY ro.id"
 			+ " ORDER BY ro.rejectedByCarrier ASC")
 	Page<RouteOffer> findAllByRouteIdAndUserId(int routeId, int userId, Pageable page);
+	
+	@Query("select ro from RouteOffer ro where ro.shipment.id = ?1 AND ro.acceptedByCarrier = false AND ro.rejectedByCarrier = false")
+	Collection<RouteOffer> findAllPendingByShipmentId(int shipmentId);
 
 }
