@@ -67,10 +67,10 @@
 
 	<div class="row formulario-sm">
 	
-
+	<spring:message code="complaint.confirm.create" var="mensaje_confirmacion"/>
 	
 		<form:form action="complaint/user/create.do" modelAttribute="complaint" method="post"
-			class="form-horizontal" role="form">
+			class="form-horizontal" role="form" onSubmit="return confirm('${mensaje_confirmacion}')">
 
 			<form:hidden path="id" />
 			<form:hidden path="version" />
@@ -85,7 +85,7 @@
 					<spring:message code="complaint.explanation" />
 				</form:label>
 				<div class="col-md-8">
-					<form:textarea path="explanation" class="form-control" id="explanation" />
+					<form:textarea path="explanation" class="form-control" id="explanation" required="required"/>
 					<form:errors class="error create-message-error" path="explanation" />
 				</div>
 			</div>
@@ -100,10 +100,9 @@
 						<!-- Action buttons -->
 						
 		<div class="text-center profile-userbuttons">		
-			
-			<acme:submit_confirm name="create" code="complaint.create"
-					codeConfirm="complaint.confirm.create" />
-
+			<button type="submit" name="create" class="btn button-delete">
+				<spring:message code="complaint.create" />
+			</button>
 			<acme:cancel code="complaint.cancel" url="user/profile.do?userId=${complaint.involved.id}" />
 		</div>	
 		</form:form>
