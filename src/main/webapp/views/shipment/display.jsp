@@ -219,7 +219,7 @@
 
 								<div class="row info1 col-xs-12 col-sm-12 text-center" style="margin-bottom:1%;">
 											
-										<jstl:if test="${shipment.creator != user && user.isVerified && shipment.carried == null}">
+										<jstl:if test="${shipment.creator != user && user.isVerified && shipment.carried == null  && user.fundTransferPreference != null}">
 											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
 											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
@@ -230,14 +230,20 @@
 											<a href="user/user/edit.do"><spring:message code="message.error.shipmentOffer.verifiedCarrier.extended" /></a>
 										
 										</jstl:if>
-										
+										<jstl:if test="${shipment.creator != user && user.fundTransferPreference == null && shipment.carried == null}">
+										<br/>
+										<a href="fundTransferPreference/user/edit.do">
+											<spring:message code="message.error.shipmentOffer.fundTransferPreference" />
+										</a>
+								
+										</jstl:if>
 								</div>
 							
 								
 								
 					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
 						
-						<jstl:if test="${shipment.creator != user && user.isVerified && shipment.carried == null}">
+						<jstl:if test="${shipment.creator != user && user.isVerified && shipment.carried == null && user.fundTransferPreference != null}">
 						<button type="submit" class="btn button-view"
 							onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-bullhorn"></span>
