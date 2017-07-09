@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,8 @@ import services.UserService;
 @Service
 @Transactional
 public class RouteFormService {
+	
+	static Logger log = Logger.getLogger(RouteFormService.class);
 
 	// Supporting services ----------------------------------------------------
 
@@ -49,7 +52,8 @@ public class RouteFormService {
 	
 	public Route reconstruct(RouteForm routeForm) {
 		Route result;
-		Date departureTime, arriveTime;
+		Date departureTime;
+		Date arriveTime;
 		
 		departureTime = null;
 		arriveTime = null;
@@ -57,10 +61,10 @@ public class RouteFormService {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		
 		try {
-			departureTime = formatter.parse(routeForm.getDepartureTime().toString());
-			arriveTime = formatter.parse(routeForm.getArriveTime().toString());
+			departureTime = formatter.parse(routeForm.getDepartureTime());
+			arriveTime = formatter.parse(routeForm.getArriveTime());
 		} catch (ParseException e) {
-			e.printStackTrace();
+			log.error("Excepcion al parsear:",e);
 		}
 				
 		if (routeForm.getRouteId() == 0) {
@@ -92,7 +96,8 @@ public class RouteFormService {
 	public RouteForm findOne(int routeId) {
 		RouteForm result;
 		Route route;
-		String arriveTime, departureTime;
+		String arriveTime; 
+		String departureTime;
 		User user;
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -124,21 +129,26 @@ public class RouteFormService {
 
 	public BindingResult checkConditionsRoute(RouteForm routeForm,BindingResult binding) {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-		Date departureTime, arriveTime;
+		Date departureTime;
+		Date arriveTime;
 
 		departureTime = null;
 		arriveTime = null;
 		
 		try {
-			departureTime = formatter.parse(routeForm.getDepartureTime().toString());
-			arriveTime = formatter.parse(routeForm.getArriveTime().toString());
+			departureTime = formatter.parse(routeForm.getDepartureTime());
+			arriveTime = formatter.parse(routeForm.getArriveTime());
 		} catch (ParseException e) {
+			log.error("Excepcion al parsear:",e);
 		}
 		
-		this.addBinding(binding, departureTime.after(new Date()), "departureTime", "message.error.route.futureDepartureDate", null);
-		this.addBinding(binding, arriveTime.after(new Date()), "arriveTime", "message.error.route.futureArrivalDate", null);
-
-		this.addBinding(binding, arriveTime.after(departureTime), "arriveTime", "message.error.route.checkArriveTimeAfterDepartureDate", null);
+		if(departureTime!=null)
+			this.addBinding(binding, departureTime.after(new Date()), "departureTime", "message.error.route.futureDepartureDate", null);
+		if(arriveTime!=null){
+			this.addBinding(binding, arriveTime.after(new Date()), "arriveTime", "message.error.route.futureArrivalDate", null);
+			this.addBinding(binding, arriveTime.after(departureTime), "arriveTime", "message.error.route.checkArriveTimeAfterDepartureDate", null);
+		}
+			
 		this.addBinding(binding, routeForm.getItemEnvelope().equals("Open") || routeForm.getItemEnvelope().equals("Closed") ||
 				routeForm.getItemEnvelope().equals("Both") || routeForm.getItemEnvelope().equals("Abierto") ||
 				routeForm.getItemEnvelope().equals("Cerrado") || routeForm.getItemEnvelope().equals("Ambos"), "itemEnvelope", "message.error.route.checkItemEnvelope", null);
