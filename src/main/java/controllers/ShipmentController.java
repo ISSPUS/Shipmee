@@ -141,7 +141,7 @@ public class ShipmentController extends AbstractController {
 
 		}
 		
-		private ModelAndView createListModelAndView(int shipmentId){
+		public ModelAndView createListModelAndView(int shipmentId){
 			ModelAndView result;
 			Shipment shipment;
 			User currentUser;

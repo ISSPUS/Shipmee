@@ -51,6 +51,10 @@
 
 </style>
 
+<security:authorize access="isAnonymous()" var="isAnonymous" />
+<security:authorize access="hasRole('USER')" var="isUser" />
+
+
 <div class="blue-barra">
 	    <div class="container">
 			<div class="row">
@@ -256,26 +260,29 @@
 								<div class="rfecha separador-final"></div>
 
 
-
 								<div class="row info1 col-xs-12 col-sm-12 text-center" style="margin-bottom:1%;">
-											
+										<jstl:if test="${isAnonymous}">
+
+											<a href="security/login.do"><spring:message code="message.error.shipment.authenticate" /></a>
+
+										</jstl:if>
 										<jstl:if test="${shipment.creator != user && user.isVerified && shipment.carried == null  && user.fundTransferPreference != null}">
 											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
 											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
 										
 										</jstl:if>
-										<jstl:if test="${shipment.creator != user && !user.isVerified && shipment.carried == null && (user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')}">
+										<jstl:if test="${isUser && shipment.creator != user && !user.isVerified && shipment.carried == null && (user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')}">
 											
 											<a href="user/user/edit.do"><spring:message code="message.error.shipmentOffer.verifiedCarrier.extended" /></a>
 										
 										</jstl:if>
-										<jstl:if test="${shipment.creator != user && !user.isVerified && shipment.carried == null  && (user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')}">
+										<jstl:if test="${isUser && shipment.creator != user && !user.isVerified && shipment.carried == null  && (user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')}">
 
 											<a><spring:message code="user.notVerified.waiting" /></a>
 
 										</jstl:if>
-										<jstl:if test="${shipment.creator != user && user.fundTransferPreference == null && shipment.carried == null}">
+										<jstl:if test="${isUser && shipment.creator != user && user.fundTransferPreference == null && shipment.carried == null}">
 										<br/>
 										<a href="fundTransferPreference/user/edit.do">
 											<spring:message code="message.error.shipmentOffer.fundTransferPreference" />
@@ -287,15 +294,13 @@
 								
 								
 					<div class="profile-userbuttons" style="margin-left: 2%;margin-right: 2%;">
-						
-						<jstl:if test="${shipment.creator != user && user.isVerified && shipment.carried == null && user.fundTransferPreference != null}">
+						<jstl:if test="${isUser && shipment.creator != user && user.isVerified && shipment.carried == null && user.fundTransferPreference != null}">
 						<button type="submit" class="btn button-view"
 							onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
 							<span class="fa fa-bullhorn"></span>
 							<spring:message code="offer.new" />
 						</button>
 						</jstl:if>
-						<security:authorize access="hasRole('USER')" var="isUser" />
 						
 						<jstl:if test="${isUser && shipment.creator == user && shipmentOffersIsEmpty && shipment.carried == null}">
 						<button type="submit" class="btn button-view"
