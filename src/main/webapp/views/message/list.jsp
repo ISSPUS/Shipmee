@@ -39,6 +39,26 @@ width: 40px;
 margin-bottom: 0px;
 margin-top: 0px;
 }
+
+@media only screen
+and (min-device-width : 250px)
+and (max-device-width : 480px) {
+.message-header {
+		padding-left: 1px !important;
+	}
+}
+.menu-lateral-mensajes{
+	padding-left: 0px!important;
+}
+.lista-mensajes{
+	padding-left: 0px!important;
+}
+.title ,
+.pendiente{
+	overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
 </style>
 <div class="blue-barra" >
 	<div class="container">
@@ -54,7 +74,7 @@ margin-top: 0px;
 <div class="container">
 
 	<div class="row inbox " style="margin-top: 2%;">
-		<div class="col-md-4">
+		<div class="col-md-4 menu-lateral-mensajes">
 			<div class="panel panel-default">
 				<div class="panel-body inbox-menu ">
 					<div class="text-center profile-userbuttons">
@@ -87,14 +107,14 @@ margin-top: 0px;
 			</div>
 		</div>
 
-		<div class="col-md-8">
+		<div class="col-md-8 lista-mensajes">
 			<jstl:if test="${not empty messages}">
 				<jstl:forEach items="${messages}" var="messageRow">
 					<div class="row msg">
 						<div class=" col-xs-12 table-container panel panel-default">
 
 							<div class="row" style="margin-top: 2%;">
-								<div class="col-xs-2 col-sm-1 col-md-1">
+								<div class="col-xs-2 col-sm-1 col-md-1 message-header" style="display: inline-block" >
 									<jstl:choose>
 										<jstl:when test="${infoMessages eq 'messages.received'}">
 											<a href="user/profile.do?userId=${messageRow.sender.id}"
