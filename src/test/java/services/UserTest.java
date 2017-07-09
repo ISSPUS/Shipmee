@@ -195,6 +195,7 @@ public class UserTest extends AbstractTest {
 
 		user = userService.findOne(UtilTest.getIdFromBeanName("user3"));
 		Assert.isTrue(!user.getIsVerified());
+		user.setPhoto("images/anonymous2.png");
 		userService.verifyUser(user.getId());
 
 		Assert.isTrue(user.getId() != 0 && userService.findOne(user.getId()).getName().equals("Carlos")
