@@ -43,6 +43,12 @@
 	font-style: normal;
 }
 
+
+.separa_imagen{
+	margin-bottom:5%;
+
+}
+
 </style>
 
 <div class="blue-barra">
@@ -135,7 +141,7 @@
 										
 										<div class="row info1 col-xs-12 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
-											<div class="col-xs-11">
+											<div class="col-xs-12">
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
 												<span class="titles-info">
 													<jstl:if test="${shipment.itemEnvelope == 'Both'}">
@@ -158,7 +164,41 @@
 													<jstl:if test="${shipment.itemSize == 'L'}"><spring:message code="shipment.sizeL"/></jstl:if>
 													<jstl:if test="${shipment.itemSize == 'XL'}"><spring:message code="shipment.sizeXL"/></jstl:if>
 												</span>
+								
+								<a data-toggle="modal"
+								data-target="#infoSize" href="#infoSize" style="z-index: 5;"><span class="glyphicon glyphicon-info-sign"></span></a> 
+								
+								<!-- Modal -->
+								<div class="modal fade" id="infoSize" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title text-center">
+													<spring:message code="route.sizes.window" />
+												</h4>
 											</div>
+											<div class="modal-body" style="text-align: center">
+											
+											<div class="separa_imagen"><img src="images/bolsillo.svg" style="width: 10%;"><br>
+											<strong><spring:message code="shipment.sizeS"/></strong></div>
+											
+											<div class="separa_imagen"><img src="images/mochila.svg" style="width: 20%;"><br>
+											<strong><spring:message code="shipment.sizeM"/></strong></div>
+											
+											<div class="separa_imagen"><img src="images/maleta.svg" style="width: 25%;"><br>
+											<strong><spring:message code="shipment.sizeL"/></strong></div>
+											
+											<div class="separa_imagen"><img src="images/maletero2.svg" style="width: 40%;"><br>
+											<strong><spring:message code="shipment.sizeXL"/></strong></div>
+											
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
 											
 										</div>
 										
