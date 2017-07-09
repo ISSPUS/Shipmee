@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -41,6 +43,7 @@ public class ActorForm {
 	
 	@NotBlank
 	@NotNull
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return name;
 	}
@@ -50,6 +53,7 @@ public class ActorForm {
 
 	@NotBlank
 	@NotNull
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSurname() {
 		return surname;
 	}
@@ -77,13 +81,15 @@ public class ActorForm {
 		this.birthDate = birthDate;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
+	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDni() {
 		return dni;
 	}
@@ -108,6 +114,7 @@ public class ActorForm {
 	@NotBlank
 	@NotNull
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getUserName() {
 		return userName;
 	}
