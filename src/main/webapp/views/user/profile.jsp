@@ -69,8 +69,7 @@
 						<small> <jstl:if test="${user.isVerified}">
 								<i class="glyphicon glyphicon-ok img-verified" title="<spring:message code="user.verified"/>"></i>
 							</jstl:if>
-							
-							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
+							<jstl:if test="${isAdmin && !user.isVerified && user.dniPhoto != '' && user.photo != 'images/anonymous.png' && user.phone != '' && user.dni != ''}">
 								<br />
 								<a href="user/administrator/verifyUser.do?userId=${user.id}"> 
 									(<spring:message code="user.verifyUser" />)
@@ -111,9 +110,12 @@
 						<div class="datos text-left">
 										 <span> <strong><spring:message	code="user.email" />: </strong>${user.email}</span> <br />
 										 <span> <strong><spring:message code="user.phone" />: </strong>${user.phone}</span> <br />
-										 <span> <strong><spring:message code="user.dni" />: </strong>${user.dni}
-										 <a data-toggle="modal"
-											data-target="#dniPhoto" href="#dniPhoto" style="z-index: 5;">(<spring:message code="user.view.link" />)</a> 
+										 <span> <strong><spring:message code="user.dni" />: </strong>${user.dni} 
+										 <jstl:if test="${user.dniPhoto != ''}">
+											 <a data-toggle="modal"
+											data-target="#dniPhoto" href="#dniPhoto" style="z-index: 5;">(<spring:message code="user.view.link" />)
+											</a> 
+										</jstl:if>
 										 </span> <br />
 										 
 										
@@ -166,22 +168,7 @@
 										</jstl:if>				
 						</div>
 												
-						<div class="datos text-center">
-							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
-								<br />
-								<a href="user/administrator/verifyUser.do?userId=${user.id}"> 
-									(<spring:message code="user.verifyUser" />)
-								</a>
-							</jstl:if>
-							<jstl:if test="${isAdmin && user.isVerified}">
-								<br />
-								<a href="user/administrator/unverifyUser.do?userId=${user.id}"> 
-									(<spring:message code="user.unverifyUser" />)
-								</a>
-							</jstl:if>
 						
-
-						</div>
 					</jstl:if>
 
 					<hr>
