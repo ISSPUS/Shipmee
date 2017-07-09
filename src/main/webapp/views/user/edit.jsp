@@ -332,8 +332,13 @@ $(function() {
 	<script type="text/javascript">
 		var inputImage1 = document.getElementById('photo');
 		inputImage1.onchange = function(e) {
-			var nameFile = this.value.match(/\.(.+)$/)[1];
-			switch (nameFile) {
+	    	if (document.contains(document.getElementById("photo.errors"))) {
+	            document.getElementById("photo.errors").remove();
+			}
+			
+			extension = this.value.split(".");
+		    var nameFile = extension[extension.length-1];
+		    switch (nameFile) {
 			case 'jpg':
 			case 'jpeg':
 			case 'png':
@@ -349,8 +354,12 @@ $(function() {
 
 		var inputImage2 = document.getElementById('dniPhoto');
 		inputImage2.onchange = function(e) {
-			var nameFile = this.value.match(/\.(.+)$/)[1];
-			switch (nameFile) {
+	    	if (document.contains(document.getElementById("dniPhoto.errors"))) {
+	            document.getElementById("dniPhoto.errors").remove();
+			}
+			extension = this.value.split(".");
+		    var nameFile = extension[extension.length-1];
+		    switch (nameFile) {
 			case 'jpg':
 			case 'jpeg':
 			case 'png':

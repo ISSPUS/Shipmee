@@ -287,7 +287,11 @@ function initialize() {
 
 	var inputImage = document.getElementById('itemPicture');
 	inputImage.onchange = function(e){ 
-	    var nameFile = this.value.match(/\.(.+)$/)[1];
+    	if (document.contains(document.getElementById("itemPicture.errors"))) {
+            document.getElementById("itemPicture.errors").remove();
+		}
+		extension = this.value.split(".");
+	    var nameFile = extension[extension.length-1];
 	    switch(nameFile)
 	    {
 	        case 'jpg':
