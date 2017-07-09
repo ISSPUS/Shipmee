@@ -130,13 +130,17 @@
 <script type="text/javascript">
 	var inputImage = document.getElementById('picture');
 	inputImage.onchange = function(e){ 
-	    var nameFile = this.value.match(/\.(.+)$/)[1];
+		if (document.contains(document.getElementById("picture.errors"))) {
+            document.getElementById("picture.errors").remove();
+		}
+		extension = this.value.split(".");
+	    var nameFile = extension[extension.length-1];
 	    switch(nameFile)
 	    {
 	        case 'jpg':
 	        case 'jpeg':
 	        case 'png':
-	            break;
+	        	break;
 	        default:
 	        	var mssg ='<spring:message code="message.error.imageUpload.incompatibleType" />';
 	        	inputImage.insertAdjacentHTML('afterend', '<span id="picture.errors" class="error">'+mssg+'</span>');

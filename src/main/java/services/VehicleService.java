@@ -102,9 +102,14 @@ public class VehicleService {
 	
 	public Vehicle findOne(int vehicleId) {
 		Vehicle result;
-		
+		User user;
+
+		user=userService.findByPrincipal();
 		result = vehicleRepository.findOne(vehicleId);
 		
+		Assert.notNull(result);
+		Assert.isTrue(result.getUser().equals(user));
+
 		return result;
 	}
 	

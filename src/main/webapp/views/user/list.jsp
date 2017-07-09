@@ -167,7 +167,7 @@
 													
 																										
 													<br />
-													<jstl:if test="${!userRow.isVerified && userRow.dniPhoto != ''}">
+													<jstl:if test="${!userRow.isVerified && userRow.dniPhoto != '' && userRow.photo != 'images/anonymous.png' && userRow.phone != '' && userRow.dni != ''}">
 														<a href="user/administrator/verifyUser.do?userId=${userRow.id}"> 
 															<spring:message code="user.verifyUser" />
 														</a>

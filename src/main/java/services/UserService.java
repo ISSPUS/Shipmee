@@ -323,7 +323,7 @@ public class UserService {
 		
 		dbUser = this.findOne(userId);
 		
-		Assert.isTrue(!dbUser.getPhoto().equals(""),"UserService.verifyUser.PhotoNotFound");
+		Assert.isTrue(!dbUser.getPhoto().equals("images/anonymous.png"),"UserService.verifyUser.PhotoNotFound");
 		Assert.isTrue(!dbUser.getDniPhoto().equals(""),"UserService.verifyUser.PhotoDniNotFound");
 		Assert.isTrue(!dbUser.getDni().equals(""),"UserService.verifyUser.DniNumberNotFound");
 		Assert.isTrue(!dbUser.getPhone().equals(""),"UserService.verifyUser.PhoneNotFound");
