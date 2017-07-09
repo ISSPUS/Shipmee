@@ -41,9 +41,11 @@
 				</jstl:if>
 				<jstl:if test="${!isPrincipal}">
 				<div style="float:right;">
+					<jstl:if test="${!isAdmin}">
 					<a href="complaint/user/create.do?userId=${user.id}"><i
 						class="glyphicon glyphicon-exclamation-sign img-report"
 						title="<spring:message code="complaint.complaint" />"></i></a>
+					</jstl:if>
 						<br /><br />			
 					<a href="message/actor/create.do?userId=${user.id}"><i 
 						class="glyphicon glyphicon-envelope img-message"

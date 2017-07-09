@@ -305,13 +305,14 @@
 						</button>
 						</jstl:if>
 						
-
-						<button type="submit" class="btn btn-primary"
-							onclick="location.href = 'shipmentOffer/user/list.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
-							<span class="fa fa-list"></span> 
-							<spring:message code="offer.list" />
-						</button>
-
+						<security:authorize access="hasAnyRole('ADMIN')" var="isAdmin" />
+						<jstl:if test="${!isAdmin}">
+							<button type="submit" class="btn btn-primary"
+								onclick="location.href = 'shipmentOffer/user/list.do?shipmentId=${shipment.id}';" style="margin-bottom: 10px;">
+								<span class="fa fa-list"></span>
+								<spring:message code="offer.list" />
+							</button>
+						</jstl:if>
 					</div>
 								
 							</div>

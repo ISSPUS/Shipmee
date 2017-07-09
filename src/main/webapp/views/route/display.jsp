@@ -333,11 +333,14 @@ color: #428bca;
 						</button>
 						</jstl:if>
 
-						<button type="submit" class="btn btn-primary"
-							onclick="location.href = 'routeOffer/user/list.do?routeId=${route.id}';" style="margin-bottom: 10px;">
-							<span class="fa fa-list"></span> 
-							<spring:message code="offer.list" />
-						</button>
+						<security:authorize access="hasAnyRole('ADMIN')" var="isAdmin" />
+						<jstl:if test="${!isAdmin}">
+							<button type="submit" class="btn btn-primary"
+								onclick="location.href = 'routeOffer/user/list.do?routeId=${route.id}';" style="margin-bottom: 10px;">
+								<span class="fa fa-list"></span>
+								<spring:message code="offer.list" />
+							</button>
+						</jstl:if>
 					</div>
 
 
