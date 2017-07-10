@@ -3,10 +3,12 @@ package services;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,9 @@ public class ActorService {
 	private ActorRepository actorRepository;
 	
 	// Supporting services ----------------------------------------------------
+	
+	@Autowired
+	private MessageSource messageSource;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -150,14 +155,19 @@ public class ActorService {
 		
 		//log.trace(System.getenv("mailPassword"));
 		SendMail mail = (SendMail) context.getBean("sendMail");
+		Locale locale = new Locale(actor.getLocalePreferences());
+		String url;
+		
+		url = PayPalConfig.getUrlBase()+"/passwordRecovery/reset.do?passwordResetToken="+passwordResetToken;
+
+		// https://stackoverflow.com/a/2764993
+
+		String[] args_body = { actor.getName(), url};
+		
 		mail.sendMail("shipmee.contact@gmail.com",
     		   actor.getEmail(),
-    		   "Shipmee - Recuperación de contraseña",
-    		   "¡Hola "+actor.getName()+"! \n\n"
-    		   		+ "Para recuperar tu contraseña te pedimos que accedas al siguiente enlace: \n\n"
-    		   		+ PayPalConfig.getUrlBase()+"/passwordRecovery/reset.do?passwordResetToken="+passwordResetToken
-    		   		+ "\n\nSi no has sido tú quien ha pedido restablecer la contraseña te rogamos que ignores éste mensaje."
-    		   		+ "\n\nUn Saludo. \nShipmee.");
+    		   messageSource.getMessage("user.forgotPassword.subject", null, locale),
+    		   messageSource.getMessage("user.forgotPassword.body", args_body, locale));
 		
 		return actor;
 	}
