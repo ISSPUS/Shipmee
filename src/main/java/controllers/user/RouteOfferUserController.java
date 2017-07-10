@@ -1,5 +1,7 @@
 package controllers.user;
 
+import java.net.URLEncoder;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -126,6 +128,7 @@ public class RouteOfferUserController extends AbstractController {
 	public ModelAndView save(@Valid RouteOffer routeOffer, BindingResult binding) {
 		ModelAndView result;
 		String messageError;
+		String description = "";
 		int shipmentId;
 
 		if (binding.hasErrors()) {
@@ -138,8 +141,15 @@ public class RouteOfferUserController extends AbstractController {
 					shipmentId = 0;
 				}
 				
+				try{
+					description = URLEncoder.encode(routeOffer.getDescription(), "ISO-8859-1");
+				}catch (Exception e) {
+					// TODO: handle exception
+					log.error(e);
+				}
+				
 				result = new ModelAndView("redirect:../../feepayment/user/create.do?type=2&id=" + routeOffer.getRoute().getId()
-						+ "&amount=" + routeOffer.getAmount() + "&description=" + routeOffer.getDescription() + "&shipmentId=" + shipmentId);
+						+ "&amount=" + routeOffer.getAmount() + "&description=" + description + "&shipmentId=" + shipmentId);
 			} catch (Throwable oops) {
 				log.error(oops.getMessage());
 				messageError = "routeOffer.commit.error";
