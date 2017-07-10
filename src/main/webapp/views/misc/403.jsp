@@ -84,26 +84,29 @@ and (max-device-width : 480px) {
 		</div>
 		<div class="row" style="font-family: console; text-align: center;">
 
-			<img class="furgo-svg" src="/Shipmee/images/furgoStop.svg"
+			<img class="furgo-svg" src="/images/furgoStop.svg"
 				style="width: 30%;">
 
 		</div>
 		<div class="row" style="font-family: console; text-align: center;">
 
-			<p>¡Vaya! No tiene acceso a este recurso.</p>
+			<p><spring:message code="error403.sentence" /></p>
 		</div>
-		<div class="row" style="font-family: console; text-align: center;">
+		
+		<div class="row" style="text-align: center;">
 
 			<div class="profile-userbuttons" style="margin: 2%;">
 
 				<button type="submit" class="btn btn-primary"
 					onclick="javascript:location.href='/'" style="margin-bottom: 10px;">
-					<i class="glyphicon glyphicon-home"></i> Inicio
+					<i class="glyphicon glyphicon-home"></i> <spring:message code="error403.home" />
 				</button>
 				<button type="submit" class="btn btn-primary"
 					onclick="history.back();" style="margin-bottom: 10px;">
-					<i class="glyphicon glyphicon-arrow-left"></i> Atrás
+					<i class="glyphicon glyphicon-arrow-left"></i> <spring:message code="error403.back" />
 				</button>
+				
+				
 
 			</div>
 		</div>
