@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Date;
+import java.util.Locale;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import domain.Actor;
@@ -19,13 +21,14 @@ import domain.RouteOffer;
 import domain.ShipmentOffer;
 import repositories.MessageRepository;
 import services.form.MessageFormService;
+import utilities.PayPalConfig;
 import utilities.SendMail;
 
 @Service
 @Transactional
 public class MessageService {
 	
-	static Logger log = Logger.getLogger(ShipmentService.class);
+	static Logger log = Logger.getLogger(MessageService.class);
 	private ApplicationContext context = new ClassPathXmlApplicationContext("Mail.xml");
 
 	// Managed repository -----------------------------------------------------
@@ -37,6 +40,10 @@ public class MessageService {
 
 	@Autowired
 	private ActorService actorService;
+	
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	// Constructors -----------------------------------------------------------
 
@@ -67,16 +74,16 @@ public class MessageService {
 	public Message save(Message message) {
 		Assert.notNull(message);
 		Message result;
-		Actor actor;
+		//Actor actor;
 		long segundos;
 		Date momento;
 		
-		actor = actorService.findByPrincipal();
+		//actor = actorService.findByPrincipal();
 		segundos = System.currentTimeMillis() - 1;
 		momento = new Date(segundos);
 		message.setMoment(momento);
-		Assert.notNull(actor);
-		message.setSender(actor);
+		/*Assert.notNull(actor);
+		message.setSender(actor);*/
 		
 		result = messageRepository.save(message);
 		//log.trace(System.getenv("mailPassword"));
@@ -163,23 +170,23 @@ public class MessageService {
 		Actor recipient;
 		String subject;
 		String body;
+		Locale locale;
 		
-		sender = shipmentOffer.getShipment().getCreator();
+		sender = actorService.findByUsername("shipmee");
 		recipient = shipmentOffer.getUser();
-		subject = "Your counteroffer has been accepted.";
-		body = "The counteroffer you did for a Shipment to carry " + 
-				shipmentOffer.getShipment().getItemName() + 
-				" from " + 
-				shipmentOffer.getShipment().getOrigin() + 
-				" to " + 
-				shipmentOffer.getShipment().getDestination() + 
-				" with a proposed cost of " +
-				shipmentOffer.getAmount() + 
-				" euros, originally posted by " + 
-				shipmentOffer.getShipment().getCreator().getUserAccount().getUsername() + 
-				" with a cost of " + 
-				shipmentOffer.getShipment().getPrice() + 
-				" euros, has been accepted.";
+		
+		locale = new Locale(recipient.getLocalePreferences());
+
+		subject = messageSource.getMessage("message.auto.acceptShipmentOffer.subject", null, locale);
+		String[] args_body = {shipmentOffer.getShipment().getItemName(), 
+				shipmentOffer.getShipment().getOrigin(), 
+				shipmentOffer.getShipment().getDestination(),
+				String.valueOf(shipmentOffer.getAmount()),
+				shipmentOffer.getShipment().getCreator().getUserAccount().getUsername(),
+				PayPalConfig.getUrlBase() + "/shipment/display.do?shipmentId=" + shipmentOffer.getShipment().getId()
+				};
+		
+		body = messageSource.getMessage("message.auto.acceptShipmentOffer.body", args_body, locale);
 		
 		sendMessage(sender, recipient, subject, body);
 	}
@@ -190,23 +197,22 @@ public class MessageService {
 		Actor recipient;
 		String subject;
 		String body;
+		Locale locale;
 		
-		sender = shipmentOffer.getShipment().getCreator();
+		sender = actorService.findByUsername("shipmee");
 		recipient = shipmentOffer.getUser();
-		subject = "Your counteroffer has been denied.";
-		body = "The counteroffer you did for a Shipment to carry " + 
-				shipmentOffer.getShipment().getItemName() + 
-				" from " + 
-				shipmentOffer.getShipment().getOrigin() + 
-				" to " + 
-				shipmentOffer.getShipment().getDestination() + 
-				" with a proposed cost of " +
-				shipmentOffer.getAmount() + 
-				" euros, originally posted by " + 
-				shipmentOffer.getShipment().getCreator().getUserAccount().getUsername() + 
-				" with a cost of " + 
-				shipmentOffer.getShipment().getPrice() + 
-				" euros, has been denied.";
+		
+		locale = new Locale(recipient.getLocalePreferences());
+
+		subject = messageSource.getMessage("message.auto.denyShipmentOffer.subject", null, locale);
+		String[] args_body = {shipmentOffer.getShipment().getItemName(), 
+				shipmentOffer.getShipment().getOrigin(), 
+				shipmentOffer.getShipment().getDestination(),
+				String.valueOf(shipmentOffer.getAmount()),
+				shipmentOffer.getShipment().getCreator().getUserAccount().getUsername(),
+				PayPalConfig.getUrlBase() + "/shipment/display.do?shipmentId=" + shipmentOffer.getShipment().getId()
+				};
+		body = messageSource.getMessage("message.auto.denyShipmentOffer.body", args_body, locale);
 		
 		sendMessage(sender, recipient, subject, body);
 	}
@@ -217,20 +223,22 @@ public class MessageService {
 		Actor recipient;
 		String subject;
 		String body;
+		Locale locale;
 		
-		sender = routeOffer.getRoute().getCreator();
+		sender = actorService.findByUsername("shipmee");
 		recipient = routeOffer.getUser();
-		subject = "Your counteroffer has been accept.";
-		body = "The counteroffer you did for a Route" + 				
-				" from " + 
-				routeOffer.getRoute().getOrigin() + 
-				" to " + 
-				routeOffer.getRoute().getDestination() + 
-				" with a proposed cost of " +
-				routeOffer.getAmount() + 
-				" euros, originally posted by " + 
-				routeOffer.getRoute().getCreator().getUserAccount().getUsername() + 
-				", has been accept.";
+		
+		locale = new Locale(recipient.getLocalePreferences());
+		
+		subject = messageSource.getMessage("message.auto.acceptRouteOffer.subject", null, locale);
+		String[] args_body = {routeOffer.getRoute().getOrigin(), 
+				routeOffer.getRoute().getDestination(), 
+				String.valueOf(routeOffer.getAmount()),
+				routeOffer.getRoute().getCreator().getUserAccount().getUsername(), 
+				PayPalConfig.getUrlBase() + "/route/display.do?routeId=" + routeOffer.getRoute().getId()
+				};
+
+		body = messageSource.getMessage("message.auto.acceptRouteOffer.body", args_body, locale);
 		
 		sendMessage(sender, recipient, subject, body);
 	}
@@ -241,20 +249,22 @@ public class MessageService {
 		Actor recipient;
 		String subject;
 		String body;
+		Locale locale;
 		
-		sender = routeOffer.getRoute().getCreator();
+		sender = actorService.findByUsername("shipmee");
 		recipient = routeOffer.getUser();
-		subject = "Your counteroffer has been denied.";
-		body = "The counteroffer you did for a Route" + 				
-				" from " + 
-				routeOffer.getRoute().getOrigin() + 
-				" to " + 
-				routeOffer.getRoute().getDestination() + 
-				" with a proposed cost of " +
-				routeOffer.getAmount() + 
-				" euros, originally posted by " + 
-				routeOffer.getRoute().getCreator().getUserAccount().getUsername() + 
-				", has been denied.";
+		
+		locale = new Locale(recipient.getLocalePreferences());
+
+		subject = messageSource.getMessage("message.auto.denyRouteOffer.subject", null, locale);
+		String[] args_body = {routeOffer.getRoute().getOrigin(), 
+				routeOffer.getRoute().getDestination(), 
+				String.valueOf(routeOffer.getAmount()),
+				routeOffer.getRoute().getCreator().getUserAccount().getUsername(), 
+				PayPalConfig.getUrlBase() + "/route/display.do?routeId=" + routeOffer.getRoute().getId()
+				};
+		body = messageSource.getMessage("message.auto.denyRouteOffer.body", args_body, locale);
+
 		
 		sendMessage(sender, recipient, subject, body);
 	}

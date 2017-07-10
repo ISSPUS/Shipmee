@@ -26,6 +26,7 @@ import domain.PayPalObject;
 import domain.ShipmentOffer;
 import services.FeePaymentService;
 import services.PayPalService;
+import services.RouteOfferService;
 import services.ShipmentOfferService;
 import utilities.PayPalConfig;
 
@@ -44,6 +45,9 @@ public class PayPalUserController extends AbstractController {
 	@Autowired
 	private FeePaymentService feePaymentService;
 	
+	@Autowired
+	private RouteOfferService routeOfferService;
+	
 	static Logger log = Logger.getLogger(PayPalUserController.class);
 
 	
@@ -58,14 +62,14 @@ public class PayPalUserController extends AbstractController {
 	@RequestMapping(value = "/pay", method = RequestMethod.GET)
 	public ModelAndView adaptiveCreate(@RequestParam int type, @RequestParam int id,
 			@RequestParam (required=false, defaultValue="0") Integer sizePriceId, @RequestParam (required=false, defaultValue = "0") Double amount,
-			@RequestParam (required=false) String description) {
+			@RequestParam (required=false) String description, @RequestParam (required=false, defaultValue="0") int shipmentId) {
 		ModelAndView result;
 
 		PayResponse p = null;
 		FeePayment feePayment;
 
 		try {
-			feePayment = feePaymentService.createAndSave(type, id, sizePriceId, amount, description);
+			feePayment = feePaymentService.createAndSave(type, id, sizePriceId, amount, description, shipmentId);
 			
 			p = payPalService.authorizePay(feePayment.getId());
 			result = new ModelAndView("redirect:" + PayPalConfig.getPayRedirectUrl()+ "?cmd=_ap-payment&paykey=" + p.getPayKey());
@@ -84,17 +88,20 @@ public class PayPalUserController extends AbstractController {
 	public ModelAndView adaptiveReturnCreate(@RequestParam String trackingId) {
 		ModelAndView result;
 		ShipmentOffer so;
-		PayPalObject po;
+		PayPalObject po = null;
 
 		try {
-			payPalService.refreshPaymentStatusFromPaypal(trackingId);
+			po = payPalService.refreshPaymentStatusFromPaypal(trackingId);
 			
-			po = payPalService.findByTrackingId(trackingId);
+			// po = payPalService.findByTrackingId(trackingId);
 			
 			if (po.getFeePayment().getShipmentOffer() != null){
-				so = shipmentOfferService.accept(payPalService.findByTrackingId(trackingId).getFeePayment().getShipmentOffer().getId());
+				so = payPalService.findByTrackingId(trackingId).getFeePayment().getShipmentOffer();
+				if (!po.getPayStatus().equals("CREATED"))
+					so = shipmentOfferService.accept(so.getId());
 				result = new ModelAndView("redirect:/shipmentOffer/user/list.do?shipmentId=" + so.getShipment().getId());
 			}else{
+				routeOfferService.save(routeOfferService.findOne(po.getFeePayment().getRouteOffer().getId()));
 				result = new ModelAndView("redirect:/routeOffer/user/list.do?routeId=" + po.getFeePayment().getRouteOffer().getRoute().getId());
 			}
 			// Pagado y registrado correctamente

@@ -67,6 +67,9 @@
 			role="form" enctype="multipart/form-data">
 			
 			<form:hidden path="id" />
+			 <jstl:if test="${actorForm.id == 0}">
+				<form:hidden path="localePreferences"/>
+			</jstl:if>
 
 			<!-- Username -->
 			<div class="form-group">
@@ -76,7 +79,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
-						<form:input path="userName" class="form-control" id="userName" required="true"/>
+						<form:input path="userName" class="form-control" id="userName" required="true"   maxlength="32" minlength="5"/>
 					</div>
 					<form:errors class="error create-message-error" path="userName" />
 				</div>
@@ -104,7 +107,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
-						<form:input path="surname" class="form-control" id="surname"/>
+						<form:input path="surname" class="form-control" id="surname" required="required"/>
 					</div>
 					<form:errors class="error create-message-error" path="surname" />
 				</div>
@@ -118,7 +121,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon">
-						<form:input type="email" path="email" class="form-control" id="email"/>
+						<form:input type="email" path="email" class="form-control" id="email" required="required"/>
 					</div>
 					<form:errors class="error create-message-error" path="email" />
 				</div>
@@ -132,7 +135,7 @@
 				</form:label>
 				<div class="col-md-8">
 					<div class="inner-addon input-group date fondoDesplegable input-text" id='datetimepicker1'>
-						<form:input path="birthDate" class="form-control" id="birthDate" name="fecha" style="backgroud-color: white;" type='text'/>
+						<form:input path="birthDate" class="form-control" id="birthDate" name="fecha" style="backgroud-color: white;" type='text' required="required"/>
 						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 					</div>
 					<form:errors class="error create-message-error" path="birthDate" />
@@ -207,6 +210,28 @@
 				</div>
 			</div>
 			
+			<!-- LocalePreferences -->
+			<jstl:if test="${actorForm.id != 0}">
+			<div class="form-group">
+				<form:label path="localePreferences" class="control-label col-md-2"
+					for="localePreferences">
+					<spring:message code="user.localePreferences" />
+					<span title="<spring:message code="user.required" />" class="glyphicon glyphicon-record" style="color:#d9534f;"></span>
+				</form:label>
+
+				<div class="col-md-8">
+					<div class="inner-addon">
+						<form:select path="localePreferences" class="form-control" id="localePreferences">
+							<form:option value="es"><spring:message code="user.localePreferences.spanish" /></form:option>
+							<form:option value="en"><spring:message code="user.localePreferences.english" /></form:option>
+						</form:select>
+					</div>
+					<form:errors class="error create-message-error" path="localePreferences" required="true"/>
+				</div>
+			</div>
+			</jstl:if>
+			
+			
 			<!-- PhotoURL -->
 			<jstl:if test="${actorForm.id != 0}">
 			<div class="form-group">
@@ -217,7 +242,7 @@
 				<div class="col-md-8">
 					<div class="inner-addon">
 						<form:input type="file" path="photo"
-							class="form-control btn btn-default btn-file" id="photo" />
+							class="form-control btn btn-default btn-file" id="photo" accept=".jpg,.jpeg,.png"/>
 					</div>
 					<form:errors class="error create-message-error" path="photo" />
 				</div>
@@ -233,7 +258,7 @@
 					</form:label>
 					<div class="col-md-8">
 						<div class="inner-addon">
-							<form:input type="file" path="dniPhoto" class="form-control" id="dniPhoto" placeholder="Link"/>
+							<form:input type="file" path="dniPhoto" class="form-control" id="dniPhoto" placeholder="Link" accept=".jpg,.jpeg,.png"/>
 						</div>
 						<form:errors class="error create-message-error" path="dniPhoto" />
 					</div>
@@ -293,10 +318,59 @@
 </div>
 <script type="text/javascript">
 $(function() {
+	language = getCookie("language");
 	$('#datetimepicker1').datetimepicker({
 		viewMode : 'days',
-		locale: 'es',
+		locale: language,
 		format : 'DD/MM/YYYY'
 	});
-});          
+});    
+
 </script>
+
+<jstl:if test="${actorForm.id != 0}">
+	<script type="text/javascript">
+		var inputImage1 = document.getElementById('photo');
+		inputImage1.onchange = function(e) {
+	    	if (document.contains(document.getElementById("photo.errors"))) {
+	            document.getElementById("photo.errors").remove();
+			}
+			
+			extension = this.value.split(".");
+		    var nameFile = extension[extension.length-1];
+		    switch (nameFile) {
+			case 'jpg':
+			case 'jpeg':
+			case 'png':
+				break;
+			default:
+				var mssg = '<spring:message code="message.error.imageUpload.incompatibleType" />';
+				inputImage1.insertAdjacentHTML('afterend',
+						'<span id="photo.errors" class="error">' + mssg
+								+ '</span>');
+				this.value = '';
+			}
+		};
+
+		var inputImage2 = document.getElementById('dniPhoto');
+		inputImage2.onchange = function(e) {
+	    	if (document.contains(document.getElementById("dniPhoto.errors"))) {
+	            document.getElementById("dniPhoto.errors").remove();
+			}
+			extension = this.value.split(".");
+		    var nameFile = extension[extension.length-1];
+		    switch (nameFile) {
+			case 'jpg':
+			case 'jpeg':
+			case 'png':
+				break;
+			default:
+				var mssg = '<spring:message code="message.error.imageUpload.incompatibleType" />';
+				inputImage2.insertAdjacentHTML('afterend',
+						'<span id="dniPhoto.errors" class="error">' + mssg
+								+ '</span>');
+				this.value = '';
+			}
+		};
+	</script>
+</jstl:if>

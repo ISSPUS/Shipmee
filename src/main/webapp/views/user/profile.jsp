@@ -20,6 +20,16 @@
 
 <security:authorize access="hasRole('ADMIN')" var="isAdmin" />
 
+<div class="blue-barra">
+	<div class="container">
+		<div class="row">
+			<h3>
+				<spring:message code="user.view" />
+			</h3>
+		</div>
+		<!-- /row -->
+	</div>
+</div>
 
 <div class="container">
 	<div class="row">
@@ -31,9 +41,11 @@
 				</jstl:if>
 				<jstl:if test="${!isPrincipal}">
 				<div style="float:right;">
+					<jstl:if test="${!isAdmin}">
 					<a href="complaint/user/create.do?userId=${user.id}"><i
 						class="glyphicon glyphicon-exclamation-sign img-report"
 						title="<spring:message code="complaint.complaint" />"></i></a>
+					</jstl:if>
 						<br /><br />			
 					<a href="message/actor/create.do?userId=${user.id}"><i 
 						class="glyphicon glyphicon-envelope img-message"
@@ -57,10 +69,9 @@
 
 					<h3 class="media-heading profile-name">${user.name}
 						<small> <jstl:if test="${user.isVerified}">
-								<i class="glyphicon glyphicon-ok img-verified" title="Verified"></i>
+								<i class="glyphicon glyphicon-ok img-verified" title="<spring:message code="user.verified"/>"></i>
 							</jstl:if>
-							
-							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
+							<jstl:if test="${isAdmin && !user.isVerified && user.dniPhoto != '' && user.photo != 'images/anonymous.png' && user.phone != '' && user.dni != ''}">
 								<br />
 								<a href="user/administrator/verifyUser.do?userId=${user.id}"> 
 									(<spring:message code="user.verifyUser" />)
@@ -99,29 +110,67 @@
 								class="glyphicon glyphicon-lock"></i>
 						</div>
 						<div class="datos text-left">
-										 <span> <strong><spring:message
-										code="user.email" />: </strong>${user.email}</span> <br /> <span> <strong><spring:message
-										code="user.phone" />: </strong>${user.phone}</span> <br /> <span> <strong><spring:message
-										code="user.dni" />: </strong>${user.dni}</span><br /> <span> <strong><spring:message
-										code="user.fundTransferPreference" /></strong> (<a href="fundTransferPreference/user/edit.do"><spring:message
-										code="user.edit" /></a>)</span>
+										 <span> <strong><spring:message	code="user.email" />: </strong>${user.email}</span> <br />
+										 <span> <strong><spring:message code="user.phone" />: </strong>${user.phone}</span> <br />
+										 <span> <strong><spring:message code="user.dni" />: </strong>${user.dni} 
+										 <jstl:if test="${user.dniPhoto != ''}">
+											 <a data-toggle="modal"
+											data-target="#dniPhoto" href="#dniPhoto" style="z-index: 5;">(<spring:message code="user.view.link" />)
+											</a> 
+										</jstl:if>
+										 </span> <br />
+										 
+										
+								<!-- Modal -->
+								<div class="modal fade" id="dniPhoto" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title text-center">
+													<spring:message code="user.photo" />
+												</h4>
+											</div>
+											<div class="modal-body" style="text-align: center">
+											
+											<span><img src="${user.dniPhoto}"></span><br />
+											
+											</div>
+											
+										</div>
+									</div>
+								</div>
+										 
+										 
+										 
+										 <span> <strong><spring:message code="user.localePreferences" />: </strong>
+										 <jstl:if test="${user.localePreferences == 'es'}">
+											<spring:message code="user.localePreferences.spanish" />
+										</jstl:if>
+										 <jstl:if test="${user.localePreferences == 'en'}">
+											<spring:message code="user.localePreferences.english" />
+										 </jstl:if>
+										 </span> <br /><br />
+										 
+										 <jstl:if test="${isPrincipal && !isAdmin}">
+											<span> <strong><spring:message code="user.fundTransferPreference" /></strong> <a href="fundTransferPreference/user/edit.do">(<spring:message code="user.edit" />)</a></span><br /><br /> 
+										 </jstl:if>
+										 
+										
+										<jstl:if test="${isPrincipal && !user.isVerified && 
+											(user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')}">
+											<span> <strong><spring:message code="user.isVerified" /></strong>
+											<a href="user/user/edit.do">(<spring:message code="user.verify" />)</a></span>
+										</jstl:if>
+										
+										<jstl:if test="${isPrincipal && !user.isVerified && 
+											(user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')}">
+											<span><strong><spring:message code="user.notVerified.waiting" /></strong></span>
+										</jstl:if>				
 						</div>
-						<div class="datos text-center">
-							<jstl:if test="${isAdmin && !user.isVerified && !user.dniPhoto != ''}">
-								<br />
-								<a href="user/administrator/verifyUser.do?userId=${user.id}"> 
-									(<spring:message code="user.verifyUser" />)
-								</a>
-							</jstl:if>
-							<jstl:if test="${isAdmin && user.isVerified}">
-								<br />
-								<a href="user/administrator/unverifyUser.do?userId=${user.id}"> 
-									(<spring:message code="user.unverifyUser" />)
-								</a>
-							</jstl:if>
+												
 						
-
-						</div>
 					</jstl:if>
 
 					<hr>
@@ -226,9 +275,10 @@
 								<div class="col-xs-12">
 									<div class="center-block col-lg-12"
 										style="text-align: center;">
-										<h4>
-											<spring:message code="rating.anything" />
-										</h4>
+										<div class="alert alert-info">
+											<strong><spring:message code="rating.anything" /></strong>
+										</div>
+										
 									</div>
 								</div>
 							</div>
@@ -286,7 +336,7 @@
 		$('#pagination').bootpag({
 			total : <jstl:out value="${total_pages}"></jstl:out>,
 			page : <jstl:out value="${page}"></jstl:out>,
-			maxVisible : 5,
+			maxVisible : 3,
 			leaps : true,
 			firstLastUse : true,
 			first : '<',

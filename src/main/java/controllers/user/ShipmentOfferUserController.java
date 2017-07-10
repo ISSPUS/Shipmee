@@ -19,6 +19,7 @@ import controllers.AbstractController;
 import domain.Shipment;
 import domain.ShipmentOffer;
 import domain.User;
+import services.PayPalService;
 import services.ShipmentOfferService;
 import services.ShipmentService;
 import services.UserService;
@@ -39,6 +40,9 @@ public class ShipmentOfferUserController extends AbstractController {
 	
 	@Autowired
 	private ShipmentService shipmentService;
+	
+	@Autowired
+	private PayPalService payPalService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -66,12 +70,16 @@ public class ShipmentOfferUserController extends AbstractController {
 		
 		result = new ModelAndView("shipmentOffer/list");
 		result.addObject("shipmentOffers", shipmentOffers.getContent());
+		result.addObject("paypalObjects", payPalService.findByShipmentId(shipmentId));
 		result.addObject("p", page);
 		result.addObject("total_pages", shipmentOffers.getTotalPages());
 		result.addObject("shipmentId", shipmentId);
 		result.addObject("userId", userId);
 		result.addObject("currentUser", currentUser);
 		result.addObject("shipment", shipment);
+		result.addObject("urlPage", "shipmentOffer/user/list.do?shipmentId=" + shipmentId 
+				+ "&userId=" + userId 
+				+ "&page=");
 
 		return result;
 	}
@@ -82,10 +90,10 @@ public class ShipmentOfferUserController extends AbstractController {
 	public ModelAndView create(@RequestParam int shipmentId) {
 		ModelAndView result;
 		ShipmentOffer offer;
-
+		
 		offer = shipmentOfferService.create(shipmentId);
 		result = createEditModelAndView(offer);
-
+		
 		return result;
 	}
 
@@ -198,10 +206,15 @@ public class ShipmentOfferUserController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(ShipmentOffer input, String message) {
 		ModelAndView result;
+		User user;
+
+		user = userService.findByPrincipal();
+		Assert.notNull(user);
 
 		result = new ModelAndView("shipmentOffer/edit");
 		result.addObject("shipmentOffer", input);
 		result.addObject("message", message);
+		result.addObject("user", user);
 
 		return result;
 	}

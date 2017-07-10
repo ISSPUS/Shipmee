@@ -12,6 +12,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<jsp:useBean id="javaMethods" class="utilities.ViewsMethods" />
+
+
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script async type="text/javascript" src="scripts/moment.min.js"></script>
 <script async type="text/javascript" src="scripts/datetimepicker.min.js"></script>
@@ -55,7 +58,7 @@
 	<div class="container">
 		<div class="row">
 			<h3>
-				<spring:message code="shipments.from" /><jstl:out value="${user.name}" />
+				<spring:message code="shipments.from" /><a href="user/profile.do?userId=${user.id}"><jstl:out value="${user.name}" /></a>
 			</h3>
 		</div>
 		<!-- /row -->
@@ -89,13 +92,13 @@
 				<div class="profile-userbuttons">
 				
 					<button type="button" class="btn button-view btn-sm"
-						onclick="location.href = 'user/profile.do?userId=${shipmentId}';">
+						onclick="location.href = 'user/profile.do?userId=${user.id}';">
 						<spring:message code="user.view" />
 					</button>
 					
 					<jstl:if test="${(user.id != shipmentId) && shipmentId != 0 && (user.id != currentUser.id)}">
 						<button type="button" class="btn button-delete-lax btn-sm"
-							onclick="location.href = 'complaint/user/create.do?userId=${shipmentId}';">
+							onclick="location.href = 'complaint/user/create.do?userId=${user.id}';">
 							<spring:message code="user.report" />
 						</button>
 					</jstl:if>
@@ -105,6 +108,21 @@
 
 		</div>
 		<div class="col-md-9">
+			<jstl:if test="${(user.id == currentUser.id) || (user.id == shipmentId)}">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
+					style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
+					<div class="text-center profile-userbuttons">
+						<button class="btn button-view" style="font-size: 20px;"
+							onclick="location.href = 'shipment/user/create.do';">
+							<span class="fa fa-plus-circle"></span>
+							<spring:message code="shipment.create" />
+						</button>
+					</div>
+				</div>
+			</div>
+			</jstl:if>
+			
 			<div class="profile-content">
 
 				<div class="panel panel-default">
@@ -127,10 +145,9 @@
 														<div class="row">
 
 															<div class="col-lg-3 text-center">
-
-																<img src="${shipment.itemPicture}"
-																	class="media-photo-shipment">
-
+																<a href="shipment/display.do?shipmentId=${shipment.id}">
+																	<img src="${shipment.itemPicture}" class="media-photo-shipment">
+																</a>
 															</div>
 
 															<div class="info-salida col-lg-6"
@@ -140,11 +157,12 @@
 																		<h4><a href="shipment/display.do?shipmentId=${shipment.id}">${shipment.itemName}</a></h4>
 																	</div>
 
-																	<a><i
-																		class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
-
-																	<i class="glyphicon glyphicon-sort"></i> <a> <i
-																		class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
+																	<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(shipment.origin)}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}</a>
+											
+																	<i class="glyphicon glyphicon-sort"></i>
+											
+																	<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(shipment.destination)}"> <i
+																	class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
 																	</a>
 
 
@@ -153,14 +171,14 @@
 
 
 
-																<i class="glyphicon glyphicon-plane"></i>
+																<i class="glyphicon glyphicon-time"></i>
 																<spring:message code="shipment.departureTime" />
 																:
 																<fmt:formatDate value="${shipment.departureTime}"
 																	pattern="dd/MM/yyyy '-' HH:mm" />
 
 
-																<br /> <i class="glyphicon glyphicon-plane"></i>
+																<br /> <i class="glyphicon glyphicon-time"></i>
 																<spring:message code="shipment.maximumArriveTime" />
 																:
 																<fmt:formatDate value="${shipment.maximumArriveTime}"
@@ -170,8 +188,8 @@
 															</div>
 															<div class="col-lg-3 profile-userbuttons"
 																style="margin-top: 5%;">
-
-																<div class="price">${shipment.price}&#8364;</div>
+																<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${shipment.price}" var="formatPrice" />
+																<div class="price">${formatPrice}&#8364;</div>
 																<button type="button" class="btn button-ok btn-block"
 																	style="font-size: 15px;"
 																	onclick="location.href = 'shipment/display.do?shipmentId=${shipment.id}';">
@@ -191,9 +209,9 @@
 											
 										</jstl:when>
 										<jstl:otherwise>
-											<p>
-												<spring:message code="shipment.results" />
-											</p>
+											<div class="alert alert-info">
+												<strong><spring:message code="shipment.results" /></strong>
+											</div>
 										</jstl:otherwise>
 									</jstl:choose>
 								</tbody>
@@ -211,12 +229,12 @@
 
 		</div>
 		
-		<div id="pagination" class="copyright">
+		<div id="pagination" class="copyright pagination-center">
 			<script>
 				$('#pagination').bootpag({
 					total : <jstl:out value="${total_pages}"></jstl:out>,
 					page : <jstl:out value="${p}"></jstl:out>,
-					maxVisible : 5,
+					maxVisible : 3,
 					leaps : true,
 					firstLastUse : true,
 					first : '<',

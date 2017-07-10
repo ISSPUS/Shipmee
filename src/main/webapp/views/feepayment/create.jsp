@@ -37,7 +37,9 @@
 }
 
 .paymentWrap {
-	padding: 50px;
+	margin-left: -50px;
+	margin-top: 30px;
+	margin-bottom: 50px;
 }
 
 .paymentWrap .paymentBtnGroup {
@@ -98,17 +100,22 @@
 
 
 .payPaypal{
-
 	display: block;
     margin: 0 auto;
-    width: 12%;
+    width: 150px;
 
 }
+
 .image-p:hover{
- 
-filter: brightness(110%);
+	filter: brightness(110%);
+}
+
+.image-p{
+	margin-top: 10px;
+    margin-bottom: 10px;
 
 }
+
 </style>
 
 <div class="blue-barra">
@@ -136,7 +143,7 @@ filter: brightness(110%);
 						class="method visa"></span> <input name="options" class="pago"
 						type="radio" value="paypal" style="visibility: hidden;" />
 					</label> <label class="btn paymentMethod parteTarjeta"> <span
-						class="method master-card"></span> <input checked="checked"
+						class="method master-card" style="margin-left: -18px;"></span> <input checked="checked"
 						class="pago" name="options" type="radio" value="creditcard"
 						style="visibility: hidden;" />
 					</label>
@@ -156,12 +163,12 @@ filter: brightness(110%);
 		<a class="payPaypal" href="https://paypal.com/myaccount"
 			target="_blank"> <jstl:if test="${feePaymentForm.type > 2}">
 				<a class="payPaypal"
-					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.offerId}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
+					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.offerId}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}&shipmentId=${feePaymentForm.shipmentId}">
 			</jstl:if> <jstl:if test="${feePaymentForm.type < 3}">
 				<a class="payPaypal"
-					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.id}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}">
+					href="user/payPal/pay.do?type=${feePaymentForm.type}&id=${feePaymentForm.id}&sizePriceId=${feePaymentForm.sizePriceId}&amount=${feePaymentForm.amount}&description=${feePaymentForm.description}&shipmentId=${feePaymentForm.shipmentId}">
 			</jstl:if> <img class="image-p"
-			src="http://www.northportgirlslacrosse.com/sites/default/files/images/paypal-paynow-button-300x89.png"></a>
+			src="images/pay_paypal.png"></a>
 	</div>
 </div>
 
@@ -179,6 +186,7 @@ filter: brightness(110%);
 				<form:hidden path="amount" />
 				<form:hidden path="offerId" />
 				<form:hidden path="type" />
+				<form:hidden path="shipmentId" />
 
 				<div class="form-group">
 					<form:label path="creditCard.holderName" class="control-label col-md-2" for="holderName">
@@ -198,7 +206,7 @@ filter: brightness(110%);
 					</form:label>
 					<div class="col-md-10">
 						<form:select id="brandName" class="form-control"
-							path="creditCard.brandName">
+							path="creditCard.brandName" required="required">
 							<form:option value="" label="----" />
 							<form:option value="American Express">American Express</form:option>
 							<form:option value="Diners Club">Diners Club</form:option>
@@ -227,7 +235,7 @@ filter: brightness(110%);
 					</form:label>
 					<div class="col-md-10">
 						<form:input path="creditCard.number" class="form-control" id="number" required="true"/>
-						<form:errors class="error create-message-error" path="creditCard.number" />
+						<form:errors class="error create-message-error" path="creditCard.number"/>
 					</div>
 				</div>
 				
@@ -246,7 +254,7 @@ filter: brightness(110%);
 						<spring:message code="feePayment.expirationYear" />
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="creditCard.expirationYear" class="form-control" id="expirationYear" required="true"/>
+						<form:input path="creditCard.expirationYear" class="form-control" id="expirationYear" required="true" type="number"/>
 						<form:errors class="error create-message-error" path="creditCard.expirationYear" />
 					</div>
 				</div>
@@ -258,7 +266,7 @@ filter: brightness(110%);
 						</a>
 					</form:label>
 					<div class="col-md-10">
-						<form:input path="creditCard.cvvCode" class="form-control" id="cvvCode" required="true" maxlength="3"/>
+						<form:input path="creditCard.cvvCode" class="form-control" id="cvvCode" required="true" maxlength="3"  type="number"/>
 						<form:errors class="error create-message-error" path="creditCard.cvvCode" />
 					</div>
 					
@@ -266,9 +274,16 @@ filter: brightness(110%);
 					<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel2" aria-hidden="true">
 						<div class="modal-dialog">
-
-							<div class="modal-content text-center" style="padding: 3%;">
-								<img src="https://www.creditcards.com/credit-card-news/images/cc-security-codes-back-2.png" />
+							<div class="modal-content text-center">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title text-center">
+											<spring:message code="feePayment.cvvCode" />
+										</h4>
+									</div>
+									<div style="padding: 3%;">
+										<img src="images/cvv_code.png" />
+									</div>
 								<a href="https://www.teamline.cc/static/html/csv.html" target="_blank">Info</a>
 							</div>
 						</div>
@@ -290,17 +305,24 @@ filter: brightness(110%);
 
 
 			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-				
-					<div class="modal-content text-center" style="padding: 3%;">
-								<img src="http://blog.unibulmerchantservices.com/wp-content/uploads/2011/06/How-to-Authenticate-Credit-Cards-in-Face-to-Face-Transactions.png" />
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content text-center">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title text-center">
+											<spring:message code="user.help" />
+										</h4>
+									</div>
+									<div style="padding: 3%;">
+										<img src="images/info_tarjeta.png" />
+									</div>
+								</div>
 							</div>
-				</div>
 
-			</div>
-				</div>
+						</div>
+					</div>
 				<!-- Action buttons -->
 
 
@@ -325,6 +347,14 @@ $(function(){
 
 
 $(document).ready(function(){
+	if("${message}" || $(".error")[0]){
+		$("#div1").css("display", "block");
+        $("#div2").css("display", "none");
+        $(".paymentMethod").click(function(evento){
+        	$(".partePaypal").addClass("opaco");
+        	$(".parteTarjeta").removeClass("opaco");
+        });
+	}
     $(".pago").click(function(evento){
     	
         var valor = $(this).val();

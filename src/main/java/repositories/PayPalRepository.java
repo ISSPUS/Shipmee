@@ -1,5 +1,7 @@
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,4 +22,10 @@ public interface PayPalRepository extends JpaRepository<PayPalObject, Integer> {
 	
 	@Query("select r from PayPalObject r where r.feePayment.routeOffer.id = ?1")
 	PayPalObject findByRouteOfferId(int routeOfferId);
+	
+	@Query("select r from PayPalObject r where r.feePayment.routeOffer.route.id = ?1")
+	Collection<PayPalObject> findByRouteId(int routeId);
+	
+	@Query("select r from PayPalObject r where r.feePayment.shipmentOffer.shipment.id = ?1")
+	Collection<PayPalObject> findByShipmentId(int shipmentId);
 }

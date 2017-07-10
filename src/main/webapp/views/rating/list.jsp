@@ -18,8 +18,10 @@
 	rel="stylesheet">
 
     <link rel="stylesheet" href="styles/assets/css/style-lists-offers.css"  type="text/css">
+<script async src="scripts/jquery.bootpag.min.js"></script>
 
-<jstl:if test="${!empty ratings.content && userReceivedId > 0}">
+<jstl:choose>					
+<jstl:when test="${!empty ratings.content && userReceivedId > 0}">
 	<div class="blue-barra"
 		style="padding-top: 0.75%; padding-bottom: 0.75%;">
 		<div class="container">
@@ -34,6 +36,16 @@
 					</a>
 				</jstl:if>
 				</h3>
+			</div>
+			<!-- /row -->
+		</div>
+	</div>
+</jstl:when>
+<jstl:when test="${!empty ratings.content && authorId > 0}">
+	<div class="blue-barra"
+		style="padding-top: 0.75%; padding-bottom: 0.75%;">
+		<div class="container">
+			<div class="row">
 				<h3>
 				<jstl:if test="${authorId > 0}">
 					<spring:message code="rating.list.by" />
@@ -48,15 +60,29 @@
 			<!-- /row -->
 		</div>
 	</div>
-</jstl:if>
+</jstl:when>
+<jstl:when test="${empty ratings.content}">
+	<div class="blue-barra"
+		style="padding-top: 0.75%; padding-bottom: 0.75%;">
+		<div class="container">
+			<div class="row">
+				<h3>
+				<spring:message code="rating.list" />
 
+				</h3>
+			</div>
+			<!-- /row -->
+		</div>
+	</div>
+</jstl:when>
+</jstl:choose>
 
 <jstl:if test="${empty ratings.content}">
-	<center>
-		<h2>
-			<spring:message code="rating.anything" />
-		</h2>
-	</center>
+	<div class="container" style="margin-top:25px">
+			<div class="alert alert-info">
+				<strong><spring:message code="rating.anything" /></strong>
+			</div>
+		</div>
 </jstl:if>
 
 <div class="container">
@@ -67,26 +93,24 @@
 				style="float: none; margin: 0 auto;">
 				<div class="row perfil-info-offer">
 					<div class="img-perfil-offer col-xs-4 col-sm-3 col-lg-2">
-						<img
-							src="${ratingRow.author.photo}"
-							class="img-thumbnail  profile-offer-img ">
+						<a href="user/profile.do?userId=${ratingRow.author.id}">
+							<img src="${ratingRow.author.photo}" class="img-thumbnail  profile-offer-img" style="margin-top: 8%;">
+						</a>
 					</div>
 					<div>
-						<p><b><spring:message code="rating.author" /> : </b><jstl:out value="${ratingRow.author.userAccount.username}" /></p>
+						<p><b><spring:message code="rating.author" /> : </b><a href="user/profile.do?userId=${ratingRow.author.id}"><jstl:out value="${ratingRow.author.userAccount.username}" /></a></p>
 					</div>
 					<div>
-						<p><b><spring:message code="rating.user" /> : </b><jstl:out value="${ratingRow.user.userAccount.username}" /></p>
+						<p><b><spring:message code="rating.user" /> : </b><a href="user/profile.do?userId=${ratingRow.user.id}"><jstl:out value="${ratingRow.user.userAccount.username}" /></a></p>
 					</div>
 					<div>
-						<p><b><spring:message code="rating.value" /> : </b><jstl:out value="${ratingRow.value}" /></p>
+						<p><b><spring:message code="rating.value" /> : </b><a><jstl:out value="${ratingRow.value}" /></a></p>
 					</div>
-					<div>
+					<div style="padding-left: 1%;padding-right: 2%;">
 						<p><b><spring:message code="rating.comment" /> : </b><jstl:out value="${ratingRow.comment}" /></p>
 					</div>
-					<div>
-						<p><b><spring:message code="rating.createdDate" /> : </b><jstl:out value="${ratingRow.createdDate}" /></p>
-					</div>
-
+					<div class="rfecha separador"></div><span class="cretaion-date media-meta pull-right" style="margin-right: 1%;"><fmt:formatDate value="${ratingRow.createdDate}" pattern="dd/MM/yyyy HH:mm" /></span>
+						
  				</div>
 			</div>
 		</div>
@@ -95,13 +119,13 @@
 
 </div>
 
-<div id="pagination" class="copyright">
+<div id="pagination" class="copyright" style="text-align: center;">
 
 	<script>
 		$('#pagination').bootpag({
 			total : <jstl:out value="${total_pages}"></jstl:out>,
 			page : <jstl:out value="${p}"></jstl:out>,
-			maxVisible : 5,
+			maxVisible : 4,
 			leaps : true,
 			firstLastUse : true,
 			first : '<',

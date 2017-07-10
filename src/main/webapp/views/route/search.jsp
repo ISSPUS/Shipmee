@@ -12,6 +12,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<jsp:useBean id="javaMethods" class="utilities.ViewsMethods" />
+
+
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script type="text/javascript" src="scripts/moment.min.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
@@ -46,6 +49,11 @@
 	font-style: normal;
 }
 
+
+#select_size .filter-option{
+	font-size: 12px;
+}
+
 </style>
 
 <div class="blue-barra">
@@ -68,77 +76,103 @@
 
 						<ul class="nav">
 
-							<li class="active"><a href=""> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-map-marker img-origin"></i><spring:message code="route.origin" />
 							</a></li>
 							<li class="li-input"><input type="text" id="origin" name="origin"
 								class="form-control input-text" value="${origin}" placeholder="" required></li>
-							<li class="active"><a href=""> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-map-marker img-destination"></i>
 									<spring:message code="route.destination" />
 							</a></li>
 							<li class="li-input"><input id="destination" name="destination" type="text"
 								class="form-control input-text" value="${destination}" placeholder="" required></li>
-							<li class="active"><a href="" target="_blank"> <i
-									class="glyphicon glyphicon-plane"></i><spring:message code="route.date" />
+							<li class="active"><a target="_blank"> <i
+									class="fa fa-calendar"></i><spring:message code="route.date" />
 							</a></li>
 							<li class="li-input">
 								<div class='input-group input-text fondoDesplegable' id='datetimepicker1'>
 									<input name="date" style="backgroud-color: white;" type='text'
-										class="form-control" /> <span class="input-group-addon">
+										class="form-control" value="${form_date}"/> <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
 							</li>
-							<li class="active"><a href="" target="_blank"> <i
+							<li class="active"><a target="_blank"> <i
 									class="glyphicon glyphicon-time"></i> <spring:message code="route.hour" />
 							</a></li>
 							<li style="text-align: center" class="li-input">
 								<select class="form-control selectpicker fondoDesplegable input-text" name="hour">
-								<option selected="selected" disabled value=''><spring:message code="shipment.select.hour" /></option>
+								<option value=''><spring:message code="shipment.select.hour" /></option>
 									<jstl:forEach begin="0" end="23" varStatus="i">
+										<jstl:set var="selected_now" value=""/>
 										<jstl:choose>	
 											<jstl:when test="${i.index lt 10 }">
-												<option>0${i.index}:00</option>
+												<jstl:set var="hour_i" value="0${i.index}:00" />
 											</jstl:when>
 											<jstl:otherwise>
-												<option>${i.index}:00</option>
+												<jstl:set var="hour_i" value="${i.index}:00" />
 											</jstl:otherwise>
 										</jstl:choose>
+										<jstl:if test="${hour_i == form_hour}"><jstl:set var="selected_now" value="selected"/></jstl:if>
+										<option ${selected_now}>${hour_i}</option>
+										
 									</jstl:forEach>
 								</select>
 							</li>
-							<li class="active"><a href="#"> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-eye-open"></i><spring:message code="route.package" />
 							</a></li>
 							<li style="padding-bottom: 2%;">
 								<div class="form-check form-check-inline input-text">
+								<jstl:choose>
+									<jstl:when test="${form_envelope == 'open'}">
+										<jstl:set var="form_envelope_open" value="checked"/>
+									</jstl:when>
+									<jstl:otherwise>
+										<jstl:set var="form_envelope_open" value=""/>
+									</jstl:otherwise>
+								</jstl:choose>
+								<jstl:choose>
+									<jstl:when test="${form_envelope == 'close'}">
+										<jstl:set var="form_envelope_close" value="checked"/>
+									</jstl:when>
+									<jstl:otherwise>
+										<jstl:set var="form_envelope_close" value=""/>
+									</jstl:otherwise>
+								</jstl:choose>
+								
 									<label class="form-check-label"> <input
 										class="form-check-input" type="checkbox" id="inlineCheckbox1" name="envelope"
-										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="route.open" />
+										value="open" ${form_envelope_open}> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="route.open" />
 									</label> <label class="form-check-label"> <input
 										class="form-check-input" type="checkbox" id="inlineCheckbox2" name="envelope"
-										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="route.closed" />
+										value="close" ${form_envelope_close}> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="route.closed" />
 									</label>
 								</div>
 
 							</li>
-							<li class="active"><a href="#"> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-resize-full"></i><spring:message code="route.sizes" />
 							</a></li>
 							
 							<spring:message code="shipment.sizeS" var="s" />
+							<jstl:if test="${form_itemSize == 'S'}"><jstl:set var="selected_s" value="selected"/></jstl:if>
 							<spring:message code="shipment.sizeM" var="m" />
+							<jstl:if test="${form_itemSize == 'M'}"><jstl:set var="selected_m" value="selected"/></jstl:if>
 							<spring:message code="shipment.sizeL" var="l" />
+							<jstl:if test="${form_itemSize == 'L'}"><jstl:set var="selected_l" value="selected"/></jstl:if>
 							<spring:message code="shipment.sizeXL" var="xl" />
-							<li style="text-align: center" class="li-input"><select
+							<jstl:if test="${form_itemSize == 'XL'}"><jstl:set var="selected_xl" value="selected"/></jstl:if>
+
+							<li style="text-align: center; font-size: 12px;" class="li-input"><div id="select_size"><select
 								class="form-control selectpicker input-text fondoDesplegable" name="itemSize">
-									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
-									<option value="S">"${s }" </option>
-									<option value="M">"${m }" </option>
-									<option value="L">"${l }" </option>
-									<option value="XL">"${xl }" </option>
-							</select></li>
+									<option value=''><spring:message code="shipment.select.sizes" /></option>
+									<option value="S" ${selected_s}>"${s }" </option>
+									<option value="M" ${selected_m}>"${m }" </option>
+									<option value="L" ${selected_l}>"${l }" </option>
+									<option value="XL" ${selected_xl}>"${xl }" </option>
+							</select></div></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
 									<spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span>
@@ -197,11 +231,11 @@
 													<h4><a href="user/profile.do?userId=${route.creator.id}">${route.creator.name}</a></h4>
 												</div>
 												
-												<a target="_blank" href="http://maps.google.com/maps?q=${route.origin}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
+												<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(route.origin)}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
 											
 												<i class="glyphicon glyphicon-sort"></i>
 											
-												<a target="_blank" href="http://maps.google.com/maps?q=${route.destination}"> <i
+												<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(route.destination)}"> <i
 													class="glyphicon glyphicon-map-marker img-destination"></i>${route.destination}
 												</a>
 												
@@ -210,13 +244,13 @@
 
 										
 
-												<i class="glyphicon glyphicon-plane"></i> 
+												<i class="glyphicon glyphicon-time"></i> 
 												<spring:message code="route.departureTime" />: 
 												<fmt:formatDate value="${route.departureTime}" pattern="dd/MM/yyyy '-' HH:mm" />
 												
 												
 												<br/>
-												<i class="glyphicon glyphicon-plane"></i> 
+												<i class="glyphicon glyphicon-time"></i> 
 												<spring:message code="route.arriveTime" />: 
 												<fmt:formatDate value="${route.arriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
 												
@@ -239,7 +273,9 @@
 					</jstl:when>
 					
 					<jstl:otherwise>
-						<p><spring:message code="shipment.results" /></p>
+						<div class="alert alert-info">
+							<strong><spring:message code="route.results" /></strong>
+						</div>
 					</jstl:otherwise>
 				</jstl:choose>
 				
@@ -253,7 +289,7 @@
 				$('#pagination').bootpag({
 					total : <jstl:out value="${total_pages}"></jstl:out>,
 					page : <jstl:out value="${p}"></jstl:out>,
-					maxVisible : 5,
+					maxVisible : 3,
 					leaps : true,
 					firstLastUse : true,
 					first : '<',
@@ -315,12 +351,31 @@ function initialize() {
 
 
 	$(function() {
+		language = getCookie("language");
 		$('#datetimepicker1').datetimepicker({
 			viewMode : 'days',
 			format : 'DD/MM/YYYY',
-			locale: 'es'
+			locale: language
 
 		});
 	});
-	
+
+	// https://stackoverflow.com/a/9709425
+	// the selector will match all input controls of type :checkbox
+	// and attach a click event handler 
+	$("input:checkbox").on('click', function() {
+	  // in the handler, 'this' refers to the box clicked on
+	  var $box = $(this);
+	  if ($box.is(":checked")) {
+	    // the name of the box is retrieved using the .attr() method
+	    // as it is assumed and expected to be immutable
+	    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+	    // the checked state of the group/box on the other hand will change
+	    // and the current value is retrieved using .prop() method
+	    $(group).prop("checked", false);
+	    $box.prop("checked", true);
+	  } else {
+	    $box.prop("checked", false);
+	  }
+	});
 </script>

@@ -1,6 +1,7 @@
 package controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import domain.Shipment;
+import domain.ShipmentOffer;
 import domain.User;
 import services.ActorService;
+import services.ShipmentOfferService;
 import services.ShipmentService;
 import services.UserService;
 
@@ -33,6 +36,9 @@ public class ShipmentController extends AbstractController {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private ShipmentOfferService shipmentOfferService;
 	// Constructors -----------------------------------------------------------
 	
 	public ShipmentController() {
@@ -57,7 +63,7 @@ public class ShipmentController extends AbstractController {
 		user = userService.findOne(userId);
 		currentUser = null;
 		
-		if(actorService.checkLogin()){
+		if(actorService.checkAuthority("USER")){
 			currentUser = userService.findByPrincipal();
 		}
 				
@@ -78,6 +84,14 @@ public class ShipmentController extends AbstractController {
 			ModelAndView result;
 			Page<Shipment> shipments;
 			Pageable pageable;
+			
+			if (itemSize != null && itemSize.equals("")){
+				itemSize=null;
+			}
+			
+			if (hour != null && hour.equals("")){
+				hour=null;
+			}
 
 			pageable = new PageRequest(page - 1, 5);
 			shipments = shipmentService.searchShipment(origin, destination, date, hour, envelope, itemSize,pageable);
@@ -86,6 +100,10 @@ public class ShipmentController extends AbstractController {
 			result.addObject("shipments", shipments.getContent());
 			result.addObject("origin", origin);
 			result.addObject("destination", destination);
+			result.addObject("form_date", date);
+			result.addObject("form_hour", hour);
+			result.addObject("form_envelope", envelope);
+			result.addObject("form_itemSize", itemSize);
 			result.addObject("p", page);
 			result.addObject("total_pages", shipments.getTotalPages());
 			
@@ -123,18 +141,27 @@ public class ShipmentController extends AbstractController {
 
 		}
 		
-		private ModelAndView createListModelAndView(int shipmentId){
+		public ModelAndView createListModelAndView(int shipmentId){
 			ModelAndView result;
 			Shipment shipment;
 			User currentUser;
+			Boolean shipmentOffersIsEmpty;
+			Collection<ShipmentOffer> shipmentOffers;
 			
 			shipment = shipmentService.findOne(shipmentId);
 			currentUser = null;
+			shipmentOffersIsEmpty = false;
 			
 			if(actorService.checkAuthority("ADMIN")){
 				currentUser = userService.findOne(shipment.getCreator().getId());
-			}else if (actorService.checkLogin()){
+			}else if (actorService.checkAuthority("USER")){
 				currentUser = userService.findByPrincipal();
+			}
+			
+			shipmentOffers = shipmentOfferService.findAllByShipmentId(shipment.getId());
+			
+			if(shipmentOffers.isEmpty()) {
+				shipmentOffersIsEmpty = true;
 			}
 			
 			String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(shipment.getDepartureTime());
@@ -151,6 +178,7 @@ public class ShipmentController extends AbstractController {
 			result.addObject("maximumArriveTime", maximumArriveTime);
 			result.addObject("maximumArriveTime_hour", maximumArriveTimeHour);
 			result.addObject("user", currentUser);
+			result.addObject("shipmentOffersIsEmpty", shipmentOffersIsEmpty);
 
 			return result;
 		}

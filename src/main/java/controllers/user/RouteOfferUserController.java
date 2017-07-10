@@ -1,5 +1,7 @@
 package controllers.user;
 
+import java.net.URLEncoder;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -19,6 +21,7 @@ import controllers.AbstractController;
 import domain.Route;
 import domain.RouteOffer;
 import domain.User;
+import services.PayPalService;
 import services.RouteOfferService;
 import services.RouteService;
 import services.UserService;
@@ -39,6 +42,9 @@ public class RouteOfferUserController extends AbstractController {
 	
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private PayPalService payPalService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -66,12 +72,16 @@ public class RouteOfferUserController extends AbstractController {
 		
 		result = new ModelAndView("routeOffer/list");
 		result.addObject("routeOffers", routeOffers.getContent());
+		result.addObject("paypalObjects", payPalService.findByRouteId(routeId));
 		result.addObject("p", page);
 		result.addObject("total_pages", routeOffers.getTotalPages());
 		result.addObject("routeId", routeId);
 		result.addObject("userId", userId);
 		result.addObject("currentUser", currentUser);
 		result.addObject("route", route);
+		result.addObject("urlPage", "routeOffer/user/list.do?routeId=" + routeId 
+				+ "&userId=" + userId 
+				+ "&page=");
 
 		return result;
 	}
@@ -79,11 +89,11 @@ public class RouteOfferUserController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int routeId) {
+	public ModelAndView create(@RequestParam int routeId, @RequestParam(required=false, defaultValue="0") int shipmentId) {
 		ModelAndView result;
 		RouteOffer routeOffer;
 
-		routeOffer = routeOfferService.create(routeId);
+		routeOffer = routeOfferService.create(routeId, shipmentId);
 		result = createEditModelAndView(routeOffer);
 
 		return result;
@@ -118,13 +128,28 @@ public class RouteOfferUserController extends AbstractController {
 	public ModelAndView save(@Valid RouteOffer routeOffer, BindingResult binding) {
 		ModelAndView result;
 		String messageError;
+		String description = "";
+		int shipmentId;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(routeOffer);
 		} else {
 			try {
+				if(routeOffer.getShipment() != null) {
+					shipmentId = routeOffer.getShipment().getId();
+				} else {
+					shipmentId = 0;
+				}
+				
+				try{
+					description = URLEncoder.encode(routeOffer.getDescription(), "ISO-8859-1");
+				}catch (Exception e) {
+					// TODO: handle exception
+					log.error(e);
+				}
+				
 				result = new ModelAndView("redirect:../../feepayment/user/create.do?type=2&id=" + routeOffer.getRoute().getId()
-						+ "&amount=" + routeOffer.getAmount() + "&description=" + routeOffer.getDescription());
+						+ "&amount=" + routeOffer.getAmount() + "&description=" + description + "&shipmentId=" + shipmentId);
 			} catch (Throwable oops) {
 				log.error(oops.getMessage());
 				messageError = "routeOffer.commit.error";

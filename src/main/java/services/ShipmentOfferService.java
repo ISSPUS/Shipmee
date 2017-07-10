@@ -1,19 +1,25 @@
 package services;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.FundTransferPreference;
+import domain.RouteOffer;
 import domain.Shipment;
 import domain.ShipmentOffer;
 import domain.User;
 import repositories.ShipmentOfferRepository;
+import utilities.PayPalConfig;
 
 @Service
 @Transactional
@@ -37,6 +43,12 @@ public class ShipmentOfferService {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private MessageSource messageSource;
+	
+	@Autowired
+	private RouteOfferService routeOfferService;
 		
 	// Constructors -----------------------------------------------------------
 
@@ -52,6 +64,7 @@ public class ShipmentOfferService {
 
 		shipment = shipmentService.findOne(shipmentId);
 		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
+		Assert.isTrue(userService.findByPrincipal().getIsVerified(), "message.error.shipmentOffer.verifiedCarrier");
 
 		res = new ShipmentOffer();
 		res.setShipment(shipment);
@@ -76,29 +89,41 @@ public class ShipmentOfferService {
 	public ShipmentOffer save(ShipmentOffer input) {
 		User actUser;
 		ShipmentOffer tmp;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String url;
 
 		Assert.notNull(input, "message.error.shipmentOffer.mustExist");
 
 		actUser = userService.findByPrincipal();
 
-		if (actUser.equals(input.getUser())) { // User that create shipment
+		if (actUser.equals(input.getUser())) { // User that put the offer
 			if (input.getId() != 0) {
 				tmp = this.findOne(input.getId());
 				Assert.notNull(tmp, "message.error.shipmentOffer.save.dontFindID");
 				Assert.isTrue(tmp.getUser().equals(actUser), "message.error.shipmentOffer.save.user.own");
-				Assert.isTrue(!tmp.getAcceptedBySender() && !tmp.getRejectedBySender(),
-						"message.error.shipmentOffer.notAcceptedOrRejected");
+//				Assert.isTrue(!tmp.getAcceptedBySender() && !tmp.getRejectedBySender(),
+//						"message.error.shipmentOffer.notAcceptedOrRejected"); // Not neccessary.
+				// Conflictive with autoDenyRelatedOffersNotAcceptedYet when accept from routeOffer 
 			} else {
 				tmp = this.create(input.getShipment().getId());
+				
+				url = PayPalConfig.getUrlBase()+"/shipmentOffer/user/list.do?shipmentId="+input.getShipment().getId();
+
+				String[] args_body = {input.getShipment().getOrigin(), input.getShipment().getDestination(), dateFormat.format(input.getShipment().getDate()),url};
+				
+				messageService.sendMessage(actorService.findByUsername("shipmee"), input.getShipment().getCreator(),
+						messageSource.getMessage("shipment.offer.alert.subject", null, new Locale(input.getShipment().getCreator().getLocalePreferences())), 
+						messageSource.getMessage("shipment.offer.alert.body", args_body, new Locale(input.getShipment().getCreator().getLocalePreferences())));
 			}
 
 			tmp.setAmount(input.getAmount());
 			tmp.setDescription(input.getDescription());
+			tmp.setRejectedBySender(input.getRejectedBySender()); // Neccesary for autoDenyRelatedOffersNotAcceptedYet doing by oneself
 		} else if (actUser.equals(input.getShipment().getCreator())) { // User
 																		// that
-																		// put
+																		// create
 																		// the
-																		// offer
+																		// shipment
 			Assert.isTrue(input.getId() != 0, "service.shipmentOffer.save.ProposerCreating"); // The
 																								// shipmentCreator
 																								// can't
@@ -108,15 +133,19 @@ public class ShipmentOfferService {
 			Assert.isTrue(tmp.getShipment().getCreator().equals(actUser), "message.error.shipmentOffer.save.user.own");
 			tmp.setAcceptedBySender(input.getAcceptedBySender());
 			tmp.setRejectedBySender(input.getRejectedBySender());
-		} else {
-			Assert.isTrue(false, "shipmentOffer.commit.error");
-			return null;
+		} else { // Other user denied offers
+			tmp = shipmentOfferRepository.findOne(input.getId());
+			Assert.notNull(tmp, "message.error.shipmentOffer.save.dontFindID");
+			tmp.setRejectedBySender(input.getRejectedBySender());
 		}
+		Assert.isTrue(tmp.getUser().getIsVerified(), "message.error.shipmentOffer.verifiedCarrier");
 		Assert.isTrue(!tmp.getUser().equals(tmp.getShipment().getCreator()),
 				"message.error.shipmentOffer.equalCreatorAndProposer");
 		Assert.isTrue(tmp.getShipment().getMaximumArriveTime().after(new Date()),
 				"message.error.shipmentOffer.shipment.maxArrivalTime.future");
-
+		Assert.isTrue(isValidMethodPayment(tmp.getUser().getFundTransferPreference()),
+				"message.error.shipmentOffer.fundTransferPreference");
+		
 		tmp = shipmentOfferRepository.save(tmp);
 
 		return tmp;
@@ -147,15 +176,8 @@ public class ShipmentOfferService {
 
 	public Collection<ShipmentOffer> findAllByShipmentId(int shipmentId) {
 		Collection<ShipmentOffer> result;
-		User actUser;
 
-		actUser = userService.findByPrincipal();
 		result = shipmentOfferRepository.findAllByShipmentId(shipmentId);
-
-		if (!result.isEmpty()) {
-			Assert.isTrue(result.iterator().next().getShipment().getCreator().equals(actUser),
-					"service.shipmentOffer.delete.notPermitted");
-		}
 
 		return result;
 	}
@@ -192,7 +214,8 @@ public class ShipmentOfferService {
 		Shipment shipment = shipmentOffer.getShipment();
 		
 		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
-		Assert.isTrue(shipmentService.checkDates(shipment), "message.error.shipmentOffer.shipment.checkDates");
+		Assert.isTrue(shipmentService.checkFutureDepartureDate(shipment), "message.error.shipment.checkFutureDepartureDate");
+		Assert.isTrue(shipmentService.checkMaximumArriveTimeAfterDepartureDate(shipment), "message.error.shipment.checkMaximumArriveTimeAfterDepartureDate");
 		Assert.isTrue(shipment.getDepartureTime().after(new Date()),"The Departure Time must be future");
 		Assert.isTrue(shipment.getMaximumArriveTime().after(new Date()),"message.error.shipmentOffer.shipment.maxArrivalTime.future");
 		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "message.error.shipmentOffer.accept.user.own");
@@ -217,13 +240,7 @@ public class ShipmentOfferService {
 		
 		// Now, we reject every other offer.
 		
-		Collection<ShipmentOffer> remaining = findAllPendingByShipmentId(shipment.getId());
-		
-		for(ShipmentOffer so:remaining){
-			if(!so.getAcceptedBySender()){
-				deny(so.getId());
-			}
-		}
+		this.autoDenyRelatedOffersNotAcceptedYet(shipment.getId());
 		
 		/*
 		 * Here comes the notification to the carrier (Still not developed) 
@@ -242,14 +259,26 @@ public class ShipmentOfferService {
 	public void deny(int shipmentOfferId){
 		
 		Assert.isTrue(shipmentOfferId != 0, "message.error.shipmentOffer.mustExist");
-		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipmentOffer.onlyUser");
 		
-		ShipmentOffer shipmentOffer = findOne(shipmentOfferId);		
+		ShipmentOffer shipmentOffer = findOne(shipmentOfferId);
+		Assert.notNull(shipmentOffer);
+		
+		Assert.isTrue(shipmentOffer.getShipment().getCreator().equals(actorService.findByPrincipal()), "message.error.shipmentOffer.deny.user.own");
+
+		this.internalDeny(shipmentOffer);
+	}
+	
+	private void internalDeny(ShipmentOffer shipmentOffer){
+		
+		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.shipmentOffer.onlyUser");
+		Assert.notNull(shipmentOffer);
+		
 		Shipment shipment = shipmentOffer.getShipment();
 		
 		Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
-		Assert.isTrue(shipmentService.checkDates(shipment), "message.error.shipmentOffer.shipment.checkDates");
-		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "message.error.shipmentOffer.deny.user.own");
+		Assert.isTrue(shipmentService.checkFutureDepartureDate(shipment), "message.error.shipment.checkFutureDepartureDate");
+		Assert.isTrue(shipmentService.checkMaximumArriveTimeAfterDepartureDate(shipment), "message.error.shipment.checkMaximumArriveTimeAfterDepartureDate");
+		// Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "message.error.shipmentOffer.deny.user.own");
 
 		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "message.error.shipmentOffer.notAcceptedOrRejected");
 		Assert.isTrue(shipmentOffer.getUser().getIsVerified(), "message.error.shipmentOffer.verifiedCarrier");
@@ -269,6 +298,32 @@ public class ShipmentOfferService {
 		 */
 		
 		messageService.autoMessageDenyShipmentOffer(shipmentOffer);
+	}
+	
+	/**
+	 * Deny all Offer from a Shipment not Accepted yet. It consider shipmentOffers and routeOffers related with the given shipment
+	 * @param shipmentId
+	 */
+	public void autoDenyRelatedOffersNotAcceptedYet(int shipmentId){
+
+		// First, we reject every shipmentOffer pendind.
+		Collection<ShipmentOffer> remainingSO = findAllPendingByShipmentId(shipmentId);
+		
+		for(ShipmentOffer so:remainingSO){
+			if(!so.getAcceptedBySender()){
+//				deny(so.getId());
+				this.internalDeny(so);
+			}
+		}
+		
+		// Finally we reject every routeOffer pending related with the shipment.
+		
+		Collection<RouteOffer> remainingRO = routeOfferService.findAllPendingByShipmentId(shipmentId);
+
+		for(RouteOffer ro: remainingRO){
+			routeOfferService.internalDeny(ro);
+		}
+		
 		
 	}
 	
@@ -314,5 +369,11 @@ public class ShipmentOfferService {
 			return false;
 		}
 	}
-
+	public boolean isValidMethodPayment(FundTransferPreference form){
+		return (form.getAccountHolder() != null && !form.getAccountHolder().equals("")) &&
+		(form.getBankName() != null && !form.getBankName().equals("")) &&
+		(form.getIBAN() != null && !form.getIBAN().equals("")) &&
+		(form.getBIC() != null && !form.getBIC().equals("")) || 
+		(form.getPaypalEmail() != null && !form.getPaypalEmail().equals(""));
+	}
 }

@@ -44,7 +44,7 @@ public class RatingController extends AbstractController {
 		int currentActorId;
 
 		
-		pageable = new PageRequest(page - 1, 5);
+		pageable = new PageRequest(page - 1, 4);
 		
 		ratings = ratingService.findAllByAuthorOrUser(authorId, userReceivedId, pageable);
 		try{
@@ -59,6 +59,9 @@ public class RatingController extends AbstractController {
 		result.addObject("authorId", authorId);
 		result.addObject("userReceivedId", userReceivedId);
 		result.addObject("p", page);
+		result.addObject("total_pages", ratings.getTotalPages());
+		result.addObject("urlPage", "rating/list.do?userReceivedId=" + String.valueOf(userReceivedId) + "&authorId="
+				+ String.valueOf(authorId)+"&page=");
 
 		return result;
 	}

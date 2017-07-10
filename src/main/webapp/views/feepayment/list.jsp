@@ -26,6 +26,7 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css"
 	type="text/css">
+<script async src="scripts/jquery.bootpag.min.js"></script>
 
 <!-- variables necesarias para la vista 
 
@@ -332,8 +333,8 @@ font-size: 225%;
 								<jstl:if test="${feePayment.shipmentOffer != null}">
 									<h4>
 										<a href="shipment/display.do?shipmentId=${feePayment.shipmentOffer.shipment.id}"><spring:message code="shipmentOffer.shipment" />
-											${feePayment.shipmentOffer.shipment.itemName}</a>
-									</h4>
+											${feePayment.shipmentOffer.shipment.itemName}</a></h4>
+											<fmt:formatDate value="${feePayment.shipmentOffer.shipment.departureTime}" pattern="dd/MM/yyyy '-' HH:mm" /> - <fmt:formatDate value="${feePayment.shipmentOffer.shipment.maximumArriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
 								</jstl:if>
 								<jstl:if test="${feePayment.routeOffer != null}">
 									<h4>
@@ -385,24 +386,28 @@ font-size: 225%;
 								</div>
 							</div>
 						</div>
-
+						<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${feePayment.amount}" var="formatAmount" />
+						
 						<jstl:choose>
 							<jstl:when test="${feePayment.type == 'Accepted'}">
 								<div class="col-xs-12 price" style="color: #5cb85c">
-									<span>${feePayment.amount}&#8364;</span>
+									<span>${formatAmount}&#8364;</span>
 								</div>
 							</jstl:when>
 							<jstl:when test="${feePayment.type == 'Pending'}">
 								<div class="col-xs-12 price" style="color: #f0ad4e">
-									<span>${feePayment.amount}&#8364;</span>
+									<span>${formatAmount}&#8364;</span>
 								</div>
 							</jstl:when>
 							<jstl:when test="${feePayment.type == 'Rejected'}">
 								<div class="col-xs-12 price" style="color: #d9534f">
-									<span>${feePayment.amount}&#8364;</span>
+									<span>${formatAmount}&#8364;</span>
 								</div>
 							</jstl:when>
 						</jstl:choose>
+						
+						<div class="text-center"><a><spring:message code="master.page.comissions" /></a></div>
+						
 
 						<jstl:if test="${feePayment.type == 'Pending'}">
 						<div class="col-xs-12 text-center profile-userbuttons">
@@ -430,16 +435,62 @@ font-size: 225%;
 						</div>
 						
 						</jstl:if>
-					
-						
 					</div>
 				</div>
 			</jstl:forEach>
 		</jstl:when>
 		<jstl:otherwise>
-			<p>
-				<spring:message code="feePayment.results" />
-			</p>
+						<jstl:choose>
+							<jstl:when test="${feePaymentsType == 'Accepted'}">
+								<div class="container" style="margin-top: 25px">
+									<div class="alert alert-info">
+										<strong><spring:message code="feePayment.results.accepted" /></strong>
+									</div>
+								</div>
+							</jstl:when>
+							<jstl:when test="${feePaymentsType == 'Pending'}">
+								<div class="container" style="margin-top: 25px">
+									<div class="alert alert-info">
+										<strong><spring:message code="feePayment.results.pending" /></strong>
+									</div>
+								</div>
+							</jstl:when>
+							<jstl:when test="${feePaymentsType == 'Rejected'}">
+								<div class="container" style="margin-top: 25px">
+									<div class="alert alert-info">
+										<strong><spring:message code="feePayment.results.rejected" /></strong>
+									</div>
+								</div>
+							</jstl:when>
+						</jstl:choose>
+
 		</jstl:otherwise>
 	</jstl:choose>
+	
+			<div id="pagination" class="copyright" style="
+    text-align: center;">
+
+			<script>
+				$('#pagination').bootpag({
+					total : <jstl:out value="${total_pages}"></jstl:out>,
+					page : <jstl:out value="${p}"></jstl:out>,
+					maxVisible : 3,
+					leaps : true,
+					firstLastUse : true,
+					first : '<',
+            last: '>',
+					wrapClass : 'pagination',
+					activeClass : 'active',
+					disabledClass : 'disabled',
+					nextClass : 'next',
+					prevClass : 'prev',
+					lastClass : 'last',
+					firstClass : 'first'
+				}).on('page', function(event, num) {
+					window.location.href = "${urlPage}" + num + "";
+					page = 1
+				});
+			</script>
+
+		</div>
 </div>

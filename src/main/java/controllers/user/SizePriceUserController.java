@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.RouteService;
+import services.UserService;
 import services.VehicleService;
 import services.form.RouteFormService;
 import services.form.SizePriceFormService;
 import controllers.AbstractController;
 import domain.Route;
+import domain.User;
 import domain.Vehicle;
 import domain.form.RouteForm;
 import domain.form.SizePriceForm;
@@ -41,6 +43,9 @@ public class SizePriceUserController extends AbstractController {
 
 	@Autowired
 	private VehicleService vehicleService;
+
+	@Autowired
+	private UserService userService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -102,7 +107,8 @@ public class SizePriceUserController extends AbstractController {
 			result = createEditModelAndView(sizePriceForm);
 		} else {
 			try {
-				if (sizePriceForm.getRouteId() == 0) {
+				
+				if (sizePriceForm.getRouteId() == 0 && sizePriceFormService.checkSizePrices(sizePriceForm)) {
 					RouteForm routeForm;
 					Route route;
 
@@ -161,11 +167,14 @@ public class SizePriceUserController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(SizePriceForm sizePriceForm, String message) {
 		ModelAndView result;
+		User user;
 
+		user = userService.findByPrincipal();
 		result = new ModelAndView("sizePrice/edit");
+
 		result.addObject("sizePriceForm", sizePriceForm);
 		result.addObject("message", message);
-
+		result.addObject("user",user);
 		return result;
 	}
 

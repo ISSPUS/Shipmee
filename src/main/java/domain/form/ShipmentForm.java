@@ -1,10 +1,13 @@
 package domain.form;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 
@@ -49,6 +52,7 @@ public class ShipmentForm {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getOrigin() {
 		return origin;
 	}
@@ -58,6 +62,7 @@ public class ShipmentForm {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDestination() {
 		return destination;
 	}
@@ -65,8 +70,8 @@ public class ShipmentForm {
 		this.destination = destination;
 	}
 	
-	@Min(0)
 	@Digits(integer=9,fraction=2)
+	@DecimalMin("0.01")
 	public double getPrice() {
 		return price;
 	}
@@ -76,6 +81,7 @@ public class ShipmentForm {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getItemName() {
 		return itemName;
 	}
@@ -85,6 +91,7 @@ public class ShipmentForm {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getItemSize() {
 		return itemSize;
 	}
@@ -94,6 +101,7 @@ public class ShipmentForm {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getItemEnvelope() {
 		return itemEnvelope;
 	}

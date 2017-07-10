@@ -23,6 +23,7 @@
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-details.css" type="text/css">
+<script async src="scripts/jquery.bootpag.min.js"></script>
 
 <style>
 @font-face {
@@ -54,13 +55,9 @@
 	
 }
 
-.caja{
-margin-bottom: 5%;
-}
-
 .alerts-buttons{
 margin-top: 32px;
-    margin-bottom: 5%;
+margin-bottom: 5%;
 }
 
 </style>
@@ -80,7 +77,7 @@ margin-top: 32px;
 <div class="container caja">
 
 	<div class="row">
-	<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
+	<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2" style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
 		<div class="text-center profile-userbuttons">
 			<button class="btn button-view" style="font-size: 20px;" onclick="location.href = 'alert/user/create.do';"><span class="fa fa-plus-circle"></span> <spring:message code="alert.new" /></button>
 			</div>
@@ -91,7 +88,7 @@ margin-top: 32px;
 	<jstl:choose>
 		<jstl:when test="${not empty alerts}">
 			<jstl:forEach items="${alerts}" var="alert">
-				<div class="row">
+				<div class="row" style="margin-right: 0px;">
 					
 					
 					<div
@@ -100,23 +97,33 @@ margin-top: 32px;
 
 							<div class="col-xs-12 col-sm-6 col-md-8">
 
-								<div class="alerta-info">
+								<div class="alerta-info frontera">
 									<h4>
-										<a>${alert.type}</a> <fmt:formatDate value="${alert.date}" pattern="dd/MM/yyyy" />
+										
+										<jstl:choose>
+											<jstl:when test="${alert.type eq 'Route'}">
+												<a><spring:message code="alert.type.route" /></a>
+											</jstl:when>
+											<jstl:when test="${alert.type eq 'Shipment'}">
+												<a><spring:message code="alert.type.shipment" /></a>
+											</jstl:when>
+
+										</jstl:choose>
+										<fmt:formatDate value="${alert.date}" pattern="dd/MM/yyyy" />
 									</h4>
 									<h5>
 										<spring:message code="route.origin" />
 										:
-										<jstl:out value="${alert.origin}" />
+										<a><jstl:out value="${alert.origin}" /></a>
 									</h5>
 									<h5>
 										<spring:message code="route.destination" />
 										:
-										<jstl:out value="${alert.destination}" />
+										<a><jstl:out value="${alert.destination}" /></a>
 									</h5>
 								</div>
 							</div>
-							<div class="col-xs-12 col-sm-2 col-md-4 col-lg-3"
+							<div
 								style="text-align: center;">
 								<div class="text-center profile-userbuttons alerts-buttons">
 									<button class="btn button-ok" onclick="location.href = 'alert/user/edit.do?alertId=${alert.id}';">
@@ -134,11 +141,39 @@ margin-top: 32px;
 			</jstl:forEach>
 		</jstl:when>
 		<jstl:otherwise>
-			<p>
-				<spring:message code="vehicle.results" />
-			</p>
+			<div class="container" style="margin-top:25px">
+			<div class="alert alert-info">
+				<strong><spring:message code="alert.results" /></strong>
+			</div>
+			</div>
 		</jstl:otherwise>
 	</jstl:choose>
 </div>
 
 
+		<div id="pagination" class="copyright" style="
+    text-align: center;">
+
+			<script>
+				$('#pagination').bootpag({
+					total : <jstl:out value="${total_pages}"></jstl:out>,
+					page : <jstl:out value="${p}"></jstl:out>,
+					maxVisible : 3,
+					leaps : true,
+					firstLastUse : true,
+					first : '<',
+            last: '>',
+					wrapClass : 'pagination',
+					activeClass : 'active',
+					disabledClass : 'disabled',
+					nextClass : 'next',
+					prevClass : 'prev',
+					lastClass : 'last',
+					firstClass : 'first'
+				}).on('page', function(event, num) {
+					window.location.href = "${urlPage}" + num + "";
+					page = 1
+				});
+			</script>
+
+		</div>

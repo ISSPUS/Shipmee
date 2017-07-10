@@ -62,7 +62,7 @@ public class RouteOfferTest extends AbstractTest {
 		unauthenticate();
 		authenticate("user2");
 		
-		result = routeOfferService.create(route.getId());
+		result = routeOfferService.create(route.getId(), 0);
 		result.setAmount(1);
 		result.setDescription("Test");
 		result = routeOfferService.save(result);
@@ -100,7 +100,7 @@ public class RouteOfferTest extends AbstractTest {
 		unauthenticate();
 		authenticate("user2");
 		
-		result = routeOfferService.create(route.getId());
+		result = routeOfferService.create(route.getId(), 0);
 		result.setAmount(1);
 		result.setDescription("Test");
 		result.setAcceptedByCarrier(true);
@@ -142,7 +142,7 @@ public class RouteOfferTest extends AbstractTest {
 		unauthenticate();
 		authenticate("user2");
 		
-		result = routeOfferService.create(route.getId());
+		result = routeOfferService.create(route.getId(), 0);
 		result.setAmount(1);
 		result.setDescription("Test");
 		result.setUser(user);
@@ -178,7 +178,7 @@ public class RouteOfferTest extends AbstractTest {
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		sizePreCreate = routeOffers.size();		
 		
-		result = routeOfferService.create(route.getId());
+		result = routeOfferService.create(route.getId(), 0);
 		result.setAmount(1);
 		result.setDescription("Test");
 		result = routeOfferService.save(result);
@@ -212,7 +212,7 @@ public class RouteOfferTest extends AbstractTest {
 		
 		unauthenticate();
 		
-		result = routeOfferService.create(route.getId());
+		result = routeOfferService.create(route.getId(), 0);
 		result.setAmount(1);
 		result.setDescription("Test");
 		result = routeOfferService.save(result);

@@ -58,8 +58,7 @@ public class UserController extends AbstractController {
 			try {
 				userService.save(reconstructed);
 
-				result = new ModelAndView("redirect:/security/login.do");
-				result.addObject("message", "user.register.ok");
+				result = new ModelAndView("redirect:/security/login.do?register=true");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(actorForm, "user.register.error");
 			}
@@ -81,8 +80,8 @@ public class UserController extends AbstractController {
 	protected ModelAndView createEditModelAndView(ActorForm input, String message) {
 		ModelAndView result;
 		
-		input.setPassword("");
 		input.setAcceptLegalCondition(false);
+		input.setPassword("");
 		input.setRepeatedPassword("");
 
 		result = new ModelAndView("user/edit");

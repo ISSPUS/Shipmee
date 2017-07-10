@@ -1,12 +1,14 @@
 package controllers.user;
 
 
-import java.util.Collection;
 
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -42,15 +44,20 @@ public class VehicleUserController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(required=false, defaultValue="1") int page) {
 		ModelAndView result;
-		Collection<Vehicle> vehicles;
-		
-		vehicles = vehicleService.findAllNotDeletedByUser();
+		Page<Vehicle> vehicles;
+		Pageable pageable;
+
+		pageable = new PageRequest(page - 1, 4);
+		vehicles = vehicleService.findAllNotDeletedByUser(pageable);
 		
 		result = new ModelAndView("vehicle/list");
-		result.addObject("vehicles", vehicles);
-
+		result.addObject("vehicles", vehicles.getContent());
+		result.addObject("p", page);
+		result.addObject("total_pages", vehicles.getTotalPages());
+		result.addObject("urlPage", "vehicle/user/list.do?page=");
+		
 		return result;
 	}
 
@@ -87,12 +94,14 @@ public class VehicleUserController extends AbstractController {
 	public ModelAndView save(@Valid VehicleForm vehicleForm, BindingResult binding) {
 		ModelAndView result;
 		String messageError;
+		
+		// This method add binding errors!. Don't move after check binding if
+		Vehicle vehicle = vehicleFormService.reconstruct(vehicleForm, binding);
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(vehicleForm);
 		} else {
 			try {
-				Vehicle vehicle = vehicleFormService.reconstruct(vehicleForm);
 				vehicleService.save(vehicle);
 				
 				result = new ModelAndView("redirect:list.do");

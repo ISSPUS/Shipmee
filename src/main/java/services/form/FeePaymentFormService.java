@@ -39,7 +39,7 @@ public class FeePaymentFormService {
 	// Simple CRUD methods ----------------------------------------------------
 
 
-	public FeePaymentForm create(int type, int id, int sizePriceId, double amount, String description) {
+	public FeePaymentForm create(int type, int id, int sizePriceId, double amount, String description, int shipmentId) {
 		FeePaymentForm result;
 		
 		result = new FeePaymentForm();
@@ -55,12 +55,14 @@ public class FeePaymentFormService {
 		case 1:
 			result.setId(id);
 			result.setSizePriceId(sizePriceId);
+			result.setAmount(0.1); // Posteriormente se reseteará al valor oportuno
 			break;
 			
 		case 2:
 			result.setId(id);
 			result.setAmount(amount);
 			result.setDescription(description);
+			result.setShipmentId(shipmentId);
 			break;
 			
 		case 3:
@@ -70,6 +72,7 @@ public class FeePaymentFormService {
 			
 			result.setId(shipmentOffer.getShipment().getId());
 			result.setOfferId(id);
+			result.setAmount(0.1);
 			break;
 
 		default:
@@ -98,7 +101,7 @@ public class FeePaymentFormService {
 			break;
 			
 		case 2:
-			routeOffer = routeOfferService.create(feePaymentForm.getId());
+			routeOffer = routeOfferService.create(feePaymentForm.getId(), feePaymentForm.getShipmentId());
 			routeOffer.setAmount(feePaymentForm.getAmount());
 			routeOffer.setDescription(feePaymentForm.getDescription());
 			routeOffer = routeOfferService.save(routeOffer);

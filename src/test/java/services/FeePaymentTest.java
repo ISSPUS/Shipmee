@@ -91,9 +91,9 @@ public class FeePaymentTest extends AbstractTest {
 		shipment = shipmentService.create();
 		shipment.setOrigin("Sevilla");
 		shipment.setDestination("Lugo");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		shipment.setDepartureTime(departureTime);
-		Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		shipment.setMaximumArriveTime(maximumArrivalTime);
 		shipment.setItemSize("L");
 		shipment.setItemName("Prueba");
@@ -123,7 +123,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -185,9 +185,9 @@ public class FeePaymentTest extends AbstractTest {
 		shipment = shipmentService.create();
 		shipment.setOrigin("Sevilla");
 		shipment.setDestination("Lugo");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		shipment.setDepartureTime(departureTime);
-		Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		shipment.setMaximumArriveTime(maximumArrivalTime);
 		shipment.setItemSize("L");
 		shipment.setItemName("Prueba");
@@ -217,7 +217,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -311,7 +311,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -373,9 +373,9 @@ public class FeePaymentTest extends AbstractTest {
 		shipment = shipmentService.create();
 		shipment.setOrigin("Sevilla");
 		shipment.setDestination("Lugo");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		shipment.setDepartureTime(departureTime);
-		Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		shipment.setMaximumArriveTime(maximumArrivalTime);
 		shipment.setItemSize("L");
 		shipment.setItemName("Prueba");
@@ -405,7 +405,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, 0, 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, 0, 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -464,9 +464,9 @@ public class FeePaymentTest extends AbstractTest {
 		shipment = shipmentService.create();
 		shipment.setOrigin("Sevilla");
 		shipment.setDestination("Lugo");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		shipment.setDepartureTime(departureTime);
-		Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date maximumArrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		shipment.setMaximumArriveTime(maximumArrivalTime);
 		shipment.setItemSize("L");
 		shipment.setItemName("Prueba");
@@ -496,7 +496,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 //		creditCard.setHolderName("Nombre de Prueba");
 //		creditCard.setBrandName("VISA");
@@ -587,7 +587,7 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user1");
 		
 		shipmentOffer = shipmentOfferService.findOne(shipmentOffer.getId());
-		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(3, shipmentOffer.getId(), 0, 0.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -648,12 +648,12 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.create();
 		route.setOrigin("Sevilla");
 		route.setDestination("Luego");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		route.setDepartureTime(departureTime);
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -679,7 +679,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -747,12 +747,12 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.create();
 		route.setOrigin("Sevilla");
 		route.setDestination("Luego");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		route.setDepartureTime(departureTime);
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -778,7 +778,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -851,7 +851,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -877,7 +877,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -950,7 +950,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -976,7 +976,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, 0, 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, 0, 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1044,12 +1044,12 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.create();
 		route.setOrigin("Sevilla");
 		route.setDestination("Luego");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		route.setDepartureTime(departureTime);
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1075,7 +1075,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 //		creditCard.setHolderName("Nombre de Prueba");
 //		creditCard.setBrandName("VISA");
@@ -1148,7 +1148,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1174,7 +1174,7 @@ public class FeePaymentTest extends AbstractTest {
 		
 		route = routeService.findOne(route.getId());
 		
-		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago");
+		feePaymentForm = feePaymentFormService.create(2, route.getId(), 0, 5.0, "Prueba de pago", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1246,12 +1246,12 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.create();
 		route.setOrigin("Sevilla");
 		route.setDestination("Luego");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		route.setDepartureTime(departureTime);
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1278,7 +1278,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1346,12 +1346,12 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.create();
 		route.setOrigin("Sevilla");
 		route.setDestination("Luego");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		route.setDepartureTime(departureTime);
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1378,7 +1378,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1451,7 +1451,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1478,7 +1478,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1551,7 +1551,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1578,7 +1578,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, 0, sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, 0, sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1646,12 +1646,12 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.create();
 		route.setOrigin("Sevilla");
 		route.setDestination("Luego");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		route.setDepartureTime(departureTime);
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1678,7 +1678,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 //		creditCard.setHolderName("Nombre de Prueba");
 //		creditCard.setBrandName("VISA");
@@ -1751,7 +1751,7 @@ public class FeePaymentTest extends AbstractTest {
 		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1778,7 +1778,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1850,12 +1850,12 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.create();
 		route.setOrigin("Sevilla");
 		route.setDestination("Luego");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		route.setDepartureTime(departureTime);
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1882,7 +1882,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");
@@ -1950,12 +1950,12 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.create();
 		route.setOrigin("Sevilla");
 		route.setDestination("Luego");
-		Date departureTime = new GregorianCalendar(2017, Calendar.JULY, 01).getTime();
+		Date departureTime = new GregorianCalendar(2017, Calendar.AUGUST, 01).getTime();
 		route.setDepartureTime(departureTime);
-		Date arrivalTime = new GregorianCalendar(2017, Calendar.JULY, 02).getTime();
+		Date arrivalTime = new GregorianCalendar(2017, Calendar.AUGUST, 02).getTime();
 		route.setArriveTime(arrivalTime);
 		route.setItemEnvelope("Open");
-		vehicle = vehicleService.findAllNotDeletedByUser().iterator().next();
+		vehicle = vehicleService.findAllNotDeletedByUser(page).getContent().iterator().next();
 		route.setVehicle(vehicle);
 		
 		sizePrice = sizePriceService.create();
@@ -1982,7 +1982,7 @@ public class FeePaymentTest extends AbstractTest {
 		route = routeService.findOne(route.getId());
 		sizePrice = sizePriceService.findAllByRouteId(route.getId()).iterator().next();
 		
-		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "");
+		feePaymentForm = feePaymentFormService.create(1, route.getId(), sizePrice.getId(), 0.0, "", 0);
 		creditCard = new CreditCard();
 		creditCard.setHolderName("Nombre de Prueba");
 		creditCard.setBrandName("VISA");

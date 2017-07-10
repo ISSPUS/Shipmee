@@ -15,8 +15,9 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<link rel="shortcut icon" href="favicon.ico"/> 
+<link rel="shortcut icon" href="favicon.ico"/>
 
+<script type="text/javascript" src="scripts/scripts-selft.js"></script>
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
 <script type="text/javascript" src="scripts/jmenu.min.js"></script>
@@ -51,8 +52,6 @@
 	}
 </script>
 
-
-
 </head>
 
 <body>
@@ -65,7 +64,10 @@
 		<tiles:insertAttribute name="body" />	
 		<jstl:if test="${message != null}">
 			<br />
-			<span class="message"><spring:message code="${message}" /></span>
+			<div class="mensaje_error_servidor">
+					<strong><span class="message"><spring:message code="${message}" /></span></strong>
+			</div>
+			<br />
 		</jstl:if>	
 	</div>
 	<div>

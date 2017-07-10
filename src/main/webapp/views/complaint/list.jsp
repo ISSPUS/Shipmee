@@ -26,6 +26,7 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css"
 	type="text/css">
+<script async src="scripts/jquery.bootpag.min.js"></script>
 
 <!-- variables necesarias para la vista 
 
@@ -376,11 +377,41 @@ len_serious: total de quejas graves
 			</jstl:forEach>
 		</jstl:when>
 		<jstl:otherwise>
-			<p>
-				<spring:message code="complaint.results" />
-			</p>
+			<div class="container" style="margin-top: 25px">
+				<div class="alert alert-info">
+					<strong><spring:message code="complaint.results" /></strong>
+				</div>
+			</div>
+
 		</jstl:otherwise>
 	</jstl:choose>
+	
+		<div id="pagination" class="copyright" style="
+    text-align: center;">
+
+			<script>
+				$('#pagination').bootpag({
+					total : <jstl:out value="${total_pages}"></jstl:out>,
+					page : <jstl:out value="${p}"></jstl:out>,
+					maxVisible : 3,
+					leaps : true,
+					firstLastUse : true,
+					first : '<',
+            last: '>',
+					wrapClass : 'pagination',
+					activeClass : 'active',
+					disabledClass : 'disabled',
+					nextClass : 'next',
+					prevClass : 'prev',
+					lastClass : 'last',
+					firstClass : 'first'
+				}).on('page', function(event, num) {
+					window.location.href = "${urlPage}" + num + "";
+					page = 1
+				});
+			</script>
+
+		</div>
 	
 	<jstl:if test="${messageError != null}">
 		<div class="error" style="text-align: center;">

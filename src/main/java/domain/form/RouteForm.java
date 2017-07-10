@@ -4,6 +4,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 import domain.Vehicle;
 
@@ -37,6 +39,7 @@ public class RouteForm {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getOrigin() {
 		return origin;
 	}
@@ -46,6 +49,7 @@ public class RouteForm {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDestination() {
 		return destination;
 	}
@@ -55,6 +59,7 @@ public class RouteForm {
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getItemEnvelope() {
 		return itemEnvelope;
 	}

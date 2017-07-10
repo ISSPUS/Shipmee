@@ -2,6 +2,7 @@ package services;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -45,6 +46,9 @@ public class PayPalService {
 	@Autowired
 	private FeePaymentService feePaymentService;
 	
+	@Autowired
+	private UserService userService;
+	
 
 	// Constructors -----------------------------------------------------------
 
@@ -68,7 +72,7 @@ public class PayPalService {
 	private PayPalObject save(PayPalObject payPalObject) {
 		Assert.notNull(payPalObject, "message.error.PayPalObject.notNull");
 		
-		payPalObject = payPalRepository.save(payPalObject);
+		payPalObject = payPalRepository.save(payPalObject); // No añadir flush puesto que falla todo
 			
 		return payPalObject;
 	}
@@ -96,7 +100,7 @@ public class PayPalService {
 		PayPalObject payObject = this.create();
 		payObject.setFeePayment(fp);;
 
-		payObject = this.save(payObject);	// Comentar para evitar tantas escrituras a la DB
+//		payObject = this.save(payObject);	// Comentar para evitar tantas escrituras a la DB
 		
 // 		Assert.isTrue(!fp.getCarrier().getFundTransferPreference().getPaypalEmail().equals(""), "PayPalService.authorizePay.error.CarrierWithoutPayPalEmail");
 		try{
@@ -121,12 +125,14 @@ public class PayPalService {
 		Assert.isTrue(res.getError().isEmpty(), "PayPalService.authorizePay.error.startTransaction");
 		payObject.setPayStatus(res.getPaymentExecStatus());
 		
-		this.save(payObject);
+		payObject = this.save(payObject);
+		// payObject = payPalRepository.saveAndFlush(payObject);
 
 		return res;
 	}
 	
-	public PaymentDetailsResponse refreshPaymentStatusFromPaypal(String trackingId)
+	public PayPalObject refreshPaymentStatusFromPaypal(String trackingId)
+//	public PaymentDetailsResponse refreshPaymentStatusFromPaypal(String trackingId, PayPalObject response)
 			throws SSLConfigurationException, InvalidCredentialException, UnsupportedEncodingException,
 			HttpErrorException, InvalidResponseDataException, ClientActionRequiredException, MissingCredentialException,
 			OAuthException, PayPalRESTException, IOException, InterruptedException {
@@ -136,12 +142,16 @@ public class PayPalService {
 		PaymentDetailsResponse details = PayPal.fetchDetailsAdaptiveTransaction(payObject.getTrackingId());
 
 		Assert.isTrue(details.getError().isEmpty(), "PayPalService.returnFromPaypal.error.RetrievingDetailsFromPaypal");
+		
+		// payObject = this.findByTrackingId(trackingId);
 
 		payObject.setPayStatus(details.getStatus());
 
-		this.save(payObject);
+		// this.save(payObject);
+		payObject = payPalRepository.saveAndFlush(payObject);
 		
-		return details;
+//		return details;
+		return payObject;
 	}
 	
 	public void payToShipper(int feePaymentID)
@@ -152,18 +162,18 @@ public class PayPalService {
 		
 		PayPalObject po = this.findByFeePaymentId(feePaymentID);
 
-		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId());
-
-		if (payObject.getStatus().equals("INCOMPLETE")) {
-			res = PayPal.adaptiveSendToSenconds(payObject.getPayKey());
-
-			if (res.getError().size() != 0) {
-				log.error(res.getError().get(0).getMessage());
-
-				Assert.isTrue(res.getError().size() == 0, "PayPalService.payToShipper.error.payPalError");
-
-			}
-		}
+//		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId(), po);
+//
+//		if (payObject.getStatus().equals("INCOMPLETE")) {
+//			res = PayPal.adaptiveSendToSenconds(payObject.getPayKey());
+//
+//			if (res.getError().size() != 0) {
+//				log.error(res.getError().get(0).getMessage());
+//
+//				Assert.isTrue(res.getError().size() == 0, "PayPalService.payToShipper.error.payPalError");
+//
+//			}
+//		}
 	}
 	
 	public void refundToSender(int feePaymentID)
@@ -174,31 +184,31 @@ public class PayPalService {
 
 		PayPalObject po = this.findByFeePaymentId(feePaymentID);
 
-		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId());
-
-		// Actualmente no tenemos permsisos por parte de PayPal para devolver
-		// una transacción ya pagada al usuario final
-		// por lo que ese podría ser el error
-
-		Receiver rec1 = null;
-		Receiver rec2 = null;
-
-		if (!payObject.getPaymentInfoList().getPaymentInfo().isEmpty()) {
-			rec1 = payObject.getPaymentInfoList().getPaymentInfo().get(0).getReceiver();
-		}
-
-		if (payObject.getPaymentInfoList().getPaymentInfo().size() > 1) {
-			rec2 = payObject.getPaymentInfoList().getPaymentInfo().get(1).getReceiver();
-		}
-
-		res = PayPal.refundAdaptiveTransaction(po.getTrackingId(), rec1, rec2);
-
-		if (res.getError().size() != 0) {
-			log.error(res.getError().get(0).getMessage());
-
-			Assert.isTrue(res.getError().size() == 0, "PayPalService.refundToSender.error.payPalError");
-
-		}
+//		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId(), po);
+//
+//		// Actualmente no tenemos permsisos por parte de PayPal para devolver
+//		// una transacción ya pagada al usuario final
+//		// por lo que ese podría ser el error
+//
+//		Receiver rec1 = null;
+//		Receiver rec2 = null;
+//
+//		if (!payObject.getPaymentInfoList().getPaymentInfo().isEmpty()) {
+//			rec1 = payObject.getPaymentInfoList().getPaymentInfo().get(0).getReceiver();
+//		}
+//
+//		if (payObject.getPaymentInfoList().getPaymentInfo().size() > 1) {
+//			rec2 = payObject.getPaymentInfoList().getPaymentInfo().get(1).getReceiver();
+//		}
+//
+//		res = PayPal.refundAdaptiveTransaction(po.getTrackingId(), rec1, rec2);
+//
+//		if (res.getError().size() != 0) {
+//			log.error(res.getError().get(0).getMessage());
+//
+//			Assert.isTrue(res.getError().size() == 0, "PayPalService.refundToSender.error.payPalError");
+//
+//		}
 
 	}
 
@@ -227,6 +237,22 @@ public class PayPalService {
 		return result;
 	}
 	
+	public Collection<PayPalObject> findByRouteId(int routeId) {
+		Collection<PayPalObject> result;
+		
+		result = payPalRepository.findByRouteId(routeId);
+		
+		return result;
+	}
+	
+	public Collection<PayPalObject> findByShipmentId(int shipmentId) {
+		Collection<PayPalObject> result;
+		
+		result = payPalRepository.findByShipmentId(shipmentId);
+		
+		return result;
+	}
+	
 	public String generateTrackingId() {
 		String CARACTERES = PayPalConfig.CHARACTERS_TRACKING_ID;
 		StringBuilder salt = new StringBuilder();
@@ -244,5 +270,17 @@ public class PayPalService {
 		}
 		return saltStr;
 
+	}
+	
+	public void delete(int payPalObjectId){
+		
+		PayPalObject po = this.findOne(payPalObjectId);
+		
+		Assert.notNull(po); //PayPalObject not found
+		Assert.isTrue(po.getPayStatus().equals("CREATED"), ""); // Only permitted cancel with paypalStatus created
+		Assert.isTrue(po.getFeePayment().getPurchaser().equals(userService.findByPrincipal())); // Only permitted cancel by purchaser
+
+
+		payPalRepository.delete(payPalObjectId);
 	}
 }

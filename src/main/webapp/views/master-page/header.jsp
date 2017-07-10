@@ -20,6 +20,18 @@
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.navbar-collapse {
+  max-height: none ! important;
+}
+
+
+.acortar{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	
+}
 </style>
 
 	<!-- Fixed navbar -->
@@ -49,7 +61,7 @@
 			</div>
 			<div class="navbar-collapse collapse navbar-right">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href=""><spring:message
+					<li><a href=""><spring:message
 								code="master.page.home" /></a></li>
 					<security:authorize access="isAnonymous()">			
 						<li><a href="about/info.do"><spring:message
@@ -93,13 +105,13 @@
 									code="master.page.complaints" /><b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="complaint/administrator/list.do?type=${serious}&page=1"><jstl:out
+									href="complaint/administrator/list.do?type=Serious&page=1"><jstl:out
 											value="${serious}" /></a></li>
 								<li><a
-									href="complaint/administrator/list.do?type=${mild}&page=1"><jstl:out
+									href="complaint/administrator/list.do?type=Mild&page=1"><jstl:out
 											value="${mild}" /></a></li>
 								<li><a
-									href="complaint/administrator/list.do?type=${omitted}&page=1"><jstl:out
+									href="complaint/administrator/list.do?type=Omitted&page=1"><jstl:out
 											value="${omitted}" /></a></li>
 							</ul></li>
 							
@@ -111,13 +123,13 @@
 									code="master.page.feepayments" /><b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="feepayment/administrator/list.do?type=${accepted}&page=1"><jstl:out
+									href="feepayment/administrator/list.do?type=Accepted&page=1"><jstl:out
 											value="${accepted}" /></a></li>
 								<li><a
-									href="feepayment/administrator/list.do?type=${pending}&page=1"><jstl:out
+									href="feepayment/administrator/list.do?type=Pending&page=1"><jstl:out
 											value="${pending}" /></a></li>
 								<li><a
-									href="feepayment/administrator/list.do?type=${rejected}&page=1"><jstl:out
+									href="feepayment/administrator/list.do?type=Rejected&page=1"><jstl:out
 											value="${rejected}" /></a></li>
 							</ul></li>
 							
@@ -140,11 +152,11 @@
 						</li>
 						<li class="dropdown"><a href="#" class="fNiv dropdown-toggle"
 							data-toggle="dropdown"><spring:message
-									code="master.page.profile" /> (<security:authentication
-									property="principal.username" />)<b class="caret"></b></a>
+									code="master.page.profile" /><b class="caret"></b></a>
 							<ul class="dropdown-menu">
+									<li style="text-align:center"><div class="acortar" style="color: #00b3fe;font-weight: 700;font-size: 16px;"><security:authentication
+									property="principal.username" /></div><hr style="margin-top: 0px;margin-bottom: 0px;border: 0;border-top: 1px solid #eee;"></li>
 								<security:authorize access="hasRole('USER')">
-							
 									<li><a href="user/profile.do"><spring:message
 												code="master.page.info" /></a></li>
 									<li><a href="feepayment/user/list.do?page=1"><spring:message
@@ -184,7 +196,11 @@
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-
+				<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center"><spring:message
+											code="master.page.feedback.header" /></h4>
+      </div>
 				<div class="modal-body" style="height: 700px; padding: 0px;">
 					<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdVn-PiNkXWEMqI36uj_qnB5Lc5jL-4BSxkxuHC0eadYQLG2g/viewform?embedded=true" width="100%" height="100%">Cargando...</iframe>
 
@@ -203,3 +219,14 @@
         </div>
 
 
+<script >
+$(document).ready(function () {
+    var page = window.location;
+    $('ul.nav a[href="'+ page +'"]').parentsUntil( ".ul.nav" ).addClass('active');
+    $('ul.nav a').filter(function() {
+         return this.href == page;
+    }).parentsUntil( ".ul.nav" ).addClass('active');
+});
+
+
+</script>

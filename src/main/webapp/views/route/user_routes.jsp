@@ -12,6 +12,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<jsp:useBean id="javaMethods" class="utilities.ViewsMethods" />
+
+
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script type="text/javascript" src="scripts/moment.min.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
@@ -57,7 +60,7 @@
 	<div class="container">
 		<div class="row">
 			<h3>
-				<spring:message code="routes.from" /><jstl:out value="${user.name}" />
+				<spring:message code="routes.from" /><a href="user/profile.do?userId=${user.id}"><jstl:out value="${user.name}" /></a>
 			</h3>
 		</div>
 		<!-- /row -->
@@ -91,13 +94,13 @@
 				<div class="profile-userbuttons">
 				
 					<button type="button" class="btn button-view btn-sm"
-						onclick="location.href = 'user/profile.do?userId=${routeId}';">
+						onclick="location.href = 'user/profile.do?userId=${user.id}';">
 						<spring:message code="user.view" />
 					</button>
 					
 					<jstl:if test="${(user.id != routeId) && routeId != 0 && (user.id != currentUser.id)}">
 						<button type="button" class="btn button-delete-lax btn-sm"
-							onclick="location.href = 'complaint/user/create.do?userId=${routeId}';">
+							onclick="location.href = 'complaint/user/create.do?userId=${user.id}';">
 							<spring:message code="user.report" />
 						</button>
 					</jstl:if>
@@ -107,6 +110,21 @@
 
 		</div>
 		<div class="col-md-9" >
+			<jstl:if test="${(user.id == currentUser.id) || (user.id == routeId)}">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
+					style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
+					<div class="text-center profile-userbuttons">
+						<button class="btn button-view" style="font-size: 20px;"
+							onclick="location.href = 'route/user/create.do';">
+							<span class="fa fa-plus-circle"></span>
+							<spring:message code="route.create" />
+						</button>
+					</div>
+				</div>
+			</div>
+			</jstl:if>
+						
 			<div class="profile-content">
 
 				<div class="panel panel-default">
@@ -155,11 +173,12 @@
 																		</h4>
 																	</div>
 
-																	<a><i
-																		class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
-
-																	<i class="glyphicon glyphicon-sort"></i> <a> <i
-																		class="glyphicon glyphicon-map-marker img-destination"></i>${route.destination}
+																	<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(route.origin)}"><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}</a>
+											
+																	<i class="glyphicon glyphicon-sort"></i>
+											
+																	<a target="_blank" href="https://maps.google.com/maps?q=${javaMethods.normalizeUrl(route.destination)}"> <i
+																	class="glyphicon glyphicon-map-marker img-destination"></i>${route.destination}
 																	</a>
 
 																</div>
@@ -167,14 +186,14 @@
 
 
 
-																<i class="glyphicon glyphicon-plane"></i>
+																<i class="glyphicon glyphicon-time"></i>
 																<spring:message code="route.departureTime" />
 																:
 																<fmt:formatDate value="${route.departureTime}"
 																	pattern="dd/MM/yyyy '-' HH:mm" />
 
 
-																<br /> <i class="glyphicon glyphicon-plane"></i>
+																<br /> <i class="glyphicon glyphicon-time"></i>
 																<spring:message code="route.arriveTime" />
 																:
 																<fmt:formatDate value="${route.arriveTime}"
@@ -203,9 +222,9 @@
 											</jstl:forEach>
 										</jstl:when>
 										<jstl:otherwise>
-											<p>
-												<spring:message code="shipment.results" />
-											</p>
+											<div class="alert alert-info">
+												<strong><spring:message code="route.results" /></strong>
+											</div>
 										</jstl:otherwise>
 									</jstl:choose>
 								</tbody>
@@ -223,13 +242,13 @@
 
 		</div>
 
-		<div id="pagination" class="copyright">
+		<div id="pagination" class="copyright pagination-center">
 		
 			<script>
 				$('#pagination').bootpag({
 					total : <jstl:out value="${total_pages}"></jstl:out>,
 					page : <jstl:out value="${p}"></jstl:out>,
-					maxVisible : 5,
+					maxVisible : 3,
 					leaps : true,
 					firstLastUse : true,
 					first : '<',

@@ -20,6 +20,6 @@ public class AbstractController {
 		log.error("Exception: ", oops);
 
 		return result;
-	}	
+	}
 
 }

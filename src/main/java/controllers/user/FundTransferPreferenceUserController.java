@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,8 +55,8 @@ public class FundTransferPreferenceUserController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid FundTransferPreferenceForm form, BindingResult binding) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "savePaypal")
+	public ModelAndView savePaypal(@Valid FundTransferPreferenceForm form, BindingResult binding) {
 		ModelAndView result;
 		String messageError;
 		User user;
@@ -63,18 +64,77 @@ public class FundTransferPreferenceUserController extends AbstractController {
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(form);
 		} else {
-			try {
-				user = fundTransferPreferenceFormService.reconstruct(form);
-				userService.save(user);
-				
-				result = new ModelAndView("redirect:../../user/profile.do");
-			} catch (Throwable oops) {
-				log.error(oops.getMessage());
-				messageError = "fundTransferPreference.commit.error";
-				if(oops.getMessage().contains("message.error")){
-					messageError=oops.getMessage();
+			if (userService.IBANBICValidator(form.getIBAN(), form.getBIC())){
+				try {
+					if(form.getPaypalEmail() != null && form.getPaypalEmail().equals("")){
+						Assert.isTrue(false,"message.error.fundTransferPreference.fillPayPal");
+					}
+					
+					user = fundTransferPreferenceFormService.reconstruct(form);
+					userService.save(user);
+					
+					result = new ModelAndView("redirect:../../user/profile.do");
+				} catch (Throwable oops) {
+					log.error(oops.getMessage());
+					messageError = "fundTransferPreference.commit.error";
+					if(oops.getMessage().contains("message.error")){
+						messageError=oops.getMessage();
+					}
+					result = createEditModelAndView(form, messageError);				
 				}
-				result = createEditModelAndView(form, messageError);				
+			}else{
+				if(form.getIBAN().contains(" ")){
+					messageError = "message.error.fundTransferPreference.ibanbic.blankspace.error";
+				}else{
+					messageError = "message.error.fundTransferPreference.ibanbic.error";
+				}
+				
+				result = createEditModelAndView(form, messageError);
+			}
+		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveBankAccount")
+	public ModelAndView saveBankAccount(@Valid FundTransferPreferenceForm form, BindingResult binding) {
+		ModelAndView result;
+		String messageError;
+		User user;
+
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(form);
+		} else {
+			if (userService.IBANBICValidator(form.getIBAN(), form.getBIC())){
+				try {
+					if((form.getCountry() != null && form.getCountry().equals("")) ||
+							(form.getAccountHolder() != null && form.getAccountHolder().equals("")) ||
+							(form.getBankName() != null && form.getBankName().equals("")) ||
+							(form.getIBAN() != null && form.getIBAN().equals("")) ||
+							(form.getBIC() != null && form.getBIC().equals(""))) {
+						Assert.isTrue(false,"message.error.fundTransferPreference.fillBankAccount");
+					}
+					
+					user = fundTransferPreferenceFormService.reconstruct(form);
+					userService.save(user);
+					
+					result = new ModelAndView("redirect:../../user/profile.do");
+				} catch (Throwable oops) {
+					log.error(oops.getMessage());
+					messageError = "fundTransferPreference.commit.error";
+					if(oops.getMessage().contains("message.error")){
+						messageError=oops.getMessage();
+					}
+					result = createEditModelAndView(form, messageError);				
+				}
+			}else{
+				if(form.getIBAN().contains(" ")){
+					messageError = "message.error.fundTransferPreference.ibanbic.blankspace.error";
+				}else{
+					messageError = "message.error.fundTransferPreference.ibanbic.error";
+				}
+				
+				result = createEditModelAndView(form, messageError);
 			}
 		}
 

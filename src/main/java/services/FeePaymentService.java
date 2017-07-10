@@ -116,7 +116,8 @@ public class FeePaymentService {
 			feePayment.setPurchaser(user);
 			feePayment.setPaymentMoment(new Date());
 			// feePayment.setType("Pending");
-			feePayment.setCommission(Math.round((feePayment.getAmount()/15) * 100) / 100);
+			
+			feePayment.setCommission(Math.round((feePayment.getAmount()/15) * 100) / 100.0);
 			
 			feePayment = feePaymentRepository.save(feePayment);
 			
@@ -133,7 +134,7 @@ public class FeePaymentService {
 			feePayment = feePaymentRepository.save(feePaymentPreSave);
 		}
 		
-		feePayment.setIsPayed(po != null || feePayment.getCreditCard() != null);
+		feePayment.setIsPayed((po != null && po.getPayStatus().equals("COMPLETED")) || feePayment.getCreditCard() != null);
 
 		return feePayment;
 	}
@@ -229,11 +230,33 @@ public class FeePaymentService {
 		
 		return result;
 	}
+	
+	public void cancelPaymentInProgress(int feePaymentId){
+		FeePayment feePayment = this.findOne(feePaymentId);
+		PayPalObject po = payPalService.findByFeePaymentId(feePaymentId);
+		int routeOfferId = -1;
+		
+		Assert.notNull(feePayment); //FeePayment not found
+		
+		Assert.isTrue(!feePayment.getIsPayed(), "message.error.feePayment.notPayed"); // Only permitted cancel not Payed
+		Assert.notNull(po); // Only permitted cancel with PayPal
+		Assert.isTrue(feePayment.getPurchaser().equals(userService.findByPrincipal())); // Only permitted cancel by purchaser
+		
+		if (feePayment.getRouteOffer() != null)
+			routeOfferId = feePayment.getRouteOffer().getId();
+		
+		
+		payPalService.delete(po.getId());
+		feePaymentRepository.delete(feePaymentId);
+		
+		if (routeOfferId > 0)
+			routeOfferService.delete(routeOfferId);
+	}
 
 	// Other business methods -------------------------------------------------
 	
 	
-	public FeePayment createAndSave(int type, int id, int sizePriceId, double amount, String description){
+	public FeePayment createAndSave(int type, int id, int sizePriceId, double amount, String description, int shipmentId){
 		FeePayment res;
 		RouteOffer ro;
 		ShipmentOffer so;
@@ -258,7 +281,7 @@ public class FeePaymentService {
 			break;
 			
 		case 2:
-			ro = routeOfferService.create(id);
+			ro = routeOfferService.create(id, shipmentId);
 			ro.setAmount(amount);
 			ro.setDescription(description);
 			

@@ -1,6 +1,8 @@
 package controllers.user;
 
 
+import java.net.URLDecoder;
+import java.time.LocalDateTime;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -9,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,18 +59,22 @@ public class FeePaymentUserController extends AbstractController {
 		Integer allPending;
 		Integer allDenied;
 		Pageable pageable;
-		
-		pageable = new PageRequest(page - 1, 5);
+		String feePaymentsType;
+
+		pageable = new PageRequest(page - 1, 3);
 		allAccepted = (int) feePaymentService.findAllAcceptedByUser(pageable).getTotalElements();
 		allPending = (int) feePaymentService.findAllPendingByUser(pageable).getTotalElements();
 		allDenied = (int) feePaymentService.findAllRejectedByUser(pageable).getTotalElements();
 
 		if(type.equals("Rejected") || type.equals("Rechazados")) {
 			items = feePaymentService.findAllRejectedByUser(pageable);
+			feePaymentsType="Rejected";
 		} else if(type.equals("Pending") || type.equals("Pendientes")) {
 			items = feePaymentService.findAllPendingByUser(pageable);
+			feePaymentsType="Pending";
 		} else {   // if (type.equals("Accepted")) {
 			items = feePaymentService.findAllAcceptedByUser(pageable);
+			feePaymentsType="Accepted";
 		}
 		
 		result = new ModelAndView("feepayment/list");
@@ -77,6 +84,8 @@ public class FeePaymentUserController extends AbstractController {
 		result.addObject("allDenied", allDenied);
 		result.addObject("p", page);
 		result.addObject("total_pages", items.getTotalPages());
+		result.addObject("feePaymentsType", feePaymentsType);
+		result.addObject("urlPage", "feepayment/user/list.do?type="+feePaymentsType+"&page=");
 
 		return result;
 	}
@@ -86,12 +95,12 @@ public class FeePaymentUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int type, @RequestParam int id,
 			@RequestParam (required=false, defaultValue="0") Integer sizePriceId, @RequestParam (required=false, defaultValue = "0") Double amount,
-			@RequestParam (required=false) String description) {
+			@RequestParam (required=false) String description, @RequestParam (required=false, defaultValue="0") Integer shipmentId) {
 		
 		ModelAndView result;
 		FeePaymentForm feePaymentForm;
 
-		feePaymentForm = feePaymentFormService.create(type, id, sizePriceId, amount, description);
+		feePaymentForm = feePaymentFormService.create(type, id, sizePriceId, amount, description, shipmentId);
 		result = createEditModelAndView(feePaymentForm);
 
 		return result;
@@ -135,7 +144,15 @@ public class FeePaymentUserController extends AbstractController {
 				result = new ModelAndView(redirect+feePaymentForm.getId());
 			} catch (Throwable oops) {
 				log.error(oops);
-				result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");
+				LocalDateTime now = LocalDateTime.now();
+				if(feePaymentForm.getCreditCard().getExpirationMonth() < now.getMonthValue() &&
+						feePaymentForm.getCreditCard().getExpirationYear() == now.getYear()){
+					System.out.println(now.getMonthValue());
+					result = createEditModelAndView(feePaymentForm, "feePayment.commit.error.month");
+				}else{
+					result = createEditModelAndView(feePaymentForm, "feePayment.commit.error");
+				}
+				
 			}
 		}
 
@@ -169,6 +186,35 @@ public class FeePaymentUserController extends AbstractController {
 			result = new ModelAndView("redirect:list.do?page=1&message=error");
 		}
 
+		return result;
+	}
+	
+	@RequestMapping(value = "/cancelPaymentInProgress", method = RequestMethod.GET)
+	public ModelAndView cancelPaymentInProgress(@RequestParam int feePaymentId){
+		ModelAndView result;
+		String messageError;
+		
+		FeePayment feePayment = feePaymentService.findOne(feePaymentId);
+		
+		try{
+			Assert.notNull(feePayment);
+			
+			if(feePayment.getShipmentOffer() != null){
+				result = new ModelAndView("redirect:../../shipmentOffer/user/list.do?shipmentId=" + feePayment.getShipmentOffer().getShipment().getId());
+			}else{
+				result = new ModelAndView("redirect:../../routeOffer/user/list.do?routeId=" + feePayment.getRouteOffer().getRoute().getId());
+			}
+			feePaymentService.cancelPaymentInProgress(feePaymentId);
+			
+		}catch(Throwable oops){
+			log.error(oops.getMessage());
+			messageError = "shipmentOffer.commit.error";
+			if(oops.getMessage().contains("message.error")){
+				messageError = oops.getMessage();
+			}
+			result = new ModelAndView("redirect:/?message=" + messageError);
+		}
+		
 		return result;
 	}
 	

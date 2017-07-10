@@ -1,6 +1,7 @@
 package controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Route;
+import domain.RouteOffer;
+import domain.Shipment;
 import domain.SizePrice;
 import domain.User;
 import services.ActorService;
+import services.RouteOfferService;
 import services.RouteService;
+import services.ShipmentService;
 import services.SizePriceService;
 import services.UserService;
 
@@ -40,6 +45,12 @@ public class RouteController extends AbstractController {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private RouteOfferService routeOfferService;
+	
+	@Autowired
+	private ShipmentService shipmentService;
 	// Constructors -----------------------------------------------------------
 	
 	public RouteController() {
@@ -55,6 +66,14 @@ public class RouteController extends AbstractController {
 		ModelAndView result;
 		Page<Route> routes;
 		Pageable pageable;
+		
+		if (itemSize != null && itemSize.equals("")){
+			itemSize=null;
+		}
+		
+		if (hour != null && hour.equals("")){
+			hour=null;
+		}
 
 		pageable = new PageRequest(page - 1, 5);
 		
@@ -64,6 +83,10 @@ public class RouteController extends AbstractController {
 		result.addObject("routes", routes.getContent());
 		result.addObject("origin", origin);
 		result.addObject("destination", destination);
+		result.addObject("form_date", date);
+		result.addObject("form_hour", hour);
+		result.addObject("form_envelope", envelope);
+		result.addObject("form_itemSize", itemSize);
 		result.addObject("p", page);
 		result.addObject("total_pages", routes.getTotalPages());
 		
@@ -92,10 +115,10 @@ public class RouteController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView seeThread(@RequestParam int routeId) {
+	public ModelAndView seeThread(@RequestParam int routeId, @RequestParam(required=false, defaultValue="1") int page) {
 		ModelAndView result;
 		
-		result = createListModelAndView(routeId);
+		result = createListModelAndView(routeId, page);
 		
 		return result;
 
@@ -117,7 +140,7 @@ public class RouteController extends AbstractController {
 		user = userService.findOne(userId);
 		currentUser = null;
 		
-		if(actorService.checkLogin()){
+		if(actorService.checkAuthority("USER")){
 			currentUser = userService.findByPrincipal();
 		}
 				
@@ -131,20 +154,37 @@ public class RouteController extends AbstractController {
 		return result;
 	}		
 	
-	private ModelAndView createListModelAndView(int routeId){
+	private ModelAndView createListModelAndView(int routeId, @RequestParam(required=false, defaultValue="1") int page){
 		ModelAndView result;
 		Route route;
 		Collection<SizePrice> sizePrices;
+		Collection<RouteOffer> routeOffers;
 		User currentUser;
+		Boolean routeOffersIsEmpty;
+		Page<Shipment> shipmentsPage;
+		Pageable pageable;
+		Collection<Shipment> shipments;
 		
 		route = routeService.findOne(routeId);
 		sizePrices = sizePriceService.findAllByRouteId(routeId);
 		currentUser = null;
+		routeOffersIsEmpty = false;
+		shipments = new ArrayList<Shipment>();
+		
+		routeOffers = routeOfferService.findAllByRouteId(routeId);
+		
+		if(routeOffers.isEmpty()) {
+			routeOffersIsEmpty = true;
+		}
 		
 		if(actorService.checkAuthority("ADMIN")){
 			currentUser = userService.findOne(route.getCreator().getId());
-		}else if (actorService.checkLogin()){
+		}else if (actorService.checkAuthority("USER")){
 			currentUser = userService.findByPrincipal();
+			
+			pageable = new PageRequest(page - 1, 5);
+			shipmentsPage = shipmentService.findAllAvailableByCurrentUser(pageable);
+			shipments = shipmentsPage.getContent();
 		}
 		
 		String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(route.getDepartureTime());
@@ -162,6 +202,8 @@ public class RouteController extends AbstractController {
 		result.addObject("arriveTime_hour", arriveTimeHour);
 		result.addObject("sizePrices", sizePrices);
 		result.addObject("user", currentUser);
+		result.addObject("routeOffersIsEmpty", routeOffersIsEmpty);
+		result.addObject("shipments", shipments);
 		
 		return result;
 	}

@@ -55,6 +55,7 @@ public class ShipmentFormService {
 	public Shipment reconstruct(ShipmentForm shipmentForm) {
 		Shipment result;
 		Date departureTime, maximumArriveTime;
+		String exceptionMessage = "message.error.imageUpload.notNull";
 		
 		departureTime = null;
 		maximumArriveTime = null;
@@ -75,6 +76,7 @@ public class ShipmentFormService {
 				log.trace("ruta extraida de variable del entorno:" + ServerConfig.getPATH_UPLOAD());
 				imageName = ImageUpload.subirImagen(shipmentForm.getImagen(),ServerConfig.getPATH_UPLOAD());
 			} catch (Exception e) {
+				exceptionMessage = e.getMessage();
 				log.error(e.getMessage());
 			}
 			
@@ -83,19 +85,32 @@ public class ShipmentFormService {
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			Assert.notNull(imageName,"message.error.imageUpload.notNull");
+			Assert.notNull(imageName, exceptionMessage);
 			result.setItemPicture(ServerConfig.getURL_IMAGE()+imageName);
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);			
 		} else if(shipmentForm.getShipmentId() != 0) {			
 			result = shipmentService.findOne(shipmentForm.getShipmentId());
+			
+			if(shipmentForm.getImagen().getSize() > 0){
+				String imageName = null;
+				try {
+					log.trace("ruta extraida de variable del entorno:" + ServerConfig.getPATH_UPLOAD());
+					imageName = ImageUpload.subirImagen(shipmentForm.getImagen(),ServerConfig.getPATH_UPLOAD());
+				} catch (Exception e) {
+					exceptionMessage = e.getMessage();
+					log.error(e.getMessage());
+				}
+				Assert.notNull(imageName, exceptionMessage);
+				result.setItemPicture(ServerConfig.getURL_IMAGE()+imageName);
+			}
+			
 			result.setOrigin(shipmentForm.getOrigin());
 			result.setDestination(shipmentForm.getDestination());
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
 			result.setItemName(shipmentForm.getItemName());
-			result.setItemPicture(ServerConfig.getURL_IMAGE()+shipmentForm.getImagen().getName());
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);
@@ -126,7 +141,7 @@ public class ShipmentFormService {
 		result.setOrigin(shipment.getOrigin());
 		result.setDestination(shipment.getDestination());
 		result.setItemEnvelope(shipment.getItemEnvelope());
-		result.setPrice(shipment.getPrice());
+		result.setPrice(Math.round((shipment.getPrice()/1.15) * 100.0)/100.0);
 		result.setItemName(shipment.getItemName());
 		result.setItemSize(shipment.getItemSize());
 		result.setMaximumArriveTime(maximumArriveTime);

@@ -93,6 +93,8 @@
 
 
 <!-- Form -->
+<jstl:if test="${user.isVerified && user.fundTransferPreference != null}">
+
 <div class="container">
 	<div class="row formulario-sm">
 		<div class="alert alert-info">
@@ -119,8 +121,8 @@
 				<div class="col-md-6">
 					<div class="inner-addon left-addon input-price">
 						<i class="glyphicon glyphicon-euro"></i>
-						<form:input path="priceS" class="form-control" id="priceS" min="0"
-							step="0.10" type="number" />
+						<form:input path="priceS" class="form-control" id="priceS" min="0.01"
+							step="0.01" type="number" />
 					</div>
 					<form:errors class="error create-message-error" path="priceS" />
 				</div>
@@ -138,8 +140,8 @@
 						<div class="inner-addon left-addon input-price">
 
 							<i class="glyphicon glyphicon-euro"></i>
-							<form:input path="priceM" class="form-control" min="0"
-								step="0.10" type="number" id="priceM" />
+							<form:input path="priceM" class="form-control" min="0.01"
+								step="0.01" type="number" id="priceM" />
 						</div>
 						<form:errors class="error create-message-error" path="priceM" />
 					</div>
@@ -155,8 +157,8 @@
 				<div class="col-md-6">
 					<div class="inner-addon left-addon input-price">
 						<i class="glyphicon glyphicon-euro"></i>
-						<form:input path="priceL" class="form-control" id="priceL" min="0"
-							step="0.10" type="number" />
+						<form:input path="priceL" class="form-control" id="priceL" min="0.01"
+							step="0.01" type="number" />
 					</div>
 					<form:errors class="error create-message-error" path="priceL" />
 				</div>
@@ -174,7 +176,7 @@
 
 						<i class="glyphicon glyphicon-euro"></i>
 						<form:input path="priceXL" class="form-control" id="priceXL"
-							min="0" step="0.10" type="number" />
+							min="0.01" step="0.01" type="number" />
 					</div>
 
 					<form:errors class="error create-message-error" path="priceXL" />
@@ -183,20 +185,69 @@
 
 			<!-- Action buttons -->
 			<div class="text-center profile-userbuttons">
+			 	<div><a><spring:message code="master.page.comissions.must" /></a></div>
+				<br />
+				
+				<button name="save" class="btn button-cancel" onclick="goBack()">
+					<span class="glyphicon glyphicon-arrow-left"></span>
+					<spring:message code="route.edit.previous" />
+				</button>
+			
 				<button type="submit" name="save" class="btn  btn-primary">
 					<span class="glyphicon glyphicon-floppy-disk"></span>
 					<spring:message code="sizePrice.save" />
 				</button>
 
-				<jstl:if test="${sizePriceForm.sizePriceFormId != 0}">
-					<button type="submit" name="delete" class="btn btn-danger"
-					onclick="return confirm('<spring:message code="sizePrice.confirm.delete" />')">
-						<spring:message code="sizePrice.delete" />
-					</button>
-				</jstl:if>
 				<acme:cancel code="sizePrice.cancel" url="route/user/list.do" />
 			</div>
 		</form:form>
 
 	</div>
 </div>
+</jstl:if>
+
+<jstl:if test="${(!user.isVerified && (user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')) ||
+(!user.isVerified && (user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')) ||
+(user.fundTransferPreference == null)}">
+
+	<div class="" style="margin-top:25px">
+
+	</div>
+
+</jstl:if>
+
+
+<jstl:if test="${!user.isVerified && (user.phone == '' || user.dni == '' || user.photo == '' || user.dniPhoto == '')}">
+
+	<div class="container">
+		<div class="alert alert-info">
+			<strong><spring:message code="user.isVerified" />: <a href="user/user/edit.do" ><spring:message code="user.verify" /></a></strong>
+		</div>
+	</div>
+
+</jstl:if>
+<jstl:if test="${!user.isVerified && (user.phone != '' && user.dni != '' && user.photo != '' && user.dniPhoto != '')}">
+
+	<div class="container" >
+		<div class="alert alert-success">
+			<strong><spring:message code="user.notVerified.waiting" /></strong>
+		</div>
+	</div>
+
+</jstl:if>
+
+<jstl:if test="${user.fundTransferPreference == null}">
+
+	<div class="container">
+		<div class="alert alert-info">
+			<strong><spring:message code="message.error.shipmentOffer.fundTransferPreference" /> <spring:message code="message.error.shipmentOffer.fundTransferPreference.can" />: <a href="fundTransferPreference/user/edit.do" ><spring:message code="message.error.shipmentOffer.fundTransferPreference.edit" /></a></strong>
+		</div>
+	</div>
+
+	<br/>
+</jstl:if>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>

@@ -1,6 +1,8 @@
 package controllers.user;
 
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -17,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
+import controllers.ShipmentController;
 import domain.Shipment;
+import domain.ShipmentOffer;
 import domain.User;
 import domain.form.ShipmentForm;
+import services.ShipmentOfferService;
 import services.ShipmentService;
 import services.UserService;
 import services.form.ShipmentFormService;
@@ -40,6 +45,12 @@ public class ShipmentUserController extends AbstractController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ShipmentOfferService shipmentOfferService;
+	
+	@Autowired
+	private ShipmentController shipmentController;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -70,6 +81,7 @@ public class ShipmentUserController extends AbstractController {
 		result = new ModelAndView("shipment/user");
 		result.addObject("shipments", ownShipments.getContent());
 		result.addObject("user", currentUser);
+		result.addObject("currentUser", currentUser);
 		result.addObject("shipmentId", shipmentId);
 		result.addObject("p", page);
 		result.addObject("total_pages", ownShipments.getTotalPages());
@@ -113,6 +125,7 @@ public class ShipmentUserController extends AbstractController {
 	public ModelAndView save(@Valid ShipmentForm shipmentForm, BindingResult binding) {
 		ModelAndView result;
 		String messageError;
+		Collection<ShipmentOffer> shipmentOffers;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(shipmentForm);
@@ -121,6 +134,13 @@ public class ShipmentUserController extends AbstractController {
 				Shipment shipment;
 
 				shipment = shipmentFormService.reconstruct(shipmentForm);
+				
+				//Añadimos la comisión al precio
+				shipment.setPrice(Math.round((shipment.getPrice()*1.15) * 100.0)/100.0);
+				
+				shipmentOffers = shipmentOfferService.findAllByShipmentId(shipment.getId());
+				Assert.isTrue(shipmentOffers.isEmpty(), "message.error.shipment.edit");
+				
 				shipmentService.save(shipment);
 
 				result = new ModelAndView("redirect:list.do");
@@ -166,7 +186,8 @@ public class ShipmentUserController extends AbstractController {
 			if(oops.getMessage().contains("message.error")){
 				messageError = oops.getMessage();
 			}
-			result = createEditModelAndView(shipment, messageError);
+			result = shipmentController.createListModelAndView(shipment.getId());
+		    result.addObject("message", messageError);
 		}
 		
 		return result;		
@@ -182,13 +203,6 @@ public class ShipmentUserController extends AbstractController {
 		return result;
 	}	
 	
-	protected ModelAndView createEditModelAndView(Shipment shipment) {
-		ModelAndView result;
-
-		result = createEditModelAndView(shipment, null);
-		
-		return result;
-	}	
 	
 	protected ModelAndView createEditModelAndView(ShipmentForm shipmentForm, String message) {
 		ModelAndView result;
@@ -200,14 +214,6 @@ public class ShipmentUserController extends AbstractController {
 		return result;
 	}
 	
-	protected ModelAndView createEditModelAndView(Shipment shipment, String message) {
-		ModelAndView result;
-						
-		result = new ModelAndView("shipment/search");
-		result.addObject("shipment", shipment);
-		result.addObject("message", message);
 
-		return result;
-	}
 
 }

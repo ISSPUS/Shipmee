@@ -31,6 +31,7 @@ public class PayPalObject extends DomainEntity {
 	}
 
 	@NotBlank
+	// CREATED, COMPLETED, ...
 	public String getPayStatus() {
 		return payStatus;
 	}

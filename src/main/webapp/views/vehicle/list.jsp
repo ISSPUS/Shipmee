@@ -27,6 +27,7 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css"
 	type="text/css">
+<script async src="scripts/jquery.bootpag.min.js"></script>
 
 
 <style>
@@ -55,6 +56,7 @@
 .panel-default {
 	margin: 0 auto;
 	float: None;
+	margin-bottom: 1%;
 }
 
 .row-vehicle {
@@ -65,9 +67,11 @@
 	margin-top: 5%;
 	margin-bottom: 5%;
 }
-.caja{
-margin-bottom: 5%;
+.alerts-buttons{
+	margin-top: 32px;
+	margin-bottom: 5%;
 }
+
 @media ( min-width : 770px) {
 	.buttons-vehicle {
 		margin-top: 20%
@@ -90,7 +94,7 @@ margin-bottom: 5%;
 
 <div class="container caja">
 <div class="row">
-	<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
+	<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2" style="margin: 0 auto; float: none; margin-bottom: 2%; margin-top: 2%;">
 		<div class="text-center profile-userbuttons">
 			<button class="btn button-view" style="font-size: 20px;" onclick="location.href = 'vehicle/user/create.do';"><span class="fa fa-plus-circle"></span> <spring:message code="vehicle.add" /></button>
 			</div>
@@ -101,7 +105,7 @@ margin-bottom: 5%;
 	<jstl:choose>
 		<jstl:when test="${not empty vehicles}">
 			<jstl:forEach items="${vehicles}" var="vehicle">
-				<div class="row">
+				<div class="row" style="margin-right: 0px;">
 					<div
 						class=" col-xs-12 col-sm-10 col-md-6 col-lg-6 table-container panel panel-default">
 						<div class="row">
@@ -109,26 +113,26 @@ margin-bottom: 5%;
 								<img src="${vehicle.picture}" class="media-photo-shipment"
 									style="padding: 1%; margin-top: 10%" />
 							</div>
-							<div class="col-xs-7 col-sm-6 col-md-3">
+							<div class="col-xs-7 col-sm-6 col-md-6">
 
-								<div class="car-info">
+								<div class="car-info frontera">
 									<h4>
 										<a>${vehicle.brand}</a>
 									</h4>
 									<h5>
 										<spring:message code="vehicle.model" />
 										:
-										<jstl:out value="${vehicle.model}" />
+										<a><jstl:out value="${vehicle.model}" /></a>
 									</h5>
 									<h5>
 										<spring:message code="vehicle.color" />
 										:
-										<jstl:out value="${vehicle.color}" />
+										<a><jstl:out value="${vehicle.color}" /></a>
 									</h5>
 								</div>
 							</div>
 							
-							<div class="col-xs-12 col-sm-2 col-md-4 col-lg-3"
+							<div
 								style="text-align: center;">
 								<div class="text-center profile-userbuttons alerts-buttons">
 									<button class="btn button-ok" onclick="location.href = 'vehicle/user/edit.do?vehicleId=${vehicle.id}';">
@@ -146,10 +150,37 @@ margin-bottom: 5%;
 			</jstl:forEach>
 		</jstl:when>
 		<jstl:otherwise>
-			<p>
-				<spring:message code="vehicle.results" />
-			</p>
+			<div class="container" style="margin-top:25px">
+			<div class="alert alert-info">
+				<strong><spring:message code="vehicle.results" /></strong>
+			</div>
+			</div>
 		</jstl:otherwise>
 	</jstl:choose>
+</div>
+<div id="pagination" class="copyright" style="text-align: center;">
+
+	<script>
+		$('#pagination').bootpag({
+			total : <jstl:out value="${total_pages}"></jstl:out>,
+			page : <jstl:out value="${p}"></jstl:out>,
+			maxVisible : 3,
+			leaps : true,
+			firstLastUse : true,
+			first : '<',
+            last: '>',
+			wrapClass : 'pagination',
+			activeClass : 'active',
+			disabledClass : 'disabled',
+			nextClass : 'next',
+			prevClass : 'prev',
+			lastClass : 'last',
+			firstClass : 'first'
+		}).on('page', function(event, num) {
+			window.location.href = "${urlPage}" + num + "";
+			page = 1
+		});
+	</script>
+
 </div>
 

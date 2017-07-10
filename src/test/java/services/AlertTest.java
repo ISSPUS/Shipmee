@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -73,7 +75,8 @@ public class AlertTest extends AbstractTest {
 				savedAlert.getOrigin().equals(alert.getOrigin()) &&
 				savedAlert.getType().equals(alert.getType()) &&
 				savedAlert.getUser().getId() == userId);
-		Assert.isTrue(alertService.getAlertsByPrincipal().contains(savedAlert));
+		Pageable page = new PageRequest(0, Integer.MAX_VALUE);
+		Assert.isTrue(alertService.getAlertsByPrincipal(page).getContent().contains(savedAlert));
 		Assert.isTrue(previous.size() + 1 == alertRepository.findAll().size());
 	}
 	
@@ -143,8 +146,8 @@ public class AlertTest extends AbstractTest {
 		
 
 		userId = actorService.findByPrincipal().getId();
-		
-		alertsPage = alertService.getAlertsByPrincipal();
+		Pageable page = new PageRequest(0, Integer.MAX_VALUE);
+		alertsPage = alertService.getAlertsByPrincipal(page).getContent();
 		
 		for(Alert a:alertRepository.findAll()){
 			if(a.getUser().getId() == userId){
@@ -171,8 +174,8 @@ public class AlertTest extends AbstractTest {
 		
 
 		userId = actorService.findByPrincipal().getId();
-		
-		alertsPage = alertService.getAlertsByPrincipal();
+		Pageable page = new PageRequest(0, Integer.MAX_VALUE);
+		alertsPage = alertService.getAlertsByPrincipal(page).getContent();
 		
 		for(Alert a:alertRepository.findAll()){
 			if(a.getUser().getId() == userId){
@@ -199,8 +202,9 @@ public class AlertTest extends AbstractTest {
 		
 
 		userId = actorService.findByPrincipal().getId();
-		
-		alertsPage = alertService.getAlertsByPrincipal();
+		Pageable page = new PageRequest(0, Integer.MAX_VALUE);
+
+		alertsPage = alertService.getAlertsByPrincipal(page).getContent();
 		
 		for(Alert a:alertRepository.findAll()){
 			if(a.getUser().getId() == userId){
@@ -218,8 +222,9 @@ public class AlertTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void alertListNegative1() {
 		authenticate("admin");
-	
-		alertService.getAlertsByPrincipal();
+		Pageable page = new PageRequest(0, Integer.MAX_VALUE);
+
+		alertService.getAlertsByPrincipal(page).getContent();
 	}
 	
 	/**
@@ -228,8 +233,9 @@ public class AlertTest extends AbstractTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void alertListNegative2() {
-			
-		alertService.getAlertsByPrincipal();
+		Pageable page = new PageRequest(0, Integer.MAX_VALUE);
+
+		alertService.getAlertsByPrincipal(page).getContent();
 				
 	}
 	
@@ -248,7 +254,8 @@ public class AlertTest extends AbstractTest {
 		alertService.delete(alert);
 		
 		Assert.isTrue(!alertRepository.findAll().contains(alert));
-		Assert.isTrue(!alertService.getAlertsByPrincipal().contains(alert));
+		Pageable page = new PageRequest(0, Integer.MAX_VALUE);
+		Assert.isTrue(!alertService.getAlertsByPrincipal(page).getContent().contains(alert));
 		Assert.isTrue(previous.size() - 1 == alertRepository.findAll().size());
 	}
 	

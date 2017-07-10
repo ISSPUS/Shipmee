@@ -74,7 +74,9 @@
 						<spring:message code="message.recipient"/>
 					</form:label>
 					<div class="col-md-8">
-						<form:input path="recipient" class="form-control" id="recipient"/>
+						<spring:message code="message.placeholder.recipient" var="pRecipient"/>
+						
+						<form:input path="recipient" class="form-control" id="recipient" required="required" placeholder="${pRecipient}" />
 						<form:errors class="error create-message-error" path="recipient" />
 					</div>
 				</div>
@@ -86,7 +88,7 @@
 					</form:label>
 					<div class="col-md-8">
 						<form:input path="subject" class="form-control noresize"
-							id="subject" />
+							id="subject" required="required"/>
 						<form:errors class="error create-message-error" path="subject" />
 					</div>
 				</div>
@@ -96,7 +98,7 @@
 					</form:label>
 					<div class="col-md-8">
 						<form:textarea rows="3" path="body" class="form-control noresize"
-							id="body" />
+							id="body" required="required"/>
 						<form:errors class="error create-message-error" path="body" />
 					</div>
 				</div>
@@ -108,13 +110,13 @@
 					</div>
 				</jstl:if>
 
-				<div class="form-group" style="text-align: center;">
+				<div class="form-group text-center profile-userbuttons">
 					<div class="col-md-12">
 						<button type="submit" name="save" class="btn  btn-primary">
-							<span class="glyphicon glyphicon-floppy-disk"></span>
-							<spring:message code="route.save" />
+							<span class="glyphicon glyphicon-send"></span>
+							<spring:message code="message.send" />
 						</button>
-						<acme:cancel code="route.cancel" url="/message/actor/received.do?page=1" />
+						<acme:cancel code="message.cancel" url="/message/actor/received.do?page=1" />
 					</div>
 				</div>
 

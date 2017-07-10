@@ -1,11 +1,14 @@
 package services;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,9 +27,11 @@ import com.paypal.sdk.exceptions.OAuthException;
 import domain.PayPalObject;
 import domain.Route;
 import domain.RouteOffer;
+import domain.Shipment;
+import domain.SizePrice;
 import domain.User;
 import repositories.RouteOfferRepository;
-import utilities.ServerConfig;
+import utilities.PayPalConfig;
 
 @Service
 @Transactional
@@ -56,6 +61,18 @@ public class RouteOfferService {
 	
 	@Autowired
 	private PayPalService payPalService;
+	
+	@Autowired
+	private ShipmentService shipmentService;
+	
+	@Autowired
+	private SizePriceService sizePriceService;
+	
+	@Autowired
+	private MessageSource messageSource;
+	
+	@Autowired
+	private ShipmentOfferService shipmentOfferService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -65,15 +82,36 @@ public class RouteOfferService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public RouteOffer create(int routeId) {
+	public RouteOffer create(int routeId, int shipmentId) {
 		RouteOffer res;
 		Route route;
+		Shipment shipment;
+		Collection<SizePrice> sizePrices;
 
 		route = routeService.findOne(routeId);
 		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
 
 		res = new RouteOffer();
 		res.setRoute(route);
+		if(shipmentId != 0) {
+			shipment = shipmentService.findOne(shipmentId);
+			Assert.notNull(shipment, "message.error.shipmentOffer.shipment.mustExist");
+			
+			res.setShipment(shipment);
+			
+			sizePrices = sizePriceService.findAllByRouteId(routeId);
+			for(SizePrice sizePrice : sizePrices) {
+				if(sizePrice.getSize().equals(shipment.getItemSize())) {
+					if(sizePrice.getPrice() < shipment.getPrice()) {
+						res.setAmount(sizePrice.getPrice());
+					} else {
+						res.setAmount(shipment.getPrice());
+					}
+					break;
+				}
+			}
+		}
+		
 		res.setUser(userService.findByPrincipal());
 
 		return res;
@@ -85,7 +123,7 @@ public class RouteOfferService {
 		act = this.findOne(routeOfferId);
 		Assert.notNull(act, "message.error.routeOffer.mustExist");
 
-		res = this.create(act.getRoute().getId());
+		res = this.create(act.getRoute().getId(), act.getShipment().getId());
 		res.setAmount(act.getAmount());
 		res.setDescription(act.getDescription());
 
@@ -95,27 +133,50 @@ public class RouteOfferService {
 	public RouteOffer save(RouteOffer input) {
 		User actUser;
 		RouteOffer tmp;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String url;
 
 		Assert.notNull(input, "message.error.routeOffer.mustExist");
 
 		actUser = userService.findByPrincipal();
 
-		if (actUser.equals(input.getUser())) { // User that create route
+		if (actUser.equals(input.getUser())) { // User that put the offer
 			if (input.getId() != 0) {
 				tmp = this.findOne(input.getId());
 				Assert.notNull(tmp, "message.error.routeOffer.save.dontFindID");
 				Assert.isTrue(tmp.getUser().equals(actUser), "message.error.routeOffer.save.user.own");
-				Assert.isTrue(!tmp.getAcceptedByCarrier() && !tmp.getRejectedByCarrier(),
-						"message.error.routeOffer.notAcceptedOrRejected");
+				// Assert.isTrue(!tmp.getAcceptedByCarrier() && !tmp.getRejectedByCarrier(),
+				// 		"message.error.routeOffer.notAcceptedOrRejected"); // Not neccessary.
+				// Conflictive with autoDenyRelatedOffersNotAcceptedYet when accept from shipmentOffer 
+
 			} else {
-				tmp = this.create(input.getRoute().getId());
+				if(input.getShipment() != null) {
+					tmp = this.create(input.getRoute().getId(), input.getShipment().getId());
+				} else {
+					tmp = this.create(input.getRoute().getId(), 0);
+				}
+				
+				url = PayPalConfig.getUrlBase()+"/routeOffer/user/list.do?routeId="+input.getRoute().getId();
+
+				String[] args_body = {input.getRoute().getOrigin(), input.getRoute().getDestination(), dateFormat.format(input.getRoute().getDate()),url};
+				
+				messageService.sendMessage(actorService.findByUsername("shipmee"), input.getRoute().getCreator(),
+						messageSource.getMessage("route.offer.alert.subject", null, new Locale(input.getRoute().getCreator().getLocalePreferences())), 
+						messageSource.getMessage("route.offer.alert.body", args_body, new Locale(input.getRoute().getCreator().getLocalePreferences())));
 			}
 
 			tmp.setAmount(input.getAmount());
 			tmp.setDescription(input.getDescription());
+			tmp.setShipment(input.getShipment());
+			tmp.setRejectedByCarrier(input.getRejectedByCarrier());
+			
+			if(tmp.getShipment() != null) {
+				Assert.isTrue(actUser.getId() == tmp.getShipment().getCreator().getId());
+			}
+			
 		} else if (actUser.equals(input.getRoute().getCreator())) { // User that
-																	// put the
-																	// offer
+																	// create
+																	// the route
 			Assert.isTrue(input.getId() != 0, "service.routeOffer.save.ProposerCreating"); // The
 																							// routeCreator
 																							// can't
@@ -126,8 +187,9 @@ public class RouteOfferService {
 			tmp.setAcceptedByCarrier(input.getAcceptedByCarrier());
 			tmp.setRejectedByCarrier(input.getRejectedByCarrier());
 		} else {
-			Assert.isTrue(false, "routeOffer.commit.error");
-			return null;
+			tmp = routeOfferRepository.findOne(input.getId());
+			Assert.notNull(tmp, "message.error.routeOffer.save.dontFindID");
+			tmp.setRejectedByCarrier(input.getRejectedByCarrier());
 		}
 		Assert.isTrue(!tmp.getUser().equals(tmp.getRoute().getCreator()),
 				"message.error.routeOffer.equalCreatorAndProposer");
@@ -172,16 +234,8 @@ public class RouteOfferService {
 
 	public Collection<RouteOffer> findAllByRouteId(int routeId) {
 		Collection<RouteOffer> result;
-		User actUser;
-
-		actUser = userService.findByPrincipal();
 
 		result = routeOfferRepository.findAllByRouteId(routeId);
-
-		if (!result.isEmpty()) {
-			Assert.isTrue(result.iterator().next().getRoute().getCreator().equals(actUser),
-					"service.routeOffer.delete.notPermitted");
-		}
 
 		return result;
 	}
@@ -190,6 +244,14 @@ public class RouteOfferService {
 		Collection<RouteOffer> result;
 		
 		result = routeOfferRepository.findAllPendingByRouteId(routeId);
+		
+		return result;
+	}
+	
+	public Collection<RouteOffer> findAllPendingByShipmentId(int shipmentId){
+		Collection<RouteOffer> result;
+		
+		result = routeOfferRepository.findAllPendingByShipmentId(shipmentId);
 		
 		return result;
 	}
@@ -207,22 +269,37 @@ public class RouteOfferService {
 		
 		RouteOffer routeOffer = findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
+		Shipment shipment;
+		User user;
+		PayPalObject po;
+		
+		user = userService.findByPrincipal();
 		
 		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
-		Assert.isTrue(routeService.checkDates(route), "message.error.routeOffer.route.checkDates");
+		Assert.isTrue(routeService.checkFutureDepartureDate(route), "message.error.route.checkFutureDepartureDate");
+		Assert.isTrue(routeService.checkArriveTimeAfterDepartureDate(route), "message.error.route.checkArriveTimeAfterDepartureDate");
 		Assert.isTrue(route.getDepartureTime().after(new Date()), "message.error.routeOffer.route.departureTime.future");
 		Assert.isTrue(route.getArriveTime().after(new Date()), "message.error.routeOffer.route.arrivalTime.future");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.routeOffer.accept.user.own");
 		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
 		
-		if(!ServerConfig.getTesting()){
-			PayPalObject po = payPalService.findByRouteOfferId(routeOfferId);
-			Assert.isTrue(po == null || po.getPayStatus().equals("INCOMPLETE"), "message.error.routeOffer.tryToAcceptNotPayOffer");
-		}
+		po = payPalService.findByRouteOfferId(routeOfferId);
+		Assert.isTrue(po == null || po.getPayStatus().equals("COMPLETED"), "message.error.routeOffer.tryToAcceptNotPayOffer");
+
 		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "message.error.routeOffer.notAcceptedOrRejected");		
 		
 		routeOffer.setAcceptedByCarrier(true); // The offer is accepted.
 		routeOffer.setRejectedByCarrier(false); // The offer is not rejected.
+		
+		if(routeOffer.getShipment() != null) {
+			shipment = routeOffer.getShipment();
+			
+			shipment.setCarried(user);
+			shipment = shipmentService.save(shipment);
+			
+			shipmentOfferService.autoDenyRelatedOffersNotAcceptedYet(shipment.getId());
+		}
+		
 		save(routeOffer);
 		
 		/*
@@ -232,6 +309,7 @@ public class RouteOfferService {
 		messageService.autoMessageAcceptRouteOffer(routeOffer);
 		
 	}
+	
 	
 	/**
 	 * 
@@ -244,20 +322,28 @@ public class RouteOfferService {
 		Assert.isTrue(routeOfferId != 0, "message.error.routeOffer.mustExist");
 		Assert.isTrue(actorService.checkAuthority("USER"), "message.error.routeOffer.onlyUser");
 		
-		RouteOffer routeOffer = findOne(routeOfferId);
+		RouteOffer routeOffer = routeOfferRepository.findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
 		
-		Assert.notNull(route, "message.error.routeOffer.route.mustExist");
-		Assert.isTrue(routeService.checkDates(route), "message.error.routeOffer.route.checkDates");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "message.error.routeOffer.deny.user.own");
 		Assert.isTrue(route.getCreator().getIsVerified(), "message.error.must.verified");
 
 		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "message.error.routeOffer.notAcceptedOrRejected");
 
-		PayPalObject po = payPalService.findByRouteOfferId(routeOfferId);
+		this.internalDeny(routeOffer);
+	}
+	
+	public void internalDeny(RouteOffer routeOffer){
+		Assert.notNull(routeOffer);
+		
+		Assert.notNull(routeOffer.getRoute(), "message.error.routeOffer.route.mustExist");
+		Assert.isTrue(routeService.checkFutureDepartureDate(routeOffer.getRoute()), "message.error.route.checkFutureDepartureDate");
+		Assert.isTrue(routeService.checkArriveTimeAfterDepartureDate(routeOffer.getRoute()), "message.error.route.checkArriveTimeAfterDepartureDate");
 
-		if(!ServerConfig.getTesting() && po != null){
-			Assert.isTrue(po.getPayStatus().equals("INCOMPLETE"), "message.error.routeOffer.tryToAcceptNotPayOffer");
+		PayPalObject po = payPalService.findByRouteOfferId(routeOffer.getId());
+
+		if(po != null){
+			Assert.isTrue(po.getPayStatus().equals("COMPLETED"), "message.error.routeOffer.tryToAcceptNotPayOffer");
 			
 			try {
 				payPalService.refundToSender(po.getFeePayment().getId());
@@ -278,7 +364,6 @@ public class RouteOfferService {
 		 */
 		
 		messageService.autoMessageDenyRouteOffer(routeOffer);
-	
 	}
 	
 	// IDs could be <= 0 to ignore in the find

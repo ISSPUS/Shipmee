@@ -3,7 +3,6 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:useBean id="date" class="java.util.Date" />
-
 <style>
 
 .well-cookies {
@@ -43,8 +42,8 @@
 					</p>
 		 			
 		 			<div class="language text-sample">
-		 				<a id="es" href="?language=es"><img id="translate-flag" src="images/es.gif"/>Español</a> |
-						<a id="en" href="?language=en"><img id="translate-flag" src="images/en.gif"/>English</a>
+		 				<a id="es" href=""><img id="translate-flag" src="images/es.gif"/>Español</a> |
+						<a id="en" href=""><img id="translate-flag" src="images/en.gif"/>English</a>
 					</div>
 					
 		 		</div>
@@ -111,5 +110,24 @@
 	
 	if(getCookie("infoCookies")=="hide"){
 		hideInfoCookies();
+	}
+	
+	window.onload = function () {
+		var documentURL = document.URL.replace(/&language=e[sn]/gi,'');
+		documentURL = documentURL.replace(/\?language=e[sn]/gi,'?');
+		var append = '';
+		
+		if (documentURL.includes('?')) {
+			append = '&';
+		} else {
+			append = '?';
+		}
+		append = append + 'language=e';
+		
+		var es = document.getElementById('es');
+		es.href = documentURL + append + 's';
+	
+		var en = document.getElementById('en');
+		en.href = documentURL + append + 'n';
 	}
 </script>

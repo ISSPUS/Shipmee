@@ -11,6 +11,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -32,6 +35,7 @@ public abstract class Actor extends DomainEntity {
 	private String dni;
 	private String photo;
 	private String passwordResetToken;
+	private String localePreferences;
 	
 	@NotBlank
 	@NotNull
@@ -64,6 +68,7 @@ public abstract class Actor extends DomainEntity {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Past
 	@NotNull
 	public Date getBirthDate() {
 		return birthDate;
@@ -108,6 +113,19 @@ public abstract class Actor extends DomainEntity {
 		this.passwordResetToken = passwordResetToken;
 	}
 	
+	
+	@Pattern(regexp="^(es|en)$")
+	@NotNull
+	@NotBlank
+	public String getLocalePreferences() {
+		return localePreferences;
+	}
+	public void setLocalePreferences(String localePreferences) {
+		this.localePreferences = localePreferences;
+	}
+
+
+
 	// Relationships ----------------------------------------------------------
 	private UserAccount userAccount;
 

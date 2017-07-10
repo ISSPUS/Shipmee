@@ -179,7 +179,7 @@ input:valid ~ label {
 					<spring:message code="fundTransferPreference.sentence" />
 				</h3>
 			</div>
-			<div class="paymentWrap col-md-12" style="width: 25%;margin: 0 auto;float: none;">
+			<div class="paymentWrap col-md-4" style="margin: 0 auto;float: none;">
 
 
 				<div class="funkyradio">
@@ -213,7 +213,13 @@ input:valid ~ label {
 			style="margin: 0 auto; float: none;">
 			<form:form enctype="multipart/form-data"  action="fundTransferPreference/user/edit.do" modelAttribute="fundTransferPreferenceForm"
 				method="post" class="form-horizontal" role="form">
-
+				
+				<form:hidden path="country"/>
+				<form:hidden path="accountHolder"/>
+				<form:hidden path="bankName"/>
+				<form:hidden path="IBAN"/>
+				<form:hidden path="BIC"/>
+				
 				<div class="form-group">
 					<form:label path="paypalEmail" class="control-label col-md-2" for="paypalEmail">
 						<spring:message code="fundTransferPreference.paypalEmail" />
@@ -226,9 +232,9 @@ input:valid ~ label {
 				
 				<!-- Action buttons -->
 				<div class="form-group text-center profile-userbuttons">
-					<button type="submit" name="save" class="btn  btn-primary">
+					<button type="submit" name="savePaypal" class="btn  btn-primary">
 						<span class="glyphicon glyphicon-floppy-disk"></span>
-						<spring:message code="fundTransferPreference.save" />
+						<spring:message code="fundTransferPreference.save.paypal" />
 					</button>
 
 
@@ -243,15 +249,14 @@ input:valid ~ label {
 </div>
 <div id="div1" style="display:none;">
 
-
-
 <div class="container">
 	<div class="row formulario-sm">
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"
 			style="margin: 0 auto; float: none;">
 			<form:form enctype="multipart/form-data"  action="fundTransferPreference/user/edit.do" modelAttribute="fundTransferPreferenceForm"
 				method="post" class="form-horizontal" role="form">
-
+				<form:hidden path="paypalEmail"/>
+				
 				<div class="form-group">
 					<form:label path="country" class="control-label col-md-2" for="country">
 						<spring:message code="fundTransferPreference.country" />
@@ -306,9 +311,9 @@ input:valid ~ label {
 
 				<!-- Action buttons -->
 				<div class="form-group text-center profile-userbuttons">
-					<button type="submit" name="save" class="btn  btn-primary">
+					<button type="submit" name="saveBankAccount" class="btn  btn-primary">
 						<span class="glyphicon glyphicon-floppy-disk"></span>
-						<spring:message code="fundTransferPreference.save" />
+						<spring:message code="fundTransferPreference.save.creditCard" />
 					</button>
 
 

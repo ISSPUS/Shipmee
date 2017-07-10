@@ -1,6 +1,7 @@
 package domain.form;
 
 import javax.validation.Valid;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,6 +18,7 @@ public class FeePaymentForm {
 	private int sizePriceId;
 	private int offerId;
 	private int type;
+	private int shipmentId;
 
 	@Valid
 	public CreditCard getCreditCard() {
@@ -28,8 +30,8 @@ public class FeePaymentForm {
 	}
 
 	@NotNull
-	@Min(0)
 	@Digits(integer = 9, fraction = 2)
+	@DecimalMin("0.01")
 	@Valid
 	public double getAmount() {
 		return amount;
@@ -88,5 +90,15 @@ public class FeePaymentForm {
 		this.type = type;
 	}
 
+	@Min(0)
+	public int getShipmentId() {
+		return shipmentId;
+	}
+
+	public void setShipmentId(int shipmentId) {
+		this.shipmentId = shipmentId;
+	}
+
+	
 	
 }

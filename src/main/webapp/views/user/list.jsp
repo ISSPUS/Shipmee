@@ -53,6 +53,7 @@
 		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-body inbox-menu">
+					<div class="text-center" style="margin-bottom: 5%"><b><spring:message code="user.filter" />:</b></div>
 					<ul>
 						<li
 							<jstl:if test="${type eq 'verified'}">
@@ -61,7 +62,7 @@
 							</jstl:if>>
 							<a href="user/administrator/list.do?isVerified=1"><i
 								class="fa fa-check-circle" style="color: #3e87fb;"></i> <spring:message
-									code="users.verified" /> </a>
+									code="users.verified" /> <i style="color: #428bca; float: right;" class="glyphicon glyphicon-chevron-right"></i></a>
 						</li>
 
 											<li
@@ -71,7 +72,7 @@
 							</jstl:if>>
 							<a href="user/administrator/list.do?isVerified=0"><i
 								class="fa fa-times-circle" style="color:#a92424;"></i> <spring:message
-									code="users.noVerified" /> </a>
+									code="users.noVerified" /> <i style="color: #428bca; float: right;" class="glyphicon glyphicon-chevron-right"></i></a>
 						</li>
 						<li
 							<jstl:if test="${type eq 'moderator'}">
@@ -80,7 +81,7 @@
 							</jstl:if>>
 							<a href="user/administrator/list.do?isModerator=1"><i
 								class="fa fa-gavel" aria-hidden="true" style="color:#f95300;" ></i> <spring:message
-									code="users.moderator" /> </a>
+									code="users.moderator" /> <i style="color: #428bca; float: right;" class="glyphicon glyphicon-chevron-right"></i></a>
 						</li>
 						<li
 							<jstl:if test="${type eq 'nomoderator'}">
@@ -89,7 +90,7 @@
 							</jstl:if>>
 							<a href="user/administrator/list.do?isModerator=0"><i
 								class="fa fa-times-circle" aria-hidden="true" style="color:#f95300;" ></i> <spring:message
-									code="users.noModerator" /> </a>
+									code="users.noModerator" /> <i style="color: #428bca; float: right;" class="glyphicon glyphicon-chevron-right"></i></a>
 						</li>
 						<li
 							<jstl:if test="${type eq 'all'}">
@@ -98,7 +99,7 @@
 							</jstl:if>>
 							<a href="user/administrator/list.do"><i
 								class="fa fa-users"></i> <spring:message
-									code="users.all" /> </a>
+									code="users.all" /> <i style="color: #428bca; float: right;" class="glyphicon glyphicon-chevron-right"></i></a>
 						</li>
 					</ul>
 				</div>
@@ -161,12 +162,12 @@
 												</span>
 
 												<p class="summary">
-													<jstl:out value="${userRow.dni}"></jstl:out>
+													NIF: <jstl:out value="${userRow.dni}"></jstl:out>
 													
 													
 																										
 													<br />
-													<jstl:if test="${!userRow.isVerified && userRow.dniPhoto != ''}">
+													<jstl:if test="${!userRow.isVerified && userRow.dniPhoto != '' && userRow.photo != 'images/anonymous.png' && userRow.phone != '' && userRow.dni != ''}">
 														<a href="user/administrator/verifyUser.do?userId=${userRow.id}"> 
 															<spring:message code="user.verifyUser" />
 														</a>
@@ -212,7 +213,7 @@
 														{
 															total : <jstl:out value="${total_pages}"></jstl:out>,
 															page : <jstl:out value="${p}"></jstl:out>,
-															maxVisible : 5,
+															maxVisible : 3,
 															leaps : true,
 															firstLastUse : true,
 															first : '<',
@@ -249,21 +250,22 @@
 								</div>
 							</div>
 						</jstl:if>
+
+						<jstl:if test="${fn:length(users.content) ==0}">
+							<div class="alert alert-info">
+								<strong><spring:message code="user.wihtout.results" /></strong>
+							</div>
+						</jstl:if>
+
 					</div>
+					
+					
 		</div></div>
 	</div>
 
 </div>
 
-		<jstl:if test="${fn:length(users.content) ==0}">
-			<center>
-				<h2>
-					<spring:message code="messages.anything" />
-				</h2>
-			</center>
-		</jstl:if>
-
-
+	
 	</div>
 
 

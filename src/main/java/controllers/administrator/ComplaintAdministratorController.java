@@ -42,18 +42,23 @@ public class ComplaintAdministratorController extends AbstractController {
 		Integer allMild;
 		Integer allOmitted;
 		Pageable pageable;
-		
-		pageable = new PageRequest(page - 1, 999);
+		String complaintType;
+
+		pageable = new PageRequest(page - 1, 3);
 		allSerious = (int) complaintService.findAllSerious(pageable).getTotalElements();
 		allMild = (int) complaintService.findAllMild(pageable).getTotalElements();
 		allOmitted = (int) complaintService.findAllOmitted(pageable).getTotalElements();
 
 		if(type.equals("Serious") || type.equals("Grave")) {
 			items = complaintService.findAllSerious(pageable);
+			complaintType="Serious";
 		} else if(type.equals("Mild") || type.equals("Leve")) {
 			items = complaintService.findAllMild(pageable);
+			complaintType="Mild";
 		} else {   // if (type.equals("Omitted") || type.equals("Omitido")) {
 			items = complaintService.findAllOmitted(pageable);
+			complaintType="Omitted";
+
 		}
 
 		result = new ModelAndView("complaint/list");
@@ -63,6 +68,7 @@ public class ComplaintAdministratorController extends AbstractController {
 		result.addObject("allOmitted", allOmitted);		
 		result.addObject("p", page);
 		result.addObject("total_pages", items.getTotalPages());
+		result.addObject("urlPage", "complaint/administrator/list.do?type="+complaintType+"&page=");
 
 		return result;
 	}
