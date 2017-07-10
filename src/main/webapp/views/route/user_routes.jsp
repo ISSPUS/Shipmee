@@ -60,7 +60,7 @@
 	<div class="container">
 		<div class="row">
 			<h3>
-				<spring:message code="routes.from" /><jstl:out value="${user.name}" />
+				<spring:message code="routes.from" /><a href="user/profile.do?userId=${user.id}"><jstl:out value="${user.name}" /></a>
 			</h3>
 		</div>
 		<!-- /row -->
