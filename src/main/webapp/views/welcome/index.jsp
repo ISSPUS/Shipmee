@@ -164,8 +164,6 @@ function sendForm(){
 $('.btn-toggle').click(function() {
     $(this).children('.btn').toggleClass('active');  
     $(this).children('.btn').toggleClass('btn-primary');
-    e.stopPropagation(); 
-    e.preventDefault();
 });
 
 
