@@ -8,11 +8,11 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<script type="text/javascript" src="scripts/scripts-selft.js"></script>
-<script type="text/javascript" src="scripts/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
-<script type="text/javascript" src="scripts/jmenu.min.js"></script>
-    <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
+<script type="text/javascript" src="/scripts/scripts-selft.js"></script>
+<script type="text/javascript" src="/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="/scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/scripts/jmenu.min.js"></script>
+    <link rel="stylesheet" href="/styles/assets/css/lateral-menu.css" type="text/css">
 
 <meta name="description"
 	content="Shipmee te ofrece la posibilidad de enviar o transportar paquetes conectando con otros usuarios.">
@@ -23,8 +23,8 @@
 
 <!-- Bootstrap core CSS
     ================================================== -->
-<link rel="stylesheet" href="styles/assets/css/bootstrap.min.css"  type="text/css">
-<link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
+<link rel="stylesheet" href="/styles/assets/css/bootstrap.min.css"  type="text/css">
+<link rel="stylesheet" href="/styles/assets/css/lateral-menu.css" type="text/css">
 
 <style>
 body {
@@ -84,7 +84,7 @@ and (max-device-width : 480px) {
 		</div>
 		<div class="row" style="font-family: console; text-align: center;">
 
-			<img class="furgo-svg" src="/images/furgoStop.svg"
+			<img class="furgo-svg" src="/Shipmee/images/furgoStop.svg"
 				style="width: 30%;">
 
 		</div>
