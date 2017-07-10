@@ -67,6 +67,9 @@ color: #428bca;
 color: #428bca;
 }
 
+.fondoDesplegable{
+	height: auto!important;
+}
 </style>
 
 <div class="blue-barra">
