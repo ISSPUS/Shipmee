@@ -4,6 +4,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 
 @Embeddable
@@ -20,6 +22,7 @@ public class FundTransferPreference{
 	private String BIC;
 	private String paypalEmail;
 	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getCountry() {
 		return country;
 	}
@@ -27,6 +30,7 @@ public class FundTransferPreference{
 		this.country = country;
 	}
 	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAccountHolder() {
 		return accountHolder;
 	}
@@ -34,6 +38,7 @@ public class FundTransferPreference{
 		this.accountHolder = accountHolder;
 	}
 	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBankName() {
 		return bankName;
 	}
@@ -41,6 +46,7 @@ public class FundTransferPreference{
 		this.bankName = bankName;
 	}
 	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getIBAN() {
 		return IBAN;
 	}
@@ -48,6 +54,7 @@ public class FundTransferPreference{
 		IBAN = iBAN;
 	}
 	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBIC() {
 		return BIC;
 	}
@@ -56,6 +63,7 @@ public class FundTransferPreference{
 	}
 	
 	@Email
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPaypalEmail() {
 		return paypalEmail;
 	}
