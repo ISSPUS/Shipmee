@@ -70,7 +70,7 @@ h1 .ion {
 and (min-device-width : 250px)
 and (max-device-width : 480px) {
 .furgo-svg {
-		width: 60%;
+		width: 60%!important;
 	}
 }
 </style>
