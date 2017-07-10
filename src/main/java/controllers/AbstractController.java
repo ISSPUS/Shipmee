@@ -2,7 +2,6 @@ package controllers;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Controller
 public class AbstractController {
@@ -11,9 +10,14 @@ public class AbstractController {
 	
 	// Panic handler ----------------------------------------------------------
 	
-	@ExceptionHandler(Throwable.class)
-	public void panic(final Throwable oops) {
+	/*@ExceptionHandler(Throwable.class)
+	public ModelAndView panic(final Throwable oops) {
+		ModelAndView result;
+
+		result = new ModelAndView("redirect:/");
 		log.error("Exception: ", oops);
-	}	
+
+		return result;
+	}	*/
 
 }
