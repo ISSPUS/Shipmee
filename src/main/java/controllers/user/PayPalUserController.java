@@ -88,12 +88,12 @@ public class PayPalUserController extends AbstractController {
 	public ModelAndView adaptiveReturnCreate(@RequestParam String trackingId) {
 		ModelAndView result;
 		ShipmentOffer so;
-		PayPalObject po;
+		PayPalObject po = null;
 
 		try {
-			payPalService.refreshPaymentStatusFromPaypal(trackingId);
+			po = payPalService.refreshPaymentStatusFromPaypal(trackingId);
 			
-			po = payPalService.findByTrackingId(trackingId);
+			// po = payPalService.findByTrackingId(trackingId);
 			
 			if (po.getFeePayment().getShipmentOffer() != null){
 				so = payPalService.findByTrackingId(trackingId).getFeePayment().getShipmentOffer();

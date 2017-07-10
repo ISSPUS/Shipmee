@@ -100,7 +100,7 @@ public class PayPalService {
 		PayPalObject payObject = this.create();
 		payObject.setFeePayment(fp);;
 
-		payObject = this.save(payObject);	// Comentar para evitar tantas escrituras a la DB
+//		payObject = this.save(payObject);	// Comentar para evitar tantas escrituras a la DB
 		
 // 		Assert.isTrue(!fp.getCarrier().getFundTransferPreference().getPaypalEmail().equals(""), "PayPalService.authorizePay.error.CarrierWithoutPayPalEmail");
 		try{
@@ -125,12 +125,14 @@ public class PayPalService {
 		Assert.isTrue(res.getError().isEmpty(), "PayPalService.authorizePay.error.startTransaction");
 		payObject.setPayStatus(res.getPaymentExecStatus());
 		
-		this.save(payObject);
+		payObject = this.save(payObject);
+		// payObject = payPalRepository.saveAndFlush(payObject);
 
 		return res;
 	}
 	
-	public PaymentDetailsResponse refreshPaymentStatusFromPaypal(String trackingId)
+	public PayPalObject refreshPaymentStatusFromPaypal(String trackingId)
+//	public PaymentDetailsResponse refreshPaymentStatusFromPaypal(String trackingId, PayPalObject response)
 			throws SSLConfigurationException, InvalidCredentialException, UnsupportedEncodingException,
 			HttpErrorException, InvalidResponseDataException, ClientActionRequiredException, MissingCredentialException,
 			OAuthException, PayPalRESTException, IOException, InterruptedException {
@@ -145,9 +147,11 @@ public class PayPalService {
 
 		payObject.setPayStatus(details.getStatus());
 
-		this.save(payObject);
+		// this.save(payObject);
+		payObject = payPalRepository.saveAndFlush(payObject);
 		
-		return details;
+//		return details;
+		return payObject;
 	}
 	
 	public void payToShipper(int feePaymentID)
@@ -158,18 +162,18 @@ public class PayPalService {
 		
 		PayPalObject po = this.findByFeePaymentId(feePaymentID);
 
-		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId());
-
-		if (payObject.getStatus().equals("INCOMPLETE")) {
-			res = PayPal.adaptiveSendToSenconds(payObject.getPayKey());
-
-			if (res.getError().size() != 0) {
-				log.error(res.getError().get(0).getMessage());
-
-				Assert.isTrue(res.getError().size() == 0, "PayPalService.payToShipper.error.payPalError");
-
-			}
-		}
+//		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId(), po);
+//
+//		if (payObject.getStatus().equals("INCOMPLETE")) {
+//			res = PayPal.adaptiveSendToSenconds(payObject.getPayKey());
+//
+//			if (res.getError().size() != 0) {
+//				log.error(res.getError().get(0).getMessage());
+//
+//				Assert.isTrue(res.getError().size() == 0, "PayPalService.payToShipper.error.payPalError");
+//
+//			}
+//		}
 	}
 	
 	public void refundToSender(int feePaymentID)
@@ -180,31 +184,31 @@ public class PayPalService {
 
 		PayPalObject po = this.findByFeePaymentId(feePaymentID);
 
-		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId());
-
-		// Actualmente no tenemos permsisos por parte de PayPal para devolver
-		// una transacción ya pagada al usuario final
-		// por lo que ese podría ser el error
-
-		Receiver rec1 = null;
-		Receiver rec2 = null;
-
-		if (!payObject.getPaymentInfoList().getPaymentInfo().isEmpty()) {
-			rec1 = payObject.getPaymentInfoList().getPaymentInfo().get(0).getReceiver();
-		}
-
-		if (payObject.getPaymentInfoList().getPaymentInfo().size() > 1) {
-			rec2 = payObject.getPaymentInfoList().getPaymentInfo().get(1).getReceiver();
-		}
-
-		res = PayPal.refundAdaptiveTransaction(po.getTrackingId(), rec1, rec2);
-
-		if (res.getError().size() != 0) {
-			log.error(res.getError().get(0).getMessage());
-
-			Assert.isTrue(res.getError().size() == 0, "PayPalService.refundToSender.error.payPalError");
-
-		}
+//		PaymentDetailsResponse payObject = this.refreshPaymentStatusFromPaypal(po.getTrackingId(), po);
+//
+//		// Actualmente no tenemos permsisos por parte de PayPal para devolver
+//		// una transacción ya pagada al usuario final
+//		// por lo que ese podría ser el error
+//
+//		Receiver rec1 = null;
+//		Receiver rec2 = null;
+//
+//		if (!payObject.getPaymentInfoList().getPaymentInfo().isEmpty()) {
+//			rec1 = payObject.getPaymentInfoList().getPaymentInfo().get(0).getReceiver();
+//		}
+//
+//		if (payObject.getPaymentInfoList().getPaymentInfo().size() > 1) {
+//			rec2 = payObject.getPaymentInfoList().getPaymentInfo().get(1).getReceiver();
+//		}
+//
+//		res = PayPal.refundAdaptiveTransaction(po.getTrackingId(), rec1, rec2);
+//
+//		if (res.getError().size() != 0) {
+//			log.error(res.getError().get(0).getMessage());
+//
+//			Assert.isTrue(res.getError().size() == 0, "PayPalService.refundToSender.error.payPalError");
+//
+//		}
 
 	}
 
