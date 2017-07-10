@@ -1,5 +1,7 @@
 package domain.form;
 
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 public class FundTransferPreferenceForm {
 	
@@ -10,6 +12,7 @@ public class FundTransferPreferenceForm {
 	private String BIC;
 	private String paypalEmail;
 	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getCountry() {
 		return country;
 	}
@@ -17,7 +20,7 @@ public class FundTransferPreferenceForm {
 		this.country = country;
 	}
 	
-	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAccountHolder() {
 		return accountHolder;
 	}
@@ -25,6 +28,7 @@ public class FundTransferPreferenceForm {
 		this.accountHolder = accountHolder;
 	}
 	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBankName() {
 		return bankName;
 	}
@@ -32,6 +36,7 @@ public class FundTransferPreferenceForm {
 		this.bankName = bankName;
 	}
 	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getIBAN() {
 		return IBAN;
 	}
@@ -39,6 +44,7 @@ public class FundTransferPreferenceForm {
 		IBAN = iBAN;
 	}
 	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBIC() {
 		return BIC;
 	}
@@ -46,6 +52,7 @@ public class FundTransferPreferenceForm {
 		BIC = bIC;
 	}
 	
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPaypalEmail() {
 		return paypalEmail;
 	}
