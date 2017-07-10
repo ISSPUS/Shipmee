@@ -36,4 +36,8 @@
     <error-code>403</error-code>
     <location>/views/misc/403.jsp</location>
   </error-page>
+  <error-page>
+   <exception-type>java.lang.Throwable</exception-type >
+   <location>/views/misc/panic.jsp</location>
+</error-page>
 </web-app>
