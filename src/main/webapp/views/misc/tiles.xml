@@ -6,7 +6,7 @@
        
 <tiles-definitions>
 
-	<definition name="misc/panic" extends="master.page">
+	<definition name="misc/panic" template="/views/misc/emptyLayout.jsp">
 		<put-attribute name="title" value="Panic" />
 		<put-attribute name="body" value="/views/misc/panic.jsp" />
 	</definition>

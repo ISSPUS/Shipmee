@@ -16,7 +16,7 @@ public class AbstractController {
 	public ModelAndView panic(final Throwable oops) {
 		ModelAndView result;
 
-		result = new ModelAndView("redirect:/");
+		result = new ModelAndView("misc/panic");
 		log.error("Exception: ", oops);
 
 		return result;
