@@ -8,9 +8,9 @@
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:#{systemEnvironment.jdbcURL}" />
-			<property name="javax.persistence.jdbc.user" value="#{systemEnvironment.jdbcUser}" />
-			<property name="javax.persistence.jdbc.password" value="#{systemEnvironment.jdbcPassword}" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Shipmee" />
+			<property name="javax.persistence.jdbc.user" value="shipmee-manager" />
+			<property name="javax.persistence.jdbc.password" value="ACME-M@n@ger-6874" />
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
