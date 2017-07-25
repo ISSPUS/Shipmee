@@ -8,10 +8,10 @@ before_install:
 - mysql -u root < initialize.sql
 script:
 - mvn clean install org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
-- ls -lah
-after_success:
 - mvn clean install cobertura:cobertura coveralls:report -DrepoToken=$tokenCoverall
 - bash herokuDB.sh
+after_success:
+- ls -lah
 cache:
   directories:
   - "$HOME/.m2"
@@ -25,7 +25,7 @@ addons:
     - develop
     - master
 dist:
-- trusty
+- precise
 sudo:
 - false
 notifications:
