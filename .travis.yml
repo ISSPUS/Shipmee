@@ -11,6 +11,7 @@ script:
 - ls -lah
 after_success:
 - mvn clean install cobertura:cobertura coveralls:report -DrepoToken=$tokenCoverall
+- bash herokuDB.sh
 cache:
   directories:
   - "$HOME/.m2"
