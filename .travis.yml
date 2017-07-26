@@ -9,8 +9,8 @@ before_install:
 script:
 - mvn clean install org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 - mvn clean install cobertura:cobertura coveralls:report -DrepoToken=$tokenCoverall
-- bash herokuDB.sh
 after_success:
+- bash herokuDB.sh
 - ls -lah
 cache:
   directories:
