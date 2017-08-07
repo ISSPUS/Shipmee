@@ -1,16 +1,10 @@
 # Shipmee
 
+[![Build status](https://travis-ci.org/Shipmee/Shipmee.svg?branch=master)](https://travis-ci.org/Shipmee/Shipmee) [![Coverage Status](https://coveralls.io/repos/github/Shipmee/Shipmee/badge.svg)](https://coveralls.io/github/Shipmee/Shipmee) [![Quality Gate](https://sonarqube.com/api/badges/gate?key=ISPP:Shipmee)](https://sonarqube.com/dashboard/index/ISPP%3AShipmee)
+
 ## Disclaimer
 
 This is an academic project done during the Software Engineering & Professional Practice subject. The result of the development (know as the Service) is deployed but it's no longer supported. There is no warranty for any of the provided services, as the payment system.
-
-## Project Status
-
-| Master | Develop |
-| :----: | :---:|
-|[![Build status](https://travis-ci.org/Shipmee/Shipmee.svg?branch=master)](https://travis-ci.org/Shipmee/Shipmee)|[![Build status](https://travis-ci.org/Shipmee/Shipmee.svg?branch=develop)](https://travis-ci.org/Shipmee/Shipmee)|
-|[![Coverage Status](https://coveralls.io/repos/github/Shipmee/Shipmee/badge.svg)](https://coveralls.io/github/Shipmee/Shipmee)| [![Coverage Status](https://coveralls.io/repos/github/Shipmee/Shipmee/badge.svg?branch=develop)](https://coveralls.io/github/Shipmee/Shipmee?branch=develop)|
-|[![Quality Gate](https://sonarqube.com/api/badges/gate?key=ISPP:Shipmee)](https://sonarqube.com/dashboard/index/ISPP%3AShipmee)|[![Quality Gate](https://sonarqube.com/api/badges/gate?key=ISPP:Shipmee:develop)](https://sonarqube.com/dashboard/index/ISPP%3AShipmee%3Adevelop)|
 
 ## The idea
 
@@ -57,17 +51,17 @@ Other technologies we used:
 ## Developers
 
 <img src="https://avatars0.githubusercontent.com/u/12049827?v=4&s=460" alt="Avatar: " height="50" /> &nbsp;
-Manuel López, as Project Manager, [in Github](https://github.com/ManuelLR)  
+[Manuel López](https://github.com/ManuelLR), as Project Manager.   
 <img src="https://avatars1.githubusercontent.com/u/8267403?v=4&s=400" alt="Avatar: " height="50" /> &nbsp;
-Juan Ramón Rodríguez, as Chief Developer, [in Github](https://github.com/juanrarodriguez18)  
+[Juan Ramón Rodríguez](https://github.com/juanrarodriguez18), as Chief Developer. 
 <img src="https://avatars0.githubusercontent.com/u/22616365?v=4&s=400" alt="Avatar: " height="50" /> &nbsp;
-Bartolomé Márquez, as Chief Designer, [in Github](https://github.com/barmardom)  
+[Bartolomé Márquez](https://github.com/barmardom), as Chief Designer.   
 <img src="https://avatars3.githubusercontent.com/u/11299118?v=4&s=400" alt="Avatar: " height="50" /> &nbsp;
-Miguel Rodríguez, as Developer, [in Github](https://github.com/migrodcab)  
+[Miguel Rodríguez](https://github.com/migrodcab), as Developer. 
 <img src="https://avatars3.githubusercontent.com/u/6894925?v=4&s=400" alt="Avatar: " height="50" /> &nbsp;
-José Antonio Rodríguez, as Designer, [in Github](https://github.com/josearodriguez)  
+ [José Antonio Rodríguez](https://github.com/josearodriguez), as Designer.
 <img src="https://avatars3.githubusercontent.com/u/12424182?v=4&s=400" alt="Avatar: " height="50" /> &nbsp;
-Guillermo Alcalá, as Developer, [in Github](https://github.com/guillermo-ag-95)  
+[Guillermo Alcalá](https://github.com/guillermo-ag-95), as Developer.
 
 ## Licence
 
