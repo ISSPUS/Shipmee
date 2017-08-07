@@ -15,34 +15,9 @@
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <sonar.organization>shipmee</sonar.organization>
         <sonar.language>java</sonar.language>
-        <sonar.exclusions>
-        **src/main/java/security/**, 
-        **src/main/java/utilities/**, 
-        **src/main/java/repositories/**, 
-        **src/main/java/services/form/**
-        </sonar.exclusions>
-        <sonar.cpd.exclusions>
-            src/main/java/converters/**,
-            src/main/java/domain/**,
-            src/main/java/repositories/**
-        </sonar.cpd.exclusions>
-        <sonar.coverage.exclusions>
-            src/main/java/controllers/**,
-            src/main/java/converters/**,
-            src/main/java/domain/form/**,
-            src/main/java/domain/DomainEntity.*,
-            src/main/java/domain/CreditCard.*,
-            src/main/java/domain/FundTransferPreference.*,
-            src/main/java/domain/PayPalObject.*,
-            src/main/java/security/**,
-            src/main/java/repositories/**,
-            src/main/java/utilities/**,
-            src/main/java/services/form/**,
-            src/main/java/services/ActorService.*,
-            src/main/java/services/AdministratorService.*,
-            src/main/java/services/PayPalService.*,
-            src/main/java/services/SizePriceService.*
-        </sonar.coverage.exclusions>
+        <sonar.exclusions> **src/main/java/security/**, **src/main/java/utilities/**, **src/main/java/repositories/**, **src/main/java/services/form/**</sonar.exclusions>
+        <sonar.cpd.exclusions> **src/main/java/converters/**, **src/main/java/domain/**, **src/main/java/repositories/**</sonar.cpd.exclusions>
+        <sonar.coverage.exclusions> **src/main/java/controllers/**, **src/main/java/converters/**, **src/main/java/domain/form/**, **src/main/java/domain/DomainEntity.*, **src/main/java/domain/CreditCard.*, **src/main/java/domain/FundTransferPreference.*, **src/main/java/domain/PayPalObject.*, **src/main/java/security/**, **src/main/java/repositories/**, **src/main/java/utilities/**, **src/main/java/services/form/**, **src/main/java/services/ActorService.*, **src/main/java/services/AdministratorService.*, **src/main/java/services/PayPalService.*, **src/main/java/services/SizePriceService.*</sonar.coverage.exclusions>
 	</properties>
 
 	<!-- Indexing information -->
