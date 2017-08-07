@@ -17,6 +17,7 @@ import org.springframework.util.Assert;
 
 import domain.Route;
 import domain.RouteOffer;
+import domain.Shipment;
 import domain.User;
 import utilities.AbstractTest;
 import utilities.UtilTest;
@@ -39,6 +40,9 @@ public class RouteOfferTest extends AbstractTest {
 
 	@Autowired 
 	private UserService userService;
+	
+	@Autowired
+	private ShipmentService shipmentService;
 	
 	// Test cases -------------------------------------------------------------
 
@@ -116,6 +120,38 @@ public class RouteOfferTest extends AbstractTest {
 		Assert.isTrue(result.getAcceptedByCarrier() == false);
 		Assert.isTrue(sizePostCreate == sizePreCreate + 1);
 		Assert.isTrue(routeOffers.contains(result));
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Clone RouteOffer
+	 * @result The routeOffer is cloned
+	 */
+	@Test
+	public void positiveCloneRouteOffer() {
+		authenticate("user3");
+		
+		RouteOffer routeOffer;
+		RouteOffer routeOfferCloned;
+		Route route;
+		Shipment shipment;
+		
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route3"));
+		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		
+		unauthenticate();
+		authenticate("user2");
+		
+		routeOffer = routeOfferService.create(route.getId(), shipment.getId());
+		routeOffer.setAmount(1);
+		routeOffer.setDescription("Test");
+		routeOffer.setAcceptedByCarrier(true);
+		routeOffer = routeOfferService.save(routeOffer);
+		
+		routeOfferCloned = routeOfferService.createFromClone(routeOffer.getId());
+
+		Assert.isTrue(routeOfferCloned.getAmount()==routeOffer.getAmount() && routeOfferCloned.getDescription().equals(routeOffer.getDescription()));
 		
 		unauthenticate();
 	}

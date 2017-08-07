@@ -45,7 +45,6 @@ public class ShipmentOfferTest extends AbstractTest {
 	@Autowired
 	private ShipmentOfferRepository shipmentOfferRepository;
 
-
 	// Test cases -------------------------------------------------------------
 
 	/**
@@ -70,6 +69,35 @@ public class ShipmentOfferTest extends AbstractTest {
 		
 		Assert.isTrue(numberOfShipmentOfferAfter - numberOfShipmentOfferBefore == 1);
 
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Clone ShipmentOffer
+	 * @result The shipmentOffer is cloned
+	 */
+	@Test
+	public void positiveCloneShipmentOffer() {
+		authenticate("user3");
+		
+		ShipmentOffer shipmentOffer;
+		ShipmentOffer shipmentOfferCloned;
+		Shipment shipment;
+		
+		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		
+		unauthenticate();
+		authenticate("user1");
+		
+		shipmentOffer = shipmentOfferService.create(shipment.getId());
+		shipmentOffer.setAmount(1);
+		shipmentOffer.setDescription("Test");
+		shipmentOffer = shipmentOfferService.save(shipmentOffer);
+		
+		shipmentOfferCloned = shipmentOfferService.createFromClone(shipmentOffer.getId());
+
+		Assert.isTrue(shipmentOfferCloned.getAmount()==shipmentOffer.getAmount() && shipmentOfferCloned.getDescription().equals(shipmentOffer.getDescription()));
+		
 		unauthenticate();
 	}
 	
