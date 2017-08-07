@@ -53,15 +53,15 @@ Other technologies we used:
 <img src="https://avatars0.githubusercontent.com/u/12049827?v=4&s=460" alt="Avatar: " height="50" /> &nbsp;
 [Manuel López](https://github.com/ManuelLR), as Project Manager.   
 <img src="https://avatars1.githubusercontent.com/u/8267403?v=4&s=400" alt="Avatar: " height="50" /> &nbsp;
-[Juan Ramón Rodríguez](https://github.com/juanrarodriguez18), as Chief Developer. 
+[Juan Ramón Rodríguez](https://github.com/juanrarodriguez18), as Chief Developer.  
 <img src="https://avatars0.githubusercontent.com/u/22616365?v=4&s=400" alt="Avatar: " height="50" /> &nbsp;
-[Bartolomé Márquez](https://github.com/barmardom), as Chief Designer.   
+[Bartolomé Márquez](https://github.com/barmardom), as Chief Designer.    
 <img src="https://avatars3.githubusercontent.com/u/11299118?v=4&s=400" alt="Avatar: " height="50" /> &nbsp;
-[Miguel Rodríguez](https://github.com/migrodcab), as Developer. 
+[Miguel Rodríguez](https://github.com/migrodcab), as Developer.  
 <img src="https://avatars3.githubusercontent.com/u/6894925?v=4&s=400" alt="Avatar: " height="50" /> &nbsp;
- [José Antonio Rodríguez](https://github.com/josearodriguez), as Designer.
+ [José Antonio Rodríguez](https://github.com/josearodriguez), as Designer.  
 <img src="https://avatars3.githubusercontent.com/u/12424182?v=4&s=400" alt="Avatar: " height="50" /> &nbsp;
-[Guillermo Alcalá](https://github.com/guillermo-ag-95), as Developer.
+[Guillermo Alcalá](https://github.com/guillermo-ag-95), as Developer. 
 
 ## Licence
 
