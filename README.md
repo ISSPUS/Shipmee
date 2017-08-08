@@ -4,7 +4,10 @@
 
 ## Disclaimer
 
-This is an academic project done during the Software Engineering & Professional Practice subject. The result of the development (know as the Service) is deployed but it's no longer supported. There is no warranty for any of the provided services, as the payment system.
+This is an academic project done during the Software Engineering & Professional Practice subject at [Universidad de Sevilla](https://www.informatica.us.es). The result of the development (know as the Service) is deployed but it's no longer supported. There is no warranty for any of the provided services, as the payment system.
+
+## Our web
+You can access the web using [this link](http://shipmee.es)
 
 ## The idea
 
