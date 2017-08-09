@@ -49,7 +49,11 @@ Other technologies we used:
 
 ## Installation
 
+Coming soon!
+
 ## Screenshots
+
+Coming soon!
 
 ## Developers
 
