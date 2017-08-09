@@ -105,13 +105,13 @@ public class RatingTest extends AbstractTest {
 	 */
 	@Test
 	public void positiveCountRating() {
-		authenticate("user2");
+		authenticate("user1");
 		Integer countRatingByUser;
 		User principal = userService.findByPrincipal();
 		
-		countRatingByUser = ratingService.countRatingCreatedByUserId(principal);
-		
-		Assert.isTrue(countRatingByUser.equals(1));
+		countRatingByUser = ratingService.countRatingReceivedByUserId(principal);
+
+		Assert.isTrue(countRatingByUser.equals(6));
 		
 		unauthenticate();
 	}
