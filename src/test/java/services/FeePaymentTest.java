@@ -27,6 +27,7 @@ import domain.Vehicle;
 import domain.form.FeePaymentForm;
 import services.form.FeePaymentFormService;
 import utilities.AbstractTest;
+import utilities.UtilTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
@@ -864,6 +865,15 @@ public class FeePaymentTest extends AbstractTest {
 		
 		unauthenticate();
 		Assert.isTrue(numberOfPaymentRejectedAfter - numberOfPaymentRejectedBefore == 1, "Number of Accepted Payments must increase");
+	}
+	
+	@Test
+	public void positiveCancelFeePaymentInProgress(){
+		authenticate("user3");
+		
+		feePaymentService.cancelPaymentInProgress(UtilTest.getIdFromBeanName("payment9"));
+
+		unauthenticate();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
