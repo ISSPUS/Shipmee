@@ -27,6 +27,7 @@ import domain.Vehicle;
 import domain.form.FeePaymentForm;
 import services.form.FeePaymentFormService;
 import utilities.AbstractTest;
+import utilities.UtilTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
@@ -256,6 +257,22 @@ public class FeePaymentTest extends AbstractTest {
 		
 		Assert.isTrue(numberOfPaymentRejectedAfter - numberOfPaymentRejectedBefore == 1, "Number of Accepted Payments must increase");
 		
+	}
+	
+	/**
+	 * List one page of pending Payments
+	 */
+	@Test
+	public void possitiveListPendingPayments(){
+		authenticate("user1");
+		Pageable page;
+		Integer numberOfPendingPayments;
+		
+		page = new PageRequest(0, 10);
+		numberOfPendingPayments = feePaymentService.findAllPending(page).getSize();
+		
+		Assert.isTrue(numberOfPendingPayments.equals(10));
+		unauthenticate();
 	}
 	
 	/**
@@ -753,6 +770,10 @@ public class FeePaymentTest extends AbstractTest {
 		Integer numberOfPaymentPendingAfter;
 		Integer numberOfPaymentRejectedBefore;
 		Integer numberOfPaymentRejectedAfter;
+		Integer numberOfPaymentAcceptedBefore;
+		Integer numberOfPaymentAcceptedAfter;
+		Integer numberOfPaymentRejectedByUserBefore;
+		Integer numberOfPaymentRejectedByUserAfter;
 		
 		authenticate("user1");
 		
@@ -793,6 +814,8 @@ public class FeePaymentTest extends AbstractTest {
 		numberOfPaymentsBefore = feePaymentService.findAll().size();
 		numberOfPaymentPendingBefore = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
 		numberOfPaymentRejectedBefore = (int) feePaymentService.findAllRejected(page).getTotalElements();
+		numberOfPaymentAcceptedBefore = (int) feePaymentService.findAllAcceptedByUser(page).getTotalElements();
+		numberOfPaymentRejectedByUserBefore = (int) feePaymentService.findAllRejectedByUser(page).getTotalElements();
 		
 		route = routeService.findOne(route.getId());
 		
@@ -822,6 +845,8 @@ public class FeePaymentTest extends AbstractTest {
 		authenticate("user2");
 		
 		numberOfPaymentPendingAfter = (int) feePaymentService.findAllPendingByUser(page).getTotalElements();
+		numberOfPaymentAcceptedAfter = (int) feePaymentService.findAllAcceptedByUser(page).getTotalElements();
+		numberOfPaymentRejectedByUserAfter = (int) feePaymentService.findAllRejectedByUser(page).getTotalElements();
 		
 		unauthenticate();
 				
@@ -835,11 +860,20 @@ public class FeePaymentTest extends AbstractTest {
 		payment = feePaymentService.save(payment);
 		
 		numberOfPaymentRejectedAfter = (int) feePaymentService.findAllRejected(page).getTotalElements();
+		Assert.isTrue(numberOfPaymentAcceptedAfter.equals(numberOfPaymentAcceptedBefore));
+		Assert.isTrue(numberOfPaymentRejectedByUserAfter.equals(numberOfPaymentRejectedByUserBefore));
 		
 		unauthenticate();
-		
 		Assert.isTrue(numberOfPaymentRejectedAfter - numberOfPaymentRejectedBefore == 1, "Number of Accepted Payments must increase");
+	}
+	
+	@Test
+	public void positiveCancelFeePaymentInProgress(){
+		authenticate("user3");
 		
+		feePaymentService.cancelPaymentInProgress(UtilTest.getIdFromBeanName("payment9"));
+
+		unauthenticate();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)

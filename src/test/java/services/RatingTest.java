@@ -78,6 +78,7 @@ public class RatingTest extends AbstractTest {
 		Rating rating;
 		User principal = userService.findByPrincipal();
 		User userConcerning = userService.findOne(UtilTest.getIdFromBeanName("user2"));
+		Rating ratingReconstruct;
 		
 		int numberOfRatingsBefore = ratingService.countRatingCreatedByUserId(principal);
 		
@@ -90,7 +91,28 @@ public class RatingTest extends AbstractTest {
 		int numberOfRatings = ratingService.countRatingCreatedByUserId(principal);
 		
 		Assert.isTrue(numberOfRatingsBefore+1 == numberOfRatings);
+		
+		ratingReconstruct = ratingService.reconstruct(rating, null);
+		
+		Assert.isTrue(rating.getAuthor().equals(ratingReconstruct.getAuthor()) && rating.getComment().equals(ratingReconstruct.getComment()));
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Count the rating received by an User
+	 * @result The count of rating received by an User
+	 */
+	@Test
+	public void positiveCountRating() {
+		authenticate("user1");
+		Integer countRatingByUser;
+		User principal = userService.findByPrincipal();
+		
+		countRatingByUser = ratingService.countRatingReceivedByUserId(principal);
 
+		Assert.isTrue(countRatingByUser.equals(6));
+		
 		unauthenticate();
 	}
 	

@@ -215,7 +215,6 @@ public class ShipmentService {
 		log.trace(origin+" - "+destination+" at "+finalDate);
 		result = shipmentRepository.searchShipment(origin, destination, finalDate, time, envelope, itemSize, moment, page);
 		log.trace(result);
-		//System.out.println(result);
 		
 		return result;
 	}

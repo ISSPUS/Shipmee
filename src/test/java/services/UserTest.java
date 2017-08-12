@@ -35,6 +35,9 @@ public class UserTest extends AbstractTest {
 	private UserService userService;
 
 	// Supporting services ----------------------------------------------------
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Test cases -------------------------------------------------------------
 
@@ -221,6 +224,67 @@ public class UserTest extends AbstractTest {
 		Assert.isTrue(
 				userService.findAllByVerifiedActiveVerificationPending(-1, -1, 1, -1, page).getContent().contains(user));
 	
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Unverify an user
+	 * @result The result is correct
+	 */
+	@Test
+	public void positiveCheckUnverifyUser() {
+		authenticate("admin");
+		
+		User user;
+
+		user = userService.findOne(UtilTest.getIdFromBeanName("user3"));
+		Assert.isTrue(!user.getIsVerified());
+		user.setPhoto("images/anonymous2.png");
+		userService.verifyUser(user.getId());
+
+		Assert.isTrue(user.getId() != 0 && userService.findOne(user.getId()).getName().equals("Carlos")
+				&& userService.findOne(user.getId()).getIsVerified());
+		
+		userService.unVerifyUser(user.getId());
+		
+		Assert.isTrue(user.getIsVerified()==false);
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Manage a moderator
+	 * @result The result is correct
+	 */
+	@Test
+	public void positiveManageModerator() {
+		authenticate("user1");
+		
+		User user;
+
+		user = userService.findOne(UtilTest.getIdFromBeanName("user1"));
+		Assert.isTrue(!actorService.checkAuthority("MODERATOR"));
+		
+		unauthenticate();
+		authenticate("admin");
+		
+		userService.turnIntoModerator(user.getId());
+
+		unauthenticate();
+		authenticate("user1");
+		
+		Assert.isTrue(actorService.checkAuthority("MODERATOR"));
+		
+		unauthenticate();
+		authenticate("admin");
+		
+		userService.unturnIntoModerator(user.getId());
+		
+		unauthenticate();
+		authenticate("user1");
+		
+		Assert.isTrue(!actorService.checkAuthority("MODERATOR"));
+		
 		unauthenticate();
 	}
 	

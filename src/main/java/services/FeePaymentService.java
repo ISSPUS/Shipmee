@@ -115,7 +115,6 @@ public class FeePaymentService {
 			
 			feePayment.setPurchaser(user);
 			feePayment.setPaymentMoment(new Date());
-			// feePayment.setType("Pending");
 			
 			feePayment.setCommission(Math.round((feePayment.getAmount()/15) * 100) / 100.0);
 			
