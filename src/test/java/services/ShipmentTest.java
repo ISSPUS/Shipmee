@@ -346,8 +346,20 @@ public class ShipmentTest extends AbstractTest {
 		authenticate("user1");
 		Shipment shipment;
 		ShipmentOffer shipmentOffer;
+		Date departureTime;
+		Date maximumArriveTime;
+		
+		departureTime = new Date();
+		Calendar calendar = Calendar.getInstance(); 
+		calendar.setTime(departureTime); 
+		calendar.add(Calendar.DATE, 1);
+		departureTime = calendar.getTime();
+		calendar.add(Calendar.DATE, 3);
+		maximumArriveTime = calendar.getTime();
 
 		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		shipment.setDepartureTime(departureTime);
+		shipment.setMaximumArriveTime(maximumArriveTime);
 		Assert.isTrue(shipment.getCarried() == null);
 
 		shipmentOffer = shipmentService.carryShipment(UtilTest.getIdFromBeanName("shipment1"));
@@ -367,8 +379,20 @@ public class ShipmentTest extends AbstractTest {
 		Shipment shipment;
 		ShipmentOffer shipmentOffer;
 		ShipmentOffer shipmetOffer1;
+		Date departureTime;
+		Date maximumArriveTime;
+		
+		departureTime = new Date();
+		Calendar calendar = Calendar.getInstance(); 
+		calendar.setTime(departureTime); 
+		calendar.add(Calendar.DATE, 1);
+		departureTime = calendar.getTime();
+		calendar.add(Calendar.DATE, 3);
+		maximumArriveTime = calendar.getTime();
 
 		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		shipment.setDepartureTime(departureTime);
+		shipment.setMaximumArriveTime(maximumArriveTime);
 		Assert.isTrue(shipment.getCarried() == null);
 
 		shipmentOffer = shipmentService.carryShipment(UtilTest.getIdFromBeanName("shipment1"));

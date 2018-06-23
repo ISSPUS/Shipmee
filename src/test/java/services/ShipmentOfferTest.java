@@ -1,6 +1,8 @@
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
@@ -83,8 +85,20 @@ public class ShipmentOfferTest extends AbstractTest {
 		ShipmentOffer shipmentOffer;
 		ShipmentOffer shipmentOfferCloned;
 		Shipment shipment;
+		Date departureTime;
+		Date maximumArriveTime;
+		
+		departureTime = new Date();
+		Calendar calendar = Calendar.getInstance(); 
+		calendar.setTime(departureTime); 
+		calendar.add(Calendar.DATE, 1);
+		departureTime = calendar.getTime();
+		calendar.add(Calendar.DATE, 3);
+		maximumArriveTime = calendar.getTime();
 		
 		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		shipment.setDepartureTime(departureTime);
+		shipment.setMaximumArriveTime(maximumArriveTime);
 		
 		unauthenticate();
 		authenticate("user1");
@@ -342,8 +356,20 @@ public class ShipmentOfferTest extends AbstractTest {
 		
 		Shipment shipment;
 		ShipmentOffer ro;
+		Date departureTime;
+		Date maximumArriveTime;
+		
+		departureTime = new Date();
+		Calendar calendar = Calendar.getInstance(); 
+		calendar.setTime(departureTime); 
+		calendar.add(Calendar.DATE, 1);
+		departureTime = calendar.getTime();
+		calendar.add(Calendar.DATE, 3);
+		maximumArriveTime = calendar.getTime();
 		
 		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		shipment.setDepartureTime(departureTime);
+		shipment.setMaximumArriveTime(maximumArriveTime);
 		ro = shipmentOfferService.findOne(UtilTest.getIdFromBeanName("shipmentOffer4"));
 		
 		shipmentOfferService.accept(ro.getId());
@@ -447,9 +473,25 @@ public class ShipmentOfferTest extends AbstractTest {
 		authenticate("user2");
 		
 		ShipmentOffer ro;
-
-		ro = shipmentOfferService.findOne(UtilTest.getIdFromBeanName("shipmentOffer3"));
+		Shipment shipment;
+		Date departureTime;
+		Date maximumArriveTime;
 		
+		departureTime = new Date();
+		Calendar calendar = Calendar.getInstance(); 
+		calendar.setTime(departureTime); 
+		calendar.add(Calendar.DATE, 1);
+		departureTime = calendar.getTime();
+		calendar.add(Calendar.DATE, 3);
+		maximumArriveTime = calendar.getTime();
+
+		shipment = shipmentService.findOne(UtilTest.getIdFromBeanName("shipment1"));
+		
+		ro = shipmentOfferService.findOne(UtilTest.getIdFromBeanName("shipmentOffer3"));
+		shipment = ro.getShipment();
+		shipment.setDepartureTime(departureTime);
+		shipment.setMaximumArriveTime(maximumArriveTime);
+
 		shipmentOfferService.deny(ro.getId());
 		
 		ro = shipmentOfferService.findOne(ro.getId());
