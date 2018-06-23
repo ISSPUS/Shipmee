@@ -2,6 +2,7 @@
 
 [![Build status](https://travis-ci.org/Shipmee/Shipmee.svg?branch=master)](https://travis-ci.org/Shipmee/Shipmee) [![Coverage Status](https://coveralls.io/repos/github/Shipmee/Shipmee/badge.svg)](https://coveralls.io/github/Shipmee/Shipmee) [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=ISPP%3AShipmee&metric=alert_status)](https://sonarcloud.io/dashboard/index/ISPP%3AShipmee)
 
+
 ## Disclaimer
 
 This is an academic project done during the Software Engineering & Professional Practice subject at [Universidad de Sevilla](https://www.informatica.us.es). The result of the development (know as the Service) is deployed but it's no longer supported. There is no warranty for any of the provided services, as the payment system.
@@ -46,14 +47,6 @@ Other technologies we used:
 - Travis CI, as our continuos integration service.
 - SonarQube, as our continuous inspection of code quality service.
 - Coveralls, as our test coverage service.
-
-## Installation
-
-Coming soon!
-
-## Screenshots
-
-Coming soon!
 
 ## Developers
 
